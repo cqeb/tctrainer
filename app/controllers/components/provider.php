@@ -67,13 +67,16 @@ class ProviderComponent extends Object {
 				$trp = new TriRunProvider($this->DB, $athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save();
+				break;
 			case 'RUN':
 				$trp = new TriRunProvider($this->DB, $athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save();
+				break;
 			case 'BIKE':
             	$bikeWorkouts = array (
 					new BikeWorkout($athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
+				break;
 			default:
 				break;
 		}
