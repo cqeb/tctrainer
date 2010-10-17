@@ -86,10 +86,10 @@ echo $html->charset();
       	</div>
       	
       	<div class="grid_4 distribution">
-      		<!--  <div class="box last">
+      		<div class="box last">
 	      		<label><?php __('Workout Balance'); ?></label>
       			<div id="slider"></div>
-      			<div class="sporttime br">
+      			<!-- <div class="sporttime br">
       				<h3><?php __('Swim'); ?> <small id="p1">0%</small></h3>
       				<div id="time1"></div>
       			</div>
@@ -100,8 +100,8 @@ echo $html->charset();
       			<div class="sporttime last br">
       				<h3><?php __('Run'); ?> <small id="p3">0%</small></h3>
       				<div id="time3"></div>
-      			</div>
-      		</div> -->
+      			</div>-->
+      		</div>
       	</div>
 	<!-- /Training hour distribution -->
 	</div>

@@ -10,33 +10,56 @@ TrainingPlanner = {
 	p : null,
 	// shortcut to next button
 	n : null,
+	// array of sports
+	sports : null,
 	
 	// old value for weekly minutes
 	oldWeek : -1,
 
 	/**
-	 * initialize the pager
+	 * initialize the training planner
+	 * @param url ajax request url base for retrieving plans
+	 * @param weeklymins minutes for training for this week
+	 * @param usersport the user's sport
 	 */
-	init : function (url, weeklymins) {
+	init : function (url, weeklymins, usersport) {
 		var that = this;
 		this.url = url;
+		this.sports = usersport.split(',');
+		
+		this.initDistributor();
 		
 		$('#avg').val(TimeParser.format(weeklymins));
 		
 		// init the slider
 		this.slider = $("#slider");
-		this.slider.slider({
-			range: true,
-			min: 0,
-			max: 100,
-			values: [0,0],
-			slide: function(event, ui) {
-				that.balanceUpdated();
-			},
-			stop: function () {
-				that.saveWorkoutSettings();
-			}
-		});
+		if (this.sports.length == 2) {
+			this.slider.slider({
+				range: false,
+				min: 0,
+				max: 100,
+				value: 0,
+				slide: function(event, ui) {
+					that.balanceUpdated();
+				},
+				stop: function () {
+					that.saveWorkoutSettings();
+				}
+			});
+		} else if (this.sports.length == 3) {
+			this.slider.slider({
+				range: true,
+				min: 0,
+				max: 100,
+				values: [0,0],
+				slide: function(event, ui) {
+					that.balanceUpdated();
+				},
+				stop: function () {
+					that.saveWorkoutSettings();
+				}
+			});
+		}
 		
 		// prepare input fields
 		// $('#avg').blur(avgUpdated).keyup(function (e) {
@@ -72,6 +95,27 @@ TrainingPlanner = {
 		
 		// init is done
 		this.initialized = true;
+	},
+	
+	/**
+	 * initializes the sport time distributor
+	 */
+	initDistributor : function () {
+		if (this.sports.length == 1) {
+			return;
+		}
+		
+		var d = jQuery(".distribution .box");
+		var last = '';
+		for (var i=0; i<this.sports.length; i++) {
+			if (i == (this.sports.length - 1)) {
+				last = 'last';
+			}
+			d.append('<div class="sporttime br ' + last + '">' +
+			'<h3>' + this.sports[i] + ' <small id="p' + (i+1) + '">0%</small></h3>' +
+			'<div id="time' + (i+1) + '"></div>' +
+			'</div>');
+		}
 	},
 	
 	/**
@@ -131,11 +175,16 @@ TrainingPlanner = {
 				$('#week').val(TimeParser.format(workoutSettings.time));
 			}
 
-			// update ratio setting
-			var ratio = [workoutSettings.ratio[0], workoutSettings.ratio[0] + workoutSettings.ratio[1]];
-			// update the slider
-			that.slider.slider("option", "values", ratio);
-
+			if (that.sports.length == 2) {
+				// update the slider
+				that.slider.slider("option", "value", workoutSettings.ratio[0]);
+			} else if (that.sports.length == 3) {
+				// update ratio setting
+				var ratio = [workoutSettings.ratio[0], workoutSettings.ratio[0] + workoutSettings.ratio[1]];
+				// update the slider
+				that.slider.slider("option", "values", ratio);
+			}
+			
 			$('#plan').fadeTo("normal", 1);
 			$('#loader').fadeOut();
 
@@ -212,26 +261,44 @@ TrainingPlanner = {
 	},
 
 	balanceUpdated : function () {
+		if (this.sports.length == 1) {
+			return;
+		}
+		var tri = (this.sports.length == 3);
+		
 		var val1 = this.slider.slider("values", 0);
-		var val2 = this.slider.slider("values", 1);
+		if (tri) {
+			var val2 = this.slider.slider("values", 1);
+		}
 
 		TimeParser.parse($('#week').val());
 		var minsPercent = TimeParser.mins / 100;
 
 		// split mins according to the slider
 		var mins1 = parseInt(val1 * minsPercent);
-		var mins2 = parseInt((val2 - val1) * minsPercent);
-		var mins3 = parseInt((100 - val2) * minsPercent);
+		if (tri) {
+			var mins2 = parseInt((val2 - val1) * minsPercent);
+		} else {
+			var mins2 = parseInt((100 - val1) * minsPercent);
+		}
 
 		// now render times to the html elements
 		$('#time1').text(TimeParser.format(mins1)); 
 		$('#time2').text(TimeParser.format(mins2)); 
-		$('#time3').text(TimeParser.format(mins3)); 
 
 		// update percentage values
 		$('#p1').text(val1 + "%");
-		$('#p2').text((val2 - val1) + "%");
-		$('#p3').text((100 - val2) + "%");
+		if (tri) {
+			$('#p2').text((val2 - val1) + "%");
+		} else {
+			$('#p2').text((100 - val1) + "%");
+		}
+
+		if (tri) {
+			var mins3 = parseInt((100 - val2) * minsPercent);
+			$('#time3').text(TimeParser.format(mins3)); 
+			$('#p3').text((100 - val2) + "%");
+		}
 	},
 	
 	resetWeeklyHours : function () {

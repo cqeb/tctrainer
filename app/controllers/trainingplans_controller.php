@@ -60,7 +60,8 @@ class TrainingplansController extends AppController {
 		}
 		$this->set('usersport', $usersport);
 		$this->set('weeklyhours', $u['weeklyhours']);
-		$this->set('rightcol', $this->Provider->renderMesoCycle($now, $u["id"]));
+//		$this->set('rightcol', $this->Provider->renderMesoCycle($now, $u["id"]));
+		$this->set('rightcol', "mesocycle");
 	}
 	
 	// ajax call for retrieving plans

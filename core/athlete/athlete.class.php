@@ -5,7 +5,7 @@
  *
  */
 class Athlete {
-	/**
+	/** test
 	 * the athletes database id
 	 * @var int
 	 */
