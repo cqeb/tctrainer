@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
+<?php 
+$url = Configure::read('App.serverUrl');
+echo $html->charset(); 
+?>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <?php echo $html->meta('icon'); ?>
+
+    <?php echo $this->element('metanavigation'); ?>
+
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="#" />
+
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
+                
+    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-1.3.2.min.js"></script>-->
+    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
+    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
+    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+
+<!-- take a deeper look at the helpers -->
+<?php echo $scripts_for_layout; ?>
+
+<script type="text/javascript">
+// image fader
+$(document).ready(function() {
+	var $teasers = $(".teaserimages").children("img");
+	var tcount = $teasers.length;
+	var last = tcount - 1;
+	
+	setInterval(function() {
+		$($teasers[last]).fadeOut();
+		var r = Math.floor(Math.random() * tcount);
+
+		if (r == last && r < (tcount - 1)) {
+			r++;
+		} else if (r == last && r == (tcount - 1)) {
+			r = 0;
+		}
+		$($teasers[r]).fadeIn();
+		last = r;
+	}, 6000);
+});
+</script>
+
+</head>
+<body>
+	<!-- Header -->
+	<div class="container_12 header">
+		<div class="grid_12 branding">
+			<a href="<?php echo Configure::read('App.serverUrl'); ?>">
+				<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining" title="TriCoreTraining" />
+			</a>
+			<div class="tools">
+              <?php echo $this->element('topprofile'); ?>
+			</div> 
+		</div>
+		<div class="grid_12 navigation">
+			<?php echo $this->element('topnavigation_public'); ?>
+		</div>
+	</div>
+	<!-- /Header -->
+	<!-- Main -->
+	<div class="container_12 main">
+		<!-- Center column -->
+  		<div class="grid_12 center">
+			<!-- Content -->
+			<div class="box content" style="padding-bottom: 18px; height: 285px;">
+				<div id="signup">
+					<p></p><em>It's simple &amp; it's free</em></p>
+					<button onclick="$('#signup').fadeOut(); $('.teaserimages').fadeOut();"><img src="/trainer/img/signup.png" /></button>
+				</div>
+				<div class="teaserimages">
+					<img src="/trainer/img/start/start-1.jpg" alt="" />
+					<img src="/trainer/img/start/start-2.jpg" alt="" />
+					<img src="/trainer/img/start/start-3.jpg" alt="" />
+					<img src="/trainer/img/start/start-4.jpg" alt="" />
+				</div>
+				<div class="clear"></div>
+			</div>
+			<!-- /Content -->
+		</div>
+		
+		<div class="grid_4">
+			<div class="box last">
+				<h1>Easier.</h1>
+				<ul>
+					<li>Simple, solid training plans which are easy to understand</li>
+					<li>Straightforward training log</li>
+					<li>Fits your daily training needs</li>
+					<li>No fluff - just plain, simple plans</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="grid_4">
+			<div class="box last">
+				<h1>Faster.</h1>
+				<ul>
+					<li>Train smart instead of hammering endless miles</li>
+					<li>Even out your weaknesses</li>
+					<li>Focus on your strengths</li>
+					<li>On-the-fly training plans based on your fitness level and race goals</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="grid_4">
+			<div class="box last">
+				<h1>Better.</h1>
+				<ul>
+					<li>Take your time to decide: free basic account</li>
+					<li>Quality-proven periodic training plans</li>
+					<li>Easy to understand, simple to execute</li>
+					<li>Crush the competition</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- /Center column -->
+	<div class="clear"></div>
+	<!-- /Main -->
+	
+	<div class="container_12">
+	<?php echo $cakeDebug; ?>
+  </div>
+	
+  <!-- Footer -->
+  <?php echo $this->element('footer'); ?>
+  <!-- /Footer -->
+
+
+</body>
+</html>

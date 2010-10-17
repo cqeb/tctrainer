@@ -1,0 +1,573 @@
+body {
+	background: #F2F2F2 url('../img/bg.jpg') repeat-x top center;
+}
+
+/* general use border radius class */
+.br {
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+/**
+ * Tables
+ */
+
+td, th {
+	padding: 7px;
+}
+
+tr:nth-child(odd) { 
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #efefef),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#efefef 0%,
+    	rgb(255,255,255) 100%
+	);
+}
+
+tr {
+	border-bottom: 1px dotted #ccc;
+}
+
+th {
+	padding: 10px 7px;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #efefef),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#efefef 0%,
+    	rgb(255,255,255) 100%
+	);
+	
+	text-shadow: 1px 1px 1px white;
+}
+
+/**
+ * Header
+ */
+.header .branding {
+	height: 85px;
+	background: none;
+}
+
+.header .branding img {
+	position: absolute;
+	margin: 20px 0 0 -20px;
+}
+
+.header .tools {
+	float: right;
+	padding-right: 15px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background: lightblue;
+	text-align: right;
+	font-size: 12px;
+}
+
+/**
+ * Boxes
+ */
+.box {
+	background-color: white;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	padding: 15px 15px 40px 15px;
+}
+
+.grid_12 .box {
+	background: white url('../img/bg-navigation.png') no-repeat center bottom;
+}
+
+.grid_4 .box {
+	background: white url('../img/bg-box-4.png') no-repeat center bottom;
+}
+
+.grid_3 .box, .grid_6 .box {
+	background: white url('../img/bg-box-3.png') no-repeat center bottom;
+}
+
+.grid_2 .box {
+	background: white url('../img/bg-box-2.png') no-repeat center bottom;
+}
+
+.grid_6 .box {
+	background: white url('../img/bg-box-6.png') no-repeat center bottom;
+}
+
+.grid_3 .box.last, .grid_4 .box.last {
+	background: white url('../img/bg-box-3-last.png') no-repeat center bottom;
+	padding-bottom: 60px;
+}
+
+.grid_4 .box.last {
+	background: white url('../img/bg-box-4-last.png') no-repeat center bottom;
+}
+
+.grid_2 .box.last {
+	background: white url('../img/bg-box-2-last.png') no-repeat center bottom;
+	padding-bottom: 60px;
+}
+
+.grid_6 .box.last {
+	background: white url('../img/bg-box-6-last.png') no-repeat center bottom;
+	padding-bottom: 60px;
+}
+
+.box.comments {
+	background-image: none;
+}
+
+/**
+ * Top Navigation
+ */
+ 
+.header .navigation {
+	height: 50px;
+	background: white;
+	padding-bottom: 17px;
+	-webkit-border-radius: 2px;
+	background: white url('../img/bg-navigation.png') no-repeat center bottom;
+}
+
+.header .navigation ul, .left .navigation ul {
+	margin: 0px;
+	padding: 0px;
+	height: 50px;
+	list-style-type: none;
+}
+
+.header .navigation ul {
+	margin-left: 240px;
+}
+
+.header .navigation ul li {
+	margin: 0px;
+	float: left;
+}
+
+.header .navigation ul li a {
+	text-transform: uppercase;
+	height: 33px;
+	display: block;
+	padding: 17px 20px 0px 20px;
+	font-weight: bold;
+}
+
+.header .navigation ul li a:hover, .header .navigation ul li a.active {
+	font-weight: bold;
+	background: white url('../img/bg-topnav.gif') repeat-x;
+	padding-right: 19px;
+	text-decoration: none;
+	text-shadow: white 1px 1px 0px;
+}
+
+/**
+ * Sub navigation
+ */
+
+.left .box.navigation {
+	padding: 0px;
+}
+
+.left .navigation ul {
+	padding: 15px 0px 30px 0px;
+	display: table;
+	width: 100%;
+}
+
+.left .navigation ul li {
+	margin: 0px;
+}
+
+.left .navigation ul li a {
+	display: block;
+	padding: 5px 0px 5px 15px;
+}
+
+.left .navigation ul li ul {
+	padding: 2px 0px;
+	background: #F4F7FF url('../img/bg-subnav.png') repeat-x;
+}
+
+.left .navigation ul li ul li {
+	padding: 0px 10px;
+	line-height: 80%;
+}
+
+.left .navigation ul li ul li a {
+	background-image: url('../img/box.gif');
+	background-repeat: no-repeat;
+	background-position: 5px 9px;
+}
+
+.left .navigation .active {
+	font-weight: bold;
+}
+
+/**
+ * Pages navigation
+ */
+ul.pages {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul.pages li {
+	margin: 0px;
+	padding: 5px 0px;
+	list-style: none;
+}
+
+/**
+ * Userinfo
+ */
+.userinfo img {
+	float: left;
+	margin: 0px 10px 10px 0px;
+}
+
+
+/**
+ * Form
+ */
+input[type=text], input[type=password] {
+	width: 200px;
+}
+
+input:disabled, button:disabled {
+	opacity:0.6;
+	filter:alpha(opacity=60);
+}
+
+input.short {
+	width: 20px;
+	text-align: center;
+}
+
+input.medium {
+	width: 40px;
+	text-align: center;
+}
+
+select {
+	width: 210px;
+}
+
+#UserBirthdayMonth, #TrainingstatisticDateMonth, #UserTargetweightdateMonth,
+#TrainingstatisticFromdateMonth, #TrainingstatisticTodateMonth {
+	width: 100px;
+}
+#UserBirthdayDay, #TrainingstatisticDateDay, 
+#TrainingstatisticDateHour, #TrainingstatisticDateMin, #TrainingstatisticDateMeridian,
+#UserTargetweightdateDay,
+#TrainingstatisticFromdateDay, #TrainingstatisticTodateDay {
+	width: 50px;
+}
+
+#UserBirthdayYear, #TrainingstatisticDateYear, #UserTargetweightdateYear,
+#TrainingstatisticFromdateYear, #TrainingstatisticTodateYear {
+	width: 70px;
+}
+
+input[type=checkbox] {
+	position: absolute;
+	margin-left: 125px;	
+}
+
+input[type=text], input[type=password], select {
+	border: 1px solid #999999;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	padding: 5px;
+	background: white url('../img/bg-input.png') repeat-x bottom left;
+	color: #666666;
+}
+
+input[type=text]:focus, input[type=password]:focus, button:focus, input[type=submit]:focus, select:focus {
+	box-shadow: 0 0 4px #0099CC;
+	-webkit-box-shadow: 0 0 4px #0099CC;
+	-moz-box-shadow: 0 0 4px #0099CC;
+}
+
+button, input[type=submit] {
+	color: #666;
+	border: 1px solid #999;
+	border-color: #ccc #999 #999 #ccc;
+	padding: 5px 10px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	background: #efefef;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #ddd),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#efefef 0%,
+    	#ddd 100%
+	);
+	text-shadow: 1px 1px 1px white;
+	cursor: pointer;
+}
+
+button:hover, input[type=submit]:hover {
+	-webkit-box-shadow: 0 0 5px #67c5f8;
+	-moz-box-shadow: 0 0 5px #67c5f8;
+	box-shadow: 0 0 5px #67c5f8;
+}
+
+button:active, input[type=submit]:active {
+	-webkit-box-shadow: inset 3px 3px 5px #999;
+	-moz-box-shadow: inset 3px 3px 5px #999;
+	box-shadow: inset 3px 3px 5px #999;
+	padding: 7px 8px 3px 12px;
+}
+
+
+/*button, input[type=submit] {
+	width: 80px;
+	height: 24px;
+	background: #999999 url('../img/bg-button.png') repeat-x;
+	border: 1px solid #999999;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+	text-shadow: #666 -1px -1px 1px;
+}
+
+button:hover, input[type=submit]:hover {
+	background: #CCCCCC url('../img/bg-button-hover.png') repeat-x;
+	border: 1px solid #999999;
+}
+
+button:active, , input[type=submit]:active {
+	position: relative;
+	top: 1px;
+	left: 1px;
+}*/
+
+legend {
+	padding-bottom: 30px;
+	font-weight: bold;
+}
+
+label {
+	display: inline-block;
+	width: 120px;
+}
+
+div.input {
+	height: 40px;
+}
+
+.form-error {
+	border: 1px solid red;
+	border: 1px solid rgba(0,0,0,0);
+	box-shadow: 0 0 4px red;
+	-webkit-box-shadow: 0 0 4px red;
+	-moz-box-shadow: 0 0 4px red;
+}
+
+.form-ok {
+	border: 1px solid green;
+	border: 1px solid rgba(0,0,0,0);
+	box-shadow: 0 0 4px green;
+	-webkit-box-shadow: 0 0 4px green;
+	-moz-box-shadow: 0 0 4px green;
+}
+
+img.loader {
+	margin-left: 10px;
+}
+
+div.input.error {
+	height: 80px;
+}
+
+#UserGenderM {
+	margin-left: 80px;
+}
+label[for=UserGenderM] {
+	width: 60px;	
+}
+/**
+ * Misc
+ */
+
+ul.actions {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+ul.actions li {
+	margin: 0px;
+	padding: 5px 0px;
+}
+
+ul.actions li.trash {
+	border: 0px dotted #CCCCCC;
+	border-top-width: 1px;	
+	margin-top: 8px;
+	padding-top: 8px;
+}
+
+li.trash a {
+	color: #CC3300;
+	font-size: 12px;
+}
+
+li.trash a:hover {
+	color: white;
+	background-color: #CC3300;
+}
+
+.paging {
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+.paging .all {
+	float: right;
+}
+
+a.reset {
+	color: #CC3300;
+	font-size: 12px;
+	padding: 2px 4px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+a.reset:hover {
+	color: white;
+	background-color: #CC3300;
+}
+
+/**
+ * Footer
+ */
+.footer {
+	background: white;
+	border: 0px solid #88C7EA;
+	border-top-width: 5px;
+	padding: 20px 0px;
+}
+
+.footer p {
+	line-height: 160%;
+}
+
+/**
+ * Tables
+ */
+.content table {
+	width: 100%;
+}
+
+/**
+ * Startpage
+ */
+.teaserimages {
+	margin: -15px 0px 0px -15px;
+	height: 300px;
+	z-index: 100;
+}
+.teaserimages img {
+	position: absolute;
+}
+
+#signup {
+	position: absolute;
+	margin: 90px 0px 0px 580px;
+	padding: 0 15px 10px 15px;
+	background: white;
+	background: rgba(255,255,255,0.6);
+	z-index: 200;
+	font-size: 30px;
+	text-shadow: rgba(0,0,0,0.5) -1px -1px 0px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	text-align: center;
+}
+
+#signup button {
+	background: 0;
+	padding: 0;
+	margin: 0;
+	border: 0;
+	width: 280px;
+	height: 70px;
+}
+
+#signup button:hover {
+	-webkit-box-shadow: 0 0 20px rgb(255, 200, 0);
+}
+
+/**
+ * status messages
+ */
+.errorbox, .okbox, .statusbox, .error-message {
+	padding: 10px;
+	border: 1px solid #999;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	color: white;
+	font-weight: bold;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+}
+
+.error-message {
+	width: 180px;
+	margin-left: 120px;
+}
+
+.errorbox, .error-message {
+	background: #ff8e66;
+	border-color: #A1603A;
+}
+
+.statusbox {
+	background: #feec64;
+	border-color: #C7B110;
+	color: #666;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+}
+
+.okbox {
+	background: #b2ff65;
+	border-color: #6D9452;
+	color: #666;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
+}
+ 

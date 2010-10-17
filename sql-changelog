@@ -1,0 +1,25 @@
+DROP TABLE `athletes`;
+
+2010-08-21 KMS
+DROP TABLE `cmspages`;
+DROP TABLE `cmspagespagestatuses`;
+DROP TABLE `cmspagespagetypes`;
+RENAME TABLE `trainingsplans`  TO `trainingplans`;
+ 
+2010-09-09 KMS
+ALTER TABLE `trainingstatistics` CHANGE `distancetime` `duration` INT( 11 ) NULL DEFAULT NULL;
+DROP TABLE `trainingplans`;
+
+2010-09-10 CP
+ALTER TABLE  `scheduledtrainings` ADD  `trimp` INT NOT NULL AFTER  `duration`;
+
+2010-09-11 KMS
+ALTER TABLE `trainingstatistics` CHANGE `trimps` `trimp` INT( 11 ) NOT NULL;
+
+2010-09-19 KMS
+CREATE TABLE starts (id int);
+CREATE TABLE trainingplans (id int);
+
+2010-09-22 CP
+ALTER TABLE  `mesocyclephases` ADD  `usertime` INT NOT NULL AFTER  `time`;
+ALTER TABLE  `mesocyclephases` ADD  `ratio` VARCHAR( 20 ) NOT NULL AFTER  `usertime`;

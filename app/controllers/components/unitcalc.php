@@ -1,0 +1,645 @@
+<?php
+
+/**
+converts, calculates, etc
+
+**/
+
+class UnitcalcComponent extends Object {
+   var $components = array('Session');
+   var $helpers = array('Session');
+
+   /**
+   converts from different metrics to another
+   **/
+   function convert_metric( $amount, $convertunit, $roundnumber = 3, $commasep = '.' )
+   {
+     // TODO when to use , and when . as comma separator?
+     // TODO round one number less than saving - round at viewing
+     if ( $convertunit != '' )
+     {
+       switch ( $convertunit )
+      {
+            case "cm_ft":
+            $result = $amount / 30.48;
+            break;
+
+            case "ft_cm":
+            $result = $amount * 30.48;
+            break;
+
+            case "kg_lbs":
+            $result = $amount * 2.2046;
+            break;
+
+            case "lbs_kg":
+            $result = $amount / 2.2046;
+            break;
+
+            case "km_mi":
+            $result = $amount * 0.62137;
+            break;
+
+            case "mi_km":
+            $result = $amount / 0.62137;
+            break;
+      }
+     } else
+            $result = $amount;
+            
+     $result = $this->format_number( $result, $roundnumber, '', $commasep );
+
+     return $result;
+   }
+
+   /**
+   get metric unit definitions for displaying
+   **/
+   function get_unit_metric()
+   {
+            // length / weight / height
+            $session_userobject = $this->Session->read('userobject');
+            if (  $session_userobject['unit'] == 'imperial' )
+            {
+               $return['length'] = 'mi';
+               $return['weight'] = 'lbs';
+               $return['height'] = 'ft';
+            } else
+            {
+               $return['length'] = 'km';
+               $return['weight'] = 'kg';
+               $return['height'] = 'cm';
+            }
+            return $return;
+   }
+
+   /**
+   check a distance to be saved and viewed in the correct metric
+   **/
+   function check_distance( $amount, $mode = 'show', $ret = 'both' )
+   {
+            //echo "amount: " . $amount . "<br>";
+            if ( is_numeric( $amount ) )
+            {
+
+              $session_userobject = $this->Session->read('userobject');
+              if (  $session_userobject['unit'] == 'imperial' )
+              {
+                 if ( $mode == 'show' ) $convert = 'km_mi';
+                 else
+                     $convert = 'mi_km';
+
+                 $amount_array['amount'] = $this->convert_metric( $amount, $convert );
+                 $amount_array['unit'] = 'mi';
+              } else
+              {
+                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  else $amount_array['amount'] = $amount;
+
+                  $amount_array['unit'] = 'km';
+              }
+
+              if ( $ret == 'single' )
+                 return $amount_array['amount'];
+              else
+                 return $amount_array;
+
+            } else
+                return false;
+   }
+
+   /**
+   check a weight to be saved and viewed in the correct metric
+   **/
+   function check_weight( $amount, $mode = 'show', $ret = 'both' )
+   {
+            if ( is_numeric( $amount ) )
+            {
+              $session_userobject = $this->Session->read('userobject');
+              if (  $session_userobject['unit'] == 'imperial' )
+              {
+                 if ( $mode == 'show' ) $convert = 'kg_lbs';
+                 else
+                     $convert = 'lbs_kg';
+
+                 $amount_array['amount'] = $this->convert_metric( $amount, $convert );
+                 $amount_array['unit'] = 'lbs';
+              } else
+              {
+                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  else $amount_array['amount'] = $amount;
+                  $amount_array['unit'] = 'kg';
+              }
+              if ( $ret == 'single' )
+                 return $amount_array['amount'];
+              else
+                 return $amount_array;
+            } else
+                return false;
+   }
+
+   /**
+   check a height to be saved and viewed in the correct metric
+   **/
+   function check_height( $amount, $mode = 'show', $ret = 'both' )
+   {
+            if ( is_numeric( $amount ) )
+            {
+              $session_userobject = $this->Session->read('userobject');
+              if (  $session_userobject['unit'] == 'imperial' )
+              {
+                 if ( $mode == 'show' ) $convert = 'cm_ft';
+                 else
+                     $convert = 'ft_cm';
+
+                  //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  $amount_array['amount'] = $amount;
+                  $amount_array['unit'] = 'ft';
+              } else
+              {
+                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  else $amount_array['amount'] = $amount;
+                  $amount_array['unit'] = 'cm';
+              }
+
+              if ( $ret == 'single' )
+                 return $amount_array['amount'];
+              else
+                 return $amount_array;
+
+            } else
+                return false;
+   }
+
+   /**
+   calculate bmi and give back a status on your bmi
+   **/
+   function calculate_bmi( $weight, $height, $age )
+   {
+            /**
+            BMI (Body mass index) Tabelle
+            Age     underw. normal  overw.  really fat
+            18-24  	<19  	19-24  	24-29  	29-39  	>39
+            25-34 	<20 	20-25 	25-30 	30-40 	>40
+            35-44 	<21 	21-26 	26-31 	31-41 	>41
+            45-54 	<22 	22-27 	27-32 	32-42 	>42
+            55-64 	<23 	23-28 	28-33 	33-43 	>43
+            65+ 	<24 	24-29 	29-34 	34-44 	>44
+
+            BMI = kg / m^2
+            **/
+
+            $height = $height / 100; // must be in meters
+            $bmi = $weight / ($height * $height);
+            //echo $weight . "|" . $height . "|" . $bmi . "|" . $age . "<br>";
+
+            $bmi_current = $bmi;
+
+            // reduce bmi by age interval
+            if ( $age < 25 ) $bmi = $bmi + 0;
+            if ( $age < 35 && $bmi > 24 ) $bmi = $bmi - 1;
+            if ( $age < 45 && $bmi > 34 ) $bmi = $bmi - 2;
+            if ( $age < 55 && $bmi > 44 ) $bmi = $bmi - 3;
+            if ( $age < 65 && $bmi > 54 ) $bmi = $bmi - 4;
+            if ( $age > 64 ) $bmi = $bmi - 5;
+
+            // TODO translation not finished
+            if ( $bmi <= 16 ) $bmi_status = __('critical (too low)',true);
+            if ( $bmi >= 16 && $bmi < 20 ) $bmi_status = __('not critical (but too low)',true);
+            if ( $bmi >= 20 && $bmi < 25 ) $bmi_status = __('normal',true);
+            if ( $bmi >= 25 && $bmi < 30 ) $bmi_status = __('not critical (but too high)',true);
+            if ( $bmi >= 30 ) $bmi_status = __('critical (too high)',true);
+
+            $return['bmi_status'] = $bmi_status;
+            $return['bmi'] = round($bmi_current, 1);
+            return $return;
+   }
+
+   /**
+   format a number in correct format
+   **/
+   function format_number($number, $decimals = 0, $thousand_separator = '&nbsp;', $decimal_point = '.')
+   {
+            $tmp1 = round((float) $number, $decimals);
+
+            while (($tmp2 = preg_replace('/(\d+)(\d\d\d)/', '\1 \2', $tmp1)) != $tmp1)
+                  $tmp1 = $tmp2;
+
+            return strtr($tmp1, array(' ' => $thousand_separator, '.' => $decimal_point));
+   }
+   /**
+   is the send amount a correct decimal number?
+   **/
+   function check_decimal( $amount )
+   {
+            $amount = trim($amount);
+
+            // if decimal numbers on the right side are more than 100 - problemos :)
+
+            //if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,2})?$~", $amount, $parts) )
+            if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,100})?$~", $amount, $parts) )
+            {
+                 //print_r($parts);
+                 if ( !empty($parts['2']) )
+                 {
+                      $pre = preg_replace("~[".$parts['2']."]~", "", $parts['1']);
+                 } else
+                 {
+                      $pre = $parts['1'];
+                 }
+                 if ( !empty($parts['4']) )
+                 {
+                      $post = ".".preg_replace("~[".$parts['4']."]~", "", $parts['3']);
+                 } else
+                 {
+                      $post = false;
+                 }
+                 $format_amount = $pre.$post;
+                 //echo "ff: " . $format_amount . "<br>";
+                 return $format_amount;
+            }
+
+            return false;
+   }
+
+   /**
+   a lot of date and time functions
+   time_from_to - what is the difference between 2 dates
+   **/
+   function time_from_to( $date_from, $date_to )
+   {
+            if ( $date_from == "" )
+            {
+                $date_from_ts = time();
+            } else
+            {
+                list($year,$month,$day) = explode("-",$date_from);
+                $date_from_ts = mktime( 0, 0, 0, $month, $day, $year );
+            }
+
+            $date_to_string = $date_to['year'] . '-' . $date_to['month'] . '-' . $date_to['day'];
+            list($year,$month,$day) = explode("-", $date_to_string);
+            $date_to_ts = mktime( 0, 0, 0, $month, $day, $year );
+
+            $diff['days'] = ($date_to_ts - $date_from_ts) / ( 3600 * 24 );
+            // TODO that might not be correct :)
+            $diff['months'] = $diff['days'] / 30;
+
+            return $diff;
+   }
+
+   /**
+   convert HH:MM:SS to seconds
+   **/
+   function time_to_seconds( $time )
+   {
+            //echo $time;
+            // HH:MM:SS to seconds
+            $time = trim( $time );
+            $time_array = explode( ":", $time );
+            if ( count( $time_array ) == 3 )
+            {
+               $seconds = $time_array[2];
+               $minutes_in_seconds = $time_array[1] * 60;
+               $hours_in_seconds = $time_array[0] * 3600;
+
+               $result = $seconds + $minutes_in_seconds + $hours_in_seconds;
+               return $result;
+
+            } else
+               return false;
+   }
+
+   /**
+   convert seconds to HH:MM:SS
+   **/
+   function seconds_to_time( $seconds )
+   {
+            $hours = intval( $seconds / 3600 );
+            //echo $hours . "<br>";
+            $rest_hours = $seconds - ( $hours * 3600 );
+            $minutes = intval( $rest_hours / 60 );
+            //echo $minutes . "<br>";
+            $rest_minutes = $seconds - ( $hours * 3600 ) - ( $minutes * 60 );
+            $seconds2 = intval( $rest_minutes );
+            //echo $seconds2 . "<br>";
+
+            $result = sprintf("%02d", $hours) . ":" . sprintf("%02d", $minutes) . ":" . sprintf("%02d", $seconds2);
+
+            return $result;
+   }
+
+   /**
+   calculate age from birthday on
+   **/
+   function how_old( $birthday )
+   {
+            if ( !$birthday ) return 0;
+            //calculate years of age (input string: YYYY-MM-DD)
+            list($year,$month,$day) = explode("-",$birthday);
+            $year_diff  = date("Y") - $year;
+            $month_diff = date("m") - $month;
+            $day_diff   = date("d") - $day;
+            if ($day_diff < 0 || $month_diff < 0)
+               $year_diff--;
+
+            return $year_diff;
+   }
+
+   /**
+   show date in correct format (depending on your user profile)
+   save date in correct format
+   **/
+   function check_date( $date, $mode = 'show' )
+   {
+            $session_userobject = $this->Session->read('userobject');
+            $session_unitdate = $session_userobject['unitdate'];
+
+            $return = "";
+
+            // save / show / display
+            if ( $mode == 'show' )
+            {
+               $date_split_fromtime = split( ' ', $date );
+               $date_split = split( '-', $date_split_fromtime[0] );
+               switch ( $session_unitdate )
+               {
+                      case "ddmmyyyy":
+                      $return = $date_split[2] . '.' . $date_split[1] . '.' . $date_split[0];
+                      break;
+
+                      case "mmddyyyy":
+                      $return = $date_split[1] . '.' . $date_split[2] . '.' . $date_split[0];
+                      break;
+
+                      case "yyyymmdd":
+                      $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
+                      break;
+               }
+            } elseif ( $mode == 'save' )
+            {
+               switch ( $session_unitdate )
+               {
+                      case "ddmmyyyy":
+                      $date_split = split( '.', $date );
+                      $return = $date_split[2] . '-' . $date_split[1] . '-' . $date_split[0];
+                      break;
+
+                      case "mmddyyyy":
+                      $date_split = split( '.', $date );
+                      $return = $date_split[2] . '-' . $date_split[0] . '-' . $date_split[1];
+                      break;
+
+                      case "yyyymmdd":
+                      //$date_split = split( '.', $date );
+                      //$return = $date_split[2] . '-' . $date_split[1] . '-' . $date_split[0];
+                      $return = $date;
+                      break;
+               }
+
+            }
+            return $return;
+   }
+
+   /**
+    * calculate trimp
+    * 
+    */
+   function calc_trimp( $duration_total, $avg_pulse_total, $time_in_zones )
+   {
+           $trimp = 0;
+           // duration must be in minutes!!
+           
+           if ( is_array( $time_in_zones ) ) 
+           {
+             // TODO we need lth here
+             // TODO what about 5a-c
+             $lth = 170;
+             
+             $trimp += ( $time_in_zones['zone1'] * $lth * 0.85 ); 
+             $trimp += ( $time_in_zones['zone2'] * $lth * 0.89 );
+             $trimp += ( $time_in_zones['zone3'] * $lth * 0.94 ); 
+             $trimp += ( $time_in_zones['zone4'] * $lth * 0.99 ); 
+             $trimp += ( $time_in_zones['zone5'] * $lth * 1.02 ); 
+             
+           } else
+           {
+             $trimp = $duration_total * $avg_pulse_total;
+           } 
+
+           return $trimp;
+   }
+   
+   /**
+   this functions seems to be duplicate - damn!
+   **/
+   function diff_dates( $date_from, $date_to )
+   {
+            //$date_to_string = $date_to['year'] . '-' . $date_to['month'] . '-' . $date_to['day'];
+            list($year_from, $month_from, $day_from) = explode("-", $date_from);
+            $ts_from = mktime( 0, 0, 0, $month_from, $day_from, $year_from );
+
+            list($year_to, $month_to, $day_to) = explode("-", $date_to);
+            $ts_to = mktime( 0, 0, 0, $month_to, $day_to, $year_to );
+
+            $diff_in_days = ($ts_to - $ts_from)/(3600*24);
+
+            return $diff_in_days;
+   }
+
+/**
+   function date_plus_days( $date, $days, $calctype = 'plus' )
+   {
+            list($year, $month, $day) = explode("-", $date);
+            $ts = mktime( 0, 0, 0, $month, $day, $year );
+
+            if ( $calctype == 'plus' )
+            {
+                 $ts_return = $ts + ( $days * 24 * 3600 );
+            } elseif ( $calctype == 'minus' )
+            {
+                 $ts_return = $ts - ( $days * 24 * 3600 );
+            }
+
+            $date_return = date( "Y-m-d", $ts_return );
+
+            return $date_return;
+   }
+**/
+
+   /**
+   take given daten and add/subtract days
+   **/
+   function date_plus_days( $date, $days )
+   {
+            // TODO later - replace with strtotime
+
+            if ( strpos( $date, ' ' ) )
+            {
+                 $date_split = explode( ' ', $date );
+                 $date = $date_split[0];
+            }
+
+            list($year, $month, $day) = explode( '-', $date );
+            $ts = mktime( 0, 0, 0, $month, $day, $year );
+
+            $ts_return = $ts + ( $days * 86400 );
+
+            $date_return = date( "Y-m-d", $ts_return );
+
+            return $date_return;
+   }
+
+   /**
+   some helper function - don't wanna explain that :)
+   **/
+   function month_in_year( $month, $year )
+   {
+            if ( $month > 12 )
+            {
+                 $month -= 12;
+                 $year++;
+            }
+
+            if ( $month < 1 )
+            {
+                 $month += 12;
+                 $year--;
+            }
+            $return['month'] = $month;
+            $return['year'] = $year;
+
+            return $return;
+   }
+
+   /**
+   take a given date and return the start and end of a season
+   **/
+   function get_season( $userdata, $sentdata )
+   {
+               // if no event is saved, than use current date
+               if ( !is_array( $sentdata ) )
+               {
+                  $sentdata['Competition']['competitiondate']['month'] = date('m', time());
+                  $sentdata['Competition']['competitiondate']['year'] = date('Y', time());
+               }
+
+               $seasonstartmonth = $seasonendmonth = $userdata['User']['coldestmonth'];
+               $compmonth = $sentdata['Competition']['competitiondate']['month'];
+               $compyear = $sentdata['Competition']['competitiondate']['year'];
+
+               if ( $seasonstartmonth < $compmonth )
+               {
+                   $seasonstartyear = $compyear;
+                   $seasonendyear = $compyear+1;
+               } else
+               {
+                   $seasonstartyear = $compyear-1;
+                   $seasonendyear = $compyear;
+               }
+
+               $season['start'] = $seasonstartyear . '-' . $seasonstartmonth . '-01';
+               $season['end']   = $seasonendyear . '-' . $seasonendmonth . '-01';
+
+               return $season;
+   }
+
+   /**
+   return the correct currency for a country
+   **/
+   function currency_for_country( $country )
+   {
+            $eur_countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
+
+            if ( in_array( $country, $eur_countries ) )
+                $currency = 'EUR';
+            else
+                $currency = 'USD';
+
+            return $currency;
+   }
+
+   function get_sports()
+   {
+     
+            $session_userobject = $this->Session->read('userobject');
+            if (  $session_userobject['unit'] == 'imperial' )
+            {
+                $unit = 'mi';
+                $convertunit = 'km_mi';
+            } else
+            {
+                $unit = 'km';
+                $convertunit = '';
+            }  
+            
+            
+            $tri_ironman = __('Ironman (', true) . 
+              $this->convert_metric( '3.8', $convertunit, 1 ) . ' ' . $unit . __(' swim, ', true) . 
+              $this->convert_metric( '180', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
+              $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $tri_halfironman = __('Half-Ironman (', true) . 
+              $this->convert_metric( '1.9', $convertunit, 1) . ' ' . $unit . __(' swim, ', true) . 
+              $this->convert_metric( '90', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
+              $this->convert_metric( '21', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $tri_olympic = __('Olympic Distance (', true) . 
+              $this->convert_metric( '1.5', $convertunit, 1 ) . ' ' . $unit . __(' swim, ', true) . 
+              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $tri_sprint = __('Sprint Distance (', true) . 
+              $this->convert_metric( '0.75', $convertunit, 1 ) . ' ' . $unit . __(' swim, ', true) . 
+              $this->convert_metric( '20', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
+              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+                
+            $run_ultra = __('Ultrarun (> ', true) . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $run_marathon = __('Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $run_halfmarathon = __('Half-Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $run_10k = __('Race (', true) . $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $run_5k = __('Race (', true) . $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+                
+            $duathlon_middle = __('Duathlon (', true) .
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run, ', true) . 
+              $this->convert_metric( '60', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $duathlon_short = __('Duathlon (', true) .
+              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . __(' run, ', true) . 
+              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+                
+            $bike_ultra = __('Races (> ', true) . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';
+            $bike_long = __('Races (', true) . $this->convert_metric( '100', $convertunit, 0 ) . '-' . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';
+            $bike_middle = __('Races (', true) . $this->convert_metric( '50', $convertunit, 0 ) . '-' . $this->convert_metric( '100', $convertunit, 0 ) . ' ' . $unit . ')';
+            $bike_short = __('Races (< ', true) . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ')';
+
+            $sports = array(
+                                 'Triathlon' => array (
+                                             'TRIATHLON IRONMAN' => $tri_ironman,
+                                             'TRIATHLON HALFIRONMAN' => $tri_halfironman,
+                                             'TRIATHLON OLYMPIC' => $tri_olympic,
+                                             'TRIATHLON SPRINT' => $tri_sprint
+                                 ),
+                                 'Running' => array(
+                                             'RUN ULTRA' => $run_ultra,
+                                             'RUN MARATHON' => $run_marathon,
+                                             'RUN HALFMARATHON' => $run_halfmarathon,
+                                             'RUN 10K' => $run_10k,
+                                             'RUN 5K' => $run_5k
+                                 ),
+                                 'Duathlon' => array(
+                                             'DUATHLON MIDDLE' => $duathlon_middle,
+                                             'DUATHLON SHORT' => $duathlon_short
+                                 ),
+                                 'Bikeracing' => array(
+                                             'BIKE ULTRA' => $bike_ultra,
+                                             'BIKE LONG' => $bike_long,
+                                             'BIKE MIDDLE' => $bike_middle,
+                                             'BIKE SHORT' => $bike_short
+                                 )
+            );
+            
+            return $sports; 
+   }
+
+}
+
+?>
