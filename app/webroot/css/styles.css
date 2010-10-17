@@ -58,6 +58,10 @@ th {
 	text-shadow: 1px 1px 1px white;
 }
 
+td.nobg {
+	background: white;
+}
+
 /**
  * Header
  */

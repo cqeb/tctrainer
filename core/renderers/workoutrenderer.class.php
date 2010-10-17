@@ -28,7 +28,7 @@ class WorkoutRenderer {
 			$trimps += $w->getTRIMP();
 		}
 		
-		$html .= "<tr><td></td><td></td>
+		$html .= "<tr><td class=\"nobg\"></td><td class=\"nobg\"></td>
 	<td class=\"duration sum\">" . self::formatTime($length) . "<small>h</small></td>
 	<td class=\"trimp sum\">" . $trimps . "<small>pts.</small></td>
 </tr>";
