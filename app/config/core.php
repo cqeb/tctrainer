@@ -55,6 +55,10 @@ Configure::write('App.encoding', 'UTF-8');
  * And uncomment the App.baseUrl below:
  */
 
+ /** 
+  * this is correct
+  * 
+  */
 if (gethostname() === "Main") {
 	
 	// Clemens' config
