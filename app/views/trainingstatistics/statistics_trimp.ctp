@@ -74,7 +74,7 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 
 <br /><br />
 
-<h2><?php __('Acute Training Load'); ?></h2>
+<h2><?php __('Grade of fatigue (Acute Training Load)'); ?></h2>
 
 <?php
 
@@ -88,7 +88,7 @@ echo $ofc->createflash('my_chart1','680','400',$jsonurl . 'stype:' . $sportstype
 
 <br /><br />
 
-<h2><?php __('Chronic Training Load'); ?></h2>
+<h2><?php __('Grade of fitness (Chronic Training Load)  '); ?></h2>
 
 <?php
 

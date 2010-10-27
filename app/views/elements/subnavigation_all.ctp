@@ -1,4 +1,13 @@
 <ul>
+<?php if ( !$session_userid ) { ?>
+        <li>&nbsp;</li>
+        <li><a href="<?php echo Configure::read('App.serverUrl'); ?>/app/webroot/flash.php">(<?php __('Graphs'); ?>)</a></li>
+        <li><a href="/phpmyadmin/">(<?php __('PHPMyAdmin'); ?>)</a></li>
+        <li><a href="/trainer/starts/fill_my_database">(<?php __('Fill my database'); ?>)</a></li>
+        <li><?php echo $html->link(__('Home',true),array('controller' => 'starts', 'action' => 'index'))?></li>
+        <li><?php echo $html->link(__('Register',true),array('controller' => 'users', 'action' => 'register'))?></li>
+<?php } ?>
+ 
 
 <?php if ( $this->name == 'Competitions' ) { ?>
 		    <li><?php echo $html->link(__('List competitions',true),array('controller' => 'competitions', 'action' => 'list_competitions'))?></li>
@@ -15,13 +24,13 @@
 		    <li><?php echo $html->link(__('Can I finish the next competition?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_competition'))?></li>
 		    <li><?php echo $html->link(__('What have I achieved?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_whathaveidone'))?></li>
 <?php } ?>
-<?php if ( $this->name == 'Users' ) { ?>
+<?php if ( $this->name == 'Users' && $session_userid ) { ?>
 		    <li><?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?></li>
 		    <li><?php echo $html->link(__('Edit training info',true),array('controller' => 'users', 'action' => 'edit_traininginfo'))?></li>
-		    <li><?php echo $html->link(__('Edit weight settings',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
+		    <li><?php echo $html->link(__('Edit weight targets',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
 		    <li><?php echo $html->link(__('Change metric',true),array('controller' => 'users', 'action' => 'edit_metric'))?></li>
 		    <li><?php echo $html->link(__('Change password',true),array('controller' => 'users', 'action' => 'edit_password'))?></li>
-		    <li><?php echo $html->link(__('Edit images',true),array('controller' => 'users', 'action' => 'edit_images'))?></li>
+		    <li><?php echo $html->link(__('Edit images (later)',true),array('controller' => 'users', 'action' => 'edit_images'))?></li>
         <li><?php echo $html->link(__('Subscribe',true),array('controller' => 'payments', 'action' => 'subscribe_triplans'))?></li>
 
 <?php } ?>
@@ -30,12 +39,6 @@
 		    <li><?php echo $html->link(__('Show payments',true),array('controller' => 'payments', 'action' => 'show_payments'))?></li>
 		    <li><?php echo $html->link(__('Cancel subscription',true),array('controller' => 'payments', 'action' => 'unsubscribe_triplans'))?></li>
 <?php } ?>
-        <li>&nbsp;</li>
-	      <li><a href="<?php echo Configure::read('App.serverUrl'); ?>/app/webroot/flash.php">(<?php __('Graphs'); ?>)</a></li>
-        <li><a href="/phpmyadmin/">(<?php __('PHPMyAdmin'); ?>)</a></li>
-        <li><a href="/trainer/starts/fill_my_database">(<?php __('Fill my database'); ?>)</a></li>
-        <li><?php echo $html->link(__('Home',true),array('controller' => 'starts', 'action' => 'index'))?></li>
-        <li><?php echo $html->link(__('Register',true),array('controller' => 'users', 'action' => 'register'))?></li>
 <!--
         <li><?php echo $html->link(__('Prices & Register',true),array('controller' => 'users', 'action' => 'add_step1'))?></li>
         <li><?php echo $html->link(__('Login',true),array('controller' => 'users', 'action' => 'login'))?></li>
