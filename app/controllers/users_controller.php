@@ -1,6 +1,5 @@
 <?php
 
-
 class UsersController extends AppController {
 	var $name = 'Users';
 
@@ -179,6 +178,8 @@ class UsersController extends AppController {
 				}
 			}
 		}
+    $this->layout = 'default_trainer';
+
 		$this->set('statusbox', $statusbox);
 		$this->set('status', $status);
 	}
@@ -229,40 +230,136 @@ class UsersController extends AppController {
 	}
 
 	/**
-	 * register a new user with the system
+	 * registration for new users 
 	 */
-	function register() {
-		// basic settings
-		$this->set('sports', $this->Unitcalc->get_sports());
-		$this->pageTitle = __('Create your account', true);
-		$success = false;
-		
-		// save & validate user data
-		if (is_array($this->data) && count($this->data) > 0) {
-			$success = $this->User->save(
-				$this->data,
-				array(
-                	'validate' => true,
-                    'fieldList' => array(
-                    	'firstname', 
-                    	'lastname', 
-                    	'gender', 
-                    	'email', 
-                    	'password', 
-                    	'birthday',
-						'lactatethreshold',
-						'weeklyhours'
-                         )
-				));
-		}
-		$this->set('success', $success);
-		
-		// 
-	}
-	
-	function add_step1($id = null)
+	function register() 
 	{
 
+    $this->pageTitle = __('Create your account', true);
+    $success = false;
+    $statusbox = 'statusbox_none';
+    $save_fails = false;
+    
+    if (empty($this->data))
+    {
+      
+    } else
+    {
+      // tells you - user clicked back in browser :(
+      $session_register_userid_just_in_case = $this->Session->read('register_userid');
+
+      // check email (if correct and not duplicate) at registration
+      if ( $this->data['User']['email'] && $this->data['User']['id'] )
+      {
+        $checkemail = $this->check_email_function( $this->data['User']['email'], $this->data['User']['id'], true );
+      } else
+      {
+        if ( $session_register_userid_just_in_case != '' )
+        {
+          // change insert to update statement by setting userid for user-data
+          $set_userid = $session_register_userid_just_in_case;
+        } else
+        {
+          $set_userid = null;
+        }
+        // check email - maybe user already registered with this email
+        $checkemail = $this->check_email_function( $this->data['User']['email'], $set_userid, true );
+      }
+
+      //echo "you can register email twice!";
+      //echo $checkemail; 
+
+      // checkemail is a hidden field in form which tells the model whether the email is ok or not
+      if ( $checkemail == 0 && $this->data['User']['email'] != '' )
+      {
+        // email is already taken - sorry.
+        $this->data['User']['emailcheck'] = "0";
+      } else
+      {
+        $this->data['User']['emailcheck'] = "1";
+      }
+
+/**
+      // check if password + password-approve field are equal
+      if ( $this->data['User']['password'] == $this->data['User']['passwordapprove'] )
+      {
+           $this->data['User']['passwordcheck'] = "1";
+           $save_pw = $this->data['User']['password'];
+           $this->data['User']['password'] = md5($this->data['User']['password']);
+           
+      } else
+      {
+           $this->data['User']['passwordcheck'] = "0";
+      }
+**/
+
+      // no chance - you have to get the newsletter
+      $this->data['User']['newsletter'] = "1";
+      // we do not ask for "where do you know us from?" - for Clemens' sake :)
+      $this->data['User']['dayofheaviesttraining'] = 'FRI';
+
+      // TODO (B)
+      // enter values depending on country
+      $this->data['User']['coldestmonth'] = '1';
+      $this->data['User']['unit'] = 'metric';
+      $this->data['User']['unitdate'] = 'yyyymmdd';
+      $this->data['User']['yourlanguage'] = $this->Session->read('session_userlanguage');
+      
+      // save user profile
+      if ( $this->data['User']['tos'] == '0' || !$this->data['User']['tos'] )
+          $save_fails = true;
+           
+      if ( !$save_fails )
+      {
+          if ( $this->User->save( $this->data, array(
+                               'validate' => true,
+                               'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'password', 'birthday',
+                               'emailcheck', 'payed_from', 'payed_to', 'newsletter', 'coldestmonth', 'dayofheaviesttraining', 'unit', 'unitdate', 'yourlanguage' )
+          ) ) )
+          {
+              //$this->_sendNewUserMail( $this->User->id );
+              // send user with activation link
+              // TODO text-newsletter-template is missing
+              $tid = $this->_sendNewUserMail( $this->User->id );
+
+              // write imperial / metric to session and date-format
+              $this->Session->write('session_unit', $this->data['User']['unit']);
+              $this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+
+              $statusbox = 'statusbox_ok';
+              $this->Session->write('register_userid', $this->User->id);
+
+              $this->Session->setFlash(__('Registration finished',true));
+              $this->redirect(array('action' => 'register_finish', $this->User->id));
+          } else
+          {
+              $save_fails = true;
+          }
+      }
+      
+      if ( $save_fails )
+      {
+          if ( !$this->data['User']['tos'] || $this->data['User']['tos'] == 0 ) 
+                $this->set( 'tos_warning', true );
+          $statusbox = 'errorbox';
+          $this->Session->setFlash(__('Some errors occured',true));
+          $this->set('statusbox', $statusbox);
+      }
+    }
+
+    $this->set('sports', $this->Unitcalc->get_sports());
+    $this->set('statusbox', $statusbox);
+    $this->set('tos_warning', false);
+  }
+
+/**
+ * deprecated registration form
+ */	
+ 
+	function add_step1($id = null)
+	{
+    die();
+    
 		$this->pageTitle = __('Registration - Step 1/2',true);
 		$statusbox = 'statusbox_none';
 
@@ -340,6 +437,7 @@ class UsersController extends AppController {
 	}
 
 	function add_step2($id = null) {
+    die();
 
 		$this->pageTitle = __('Registration - Step 2/2',true);
 		$statusbox = 'okbox';
@@ -394,7 +492,7 @@ class UsersController extends AppController {
                               	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
 
                               	$this->Session->setFlash(__('User registration finished. Please click your activation link in your E-mail!',true));
-                              	$this->redirect(array('action' => 'add_step3', $this->User->id));
+                              	$this->redirect(array('action' => 'register_finish', $this->User->id));
                               } else
                               {
                               	$statusbox = 'errorbox';
@@ -407,7 +505,7 @@ class UsersController extends AppController {
 
 	}
 
-	function add_step3($id = null)
+	function register_finish($id = null)
 	{
 
 		$this->pageTitle = __('Registration - Finished',true);
@@ -485,7 +583,8 @@ class UsersController extends AppController {
 		//$this->render('check_email');
 		$usethisemail = "true";
 		$shownoerror = "false";
-
+    $error_msg = "";
+    
 		// if no userid is set but email
 		if ( !$checkuserid && $checkuseremail )
 		{
@@ -536,7 +635,13 @@ class UsersController extends AppController {
 		// check whether email format is correct
 		if ( !eregi("^[a-z0-9]+([-_\.]?[a-z0-9])+@[a-z0-9]+([-_\.]?[a-z0-9])+\.[a-z]{2,4}$", $checkuseremail ))
 		{
-			$this->set("emailcheck", __('<div class="error-message" style="color: red;">Sorry, your E-mail ' . $checkuseremail . ' is not correct!</div>', true));
+		  $error_msg = '<div class="error-message">';
+		  $error_msg .= __('Sorry, your E-Mail', true);
+      $error_msg .= ' ' . $checkuseremail . ' '; 
+		  $error_msg .= __('is not correct!', true);
+      $error_msg .= '</div>';
+			
+			$this->set("emailcheck", $error_msg);
 			$this->set("emailcheck_var", "false");
 			return 0;
 
@@ -545,17 +650,32 @@ class UsersController extends AppController {
 			// you can not use this email at registration or at profile changes
 			if ( $usethisemail == "false" )
 			{
-				$this->set("emailcheck", __('<div class="error-message" style="color: red;">Sorry, your E-mail is already registered!</div>', true));
+        $error_msg = '<div class="error-message">';
+        $error_msg .= __('Sorry, your E-Mail', true);
+        //$error_msg .= ' ' . $checkuseremail . ' ';
+        $error_msg .= ' ';  
+        $error_msg .= __('is already registered!', true);
+        $error_msg .= '</div>';
+        
+				$this->set("emailcheck", $error_msg);
 				$this->set("emailcheck_var", "false");
 				return 0;
 			} else {
 				// that's good, you can use this email at registration
 				if ( $shownoerror == "false" )
 				{
-					$this->set("emailcheck", __('<div class="error-message" style="color: green;">GREAT! E-mail is not registered!</div>', true));
+          $error_msg = '<div class="ok-message">';
+          $error_msg .= __('GREAT! E-Mail is not registered!', true);
+          $error_msg .= '</div>';
+          
+					$this->set("emailcheck", $error_msg);
 				} else
 				{
-					$this->set("emailcheck", __('<div class="error-message" style="color: green;">E-mail has not changed!</div>', true));
+          $error_msg = '<div class="error-message">';
+          $error_msg .= __('E-Mail has not changed!', true);
+          $error_msg .= '</div>';
+
+					$this->set("emailcheck", $error_msg);
 				}
 				$this->set("emailcheck_var", "true");
 				return 1;
@@ -1097,6 +1217,8 @@ class UsersController extends AppController {
 		$tid = $this->Transactionhandler->handle_transaction( $this->Transaction, '', 'create', 'activation_userid', $User['User']['id'] );
 		$this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'activation_email', $User['User']['email'] );
 
+    $this->layout = 'newsletter';
+
 		/* Check for SMTP errors. */
 		//Set view variables as normal
 		$this->set('user', $User);
@@ -1113,7 +1235,7 @@ class UsersController extends AppController {
 		$this->Email->from = Configure::read('App.mailFrom');
 
 		// TODO internationalisation is missing
-		$this->Email->template = 'welcomemail_eng'; // note no '.ctp'
+		$this->Email->template = 'welcomemail'; // note no '.ctp'
 		//Send as 'html', 'text' or 'both' (default is 'text')
 		$this->Email->sendAs = 'both'; // because we like to send pretty mail
 		/* SMTP Options */
@@ -1142,14 +1264,16 @@ class UsersController extends AppController {
 
 	function _sendPasswordForgotten($id, $randompassword = null)
 	{
+	  $this->layout = 'newsletter';
+    
 		// TODO translation template
 		if ( $randompassword )
 		{
-			$this->template = 'passwordreset_eng';
+			$this->template = 'passwordreset';
 			$this->set('randompassword',$randompassword);
 		} else
 		{
-			$this->template = 'passwordforgotten_eng';
+			$this->template = 'passwordforgotten';
 		}
 
 		$User = $this->User->read(null,$id);

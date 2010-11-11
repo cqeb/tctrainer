@@ -1,13 +1,32 @@
 <h1><?php __("Create your account"); ?></h1>
+
+<?php echo $this->element('js_error'); ?>
+
+<div class="messagebox">
+<?php __('Get your trainingplans FREE for 1 month. Then invest less than 3 cups of coffee worth per month for your interactive coach.'); ?>
+</div>
+
+<br />
+<?php echo $form->create('User', array('action' => 'register')); ?>
+
+<fieldset>
+<!--<legend><?php __('Fill in your personal information'); ?></legend>-->
+
+<?php if ($session->check('Message.flash')) { ?>
+<div class="<?php echo $statusbox; ?>">
+<?php $session->flash(); ?>
+</div>
+<br />
+<?php } ?>
+
 <?php
-echo $form->create('User', array('action' => 'register'));
 
 echo $form->input('firstname',
      array(
      'maxLength' => 255,
      'error' => array(
-          'length' => __('Mimimum 2 characters long',true), 
-          'notempty' => __('Enter your first name',true)
+          'length' => __('Minimum 2 characters long',true), 
+          'notempty' => __('Enter your firstname',true)
      ),
      'label' => __('Firstname', true)
 ));
@@ -16,8 +35,8 @@ echo $form->input('lastname',
      array(
      'maxLength' => 255,
      'error' => array(
-          'length' => __('Mimimum 2 characters long',true), 
-          'notempty' => __('Enter a firstname',true)
+          'length' => __('Minimum 2 characters long',true), 
+          'notempty' => __('Enter your lastname',true)
      ),
      'label' => __('Lastname', true)
 ));
@@ -36,15 +55,36 @@ echo $form->input('email',
      array(
      'maxLength' => 255,
      'label' => __('E-Mail', true),
-     'error' => array( 'message' => __('Enter your E-Mail, please', true)),
+     'error' => array( 'message' => __('Enter your E-Mail', true)),
 ));
+
+
+echo $form->hidden('emailcheck');
+?>
+<span id="usernameLoading"><img src="<?php echo Configure::read('App.serverUrl'); ?>/img/indicator.gif" alt="Ajax Indicator" /></span>
+<span id="usernameResult">
+
+<?php
+if ($form->isFieldError('emailcheck'))
+{
+   echo "<span class=\"error-message\">";
+   __('Your E-Mail is already in use!');
+   echo "</span>";
+   //echo $form->error('emailcheck');
+}
+
+?>
+</span>
+
+
+<?php
 
 echo $form->input('password',
      array(
      'type' => 'password',
      'maxLength' => 255,
      'error' => array(
-          'length' => __('Mimimum 4 characters long',true), 
+          'length' => __('Minimum 4 characters long',true), 
           'notempty' => __('Enter a password',true)
      ),
      'label' => __('Password', true)
@@ -53,7 +93,7 @@ echo $form->input('password',
 echo $form->input('birthday',
      array(
      'minYear' => '1930',
-     'maxYear' => date( 'Y', time() ),
+     'maxYear' => date( 'Y', time() )-15,
      'label' => __('Birthday', true),
      'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
@@ -62,10 +102,10 @@ echo $form->input('lactatethreshold',
      array(
 	 'class' => 'medium',
      'error' => array( 
-        'numeric' => __('Please supply your lactate threshold heart rate',true),
+        'numeric' => __('Enter your max. lactate threshold heart rate',true),
         'greater' => __('Must be at least 120',true),
         'lower' => __('Must be at lower than 220',true),
-        'notempty' => __('Enter a maximum heart rate, please',true)
+        'notempty' => __('Enter your max. lactate threshold heart rate',true)
      ),
      'label' => __('Lactate threshold', true)
 ));
@@ -74,7 +114,7 @@ echo $form->input('sport',
      array(
      'class' => 'required',
      'label' => __('Main sport', true),
-     'options' => array_merge(array('PICK' => __('pick yours', true)), $sports)
+     'options' => array_merge(array('' => __('pick yours', true)), $sports)
 ));
 
 echo $form->input('weeklyhours',
@@ -82,10 +122,10 @@ echo $form->input('weeklyhours',
      'class' => 'short',
      'maxLength' => 255,
      'error' => array( 
-          'numeric' => __('Please supply the your weekly training hours.', true),
+          'numeric' => __('Enter your weekly available training hours', true),
           'greater' => __('Must be at least 0 hours',true),
           'lower' => __('Must be at lower than 60 hours',true),
-          'notempty' => __('Enter your weekly available training hours, please',true) 
+          'notempty' => __('Enter your weekly available training hours',true) 
      ),
      'label' => __('Weekly hours', true)
 ));
@@ -93,38 +133,77 @@ echo $form->input('weeklyhours',
 echo $form->input('rookie',
      array(
      'type' => 'checkbox',
-     'label' => __('Rookie', true)
+     'label' => __('Beginner?', true)
 ));
+?>
+<div class="messagebox" style="overflow:auto; width: 420px; height: 100px;">
+<?php echo $this->element('tos'); ?>
+<br />
+</div>
 
+<br />
+<b><?php __('You hereby confirm that you\'ve read the terms of service and agree. You also confirm that you have no medical inability to do sports!'); ?></b>  
+<br /><br />
+<?php
 echo $form->input('tos',
      array(
      'type' => 'checkbox',
-     'label' => __('Terms of service', true)
+     'label' => __('I agree', true)
 ));
 
+if ( $tos_warning == true )
+{
+?>
+<div class="error-message">
+<?php __('You HAVE TO agree with our terms of service! That\'s the way you protect our rights :).'); ?>
+</div>
+<?php
+}
+
+// calculate FREE training period
+$payed_from = date( "Y-m-d", time() );
+$payed_to = date( "Y-m-d", time() + (30*24*60*60) );
+
+echo $form->input( 'payed_from', array('type' => 'hidden', 'value' => $payed_from));
+echo $form->input( 'payed_to', array('type' => 'hidden', 'value' => $payed_to));
+
 echo $form->hidden('id');
+
 echo $form->submit(__('Register',true));
 
 echo $form->end();
+
 ?>
+
+
+<?php
+
+      $this->js_addon = <<<EOE
+
 <script type="text/javascript">
-$(document).ready(function () {
+function finishAjax(id, response) {
+         \$('#usernameLoading').hide();
+         \$('#'+id).html(unescape(response));
+         \$('#'+id).fadeIn();
+}
+
+\$(document).ready(function () {
 	/**
 	 * calculate default lactate treshold value when
 	 * the user changes the his year of birth
 	 */
-	$('#UserBirthdayYear').change(function () {
+	\$('#UserBirthdayYear').change(function () {
 		var year = this.value;
 		var d = new Date();
 		var lt = parseInt((220 - (d.getFullYear() - year)) * 0.85);
-		$('#UserLactatethreshold').attr('value', lt).effect("highlight", {}, 3000);
+		\$('#UserLactatethreshold').attr('value', lt).effect("highlight", {}, 3000);
 	});
 
 	/**
 	 * provide a basic number of weekly hours after
 	 * the user has selected a sport
 	 */
-	$('#UserSport').change(function () {
+	\$('#UserSport').change(function () {
 		var val;
 		switch (this.value) {
 			case 'TRIATHLON IRONMAN':
@@ -153,40 +232,39 @@ $(document).ready(function () {
 				val = 4;
 				break;
 		}
-		$('#UserWeeklyhours').attr('value', val).effect("highlight", {}, 3000);
+		\$('#UserWeeklyhours').attr('value', val).effect("highlight", {}, 3000);
 	});
 
 	/**
 	 * check email address for availability
 	 */
-	$('#UserEmail').blur(function() {
-		var email = $('#UserEmail');
-		var loader = jQuery('<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/indicator.gif" class="loader" />');
 
-		if (email.val() != '') {
-			email.parent().append(loader);
-	        jQuery.post("<?php echo Configure::read('App.serverUrl'); ?>/users/check_email_available",
-				{
-	            	email: email.val()
-	            }, function(response) {
-					loader.fadeOut("slow", function () {
-						loader.remove();
-					});
-					if (response == "ok") {
-						email.addClass('form-ok');
-						email.removeClass('form-error');
-					} else {
-						email.addClass('form-error');
-						email.removeClass('form-ok');
-					}
-	            });
-		}
-	});
+        // check email availability
+        \$('#usernameLoading').hide();
+
+        \$('#UserEmail').blur(function(){
+            if ( \$('#UserEmail').val() != '' ) {
+                \$('#usernameLoading').show();
+                \$.post("
+EOE;
+      $this->js_addon .= Configure::read('App.serverUrl');
+      
+      $this->js_addon .= <<<EOF
+/users/check_email", {
+                       checkuseremail: \$('#UserEmail').val(),
+                       checkuserid: \$('#UserId').val()
+                   }, function(response){
+                       //\$('#usernameResult').fadeOut();
+                       setTimeout("finishAjax('usernameResult', '"+escape(response)+"')", 400);
+                   });
+                   }
+                return false;
+  });
 
 	/**
 	 * validation of simple text fields
 	 */
-	$('#UserFirstname, #UserLastname, #UserPassword').blur(function () {
+	\$('#UserFirstname, #UserLastname, #UserPassword').blur(function () {
 		var field = $(this);
 		if (field.val().length >= 2) {
 			field.addClass('form-ok');
@@ -200,7 +278,7 @@ $(document).ready(function () {
 	/**
 	 * validation of numeric fields
 	 */
-	$('#UserLactatethreshold').blur(function () {
+	\$('#UserLactatethreshold').blur(function () {
 		var field = $(this);
 		var val = parseInt(field.val());
 		if (val > 120 && val < 220) {
@@ -215,7 +293,7 @@ $(document).ready(function () {
 	/**
 	 * validation of numeric fields
 	 */
-	$('#UserWeeklyhours').blur(function () {
+	\$('#UserWeeklyhours').blur(function () {
 		var field = $(this);
 		var val = parseInt(field.val());
 		if (val > 0 && val < 50) {
@@ -228,3 +306,6 @@ $(document).ready(function () {
 	});
 });
 </script>
+EOF;
+
+?>

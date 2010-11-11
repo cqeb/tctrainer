@@ -540,7 +540,7 @@ a.reset:hover {
 /**
  * status messages
  */
-.errorbox, .okbox, .statusbox, .error-message {
+.errorbox, .okbox, .statusbox, .error-message, .ok-message {
 	padding: 10px;
 	border: 1px solid #999;
 	-webkit-border-radius: 2px;
@@ -560,6 +560,14 @@ a.reset:hover {
 	background: #ff8e66;
 	border-color: #A1603A;
 }
+
+.ok-message {
+  width: 180px;
+  margin-left: 120px;
+  background: #b2ff65;
+  border-color: #6D9452;
+}
+
 
 .statusbox {
 	background: #feec64;

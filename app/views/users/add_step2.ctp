@@ -1,4 +1,3 @@
-
                    <h1><?php __('Registration - Step 2/2'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
@@ -6,7 +5,9 @@
                    <div class="messagebox">
                    <?php __('Get your trainingplans FREE for 1 month. Then invest less than 3 cups of coffee worth per month for your
                    electronic trainingscoach. NO RISK, as we offer a 30-days money back garantuee.'); ?>
-                   </div><br />
+                   </div>
+
+                   <br />
 
                    <?php echo $form->create('User', array('action' => 'add_step2')); ?>
 
@@ -22,65 +23,123 @@
 
                    <h2><?php __('Sport preferences'); ?></h2>
 
-<a href="#"><?php __('TODO Details about Distances (Kilometers/Miles)'); ?></a><br />
-
+<a href="#"><?php __('Details about Distances (Kilometers/Miles)'); ?></a><br />
 <?php
 
-$sporttype_array = $sports;
+$sporttype_array_metric = array(
+
+                                 'Triathlon' => array (
+                                             'Triathlon Ironman' => __('Ironman (3.8km swim, 180km bike, 42km run)', true),
+                                             'Triathlon Half-Ironman' => __('Half-Ironman (1.9km swim, 90km bike, 21km run)', true),
+                                             'Triathlon Olympic Distance' => __('Olympic Distance (1.5km swim, 40km bike, 10km run)', true),
+                                             'Triathlon Sprint Distance' => __('Sprint Distance (0.75km swim, 20km bike, 5km run)', true)
+                                 ),
+                                 'Running' => array(
+                                             'Run Ultra' => __('Ultrarun (> 50km run)', true),
+                                             'Run Marathon' => __('Marathon (42km run)', true),
+                                             'Run Half-Marathon' => __('Half-Marathon (21km run)', true),
+                                             'Run 10-5k-Run' => __('Race (5-10km)', true)
+                                 ),
+                                 'Duathlon' => array(
+                                             'Duathlon middle' => __('Duathlon (5km run, 40km bike, 10km run)', true),
+                                             'Duathlon long' => __('Duathlon (10km run, 60km bike, 10km run)', true)
+                                 ),
+                                 'Bikeracing' => array(
+                                             'Bike Racing short' => __('Races (up to 50km)', true),
+                                             'Bike Racing middle' => __('Races (50-100km)', true),
+                                             'Bike Racing long' => __('Races (100-150km)', true),
+                                             'Bike Racing ultralong' => __('Races (over 150km)', true)
+                                 )
+                         );
+
+// TODO convert
+$sporttype_array_english = array(
+                                 'Triathlon' => array (
+                                             'Triathlon Ironman' => __('Ironman (3.8mi swim, 180mi bike, 42mi run)', true),
+                                             'Triathlon Half-Ironman' => __('Half-Ironman (1.9mi swim, 90mi bike, 21mi run)', true),
+                                             'Triathlon Olympic Distance' => __('Olympic Distance (1.5mi swim, 40mi bike, 10mi run)', true),
+                                             'Triathlon Sprint Distance' => __('Sprint Distance (0.75mi swim, 20mi bike, 5mi run)', true)
+                                 ),
+                                 'Running' => array(
+                                             'Run Ultra' => __('Ultrarun (> 50mi run)', true),
+                                             'Run Marathon' => __('Marathon (42mi run)', true),
+                                             'Run Half-Marathon' => __('Half-Marathon (21mi run)', true),
+                                             'Run 10-5k-Run' => __('Race (5-10mi)', true)
+                                 ),
+                                 'Duathlon' => array(
+                                             'Duathlon middle' => __('Duathlon (5mi run, 40mi bike, 10mi run)', true),
+                                             'Duathlon long' => __('Duathlon (10mi run, 60mi bike, 10mi run)', true)
+                                 ),
+                                 'Bikeracing' => array(
+                                             'Bike Racing short' => __('Races (up to 50mi)', true),
+                                             'Bike Racing middle' => __('Races (50-100mi)', true),
+                                             'Bike Racing long' => __('Races (100-150mi)', true),
+                                             'Bike Racing ultralong' => __('Races (over 150mi)', true)
+                                 )
+                         );
+
+
+//TODO function missing - you have no sessioninfo :(
+// at this point - we do not have the unit information :(
+$sporttype_array = $sporttype_array_metric;
 
 echo $form->input('typeofsport',
-     array(
-     'legend' => false,
-     'class' => 'required',
-     'label' => __('Your sport passion?', true),
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'options' => $sporttype_array
-     ));
+                  array(
+                  'legend' => false,
+                  'label' => __('<b>Your sport passion?</b>', true),
+                  'before' => '',
+                  'after' => '',
+                  'between' => '',
+                  'options' => $sporttype_array
+                  ));
 
+// you can not extract this array and place it somewhere globally for re-use :( because of language-function __();
 ?>
 
 <?php
 
 echo $form->input('rookie',
-     array(
-     'before' => __('Are you a rookie in triathlon, running and biking? So, you want to start from the beginning?', true),
-     'class' => 'required',
-     'after' => '',
-     'between' => '',
-     'legend' => false,
-     'type' => 'radio',
-     'default' => '0',
-     'multiple' => false,
-     'options' => array(
-        '1' => __('Yes',true),
-        '0' => __('No',true)
+                           array(
+                           'before' => __('Are you a rookie in triathlon, running and biking? So, you want to start from the beginning?', true),
+                           'after' => '',
+                           'between' => '',
+                           'legend' => false,
+                           'type' => 'radio',
+                           'default' => '0',
+                           'multiple' => false,
+                           'options' => array(
+                           '1' => 'Yes',
+                           '0' => 'No'
      )
 ));
-
+?>
+<br /><br />
+<?php
 echo $form->input('medicallimitations',
-     array(
-     'before' => '<b>' . __('Do you have any medical impacts preventing you from doing sports or
-     did your doctor told you not to do any sports? Please talk to your doctor BEFORE starting your training!', true) . '</b>',
-     'after' => '',
-     'between' => '',
-     'legend' => false,
-     'type' => 'radio',
-     'class' => 'required',
-     'multiple' => false,
-     'default' => '0',
-     'options' => array(
-        '1' => __('Yes',true),
-        '0' => __('No',true)
+                                       array(
+                                       'before' => __('<b>Do you have any medical impacts preventing you from doing sports or
+                                                did your doctor told you not to do any sports? Please talk to your doctor BEFORE starting your training!</b>', true),
+                                       'after' => '',
+                                       'between' => '',
+                                       'legend' => false,
+                                       'type' => 'radio',
+                                       'multiple' => false,
+                                       'default' => '0',
+                                       'options' => array(
+                                       '1' => 'Yes',
+                                       '0' => 'No'
      )
 ));
 
 ?>
 
 <div class="messagebox">
+<?php __('Help user somehow - how many ours for IM, Half-IM etc ...
+Should be calculated by various factors (rookie, type of sport) - <b>function by CP missing</b>'); ?>
+</div>
 
-<?php echo $html->link(__('Training hours calculator',true), array('action' => 'traininghours_calc'),array('rel' => 'facebox[.bolder]'),null); ?>
+Translation?
+<?php echo $html->link("Training hours calculator", array('action' => 'traininghours_calc'),array('rel' => 'facebox[.bolder]'),null) ?>
 
 <?php
 
@@ -89,87 +148,75 @@ echo $form->input('weeklyhours',
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',
      'maxLength' => 255,
      'default' => '10',
-     'error' => array( 
-          'numeric' => __('Please supply the your weekly training hours.', true),
-          'greater' => __('Must be at least 0 hours',true),
-          'lower' => __('Must be at lower than 60 hours',true),
-          'notempty' => __('Enter your weekly available training hours, please',true) 
-     ),
-     //'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Weekly hours', true)
+     'error' => array('wrap' => 'div', 'style' => 'color:red'),
+     'label' => __('<b>Weekly hours</b>', true)
+//     'default' => __('Enter Lastname here', true)
 ));
-
-/**
-echo $form->input('dayofheaviesttraining',
-     array(
-     'legend' => false,
-     'label' => __('Day of heaviest training', true),
-     'before' => '',
-     'class' => 'required',
-     'after' => '',
-     'between' => '',
-     'default' => 'FRI',
-     'options' => array(
-               'MON' => __('Monday', true),
-               'TUE' => __('Tuesday', true),
-               'WED' => __('Wednesday', true),
-               'THU' => __('Thursday', true),
-               'FRI' => __('Friday', true),
-               'SAT' => __('Saturday', true),
-               'SUN' => __('Sunday', true)
-     )));
-**/
 
 ?>
 
-<?php __('For calculating your season'); ?>
+<?php
+
+echo $form->input('dayofheaviesttraining',
+                  array(
+                  'legend' => false,
+                  'label' => __('<b>Day of heaviest training</b>', true),
+                  'before' => '',
+                  'after' => '',
+                  'between' => '',
+                  'default' => 'FRI',
+                  'options' => array(
+                                 'MON' => __('Monday', true),
+                                 'TUE' => __('Tuesday', true),
+                                 'WED' => __('Wednesday', true),
+                                 'THU' => __('Thursday', true),
+                                 'FRI' => __('Friday', true),
+                                 'SAT' => __('Saturday', true),
+                                 'SUN' => __('Sunday', true)
+                                 )));
+?>
+
+<?php __('For calculating your saison'); ?>
 <br />
 <?php
 echo $form->input('coldestmonth', array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'label' => __('Coldest month', true),
-     'class' => 'required',
-     'options' => array(
-               '1' => __('January',true),
-               '2' => __('February',true),
-               '3' => __('March',true),
-               '4' => __('April',true),
-               '5' => __('May',true),
-               '6' => __('June',true),
-               '7' => __('July',true),
-               '8' => __('August',true),
-               '9' => __('September',true),
-               '10' => __('October',true),
-               '11' => __('November',true),
-               '12' => __('December',true)
-     )));
+                                  'before' => '',
+                                  'after' => '',
+                                  'between' => '',
+                                  'label' => __('<b>Coldest month</b>', true),
+                                  'options' => array(
+                                  '1' => __('January',true),
+                                  '2' => __('February',true),
+                                  '3' => __('March',true),
+                                  '4' => __('April',true),
+                                  '5' => __('May',true),
+                                  '6' => __('June',true),
+                                  '7' => __('July',true),
+                                  '8' => __('August',true),
+                                  '9' => __('September',true),
+                                  '10' => __('October',true),
+                                  '11' => __('November',true),
+                                  '12' => __('December',true)
+                                 )));
 ?>
 
-<a href="#"><?php __('Hint how to measure?', true); ?></a>
+<a href="#">Hint how to measure?</a>
 
 <?php
+
+//echo __('Calculate automatically');
 
 echo $form->input('maximumheartrate',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',
      'maxLength' => 255,
      'default' => (220-$age),
-     'error' => array( 
-        'numeric' => __('Please supply your maximum heart rate (for approx. 220 minus your age).',true),
-        'greater' => __('Must be at least 120',true),
-        'lower' => __('Must be at lower than 220',true),
-        'notempty' => __('Enter a maximum heart rate, please',true)
-     ),
-     //'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Your maximum heart rate', true)
+     'error' => array('wrap' => 'div', 'style' => 'color:red'),
+     'label' => __('<b>Your maximum heart rate</b>', true)
 ));
 
 ?>
@@ -180,47 +227,40 @@ echo $form->input('maximumheartrate',
                    <?php echo round((220-$age)*0.85); ?>
                    </div>
 <br />
-                   <h2><?php __('Metric preferences'); ?></h2>
+                      <h2><?php __('Metric preferences'); ?></h2>
 
 <?php
 
 echo $form->input('unit', array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'class' => 'required',
-     'label' => __('Unit', true),
-     'options' => array(
-               'metric' => __('Metric (Kilometres, Kilograms, Centimeters)', true),
-               'imperial' => __('Imperial (Miles, Pounds, Feet)', true)
-     )));
+                                 'before' => '',
+                                 'after' => '',
+                                 'between' => '',
+                                 'label' => __('<b>Unit</b>', true),
+                                 'options' => array(
+                                 'metric' => __('Metric (Kilometres, Kilograms, Centimeters)', true),
+                                 'english' => __('English (Miles, Pounds, Feet)', true)
+                                 )));
 
 echo $form->input('unitdate', array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'class' => 'required',
-     'label' => __('Dateformat', true),
-     'options' => array(
-               'ddmmyyyy' => __('DD.MM.YYYY', true),
-               'mmddyyyy' => __('MM.DD.YYYY', true),
-               'yyyymmdd' => __('YYYY-MM-DD', true)
-     )));
+                                 'before' => '',
+                                 'after' => '',
+                                 'between' => '',
+                                 'label' => __('<b>Dateformat</b>', true),
+                                 'options' => array(
+                                 'ddmmyyyy' => __('DD.MM.YYYY', true),
+                                 'mmddyyyy' => __('MM.DD.YYYY', true),
+                                 'yyyymmdd' => __('YYYY-MM-DD', true)
+                                 )));
 
-/**
 echo $form->input('yourlanguage', array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'class' => 'required',
-     'label' => __('Your language', true),
-     'options' => array (
-               'ger' => __('German',true),
-               'eng' => __('English',true)
-     )));
-**/
-if ( !$locale ) $locale = 'eng';
-echo $form->input( 'yourlanguage', array('type' => 'hidden', 'value' => $locale ));
+                                  'before' => '',
+                                  'after' => '',
+                                  'between' => '',
+                                  'label' => __('<b>Your language</b>', true),
+                                  'options' => array (
+                                            'ger' => __('German',true),
+                                            'eng' => __('English',true)
+                                  )));
 
 $payed_from = date( "Y-m-d", time() );
 $payed_to = date( "Y-m-d", time() + (30*24*60*60) );
@@ -245,10 +285,13 @@ echo $form->hidden('id');
                    <br />
 
                    <div class="messagebox" style="overflow:auto; width: 420px; height: 200px;">
-                   <?php echo $this->element('tos'); ?><br />
+
+                   <?php echo $this->element('tos'); ?>
+
+                   <br />
                    </div>
 
-                   <br /><br />
+<br /><br />
 
 <?php
 /** not finished **/
@@ -256,7 +299,7 @@ echo $form->hidden('id');
 echo $form->hidden('id');
 echo $form->hidden('birthday');
 
-echo $form->submit('Finish');
+echo $form->submit('Finish submitting registration');
 
 ?>
                  <br />
@@ -281,36 +324,6 @@ echo $form->submit('Finish');
 
 });
 
-function initDropdownManipulator()
-{
-                 \$('#UserTypeofsport').change(function(){
-                        /**
-                         * TODO
-                         Triathlon:
-                          Sprint: 4h
-                          Olympisch: 5h
-                          Halbironman: 8h
-                          Ironman: 12h
-                          
-                         Laufen:
-                          5k: 2,5h
-                          10k: 3,5h
-                          Halbmarathon: 4,5h
-                          Marathon: 6h
-                        */
-                        if ( \$('#UserTypeofsport').val() == 'DUATHLON SHORT' ) \$('#UserWeeklyhours').val("6");
-                        else \$('#UserWeeklyhours').val("12");
-                        return false;
-                 });
-                 \$('#UserTypeofsport').blur(function(){
-                        //alert( \$('#UserTypeofsport').val() );
-                        return false;
-                 });
-                 return false;
-}
-        
-initDropdownManipulator();
-        
 </script>
 
 EOE;

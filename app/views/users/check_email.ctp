@@ -8,20 +8,12 @@ if ( $emailcheck_var == "true" )
 {
    $this->js_addon .= <<<EOE
     \$('#UserEmailcheck').val("1");
-    /**
-    var \$test = \$('#UserEmailcheck').val();
-    alert(\$test);
-    **/
 EOE;
 
 } else {
 
    $this->js_addon .= <<<EOE
    \$('#UserEmailcheck').val("0");
-    /**
-    var \$test = \$('#UserEmailcheck').val();
-    alert(\$test);
-    **/
 EOE;
 
 }

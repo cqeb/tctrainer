@@ -53,6 +53,11 @@ class User extends AppModel {
                           //'message' => 'Enter your E-Mail, please'
                           ),
                         ),
+          'emailcheck' => array(
+                  'rule' => array('equalTo', '1'),
+                  'required' => true
+                  //'message' => 'Your E-Mail is not correct or is already registered. Use "password forgotten" to retrieve your password!'
+                  ),
           'password' => array(
                   'length' => array(
                            'rule' => array('minLength', '4')
@@ -82,11 +87,6 @@ class User extends AppModel {
                    'message' => 'Your password check does not match!'
                    ),
           **/
-          'emailcheck' => array(
-                  'rule' => array('equalTo', '1'),
-                  'required' => true
-                  //'message' => 'Your E-Mail is not correct or is already registered. Use "password forgotten" to retrieve your password!'
-                  ),
           'birthday' => array(
                   'rule' => 'date',
                   'allowEmpty' => false

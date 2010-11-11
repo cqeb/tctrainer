@@ -84,6 +84,7 @@ class AppController extends Controller {
             **/
 
             $this->set('locale', $locale);
+            $this->Session->write('session_userlanguage', $locale);
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
 

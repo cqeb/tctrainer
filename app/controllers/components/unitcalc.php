@@ -354,6 +354,9 @@ class UnitcalcComponent extends Object {
    {
             $session_userobject = $this->Session->read('userobject');
             $session_unitdate = $session_userobject['unitdate'];
+            // for registration
+            if ( !$session_unitdate ) $session_unitdate = $this->Session->read('session_unitdate');
+
 
             $return = "";
 

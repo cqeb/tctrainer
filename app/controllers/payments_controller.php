@@ -458,6 +458,8 @@ class PaymentsController extends AppController {
 
    function _sendInvoice($pay, $mailtype)
    {
+            $this->layout = 'newsletter';
+
             $User = $this->User->read( null, $pay['pay_userid']);
 
             $this->set('user', $User);
@@ -487,9 +489,9 @@ class PaymentsController extends AppController {
 
             // TODO translate
             if ( $mailtype == 'invoice' )
-                    $this->Email->template = 'invoicemail_eng'; // note no '.ctp'
+                    $this->Email->template = 'invoicemail'; // note no '.ctp'
             else
-                    $this->Email->template = 'invoiceinfomail_eng'; // note no '.ctp'
+                    $this->Email->template = 'invoiceinfomail'; // note no '.ctp'
 
             //Send as 'html', 'text' or 'both' (default is 'text')
             $this->Email->sendAs = 'both'; // because we like to send pretty mail
@@ -520,6 +522,8 @@ class PaymentsController extends AppController {
 
    function _sendNotification($user, $array, $error, $subject)
    {
+         $this->layout = 'newsletter';
+     
          if ( isset( $error ) ) $this->set('error', $error);
          if ( is_array( $array ) ) $this->set('array', $array);
          if ( is_array( $user ) ) $this->set('user', $user);
