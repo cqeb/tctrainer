@@ -51,4 +51,5 @@ define( 'DEBUG', true );
  */
 define('RATIO_TRIATHLON', '20,40,40'); // swim bike run
 define('RATIO_DUATHLON', '40,60'); // bike run
+
 ?>

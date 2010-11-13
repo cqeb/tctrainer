@@ -19,6 +19,7 @@
                    <?php } ?>
 
                    <?php echo $html->link(__('Back to list of trainings',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null) ?>
+                   <br /><br />
 
 <?php
 
@@ -28,7 +29,7 @@ echo $form->input('date',
                   array(
                   'before' => '',
                   'after' => '',
-                  'between' => '<br />',
+                  'between' => '',
                   'class' => 'required',
                   'label' => __('Date', true),
                   'minYear' => date('Y',time())-1,
@@ -61,7 +62,7 @@ echo $form->input('sportstype',
                                  'RUN' => __('Run', true),
                                  'BIKE' => __('Bike', true),
                                  'SWIM' => __('Swim', true),
-                                 'MTB' => __('Mountain-Bike', true),
+                                 'BIKE' => __('Mountain-Bike', true),
                                  'STRENGTH' => __('Strength', true),
                                  'MISC' => __('Misc', true)
                                  )));
@@ -106,16 +107,8 @@ echo $form->input('avg_pulse',
                       'greater' => __('Must be greater than 80',true),
                       'lower' => __('Must be lower than 240',true)
                   ),
-                  'label' => __('Avg. heart rate', true)
+                  'label' => __('Avg. Heart Rate', true)
 ));
-
-$avg_speed = $unitcalc->check_distance($data['avg_speed']);
-
-if ( $avg_speed['amount'] ) { __('AVG Speed'); echo ' ' . $avg_speed['amount']; echo ' ' . $unit['length'] . '/h' . '<br /><br />'; }
-
-if ( $data['trimp'] ) { __('TRIMP'); echo ' ' . $data['trimp'] . '<br /><br />'; }
- 
-if ( $data['kcal'] ) { __('Burnt'); echo ' ' . $data['kcal'] . ' ' . 'kcal' . '<br /><br />'; }
 
 echo $form->input('testworkout', array(
                 'label' => __('Testworkout',true), 
@@ -128,11 +121,46 @@ echo $form->input('competition', array(
                 );
 
 ?>
-<a href="#Save">Save only necessary data</a>
+<a name="AF"></a>
+<!--<a href="#Save">Save only necessary data</a>-->
 
 <hr />
+
 <h2><?php __('Optional data'); ?></h2>
 
+<a href="#AF" onClick="javascript:show_layer();return false;"><?php __('Show advanced functions'); ?></a>
+<br /><br />
+<div id="layer_hidden">
+
+
+<ul>
+<?php
+
+$avg_speed = $unitcalc->check_distance($data['avg_speed']);
+
+if ( $avg_speed['amount'] ) {
+   echo '<li>';
+   __('AVG Speed'); 
+   echo ' ' . $avg_speed['amount'] . ' ' . $unit['length'] . '/h';
+   echo '</li>'; 
+}
+
+if ( $data['trimp'] ) {
+   echo '<li>';
+   __('TRIMP'); 
+   echo ' ' . $data['trimp'];
+   echo '</li>'; 
+}
+ 
+if ( $data['kcal'] ) {
+   echo '<li>';
+   __('Burnt'); 
+   echo ' ' . $data['kcal'] . ' ' . 'kcal';
+   echo '</li>';
+}
+
+?>
+</ul>
 <?php
 
 /**
@@ -187,13 +215,7 @@ echo $form->input('avg_pulse_zone5',
 ));
 **/
 
-__('Comment');
-echo '<br />';
-echo $form->textarea('comment',
-                  array(
-                  'rows' => '5',
-                  'cols' => '45'
-           ));
+$location_label = __('Location', true) . '<br />(' . __('City', true) . ', ' . __('Country', true) . ')';
 
 echo $form->input('location',
                   array(
@@ -201,8 +223,8 @@ echo $form->input('location',
                   'after' => '',
                   'between' => '',
                   'maxLength' => 100,
-                  'label' => __('Location (City, Country)', true)
-));
+                  'label' => $location_label
+                  ));
 
 ?>
 
@@ -210,8 +232,11 @@ echo $form->input('location',
 
 <?php
 
-$min_weight = $unitcalc->check_weight('40') . ' ' . $unit['weight'];
-$max_weight = $unitcalc->check_weight('150') . ' ' . $unit['weight'];
+$min_weight = $unitcalc->check_weight('40', 'single');
+$min_weight = $min_weight['amount'] . ' ' . $unit['weight'];
+$max_weight = $unitcalc->check_weight('150', 'single');
+$max_weight = $max_weight['amount'] . ' ' . $unit['weight'];
+//$max_weight = $unitcalc->check_weight('150', 'single') . ' ' . $unit['weight'];
 
 echo $form->input('weight',
      array(
@@ -228,34 +253,34 @@ echo $form->input('weight',
      'label' => __('Weight', true) . ' (' . $unit['weight'] . ')'
 ));
 
-/**
-// TODO (B)
-echo $form->input('weightfat',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 5,
-                  'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                  'label' => __('Body fat', true)
+echo $form->input('workout_link',
+     array(
+     'before' => '',
+     'after' => '',
+     'between' => '',
+     'maxLength' => 255,
+     'default' => 'http://',
+     'label' => __('Link workout', true)
 ));
-**/
+
+__('Comment');
+echo '<br />';
+echo $form->textarea('comment',
+                  array(
+                  'rows' => '5',
+                  'cols' => '45'
+           ));
+echo '<br /><br />';
 
 ?>
 
 <table border="0" width="100%">
 <tr>
-    <th>
+    <th width="50%">
     <?php __('Temperature'); ?>
     </th>
-    <th>
+    <th width="50%">
     <?php __('Weather'); ?>
-    </th>
-    <th>
-    <?php __('Route'); ?>
-    </th>
-    <th>
-    <?php __('Feeling'); ?>
     </th>
 </tr>
 <tr>
@@ -267,7 +292,7 @@ echo $form->radio('conditions_temperature',
     'warm' => __('warm',true), 
     'cold' => __('cold',true)
   ),
-  array('legend' => false,'default'=>'warm','separator'=>''));
+  array('legend' => false,'default'=>'warm','separator'=>'<br />'));
 
 ?>
     </td>
@@ -284,6 +309,19 @@ echo $form->radio('conditions_weather',
 
 ?>
     </td>
+</tr>
+</table>
+
+<table border="0" width="100%">
+<tr>
+    <th width="50%">
+    <?php __('Route'); ?>
+    </th>
+    <th width="50%">
+    <?php __('Feeling'); ?>
+    </th>
+</tr>
+<tr>
     <td>
 <?php
 
@@ -302,8 +340,8 @@ echo $form->radio('conditions_inclination',
 
 echo $form->radio('conditions_mood', 
     array(
-      'feeling_well' => __('feeling well',true), 
-      'feeling_bad' => __('feeling bad',true) 
+      'feeling_well' => __('well',true), 
+      'feeling_bad' => __('bad',true) 
     ),
     array('legend' => false,'default'=>'feeling_well','separator'=>'<br />'));
 
@@ -321,6 +359,7 @@ echo $form->input('publish_twitter', array('label' => __('Publish to twitter',tr
 **/
 
 ?>
+</div>
 
 <hr>
 
@@ -343,8 +382,13 @@ echo $form->submit(__('Save',true));
 
       $this->js_addon = <<<EOE
 <script language="JavaScript">
+function show_layer() {
+    \$('#layer_hidden').show();
+}
 \$(document).ready(function() {
-
+  
+        \$('#layer_hidden').hide();
+        
         // facebox box
         \$('a[rel*=facebox]').facebox();
         

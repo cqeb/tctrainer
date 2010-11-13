@@ -21,8 +21,9 @@
                      echo '<div class="errormessage">' . $smtperrors . '</div>';
 ?>
 
-                   <?php __('PLEASE do not forget to activate your account! Thank you and happy training!<br /><br />Your FREE membership is valid from '); ?>
-                   <?php echo $payed_from; ?> <?php __('to'); ?> <?php echo $payed_to; ?>.
+                   <?php __('PLEASE do not forget to activate your account! Thank you and happy training!'); ?>
+                   <br /><br />
+                   <b><?php __('Your FREE membership is valid from'); ?> <?php echo $payed_from; ?> <?php __('to'); ?> <?php echo $payed_to; ?>.</b>
 
                    <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
                    <br /><br />

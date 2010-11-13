@@ -235,7 +235,7 @@ class UsersController extends AppController {
     $this->pageTitle = __('Create your account', true);
     $success = false;
     $statusbox = 'statusbox_none';
-    $save_fails = 'false';
+    //$save_fails = 'false';
     
     if (empty($this->data))
     {
@@ -262,9 +262,6 @@ class UsersController extends AppController {
         // check email - maybe user already registered with this email
         $checkemail = $this->check_email_function( $this->data['User']['email'], $set_userid, true );
       }
-
-      //echo "you can register email twice!";
-      //echo $checkemail; 
 
       // checkemail is a hidden field in form which tells the model whether the email is ok or not
       if ( $checkemail == 0 && $this->data['User']['email'] != '' )
@@ -295,58 +292,71 @@ class UsersController extends AppController {
       // we do not ask for "where do you know us from?" - for Clemens' sake :)
       $this->data['User']['dayofheaviesttraining'] = 'FRI';
 
-      $this->data['User']['coldestmonth'] = '1';
-      $this->data['User']['unit'] = 'metric';
-      $this->data['User']['unitdate'] = 'yyyymmdd';
+      // yet not implemented
+      $this->data['User']['coldestmonth'] = $this->UnitCalc->coldestmonth_for_country('DE');
+      $this->data['User']['unit'] = $this->UnitCalc->unit_for_country('DE', 'unit');
+      $this->data['User']['unitdate'] = $this->UnitCalc->unit_for_country('DE', 'unitdate');;
       $this->data['User']['yourlanguage'] = $this->Session->read('session_userlanguage');
+
+      $this->data['User']['passwordcheck'] = "1";
+      $this->data['User']['publicprofile'] = "0";
+      $this->data['User']['publictrainings'] = "0";
       
-      // save user profile
-      if ( $this->data['User']['tos'] == '0' || !$this->data['User']['tos'] )
-          $save_fails = 'true';
-           
-      if ( $save_fails == 'false' )
-      {
-          $password_unenc = ($this->data['User']['password']);
-          $this->data['User']['password'] = md5( $password_unenc );
-          
-          if ( $this->User->save( $this->data, array(
-               'validate' => true,
-               'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'password', 'birthday',
-               'emailcheck', 'payed_from', 'payed_to', 'newsletter', 'coldestmonth', 'dayofheaviesttraining', 'unit', 'unitdate', 'yourlanguage' )
-          ) ) )
-          {
-              // send user with activation link
-              $tid = $this->_sendNewUserMail( $this->User->id );
-
-              // write imperial / metric to session and date-format
-              $this->Session->write('session_unit', $this->data['User']['unit']);
-              $this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-
-              $statusbox = 'statusbox_ok';
-              $this->Session->write('register_userid', $this->User->id);
-
-              $this->Session->setFlash(__('Registration finished',true));
-              $this->redirect(array('action' => 'register_finish', $this->User->id));
-          } else
-          {
-              $save_fails = 'true';
-          }
-      }
+      // approximation - max. heart rate is not in use any more
+      $this->data['User']['maximumheartrate'] = $this->data['User']['lactatethreshold'] / 0.85;
       
-      if ( $save_fails == 'true' )
+      /**
+      if ($this->User->save($this->data, array(
+               'validate' => 'only',
+               'fieldList' => array( 
+                  $check_array
+               )))) { }     
+      **/
+      
+      $password_unenc = ($this->data['User']['password']);
+      $this->data['User']['password'] = md5( $password_unenc );
+      
+      if ( $this->User->save( $this->data, array(
+           'validate' => true,
+           'fieldList' => array(
+               'firstname', 'lastname', 'gender', 'email', 
+               'password', 'birthday',
+               'lactatethreshold', 
+               'maximumheartrate',
+               'typeofsport', 
+               'medicallimitations',
+               'passwordcheck', 'emailcheck', 
+               'payed_from', 'payed_to',
+               'rookie', 'weeklyhours',
+               'newsletter', 'coldestmonth', 'dayofheaviesttraining',
+               'publicprofile','publictrainings',
+               'maximumheartrate', 
+               'unit', 'unitdate', 'yourlanguage' 
+           ) ) ) )
       {
-          if ( !$this->data['User']['tos'] || $this->data['User']['tos'] == 0 )
-          { 
-                $this->set('tos_warning', 'true');
-          }
-                
-          $statusbox = 'errorbox';
-          $this->Session->setFlash(__('Some errors occured',true));
-          $this->set('statusbox', $statusbox);
+          // send user with activation link
+          $tid = $this->_sendNewUserMail( $this->User->id );
+
+          // write imperial / metric to session and date-format
+          $this->Session->write('session_unit', $this->data['User']['unit']);
+          $this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+
+          $statusbox = 'statusbox_ok';
+          $this->Session->write('register_userid', $this->User->id);
+
+          $this->Session->setFlash(__('Registration finished',true));
+          $this->redirect(array('action' => 'register_finish', $this->User->id));
+      } else
+      {
+          $this->data['User']['password'] = $password_unenc ;
+          //pr($this->User->invalidFields( ));
       }
+
+      $statusbox = 'errorbox';
+      $this->Session->setFlash(__('Some errors occured',true));
+      $this->set('statusbox', $statusbox);
     }
 
-    if ( $save_fails == 'false' ) $this->set('tos_warning', 'false');
     $this->set('sports', $this->Unitcalc->get_sports());
     $this->set('statusbox', $statusbox);
   }
@@ -476,14 +486,14 @@ class UsersController extends AppController {
 
 			if ($this->User->save( $this->data, array(
           'validate' => true,
-          'fieldList' => array( 'typeofsport', 'rookie', 'medicallimitations', 'weeklyhours',
+          'fieldList' => array( 
+          'typeofsport', 'rookie', 'medicallimitations', 'weeklyhours',
           'dayofheaviesttraining', 'maximumheartrate', 'unit', 'unitdate',
           'coldestmonth', 'level', 'payed_from', 'payed_to', 'yourlanguage'
           ) ) ) )
           {
           	//$this->_sendNewUserMail( $this->User->id );
           	// send user with activation link
-          	// TODO text-newsletter-template is missing
           	$tid = $this->_sendNewUserMail( $this->User->id );
 
           	// write imperial / metric to session and date-format
@@ -870,7 +880,6 @@ class UsersController extends AppController {
 			if ( isset( $this->data['User']['targetweight'] ) )
 			       $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'save', 'single' );
 
-			// TODO (B) add body-fat??
 			// targetweight is set - calculate maximum loss per month
 			// calculate target weight and date
 			if ( isset( $this->data['User']['targetweight'] ) && $this->data['User']['targetweight'] != 0 )

@@ -59,7 +59,9 @@ echo $form->input('email',
      'class' => 'required',
      'maxLength' => 255,
      'label' => __('E-Mail', true),
-     'error' => array( 'message' => __('Enter your E-Mail', true)),
+     'error' => array( 
+          'notempty' => __('Enter your E-Mail', true)
+     ),
 ));
 
 
@@ -71,9 +73,9 @@ echo $form->hidden('emailcheck');
 <?php
 if ($form->isFieldError('emailcheck'))
 {
-   echo "<span class=\"error-message\">";
+   echo "<div class=\"error-message\">";
    __('Your E-Mail is already in use!');
-   echo "</span>";
+   echo "</div>";
    //echo $form->error('emailcheck');
 }
 
@@ -116,7 +118,7 @@ echo $form->input('lactatethreshold',
      'label' => __('Lactate threshold', true)
 ));
 
-echo $form->input('sport',
+echo $form->input('typeofsport',
      array(
      'class' => 'required',
      'label' => __('Main sport', true),
@@ -151,12 +153,16 @@ echo $form->input('rookie',
 <b><?php __('You hereby confirm that you\'ve read the terms of service and agree. You also confirm that you have no medical inability to do sports!'); ?></b>  
 <br /><br />
 <?php
-echo $form->input('tos',
+echo $form->input('medicallimitations',
      array(
      'type' => 'checkbox',
-     'label' => __('I agree', true)
+     'label' => __('I agree', true),
+     'error' => array( 
+          'notempty' => __('You HAVE TO agree with our terms of service! That\'s the way you protect our rights :).', true)
+     )
 ));
 
+/**
 if ( isset( $tos_warning ) && $tos_warning == 'true' )
 {
 ?>
@@ -165,6 +171,7 @@ if ( isset( $tos_warning ) && $tos_warning == 'true' )
 </div>
 <?php
 }
+**/
 
 // calculate FREE training period
 $payed_from = date( "Y-m-d", time() );
@@ -209,7 +216,7 @@ function finishAjax(id, response) {
 	 * provide a basic number of weekly hours after
 	 * the user has selected a sport
 	 */
-	\$('#UserSport').change(function () {
+	\$('#UserTypeofsport').change(function () {
 		var val;
 		switch (this.value) {
 			case 'TRIATHLON IRONMAN':

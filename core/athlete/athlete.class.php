@@ -91,6 +91,7 @@ class Athlete {
 	 * @return array of upper workout zone limits keyed 1-4
      */
 	public function getZones($sport) {
+    // if you change sth., please change it in unitcalc - component too
 		switch ($sport) {
 			case "BIKE":			
 				return array(
@@ -127,6 +128,8 @@ class Athlete {
 	 * @return int TRIMP point value for that training 
 	 */
 	public function calcTRIMP($sport, $minutes, $avgHR) {
+
+    // if you change sth., please change it in unitcalc - component too
 		$zones = $this->getZones($sport);
 		if ($avgHR < $zones[1]) {
 			$factor = 1;
@@ -141,7 +144,8 @@ class Athlete {
 		}
 		
 		// divide by 100 to avoid getting very high numbers
-		return intval(($avgHR * $minutes * $factor) / 100);
+		// let's do that in in view not here (KMS)
+		return intval(($avgHR * $minutes * $factor));
 	}
 	
 	public function getThreshold() {

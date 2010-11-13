@@ -87,6 +87,13 @@ class User extends AppModel {
                    'message' => 'Your password check does not match!'
                    ),
           **/
+          'medicallimitations' => array(
+                  'notempty' => array(
+                      'rule' => array('equalTo', '1'),
+                      'required' => true
+                      //'message' => 'Your password check does not match!'
+                   ),
+          ),
           'birthday' => array(
                   'rule' => 'date',
                   'allowEmpty' => false

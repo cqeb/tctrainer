@@ -53,6 +53,7 @@ class TrainingstatisticsController extends AppController {
             {
                      $statusbox = 'statusbox';
 
+                     // security check - don't view workouts of other users
                      if ( $id )
                      {
                        $result = $this->Trainingstatistic->find ('all', 
@@ -92,16 +93,17 @@ class TrainingstatisticsController extends AppController {
 
                      if ( $this->data['Trainingstatistic']['duration'] && $this->data['Trainingstatistic']['distance'] && $this->data['Trainingstatistic']['avg_pulse'] ) 
                      {
-                        // TODO fill with data from zones
-                        /**
-                        $athlete_object = new Athlete;
-                        $athlete_object->id = $session_userid;
-                        $calculatedTRIMP = $athlete_object->calcTRIMP($this->data['Trainingstatistic']['sportstype'], $this->data['Trainingstatistic']['duration']/60, $this->data['Trainingstatistic']['avg_pulse']);
-                        **/
-                     
-                        // easy KMS formula
                         $time_in_zones = "";
-                        $this->data['Trainingstatistic']['trimp'] = round($this->Unitcalc->calc_trimp( $this->data['Trainingstatistic']['duration']/60, $this->data['Trainingstatistic']['avg_pulse'], $time_in_zones ));
+                        $this->data['Trainingstatistic']['trimp'] = round(
+                            $this->Unitcalc->calc_trimp( 
+                                $this->data['Trainingstatistic']['duration']/60, 
+                                $this->data['Trainingstatistic']['avg_pulse'], 
+                                $time_in_zones, 
+                                $results['User']['lactatethreshold'],
+                                $this->data['Trainingstatistic']['sportstype'] 
+                            )
+                        );
+                     
                         $this->data['Trainingstatistic']['avg_speed'] = round( ( $this->data['Trainingstatistic']['distance'] / ( $this->data['Trainingstatistic']['duration'] / 3600 ) ), 2); 
 
                         if ( $results['User']['gender'] && $results['User']['weight'] && $results['User']['birthday'] )
@@ -110,6 +112,7 @@ class TrainingstatisticsController extends AppController {
                           $duration = $this->data['Trainingstatistic']['duration'];
                           $age = $this->Unitcalc->how_old($results['User']['birthday']);
                           $weight = $results['User']['weight'];
+
                           // calculate kcal for workout
                           if ( $results['User']['gender'] == 'm' )
                           {
@@ -143,16 +146,22 @@ class TrainingstatisticsController extends AppController {
                         //echo $this->data['Trainingstatistic']['trimp'] . "<br>";
                         //echo $this->data['Trainingstatistic']['avg_speed'] . "<br>";
                         //echo $this->data['Trainingstatistic']['kcal'] . "<br>";
-
                      }
  
                      $this->data['Trainingstatistic']['user_id'] = $session_userid;
 
                      if ($this->Trainingstatistic->save( $this->data, array('validate' => true)))
                      {
+                          //pr($this->data);
+                          //die();
                           $this->Session->setFlash('Training saved.');
                           $this->set('statusbox', $statusbox);
                           //$this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+                     } else
+                     {
+                          $statusbox = 'errorbox';
+                          $this->Session->setFlash(__('Some errors occured',true));
+                          //$this->set('statusbox', $statusbox);
                      }
 
                      if ( isset( $this->data['Trainingstatistic']['duration'] ) )

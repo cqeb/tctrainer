@@ -23,3 +23,7 @@ CREATE TABLE trainingplans (id int);
 2010-09-22 CP
 ALTER TABLE  `mesocyclephases` ADD  `usertime` INT NOT NULL AFTER  `time`;
 ALTER TABLE  `mesocyclephases` ADD  `ratio` VARCHAR( 20 ) NOT NULL AFTER  `usertime`;
+
+2010-11-13 KMS
+ALTER TABLE `trainingstatistics` CHANGE `date` `date` DATE NULL DEFAULT NULL;
+ALTER TABLE `trainingstatistics` ADD `workout_link` VARCHAR( 255 ) NOT NULL AFTER `competition`;

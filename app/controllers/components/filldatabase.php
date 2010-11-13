@@ -22,8 +22,7 @@ class FilldatabaseComponent extends Object
       $model->query('DELETE FROM competitions WHERE user_id != 110');
       $model->query('DELETE FROM scheduledtrainings WHERE athlete_id != 110');
       $model->query('DELETE FROM trainingstatistics WHERE user_id != 110');
-      
-              
+
       for ( $i = 0; $i < $number['users']; $i++ )
       {
             if ( rand(1,2) == 1 ) $gender = 'm';
@@ -94,7 +93,7 @@ class FilldatabaseComponent extends Object
                
                $sql = "INSERT INTO trainingstatistics VALUES (null, $userid, '$name', 
                '" . date( 'Y-m-d', time()+86400*rand(-365,365)) . "', '$sportst', " . $distance . ",
-               " . rand( 1800, 18000 ) . "," . rand( 130,220 ) . ",0,0,0,0,0,0, " . rand(  500, 3000 ) . ",
+               " . rand( 1800, 18000 ) . "," . rand( 130,220 ) . ",0,0,0,0,0,0, " . rand( 500, 3000 ) . ",
                0, '', " . rand( 65, 88 ) . ", 0, '', $testworkout, 0, '','','','',
                '" . date('Y-m-d', time()) . "', '" . date('Y-m-d', time()) . "' )";
                //echo $sql . "<br>";

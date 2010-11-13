@@ -398,31 +398,72 @@ class UnitcalcComponent extends Object {
     * calculate trimp
     * 
     */
-   function calc_trimp( $duration_total, $avg_pulse_total, $time_in_zones )
+   function calc_trimp( $duration_total, $avg_pulse_total, $time_in_zones, $lth, $sport )
    {
-           $trimp = 0;
            // duration must be in minutes!!
+           $trimp = 0;
+           $avgHR = $avg_pulse_total;
+           $minutes = $duration_total;
+           //echo $sport;
+           $this->threshold = $lth;
            
-           if ( is_array( $time_in_zones ) ) 
-           {
-             // TODO (B) what about 5a-c?
-             // TODO - what about $lth???????
-             $lth = 170;
-             
-             $trimp += ( $time_in_zones['zone1'] * $lth * 0.85 ); 
-             $trimp += ( $time_in_zones['zone2'] * $lth * 0.89 );
-             $trimp += ( $time_in_zones['zone3'] * $lth * 0.94 ); 
-             $trimp += ( $time_in_zones['zone4'] * $lth * 0.99 ); 
-             $trimp += ( $time_in_zones['zone5'] * $lth * 1.02 ); 
-             
-           } else
-           {
-             $trimp = $duration_total * $avg_pulse_total;
-           } 
+           // fill with data from zones
+           // copied the functions from athletes-class to unitcalc-component
+           /**
+           $athlete_object = new Athlete;
+           $athlete_object->id = $session_userid;
+           $calculatedTRIMP = $athlete_object->calcTRIMP($this->data['Trainingstatistic']['sportstype'], $this->data['Trainingstatistic']['duration']/60, $this->data['Trainingstatistic']['avg_pulse']);
+           **/
 
-           return $trimp;
+           $zones = $this->getZones($sport);
+           if ($avgHR < $zones[1]) 
+           {
+              $factor = 1;
+           } else if ($avgHR < $zones[2]) 
+           {
+              $factor = 1.1;
+           } else if ($avgHR < $zones[3]) 
+           {
+              $factor = 1.2;
+           } else if ($avgHR < $zones[4]) 
+           {
+              $factor = 2.2;
+           } else 
+           {
+              $factor = 4.5;
+           }
+    
+           // divide by 100 to avoid getting very high numbers
+           return intval(($avgHR * $minutes * $factor));
    }
-   
+
+    // from athletes class
+    function getZones($sport) 
+    {
+          switch ($sport) {
+            case "BIKE":      
+              return array(
+                0 => intval($this->threshold * 0.65),
+                1 => intval($this->threshold * 0.81),
+                2 => intval($this->threshold * 0.89),
+                3 => intval($this->threshold * 0.93),
+                4 => $this->threshold - 1
+              );
+              break;
+            // running will also be our default setting
+            case "RUN":
+            default:
+              return array(
+                0 => intval($this->threshold * 0.66), 
+                1 => intval($this->threshold * 0.85),
+                2 => intval($this->threshold * 0.89),
+                3 => intval($this->threshold * 0.94),
+                4 => $this->threshold - 1
+              );
+              break;
+          }
+   }
+       
    /**
    this functions seems to be duplicate - damn!
    **/
@@ -537,9 +578,8 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   return the correct currency for a country
-
-   KEEP UP-TO-DATE !!
+   * return the correct currency for a country
+   * KEEP UP-TO-DATE !!
    **/
    function currency_for_country( $country )
    {
@@ -553,9 +593,45 @@ class UnitcalcComponent extends Object {
             return $currency;
    }
 
+   /**
+    * this function should return you the coldest month for various countries
+    * TODO (B) not finished 
+    */
+   function coldestmonth_for_country( $country )
+   {
+            /**
+            $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
+
+            if ( in_array( $country, $eur_countries ) )
+                $currency = 'EUR';
+            else
+                $currency = 'USD';
+            **/
+            return '1';
+   } 
+
+   /**
+    * this function should return you the right metric / units for various countries
+    * TODO (B) not finished 
+    */
+   function unit_for_country( $country, $type )
+   {
+            /**
+            $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
+
+            if ( in_array( $country, $eur_countries ) )
+                $currency = 'EUR';
+            else
+                $currency = 'USD';
+            **/
+            if ( $type == 'unitdate' )
+                  return 'yyyymmdd';
+            elseif ( $type == 'unit' )
+                  return 'metric';
+   } 
+
    function get_sports()
    {
-     
             $session_userobject = $this->Session->read('userobject');
             if (  $session_userobject['unit'] == 'imperial' )
             {
@@ -566,7 +642,6 @@ class UnitcalcComponent extends Object {
                 $unit = 'km';
                 $convertunit = '';
             }  
-            
             
             $tri_ironman = __('Ironman (', true) . 
               $this->convert_metric( '3.8', $convertunit, 1 ) . ' ' . $unit . ' ' . __('swim, ', true) . 

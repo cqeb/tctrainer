@@ -35,6 +35,8 @@
     
     <?php echo $html->link(__('[X]',true), array('action' => 'delete', 'id' => $training['id']), null, __('Are you sure?',true) )?>
 
+    <a href="<?php echo $training['workout_link']; ?>" target="_blank"><?php __('[EXT]',true); ?></a>
+
 <?php 
 $facebookurl = "http://www.facebook.com/sharer.php?t=" .
 urlencode(__('My last training', true) . ' ') . $distance['amount'] . 

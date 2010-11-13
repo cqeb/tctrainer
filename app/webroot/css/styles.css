@@ -253,6 +253,7 @@ ul.pages li {
 /**
  * Form
  */
+
 input[type=text], input[type=password] {
 	width: 200px;
 }
@@ -263,7 +264,7 @@ input:disabled, button:disabled {
 }
 
 input.short {
-	width: 20px;
+	width: 40px;
 	text-align: center;
 }
 
