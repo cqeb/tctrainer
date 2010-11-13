@@ -22,10 +22,6 @@
 
 <?php
 
-// TODO
-// localize date component
-// check for already saved trainings.
-
 echo $form->input('user_id',array('type'=>'hidden'));
 
 echo $form->input('date',
@@ -198,7 +194,6 @@ echo $form->textarea('comment',
                   'rows' => '5',
                   'cols' => '45'
            ));
-// TODO Aloha Editor
 
 echo $form->input('location',
                   array(

@@ -37,7 +37,6 @@ class AppController extends Controller {
                $this->viewPath = $locale . DS . $this->viewPath;
             }
 
-
             if ($this->RequestHandler->isAjax())
             {
                // set debug level

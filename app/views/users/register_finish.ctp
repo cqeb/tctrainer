@@ -8,9 +8,12 @@
                    <fieldset>
                    <legend><?php __('Thank your for registering at TriCoreTraining.com.'); ?></legend>
 
-                   <div id="okbox">
-                   <?php $session->flash(); ?>
-                   </div>
+                    <?php if ($session->check('Message.flash')) { ?>
+                    <div class="okbox">
+                    <?php $session->flash(); ?>
+                    </div>
+                    <br />
+                    <?php } ?>
 
 <?php
                    if ( $smtperrors != '' )
@@ -21,6 +24,7 @@
                    <?php __('PLEASE do not forget to activate your account! Thank you and happy training!<br /><br />Your FREE membership is valid from '); ?>
                    <?php echo $payed_from; ?> <?php __('to'); ?> <?php echo $payed_to; ?>.
 
+                   <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
                    <br /><br />
                    For DEBUGGING:
                    <br />
@@ -31,7 +35,8 @@ echo $html->link(__('Activate', true), array('controller' => 'users', 'action' =
 
 ?>
                   <br />
-
+                  <?php } ?>
+                  
                   </fieldset>
 
 <?php

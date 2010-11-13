@@ -1,5 +1,7 @@
 
- <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00">
+<?php echo $this->element('email/newsletter_header'); ?>
+
+ <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00" width="100%">
     <tr>
        <td>
           <h2><?php __('Hello'); ?> <?php echo $user['User']['firstname']; ?>,</h2>
@@ -8,7 +10,10 @@
  </table>
 
  <p><i><?php __('your password is reset.'); ?></i></p>
- <p><?php __('Your new password on TriCoreTraining.com is'); ?> <?php echo $randompassword; ?>.</p>
+ <p><?php __('Your new password on TriCoreTraining.com is'); ?> <b><?php echo $randompassword; ?></b>.</p>
  <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/login/"><?php __('Click here to login'); ?>.</a></p>
                            
  <p><?php __('Yours, Clemens'); ?></p>
+ <br /> 
+
+<?php echo $this->element('email/newsletter_footer'); ?>

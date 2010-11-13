@@ -9,23 +9,23 @@ class UsersController extends AppController {
 	var $paginate = array(
        'User' => array(
                 'limit' => 15
-	)
+	     )
 	);
 
 	function beforeFilter()
 	{
-		parent::beforeFilter();
-		$this->layout = 'default_trainer';
-
-		// necessary for upload
-		// fill with associated array of name, type, size to the corresponding column name
-		$this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
-
-		// captcha keys
-		$this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
-		$this->Recaptcha->privatekey = "6LcW_goAAAAAAN3zO8KEcJiWsg9tbQd-0VJ68LPb";
-
-		$this->js_addon = '';
+  		parent::beforeFilter();
+  		$this->layout = 'default_trainer';
+  
+  		// necessary for upload
+  		// fill with associated array of name, type, size to the corresponding column name
+  		$this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
+  
+  		// captcha keys
+  		$this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
+  		$this->Recaptcha->privatekey = "6LcW_goAAAAAAN3zO8KEcJiWsg9tbQd-0VJ68LPb";
+  
+  		$this->js_addon = '';
 	}
 
 	function index()
@@ -39,11 +39,10 @@ class UsersController extends AppController {
 
 	function login()
 	{
-
     if ( $this->Session->read('session_userid') ) 
     {
-          $this->checkSession();
-          $this->redirect('/users/index');
+      $this->checkSession();
+      $this->redirect('/users/index');
     } else
     {
 		  $this->pageTitle = __('Login', true);
@@ -51,7 +50,6 @@ class UsersController extends AppController {
 
 		if ($this->data)
 		{
-
       $this->User->set( $this->data );
 
       if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
@@ -61,7 +59,7 @@ class UsersController extends AppController {
 			$results = $this->User->findByEmail($this->data['User']['email']);
 
 			// is password valid?
-			if ( $results && (md5($results['User']['password']) == md5($this->data['User']['password'])) )
+			if ( $results && ($results['User']['password'] == md5($this->data['User']['password'])) )
 			{
 				// has user activated his profile and do WE not have deactivated user
 				if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
@@ -111,7 +109,6 @@ class UsersController extends AppController {
 
 	function logout()
 	{
-
 		$this->pageTitle = __('Logout', true);
 
 		// kill all session information
@@ -133,7 +130,6 @@ class UsersController extends AppController {
 
 	function password_forgotten($id = null)
 	{
-
 		$this->pageTitle = __('Password forgotten', true);
 		$this->set('transaction_id', '');
 		$statusbox = 'statusbox';
@@ -163,7 +159,6 @@ class UsersController extends AppController {
 
 			if ( $statusbox != 'errorbox' )
 			{
-        
 				$results = $this->User->findByEmail($this->data['User']['email']);
 				if ( !is_array($results) )
 				{
@@ -211,9 +206,11 @@ class UsersController extends AppController {
 			{
 				// create a random password
 				$randompassword = rand(111111, 999999);
+        $randompassword_enc = md5( $randompassword );
+        
 				// save single field to user profile
 				$this->User->id = $this->userid;
-				$this->User->savefield('password', $randompassword, false);
+				$this->User->savefield('password', $randompassword_enc, false);
 
 				// send email with information
 				$this->_sendPasswordForgotten($this->userid, $randompassword);
@@ -223,7 +220,8 @@ class UsersController extends AppController {
 			} else
 			{
 			  $statusbox = 'errorbox';
-				$this->Session->setFlash(__('Something is wrong - sorry. <a href="mailto:support@tricoretraining.com">Contact service personal.</a>',true));
+        $flash_message = __('Something is wrong - sorry.', true) . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support.', true) . '</a>';
+				$this->Session->setFlash($flash_message);
 			}
 		}
     $this->set('statusbox',$statusbox);
@@ -234,11 +232,10 @@ class UsersController extends AppController {
 	 */
 	function register() 
 	{
-
     $this->pageTitle = __('Create your account', true);
     $success = false;
     $statusbox = 'statusbox_none';
-    $save_fails = false;
+    $save_fails = 'false';
     
     if (empty($this->data))
     {
@@ -298,8 +295,6 @@ class UsersController extends AppController {
       // we do not ask for "where do you know us from?" - for Clemens' sake :)
       $this->data['User']['dayofheaviesttraining'] = 'FRI';
 
-      // TODO (B)
-      // enter values depending on country
       $this->data['User']['coldestmonth'] = '1';
       $this->data['User']['unit'] = 'metric';
       $this->data['User']['unitdate'] = 'yyyymmdd';
@@ -307,19 +302,20 @@ class UsersController extends AppController {
       
       // save user profile
       if ( $this->data['User']['tos'] == '0' || !$this->data['User']['tos'] )
-          $save_fails = true;
+          $save_fails = 'true';
            
-      if ( !$save_fails )
+      if ( $save_fails == 'false' )
       {
+          $password_unenc = ($this->data['User']['password']);
+          $this->data['User']['password'] = md5( $password_unenc );
+          
           if ( $this->User->save( $this->data, array(
-                               'validate' => true,
-                               'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'password', 'birthday',
-                               'emailcheck', 'payed_from', 'payed_to', 'newsletter', 'coldestmonth', 'dayofheaviesttraining', 'unit', 'unitdate', 'yourlanguage' )
+               'validate' => true,
+               'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'password', 'birthday',
+               'emailcheck', 'payed_from', 'payed_to', 'newsletter', 'coldestmonth', 'dayofheaviesttraining', 'unit', 'unitdate', 'yourlanguage' )
           ) ) )
           {
-              //$this->_sendNewUserMail( $this->User->id );
               // send user with activation link
-              // TODO text-newsletter-template is missing
               $tid = $this->_sendNewUserMail( $this->User->id );
 
               // write imperial / metric to session and date-format
@@ -333,23 +329,26 @@ class UsersController extends AppController {
               $this->redirect(array('action' => 'register_finish', $this->User->id));
           } else
           {
-              $save_fails = true;
+              $save_fails = 'true';
           }
       }
       
-      if ( $save_fails )
+      if ( $save_fails == 'true' )
       {
-          if ( !$this->data['User']['tos'] || $this->data['User']['tos'] == 0 ) 
-                $this->set( 'tos_warning', true );
+          if ( !$this->data['User']['tos'] || $this->data['User']['tos'] == 0 )
+          { 
+                $this->set('tos_warning', 'true');
+          }
+                
           $statusbox = 'errorbox';
           $this->Session->setFlash(__('Some errors occured',true));
           $this->set('statusbox', $statusbox);
       }
     }
 
+    if ( $save_fails == 'false' ) $this->set('tos_warning', 'false');
     $this->set('sports', $this->Unitcalc->get_sports());
     $this->set('statusbox', $statusbox);
-    $this->set('tos_warning', false);
   }
 
 /**
@@ -415,9 +414,9 @@ class UsersController extends AppController {
 
 			// save user profile part 1
 			if ($this->User->save( $this->data, array(
-                               'validate' => true,
-                               'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'password', 'birthday',
-                               'passwordcheck', 'emailcheck', 'newsletter', 'youknowus' )
+           'validate' => true,
+           'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'password', 'birthday',
+           'passwordcheck', 'emailcheck', 'newsletter', 'youknowus' )
 			) ) )
 			{
 				$statusbox = 'statusbox_ok';
@@ -476,43 +475,41 @@ class UsersController extends AppController {
 			$this->set('age',$age);
 
 			if ($this->User->save( $this->data, array(
-                              'validate' => true,
-                              'fieldList' => array( 'typeofsport', 'rookie', 'medicallimitations', 'weeklyhours',
-                              'dayofheaviesttraining', 'maximumheartrate', 'unit', 'unitdate',
-                              'coldestmonth', 'level', 'payed_from', 'payed_to', 'yourlanguage'
-                              ) ) ) )
-                              {
-                              	//$this->_sendNewUserMail( $this->User->id );
-                              	// send user with activation link
-                              	// TODO text-newsletter-template is missing
-                              	$tid = $this->_sendNewUserMail( $this->User->id );
+          'validate' => true,
+          'fieldList' => array( 'typeofsport', 'rookie', 'medicallimitations', 'weeklyhours',
+          'dayofheaviesttraining', 'maximumheartrate', 'unit', 'unitdate',
+          'coldestmonth', 'level', 'payed_from', 'payed_to', 'yourlanguage'
+          ) ) ) )
+          {
+          	//$this->_sendNewUserMail( $this->User->id );
+          	// send user with activation link
+          	// TODO text-newsletter-template is missing
+          	$tid = $this->_sendNewUserMail( $this->User->id );
 
-                              	// write imperial / metric to session and date-format
-                              	$this->Session->write('session_unit', $this->data['User']['unit']);
-                              	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+          	// write imperial / metric to session and date-format
+          	$this->Session->write('session_unit', $this->data['User']['unit']);
+          	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
 
-                              	$this->Session->setFlash(__('User registration finished. Please click your activation link in your E-mail!',true));
-                              	$this->redirect(array('action' => 'register_finish', $this->User->id));
-                              } else
-                              {
-                              	$statusbox = 'errorbox';
-                              	$this->Session->setFlash(__('Some errors occured',true));
-                              	$this->set('statusbox', $statusbox);
-                              }
+          	$this->Session->setFlash(__('User registration finished. Please click your activation link in your E-mail!',true));
+          	$this->redirect(array('action' => 'register_finish', $this->User->id));
+          } else
+          {
+          	$statusbox = 'errorbox';
+          	$this->Session->setFlash(__('Some errors occured',true));
+          	$this->set('statusbox', $statusbox);
+          }
 		}
+
 		$this->set('statusbox', $statusbox);
 		$this->set('sports', $this->Unitcalc->get_sports());
-
 	}
 
 	function register_finish($id = null)
 	{
-
 		$this->pageTitle = __('Registration - Finished',true);
 
 		if (empty($this->data))
 		{
-
 			$this->data = $User = $this->User->read();
 
 			// activation key
@@ -540,7 +537,8 @@ class UsersController extends AppController {
 	/**
 	 * quick check if an email-adress is already registered
 	 */
-	function check_email_available() {
+	function check_email_available() 
+	{
 		$this->layout = "plain";
 		Configure::write('debug', 0);
 		$email = $_POST['email'];
@@ -570,14 +568,15 @@ class UsersController extends AppController {
 		 // this is the classic parameter reading of cakephp
 		 $check_useremail = $this->params['named']['checkuseremail'];
 		 $check_userid = $this->params['named']['checkuserid'];
-		 **/
+		**/
 		$check_useremail = $_POST['checkuseremail'];
 		$check_userid = $_POST['checkuserid'];
 
 		$return = $this->check_email_function( $check_useremail, $check_userid, $autorender );
 	}
 
-	function check_email_function($checkuseremail = "", $checkuserid = "", $autorender = false) {
+	function check_email_function($checkuseremail = "", $checkuserid = "", $autorender = false) 
+	{
 
 		//Configure::write('debug', 1);
 		//$this->render('check_email');
@@ -603,8 +602,7 @@ class UsersController extends AppController {
 			/**
 			 $User = $this->User->find('list',
 			 array('conditions' =>
-			 array('User.email' => $checkuseremail, 'User.id <>' => $checkuserid )
-			 )
+			 array('User.email' => $checkuseremail, 'User.id <>' => $checkuserid ) )
 			 );
 			 **/
 
@@ -620,7 +618,6 @@ class UsersController extends AppController {
 				else $usethisemail = "false";
 			}
 
-			//echo $usethisemail . "<br>";
 			$sql = "SELECT * FROM users WHERE email = '" . $checkuseremail . "' AND id = '" . $checkuserid ."'";
 			$User_same = $this->User->query( $sql );
 
@@ -709,7 +706,7 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('You will receive regularly trainingplans from TriCoreTraining.com. Start your sports career.',true));
 			} else
 			{
-				$this->Session->setFlash(__('Something went wrong - sorry. Maybe you\'re already activated? If not <a href="mailto:support@tricoretraining.com">contact our service personal.</a>',true));
+				$this->Session->setFlash( __('Something went wrong - sorry. Maybe you\'re already activated? If not', true) . ', <a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '.</a>');
 			}
 		}
 	}
@@ -727,23 +724,23 @@ class UsersController extends AppController {
 		$bmi_return = $this->Unitcalc->calculate_bmi( $checkweight, $checkheight, $age );
 		if ( $bmi_return['bmi'] < 50 && $bmi_return['bmi'] > 10 )
 		{
-			$bmi_message = __("Your BMI is ",true) . $bmi_return['bmi'] . __(". Your BMI-check says: ",true) . $bmi_return['bmi_status'] . ".";
+			$bmi_message = __("Your BMI is",true) . ' ' . $bmi_return['bmi'] . '. ' . __("Your BMI-check says: ",true) . $bmi_return['bmi_status'] . ".";
+      
 			$message_color = "green";
 		} else
 		{
-			$bmi_message = __("Please check your height and weight again - we got an incorrect BMI ( ",true) . $bmi_return['bmi'] . __(") - thank you.",true);
+			$bmi_message = __('Please check your height and weight again - we got an incorrect BMI', true) . ' ' . $bmi_return['bmi'] . ') - ' . __("thank you", true) . '.';
 			$message_color = "red";
 		}
 
-		$this->set("bmicheck", __('<div class="error-message" style="color: ' . $message_color . ';">' . $bmi_message . '</div>', true));
+		$this->set("bmicheck", '<div class="error-message" style="color: ' . $message_color . ';">' . $bmi_message . '</div>');
 	}
-
 
 	function edit_userinfo()
 	{
 		$this->checkSession();
 
-		$this->pageTitle = __('Change profile - user info',true);
+		$this->pageTitle = __('Change profile',true);
 		$statusbox = 'statusbox_none';
 
 		$session_userid = $this->Session->read('session_userid');
@@ -760,48 +757,40 @@ class UsersController extends AppController {
 			$this->set('UserID', $this->User->id);
 
 			if ($this->User->save( $this->data, array(
-                                              'validate' => true,
-                                              'fieldList' => array(
-                                              'firstname', 'lastname', 'gender', 'email', 'birthday',
-			                                        /**'newsletter', 'youknowus',**/
-                                              'address', 'zip', 'city', 'country', 'phonemobile'
-                                              )
-                                              )
-                                              ) )
-                                              {
-                                                  // we have to change all session info because of email change
-                                                  if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
-                                                  {
-                                                        $new_email = $this->data['User']['email'];
-                                                        $this->Session->write( 'session_useremail', $new_email );
-                                                        if ( $this->Cookie->read('email') )
-                                                        {
-                                                              $cookie = array();
-                                                              $cookie['email'] = $new_email;
-                                                              $cookie['userid'] = $session_userid;
-                                                              
-                                                              $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
-                                                              
-                                                        }
-                                                        //pr($this->Session->read('session_useremail'));
-                                                        //pr($this->Cookie->read('email'));
-                                                   }
-                                              	   $statusbox = 'okbox';
-                                              	   $this->Session->setFlash(__('User info saved.',true));
-                                              	   //$this->redirect(array('action' => 'edit_userinfo', $this->User->id));
+      'validate' => true,
+      'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'birthday',
+      /**'newsletter', 'youknowus',**/
+      'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
+      {
+          // we have to change all session info because of email change
+          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
+          {
+                $new_email = $this->data['User']['email'];
+                $this->Session->write( 'session_useremail', $new_email );
+                if ( $this->Cookie->read('email') )
+                {
+                      $cookie = array();
+                      $cookie['email'] = $new_email;
+                      $cookie['userid'] = $session_userid;
+                      
+                      $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+                }
+           }
+      	   $statusbox = 'okbox';
+      	   $this->Session->setFlash(__('User info saved.',true));
 
-                                              } else
-                                              {
-                                              	   $statusbox = 'errorbox';
-                                              	   $this->Session->setFlash(__('Some errors occured.',true));
-                                              }
+      } else
+      {
+      	   $statusbox = 'errorbox';
+      	   $this->Session->setFlash(__('Some errors occured.',true));
+      }
 		}
 		$this->set('statusbox', $statusbox);
 	}
 
 	function edit_traininginfo()
 	{
-		$this->pageTitle = __('Change profile - training info',true);
+		$this->pageTitle = __('Change training info',true);
 
 		$this->checkSession();
 		//$this->js_addon = '';
@@ -822,26 +811,25 @@ class UsersController extends AppController {
 		} else
 		{
 			$this->set('UserID', $this->User->id);
-
      
 			if ($this->User->save( $this->data, array(
-                          'validate' => true,
-                          'fieldList' => array(
-                          'typeofsport', 'rookie', 
-                          //'dayofheaviesttraining', 
-                          'weeklyhours', 'coldestmonth',
-                          'publicprofile', 'publictrainings', 'medicallimitations', 'maximumheartrate',
-                          'lactatethreshold'
-                          ) ) ) )
-                          {
-                          	  $statusbox = 'okbox';
-                            	$this->Session->setFlash('Trainingsinfo saved.');
-                          	  //$this->redirect(array('action' => 'edit_traininginfo', $this->User->id));
-                          } else
-                          {
-                          	  $this->Session->setFlash(__('Some errors occured.', true));
-                          	  $statusbox = 'errorbox';
-                          }
+        'validate' => true,
+        'fieldList' => array(
+        'typeofsport', 'rookie', 
+        //'dayofheaviesttraining', 
+        'weeklyhours', 'coldestmonth',
+        'publicprofile', 'publictrainings', 'medicallimitations', 'maximumheartrate',
+        'lactatethreshold'
+        ) ) ) )
+        {
+        	  $statusbox = 'okbox';
+          	$this->Session->setFlash('Trainingsinfo saved.');
+        	  //$this->redirect(array('action' => 'edit_traininginfo', $this->User->id));
+        } else
+        {
+        	  $this->Session->setFlash(__('Some errors occured.', true));
+        	  $statusbox = 'errorbox';
+        }
 		}
 		$this->set('statusbox', $statusbox);
 		$this->set('sports', $this->Unitcalc->get_sports());
@@ -849,7 +837,7 @@ class UsersController extends AppController {
 
 	function edit_weight()
 	{
-		$this->pageTitle = __('Change profile - weight management',true);
+		$this->pageTitle = __('Change weight management', true);
 		$this->checkSession();
 		//$this->js_addon = '';
 		$statusbox = 'statusbox_none';
@@ -874,7 +862,6 @@ class UsersController extends AppController {
 		
     } else 
 		{
-		
 			// check decimal + convert metric to save
 			if ( isset( $this->data['User']['weight'] ) )
 			       $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'save', 'single' );
@@ -896,13 +883,13 @@ class UsersController extends AppController {
 				// future date for lost weight is in the past
 				if ( round($diff_time['months']) <= 0 )
 				{
-					   $targetweighterror = __('Your target weight date is in the past and must be in the future!',true);
+					   $targetweighterror = __('Your target weight date is in the past and must be in the future!', true);
 					   $this->data['User']['targetweightcheck'] = 1;
 					   $this->set('targetweighterror', $targetweighterror);
 
 				} elseif ( $diff_weight < 1 )
 				{
-					   $targetweighterror = __('Your target weight is too low!',true);
+					   $targetweighterror = __('Your target weight is too low!', true);
 					   $this->data['User']['targetweightcheck'] = 1;
 					   $this->set('targetweighterror', $targetweighterror);
 
@@ -959,45 +946,46 @@ class UsersController extends AppController {
         						$this->set('targetweighterror', $targetweighterror);
 					   }
 				}
-        if ( isset( $weight_per_month ) ) 
+        if ( isset( $weight_per_month ) )
+        { 
             $additional_message = 
-                  __('You have to loose',true) . 
+                  __('You have to loose', true) . 
                   ' ' . $weight_per_month . ' ' . $weight_unit . ' ' . 
                   __('per month to reach your weight goal', true);
-        
+        }
 			}
 
 			if ($this->User->save( $this->data, array(
-               'validate' => true,
-               'fieldList' => array(
-               'height', 'weight', 'targetweight',
-               'targetweightdate', 'targetweightcheck'
-               ) ) ) )
-               {
-               $this->Session->setFlash(__('Weight settings saved.',true).$additional_message);
-               $statusbox = 'okbox';
+         'validate' => true,
+         'fieldList' => array(
+         'height', 'weight', 'targetweight',
+         'targetweightdate', 'targetweightcheck'
+         ) ) ) )
+         {
+         $this->Session->setFlash(__('Weight settings saved.',true).$additional_message);
+         $statusbox = 'okbox';
 
-               // convert back in case of error and no redirect
+         // convert back in case of error and no redirect
+         if ( isset( $this->data['User']['weight'] ) )
+              $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
+         if ( isset( $this->data['User']['height'] ) )
+         	    $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
+         if ( isset( $this->data['User']['targetweight'] ) )
+         	    $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
+         //$this->redirect(array('action' => 'edit_weight', $this->User->id));
+         
+         } else
+         {
+               // convert back in case of error
                if ( isset( $this->data['User']['weight'] ) )
                     $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
                if ( isset( $this->data['User']['height'] ) )
-               	    $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
+                 	  $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
                if ( isset( $this->data['User']['targetweight'] ) )
-               	    $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
-               //$this->redirect(array('action' => 'edit_weight', $this->User->id));
-               
-               } else
-               {
-                     // convert back in case of error
-                     if ( isset( $this->data['User']['weight'] ) )
-                          $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
-                     if ( isset( $this->data['User']['height'] ) )
-                       	  $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
-                     if ( isset( $this->data['User']['targetweight'] ) )
-                       	  $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
-                     $statusbox = 'errorbox';
-                     $this->Session->setFlash(__('Some errors occured',true));
-               }
+                 	  $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
+               $statusbox = 'errorbox';
+               $this->Session->setFlash(__('Some errors occured',true));
+         }
 		}
 
     $this->set('unit', $this->Unitcalc->get_unit_metric());
@@ -1050,23 +1038,24 @@ class UsersController extends AppController {
 			}
 
 			if ($this->User->save( $this->data, array(
-                            'validate' => true,
-                            'fieldList' => array(
-                            'myimage', 'mybike',
-                            'mytrainingsphilosophy'
-                            ) ) ) )
-                            {
-                            	$statusbox = 'okbox';
-                            	$this->Session->setFlash(__('Image(s) saved.',true));
-                            	//$this->redirect(array('action' => 'edit_images', $this->User->id));
-                            } else
-                            {
-                            	$this->Session->setFlash(__('Some errors occured.',true));
-                            	$statusbox = 'errorbox';
-                            }
+          'validate' => true,
+          'fieldList' => array(
+          'myimage', 'mybike',
+          'mytrainingsphilosophy'
+          ) ) ) )
+          {
+          	$statusbox = 'okbox';
+          	$this->Session->setFlash(__('Image(s) saved.',true));
+          	//$this->redirect(array('action' => 'edit_images', $this->User->id));
+          } else
+          {
+          	$this->Session->setFlash(__('Some errors occured.',true));
+          	$statusbox = 'errorbox';
+          }
 		}
 		$this->set('statusbox', $statusbox);
 	}
+	
 	function delete_image($field = 'myimage')
 	{
 		if ( $this->params['named']['field'] ) $field = $this->params['named']['field'];
@@ -1103,26 +1092,27 @@ class UsersController extends AppController {
 			$this->set('user', $this->data['User']);
 
 			if ($this->User->save( $this->data, array(
-                           'validate' => true,
-                           'fieldList' => array(
-                           'unit', 'unitdate', 'yourlanguage'
-                           ) ) ) )
-                           {
-                           	$this->Session->setFlash(__('Metric information saved.',true));
-                           	$this->Session->write('session_unit', $this->data['User']['unit']);
-                           	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-                           	$statusbox = 'okbox';
-                           } else
-                           {
-                           	$statusbox = 'errorbox';
-                           	$this->Session->setFlash(__('Some errors occured.',true));
-                           }
+         'validate' => true,
+         'fieldList' => array(
+         'unit', 'unitdate', 'yourlanguage'
+         ) ) ) )
+         {
+         	$this->Session->setFlash(__('Metric information saved.',true));
+         	$this->Session->write('session_unit', $this->data['User']['unit']);
+         	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+         	$statusbox = 'okbox';
+         } else
+         {
+         	$statusbox = 'errorbox';
+         	$this->Session->setFlash(__('Some errors occured.',true));
+         }
 		}
 		$this->set('statusbox', $statusbox);
 	}
 
-	function edit_password() {
-		$this->pageTitle = __('Change profile - password',true);
+	function edit_password() 
+	{
+		$this->pageTitle = __('Change profile - password', true);
 		$this->checkSession();
 		//$this->js_addon = '';
 		$statusbox = 'statusbox_none';
@@ -1134,33 +1124,50 @@ class UsersController extends AppController {
 		{
 			$this->data = $this->User->read();
 			$this->set('UserID', $this->User->id);
+      $this->data['User']['password'] = '';
+      $this->data['User']['passwordapprove'] = '';
+      
 		} else
 		{
       $this->User->set($this->data);
+      /**
       if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
       { }
-
-			//$this->set('UserID', $this->User->id);
-
+      **/
+      
       $save_pw = $this->data['User']['password'];
-      $this->data['User']['password'] = md5($this->data['User']['password']);
-
-			if ($this->User->save( $this->data, array(
-                     'validate' => true,
-                     'fieldList' => array(
-                     'password', 'passwordcheck'
-                     ) ) ) )
-                     {
-                     	  $this->Session->setFlash(__('New password saved.',true));
-                     	  $statusbox = 'okbox';
-                     } else
-                     {
-                        $this->data['User']['password'] = $save_pw;
-
-                     	  $statusbox = 'errorbox';
-                     	  $this->Session->setFlash(__('Some errors occured.',true));
-                     }
-		}
+      
+      if ( !$this->data['User']['password'] || !$this->data['User']['passwordapprove'] ||
+           $this->data['User']['password'] != $this->data['User']['passwordapprove'] )
+      {      
+          $this->set('errormessage', __('No passwords entered or passwords do not match!', true) );
+      } else
+      {
+          $this->data['User']['password'] = md5($this->data['User']['password']);
+          $this->data['User']['passwordcheck'] = 1;
+    
+    			if ($this->User->save( $this->data, array(
+             'validate' => true,
+             'fieldList' => array(
+             'password', 'passwordcheck'
+             ) ) ) )
+             {
+             	  $this->Session->setFlash(__('New password saved.',true));
+             	  $statusbox = 'okbox';
+                $this->data['User']['password'] = '';
+                $this->data['User']['passwordapprove'] = '';
+                
+             } else
+             {
+                $this->data['User']['password'] = $save_pw;
+    
+                //pr($this->User->validationErrors);
+                
+             	  $statusbox = 'errorbox';
+             	  $this->Session->setFlash(__('Some errors occured.',true));
+             }
+      }
+    }
 		$this->set('statusbox', $statusbox);
 	}
 
@@ -1210,14 +1217,13 @@ class UsersController extends AppController {
 
 	function _sendNewUserMail($id)
 	{
+    //$this->layout = 'newsletter';
 
-		$User = $this->User->read(null,$id);
+		$User = $this->User->read(null, $id);
 		$this->loadModel('Transaction');
 
 		$tid = $this->Transactionhandler->handle_transaction( $this->Transaction, '', 'create', 'activation_userid', $User['User']['id'] );
 		$this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'activation_email', $User['User']['email'] );
-
-    $this->layout = 'newsletter';
 
 		/* Check for SMTP errors. */
 		//Set view variables as normal
@@ -1230,11 +1236,10 @@ class UsersController extends AppController {
 
 		$this->Email->to = $User['User']['email'];
 		//$this->Email->bcc = array('secret@example.com');
-		$this->Email->subject = __('TriCoreTraining (TCT) registration',true);
+		$this->Email->subject = __('TriCoreTraining.com registration',true);
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 
-		// TODO internationalisation is missing
 		$this->Email->template = 'welcomemail'; // note no '.ctp'
 		//Send as 'html', 'text' or 'both' (default is 'text')
 		$this->Email->sendAs = 'both'; // because we like to send pretty mail
@@ -1246,27 +1251,26 @@ class UsersController extends AppController {
 		$mailPassword = Configure::read('App.mailPassword');
 
 		$this->Email->smtpOptions = array(
-                                      'port'=>$mailPort,
-                                      'timeout'=>'30',
-                                      'host'=>$mailHost,
-                                      'username'=>$mailUser,
-                                      'password'=>$mailPassword,
-                                      'client'=>'smtp_helo_hostname'
-                                      );
-                                      /* Set delivery method */
-                                      $this->Email->delivery = 'smtp';
-                                      /* Do not pass any args to send() */
-                                      $this->Email->send();
+        'port'=>$mailPort,
+        'timeout'=>'30',
+        'host'=>$mailHost,
+        'username'=>$mailUser,
+        'password'=>$mailPassword,
+        'client'=>'smtp_helo_hostname'
+        );
+        /* Set delivery method */
+        $this->Email->delivery = 'smtp';
+        /* Do not pass any args to send() */
+        $this->Email->send();
 
-                                      $this->Session->write('activation_transaction_id', $tid);
-                                      return $tid;
+        $this->Session->write('activation_transaction_id', $tid);
+        return $tid;
 	}
 
 	function _sendPasswordForgotten($id, $randompassword = null)
 	{
-	  $this->layout = 'newsletter';
+	  //$this->layout = 'newsletter';
     
-		// TODO translation template
 		if ( $randompassword )
 		{
 			$this->template = 'passwordreset';
@@ -1306,20 +1310,20 @@ class UsersController extends AppController {
 		$mailPassword = Configure::read('App.mailPassword');
 
 		$this->Email->smtpOptions = array(
-                        'port'=>$mailPort,
-                        'timeout'=>'30',
-                        'host'=>$mailHost,
-                        'username'=>$mailUser,
-                        'password'=>$mailPassword,
-                        'client'=>'smtp_helo_hostname'
-                        );
-                        /* Set delivery method */
-                        $this->Email->delivery = 'smtp';
-                        /* Do not pass any args to send() */
-                        $this->Email->send();
-                        /* Check for SMTP errors. */
-                        $this->set('smtperrors', $this->Email->smtpError);
-                        $this->set('mailsend', 'mail sent');
+        'port'=>$mailPort,
+        'timeout'=>'30',
+        'host'=>$mailHost,
+        'username'=>$mailUser,
+        'password'=>$mailPassword,
+        'client'=>'smtp_helo_hostname'
+        );
+        /* Set delivery method */
+        $this->Email->delivery = 'smtp';
+        /* Do not pass any args to send() */
+        $this->Email->send();
+        /* Check for SMTP errors. */
+        $this->set('smtperrors', $this->Email->smtpError);
+        $this->set('mailsend', 'mail sent');
 	}
 
 	function change_language()
@@ -1361,10 +1365,8 @@ class UsersController extends AppController {
 					$mailtemplate = 'premiumreminder_' . $user['yourlanguage'];
 					$this->_sendMail( $user, $mailsubject, $mailtemplate );
 				}
-
 			}
 		}
-
 	}
 
 	function check_lasttraining( $user )
@@ -1426,11 +1428,8 @@ class UsersController extends AppController {
 		 else $usethisemail = "false";
 		 }
 		 **/
-
-
 	}
 
-	// TODO finish
 	function _sendMail($user, $subject, $template)
 	{
 		$this->Email->to = $user['email'];
@@ -1455,13 +1454,13 @@ class UsersController extends AppController {
 		$mailPassword = Configure::read('App.mailPassword');
 
 		$this->Email->smtpOptions = array(
-                    'port'=>$mailPort,
-                    'timeout'=>'30',
-                    'host'=>$mailHost,
-                    'username'=>$mailUser,
-                    'password'=>$mailPassword,
-                    'client'=>'smtp_helo_hostname'
-                    );
+        'port'=>$mailPort,
+        'timeout'=>'30',
+        'host'=>$mailHost,
+        'username'=>$mailUser,
+        'password'=>$mailPassword,
+        'client'=>'smtp_helo_hostname'
+        );
 
     /* Set delivery method */
     $this->Email->delivery = 'smtp';
@@ -1472,7 +1471,6 @@ class UsersController extends AppController {
     $this->set('mailsend', 'mail sent');
 
 	}
-
 }
 
 ?>

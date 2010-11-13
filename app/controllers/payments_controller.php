@@ -1,7 +1,7 @@
 <?php
 
 /**
-do the payment with paypal
+do the payment with PAYPAL
 **/
 
 class PaymentsController extends AppController {
@@ -15,26 +15,6 @@ class PaymentsController extends AppController {
                 'limit' => 15
        )
    );
-
-   /**
-   TODO
-   1 month =/= 30 days
-
-   script which changes member to free member
-   check each day if member has subscribed, then change to freemember after validationperiod
-   write email that we are sorry and want to keep him/her
-   check whether 1,3,6,12 month subscription, send after that period new invoice and save new date in payed_to
-   check for address
-
-   check user daily
-   - canceled - 1 week before payed_to - mail personal mail - if really wants to cancel :(
-   - notify method - cancel - write field canceled
-   - trainingsdoku entered for last 10 days?
-   - membership ended or notify didn't update entry --> change to freemember?
-   - strange userdata --> notify admin
-
-   - notify - prolong membership
-   **/
 
    function beforeFilter()
    {
@@ -59,7 +39,6 @@ class PaymentsController extends AppController {
             $this->set('pay_member', $results['User']['level']);
             $this->set('currency', $currency);
             $this->set('statusbox', 'statusbox_none');
-
    }
 
    function unsubscribe_triplans()
@@ -94,6 +73,7 @@ class PaymentsController extends AppController {
                        else
                             $user = array();
                        $array = array();
+                       // do not translate
                        $error = 'User ' . $session_userid . ' ' . $results['User']['firstname'] . ' ' . $results['User']['lastname'] . ' canceled membership.';
                        $subject = 'TCT User canceled - bring her/him BACK';
 
@@ -103,7 +83,6 @@ class PaymentsController extends AppController {
                        $this->redirect('https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=payment@tricoretraining.com');
             }
             $this->set('statusbox', $statusbox);
-
    }
 
    function initiate()
@@ -122,18 +101,15 @@ class PaymentsController extends AppController {
             $session_userid = $results['User']['id'];
 
             // debugging paypal
-            $testing = 'sandbox.';
+            //$testing = 'sandbox.';
             $testing = '';
 
             $timeinterval = $this->params['named']['t'];
             if ( !$timeinterval ) $timeinterval = 1;
 
-            // TODO use final prices
+            // TODO use final prices // diffentiate between USD EUR?
             //$price_array = array( '1' => '9.90', '3' => '27.00', '6' => '51.00', '12' => '96.00' );
             $price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
-
-            //$session_userid = $this->Session->read('session_userid');
-            //$results = $this->User->findById($session_userid);
 
             // check address in user profile - otherwise redirect to edit profile
             // user has to give us an address for invoice
@@ -141,9 +117,7 @@ class PaymentsController extends AppController {
             {
                  $error = 'address';
             } else
-            {
-
-            }
+            { }
 
             $today_ts = time();
             $today = date( 'Y-m-d', $today_ts );
@@ -163,7 +137,7 @@ class PaymentsController extends AppController {
                $results['User']['days_to_end'] = $days_to_end;
             }
 
-            // paypal does not allow trial periods greater than 90 days
+            // paypal does not allow trial periods longer than 90 days
             if ( $days_to_end > 90 )
                $error = 'trial';
 
@@ -208,8 +182,6 @@ class PaymentsController extends AppController {
    {
             /**
             we get a remote request from PAYPAL-service and have to handle it
-
-            TODO copy full request to this documentation
             **/
 
             // checkSession - won't work with paypal request
@@ -219,22 +191,13 @@ class PaymentsController extends AppController {
             $logurl = '';
             $payment_successful = false;
 
-            // TODO check whether all types of requests are handled here
-            /**
-            txn_type=subscr_payment
-            txn_type=subscr_signup
-            txn_type=subscr_cancel
-            **/
-
             // have to do this - because checkSession is uncommented
             $this->loadModel('User');
 
             // Paypal notifies us through a POST-request
-            $params = $_POST;
-
-            // for testing
-            // TODO deactivate testing
-            if ( $_GET['testing'] == 'true' ) $params = $_GET;
+            // $_GET for testing
+            if ( $_POST ) $params = $_POST;
+            else $params = $_GET;
 
             // this is the payment_transaction_id
             if ( isset( $params['custom'] ) ) $this->payment_tid = $params['custom'];
@@ -242,7 +205,7 @@ class PaymentsController extends AppController {
 
             if ( !$this->payment_tid )
             {
-                      $error = __('No Transaction-ID defined - something is wrong - sorry. Contact our support - support@tricoretraining.com. ',true);
+                      $error = __('No Transaction-ID defined - something is wrong - sorry.') . ' ' . __('Contact our support', true) . ' - <a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a>.';
                       $transactions = array();
             } else
             {
@@ -255,7 +218,7 @@ class PaymentsController extends AppController {
                       $results_user = $this->User->findById($session_userid);
                       if ( !is_array( $results_user ) )
                       {
-                                 $error .= __('UserID ',true) . $session_userid . __(' was not found in database. ',true);
+                                 $error .= __('UserID',true) . ' ' . $session_userid . ' ' . __('was not found in database',true) . '.';
                       }
             }
 
@@ -264,16 +227,10 @@ class PaymentsController extends AppController {
                // payment of paypal is not confirmed
                if ( $params['payment_status'] != 'Completed' )
                {
-                      $error .= __('Your Payment-Status is not completed yet. ',true);
+                      $error .= __('Your payment is not completed yet',true) . '.';
                } else
                {
                       $payment_successful = true;
-
-                      // TODO - not urgent?
-                      // do more checks on PAYPAL data?
-                      // Use the transaction ID to verify that the transaction has not already been processed,
-                      // which prevents duplicate transactions from being processed.
-                      // Verify that the price, item description, and so on, match the transaction on your website.
 
                       // TESTING
                       //$posturl = 'https://www.sandbox.paypal.com/cgi-bin/webscr';
@@ -295,10 +252,9 @@ class PaymentsController extends AppController {
 
                       if ( $return != 'VERIFIED' )
                       {
-                                  $error .= __('Verification by PAYPAL failed. ',true) . $posturl . ' ';
+                                  $error .= __('Verification by PAYPAL failed',true) . '. ' . $posturl . ' ';
                       } else
                       {
-                                  // TODO later - new invoice number should be generated otherwise (not transactional safe!!)
                                   $sql = "SELECT MAX(invoice) AS minv FROM payments";
                                   $invoice_results = $this->Payment->query( $sql );
 
@@ -339,11 +295,11 @@ class PaymentsController extends AppController {
                                               // TODO - not finished - add username + address + TCT address 
                                               $this->_sendInvoice($transactions, 'invoice');
 
-                                              $this->Session->setFlash(__('Received notification. Invoice sent. Thank you.',true));
+                                              $this->Session->setFlash(__('Received notification', true) . '. ' . __('Invoice sent', true) . '. ' . __('Thank you', true) . '.');
                                               //$this->redirect(array('action' => '', $this->User->id));
                                   } else
                                   {
-                                              $error .= __('Payment saving failed. ',true);
+                                              $error .= __('Saving of payment status failed',true) . '.';
                                   }
                       }
                }
@@ -356,6 +312,7 @@ class PaymentsController extends AppController {
                  if ( is_array( $transactions ) ) $array = $transactions;
                  else $transactions = array();
 
+                 // do not translate 
                  $subject = 'TCT Invoice Error - something wrong/not finished in notify/paypal';
 
                  $this->_sendNotification($user, $array, $error, $subject);
@@ -365,7 +322,7 @@ class PaymentsController extends AppController {
             {
                  // only for information purposes - do not create a new invoice
                  $this->_sendInvoice($transactions, 'info');
-                 $this->Session->setFlash(__('Received notification. No invoice. Thank you.',true));
+                 $this->Session->setFlash(__('Received notification', true) . '. ' . __('No invoice', true) . '. ' . __('Thank you', true) . '.');
                  //$this->redirect(array('action' => '', $this->User->id));
             }
 
@@ -378,6 +335,7 @@ class PaymentsController extends AppController {
                  else $user = array();
                  if ( is_array( $transactions ) ) $array = $transactions;
                  else $transactions = array();
+
                  $subject = 'TCT Invoice Error - something wrong in notify/paypal';
 
                  $this->_sendNotification($user, $array, $error, $subject);
@@ -395,12 +353,12 @@ class PaymentsController extends AppController {
 
             if ( $action == 's' )
             {
-               $error = __('Thank you for subscribing for a membership. You receive your invoice as soon as your subscription period starts',true);
+               $error = __('Thank you for subscribing for a membership. You receive your invoice as soon as your subscription period starts. ',true);
 
             } elseif ( $action == 'c' )
             {
                $error = __('You canceled the payment transaction. If this was not intended, do the payment process again. If something else
-               is not ok for you, <a href="mailto:support@tricoretraining.com">please contact us support@tricoretraining.com</a>.',true);
+               is not ok for you, ', true) . '. ' . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support', true) . '</a>';
             }
 
             $session_userid = $this->Session->read('session_userid');
@@ -408,9 +366,9 @@ class PaymentsController extends AppController {
             if ( $error != "" ) { $this->Session->setFlash($error); }
 
             $this->paginate = array(
-                                      'conditions' => array('Payment.user_id = ' => $session_userid, 'Payment.payment_confirmed = ' => 1),
-                                      'limit' => 15,
-                                      'order' => array('Payment.invoice' => 'desc')
+                  'conditions' => array('Payment.user_id = ' => $session_userid, 'Payment.payment_confirmed = ' => 1),
+                  'limit' => 15,
+                  'order' => array('Payment.invoice' => 'desc')
             );
 
             $payments = $this->paginate('Payment');
@@ -420,7 +378,7 @@ class PaymentsController extends AppController {
    function delete( $id )
    {
             $this->Payment->delete($id);
-            $this->Session->setFlash(__('The payment with id: ',true).$id.__(' has been deleted.',true));
+            $this->Session->setFlash(__('Payment with ID:',true) . ' ' . $id . ' ' . __('deleted',true) . '.');
             $this->redirect(array('action'=>'show_payments'));
    }
 
@@ -458,7 +416,7 @@ class PaymentsController extends AppController {
 
    function _sendInvoice($pay, $mailtype)
    {
-            $this->layout = 'newsletter';
+            //$this->layout = 'newsletter';
 
             $User = $this->User->read( null, $pay['pay_userid']);
 
@@ -522,7 +480,7 @@ class PaymentsController extends AppController {
 
    function _sendNotification($user, $array, $error, $subject)
    {
-         $this->layout = 'newsletter';
+         //$this->layout = 'newsletter';
      
          if ( isset( $error ) ) $this->set('error', $error);
          if ( is_array( $array ) ) $this->set('array', $array);
@@ -543,13 +501,13 @@ class PaymentsController extends AppController {
          $mailPassword = Configure::read('App.mailPassword');
 
          $this->Email->smtpOptions = array(
-                                      'port'=>$mailPort,
-                                      'timeout'=>'30',
-                                      'host' => $mailHost,
-                                      'username'=>$mailUser,
-                                      'password'=>$mailPassword,
-                                      'client' => 'smtp_helo_hostname'
-                                      );
+              'port'=>$mailPort,
+              'timeout'=>'30',
+              'host' => $mailHost,
+              'username'=>$mailUser,
+              'password'=>$mailPassword,
+              'client' => 'smtp_helo_hostname'
+              );
          /* Set delivery method */
          $this->Email->delivery = 'smtp';
          /* Do not pass any args to send() */

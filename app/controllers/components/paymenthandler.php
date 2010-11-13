@@ -9,7 +9,6 @@ class PaymenthandlerComponent extends Object {
    var $components = array('Session');
    var $helpers = array('Session');
 
-   // TODO - not finished
    function handle_payment( $model, $tid = null, $mode = 'create', $key = '', $val = '' )
    {
             // create // add // read

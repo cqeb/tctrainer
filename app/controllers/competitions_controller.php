@@ -53,9 +53,9 @@ list all competitions with paging
             }
 
             $this->paginate = array(
-                                      'conditions' => array('Competition.user_id = ' => $session_userid),
-                                      'limit' => 15,
-                                      'order' => array('Competition.competitiondate' => 'desc')
+                  'conditions' => array('Competition.user_id = ' => $session_userid),
+                  'limit' => 15,
+                  'order' => array('Competition.competitiondate' => 'desc')
             );
 
             $this->set('competitions', $this->paginate('Competition'));
@@ -66,7 +66,6 @@ list all competitions with paging
 
    function edit_competition($id = null) 
    {
-        
             $this->set('js_addon','');
             $error = '';
             $statusbox = 'statusbox';
@@ -148,13 +147,11 @@ list all competitions with paging
                // create dummy event for user based on his personal profile
                if ( $id == 'dummy' )
                {
-                    // TODO (B) what happens if the event is in the transition-phase?
                     // get preferred type of sport of the user
                     if ( $results['User']['typeofsport'] )
                          $typeofsport = $results['User']['typeofsport'];
 
                     // is user rookie or not / different time (weeks) to the dummy event
-                    // TODO check number?
                     if ( $results['User']['rookie'] == 1 )
                          $dummy_event = 12;
                     else
@@ -227,24 +224,7 @@ list all competitions with paging
 
    function check_competitions( $competitions, $userdata )
    {
-            // TODO (B) there are several checks not implemented 
-            /**
-            check time-difference of events (too many too near together?)
-            check which too different events are near (IM / Sprint)
-            - competitiondate
-            - sportstype
-            - important
-            check what type of sport user has chosen and if important events are not matching
-            - typeofsport
-            check whether weekly hours are not enough to finish event successfully
-            - weeklyhours
-            - rookie
-
-            warning if competitions are not far enough away from each other
-            warning if you traing for sprint and then ironman in 1 season
-            warning if $sport is run and you add a triathlon as competition
-            **/
-
+            // TODO (B) finish this function
             $userdata = $userdata['User'];
             for ( $i = 0; $i < count( $competitions ); $i++ )
             {

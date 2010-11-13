@@ -29,7 +29,6 @@ class TrainingstatisticsController extends AppController {
             $statusbox = 'statusbox';
             $session_userid = $this->Session->read('session_userid');
 
-            // TODO (B) how to show old events?
             $this->paginate = array(
                       'conditions' => array('Trainingstatistic.user_id = ' => $session_userid),
                       'limit' => 15,
@@ -56,7 +55,6 @@ class TrainingstatisticsController extends AppController {
 
                      if ( $id )
                      {
-                       // TODO (B) where to start the list (current)
                        $result = $this->Trainingstatistic->find ('all', 
                           array('conditions' => 
                               array( 'and' => 
@@ -68,7 +66,7 @@ class TrainingstatisticsController extends AppController {
                           $this->data = $result[0];
                        else
                        {
-                          $this->Session->setFlash('Sorry. This is not your entry!');
+                          $this->Session->setFlash(__('Sorry. This is not your entry!', true));
                           $this->set('errorbox', $statusbox);
                           $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
                        }
@@ -112,6 +110,7 @@ class TrainingstatisticsController extends AppController {
                           $duration = $this->data['Trainingstatistic']['duration'];
                           $age = $this->Unitcalc->how_old($results['User']['birthday']);
                           $weight = $results['User']['weight'];
+                          // calculate kcal for workout
                           if ( $results['User']['gender'] == 'm' )
                           {
                               $this->data['Trainingstatistic']['kcal'] = 
@@ -252,7 +251,6 @@ class TrainingstatisticsController extends AppController {
                    user_id = $session_userid AND ";
             if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
             $sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
-            //echo $sql;
             
             $trainingdata = $this->Trainingstatistic->query( $sql );
 
@@ -273,7 +271,6 @@ class TrainingstatisticsController extends AppController {
                   }
             }
 
-            // TODO we have to load the correct fields from table
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
                 "athlete_id = $session_userid AND ";
@@ -282,7 +279,6 @@ class TrainingstatisticsController extends AppController {
             //if ( $sportstype ) $sql .= "type = '" . $sportstype . "' AND ";
             //$sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
             $sql .= "( week BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
-            //echo $sql;
                         
             $scheduled_trainingdata = $this->Trainingstatistic->query( $sql );
             
@@ -302,9 +298,8 @@ class TrainingstatisticsController extends AppController {
                        $trimp_planned[$day] = ( $dt['trimp'] );
                   }
             }
-            //pr($trimp_full_plan);
 
-            // TODO limit period of difference to x days
+            // TODO (B) limit period of difference to x days?
             //if ( $diff_dates > 60 ) $diff_dates = 60;
 
             $max_unit = 0;
@@ -405,8 +400,6 @@ class TrainingstatisticsController extends AppController {
             $sql .= "( date BETWEEN '" . $start . "' AND '" . $end . "' ) GROUP BY name, distance, sportstype HAVING ccount > 1 ORDER BY name, distance";
             $testworkoutsfilter = $this->Trainingstatistic->query( $sql );
 
-            //pr($testworkoutsfilter);
-
             if ( !empty( $this->data['Trainingstatistic']['search'] ) ) $searchfilter = $this->data['Trainingstatistic']['search'];
             else $searchfilter = '';
 
@@ -449,8 +442,8 @@ class TrainingstatisticsController extends AppController {
 
             $diff_dates = $this->Unitcalc->diff_dates( $start, $end );
 
-            // allow only 60 days of data
-            // TODO is this limitation a good solution?
+            // allow only 90 days
+            // TODO (B) is this limitation a good solution?
             /**
             if ( $diff_dates > 90 ) 
             { 
@@ -470,7 +463,6 @@ class TrainingstatisticsController extends AppController {
               //AND sportstype = '" . $sportstype . "'
             $sql .= "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
               "' AND distance = '" . $searchsplit[1] . "'";
-            //echo $sql . "<br>";
 
             $trainings = $this->Trainingstatistic->query( $sql );
 
@@ -483,7 +475,7 @@ class TrainingstatisticsController extends AppController {
             }
             // what is the average pulse
             $total_avg_pulse = round( ( ( $pulse['max'] + $pulse['min'] ) / 2 ), 0 );
-            //echo $total_avg_pulse;
+
             $max_perunit = 0;
 
             for ( $i = 0; $i < count( $trainings ); $i++ )
@@ -711,7 +703,6 @@ class TrainingstatisticsController extends AppController {
             else 
                 $post_sportstype = '';
 
-            // TODO check whether exports uses time-filter
             // http://www.dnamique.com/cakephp-export-data-to-excel-the-easy-way/
             $export = false;
             if ( isset( $this->params['form']['excel'] ) ) {
@@ -893,7 +884,7 @@ class TrainingstatisticsController extends AppController {
    function delete($id)
    {
             $this->Trainingstatistic->delete($id);
-            $this->Session->setFlash(__('The training has been deleted.',true));
+            $this->Session->setFlash(__('Workout deleted.',true));
             $this->redirect(array('action'=>'list_trainings'));
    }
 }

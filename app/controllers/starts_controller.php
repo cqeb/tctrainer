@@ -30,9 +30,6 @@ class StartsController extends AppController {
   {
       $this->autoRender = false;            
       $this->Filldatabase->prefill($this->Start);      
-
-    
-    
   }
 
 }

@@ -8,3 +8,6 @@
 
 <?php __('Yours, Clemens'); ?>
 
+<?php echo $this->element('email/newsletter_text_footer'); ?>
+
+

@@ -23,6 +23,7 @@
 
 echo $form->input('firstname',
      array(
+     'class' => 'required',
      'maxLength' => 255,
      'error' => array(
           'length' => __('Minimum 2 characters long',true), 
@@ -33,6 +34,7 @@ echo $form->input('firstname',
 
 echo $form->input('lastname',
      array(
+     'class' => 'required',
      'maxLength' => 255,
      'error' => array(
           'length' => __('Minimum 2 characters long',true), 
@@ -43,7 +45,8 @@ echo $form->input('lastname',
 
 echo $form->input('gender',
      array(
-     'before' => __('<label for="gender">Gender</label>', true),
+     'class' => 'required',
+     'before' => '<label for="gender">' . __('Gender', true) . '</label>',
      'legend' => false,
      'default' => 'm',
      'type' => 'radio',
@@ -53,6 +56,7 @@ echo $form->input('gender',
 
 echo $form->input('email',
      array(
+     'class' => 'required',
      'maxLength' => 255,
      'label' => __('E-Mail', true),
      'error' => array( 'message' => __('Enter your E-Mail', true)),
@@ -81,6 +85,7 @@ if ($form->isFieldError('emailcheck'))
 
 echo $form->input('password',
      array(
+     'class' => 'required',
      'type' => 'password',
      'maxLength' => 255,
      'error' => array(
@@ -92,6 +97,7 @@ echo $form->input('password',
 
 echo $form->input('birthday',
      array(
+     'class' => 'required',
      'minYear' => '1930',
      'maxYear' => date( 'Y', time() )-15,
      'label' => __('Birthday', true),
@@ -100,7 +106,7 @@ echo $form->input('birthday',
 
 echo $form->input('lactatethreshold',
      array(
-	 'class' => 'medium',
+ 	   'class' => 'medium',
      'error' => array( 
         'numeric' => __('Enter your max. lactate threshold heart rate',true),
         'greater' => __('Must be at least 120',true),
@@ -151,7 +157,7 @@ echo $form->input('tos',
      'label' => __('I agree', true)
 ));
 
-if ( $tos_warning == true )
+if ( isset( $tos_warning ) && $tos_warning == 'true' )
 {
 ?>
 <div class="error-message">

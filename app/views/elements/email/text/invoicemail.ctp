@@ -14,3 +14,6 @@
 <?php __('New period:'); ?> <?php echo $payed_new_from; ?> <?php __('to'); ?> <?php echo $payed_new_to; ?>
 
 <?php __('Yours, Clemens'); ?>
+
+<?php echo $this->element('email/newsletter_text_footer'); ?>
+

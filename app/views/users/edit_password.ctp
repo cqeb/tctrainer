@@ -54,14 +54,15 @@ echo $form->input('passwordapprove',
 
 echo $form->hidden('id');
 
+/**
 echo $form->hidden('passwordcheck');
 if ($form->isFieldError('passwordcheck')){
-   /**echo "<span style=\"color:red\">Passwords do not match! Please re-enter!</span>";**/
-   echo $form->error('passwordcheck');
+    echo $form->error('passwordcheck');
 }
+**/
 
 ?>
-<div class="error-message" style="color: red;" id="PWNotMatch"><?php __('Passwords do not match!') ?></div>
+<div class="error-message" id="PWNotMatch"><?php if ( isset( $errormessage ) ) { echo $errormessage; } ?></div>
 
 <br />
 <?php
@@ -173,14 +174,20 @@ EOE;
 
       $this->js_addon .= <<<EOE
 
-        // check password strength
-	\$('input[name="data[User][password]"]').passwordStrength();
+      // check password strength
+	    \$('input[name="data[User][password]"]').passwordStrength();
+EOE;
 
-        // check password match
-        // hide layer for error message
-        \$('#PWNotMatch').hide();
-        // if user leaves field with mouse (blur)
-       	\$('#UserPasswordapprove').blur(function(){
+if ( !isset( $errormessage ) ) 
+      $this->js_addon .= "
+      // check password match
+      // hide layer for error message
+      \$('#PWNotMatch').hide();
+";
+
+      $this->js_addon .= <<<EOE
+      // if user leaves field with mouse (blur)
+      \$('#UserPasswordapprove').blur(function(){
 
                 val1 = \$('#UserPasswordapprove').val();
                 val2 = \$('#UserPassword').val();
@@ -190,12 +197,14 @@ EOE;
 
                 if ( val1 == val2 ) {
                    \$('#PWNotMatch').html(pwokmessage);
-                   \$('#PWNotMatch').css("color","green");
+                   \$('#PWNotMatch').removeClass("error-message");
+                   \$('#PWNotMatch').addClass("ok-message");
                    \$('#UserPasswordcheck').val("1");
                    return true;
                 } else {
                    \$('#PWNotMatch').html(pwerrormessage);
-                   \$('#PWNotMatch').css("color","red");
+                   \$('#PWNotMatch').removeClass("ok-message");
+                   \$('#PWNotMatch').addClass("error-message");
                    \$('#UserPasswordcheck').val("0");
     	           return false;
                 }

@@ -1,5 +1,7 @@
 
- <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00">
+<?php echo $this->element('email/newsletter_header'); ?>
+
+ <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00" width="100%">
     <tr>
        <td>
           <h2><?php __('Hello'); ?> <?php echo $user['User']['firstname']; ?>,</h2>
@@ -52,3 +54,6 @@
  <!--<p class="more"><?php __('Please'); ?> <a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/<?php echo $transaction_id?>"><?php __('Continue to train.'); ?></a></p>-->
 
  <p><?php __('Yours, Clemens'); ?></p>
+ <br />
+
+<?php echo $this->element('email/newsletter_footer'); ?>

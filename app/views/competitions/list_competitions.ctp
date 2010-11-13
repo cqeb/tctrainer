@@ -12,7 +12,6 @@
                    </div><br />
                    <?php } ?>
 
-// TODO Translate Sport<br />
 <?php 
                    
 echo $html->link(__('Add competition', true), array('action' => 'edit_competition'), null);  

@@ -9,7 +9,7 @@
 
                    <?php echo $form->create('Competition', array('action' => 'edit_competition')); ?>
                    <fieldset>
-                   <legend><?php __('Add / edit a goal for your training.'); ?></legend>
+                   <legend><?php __('Manage goals for your training.'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">

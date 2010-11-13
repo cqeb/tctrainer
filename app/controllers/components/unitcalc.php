@@ -14,8 +14,7 @@ class UnitcalcComponent extends Object {
    **/
    function convert_metric( $amount, $convertunit, $roundnumber = 3, $commasep = '.' )
    {
-     // TODO when to use , and when . as comma separator?
-     // TODO round one number less than saving - round at viewing
+     // round one number less than saving - round at viewing
      if ( $convertunit != '' )
      {
        switch ( $convertunit )
@@ -78,10 +77,8 @@ class UnitcalcComponent extends Object {
    **/
    function check_distance( $amount, $mode = 'show', $ret = 'both' )
    {
-            //echo "amount: " . $amount . "<br>";
             if ( is_numeric( $amount ) )
             {
-
               $session_userobject = $this->Session->read('userobject');
               if (  $session_userobject['unit'] == 'imperial' )
               {
@@ -191,7 +188,6 @@ class UnitcalcComponent extends Object {
 
             $height = $height / 100; // must be in meters
             $bmi = $weight / ($height * $height);
-            //echo $weight . "|" . $height . "|" . $bmi . "|" . $age . "<br>";
 
             $bmi_current = $bmi;
 
@@ -203,7 +199,6 @@ class UnitcalcComponent extends Object {
             if ( $age < 65 && $bmi > 54 ) $bmi = $bmi - 4;
             if ( $age > 64 ) $bmi = $bmi - 5;
 
-            // TODO translation not finished
             if ( $bmi <= 16 ) $bmi_status = __('critical (too low)',true);
             if ( $bmi >= 16 && $bmi < 20 ) $bmi_status = __('not critical (but too low)',true);
             if ( $bmi >= 20 && $bmi < 25 ) $bmi_status = __('normal',true);
@@ -255,10 +250,9 @@ class UnitcalcComponent extends Object {
                       $post = false;
                  }
                  $format_amount = $pre.$post;
-                 //echo "ff: " . $format_amount . "<br>";
+
                  return $format_amount;
             }
-
             return false;
    }
 
@@ -282,7 +276,8 @@ class UnitcalcComponent extends Object {
             $date_to_ts = mktime( 0, 0, 0, $month, $day, $year );
 
             $diff['days'] = ($date_to_ts - $date_from_ts) / ( 3600 * 24 );
-            // TODO that might not be correct :)
+            // TODO (B) 30 days =/= 1 month
+            // that might not be correct :)
             $diff['months'] = $diff['days'] / 30;
 
             return $diff;
@@ -293,7 +288,6 @@ class UnitcalcComponent extends Object {
    **/
    function time_to_seconds( $time )
    {
-            //echo $time;
             // HH:MM:SS to seconds
             $time = trim( $time );
             $time_array = explode( ":", $time );
@@ -316,13 +310,10 @@ class UnitcalcComponent extends Object {
    function seconds_to_time( $seconds )
    {
             $hours = intval( $seconds / 3600 );
-            //echo $hours . "<br>";
             $rest_hours = $seconds - ( $hours * 3600 );
             $minutes = intval( $rest_hours / 60 );
-            //echo $minutes . "<br>";
             $rest_minutes = $seconds - ( $hours * 3600 ) - ( $minutes * 60 );
             $seconds2 = intval( $rest_minutes );
-            //echo $seconds2 . "<br>";
 
             $result = sprintf("%02d", $hours) . ":" . sprintf("%02d", $minutes) . ":" . sprintf("%02d", $seconds2);
 
@@ -356,7 +347,6 @@ class UnitcalcComponent extends Object {
             $session_unitdate = $session_userobject['unitdate'];
             // for registration
             if ( !$session_unitdate ) $session_unitdate = $this->Session->read('session_unitdate');
-
 
             $return = "";
 
@@ -415,8 +405,8 @@ class UnitcalcComponent extends Object {
            
            if ( is_array( $time_in_zones ) ) 
            {
-             // TODO we need lth here
-             // TODO what about 5a-c
+             // TODO (B) what about 5a-c?
+             // TODO - what about $lth???????
              $lth = 170;
              
              $trimp += ( $time_in_zones['zone1'] * $lth * 0.85 ); 
@@ -475,8 +465,7 @@ class UnitcalcComponent extends Object {
    **/
    function date_plus_days( $date, $days )
    {
-            // TODO later - replace with strtotime
-
+            // TODO (B) - replace with strtotime
             if ( strpos( $date, ' ' ) )
             {
                  $date_split = explode( ' ', $date );
@@ -549,6 +538,8 @@ class UnitcalcComponent extends Object {
 
    /**
    return the correct currency for a country
+
+   KEEP UP-TO-DATE !!
    **/
    function currency_for_country( $country )
    {
@@ -578,36 +569,36 @@ class UnitcalcComponent extends Object {
             
             
             $tri_ironman = __('Ironman (', true) . 
-              $this->convert_metric( '3.8', $convertunit, 1 ) . ' ' . $unit . __(' swim, ', true) . 
-              $this->convert_metric( '180', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
-              $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+              $this->convert_metric( '3.8', $convertunit, 1 ) . ' ' . $unit . ' ' . __('swim, ', true) . 
+              $this->convert_metric( '180', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
+              $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
             $tri_halfironman = __('Half-Ironman (', true) . 
-              $this->convert_metric( '1.9', $convertunit, 1) . ' ' . $unit . __(' swim, ', true) . 
-              $this->convert_metric( '90', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
-              $this->convert_metric( '21', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+              $this->convert_metric( '1.9', $convertunit, 1) . ' ' . $unit . ' ' . __('swim, ', true) . 
+              $this->convert_metric( '90', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
+              $this->convert_metric( '21', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
             $tri_olympic = __('Olympic Distance (', true) . 
-              $this->convert_metric( '1.5', $convertunit, 1 ) . ' ' . $unit . __(' swim, ', true) . 
-              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+              $this->convert_metric( '1.5', $convertunit, 1 ) . ' ' . $unit . ' ' . __('swim, ', true) . 
+              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
             $tri_sprint = __('Sprint Distance (', true) . 
-              $this->convert_metric( '0.75', $convertunit, 1 ) . ' ' . $unit . __(' swim, ', true) . 
-              $this->convert_metric( '20', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
-              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+              $this->convert_metric( '0.75', $convertunit, 1 ) . ' ' . $unit . ' ' . __('swim, ', true) . 
+              $this->convert_metric( '20', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
+              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
                 
-            $run_ultra = __('Ultrarun (> ', true) . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
-            $run_marathon = __('Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
-            $run_halfmarathon = __('Half-Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
-            $run_10k = __('Race (', true) . $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
-            $run_5k = __('Race (', true) . $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+            $run_ultra = __('Ultrarun (> ', true) . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+            $run_marathon = __('Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+            $run_halfmarathon = __('Half-Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+            $run_10k = __('Race (', true) . $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+            $run_5k = __('Race (', true) . $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
                 
             $duathlon_middle = __('Duathlon (', true) .
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run, ', true) . 
-              $this->convert_metric( '60', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run, ', true) . 
+              $this->convert_metric( '60', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
             $duathlon_short = __('Duathlon (', true) .
-              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . __(' run, ', true) . 
-              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . __(' bike, ', true) . 
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . __(' run)', true);
+              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run, ', true) . 
+              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
                 
             $bike_ultra = __('Races (> ', true) . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';
             $bike_long = __('Races (', true) . $this->convert_metric( '100', $convertunit, 0 ) . '-' . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';

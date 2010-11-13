@@ -108,7 +108,7 @@ if ( $searchfilter )
   echo $ofc->createflash('my_chart1','680','400',$jsonurl.'searchfilter:' . $searchfilter . '/type:' . $sportstype . '/start:' . $start . '/end:' . $end);
 } else
 {
-  echo "Sorry, no graph available - choose a testworkout please.";
+  __('Sorry, no graph available - choose a testworkout please.');
 
 }
 ?>

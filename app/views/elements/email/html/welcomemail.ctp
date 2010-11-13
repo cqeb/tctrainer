@@ -1,5 +1,7 @@
 
- <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00">
+<?php echo $this->element('email/newsletter_header'); ?>
+
+ <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00" width="100%">
     <tr>
        <td>
           <h2><?php __('Welcome'); ?> <?php echo $user['User']['firstname']; ?>,</h2>
@@ -13,4 +15,6 @@
                            
  <p><?php __('Login to your personal training dashboard.'); ?></p>
  <p><?php __('Yours, Clemens'); ?></p>
+ <br />
 
+<?php echo $this->element('email/newsletter_footer'); ?>

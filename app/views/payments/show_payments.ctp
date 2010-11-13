@@ -35,7 +35,7 @@
                         <td><?php echo $unitcalc->format_number($payment['Payment']['price'],2,'','.'); ?> <?php echo $payment['Payment']['currency']; ?></td>
                         <td><?php echo $unitcalc->check_date($payment['Payment']['payed_from']); ?> to <br /><?php echo $unitcalc->check_date($payment['Payment']['payed_to']); ?></td>
                         <td><?php echo $unitcalc->check_date($payment['Payment']['created']); ?></td>
-                        <?php /** <td>TODO - remove this option <?php echo $html->link('Delete', array('action' => 'delete', 'id' => $payment['Payment']['id']), null, 'Are you sure?' )?></td> **/ ?> 
+                        <?php /** <td><?php echo $html->link('Delete', array('action' => 'delete', 'id' => $payment['Payment']['id']), null, 'Are you sure?' )?></td> **/ ?> 
                    </tr>
                    <?php endforeach; ?>
                    </table>

@@ -49,7 +49,7 @@ class FilldatabaseComponent extends Object
             $sql = "INSERT INTO users VALUES (
             null, 'Klaus-M. " . $i . "', 'Prerovsky $i', '$gender', 
             'phone', 'address', 'zip', 'city', 'AT', 
-            'tri" . $i . "@schremser.com', '1', '1975-11-26', 'finger', 
+            'tri" . $i . "@schremser.com', '1', '1975-11-26', md5('finger'), 
             1, $randHR, " . $randHR*0.85 . ", 'youknowus', 
             1, 'philo', '$sport', 0, $weight,
             '', 1, '', $height, '1', 
