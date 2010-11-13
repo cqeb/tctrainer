@@ -39,12 +39,10 @@ echo $html->charset();
   <!-- Header -->
   <div class="container_12 header">
     <div class="grid_12 branding">
-		<a href="<?php echo Configure::read('App.serverUrl'); ?>">
+		  <a href="<?php echo Configure::read('App.serverUrl'); ?>">
 			<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining" title="TriCoreTraining" />
-		</a>
-		<div class="tools">
+		  </a>
         <?php echo $this->element('topprofile'); ?>
-      </div> 
     </div>
     <div class="grid_12 navigation">
       <?php if ( isset( $userobject ) ) echo $this->element('topnavigation_private'); else echo $this->element('topnavigation_public'); ?>

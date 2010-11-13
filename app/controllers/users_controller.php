@@ -563,7 +563,6 @@ class UsersController extends AppController {
 		$this->set('response', $response);
 	}
 	
-	
 	function check_email()
 	{
 		/**
@@ -587,7 +586,6 @@ class UsersController extends AppController {
 
 	function check_email_function($checkuseremail = "", $checkuserid = "", $autorender = false) 
 	{
-
 		//Configure::write('debug', 1);
 		//$this->render('check_email');
 		$usethisemail = "true";
@@ -756,6 +754,8 @@ class UsersController extends AppController {
 		$session_userid = $this->Session->read('session_userid');
     $this->User->id = $session_userid;
     
+    $countries = $this->Unitcalc->get_countries();
+    
 		if (empty($this->data))
 		{
 			$this->data = $this->User->read();
@@ -795,6 +795,7 @@ class UsersController extends AppController {
       	   $this->Session->setFlash(__('Some errors occured.',true));
       }
 		}
+    $this->set('countries', $countries);
 		$this->set('statusbox', $statusbox);
 	}
 
@@ -1341,12 +1342,6 @@ class UsersController extends AppController {
 		$this->Session->write('Config.language', $this->code);
 		$this->Session->setFlash(__('Language changed.',true));
 		$this->redirect(array('action'=>'index'));
-	}
-
-	function traininghours_calc()
-	{
-
-
 	}
 
 	function check_notifications()

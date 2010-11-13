@@ -35,25 +35,29 @@
     
     <?php echo $html->link(__('[X]',true), array('action' => 'delete', 'id' => $training['id']), null, __('Are you sure?',true) )?>
 
-    <a href="<?php echo $training['workout_link']; ?>" target="_blank"><?php __('[EXT]',true); ?></a>
-
 <?php 
+
 $facebookurl = "http://www.facebook.com/sharer.php?t=" .
 urlencode(__('My last training', true) . ' ') . $distance['amount'] . 
 urlencode(' ' . $distance['unit'] . ' ' . __('in',true) . ' ') . $duration . 
 urlencode(' ' . __('WOW',true)) . '&u=http://tricoretraining.com'; 
+
 ?>
-<a target="_blank" href="<?php echo $facebookurl; ?>">[F]</a>
+<!--<a target="_blank" href="<?php echo $facebookurl; ?>">[F]</a>-->
     
 <?php 
 $twitterurl = 
+urldecode(
 substr( 
-urlencode(
 __('My last training', true) . ' ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . 
 __('in',true) . ' ' . $duration . ' ' . __('WOW',true) . ' http://tricoretraining.com'
-  ), 0, 140 ); 
+, 0, 140 )
+); 
 ?>
-    <a target="_blank" href="http://www.twitter.com/?status=<?php echo $twitterurl; ?>">[T]</a>
+<!--    <a target="_blank" href="http://www.twitter.com/?status=<?php echo $twitterurl; ?>">[T]</a>-->
+
+    <?php if ( isset( $training['workout_link'] ) && $training['workout_link'] != '' ) { ?><a href="<?php echo $training['workout_link']; ?>" target="_blank"><?php __('[EXT]'); ?></a><?php } ?>
+
     </td>
 </tr>
 <?php endforeach; ?>

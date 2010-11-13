@@ -44,7 +44,7 @@ echo $form->input('name',
                   'maxLength' => 255,
                   'class' => 'required',
                   'error' => array(
-                      'notempty' => __('Enter a name for the training', true)
+                      'notempty' => __('Enter name for your workout', true)
                   ),
                   'label' => __('Name', true)
 ));
@@ -60,11 +60,11 @@ echo $form->input('sportstype',
                   'class' => 'required',
                   'options' => array(
                                  'RUN' => __('Run', true),
-                                 'BIKE' => __('Bike', true),
-                                 'SWIM' => __('Swim', true),
-                                 'BIKE' => __('Mountain-Bike', true),
-                                 'STRENGTH' => __('Strength', true),
-                                 'MISC' => __('Misc', true)
+                                 'BIKE' => __('Bike / Mountain-Bike', true),
+                                 'SWIM' => __('Swim', true)
+                                 //'BIKE' => __('Mountain-Bike', true),
+                                 //'STRENGTH' => __('Strength', true),
+                                 //'MISC' => __('Misc', true)
                                  )));
 
 echo $form->input('distance',
@@ -252,6 +252,13 @@ echo $form->input('weight',
      ),
      'label' => __('Weight', true) . ' (' . $unit['weight'] . ')'
 ));
+?>
+
+<a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a>
+<br />
+<a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a>
+
+<?php
 
 echo $form->input('workout_link',
      array(

@@ -62,11 +62,9 @@ $(document).ready(function() {
 	<div class="container_12 header">
 		<div class="grid_12 branding">
 			<a href="<?php echo Configure::read('App.serverUrl'); ?>">
-				<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining" title="TriCoreTraining" />
+				<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com" title="TriCoreTraining.com" />
 			</a>
-			<div class="tools">
-              <?php echo $this->element('topprofile'); ?>
-			</div> 
+      <?php echo $this->element('topprofile'); ?>
 		</div>
 		<div class="grid_12 navigation">
 			<?php echo $this->element('topnavigation_public'); ?>
@@ -80,8 +78,11 @@ $(document).ready(function() {
 			<!-- Content -->
 			<div class="box content" style="padding-bottom: 18px; height: 285px;">
 				<div id="signup">
-					<p></p><em>It's simple &amp; it's free</em></p>
-					<button onclick="$('#signup').fadeOut(); $('.teaserimages').fadeOut();"><img src="/trainer/img/signup.png" /></button>
+					<p></p>
+					<p>
+					<em><?php __('Gain speed, loose weight'); ?></em>
+					</p>
+					<!--button onclick="$('#signup').fadeOut(); $('.teaserimages').fadeOut();"--><button onClick="javascript:top.location.href='<?php echo Configure::read('App.serverUrl'); ?>/users/register/';"><img src="/trainer/img/signup.png" alt="<?php __('Register FREE!'); ?>"/></button>
 				</div>
 				<div class="teaserimages">
 					<img src="/trainer/img/start/start-1.jpg" alt="" />
@@ -96,36 +97,36 @@ $(document).ready(function() {
 		
 		<div class="grid_4">
 			<div class="box last">
-				<h1>Easier.</h1>
+				<h1><?php __('Easier.'); ?></h1>
 				<ul>
-					<li>Simple, solid training plans which are easy to understand</li>
-					<li>Straightforward training log</li>
-					<li>Fits your daily training needs</li>
-					<li>No fluff - just plain, simple plans</li>
+					<li><?php __('Simple, solid training plans which are easy to understand'); ?></li>
+					<li><?php __('Straightforward training log'); ?></li>
+					<li><?php __('Fits your daily training needs'); ?></li>
+					<li><?php __('No fluff - just plain, simple plans'); ?></li>
 				</ul>
 			</div>
 		</div>
 
 		<div class="grid_4">
 			<div class="box last">
-				<h1>Faster.</h1>
+				<h1><?php __('Faster.'); ?></h1>
 				<ul>
-					<li>Train smart instead of hammering endless miles</li>
-					<li>Even out your weaknesses</li>
-					<li>Focus on your strengths</li>
-					<li>On-the-fly training plans based on your fitness level and race goals</li>
+					<li><?php __('Train smart instead of hammering endless miles'); ?></li>
+					<li><?php __('Even out your weaknesses'); ?></li>
+					<li><?php __('Focus on your strengths'); ?></li>
+					<li><?php __('On-the-fly training plans based on your fitness level and race goals'); ?></li>
 				</ul>
 			</div>
 		</div>
 
 		<div class="grid_4">
 			<div class="box last">
-				<h1>Better.</h1>
+				<h1><?php __('Better.'); ?></h1>
 				<ul>
-					<li>Take your time to decide: free basic account</li>
-					<li>Quality-proven periodic training plans</li>
-					<li>Easy to understand, simple to execute</li>
-					<li>Crush the competition</li>
+					<li><?php __('Take your time to decide: free basic account'); ?></li>
+					<li><?php __('Quality-proven periodic training plans'); ?></li>
+					<li><?php __('Easy to understand, simple to execute'); ?></li>
+					<li><?php __('Crush the competition'); ?></li>
 				</ul>
 			</div>
 		</div>
@@ -141,7 +142,6 @@ $(document).ready(function() {
   <!-- Footer -->
   <?php echo $this->element('footer'); ?>
   <!-- /Footer -->
-
 
 </body>
 </html>

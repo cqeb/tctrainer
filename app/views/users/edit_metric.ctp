@@ -37,8 +37,6 @@ echo $form->input('unitdate', array(
                      'yyyymmdd' => __('YYYY-MM-DD', true)
            )));
 
-echo "// TODO maybe this should only be set via language-switcher <br />";
-
 echo $form->input('yourlanguage', array(
            'before' => '',
            'after' => '',

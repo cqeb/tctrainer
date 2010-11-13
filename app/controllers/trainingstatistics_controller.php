@@ -19,12 +19,12 @@ class TrainingstatisticsController extends AppController {
    {
             parent::beforeFilter();
             $this->layout = 'default_trainer_2rows';
-            $this->checkSession();
    }
 
    // list all trainings
    function list_trainings()
    {
+            $this->checkSession();
             $this->layout = 'default_trainer';
             $statusbox = 'statusbox';
             $session_userid = $this->Session->read('session_userid');
@@ -42,17 +42,16 @@ class TrainingstatisticsController extends AppController {
    function edit_training($id = null)
    {
             $this->layout = 'default_trainer';
-
             $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
             $statusbox = '';
+
             $session_userid = $this->Session->read('session_userid');
             $results['User'] = $this->Session->read('userobject');
-
+            
             if ( empty($this->data) )
             {
                      $statusbox = 'statusbox';
-
                      // security check - don't view workouts of other users
                      if ( $id )
                      {
@@ -81,8 +80,10 @@ class TrainingstatisticsController extends AppController {
                           $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
                           $this->data['Trainingstatistic']['distance'] = $distance['amount'];
                      }
+                     
             } else
             {
+            
                      $statusbox = 'statusbox';
 
                      // check for metric / unit
@@ -139,21 +140,12 @@ class TrainingstatisticsController extends AppController {
                            Women: C/min = (-20.4022 + 0.4472 x HR + 0.1263 x weight + 0.074 x age) / 4.184
                         weight is in kg
                         */
-                        //echo "duration " . $this->data['Trainingstatistic']['duration']/60 . "<br>";
-                        //echo "avg HR " . $this->data['Trainingstatistic']['avg_pulse'] . "<br>";
-                        //echo $results['User']['weight'] . "<br>";
-                        //echo $this->Unitcalc->how_old($results['User']['birthday']) . "<br>";
-                        //echo $this->data['Trainingstatistic']['trimp'] . "<br>";
-                        //echo $this->data['Trainingstatistic']['avg_speed'] . "<br>";
-                        //echo $this->data['Trainingstatistic']['kcal'] . "<br>";
                      }
  
                      $this->data['Trainingstatistic']['user_id'] = $session_userid;
 
                      if ($this->Trainingstatistic->save( $this->data, array('validate' => true)))
                      {
-                          //pr($this->data);
-                          //die();
                           $this->Session->setFlash('Training saved.');
                           $this->set('statusbox', $statusbox);
                           //$this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
@@ -161,7 +153,6 @@ class TrainingstatisticsController extends AppController {
                      {
                           $statusbox = 'errorbox';
                           $this->Session->setFlash(__('Some errors occured',true));
-                          //$this->set('statusbox', $statusbox);
                      }
 
                      if ( isset( $this->data['Trainingstatistic']['duration'] ) )
@@ -174,7 +165,7 @@ class TrainingstatisticsController extends AppController {
                      }
             }
 
-            $this->set("unit", $unit);
+            $this->set('unit', $unit);
             $this->set('UserID', $this->User->id);
             $this->set('statusbox', $statusbox);
             $this->set('data', $this->data['Trainingstatistic']);
@@ -183,6 +174,7 @@ class TrainingstatisticsController extends AppController {
    // how fit am I?
    function statistics_trimp()
    {
+            $this->checkSession();
             $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
             $statusbox = '';
@@ -225,6 +217,7 @@ class TrainingstatisticsController extends AppController {
    // JSON for "how fit am I"
    function statistics_trimp_json()
    {
+            $this->checkSession();
             $this->layout = "ajaxrequests";
        	    $this->RequestHandler->setContent('js', null);
             Configure::write('debug', 1);
@@ -374,6 +367,7 @@ class TrainingstatisticsController extends AppController {
    // How fast am I?
    function statistics_formcurve()
    {
+            $this->checkSession();
             $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
             $statusbox = '';
@@ -425,6 +419,8 @@ class TrainingstatisticsController extends AppController {
    // json for graph
    function statistics_formcurve_json()
    {
+            $this->checkSession();
+     
             $this->layout = "ajaxrequests";
        	    $this->RequestHandler->setContent('js', null);
             Configure::write('debug', 1);
@@ -522,7 +518,6 @@ class TrainingstatisticsController extends AppController {
                   $newdate2 = $newdate[0];
                   // date, distance, duration, avg_pulse
                   $traindate2[$newdate2] = $dt;
-
             }
 
             $initiator = 0;
@@ -555,6 +550,8 @@ class TrainingstatisticsController extends AppController {
 
    function statistics_competition()
    {
+            $this->checkSession();
+
             $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
             $statusbox = '';
@@ -707,6 +704,8 @@ class TrainingstatisticsController extends AppController {
 
    function statistics_whathaveidone()
    {
+            $this->checkSession();
+
             if ( $this->data['Trainingstatistic']['sportstype'] ) 
                 $post_sportstype = $this->data['Trainingstatistic']['sportstype'];
             else 
@@ -788,6 +787,8 @@ class TrainingstatisticsController extends AppController {
 
    function statistics_whathaveidone_json()
    {
+            $this->checkSession();
+
             /**
             http://stuartmultisport.com/TrImp.aspx
             **/
@@ -892,6 +893,8 @@ class TrainingstatisticsController extends AppController {
 
    function delete($id)
    {
+            $this->checkSession();
+
             $this->Trainingstatistic->delete($id);
             $this->Session->setFlash(__('Workout deleted.',true));
             $this->redirect(array('action'=>'list_trainings'));

@@ -65,12 +65,7 @@ echo $form->input('medicallimitations',
                   )
 ));
 
-?>
-
-<br />
-<!--<?php echo $html->link(__('Training hours information',true), array('action' => 'traininghours_calc'),array('rel' => 'facebox[.bolder]'),null); ?>-->
-
-<?php
+?><br /><?php
 
 echo $form->input('weeklyhours',
      array(

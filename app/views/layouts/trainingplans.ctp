@@ -42,9 +42,7 @@ echo $html->charset();
 			<a href="<?php echo Configure::read('App.serverUrl'); ?>">
 				<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining" title="TriCoreTraining" />
 			</a>
-			<div class="tools">
-               <?php echo $this->element('topprofile'); ?>
-			</div> 
+      <?php echo $this->element('topprofile'); ?>
 		</div>
 		<div class="grid_12 navigation">
       <?php if ( isset( $userobject ) ) echo $this->element('topnavigation_private'); else echo $this->element('topnavigation_public'); ?>

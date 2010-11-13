@@ -1,8 +1,7 @@
 <?php
 
 /**
-converts, calculates, etc
-
+* converts, calculates, etc
 **/
 
 class UnitcalcComponent extends Object {
@@ -10,7 +9,7 @@ class UnitcalcComponent extends Object {
    var $helpers = array('Session');
 
    /**
-   converts from different metrics to another
+   * converts from different metrics to another
    **/
    function convert_metric( $amount, $convertunit, $roundnumber = 3, $commasep = '.' )
    {
@@ -708,6 +707,67 @@ class UnitcalcComponent extends Object {
             
             return $sports; 
    }
+
+   function get_countries()
+   {
+              $countries = array(
+                    'D' => __('Germany', true),
+                    'AT' => __('Austria', true),
+                    'AU' => __('Australia', true),
+                    'CA' => __('Canada', true),
+                    'F' => __('France', true),
+                    'GB' => __('United Kingdom', true),
+                    'US' => __('United States of America', true),
+                    '' => '--------------',
+                    'AD' => __('Andorry', true),
+                    'AR' => __('Argentina', true),
+                    'BE' => __('Belgium', true),
+                    'BA' => __('Bosnia', true),
+                    'BR' => __('Brazil', true),
+                    'BG' => __('Bulgaria', true),
+                    'CN' => __('China', true),
+                    'HR' => __('Croatia', true),
+                    'CY' => __('Cyprus', true),
+                    'CZ' => __('Czech Republic', true),
+                    'DK' => __('Denmark', true),
+                    'EE' => __('Estonia', true),
+                    'FI' => __('Finland', true),
+                    'GR' => __('Greece', true),
+                    'GCA' => __('Guatemala', true),
+                    'HK' => __('Hong Kong', true),
+                    'HU' => __('Hungary', true),
+                    'IN' => __('India', true),
+                    'IE' => __('Ireland', true),
+                    'IL' => __('Israel', true),
+                    'IT' => __('Italy', true),
+                    'JP' => __('Japan', true),
+                    'ADN' => __('Jemen', true),
+                    'LV' => __('Latvia', true),
+                    'LI' => __('Liechtenstein', true),
+                    'LT' => __('Lithuania', true),
+                    'LU' => __('Luxembourg', true),
+                    'MT' => __('Malta', true),
+                    'NL' => __('Netherlands', true),
+                    'NZ' => __('New Zealand', true),
+                    'NO' => __('Norway', true),
+                    'PE' => __('Peru', true),
+                    'PL' => __('Poland', true),
+                    'PT' => __('Portugal', true),
+                    'RU' => __('Russian Federation', true),
+                    'RO' => __('Romania', true),
+                    'SK' => __('Slovakia', true),
+                    'SI' => __('Slovenia', true),
+                    'CH' => __('Switzerland', true),
+                    'ZA' => __('South Africa', true),
+                    'ES' => __('Spain', true),
+                    'SE' => __('Sweden', true),
+                    'TW' => __('Taiwan', true),
+                    'TR' => __('Turkey', true),
+                    'UA' => __('Ukraine', true),
+                    'OTH' => __('Other', true)
+              );
+        return $countries;
+    }
 
 }
 
