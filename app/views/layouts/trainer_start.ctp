@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
     <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-<?php 
+<?php
 $url = Configure::read('App.serverUrl');
-echo $html->charset(); 
+echo $html->charset();
 ?>
+    <?php 
+    /**
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    */
+    ?>
     <?php echo $html->meta('icon'); ?>
 
     <?php echo $this->element('metanavigation'); ?>
 
-    <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="#" />
 
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
@@ -21,7 +25,7 @@ echo $html->charset();
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
-                
+
     <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-1.3.2.min.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
     <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
@@ -31,7 +35,6 @@ echo $html->charset();
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
 
-<!-- take a deeper look at the helpers -->
 <?php echo $scripts_for_layout; ?>
 
 <script type="text/javascript">

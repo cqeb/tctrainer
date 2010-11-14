@@ -41,6 +41,7 @@ class TrainingstatisticsController extends AppController {
 
    function edit_training($id = null)
    {
+            $this->checkSession();
             $this->layout = 'default_trainer';
             $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
@@ -80,10 +81,8 @@ class TrainingstatisticsController extends AppController {
                           $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
                           $this->data['Trainingstatistic']['distance'] = $distance['amount'];
                      }
-                     
             } else
             {
-            
                      $statusbox = 'statusbox';
 
                      // check for metric / unit
@@ -144,11 +143,12 @@ class TrainingstatisticsController extends AppController {
  
                      $this->data['Trainingstatistic']['user_id'] = $session_userid;
 
+                     // save workout for user 
                      if ($this->Trainingstatistic->save( $this->data, array('validate' => true)))
                      {
                           $this->Session->setFlash('Training saved.');
                           $this->set('statusbox', $statusbox);
-                          //$this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+                          $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
                      } else
                      {
                           $statusbox = 'errorbox';

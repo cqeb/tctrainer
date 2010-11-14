@@ -583,4 +583,10 @@ a.reset:hover {
 	color: #666;
 	text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
- 
+
+#sidebar ul {
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  margin-left:-30px;
+} 
