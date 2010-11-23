@@ -10,11 +10,11 @@
      <div class="clear"></div>
 
      <div id="messagebox">
-     <h3>Magazine</h3>
+     <h3><?php __('Magazine'); ?></h3>
      <ul>
-     <li>News</li>
-     <li>News</li>
-     <li>Features</li>
+       <li>News</li>
+       <li>News</li>
+       <li>Features</li>
      </ul>
      </div>
 
@@ -22,8 +22,8 @@
 
      <div id="messagebox">
      <h3><?php __('Referrals'); ?></h3>
-     <img src="http://t3.gstatic.com/images?q=tbn:wDvvTFCkekkEmM:http://www.life-donau-ybbs.at/Downloads/20_juni_2007/Fotos/Redner%202007%2006%2020/Bild5_LFMStv_Schremser.JPG" alt="" />
      SUPA Triathlontrainer - so hab ich meinen ersten Ironman geschafft!
+     <img src="" alt="" />
      <div class="clear"></div>
      </div>
 

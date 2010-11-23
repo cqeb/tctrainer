@@ -16,6 +16,8 @@
 
       table.main {
          background-color: #ffffff;
+         font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
+         font-size: 12px;
       }
 
       td.permission {
@@ -171,6 +173,59 @@
          font-size: 11px;
          font-weight: normal;
          color: #6cb9ce;
+      }
+
+      /**
+       * Tables
+       */
+      
+      td.tab, th.tab {
+        padding: 7px;
+      }
+      
+      tr.tab:nth-child(odd) { 
+        background: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0, #efefef),
+            color-stop(1, rgb(255,255,255))
+        );
+        background: -moz-linear-gradient(
+            center bottom,
+            #efefef 0%,
+            rgb(255,255,255) 100%
+        );
+      }
+      
+      tr.tab {
+        border-bottom: 1px dotted #ccc;
+      }
+      
+      th.tab {
+        padding: 10px 7px;
+        border: 1px solid #ccc;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+        border-radius: 2px;
+        background: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(0, #efefef),
+            color-stop(1, rgb(255,255,255))
+        );
+        background: -moz-linear-gradient(
+            center bottom,
+            #efefef 0%,
+            rgb(255,255,255) 100%
+        );
+        
+        text-shadow: 1px 1px 1px white;
+      }
+      
+      td.nobg {
+        background: white;
       }
 
    </style>

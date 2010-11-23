@@ -52,7 +52,8 @@ if ( $error == 'address' )
 <div class="errorbox">
 <?php 
 
-__('Sorry, but we miss your address which we need for your invoice. Please be kind and add it now.'); 
+__('Sorry, but we miss your address which we need for your invoice. Please be kind and add it now.');
+echo " "; 
 
 echo $html->link(__('Add address',true),array('controller' => 'users', 'action' => 'edit_userinfo', 'id' => $session_userid));
 

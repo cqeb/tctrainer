@@ -98,6 +98,8 @@ class PaymentsController extends AppController {
             $tid = '';
 
             $results['User'] = $this->Session->read('userobject');
+            pr($results['User']);
+            pr($this->Session->read('userobject'));
             $session_userid = $results['User']['id'];
 
             // debugging paypal
@@ -292,7 +294,6 @@ class PaymentsController extends AppController {
                                               $this->User->savefield('payed_to', $transactions['pay_payed_new_to'], false);
                                               $this->User->savefield('level', 'paymember', false);
 
-                                              // TODO - not finished - add username + address + TCT address 
                                               $this->_sendInvoice($transactions, 'invoice');
 
                                               $this->Session->setFlash(__('Received notification', true) . '. ' . __('Invoice sent', true) . '. ' . __('Thank you', true) . '.');
@@ -434,6 +435,7 @@ class PaymentsController extends AppController {
             $this->set('payed_to', $this->Unitcalc->check_date($pay['pay_payed_to']));
             $this->set('payed_new_from', $this->Unitcalc->check_date($pay['pay_payed_new_from']));
             $this->set('payed_new_to', $this->Unitcalc->check_date($pay['pay_payed_new_to']));
+            $this->set('userobject', $this->Session->read('userobject'));
 
             $this->Email->to = $User['User']['email'];
 
@@ -445,7 +447,6 @@ class PaymentsController extends AppController {
             $this->Email->replyTo = Configure::read('App.mailFrom');
             $this->Email->from = Configure::read('App.mailFrom');
 
-            // TODO translate
             if ( $mailtype == 'invoice' )
                     $this->Email->template = 'invoicemail'; // note no '.ctp'
             else

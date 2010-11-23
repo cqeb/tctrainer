@@ -118,7 +118,7 @@
 </tbody>
 </table>
 
-<img alt="<?php __('PAYPAL - secure payment solutions'); ?>" src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_paypal_114.gif" />
+<img alt="<?php __('PAYPAL - secure payment solutions'); ?>" src="<?php echo Configure::read('App.serverUrl'); ?>/img/paypal_logo.gif" />
 
 <?php __('What is PAYPAL? It is a reputable and well-known payment solution provider (owned by e-Bay) and provides creditcard payment
 solutions for websites. You send your necessary confidential payment information via a secure connection (128-bit encrypted SSL-connection)

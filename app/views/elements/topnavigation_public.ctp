@@ -9,7 +9,7 @@
 		<a href="#"><?php __('Features'); ?></a>
 	</li>
   <li>
-    <a href="#"><?php __('Magazine'); ?></a>
+    <a href="/blog/<?php if ( $locale == 'ger' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a>
   </li>
 	<li>
 	<a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img alt="TriCoreTraining.com Facebook Page" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" /></a>

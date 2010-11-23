@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
 <?php
@@ -120,7 +120,7 @@ echo $html->charset();
 	
 	<script type="text/javascript">
 	try {
-	var pageTracker = _gat._getTracker("UA-66985-6");
+	var pageTracker = _gat._getTracker("UA-15268905-1");
 	pageTracker._trackPageview();
 	} catch(err) {}
 

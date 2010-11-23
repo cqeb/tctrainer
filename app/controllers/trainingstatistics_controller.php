@@ -195,6 +195,8 @@ class TrainingstatisticsController extends AppController {
                $end = date( 'Y-m-d', time() );
                $this->data['Trainingstatistic']['fromdate'] = $start;
                $this->data['Trainingstatistic']['todate'] = $end;
+               $statusbox = 'okbox';
+               $message = __('ddddddddddddd', true);
             } else
             {
                $start = $this->data['Trainingstatistic']['fromdate'];

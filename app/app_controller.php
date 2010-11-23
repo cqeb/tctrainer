@@ -131,7 +131,7 @@ class AppController extends Controller {
                 		    // check to make sure it's correct
                 		    $this->loadModel('User');
                 		    $results = $this->User->findByEmail( $session_useremail );
-                
+                        //print_r($results); echo "test";                        
                 		    // if not correct, send to login page
                         if ( !$results || $results['User']['id'] != $session_userid )
                         {
@@ -146,7 +146,6 @@ class AppController extends Controller {
                         $this->Session->write('session_userid', $results['User']['id']);
                         $this->Session->write('session_useremail', $results['User']['email']);
                         $this->Session->write('userobject', $results['User']);
-
                         $this->set('userobject', $results['User']);
 
 	          }

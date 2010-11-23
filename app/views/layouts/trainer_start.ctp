@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
 <?php
@@ -145,6 +145,18 @@ $(document).ready(function() {
   <!-- Footer -->
   <?php echo $this->element('footer'); ?>
   <!-- /Footer -->
+  <script type="text/javascript">
+  var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+  document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  
+  <script type="text/javascript">
+  try {
+  var pageTracker = _gat._getTracker("UA-15268905-1");
+  pageTracker._trackPageview();
+  } catch(err) {}
+
+  </script>
 
 </body>
 </html>

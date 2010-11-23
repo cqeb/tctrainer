@@ -6,12 +6,12 @@ if ( $graphtype == 'chronic' )
 {
        $gtitle = 'CTL';
        $day_back = 45;
-       $step = 5000;
+       $step = round( $max_unit / 10 );
 } elseif ( $graphtype == 'acute' )
 {
        $gtitle = 'ATL';
        $day_back = 7;
-       $step = 2000;
+       $step = round( $max_unit / 10 );
 }
 ?>
 {

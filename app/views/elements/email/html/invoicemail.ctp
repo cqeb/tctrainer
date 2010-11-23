@@ -12,9 +12,19 @@
  <p><i><?php __('thanks for your trust in TriCoreTraining.com.'); ?></i></p>
 
 <p>
-<div style="margin: 0px;" class="block" id="tables">
 
-<table summary="TriCoreTraining.com <?php __('Invoice'); ?>">
+<!--<div style="margin: 0px;" class="block" id="tables">-->
+
+<b>TriCoreTraining - <?php __('Association'); ?></b><br />
+Gonzagagasse 11/25<br />
+A-1010 <?php __('Vienna, Austria'); ?>
+<br /><br />
+<b><?php echo $userobject['firstname'] . ' ' . $userobject['lastname']; ?></b><br />
+<?php echo $userobject['address']; ?><br />
+<?php echo $userobject['zip'] . '-' . $userobject['city'] . ', ' . $userobject['country']; ?>
+<br /><br />
+
+<table class="main" summary="TriCoreTraining.com <?php __('Invoice'); ?>">
 <caption>TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?></caption>
 <colgroup>
           <col class="colA">
@@ -22,26 +32,26 @@
           <col class="colC">
 </colgroup>
 <thead>
-<tr>
+<tr class="tab">
     <th colspan="3" class="table-head">TriCoreTraining-<?php __('plan'); ?></th>
 </tr>
-<tr>
-    <th><?php __('Product'); ?></th>
-    <th><?php __('Interval'); ?></th>
+<tr class="tab">
+    <th class="tab"><?php __('Product'); ?></th>
+    <th class="tab"><?php __('Interval'); ?></th>
     <th class="currency"><?php __('Price'); ?></th>
 </tr>
 </thead>
 <tfoot>
 <tr class="total">
-    <th><?php __('Total'); ?></th>
-    <td></td>
+    <th class="tab"><?php __('Total'); ?></th>
+    <td class="tab"></td>
     <th class="currency"><?php echo $currency . ' ' . $price; ?></th>
 </tr>
 </tfoot>
 <tbody>
 <tr class="odd">
-    <th><?php __('Trainingplan'); ?></th>
-    <td><?php echo $timeinterval; ?> <?php __('month(s)'); ?></td>
+    <th class="tab"><?php __('Trainingplan'); ?></th>
+    <td class="tab"><?php echo $timeinterval; ?> <?php __('month(s)'); ?></td>
     <td class="currency"><?php echo $currency . ' ' . $price; ?></td>
 </tr>
 </tbody>
@@ -51,9 +61,10 @@
 <?php __('New period:'); ?> <?php echo $payed_new_from; ?> <?php __('to'); ?> <?php echo $payed_new_to; ?><br />
 </p>
  
- <!--<p class="more"><?php __('Please'); ?> <a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/<?php echo $transaction_id?>"><?php __('Continue to train.'); ?></a></p>-->
+<!--<p class="more"><?php __('Please'); ?> <a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/<?php echo $transaction_id?>"><?php __('Continue to train.'); ?></a></p>-->
 
- <p><?php __('Yours, Clemens'); ?></p>
- <br />
+<p><?php __('No VAT included, because as an association we are not allowed to charge VAT!'); ?></p>
+<p><?php __('Yours, Clemens'); ?></p>
+<br />
 
 <?php echo $this->element('email/newsletter_footer'); ?>

@@ -23,7 +23,7 @@ else $trainingstatistics_class = 'main';
     <?php echo $html->link(__('Logbook',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'), array('class' => $trainingstatistics_class))?>
   </li>
 	<li>
-		<a class="<?php echo $magazine_class; ?>" href="#"><?php __('Magazine'); ?></a>
+		<a class="<?php echo $magazine_class; ?>" href="/blog/<?php if ( $locale == 'ger' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a>
 	</li>
   <li>
   <a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img alt="TriCoreTraining.com Facebook Page" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" /></a>

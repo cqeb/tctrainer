@@ -69,7 +69,16 @@ echo $form->textarea('mytrainingsphilosophy',
            'rows' => '10',
            'cols' => '45'
            ));
-
+?>
+<br /><br />
+<?php echo __('What I think about TriCoreTraining?'); ?>
+<br />
+<?php 
+echo $form->textarea('myrecommendation',
+     array(
+           'rows' => '10',
+           'cols' => '45'
+           ));
 
 /** not finished **/
 
