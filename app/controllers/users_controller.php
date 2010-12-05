@@ -293,9 +293,9 @@ class UsersController extends AppController {
       $this->data['User']['dayofheaviesttraining'] = 'FRI';
 
       // yet not implemented
-      $this->data['User']['coldestmonth'] = $this->UnitCalc->coldestmonth_for_country('DE');
-      $this->data['User']['unit'] = $this->UnitCalc->unit_for_country('DE', 'unit');
-      $this->data['User']['unitdate'] = $this->UnitCalc->unit_for_country('DE', 'unitdate');;
+      $this->data['User']['coldestmonth'] = $this->Unitcalc->coldestmonth_for_country('DE');
+      $this->data['User']['unit'] = $this->Unitcalc->unit_for_country('DE', 'unit');
+      $this->data['User']['unitdate'] = $this->Unitcalc->unit_for_country('DE', 'unitdate');;
       $this->data['User']['yourlanguage'] = $this->Session->read('session_userlanguage');
 
       $this->data['User']['passwordcheck'] = "1";
@@ -672,7 +672,7 @@ class UsersController extends AppController {
           $error_msg = '<div class="ok-message">';
           $error_msg .= __('GREAT! E-Mail is not registered!', true);
           $error_msg .= '</div>';
-          
+
 					$this->set("emailcheck", $error_msg);
 				} else
 				{
@@ -1344,20 +1344,34 @@ class UsersController extends AppController {
 		$this->redirect(array('action'=>'index'));
 	}
 
+/**
+    go through all users (even not activated once) and send notifications
+    or make modifications
+    * tracked workouts for last 10 days?
+    * strange userdata --> notify admin --> or delete
+    * script which changes users back to free member
+    * check each day if member has subscribed, then change to freemember after validationperiod
+**/
+
 	function check_notifications()
 	{
-		$sql = "SELECT id, email, lastname, firstname, yourlanguage, level, payed_to FROM users WHERE deactivated = 0 and activated = 1";
+	  
+		$sql = "SELECT * FROM users";
+    // WHERE deactivated = 0 and activated = 1";
 		$results = $this->User->query($sql);
-		//print_r($results);
 
-		// check trainings
 		for ( $i = 0; $i < count( $results ); $i++ )
 		{
 			$user = $results[$i]['users'];
-			// maybe more efficient if you query by AND user_id IN ( ... )
-			// check last training - if older than 10 days - reminder!
-			$this->check_lasttraining( $user );
 
+      echo $user['firstname'] . ' ' . $user['lastname'] . '<br /><br />';
+      
+			// check last training - if older than 10 days - reminder!
+			if ( $user['deactivated'] == 0 && $user['activated'] == 1 ) 
+			         $this->_check_lasttraining( $user );
+      $this->_check_more( $user );
+      
+      // 
 			if ( $user['level'] == 'freemember' )
 			{
 				// if freemember remind him/her of premiumservice
@@ -1373,8 +1387,13 @@ class UsersController extends AppController {
 		}
 	}
 
-	function check_lasttraining( $user )
+  /**
+   * when did user last perform a workout?
+   */
+	function _check_lasttraining( $user )
 	{
+	  $last_workout_limit = 10; // 10 days 
+	  
 		$userid = $user['id'];
 		$this->loadModel('Trainingstatistic');
 
@@ -1382,59 +1401,192 @@ class UsersController extends AppController {
 		$results = $this->Trainingstatistic->query($sql);
 
 		$last_training = strtotime($results[0][0]['ldate']);
-		$diff_time = time() - ( 86400 * 10 );
+		$diff_time = time() - ( 86400 * $last_workout_limit );
 
 		if ( $diff_time > $last_training )
 		{
 			$mailsubject = __('TCT Training reminder', true);
-			$mailtemplate = 'trainingreminder_' . $user['yourlanguage'];
+			$mailtemplate = 'trainingreminder'; // '_' . $user['yourlanguage'];
 			$this->_sendMail( $user, $mailsubject, $mailtemplate );
 		}
 	}
 
-	function check_unfinished_userprofiles()
+	function _check_more( $userprofile )
 	{
+      $u = $userprofile;
+      $text_for_mail = "";
+      $wrong_attributes = "";
+      // check if profile is complete from technical point of view
+      $check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
+      'password', 'passwordcheck', 'lactatethreshold', 'typeofsport',
+      'coldestmonth', 'unit', 'unitdate', 'weeklyhours',
+      'dayofheaviesttraining', 'yourlanguage', 'level' );
+      foreach ( $check_attributes as $key => $value )
+      {
+            if ( $u[$value] == '' ) $wrong_attributes .= $value . ', ';
+      }
+      if ( $wrong_attributes != '' ) 
+      {
+            $u['email'] = 'support@tricoretraining.com';
+            $mailsubject = 'funky TCT user - check plz';
+            //$mailtemplate = '???';
+            
+            //$this->_sendMail( $u, $mailsubject, $mailtemplate, $wrong_attributes );
+      }    
 
-		/**
-		 firstname
-		 lastname
-		 gender
-		 phonemobile
-		 address
-		 zip
-		 city
-		 country
-		 birthday
-		 maximumheartrate
-		 lactatethreshold
-		 youknowus
-		 height
-		 weight
-		 coldestmonth
-		 unit
-		 unitdate
-		 weeklyhours
-		 dayofheaviesttraining
-		 yourlanguage
-		 myimage
-		 mybike
-		 **/
+      // check name + address
+      if ( !$u['firstname'] ) $text_for_mail .= __('Your firstname is missing! Please add it to your profile.', true);
+      $text_for_mail .= '<br />';
+      if ( !$u['lastname'] ) $text_for_mail .= __('Your lastname is missing! Please add it to your profile.', true);
+      $text_for_mail .= '<br />';
+      if ( $u['level'] == 'premiummember' && !$u['address'] ) $text_for_mail .= __('Your address is missing! Please add it to your profile.', true);
+      $text_for_mail .= '<br />';
+      if ( $u['level'] == 'premiummember' && !$u['zip'] ) $text_for_mail .= __('Your zip is missing! Please add it to your profile.', true);
+      $text_for_mail .= '<br />';
+      if ( $u['level'] == 'premiummember' && !$u['city'] ) $text_for_mail .= __('Your city is missing! Please add it to your profile.', true);
+      $text_for_mail .= '<br />';
+      if ( $u['level'] == 'premiummember' && !$u['country'] ) $text_for_mail .= __('Your country is missing! Please add it to your profile.', true);
+      $text_for_mail .= '<br />';
+      
+      
+      // check birthday
+      if ( !$u['birthday'] ) $text_for_mail .= __('Your country is missing! Please add it to your profile.', true);
+      $text_for_mail .= '<br />';
+      
+      // check lactatethreshold
+      if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) $nothing = "";
+      else {
+          $text_for_mail .= __('Your lactate threshold must be between 100 and 180. Please correct it [LINK].', true);
+          $text_for_mail .= '<br />';
+      }
+      
+      // check for recommendations
+/**
+      if ( !$u['recommendation'] )
+      { 
+          $text_for_mail .= __('Please recommend our service! Get a free trainingmonth. [LINK].', true);
+          $text_for_mail .= '<br />';
+      }
+**/
+      
+      // check for medical limitations
+      if ( $u['medicallimitations'] == '1')
+      { 
+          $text_for_mail .= __('Your medical conditions are not good enough for trainingworkouts. .....', true);
+          $text_for_mail .= '<br />';
+      }
+      
+      // check for target weight
+      if ( $u['targetweight'] && $u['targetweightdate'] )
+      {
+          $nowts = time();
+          $futurets = strtotime( $u['targetweightdate'] );
+          $diff_weight = $u['targetweight'] - $u['weight'];
+          
+          $divisor = $futurets / 86400 / 30;
+          $weight_per_month = $diff_weight / $divisor;
+          
+          if ( $weight_per_month > 2 ) 
+          {
+              $text_for_mail .= __('Your weight-loss must be', true) . ' ' . round( $this->Unitcalc->checkweight($weight_per_month), 1 ) .
+                    ' ' . __('kg/lbs. to reach your weight-target - that\'s not healty - set a new weight target', true) . ' [LINK]<br />';
+          } 
+      }
+    
+      if ( $u['weeklyhours'] ) 
+      {
+          // check per sport how many hours an user should train
+          // TODO
+          $text_for_mail .= __('You train', true) . ' ' . $u['weeklyhours'] . ' ' . __('hours per week. Great!', true);
+          $text_for_mail .= '<br />';
+      }
 
-		/**
-		 $sql = "SELECT * FROM users WHERE email = '" . $checkuseremail . "' AND id != '" . $checkuserid . "'";
-		 $User_entries = $this->User->query( $sql );
+      if ( ( strtotime( $u['created'] ) > ( time() + 86400*30*9 ) ) && $u['rookie'] == '1' )
+      {
+          $text_for_mail .= __('You told TCT that you\'re a rookie. Since you\'re working with TCT since more than 9 months, maybe you tell our system that you aren\'t a rookie any more', true);
+          $text_for_mail .= '<br />'; 
+      }   
 
-		 // email exists
-		 if ( is_array( $User_entries ) && count( $User_entries ) > 0 )
-		 {
-		 $User_entries['User'] = $User_entries[0]['users'];
-		 if ( $User_entries['User']['email'] == "" ) $usethisemail = "true";
-		 else $usethisemail = "false";
-		 }
-		 **/
+      if ( ( strtotime( $u['created'] ) > ( time() + 86400*5 ) ) && $u['activated'] != '1' )
+      {
+          $text_for_mail .= __('Your account is not activated yet. Please use your activation mail to activate your account. Thanks.', true);
+          $text_for_mail .= '<br />'; 
+      }   
+
+      if ( strtotime( $u['payed_to'] ) < time() && $u['level'] != 'freemember' )
+      {
+          // set level == premiummember
+          // TODO        
+          $text_for_mail .= __('Your pay time is over. From now on you do not get any training schedules any more. Please pay.', true);
+          $text_for_mail .= '<br />'; 
+      }
+
+      if ( $text_for_mail )
+      {
+          $mailsubject = __('TCT informs you.', true);
+          $template = 'reminder';
+          $content = $text_for_mail;
+          
+          //$this->_sendMail($u, $mailsubject, $template, $content = '')
+          echo '<hr />';
+          echo $content;
+          echo '<hr />';
+      } 
+      
+/**
+ * id  
+ ** firstname            // check for given name + address (1)   
+ ** lastname  
+ ** gender  
+ * phonemobile   
+ * address   
+ * zip   
+ * city  
+ * country   
+ ** email   
+ ** emailcheck  
+ ** birthday             // check for given birthday (2) 
+ ** password  
+ ** passwordcheck   
+ * maximumheartrate  
+ ** lactatethreshold     // check for lactatethreshold (3)  
+ * youknowus   
+ * newsletter  
+ * mytrainingsphilosophy   
+ * myrecommendation     // PRIO B check for recommendation (4)
+ ** typeofsport   
+ * medicallimitations   // check for medical limitations (5) 
+ * weight               // check for target weight 
+ * targetweight  
+ * targetweightcheck   
+ * targetweightdate  
+ * height  
+ ** coldestmonth  
+ ** unit  
+ ** unitdate  
+ * publicprofile   
+ * publictrainings   
+ * rookie               // check for rookie (how long been)? (6) 
+ * traininglevel   
+ ** weeklyhours          // enough for sport? (7) 
+ ** dayofheaviesttraining   
+ * activated           // still not activated (7a)    
+ * deactivated          // do not check   
+ ** yourlanguage  
+ * myimage   
+ * mybike  
+ ** level                // free? take advantage from our great premium services?
+ * payed_from  
+ * payed_to              // if payed_to is reached - set level to freemember (8) 
+ * canceled               
+ * cancelation_reason  
+ * created   
+ * modified
+**/
+  
 	}
 
-	function _sendMail($user, $subject, $template)
+	function _sendMail($user, $subject, $template, $content = '')
 	{
 		$this->Email->to = $user['email'];
 		$this->Email->replyTo = Configure::read('App.mailFrom');
@@ -1443,9 +1595,9 @@ class UsersController extends AppController {
 
 		//Set view variables as normal
 		$this->set('user', $user);
+    $this->set('content', $content);
 
-		echo $template;
-
+		//echo $template;
 		$this->Email->template = $template; // note no '.ctp'
 
 		//Send as 'html', 'text' or 'both' (default is 'text')
