@@ -22,6 +22,7 @@
 		    <li><?php echo $html->link(__('How fit am I? (TRIMP)',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_trimp'))?></li>
 		    <li><?php echo $html->link(__('How fast am I? (Formcurve)',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_formcurve'))?></li>
 		    <li><?php echo $html->link(__('Can I finish the next competition?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_competition'))?></li>
+        <li><?php echo $html->link(__('How much have I lost?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_howmuchhaveilost'))?></li>
 		    <li><?php echo $html->link(__('What have I achieved?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_whathaveidone'))?></li>
 <?php } ?>
 <?php if ( $this->name == 'Users' && $session_userid ) { ?>

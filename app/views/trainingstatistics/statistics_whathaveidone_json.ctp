@@ -96,6 +96,8 @@ if ( $stype == 'duration' )
 
 }
 
+/**
+
 if ( $stype == 'weight' )
 {
 
@@ -133,7 +135,7 @@ if ( $stype == 'weight' )
 		"colour":"#c6d9fd",
 		"grid-colour":"#dddddd",
 		"labels":{
-                        "rotate": "vertical",
+    "rotate": "vertical",
 			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . $weeks[$i] . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
 			}
 		},
@@ -143,6 +145,7 @@ if ( $stype == 'weight' )
 <?php
 
 }
+**/
 
 $this->js_addon = '';
 

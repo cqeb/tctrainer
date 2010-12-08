@@ -91,16 +91,7 @@ echo $form->hidden('targetweightcheck');
 
 if ($form->isFieldError('targetweightcheck'))
 {
-   echo "<span style=\"color:red\">";
-   if ( $targetweighterror )
-       __('You should only loose') . $unitcalc->check_weight('2') . ' ' . $unit['weight'] . ' ' . __('per month (maximum).'); 
-   else
-   {
-       __('You should only loose a maximum of');
-       echo ' ' . $max_weight_per_month . " " . $weight_unit . ' ';
-       __('per month (current loose per month');
-       echo ' ' . $weight_per_month . " " . $weight_unit . ").</span>";
-   }
+   //echo '<span style="color:red">' . $targetweighterror . '</span>';
 }
 ?>
 

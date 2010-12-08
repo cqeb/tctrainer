@@ -730,18 +730,17 @@ class UsersController extends AppController {
 		$age = $this->Unitcalc->how_old( $_POST['checkbirthday'] );
 
 		$bmi_return = $this->Unitcalc->calculate_bmi( $checkweight, $checkheight, $age );
-		if ( $bmi_return['bmi'] < 50 && $bmi_return['bmi'] > 10 )
+		if ( $bmi_return['bmi'] < 60 && $bmi_return['bmi'] > 10 )
 		{
 			$bmi_message = __("Your BMI is",true) . ' ' . $bmi_return['bmi'] . '. ' . __("Your BMI-check says: ",true) . $bmi_return['bmi_status'] . ".";
-      
-			$message_color = "green";
+      $class = "okbox";
 		} else
 		{
 			$bmi_message = __('Please check your height and weight again - we got an incorrect BMI', true) . ' ' . $bmi_return['bmi'] . ') - ' . __("thank you", true) . '.';
-			$message_color = "red";
+      $class = "error-message";
 		}
 
-		$this->set("bmicheck", '<div class="error-message" style="color: ' . $message_color . ';">' . $bmi_message . '</div>');
+		$this->set("bmicheck", '<div class="'.$class.'">' . $bmi_message . '</div>');
 	}
 
 	function edit_userinfo()
@@ -850,7 +849,8 @@ class UsersController extends AppController {
 	{
 		$this->pageTitle = __('Change weight management', true);
 		$this->checkSession();
-		//$this->js_addon = '';
+		$this->js_addon = '';
+    
 		$statusbox = 'statusbox_none';
 		$targetweighterror = '';
     $additional_message = '';
@@ -858,144 +858,156 @@ class UsersController extends AppController {
 		$session_userid = $this->Session->read('session_userid');
     $this->User->id = $session_userid;
 
-		if (empty($this->data))
+		if ( empty($this->data) )
 		{
-			$this->data = $this->User->read();
-
-			// TODO errors in rounding :(
-			// convert back to show in form
-			if ( isset( $this->data['User']['weight'] ) )
-			       $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
-			if ( isset( $this->data['User']['height'] ) )
-			       $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
-			if ( isset( $this->data['User']['targetweight'] ) )
-			       $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
-		
+    			$this->data = $this->User->read();
+    
+    			// convert back to show in form
+    			if ( isset( $this->data['User']['weight'] ) )
+    			       $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
+    			if ( isset( $this->data['User']['height'] ) )
+    			       $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
+    			if ( isset( $this->data['User']['targetweight'] ) )
+    			       $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
+    		
     } else 
 		{
-			// check decimal + convert metric to save
-			if ( isset( $this->data['User']['weight'] ) )
-			       $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'save', 'single' );
-			if ( isset( $this->data['User']['height'] ) )
-			       $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'save', 'single' );
-			if ( isset( $this->data['User']['targetweight'] ) )
-			       $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'save', 'single' );
+  			// check decimal + convert metric to save
+  			if ( isset( $this->data['User']['weight'] ) )
+  			       $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'save', 'single' );
+  			if ( isset( $this->data['User']['height'] ) )
+  			       $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'save', 'single' );
+  			if ( isset( $this->data['User']['targetweight'] ) )
+  			       $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'save', 'single' );
+  
+  			// targetweight is set - calculate maximum loss per month
+  			// calculate target weight and date
+  			if ( isset( $this->data['User']['targetweight'] ) && $this->data['User']['targetweight'] != 0 )
+  			{
+  				// calculate time to loose weight
+  				$diff_time = $this->Unitcalc->time_from_to( '', $this->data['User']['targetweightdate'] );
+  				$diff_weight = $this->data['User']['weight'] - $this->data['User']['targetweight'];
+  
+  				// future date for lost weight is in the past
+  				if ( round($diff_time['months']) <= 0 )
+  				{
+  					   $targetweighterror = __('Your target weight date is in the past and must be in the future!', true);
+  					   $this->data['User']['targetweightcheck'] = 1;
+  					   $this->set('targetweighterror', $targetweighterror);
+  
+  				} elseif ( $diff_weight < 0 )
+  				{
+  					   $targetweighterror = __('This system won\'t work if you want to gain weight!', true);
+  					   $this->data['User']['targetweightcheck'] = 1;
+  					   $this->set('targetweighterror', $targetweighterror);
+  
+  				} else
+  				{
+      				// calculate weight per month
+      				$weight_per_month = $diff_weight / $diff_time['months'];
+      				if ( $weight_per_month < 0 ) $weight_per_month * (-1);
 
-			// targetweight is set - calculate maximum loss per month
-			// calculate target weight and date
-			if ( isset( $this->data['User']['targetweight'] ) && $this->data['User']['targetweight'] != 0 )
-			{
-				// calculate time to loose weight
-				$diff_time = $this->Unitcalc->time_from_to( '', $this->data['User']['targetweightdate'] );
-
-				$diff_weight = $this->data['User']['weight'] - $this->data['User']['targetweight'];
-
-				// future date for lost weight is in the past
-				if ( round($diff_time['months']) <= 0 )
-				{
-					   $targetweighterror = __('Your target weight date is in the past and must be in the future!', true);
-					   $this->data['User']['targetweightcheck'] = 1;
-					   $this->set('targetweighterror', $targetweighterror);
-
-				} elseif ( $diff_weight < 1 )
-				{
-					   $targetweighterror = __('Your target weight is too low!', true);
-					   $this->data['User']['targetweightcheck'] = 1;
-					   $this->set('targetweighterror', $targetweighterror);
-
-				} else
-				{
-    				// calculate weight per month
-    				$weight_per_month = $diff_weight / $diff_time['months'];
-            
-    				if ( $weight_per_month < 0 ) $weight_per_month * (-1);
-    
-    				// maximum 2 kg per month
-    				if ( $weight_per_month > 2 )
-    				      $this->data['User']['targetweightcheck'] = 1;
-    				else
-    				      $this->data['User']['targetweightcheck'] = 0;
-    
-    				$max_weight_per_month = $this->Unitcalc->check_weight( 2, 'show', 'single' );
-    				$weight_per_month_array = $this->Unitcalc->check_weight( $weight_per_month, 'show' );
-            $weight_per_month = $weight_per_month_array['amount'];
-    
-        		$max_weight_per_month = round( $max_weight_per_month, 2 );
-    				$weight_per_month = round( $weight_per_month, 2 );
-    				$weight_unit = $weight_per_month_array['unit'];
-    
-    				$this->set('max_weight_per_month', $max_weight_per_month);
-    				$this->set('weight_per_month', $weight_per_month);
-    				$this->set('weight_unit', $weight_unit);
-				}
-
-			} else
-			{
-				  $this->data['User']['targetweightcheck'] = 0;
-			}
-
-			$age = $this->Unitcalc->how_old( $this->data['User']['birthday'] );
-
-			if ( $this->data['User']['weight'] && $this->data['User']['height'] )
-			$bmi = $this->Unitcalc->calculate_bmi( $this->data['User']['weight'], $this->data['User']['height'], $age );
-
-			if ( $this->data['User']['targetweight'] == 0 )
-      {
-			       unset( $this->data['User']['targetweight'] );
-			} else
-			{
-				// is your targetweight BMI-compliant :)
-				if ( $this->data['User']['targetweightcheck'] == 0 )
-				{
-					   if ( $this->data['User']['targetweight'] && $this->data['User']['height'] )
-					   $targetbmi = $this->Unitcalc->calculate_bmi( $this->data['User']['targetweight'], $this->data['User']['height'], $age );
-					   if ( $targetbmi['bmi'] < 16 || $targetbmi['bmi'] > 30 )
-					   {
-        						$targetweighterror = __('Your target weight is not ok. Your goals would bring your BMI to a critical ',true) . $targetbmi['bmi'];
-        						$this->data['User']['targetweightcheck'] = 1;
-        						$this->set('targetweighterror', $targetweighterror);
-					   }
-				}
-        if ( isset( $weight_per_month ) )
-        { 
-            $additional_message = 
-                  __('You have to loose', true) . 
-                  ' ' . $weight_per_month . ' ' . $weight_unit . ' ' . 
-                  __('per month to reach your weight goal', true);
+              $max_weight_per_month = round( $this->Unitcalc->check_weight( 2, 'show', 'single' ), 2 );
+              $weight_per_month_array = $this->Unitcalc->check_weight( $weight_per_month, 'show' );
+              $weight_per_month = round( $weight_per_month_array['amount'], 2);
+              $weight_unit = $weight_per_month_array['unit'];
+              $additional_message = __('You have to loose', true) . ' ' . $weight_per_month .
+                  ' ' . $weight_unit . ' ' . 'per month to achieve your goal.';
+                  
+              // maximum 2 kg per month
+              if ( $weight_per_month > 2 )
+              {
+                    $targetweighterror = __('You should at maximum loose', true) . ' ' .  
+                        $this->Unitcalc->check_weight('2', 'show', 'single') . ' ' . $weight_unit . ' ' . 
+                        __('per month.', true);
+                    //echo $targetweighterror;     
+                    $this->data['User']['targetweightcheck'] = 1;
+              } else
+              {
+                    $this->data['User']['targetweightcheck'] = 0;
+              }
+      				$this->set('weight_unit', $weight_unit);
+              $this->set('targetweighterror', $targetweighterror);
+  				}
+  
+  			} else
+  			{
+  				  $this->data['User']['targetweightcheck'] = 0;
+  			}
+  
+  			$age = $this->Unitcalc->how_old( $this->data['User']['birthday'] );
+  
+  			if ( $this->data['User']['weight'] && $this->data['User']['height'] )
+  			{
+  			   $bmi = $this->Unitcalc->calculate_bmi( $this->data['User']['weight'], $this->data['User']['height'], $age );
         }
-			}
-
-			if ($this->User->save( $this->data, array(
-         'validate' => true,
-         'fieldList' => array(
-         'height', 'weight', 'targetweight',
-         'targetweightdate', 'targetweightcheck'
-         ) ) ) )
-         {
-         $this->Session->setFlash(__('Weight settings saved.',true).$additional_message);
-         $statusbox = 'okbox';
-
-         // convert back in case of error and no redirect
-         if ( isset( $this->data['User']['weight'] ) )
-              $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
-         if ( isset( $this->data['User']['height'] ) )
-         	    $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
-         if ( isset( $this->data['User']['targetweight'] ) )
-         	    $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
-         //$this->redirect(array('action' => 'edit_weight', $this->User->id));
-         
-         } else
-         {
-               // convert back in case of error
-               if ( isset( $this->data['User']['weight'] ) )
-                    $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
-               if ( isset( $this->data['User']['height'] ) )
-                 	  $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
-               if ( isset( $this->data['User']['targetweight'] ) )
-                 	  $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
-               $statusbox = 'errorbox';
-               $this->Session->setFlash(__('Some errors occured',true));
-         }
+        
+  			if ( $this->data['User']['targetweight'] == 0 )
+        {
+  			       unset( $this->data['User']['targetweight'] );
+  			} else
+  			{
+  				// is your targetweight BMI-compliant :)
+  				if ( $this->data['User']['targetweightcheck'] == 0 )
+  				{
+  					   if ( $this->data['User']['targetweight'] && $this->data['User']['height'] )
+  					   {
+  					       $targetbmi = $this->Unitcalc->calculate_bmi( $this->data['User']['targetweight'], $this->data['User']['height'], $age );
+               }
+               
+  					   if ( $targetbmi['bmi'] < 16 || $targetbmi['bmi'] > 30 )
+  					   {
+          						$targetweighterror = __('Your target weight is not ok. Your goals would bring your BMI to a critical ',true) . $targetbmi['bmi'];
+          						$this->data['User']['targetweightcheck'] = 1;
+          						$this->set('targetweighterror', $targetweighterror);
+  					   }
+  				}
+          /**
+          if ( isset( $weight_per_month ) && !isset( $targetweighterror ) )
+          {
+              $additional_message = 
+                    __('You have to loose', true) . 
+                    ' ' . $weight_per_month . ' ' . $weight_unit . ' ' . 
+                    __('per month to reach your weight goal', true);
+          }
+          **/
+  			}
+  
+  			if ( $this->User->save( $this->data, 
+  			   array(
+               'validate' => true,
+               'fieldList' => array(
+                 'height', 'weight', 'targetweight',
+                 'targetweightdate', 'targetweightcheck'
+           ) ) ) )
+           {
+                 $this->Session->setFlash(__('Your settings are saved.',true).' '.$additional_message);
+                 $statusbox = 'okbox';
+        
+                 // convert back in case of error and no redirect
+                 if ( isset( $this->data['User']['weight'] ) )
+                      $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
+                 if ( isset( $this->data['User']['height'] ) )
+                 	    $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
+                 if ( isset( $this->data['User']['targetweight'] ) )
+                 	    $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
+                 //$this->redirect(array('action' => 'edit_weight', $this->User->id));
+           
+           } else
+           {
+                 // convert back in case of error
+                 if ( isset( $this->data['User']['weight'] ) )
+                      $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
+                 if ( isset( $this->data['User']['height'] ) )
+                   	  $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
+                 if ( isset( $this->data['User']['targetweight'] ) )
+                   	  $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
+                 $statusbox = 'errorbox';
+                 if ( $targetweighterror )
+                    $this->Session->setFlash(__($targetweighterror,true));
+                 else
+                    $this->Session->setFlash(__('Some errors occured',true));
+           }
 		}
 
     $this->set('unit', $this->Unitcalc->get_unit_metric());
@@ -1415,12 +1427,14 @@ class UsersController extends AppController {
 	{
       $u = $userprofile;
       $text_for_mail = "";
-      $wrong_attributes = "";
+   
       // check if profile is complete from technical point of view
+      $wrong_attributes = "";
       $check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
-      'password', 'passwordcheck', 'lactatethreshold', 'typeofsport',
-      'coldestmonth', 'unit', 'unitdate', 'weeklyhours',
-      'dayofheaviesttraining', 'yourlanguage', 'level' );
+        'password', 'passwordcheck', 'lactatethreshold', 'typeofsport',
+        'coldestmonth', 'unit', 'unitdate', 'weeklyhours',
+        'dayofheaviesttraining', 'yourlanguage', 'level' );
+
       foreach ( $check_attributes as $key => $value )
       {
             if ( $u[$value] == '' ) $wrong_attributes .= $value . ', ';
@@ -1428,39 +1442,45 @@ class UsersController extends AppController {
       if ( $wrong_attributes != '' ) 
       {
             $u['email'] = 'support@tricoretraining.com';
-            $mailsubject = 'funky TCT user - check plz';
+            $mailsubject = 'Funky TCT user - check plz';
+            // TODO
             //$mailtemplate = '???';
-            
             //$this->_sendMail( $u, $mailsubject, $mailtemplate, $wrong_attributes );
       }    
 
       // check name + address
-      if ( !$u['firstname'] ) $text_for_mail .= __('Your firstname is missing! Please add it to your profile.', true);
-      $text_for_mail .= '<br />';
-      if ( !$u['lastname'] ) $text_for_mail .= __('Your lastname is missing! Please add it to your profile.', true);
-      $text_for_mail .= '<br />';
-      if ( $u['level'] == 'premiummember' && !$u['address'] ) $text_for_mail .= __('Your address is missing! Please add it to your profile.', true);
-      $text_for_mail .= '<br />';
-      if ( $u['level'] == 'premiummember' && !$u['zip'] ) $text_for_mail .= __('Your zip is missing! Please add it to your profile.', true);
-      $text_for_mail .= '<br />';
-      if ( $u['level'] == 'premiummember' && !$u['city'] ) $text_for_mail .= __('Your city is missing! Please add it to your profile.', true);
-      $text_for_mail .= '<br />';
-      if ( $u['level'] == 'premiummember' && !$u['country'] ) $text_for_mail .= __('Your country is missing! Please add it to your profile.', true);
-      $text_for_mail .= '<br />';
+      if ( !$u['firstname'] ) 
+        $text_for_mail .= __('Your firstname is missing! Please add it to your profile.', true) . '<br />';
+
+      if ( !$u['lastname'] ) 
+        $text_for_mail .= __('Your lastname is missing! Please add it to your profile.', true) . '<br />';
       
-      
+      if ( $u['level'] == 'premiummember' && !$u['address'] ) 
+        $text_for_mail .= __('Your address is missing! Please add it to your profile.', true) . '<br />';
+
+      if ( $u['level'] == 'premiummember' && !$u['zip'] ) 
+        $text_for_mail .= __('Your zip is missing! Please add it to your profile.', true) . '<br />';
+
+      if ( $u['level'] == 'premiummember' && !$u['city'] ) 
+        $text_for_mail .= __('Your city is missing! Please add it to your profile.', true) . '<br />';
+
+      if ( $u['level'] == 'premiummember' && !$u['country'] ) 
+        $text_for_mail .= __('Your country is missing! Please add it to your profile.', true) . '<br />';
+
       // check birthday
-      if ( !$u['birthday'] ) $text_for_mail .= __('Your country is missing! Please add it to your profile.', true);
-      $text_for_mail .= '<br />';
+      if ( !$u['birthday'] ) 
+        $text_for_mail .= __('Your country is missing! Please add it to your profile.', true) . '<br />';
       
       // check lactatethreshold
-      if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) $nothing = "";
+      if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) 
+        $nothing = "";
       else {
-          $text_for_mail .= __('Your lactate threshold must be between 100 and 180. Please correct it [LINK].', true);
-          $text_for_mail .= '<br />';
+        // TODO link missing to profile
+        $text_for_mail .= __('Your lactate threshold must be between 100 and 210. Please correct it [LINK].', true) . '<br />';
       }
       
       // check for recommendations
+      // TODO (B) not yet implemented
 /**
       if ( !$u['recommendation'] )
       { 
@@ -1472,8 +1492,7 @@ class UsersController extends AppController {
       // check for medical limitations
       if ( $u['medicallimitations'] == '1')
       { 
-          $text_for_mail .= __('Your medical conditions are not good enough for trainingworkouts. .....', true);
-          $text_for_mail .= '<br />';
+          $text_for_mail .= __('Your medical conditions are not good enough for trainingworkouts. Is that still correct?', true) . '<br />';
       }
       
       // check for target weight
@@ -1484,41 +1503,47 @@ class UsersController extends AppController {
           $diff_weight = $u['targetweight'] - $u['weight'];
           
           $divisor = $futurets / 86400 / 30;
+          // weight you have to loose to achieve your weight target
           $weight_per_month = $diff_weight / $divisor;
           
           if ( $weight_per_month > 2 ) 
           {
-              $text_for_mail .= __('Your weight-loss must be', true) . ' ' . round( $this->Unitcalc->checkweight($weight_per_month), 1 ) .
-                    ' ' . __('kg/lbs. to reach your weight-target - that\'s not healty - set a new weight target', true) . ' [LINK]<br />';
+              $weight_unit_array = $this->Unitcalc->checkweight(2);
+              $weight_unit = $weight_unit_array['unit'];
+              // TODO link to weight management
+              $text_for_mail .= __('Your weight loss per month to achieve your weight goal must be', true) . ' ' . 
+                  round( $this->Unitcalc->checkweight($weight_per_month, 'show', 'single'), 1 ) .
+                    ' ' . $weight_unit . ' ' . __('that\'s not healthy - set a new weight goal', true) . 
+                    $html->link(__('go to weight management',true),array('controller' => 'users', 'action' => 'edit_weight'), array('class' => 'main')) . '<br />';
           } 
       }
     
       if ( $u['weeklyhours'] ) 
       {
           // check per sport how many hours an user should train
-          // TODO
-          $text_for_mail .= __('You train', true) . ' ' . $u['weeklyhours'] . ' ' . __('hours per week. Great!', true);
-          $text_for_mail .= '<br />';
+          //case ($u['sports'] )
+          //TODO          
+          $text_for_mail .= __('You do not train enough for your sport. Please check the recommended training load for your type of sport.', true);
       }
 
+      // after 9 month of being rookie
       if ( ( strtotime( $u['created'] ) > ( time() + 86400*30*9 ) ) && $u['rookie'] == '1' )
       {
-          $text_for_mail .= __('You told TCT that you\'re a rookie. Since you\'re working with TCT since more than 9 months, maybe you tell our system that you aren\'t a rookie any more', true);
-          $text_for_mail .= '<br />'; 
+          $text_for_mail .= __('You told TriCoreTraining you\'re a rookie. Since you\'re training with TriCoreTraining since more than 9 months, maybe you should change that!', true) . '<br />';
       }   
 
-      if ( ( strtotime( $u['created'] ) > ( time() + 86400*5 ) ) && $u['activated'] != '1' )
+      // TODO check, whether date comparisons work this way
+      if ( ( strtotime( $u['created'] ) > date( 'Y-m-d', ( time() + 86400*5 ) ) && $u['created'] < date( 'Y-m-d', ( time() + 86400*6 ) ) ) && $u['activated'] != '1' )
       {
-          $text_for_mail .= __('Your account is not activated yet. Please use your activation mail to activate your account. Thanks.', true);
-          $text_for_mail .= '<br />'; 
+          $text_for_mail .= __('Your account is not activated yet. Please use your activation mail to activate your account. Thanks.', true) . '<br />';
       }   
 
-      if ( strtotime( $u['payed_to'] ) < time() && $u['level'] != 'freemember' )
+      if ( strtotime( $u['payed_to'] ) < date( 'Y-m-d', time() ) && $u['level'] != 'freemember' )
       {
-          // set level == premiummember
-          // TODO        
-          $text_for_mail .= __('Your pay time is over. From now on you do not get any training schedules any more. Please pay.', true);
-          $text_for_mail .= '<br />'; 
+          // set level = premiummember
+          $this->User->id = $session_userid;
+          $this->User->savefield('level', 'freemember', false);
+          $text_for_mail .= __('Your PREMIUM membership is over. If you want to continue your training, please go to SUBSCRIBE.', true) . '<br />';
       }
 
       if ( $text_for_mail )
@@ -1526,7 +1551,7 @@ class UsersController extends AppController {
           $mailsubject = __('TCT informs you.', true);
           $template = 'reminder';
           $content = $text_for_mail;
-          
+          // TODO mailtemplate missing
           //$this->_sendMail($u, $mailsubject, $template, $content = '')
           echo '<hr />';
           echo $content;

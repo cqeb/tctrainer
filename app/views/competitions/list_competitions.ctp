@@ -34,8 +34,22 @@ if ( $create_dummy == 'true' )
                         <th><?php echo $paginator->sort(__('Name',true), 'name'); ?></th>
                         <th></th>
                    </tr>
-                   <?php if ( count( $competitions ) < 1 ) echo '<tr><td /><td colspan="4"><br />' . __('No competitions defined.', true) . '</td></tr>'; ?> 
+                   <?php if ( count( $competitions ) < 1 ) echo '<tr><td /><td colspan="4"><br />' . __('No competitions defined.', true) . '</td></tr>'; ?>
+                   <?php $newest_set = false; ?> 
                    <?php foreach ($competitions as $competition): ?>
+                   <?php 
+                   if ( strtotime( $competition['Competition']['competitiondate'] ) < time() && $newest_set == false )
+                   {
+                      ?>
+                   <tr>
+                        <td style="background-color:lightblue;" colspan="5">
+                        <b><?php __('Your next competition ...'); ?></b>
+                        </td>
+                   </tr>
+                   <?php 
+                      $newest_set = true;
+                   } 
+                   ?>
                    <tr>
                         <td><?php if ( $competition['Competition']['important'] ) { echo '<img src="../img/star.gif" alt="'; __('Important',true); echo '" />'; } ?></td>
                         <td><?php echo $html->link($unitcalc->check_date($competition['Competition']['competitiondate']), array('action' => 'edit_competition', 'id' => $competition['Competition']['id']),null); echo ", " . date('D', strtotime($competition['Competition']['competitiondate'])); ?></td>

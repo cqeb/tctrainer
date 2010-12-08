@@ -146,6 +146,9 @@ class TrainingstatisticsController extends AppController {
                      // save workout for user 
                      if ($this->Trainingstatistic->save( $this->data, array('validate' => true)))
                      {
+                          $this->User->id = $session_userid;
+                          $this->User->savefield('weight', $weight, false);
+                          
                           $this->Session->setFlash('Training saved.');
                           $this->set('statusbox', $statusbox);
                           $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
@@ -623,7 +626,7 @@ class TrainingstatisticsController extends AppController {
             /**
             planned trainings
             **/
-            // TODO we have to load the correct fields from table
+            // TODO (B) we have to load the correct fields from table
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
                 "athlete_id = $session_userid AND ";
@@ -701,9 +704,164 @@ class TrainingstatisticsController extends AppController {
    }
 
    /**
+   How much have I lost?
+   **/
+   function statistics_howmuchhaveilost()
+   {
+            $this->checkSession();
+
+            $this->set('js_addon','');
+            $unit = $this->Unitcalc->get_unit_metric();
+            $statusbox = '';
+
+            $results['User'] = $this->Session->read('userobject');
+            $session_userid = $results['User']['id'];
+
+            $this->compdata['Competition']['competitiondate']['month'] = date('m', time());
+            $this->compdata['Competition']['competitiondate']['year'] = date('Y', time());
+
+            $season = $this->Unitcalc->get_season( $results, $this->compdata );
+
+            if ( empty( $this->data['Trainingstatistic'] ) )
+            {
+               $start = $season['start'];
+               //$end   = $season['end'];
+               $end = date( 'Y-m-d', time() ); 
+               $this->data['Trainingstatistic']['fromdate'] = $start;
+               $this->data['Trainingstatistic']['todate'] = $end;
+            } else
+            {
+               $start = $this->data['Trainingstatistic']['fromdate'];
+               $end   = $this->data['Trainingstatistic']['todate'];
+               $start = $start['year'] . '-' . $start['month'] . '-' . $start['day'];
+               $end = $end['year'] . '-' . $end['month'] . '-' . $end['day'];
+            }
+
+            // select trainingsdata
+            $sql = "SELECT * FROM Trainingstatistics WHERE user_id = $session_userid AND date BETWEEN '" .
+                $start . "' AND '" . $end . "'";
+            $trainings = $this->Trainingstatistic->query( $sql );
+
+            $this->set('start', $start);
+            $this->set('end', $end);
+            $this->set('trainings', $trainings);
+            //$this->set('length_unit', $unit['length']);
+            $this->set('statusbox', $statusbox);
+
+   }
+
+   function statistics_howmuchhaveilost_json()
+   {
+          $this->checkSession();
+
+          $this->layout = "ajaxrequests";
+     	    $this->RequestHandler->setContent('js', null);
+          Configure::write('debug', 1);
+
+          $this->set('js_addon','');
+          $unit = $this->Unitcalc->get_unit_metric();
+          $statusbox = '';
+
+          $results['User'] = $this->Session->read('userobject');
+          $session_userid = $results['User']['id'];
+          $targetweight = $results['User']['targetweight'];
+          $targetweightdate = $results['User']['targetweightdate'];
+          
+          // type of graph
+          $type = $this->params['named']['type'];
+
+          $start = $this->params['named']['start'];
+          $end = $this->params['named']['end'];
+          if ( $targetweightdate && $targetweight ) $end = $targetweightdate; 
+          $start_ts = strtotime($start);
+          $end_ts = strtotime($end);
+         
+          $sql = "SELECT round(avg(weight),1) as avgweight, 
+                  date_format(min(date), '%Y-%m-%d') as 'weekday',
+                  date_format(date, '%Y%u') as 'week' FROM Trainingstatistics WHERE 
+                  user_id = $session_userid AND weight != '' AND
+                  date BETWEEN '" . $start . "' AND '" . $end . "' ";
+          $sql .= "GROUP BY week ORDER BY week ASC";
+          $trainings = $this->Trainingstatistic->query( $sql );
+          
+          $lastentry = count($trainings);
+          $firsttraining = $trainings[0][0];
+          $start_ts = strtotime( $firsttraining['weekday'] );
+          
+          $weeks_between_dates = round(($end_ts - $start_ts)/(86400*7),0)+1;
+          $week_ts = $start_ts;
+          
+          if ( $targetweightdate && $targetweight )
+          {
+                $train_array = $trainings[$lastentry-1][0];
+                $diff_time = strtotime( $targetweightdate ) - strtotime( $train_array['weekday'] );
+
+                // weeks between last trainingstatistics entry and target weight date
+                $diff_week = round( $diff_time / ( 86400 * 7 ) );
+                // diff between last weight entry and target weight
+                $diff_weight = $targetweight - $train_array['avgweight'];
+                // how much do you have to loose to reach your weight goal
+                $diff_per_week = ($diff_weight / $diff_week);
+
+                $lastweight = $train_array['avgweight'];
+                $lastweightdate = $train_array['weekday'];
+          }
+             
+          for ( $i = 0; $i < $weeks_between_dates; $i ++)
+          {
+              $nweek[$i] = date('W', $week_ts);
+              $nyear[$i] = date('o', $week_ts);
+              $week_ts += (86400*7);
+              //echo $nyear[$i] . '-' . $nweek[$i] . '<br />';
+              $weeks[$i] = $nyear[$i]. $nweek[$i]; 
+          }
+
+          for ( $i = 0; $i < count( $trainings ); $i++ )
+          {
+               $week = $trainings[$i][0]['week'];
+               $train[$week]['avgweight'] = $trainings[$i][0]['avgweight'];
+          }
+
+          $avg_weight_lastweek = 'null'; 
+          // go through all weeks - in case you have weeks without trainings you have to set them to 0
+          for( $i = 0; $i < ( $weeks_between_dates ); $i++ )
+          {
+               $yearweek = $nyear[$i] . '' . $nweek[$i]; 
+               //echo $yearweek . '<br />';
+               if ( $i > ( $weeks_between_dates - $diff_week ) ) 
+               {
+                   $train[$yearweek]['avgweight'] = 'null';
+               } else
+               {
+                  if ( empty($train[$yearweek]['avgweight']) || $train[$yearweek]['avgweight'] == 0 )
+                  {
+                      $train[$yearweek]['avgweight'] = $avg_weight_lastweek;
+                  } else
+                  {
+                      $avg_weight_lastweek = $train[$yearweek]['avgweight'];
+                  }
+                }
+          }
+          ksort($train);
+          
+          //pr($train);
+          $this->set('start', $start);
+          $this->set('end', $end);
+          $this->set('diffweek', $diff_week);
+          $this->set('diffweight', $diff_weight);
+          $this->set('diff_per_week', $diff_per_week);
+          $this->set('lastweight', $lastweight);
+          $this->set('targetweight', $targetweight);
+          $this->set('maxweeks', $weeks_between_dates);
+          $this->set('stype', $type);
+          $this->set('weeks', $weeks);
+          $this->set('trainings2', $train);
+          $this->set('weight_unit', $unit['weight']);
+   }
+
+   /**
    What have I done?
    **/
-
    function statistics_whathaveidone()
    {
             $this->checkSession();
@@ -736,13 +894,13 @@ class TrainingstatisticsController extends AppController {
             if ( empty( $this->data['Trainingstatistic'] ) )
             {
                $start = $season['start'];
-               $end   = $season['end'];
+               //$end   = $season['end'];
                $end = date( 'Y-m-d', time() ); 
                $this->data['Trainingstatistic']['fromdate'] = $start;
                $this->data['Trainingstatistic']['todate'] = $end;
             } else
             {
-               $start = $this->data['Trainingstatistic']['fromdate'];
+               $start = $this->data['Trainingstatistic']['fromdate']; 
                $end   = $this->data['Trainingstatistic']['todate'];
                $start = $start['year'] . '-' . $start['month'] . '-' . $start['day'];
                $end = $end['year'] . '-' . $end['month'] . '-' . $end['day'];
@@ -762,10 +920,10 @@ class TrainingstatisticsController extends AppController {
             for ( $i = 0; $i < count( $trainings ); $i++ )
             {
                   $dt = $trainings[$i]['Trainingstatistics'];
-                  $sportstype = $dt['sportstype'];
+                  $sportstype = strtoupper($dt['sportstype']);
                   if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
                   {
-                       $sumdata['collected_sportstypes'][] = $sportstype;
+                       $sumdata['collected_sportstypes'][] = strtoupper($sportstype);
                        $sumdata['duration'][$sportstype] = 0;
                        $sumdata['distance'][$sportstype] = 0;
                        $sumdata['trimp'][$sportstype] = 0;
@@ -791,12 +949,9 @@ class TrainingstatisticsController extends AppController {
    {
             $this->checkSession();
 
-            /**
-            http://stuartmultisport.com/TrImp.aspx
-            **/
-
+            /** http://stuartmultisport.com/TrImp.aspx **/
             $this->layout = "ajaxrequests";
-       	    $this->RequestHandler->setContent('js', null);
+            $this->RequestHandler->setContent('js', null);
             Configure::write('debug', 1);
 
             $this->set('js_addon','');
@@ -805,7 +960,6 @@ class TrainingstatisticsController extends AppController {
 
             $results['User'] = $this->Session->read('userobject');
             $session_userid = $results['User']['id'];
-
             // type of graph
             $type = $this->params['named']['type'];
 
@@ -823,7 +977,7 @@ class TrainingstatisticsController extends AppController {
             $end_year = date('o', $end_ts);
             $end_week = date('W', $end_ts);
 
-            // what if the period defined goes untill to the next year
+            // what if the period defined goes until to the next year
             if ( $end_year > $start_year ) $end_week = $end_week + ( 53 * ( $end_year - $start_year ) );
 
             $weeks_between_dates = $end_week - $start_week;
@@ -837,13 +991,12 @@ class TrainingstatisticsController extends AppController {
                $maxweek = '';
 
                $sql = "SELECT count(*) as 'count', sum(distance) as sumdistance, sum(duration) as sumduration,
-                      sum(weight) as sumweight, date_format(min(date), '%Y-%M-%d') as 'week commencing',
+                      date_format(min(date), '%Y-%M-%d') as 'week commencing',
                       date_format(date, '%Y%u') as 'week' from Trainingstatistics where user_id = $session_userid AND
                       date BETWEEN '" . $start . "' AND '" . $end . "' ";
                if ( $sportstype ) $sql .= " AND sportstype = '" . $sportstype . "' ";
                $sql .= "group by week order by week asc";
 
-               //echo $sql;
                $trainings = $this->Trainingstatistic->query( $sql );
 
                $lastentry = count($trainings);
@@ -855,7 +1008,6 @@ class TrainingstatisticsController extends AppController {
                    $week = $trainings[$i][0]['week'];
                    $trainings2[$week]['sumdistance'] = round( $trainings[$i][0]['sumdistance'], 2 );
                    $trainings2[$week]['sumduration'] = round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
-                   $trainings2[$week]['sumweight'] = round( $trainings[$i][0]['sumweight'] / $trainings[$i][0]['count'], 1);
                    $trainings2[$week]['sumtrainings'] = $trainings[$i][0]['count'];
 
                    // make graph a little bit higher with max values
@@ -866,6 +1018,7 @@ class TrainingstatisticsController extends AppController {
                // go through all weeks - in case you have weeks without trainings you have to set them to 0
                for( $i = 0; $i < $weeks_between_dates; $i++ )
                {
+                   if ( $start_week < 10 ) $start_week = '0' . $start_week;
                    $yearweek = $start_year . $start_week;
                    $weeks[$i] = $yearweek;
 
@@ -874,7 +1027,6 @@ class TrainingstatisticsController extends AppController {
                       $trainings2[$yearweek]['sumdistance'] = 0;
                       $trainings2[$yearweek]['sumduration'] = 0;
                       $trainings2[$yearweek]['sumtrainings'] = 0;
-                      $trainings2[$yearweek]['sumweight'] = 0;
                    }
 
                    if ( $start_week == 53 ) { $start_year++; $start_week = 1; }

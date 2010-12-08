@@ -32,7 +32,6 @@ list all competitions with paging
 
    function list_competitions()
    {
-
             $statusbox = '';
             $create_dummy = '';
 

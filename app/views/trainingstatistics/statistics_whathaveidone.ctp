@@ -141,7 +141,7 @@ echo $form->input('todate',
                     'between' => '',
                     'label' => __('To', true),
                     'minYear' => date('Y',time())-5,
-                    'maxYear' => date('Y',time())+1
+                    'maxYear' => date('Y',time())
                     //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
                   
@@ -202,7 +202,7 @@ for ( $j = 0; $j < count( $sumdata['collected_sportstypes'] ); $j++ )
 ?>
 
 </table>
-</div>
+<!--</div>-->
 
 <h2><?php __('Chart Distance'); ?></h2>
 
@@ -259,8 +259,6 @@ echo $ofc->createflash('my_chart3','680','400',$jsonurl.'type:trimp/start:' . $s
 ?>
 
 <div id="my_chart3"></div>
-**/
-
 ?>
 <br /><br />
 
@@ -283,8 +281,8 @@ echo $ofc->createflash('my_chart4','680','400',$jsonurl.'type:weight/start:' . $
 
 <div id="my_chart4"></div>
 
-
 <?php
+**/
 
       $this->js_addon = <<<EOE
 EOE;
