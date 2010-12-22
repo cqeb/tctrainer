@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	var $name = 'Users';
 
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Flowplayer', 'Unitcalc'); // 'TabDisplay',
-	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler');
+	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Provider');
 
 	var $paginate = array(
        'User' => array(
@@ -798,48 +798,40 @@ class UsersController extends AppController {
 		$this->set('statusbox', $statusbox);
 	}
 
-	function edit_traininginfo()
-	{
+	function edit_traininginfo() {
 		$this->pageTitle = __('Change training info',true);
 
 		$this->checkSession();
-		//$this->js_addon = '';
 		$statusbox = 'statusbox_none';
-
-		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
-
+		$this->User->id = $session_userid = $this->Session->read('session_userid');
 		$this->set('unitmetric', $this->Unitcalc->get_unit_metric() );
 
-		if (empty($this->data))
-		{
+		if (empty($this->data))	{
 			$this->data = $this->User->read();
-
 			$this->set('UserID', $this->User->id);
 			$this->set('unit', $this->data['User']['unit']);
-
-		} else
-		{
+		} else {
 			$this->set('UserID', $this->User->id);
-     
 			if ($this->User->save( $this->data, array(
-        'validate' => true,
-        'fieldList' => array(
-        'typeofsport', 'rookie', 
-        //'dayofheaviesttraining', 
-        'weeklyhours', 'coldestmonth',
-        'publicprofile', 'publictrainings', 'medicallimitations', 'maximumheartrate',
-        'lactatethreshold'
-        ) ) ) )
-        {
-        	  $statusbox = 'okbox';
-          	$this->Session->setFlash('Trainingsinfo saved.');
-        	  //$this->redirect(array('action' => 'edit_traininginfo', $this->User->id));
-        } else
-        {
-        	  $this->Session->setFlash(__('Some errors occured.', true));
-        	  $statusbox = 'errorbox';
-        }
+		        'validate' => true,
+        		'fieldList' => array(
+		        'typeofsport', 'rookie', 
+					//'dayofheaviesttraining',
+		        'weeklyhours', 'coldestmonth',
+		        'publicprofile', 'publictrainings', 
+		        'medicallimitations', 'maximumheartrate',
+		        'lactatethreshold'
+	        	)))) {
+	        	$statusbox = 'okbox';
+	        	$this->Session->setFlash('Traininginfo saved.');
+	        	// recalculate time track by updating athlete
+	        	$this->Provider->athlete->setTrainingTime(
+	        		$this->data['User']['weeklyhours'] * 60
+	        	);
+	        } else {
+	        	$this->Session->setFlash(__('Some errors occured.', true));
+	        	$statusbox = 'errorbox';
+	        }
 		}
 		$this->set('statusbox', $statusbox);
 		$this->set('sports', $this->Unitcalc->get_sports());

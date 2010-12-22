@@ -103,7 +103,7 @@ class Athlete {
 		$this->trainingTime = $time;
 		MesoCyclePhaseTableProvider::recalcTimes($this->DB, $this);
 		
-		$hrs = $time / 60;
+		$hrs = round($time / 60, 2);
 		// save training time to db
 		$this->DB->query("UPDATE users SET weeklyhours = $hrs
 			WHERE id = " . $this->id);
