@@ -60,11 +60,18 @@ class Athlete {
 	protected $sport;
 	
 	/**
+	 * database reference
+	 */
+	protected $DB;
+	
+	/**
 	 * initialize the athlethe from an existing cake user
 	 * @param object database object
 	 * @param array $user user data from session
 	 */
 	public function __construct($DB, $user) {
+		$this->DB = $DB;
+		
 		// initialize the athlete
 		$this->id = $user["id"];
 		if ($user["rookie"] == 1) {
@@ -80,6 +87,26 @@ class Athlete {
 		if ($DB) {
 			$this->schedule = new Schedule($DB, $this->id);
 		}
+	}
+	
+	/**
+	 * will set the athlete's training time to a maximum of 1800mins
+	 * which equals 30hrs
+	 * @param DataBase $DB
+	 * @param int $time in minutes
+	 */
+	public function setTrainingTime($time) {
+		$time = intval($time);
+		if ($time > 1800) {
+			return false; // no can do.
+		}
+		$this->trainingTime = $time;
+		MesoCyclePhaseTableProvider::recalcTimes($this->DB, $this);
+		
+		$hrs = $time / 60;
+		// save training time to db
+		$this->DB->query("UPDATE users SET weeklyhours = $hrs
+			WHERE id = " . $this->id);
 	}
 	
 	/**

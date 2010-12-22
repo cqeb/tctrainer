@@ -78,7 +78,8 @@ class MesoCycleProvider {
 		}
 		
 		$phaseTable = MesoCyclePhaseTableProvider::getPhaseTable(
-			$this->athlete, DateTimeHelper::diffWeeks(
+			$this->athlete, 
+			DateTimeHelper::diffWeeks(
 				$mon, 
 				$aRace->getDate()
 			),
