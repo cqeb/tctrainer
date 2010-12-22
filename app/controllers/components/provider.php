@@ -1,22 +1,22 @@
 <?php
 // include all core components
 // TODO this is just plain ugly with cake - find a better solution for this
-require '../../core/athlete/athlete.class.php';
-require '../../core/helpers/database.class.php';
-require '../../core/helpers/datetimehelper.class.php';
-require '../../core/providers/workoutprovider.class.php';
-require '../../core/providers/mesocyclephasetableprovider.class.php';
-require '../../core/providers/mesocycleprovider.class.php';
-require '../../core/providers/trirunprovider.class.php';
-require '../../core/schedule/schedule.class.php';
-require '../../core/schedule/race.class.php';
-require '../../core/sequences/sequence.class.php';
-require '../../core/sequences/trirunworkouttypesequence.class.php';
-require '../../core/workouts/workout.class.php';
-require '../../core/workouts/swimworkout.class.php';
-require '../../core/workouts/bikeworkout.class.php';
-require '../../core/workouts/runworkout.class.php';
-require '../../core/renderers/workoutrenderer.class.php';
+require '../../app/core/athlete/athlete.class.php';
+require '../../app/core/helpers/database.class.php';
+require '../../app/core/helpers/datetimehelper.class.php';
+require '../../app/core/providers/workoutprovider.class.php';
+require '../../app/core/providers/mesocyclephasetableprovider.class.php';
+require '../../app/core/providers/mesocycleprovider.class.php';
+require '../../app/core/providers/trirunprovider.class.php';
+require '../../app/core/schedule/schedule.class.php';
+require '../../app/core/schedule/race.class.php';
+require '../../app/core/sequences/sequence.class.php';
+require '../../app/core/sequences/trirunworkouttypesequence.class.php';
+require '../../app/core/workouts/workout.class.php';
+require '../../app/core/workouts/swimworkout.class.php';
+require '../../app/core/workouts/bikeworkout.class.php';
+require '../../app/core/workouts/runworkout.class.php';
+require '../../app/core/renderers/workoutrenderer.class.php';
 
 class ProviderComponent extends Object {
 	var $components = array('Session');
