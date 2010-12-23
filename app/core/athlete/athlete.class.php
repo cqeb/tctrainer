@@ -70,6 +70,10 @@ class Athlete {
 	 * @param array $user user data from session
 	 */
 	public function __construct($DB, $user) {
+		if ($user["id"] == null) {
+			return false;
+		}
+		
 		$this->DB = $DB;
 		
 		// initialize the athlete
