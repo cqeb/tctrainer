@@ -39,7 +39,6 @@ class ProviderComponent extends Object {
 	 * get a plan
 	 */
 	public function getPlan() {
-		
 		$genWeek = DateTimeHelper::getWeekStartDay(new DateTime());
 
 		if (isset($_GET['o'])) {

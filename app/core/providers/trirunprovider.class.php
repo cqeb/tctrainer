@@ -24,53 +24,13 @@ class TriRunProvider extends WorkoutProvider {
 		"M5" => 0,
 		"initialized" => false // flag wether the cache has been initialized yet
 	);
-		
-	/**
-	 * generate workouts for a given date
-	 * @return array or generated workouts
-	 */
-	public function generate(DateTime $week) {
-		$this->generateWeek = $week;
-		$nextA = $this->athlete->getSchedule()->getNextARace($week);
-
-		// determine if LSD run is needed
-		$ldRace = $this->athlete->getSchedule()->getNextLDRace($week);
-
-		// lsd trainings start 12 weeks before the event
-		if ($ldRace && $ldRace->getWeeksTillRaceday($week) <= 12) {
-			$lsdRun = $this->generateLSDRun($ldRace);
-			if ($lsdRun) {
-				$this->addWorkout($lsdRun);
-			}
-		}
-
-		// distribute remaining minutes as long as there are some
-		$wType = new TriRunWorkoutTypeSequence(
-		$this->DB, $this->phase["phase"], $this->athlete, $week);
-
-		$i = 0;
-		while ($this->timeBudget > $this->workoutDurations) {
-			$i++;
-			$type = $wType->next();
-			$duration = $this->getDuration($type, $nextA->getType());
-			$this->addWorkout(new RunWorkout($this->athlete, $type, $duration));
-			if ($i == 100) {
-				throw new Exception("TriRunProvider generated 100 Workouts - " .
-					"looks like an endless loop");
-			}
-		}
-
-		// finally persist the sequences
-		$wType->save();
-		return $this->workouts;
-	}
 
 	/**
 	 * generates an LSD Run, which will typically be an E2 workout
 	 * @param $ldRace the next ld race from the schedule
 	 * @return workout
 	 */
-	protected function generateLSDRun(Race $ldRace) {
+	protected function generateLSDWorkout(Race $ldRace) {
 		$NOW = new DateTime();
 		$duration = RunWorkout::$LSD_TIMES[$this->athlete->getLevel()]
 		[$ldRace->getWeeksTillRaceday(new DateTime())];
@@ -80,6 +40,14 @@ class TriRunProvider extends WorkoutProvider {
 		return new RunWorkout(Workout::E2, $duration, true);
 	}
 
+	/*
+	 * @see parent class
+	 */
+	protected function getWorkoutTypeSequence(Database $DB, $phase, Athlete $athlete, DateTime $week) {
+		return new TriRunWorkoutTypeSequence(
+			$this->DB, $this->phase["phase"], $this->athlete, $week);
+	}
+	
 	/**
 	 * determine workout duration based on
 	 * - next A race, or your training target (Ironman, Half Marathon, ...)
