@@ -1476,7 +1476,7 @@ class UsersController extends AppController {
         $nothing = "";
       else {
         // TODO link missing to profile
-        $text_for_mail .= __('Your lactate threshold must be between 100 and 210. Please correct it [LINK].', true) . '<br />';
+        $text_for_mail .= __('Your lactate threshold must be between 100 and 210.', true) . '[LINK]' . __('Please correct it.', true) . '<br />';
       }
       
       // check for recommendations
@@ -1484,7 +1484,7 @@ class UsersController extends AppController {
 /**
       if ( !$u['recommendation'] )
       { 
-          $text_for_mail .= __('Please recommend our service! Get a free trainingmonth. [LINK].', true);
+          $text_for_mail .= __('Please recommend our service! Get a free trainingmonth.', true) . '[LINK].', true);
           $text_for_mail .= '<br />';
       }
 **/
