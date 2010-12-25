@@ -104,10 +104,10 @@ echo $form->input('avg_pulse',
                   'error' => array(
                       'numeric' => __('Enter an average heart rate for your training',true),
                       'notempty' => __('Enter an average heart rate for your training',true),
-                      'greater' => __('Must be greater than 80',true),
-                      'lower' => __('Must be lower than 240',true)
+                      'greater' => __('Must be greater than',true) . ' 80',
+                      'lower' => __('Must be lower than',true) . ' 240'
                   ),
-                  'label' => __('Avg. Heart Rate', true)
+                  'label' => __('Avg. heart rate', true)
 ));
 
 echo $form->input('testworkout', array(

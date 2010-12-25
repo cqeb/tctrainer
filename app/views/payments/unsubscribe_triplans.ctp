@@ -31,9 +31,7 @@
                    echo $form->hidden('canceled');
 ?>
                    <br /><br />
-                   <?php __('You will be redirected to Paypal.com and have to unsubscribe there.
-                   IMPORTANT! You cancel all payments in the future. Refunding of already payed fees is not possible. 
-                   The current subscription will automatically end with'); ?><?php echo ' ' . $payed_to; ?>.
+                   <?php __('You will be redirected to Paypal.com and have to unsubscribe there. IMPORTANT! You cancel all payments in the future. Refunding of already payed fees is not possible. The current subscription will automatically end with'); ?><?php echo ' ' . $payed_to; ?>.
                    <br /><br />
 <?php
                    $button_url = Configure::read('App.serverUrl') . '/img/btn_unsubscribe_LG.gif';

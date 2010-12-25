@@ -31,7 +31,7 @@ echo $form->input('firstname',
      'maxLength' => 255,
 //     'class' => 'required',
      'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('<b>My firstname</b>', true)
+     'label' => __('My firstname', true)
 //     'default' => __('Enter Firstname here', true)
 ));
 
@@ -43,13 +43,13 @@ echo $form->input('lastname',
      'between' => '',
      'maxLength' => 255,
      'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('<b>My lastname</b>', true)
+     'label' => __('My lastname', true)
 //     'default' => __('Enter Lastname here', true)
 ));
 
 echo $form->input('gender',
      array(
-     'before' => __('<label for="gender"><b>Gender</b></label>', true),
+     'before' => __('Gender', true),
      'after' => '',
      'between' => '',
      'legend' => false,
@@ -66,7 +66,7 @@ echo $form->input('email',
      'after' => '',
      'between' => '',
      'maxLength' => 255,
-     'label' => __('<b>My E-Mail</b>', true),
+     'label' => __('My E-Mail', true),
      'error' => array('wrap' => 'div', 'style' => 'color:red'),
 //     'default' => __('Enter E-Mail here', true)
 ));
@@ -106,7 +106,7 @@ echo $form->input('birthday',
      'between' => '',
      'minYear' => '1930',
      'maxYear' => '1995',
-     'label' => __('<b>Birthday</b>', true),
+     'label' => __('Birthday', true),
      'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
 
@@ -161,7 +161,7 @@ echo $form->input('password',
      'maxLength' => 255,
      'legend' => false,
      'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('<b>My Password</b>', true)
+     'label' => __('My Password', true)
 ));
 
 echo $form->password('passwordapprove',
@@ -173,7 +173,7 @@ echo $form->password('passwordapprove',
      //'size' => 65,
      'legend' => false,
      'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('<label><b>Enter your Password again please</b></label>')
+     'label' => __('Enter your Password again please')
 ));
 
 echo $form->hidden('passwordcheck');

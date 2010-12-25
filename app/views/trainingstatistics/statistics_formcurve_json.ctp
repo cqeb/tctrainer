@@ -21,7 +21,6 @@ $intervaldays = 7;
 				//"type":"solid-dot", "colour":"#a44a80", "dot-size": 3,
 				"tip":"#val# <?php echo $unit['length']; ?>/h" },
 			"on-show":	{"type": "shrink-in", "cascade":1, "delay":0.5},
-			"tip":"<?php __('xxxx:'); ?> #val#",
 			"values":[<?php for ( $i = 0; $i < count($trainings); $i++ ) { $rdate = date( 'Y-m-d', ( $startday_ts + ( $i * 86400 ) ) ); $val = $trainings[$rdate]['distanceperunit']; /**if ( $val == 0 ) echo "\"\""; else **/ echo $val; if ( $i < ( count( $trainings ) - 1 ) ) echo ","; } ?>]
 		}
 	],
