@@ -179,9 +179,12 @@ td.nobg {
 .header .navigation ul li a:hover, .header .navigation ul li a.active {
 	font-weight: bold;
 	background: white url('../img/bg-topnav.gif') repeat-x;
-	padding-right: 19px;
 	text-decoration: none;
 	text-shadow: white 1px 1px 0px;
+}
+
+.header .navigation ul li img {
+	margin-top: -7px;
 }
 
 /**

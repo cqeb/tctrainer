@@ -156,6 +156,73 @@ class MesoCyclePhaseTableProvider {
 	}
 
 	/**
+	 * this will recalculate the training time track, which is needed when
+	 * the user changes his average workout hours to fit his weekly
+	 * training hours.
+	 * the newly calculated time table ist stored back automagically to the
+	 * database
+	 * @param Athlete $athlete the athlete
+	 * @param DB $DB Database object
+	 */
+	public function recalcTimes($DB, $athlete) {
+		$table = self::load($DB, $athlete);
+		if (!$table) {
+			// there was no table to be loaded so just quit here
+			return;
+		}
+		
+		// now add training times
+		self::addTrainingTimes($table, 
+			$athlete->getTrainingTime(), 
+			$athlete->getRecoveryCycle());
+
+		// speichern
+		self::update($DB, $athlete, $table);
+	}
+	
+	/**
+	 * saves the values of a phase table with an updated 
+	 * time trackback to the database
+	 * WARNING! this is just meant to be used within
+	 * the context of load() and recalcTimes()
+	 * @param DB $DB Database object
+	 * @param Athlete $athlete th athlete
+	 */
+	protected function update($DB, $athlete, $table) {
+		reset($table);
+		while(list($k,$v)=each($table)) {
+			$DB->query("UPDATE mesocyclephases 
+				SET time = " . $v["time"] . ",
+				usertime = 0
+				WHERE athlete_id = " . $athlete->getId() . "
+				AND date = '" . $k . "'");
+		}
+	}
+	
+	/**
+	 * load a mesocycletable from the database for an athlete
+	 * @param DB $DB Database object
+	 * @param Athlete $athlete th athlete
+	 */
+	protected function load($DB, $athlete) {
+		$start = DateTimeHelper::getWeekStartDay(new DateTime());
+		$res = $DB->query("SELECT date, phase FROM mesocyclephases
+			WHERE athlete_id = " . $athlete->getId() . " 
+			AND date >= '" . $start->format("Y-m-d"). "'");
+		
+		if (count($res) == 0) {
+			return false;
+		}
+		
+		// now some transformation is needed
+		$table = array();
+		while (list($k,$week) = each($res)) {
+			$table[$week["date"]]["phase"] = $week["phase"];
+		}
+		return $table;		
+	}
+	
+	/**
 	 * adds training times to the table
 	 * @param array $table containing training phases
 	 * @param int $baseTime basic time reserverd for training

@@ -79,7 +79,7 @@ echo $html->charset();
 		    <div class="grid_2 avgweekly">
       		<div class="box last">
       			<label for="avg"><?php __('Training Hours'); ?></label>
-      			<input type="text" name="avg" id="avg" disabled="disabled"/>
+      			<input type="text" name="avg" id="avg" />
       			<label for="week">This Week</label>
       			<input type="text" name="week" id="week" />
       			<a href="javascript:TrainingPlanner.resetWeeklyHours();" class="reset"><?php __('reset'); ?></a>

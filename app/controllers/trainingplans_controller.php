@@ -64,7 +64,9 @@ class TrainingplansController extends AppController {
 		$this->set('rightcol', "mesocycle");
 	}
 	
-	// ajax call for retrieving plans
+	/**
+	 * ajax call for retrieving plans 
+	 */
 	function get() {
 		$this->layout = 'plain';
 		if (!isset($_GET["debug"])) {
@@ -74,7 +76,21 @@ class TrainingplansController extends AppController {
 		$this->set('plan', $html);
 	}
 	
-	// persist workout settings such as time and ratio to database
+	/**
+	 * set an average training time via ajax
+	 */
+	function set_avg() {
+		$this->layout = 'plain';
+		if ($this->Provider->athlete->setTrainingTime($_POST["time"])) {
+			$this->set('res', 'ok');
+		} else {
+			$this->set('res', 'error');
+		}
+	}
+	
+	/**
+	 * persist workout settings such as time and ratio to database
+	 */ 
 	function save_workout_settings() {
 		$this->layout = 'plain';
 		Configure::write('debug', 0);

@@ -1,36 +1,45 @@
 <?php
 // include all core components
-require '../../core/athlete/athlete.class.php';
-require '../../core/helpers/database.class.php';
-require '../../core/helpers/datetimehelper.class.php';
-require '../../core/providers/workoutprovider.class.php';
-require '../../core/providers/mesocyclephasetableprovider.class.php';
-require '../../core/providers/mesocycleprovider.class.php';
-require '../../core/providers/trirunprovider.class.php';
-require '../../core/schedule/schedule.class.php';
-require '../../core/schedule/race.class.php';
-require '../../core/sequences/sequence.class.php';
-require '../../core/sequences/trirunworkouttypesequence.class.php';
-require '../../core/workouts/workout.class.php';
-require '../../core/workouts/swimworkout.class.php';
-require '../../core/workouts/bikeworkout.class.php';
-require '../../core/workouts/runworkout.class.php';
-require '../../core/renderers/workoutrenderer.class.php';
+// TODO this is just plain ugly with cake - find a better solution for this
+require '../../app/core/athlete/athlete.class.php';
+require '../../app/core/helpers/database.class.php';
+require '../../app/core/helpers/datetimehelper.class.php';
+require '../../app/core/providers/workoutprovider.class.php';
+require '../../app/core/providers/mesocyclephasetableprovider.class.php';
+require '../../app/core/providers/mesocycleprovider.class.php';
+require '../../app/core/providers/trirunprovider.class.php';
+require '../../app/core/schedule/schedule.class.php';
+require '../../app/core/schedule/race.class.php';
+require '../../app/core/sequences/sequence.class.php';
+require '../../app/core/sequences/trirunworkouttypesequence.class.php';
+require '../../app/core/workouts/workout.class.php';
+require '../../app/core/workouts/swimworkout.class.php';
+require '../../app/core/workouts/bikeworkout.class.php';
+require '../../app/core/workouts/runworkout.class.php';
+require '../../app/core/renderers/workoutrenderer.class.php';
 
 class ProviderComponent extends Object {
 	var $components = array('Session');
 	var $helpers = array('Session');
 	var $DB;
+	var $athlete;
 	
+	/**
+	 * initializes the provider component
+	 * @param unknown_type $controller not needed
+	 * @param unknown_type $settings not needed
+	 */
 	public function initialize($controller, $settings) {
+		// TODO omg change this!!!
 		$this->DB = new Database("root", "", "trainer", "localhost");
+		$this->athlete = new Athlete($this->DB, $this->Session->read('userobject'));
 	}
 	
 	/**
 	 * get a plan
 	 */
 	public function getPlan() {
-		$athlete = new Athlete($this->DB, $this->Session->read('userobject'));
+		
 		$genWeek = DateTimeHelper::getWeekStartDay(new DateTime());
 
 		if (isset($_GET['o'])) {
@@ -38,7 +47,7 @@ class ProviderComponent extends Object {
 			$genWeek->add(new DateInterval("P" . $offset . "D"));
 		}
 		
-		$mcp = new MesoCycleProvider($this->DB, $athlete, $genWeek);
+		$mcp = new MesoCycleProvider($this->DB, $this->athlete, $genWeek);
 		$time = $mcp->getTrainingTime($genWeek);
 
 		// now generate workouts
@@ -48,34 +57,34 @@ class ProviderComponent extends Object {
 		$bikeWorkouts = array();
 		$runWorkouts = array();
 		
-		switch($this->getMultisportType($athlete->getSport())) {
+		switch($this->getMultisportType($this->athlete->getSport())) {
 			case 'TRIATHLON':
 				$swimWorkouts = array (
-					new SwimWorkout($athlete, 'E1', $mcp->getTrainingTime($genWeek, 'SWIM')));
+					new SwimWorkout($this->athlete, 'E1', $mcp->getTrainingTime($genWeek, 'SWIM')));
 				
 				$bikeWorkouts = array (
-					new BikeWorkout($athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
+					new BikeWorkout($this->athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
 
-				$trp = new TriRunProvider($this->DB, $athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save();
 				break;
             case 'DUATHLON':
             	$bikeWorkouts = array (
-					new BikeWorkout($athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
+					new BikeWorkout($this->athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
 				
-				$trp = new TriRunProvider($this->DB, $athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save();
 				break;
 			case 'RUN':
-				$trp = new TriRunProvider($this->DB, $athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save();
 				break;
 			case 'BIKE':
             	$bikeWorkouts = array (
-					new BikeWorkout($athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
+					new BikeWorkout($this->athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
 				break;
 			default:
 				break;
@@ -87,7 +96,7 @@ class ProviderComponent extends Object {
 		$html .= WorkoutRenderer::render($workouts);
 		
 		// also attach time and workout settings
-		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $athlete->getId()); 
+		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->athlete->getId()); 
 		return $html;
 	}
 	
@@ -206,6 +215,15 @@ class ProviderComponent extends Object {
             	throw new Exception("Unknown multisport type $typeofsport");
 				break;
 		}
+	}
+	
+	/**
+	 * this will recalculate the training time track, which is needed when
+	 * the user changes his average workout hours to fit his weekly
+	 * training hours
+	 */
+	public function recalcTimes() {
+		MesoCyclePhaseTableProvider::recalcTimes($this->DB, $this->athlete);
 	}
 }
 
