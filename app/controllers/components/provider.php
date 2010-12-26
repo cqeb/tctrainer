@@ -8,11 +8,13 @@ require '../../app/core/providers/workoutprovider.class.php';
 require '../../app/core/providers/mesocyclephasetableprovider.class.php';
 require '../../app/core/providers/mesocycleprovider.class.php';
 require '../../app/core/providers/trirunprovider.class.php';
+require '../../app/core/providers/tribikeprovider.class.php';
 require '../../app/core/schedule/schedule.class.php';
 require '../../app/core/schedule/race.class.php';
 require '../../app/core/sequences/sequence.class.php';
 require '../../app/core/sequences/workouttypesequence.class.php';
 require '../../app/core/sequences/trirunworkouttypesequence.class.php';
+require '../../app/core/sequences/tribikeworkouttypesequence.class.php';
 require '../../app/core/workouts/workout.class.php';
 require '../../app/core/workouts/swimworkout.class.php';
 require '../../app/core/workouts/bikeworkout.class.php';
@@ -62,8 +64,11 @@ class ProviderComponent extends Object {
 				$swimWorkouts = array (
 					new SwimWorkout($this->athlete, 'E1', $mcp->getTrainingTime($genWeek, 'SWIM')));
 				
-				$bikeWorkouts = array (
-					new BikeWorkout($this->athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
+				$tbp = new TriBikeProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
+				$bikeWorkouts = $tbp->generate($genWeek);
+				$tbp->save(); 
+				//array (
+				//	new BikeWorkout($this->athlete, 'E1', $mcp->getTrainingTime($genWeek, 'BIKE')));
 
 				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
