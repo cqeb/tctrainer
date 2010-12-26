@@ -61,7 +61,7 @@ abstract class Workout {
 	 * generate a new workout
 	 * @param Athlete $athlete athlete
 	 * @param $type of the workout
-	 * @param $duration of the workout
+	 * @param $duration of the workout, like E1, M1...
 	 * @param $lsd flags this workout as an lsd workout
 	 */
 	public function __construct(Athlete $athlete, $type, $duration, $lsd=false) {

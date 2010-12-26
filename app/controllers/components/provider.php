@@ -11,6 +11,7 @@ require '../../app/core/providers/trirunprovider.class.php';
 require '../../app/core/schedule/schedule.class.php';
 require '../../app/core/schedule/race.class.php';
 require '../../app/core/sequences/sequence.class.php';
+require '../../app/core/sequences/workouttypesequence.class.php';
 require '../../app/core/sequences/trirunworkouttypesequence.class.php';
 require '../../app/core/workouts/workout.class.php';
 require '../../app/core/workouts/swimworkout.class.php';
