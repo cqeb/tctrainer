@@ -86,7 +86,7 @@ $sporttype_array = $sporttype_array_metric;
 echo $form->input('typeofsport',
                   array(
                   'legend' => false,
-                  'label' => __('<b>Your sport passion?</b>', true),
+                  'label' => __('Your sport passion?', true),
                   'before' => '',
                   'after' => '',
                   'between' => '',
@@ -117,8 +117,7 @@ echo $form->input('rookie',
 <?php
 echo $form->input('medicallimitations',
                                        array(
-                                       'before' => __('<b>Do you have any medical impacts preventing you from doing sports or
-                                                did your doctor told you not to do any sports? Please talk to your doctor BEFORE starting your training!</b>', true),
+                                       'before' => __('Do you have any medical impacts preventing you from doing sports or did your doctor told you not to do any sports? Please talk to your doctor BEFORE starting your training!', true),
                                        'after' => '',
                                        'between' => '',
                                        'legend' => false,
@@ -134,8 +133,7 @@ echo $form->input('medicallimitations',
 ?>
 
 <div class="messagebox">
-<?php __('Help user somehow - how many ours for IM, Half-IM etc ...
-Should be calculated by various factors (rookie, type of sport) - <b>function by CP missing</b>'); ?>
+<?php __('Help user somehow - how many ours for IM, Half-IM etc. Should be calculated by various factors (rookie, type of sport)'); ?>
 </div>
 
 Translation?
@@ -151,7 +149,7 @@ echo $form->input('weeklyhours',
      'maxLength' => 255,
      'default' => '10',
      'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('<b>Weekly hours</b>', true)
+     'label' => __('Weekly hours', true)
 //     'default' => __('Enter Lastname here', true)
 ));
 
@@ -162,7 +160,7 @@ echo $form->input('weeklyhours',
 echo $form->input('dayofheaviesttraining',
                   array(
                   'legend' => false,
-                  'label' => __('<b>Day of heaviest training</b>', true),
+                  'label' => __('Day of heaviest training', true),
                   'before' => '',
                   'after' => '',
                   'between' => '',
@@ -185,7 +183,7 @@ echo $form->input('coldestmonth', array(
                                   'before' => '',
                                   'after' => '',
                                   'between' => '',
-                                  'label' => __('<b>Coldest month</b>', true),
+                                  'label' => __('Coldest month', true),
                                   'options' => array(
                                   '1' => __('January',true),
                                   '2' => __('February',true),
@@ -216,13 +214,13 @@ echo $form->input('maximumheartrate',
      'maxLength' => 255,
      'default' => (220-$age),
      'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('<b>Your maximum heart rate</b>', true)
+     'label' => __('Your maximum heart rate', true)
 ));
 
 ?>
                    <br />
                    <div class="messagebox">
-                   <?php __('<b>Your Lactate Threshold Heart Rate (estimated)</b>'); ?>
+                   <?php __('Your Lactate Threshold Heart Rate (estimated)'); ?>
                    <br />
                    <?php echo round((220-$age)*0.85); ?>
                    </div>
@@ -245,7 +243,7 @@ echo $form->input('unitdate', array(
                                  'before' => '',
                                  'after' => '',
                                  'between' => '',
-                                 'label' => __('<b>Dateformat</b>', true),
+                                 'label' => __('Dateformat', true),
                                  'options' => array(
                                  'ddmmyyyy' => __('DD.MM.YYYY', true),
                                  'mmddyyyy' => __('MM.DD.YYYY', true),
@@ -256,7 +254,7 @@ echo $form->input('yourlanguage', array(
                                   'before' => '',
                                   'after' => '',
                                   'between' => '',
-                                  'label' => __('<b>Your language</b>', true),
+                                  'label' => __('Your language', true),
                                   'options' => array (
                                             'ger' => __('German',true),
                                             'eng' => __('English',true)
@@ -273,7 +271,7 @@ echo $form->hidden('id');
 ?>
                    <br />
                    <div class="messagebox">
-                   <?php __('You MUST have a heart rate monitor like <a href="http://www.amazon.de/gp/product/B001NGOYMU?ie=UTF8&tag=trico-21&linkCode=as2&camp=1638&creative=6742&creativeASIN=B001NGOYMU" target="_blank">POLAR</a> for your training as we offer heart rate oriented trainingplans.') ?>
+                   <?php __('You MUST have a heart rate monitor like') . ' ' . '<a href="http://www.amazon.de/gp/product/B001NGOYMU?ie=UTF8&tag=trico-21&linkCode=as2&camp=1638&creative=6742&creativeASIN=B001NGOYMU" target="_blank">POLAR</a> ' . __('for your training as we offer heart rate oriented trainingplans.') ?>
                    <br /><br />
                    <center>
                    <a href="http://www.amazon.de/gp/product/B001NGOYMU?ie=UTF8&tag=trico-21&linkCode=as2&camp=1638&creative=6742&creativeASIN=B001NGOYMU" target="_blank"><img border="0" src="https://images-na.ssl-images-amazon.com/images/I/41WA91iWQBL._SL110_.jpg" alt="Heart rate monitor" /></a><img src="http://www.assoc-amazon.de/e/ir?t=trico-21&l=as2&o=3&a=B001NGOYMU" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />

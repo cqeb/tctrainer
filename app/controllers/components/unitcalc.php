@@ -642,42 +642,42 @@ class UnitcalcComponent extends Object {
                 $convertunit = '';
             }  
             
-            $tri_ironman = __('Ironman (', true) . 
-              $this->convert_metric( '3.8', $convertunit, 1 ) . ' ' . $unit . ' ' . __('swim, ', true) . 
-              $this->convert_metric( '180', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
-              $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
-            $tri_halfironman = __('Half-Ironman (', true) . 
-              $this->convert_metric( '1.9', $convertunit, 1) . ' ' . $unit . ' ' . __('swim, ', true) . 
-              $this->convert_metric( '90', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
-              $this->convert_metric( '21', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
-            $tri_olympic = __('Olympic Distance (', true) . 
-              $this->convert_metric( '1.5', $convertunit, 1 ) . ' ' . $unit . ' ' . __('swim, ', true) . 
-              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
-            $tri_sprint = __('Sprint Distance (', true) . 
-              $this->convert_metric( '0.75', $convertunit, 1 ) . ' ' . $unit . ' ' . __('swim, ', true) . 
-              $this->convert_metric( '20', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
-              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+            $tri_ironman = __('Ironman', true) . ' (' . 
+              $this->convert_metric( '3.8', $convertunit, 1 ) . ' ' . $unit . ' ' . __('Swim', true) . ', ' .  
+              $this->convert_metric( '180', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' . 
+              $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $tri_halfironman = __('Half-Ironman', true) . '( ' .
+              $this->convert_metric( '1.9', $convertunit, 1) . ' ' . $unit . ' ' . __('Swim', true) . ', ' . 
+              $this->convert_metric( '90', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' .
+              $this->convert_metric( '21', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $tri_olympic = __('Olympic Distance', true) . '( ' .
+              $this->convert_metric( '1.5', $convertunit, 1 ) . ' ' . $unit . ' ' . __('Swim', true) . ', ' . 
+              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' .
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $tri_sprint = __('Sprint Distance', true) . '( ' . 
+              $this->convert_metric( '0.75', $convertunit, 1 ) . ' ' . $unit . ' ' . __('Swim', true) . ', ' . 
+              $this->convert_metric( '20', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' .
+              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
                 
-            $run_ultra = __('Ultrarun (> ', true) . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
-            $run_marathon = __('Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
-            $run_halfmarathon = __('Half-Marathon (', true) . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
-            $run_10k = __('Race (', true) . $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
-            $run_5k = __('Race (', true) . $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+            $run_ultra = __('Ultrarun', true) . ' (> ' . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $run_marathon = __('Marathon', true) . '( ' . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $run_halfmarathon = __('Half-Marathon', true) . '( ' . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $run_10k = __('Race', true) . '( ' . $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $run_5k = __('Race', true) . '( ' . $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
                 
-            $duathlon_middle = __('Duathlon (', true) .
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run, ', true) . 
-              $this->convert_metric( '60', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+            $duathlon_middle = __('Duathlon', true) . ' (' . 
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ', ' . 
+              $this->convert_metric( '60', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' .
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
             $duathlon_short = __('Duathlon (', true) .
-              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run, ', true) . 
-              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . ' ' . __('bike, ', true) . 
-              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('run)', true);
+              $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ', ' . 
+              $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' .
+              $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
                 
-            $bike_ultra = __('Races (> ', true) . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';
-            $bike_long = __('Races (', true) . $this->convert_metric( '100', $convertunit, 0 ) . '-' . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';
-            $bike_middle = __('Races (', true) . $this->convert_metric( '50', $convertunit, 0 ) . '-' . $this->convert_metric( '100', $convertunit, 0 ) . ' ' . $unit . ')';
-            $bike_short = __('Races (< ', true) . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ')';
+            $bike_ultra = __('Races', true) . ' (> ' . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';
+            $bike_long = __('Races', true) . ' (' . $this->convert_metric( '100', $convertunit, 0 ) . '-' . $this->convert_metric( '150', $convertunit, 0 ) . ' ' . $unit . ')';
+            $bike_middle = __('Races', true) . ' (' . $this->convert_metric( '50', $convertunit, 0 ) . '-' . $this->convert_metric( '100', $convertunit, 0 ) . ' ' . $unit . ')';
+            $bike_short = __('Races', true) . ' (< ' . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ')';
 
             $sports = array(
                                  'Triathlon' => array (

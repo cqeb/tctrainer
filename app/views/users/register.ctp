@@ -111,8 +111,8 @@ echo $form->input('lactatethreshold',
  	   'class' => 'medium',
      'error' => array( 
         'numeric' => __('Enter your max. lactate threshold heart rate',true),
-        'greater' => __('Must be at least 120',true),
-        'lower' => __('Must be at lower than 220',true),
+        'greater' => __('Must be at least',true) . ' 120',
+        'lower' => __('Must be at lower than',true) . ' 220',
         'notempty' => __('Enter your max. lactate threshold heart rate',true)
      ),
      'label' => __('Lactate threshold', true)
@@ -131,8 +131,8 @@ echo $form->input('weeklyhours',
      'maxLength' => 255,
      'error' => array( 
           'numeric' => __('Enter your weekly available training hours', true),
-          'greater' => __('Must be at least 0 hours',true),
-          'lower' => __('Must be at lower than 60 hours',true),
+          'greater' => __('Must be at least',true) . ' 0 ' . __('hours', true),
+          'lower' => __('Must be at lower than', true) . ' 60 ' . __('hours', true),
           'notempty' => __('Enter your weekly available training hours',true) 
      ),
      'label' => __('Weekly hours', true)
@@ -141,7 +141,7 @@ echo $form->input('weeklyhours',
 echo $form->input('rookie',
      array(
      'type' => 'checkbox',
-     'label' => __('Beginner?', true)
+     'label' => __('Beginner', true) . '?'
 ));
 ?>
 <div class="messagebox" style="overflow:auto; width: 420px; height: 100px;">
