@@ -50,13 +50,13 @@ class User extends AppModel {
                   'notempty' => array(
                           'rule' => 'email',
                           'required' => true
-                          //'message' => 'Enter your E-Mail, please'
+                          //'message' => 'Enter your e-mail, please'
                           ),
                         ),
           'emailcheck' => array(
                   'rule' => array('equalTo', '1'),
                   'required' => true
-                  //'message' => 'Your E-Mail is not correct or is already registered. Use "password forgotten" to retrieve your password!'
+                  //'message' => 'Your e-mail is not correct or is already registered. Use "password forgotten" to retrieve your password!'
                   ),
           'password' => array(
                   'length' => array(
@@ -98,6 +98,13 @@ class User extends AppModel {
                   'rule' => 'date',
                   'allowEmpty' => false
                   //'message' => 'Enter a valid date'
+                  ),
+          'typeofsport' => array(
+                  'notempty' => array(
+                             'rule' => 'notEmpty',
+                             'required' => true
+                             //'message' => 'Enter your weekly available training hours, please'
+                  ),
                   ),
           'weeklyhours' => array(
                   'numeric' => array(
@@ -191,7 +198,7 @@ class User extends AppModel {
                   'notempty' => array(
                              'rule' => 'notEmpty',
                              'required' => true
-                             //'message' => 'Enter your height, please'
+                             //'message' => 'Enter your height'
                              ),
                              ),
           'targetweight' => array(

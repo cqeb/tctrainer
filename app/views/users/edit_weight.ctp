@@ -27,7 +27,7 @@ echo $form->input('height',
      'between' => '',
      'maxLength' => 7,
      'error' => array( 
-             'numeric' => __('Enter your height.',true),
+             'numeric' => __('Enter your height',true),
              'greater' => __('Must be at least',true) . ' ' . $min_height,
              'lower' => __('Must be lower than',true) . ' ' . $max_height,
              'notempty' => __('Enter your height',true)

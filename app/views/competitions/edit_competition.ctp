@@ -39,8 +39,8 @@ echo $form->input('competitiondate',
      'label' => __('Date', true)
 ));
 
-echo '<br /><br />';
-__('You should only define 2-3 important competitions per year!');
+echo '<br />';
+__('You should only define 3 important competitions per year!');
 echo '<br />';
 
 /**

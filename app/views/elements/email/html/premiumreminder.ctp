@@ -9,8 +9,10 @@
     </tr>
  </table>
 
- <p><i><?php __('30 Cents a day and you get your professional interactive training coach.'); ?></i></p>
- <p><?php __('Gain speed, loose weight!'); echo '<br /><br />'; __('Go to TriCoreTraining.com and subscribe to a membership for less than 10 bucks!'); ?></p>
+ <p><i><?php __('30 cents a day and you get your professional, interactive training coach.'); ?></i></p>
+ 
+ <p><?php __('Gain speed, loose weight!'); echo '<br /><br />'; __('Go to TriCoreTraining.com and subscribe to a membership for less than 10 bucks a month!'); ?></p>
+ 
  <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/subscribe_triplans/"><?php __('Yes, I\'ll do!'); ?></a></p>
                            
  <p><?php __('Yours, Clemens'); ?></p>

@@ -1,5 +1,5 @@
 
-<?php __('Hello'); ?> Admin,
+<?php __('Aloha'); ?> Admin,
 
 <?php __('some notification arrived.'); ?>
 

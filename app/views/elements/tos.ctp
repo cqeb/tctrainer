@@ -1,5 +1,3 @@
-<span style="font-size: 10px;white-space: pre;">
-
 <b>Die Allg. Gesch&auml;ftsbedingungen (AGBs) des TriCoreTraining Vereins (TCT).</b>
 
 Der TriCoreTraining Verein wird in den AGBs als TCT abgek&uuml;rzt.
@@ -105,5 +103,3 @@ unwirksam sein oder werden, so bleibt die G&uuml;ltigkeit der
 
 * Gerichtsstand
 Der Gerichtsstand ist Wien, &Ouml;sterreich.
-
-</span>

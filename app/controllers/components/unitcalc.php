@@ -669,7 +669,7 @@ class UnitcalcComponent extends Object {
               $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ', ' . 
               $this->convert_metric( '60', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' .
               $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
-            $duathlon_short = __('Duathlon (', true) .
+            $duathlon_short = __('Duathlon', true) . ' (' .
               $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ', ' . 
               $this->convert_metric( '40', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Bike', true) . ', ' .
               $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
@@ -680,29 +680,29 @@ class UnitcalcComponent extends Object {
             $bike_short = __('Races', true) . ' (< ' . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ')';
 
             $sports = array(
-                                 'Triathlon' => array (
-                                             'TRIATHLON IRONMAN' => $tri_ironman,
-                                             'TRIATHLON HALFIRONMAN' => $tri_halfironman,
-                                             'TRIATHLON OLYMPIC' => $tri_olympic,
-                                             'TRIATHLON SPRINT' => $tri_sprint
-                                 ),
-                                 'Running' => array(
-                                             'RUN ULTRA' => $run_ultra,
-                                             'RUN MARATHON' => $run_marathon,
-                                             'RUN HALFMARATHON' => $run_halfmarathon,
-                                             'RUN 10K' => $run_10k,
-                                             'RUN 5K' => $run_5k
-                                 ),
-                                 'Duathlon' => array(
-                                             'DUATHLON MIDDLE' => $duathlon_middle,
-                                             'DUATHLON SHORT' => $duathlon_short
-                                 ),
-                                 'Bikeracing' => array(
-                                             'BIKE ULTRA' => $bike_ultra,
-                                             'BIKE LONG' => $bike_long,
-                                             'BIKE MIDDLE' => $bike_middle,
-                                             'BIKE SHORT' => $bike_short
-                                 )
+                 'Triathlon' => array (
+                             'TRIATHLON IRONMAN' => $tri_ironman,
+                             'TRIATHLON HALFIRONMAN' => $tri_halfironman,
+                             'TRIATHLON OLYMPIC' => $tri_olympic,
+                             'TRIATHLON SPRINT' => $tri_sprint
+                 ),
+                 'Running' => array(
+                             'RUN ULTRA' => $run_ultra,
+                             'RUN MARATHON' => $run_marathon,
+                             'RUN HALFMARATHON' => $run_halfmarathon,
+                             'RUN 10K' => $run_10k,
+                             'RUN 5K' => $run_5k
+                 ),
+                 'Duathlon' => array(
+                             'DUATHLON MIDDLE' => $duathlon_middle,
+                             'DUATHLON SHORT' => $duathlon_short
+                 ),
+                 'Bikeracing' => array(
+                             'BIKE ULTRA' => $bike_ultra,
+                             'BIKE LONG' => $bike_long,
+                             'BIKE MIDDLE' => $bike_middle,
+                             'BIKE SHORT' => $bike_short
+                 )
             );
             
             return $sports; 

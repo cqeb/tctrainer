@@ -67,9 +67,9 @@ echo $form->input('email',
      'between' => '',
      'class' => 'required',
      'maxLength' => 255,
-     'label' => __('E-Mail', true),
+     'label' => __('E-mail', true),
      'error' => array( 
-        'notempty' => __('Enter your E-Mail', true)
+        'notempty' => __('Enter your e-mail', true)
      )
 ));
 

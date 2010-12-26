@@ -52,7 +52,6 @@ $sporttype_array_metric = array(
                                  )
                          );
 
-// TODO convert
 $sporttype_array_english = array(
                                  'Triathlon' => array (
                                              'Triathlon Ironman' => __('Ironman (3.8mi swim, 180mi bike, 42mi run)', true),
@@ -79,7 +78,6 @@ $sporttype_array_english = array(
                          );
 
 
-//TODO function missing - you have no sessioninfo :(
 // at this point - we do not have the unit information :(
 $sporttype_array = $sporttype_array_metric;
 
@@ -233,7 +231,7 @@ echo $form->input('unit', array(
                                  'before' => '',
                                  'after' => '',
                                  'between' => '',
-                                 'label' => __('<b>Unit</b>', true),
+                                 'label' => __('Unit', true),
                                  'options' => array(
                                  'metric' => __('Metric (Kilometres, Kilograms, Centimeters)', true),
                                  'english' => __('English (Miles, Pounds, Feet)', true)

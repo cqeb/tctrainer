@@ -1,5 +1,5 @@
 
-<?php __('Hello'); ?> <?php echo $user['User']['firstname']; ?>,
+<?php __('Aloha'); ?> <?php echo $user['User']['firstname']; ?>,
 
 <?php __('Thank you for subscribing to TriCoreTraining-Plans for'); ?> <?php echo $timeinterval; ?> <?php __('months'); ?>.
 

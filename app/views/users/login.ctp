@@ -38,7 +38,7 @@ echo $form->input('email',
      'between' => '',
      'maxLength' => 255,
      'class' => 'required',
-     'label' => __('E-Mail', true),
+     'label' => __('E-mail', true),
      'error' => array( 
           'notempty' => __('You have to enter an e-mail', true)
      ) 
@@ -60,7 +60,7 @@ echo $form->input('password',
 ?>
 <br />
 <?php
-		   echo $form->input('remember_me', array('label' => __('Remember me.', true), 'type' => 'checkbox'));
+		   echo $form->input('remember_me', array('label' => __('Remember me', true), 'type' => 'checkbox'));
 ?>
 
                    <?php echo $form->end(__('Sign In', true));?>

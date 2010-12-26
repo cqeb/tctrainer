@@ -1,5 +1,5 @@
 
-<?php __('Hello'); ?> <?php echo $user['User']['firstname']; ?>,
+<?php __('Aloha'); ?> <?php echo $user['User']['firstname']; ?>,
 
 <?php __('your password is reset.'); ?>
 

@@ -7,9 +7,16 @@
          background-color: #e6e6e6;
          margin: 0;
          padding: 0;
+         font-size: 12px;
+         
          font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
       }
 
+      ol {
+         font-size: 12px;
+         font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
+      }
+      
       a img {
          border: none;
       }
@@ -18,6 +25,9 @@
          background-color: #ffffff;
          font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
          font-size: 12px;
+      }
+      th {
+         border: 1px; border-style: solid;
       }
 
       td.permission {

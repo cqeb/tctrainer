@@ -13,7 +13,7 @@
                    </div><br />
                    <?php } ?>
 
-                   <?php __('You received an E-Mail with your new password.'); ?>
+                   <?php __('You received an e-mail with your new password.'); ?>
 
                    </fieldset>
 

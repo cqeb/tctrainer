@@ -21,7 +21,7 @@
                    <br />
 
 <table summary="<?php __('All possible subscriptions'); ?>">
-<caption><?php __('SUBSCRIPTIONS'); ?></caption>
+<!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->
 <colgroup>
           <col class="colA">
           <col class="colB">
@@ -33,45 +33,45 @@
 </tr>
 <tr>
     <th><?php __('Features'); ?></th>
-    <th><?php __('Premium'); ?></th>
-    <th><?php __('Free'); ?></th>
+    <th style="width:25%"><?php __('Premium'); ?></th>
+    <th style="width:25%"><?php __('Free'); ?></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
     <td><?php __('Magazine'); ?></td>
-    <td>X</td>
-    <td>X</td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
 </tr>
 <tr>
     <td><?php __('Community'); ?></td>
-    <td>X</td>
-    <td>X</td>
-</tr>
-<tr class="odd">
-    <td><?php __('Define competitions'); ?></td>
-    <td>X</td>
-    <td>X</td>
-</tr>
-<tr>
-    <td><?php __('Training logbook'); ?></td>
-    <td>X</td>
-    <td>X</td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
     <td><?php __('Change profile'); ?></td>
-    <td>X</td>
-    <td>X</td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr>
+    <td><?php __('Training logbook'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr class="odd">
+    <td><?php __('Define competitions'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
 </tr>
 <tr>
     <td><?php __('Training statistics'); ?></td>
-    <td>X</td>
-    <td>X</td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
     <td><?php __('Training schedule'); ?></td>
-    <td>X</td>
-    <td></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center"><?php __('NO'); ?></td>
 </tr>
 <!--
 <tfoot>
@@ -120,9 +120,9 @@
 
 <img alt="<?php __('PAYPAL - secure payment solutions'); ?>" src="<?php echo Configure::read('App.serverUrl'); ?>/img/paypal_logo.gif" />
 
-<?php __('What is PAYPAL? It is a reputable and well-known payment solution provider (owned by e-Bay) and provides creditcard payment
+<?php __('What is PAYPAL? It is a reputable and well-known payment solution provider (owned by e-Bay) and provides creditcard/payment
 solutions for websites. You send your necessary confidential payment information via a secure connection (128-bit encrypted SSL-connection)
-and provide these confidential data only to PAYPAL and NOT to us (we receive your payment only).'); ?>
+and provide these confidential data only to PAYPAL and NOT to us (we only receive your payment).'); ?>
 <br /><br />
 <?php __('Your trial period will be added if you subscribe to a PREMIUM membership.'); ?>
 <br />

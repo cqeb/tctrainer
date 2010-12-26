@@ -43,10 +43,10 @@ class TrainingplansController extends AppController {
 		// build list of user sports
 		switch ($this->Provider->getMultisportType($u['typeofsport'])) {
 			case 'TRIATHLON':
-				$usersport = __('Swim,Bike,Run', true);
+				$usersport = __('Swim',true) . ',' . __('Bike', true) . ',' . __('Run', true);
 				break;
 			case 'DUATHLON':
-				$usersport = __('Bike,Run', true);
+				$usersport = __('Bike', true) . ',' . __('Run', true);
 				break;
 			case 'RUN':
 				$usersport = __('Run', true);

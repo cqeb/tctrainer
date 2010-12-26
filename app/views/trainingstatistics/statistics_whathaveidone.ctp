@@ -39,11 +39,11 @@ if ( $export == true )
 		<td class="tableTd"><?php __('AVG Speed'); ?></td>
 		<td class="tableTd"><?php __('AVG Heart Rate'); ?></td>
 <!--
-		<td class="tableTd"><?php __('Zone 1 Pulse'); ?></td>
-		<td class="tableTd"><?php __('Zone 2 Pulse'); ?></td>
-		<td class="tableTd"><?php __('Zone 3 Pulse'); ?></td>
-		<td class="tableTd"><?php __('Zone 4 Pulse'); ?></td>
-		<td class="tableTd"><?php __('Zone 5 Pulse'); ?></td>
+		<td class="tableTd"><?php __('Zone 1 Heartrate'); ?></td>
+		<td class="tableTd"><?php __('Zone 2 Heartrate'); ?></td>
+		<td class="tableTd"><?php __('Zone 3 Heartrate'); ?></td>
+		<td class="tableTd"><?php __('Zone 4 Heartrate'); ?></td>
+		<td class="tableTd"><?php __('Zone 5 Heartrate'); ?></td>
 -->
 		<td class="tableTd"><?php __('Testworkout'); ?></td>
 		<td class="tableTd"><?php __('Competition'); ?></td>

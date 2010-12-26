@@ -280,18 +280,18 @@ select {
 	width: 210px;
 }
 
-#UserBirthdayMonth, #TrainingstatisticDateMonth, #UserTargetweightdateMonth,
+#UserBirthdayMonth, #CompetitionCompetitiondateMonth, #TrainingstatisticDateMonth, #UserTargetweightdateMonth,
 #TrainingstatisticFromdateMonth, #TrainingstatisticTodateMonth {
 	width: 100px;
 }
-#UserBirthdayDay, #TrainingstatisticDateDay, 
+#UserBirthdayDay, #CompetitionCompetitiondateDay, #TrainingstatisticDateDay, 
 #TrainingstatisticDateHour, #TrainingstatisticDateMin, #TrainingstatisticDateMeridian,
 #UserTargetweightdateDay,
 #TrainingstatisticFromdateDay, #TrainingstatisticTodateDay {
 	width: 50px;
 }
 
-#UserBirthdayYear, #TrainingstatisticDateYear, #UserTargetweightdateYear,
+#UserBirthdayYear, #CompetitionCompetitiondateYear, #TrainingstatisticDateYear, #UserTargetweightdateYear,
 #TrainingstatisticFromdateYear, #TrainingstatisticTodateYear {
 	width: 70px;
 }

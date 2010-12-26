@@ -78,7 +78,7 @@ echo $html->charset();
 
 <?php if ( isset($userobject) ) { ?>
 			<div class="box userinfo">
-				<h1><?php __('Hello'); ?>, <?php echo $userobject['firstname']; ?>!</h1>
+				<h1><?php __('Aloha'); ?>, <?php echo $userobject['firstname']; ?>!</h1>
 				<img width="80" src="<?php if ( $userobject['myimage'] ) { /** echo resize( $userobject['myimage'], array("w"=>80,"h"=>80)); **/ echo $userobject['myimage']; } else { ?>http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $userobject['email'] ) ) ); } ?>" />
 				<b><?php echo $userobject['firstname'] . ' ' . $userobject['lastname']; ?></b>
         <br /><br />

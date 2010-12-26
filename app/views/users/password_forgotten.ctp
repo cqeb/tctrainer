@@ -5,7 +5,7 @@
 
                    <?php echo $form->create('User', array('action' => 'password_forgotten'));?>
                    <fieldset>
-                   <legend><?php __('Enter your email to reset your password.'); ?></legend>
+                   <legend><?php __('Enter your e-mail to reset your password.'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
@@ -25,9 +25,9 @@ if ( $status != 'sent' )
            'between' => '',
            'maxLength' => 255,
            'class' => 'required',
-           'label' => __('Your E-Mail', true),
+           'label' => __('Your e-mail', true),
            'error' => array( 
-              'notempty' => __('You have to enter an email, please.', true)
+              'notempty' => __('You have to enter an e-mail, please.', true)
            )
       ));
 

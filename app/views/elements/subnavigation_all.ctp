@@ -1,9 +1,6 @@
 <ul>
 <?php if ( !$session_userid ) { ?>
         <li>&nbsp;</li>
-        <li><a href="<?php echo Configure::read('App.serverUrl'); ?>/app/webroot/flash.php">(<?php __('Graphs'); ?>)</a></li>
-        <li><a href="/phpmyadmin/">(<?php __('PHPMyAdmin'); ?>)</a></li>
-        <li><a href="/trainer/starts/fill_my_database">(<?php __('Fill my database'); ?>)</a></li>
         <li><?php echo $html->link(__('Home',true),array('controller' => 'starts', 'action' => 'index'))?></li>
         <li><?php echo $html->link(__('Register',true),array('controller' => 'users', 'action' => 'register'))?></li>
 <?php } ?>
@@ -28,7 +25,7 @@
 <?php if ( $this->name == 'Users' && $session_userid ) { ?>
 		    <li><?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?></li>
 		    <li><?php echo $html->link(__('Edit training info',true),array('controller' => 'users', 'action' => 'edit_traininginfo'))?></li>
-		    <li><?php echo $html->link(__('Edit weight targets',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
+		    <li><?php echo $html->link(__('Edit weight goals',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
 		    <li><?php echo $html->link(__('Change metric',true),array('controller' => 'users', 'action' => 'edit_metric'))?></li>
 		    <li><?php echo $html->link(__('Change password',true),array('controller' => 'users', 'action' => 'edit_password'))?></li>
 		    <li><?php echo $html->link(__('Edit images (later)',true),array('controller' => 'users', 'action' => 'edit_images'))?></li>
@@ -44,7 +41,7 @@
         <li><?php echo $html->link(__('Prices & Register',true),array('controller' => 'users', 'action' => 'add_step1'))?></li>
         <li><?php echo $html->link(__('Login',true),array('controller' => 'users', 'action' => 'login'))?></li>
         <li><?php echo $html->link(__('Logout',true), array('controller' => 'users', 'action' => 'logout')); ?></li>
-        <li><?php echo $html->link(__('(Password forgotten)',true), array('controller' => 'Users', 'action' => 'password_forgotten')); ?></li>
+        <li><?php echo $html->link(__('Password forgotten',true), array('controller' => 'Users', 'action' => 'password_forgotten')); ?></li>
 -->
 </ul>
 <br />

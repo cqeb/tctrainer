@@ -58,9 +58,9 @@ echo $form->input('email',
      array(
      'class' => 'required',
      'maxLength' => 255,
-     'label' => __('E-Mail', true),
+     'label' => __('E-mail', true),
      'error' => array( 
-          'notempty' => __('Enter your E-Mail', true)
+          'notempty' => __('Enter your e-mail', true)
      ),
 ));
 
@@ -74,7 +74,7 @@ echo $form->hidden('emailcheck');
 if ($form->isFieldError('emailcheck'))
 {
    echo "<div class=\"error-message\">";
-   __('Your E-Mail is already in use!');
+   __('Your e-mail is already in use!');
    echo "</div>";
    //echo $form->error('emailcheck');
 }
@@ -122,6 +122,9 @@ echo $form->input('typeofsport',
      array(
      'class' => 'required',
      'label' => __('Main sport', true),
+     'error' => array( 
+          'notempty' => __('Choose your type of sport',true) 
+     ),
      'options' => array_merge(array('' => __('pick yours', true)), $sports)
 ));
 
@@ -144,21 +147,24 @@ echo $form->input('rookie',
      'label' => __('Beginner', true) . '?'
 ));
 ?>
+<!--
 <div class="messagebox" style="overflow:auto; width: 420px; height: 100px;">
 <?php echo $this->element('tos'); ?>
 <br />
 </div>
+-->
 
-<br />
-<b><?php __('You hereby confirm that you\'ve read the terms of service and agree. You also confirm that you have no medical inability to do sports!'); ?></b>  
+<b><?php __('You hereby confirm that you\'ve read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!'); ?></b>  
+<a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/users/show_tos" target="_blank"><?php __('Read terms of service.'); ?></a>
 <br /><br />
+
 <?php
 echo $form->input('medicallimitations',
      array(
      'type' => 'checkbox',
      'label' => __('I agree', true),
      'error' => array( 
-          'notempty' => __('You HAVE TO agree with our terms of service! That\'s the way you protect our rights :).', true)
+          'notempty' => __("You HAVE TO agree to our terms of service! That's the way you protect our rights :).", true)
      )
 ));
 

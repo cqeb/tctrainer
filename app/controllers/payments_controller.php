@@ -359,7 +359,7 @@ class PaymentsController extends AppController {
             } elseif ( $action == 'c' )
             {
                $error = __('You canceled the payment transaction. If this was not intended, do the payment process again. If something else
-               is not ok for you, ', true) . '. ' . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support', true) . '</a>';
+               is not ok for you', true) . ', ' . '<a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '</a>';
             }
 
             $session_userid = $this->Session->read('session_userid');
