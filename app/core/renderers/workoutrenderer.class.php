@@ -20,9 +20,19 @@ class WorkoutRenderer {
 	<td class=\"sport\">" . __($w->getSport(), true) . "</td>
 	<td class=\"type " . $w->getShortCategory() . "\">
 		" . __($w->getTypeLabel(), true) . "<br />
-		<span class=\"category br\">" . __($w->getCategory(), true) . "</span></td>
+		<span class=\"category br\">" . __($w->getCategory(), true) . "</span>
 	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>pts.</small></td>
+</tr>
+<tr>
+	<td class=\"description\" colspan=\"4\">
+		<div>
+			Suche Dir, nachdem Du gut aufgewärmt bist einen steilen Hügel,
+			den Du in etwa einer Minute hinauf laufen kannst. Laufe bis zu
+			acht Mal möglichst Schnell hinauf (bis in Zone 5), und zur
+			Erholung ganz locker wieder herunter.
+		</div>
+	</td>
 </tr>";
 			$length += $w->getDuration();
 			$trimps += $w->getTRIMP();

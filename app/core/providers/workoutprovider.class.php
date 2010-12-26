@@ -1,6 +1,9 @@
 <?php
 /**
  * a provider provides workouts of a specific type
+ * this class implements a template method pattern
+ * within the generate() function, so have a look
+ * if you want to extend it
  * @author clemens
  */
 abstract class WorkoutProvider {
@@ -34,6 +37,35 @@ abstract class WorkoutProvider {
 	 * @var DateTime
 	 */
 	protected $generateWeek;
+	
+	/**
+	 * the sport type the provider is made for
+	 * OVERRIDE that if you extend this class!
+	 * @var String
+	 */
+	protected $SPORT = null;
+	
+	/**
+	 * bytecache for getModificator()
+	 * @var array
+	 */
+	protected $modificatorCount = array(
+		"E1" => 0,
+		"E2" => 0,
+		"E3" => 0,
+		"F1" => 0,
+		"F2" => 0,
+		"F3" => 0,
+		"S1" => 0,
+		"S2" => 0,
+		"S3" => 0,
+		"M1" => 0,
+		"M2" => 0,
+		"M3" => 0,
+		"M4" => 0,
+		"M5" => 0,
+		"initialized" => false // flag wether the cache has been initialized yet
+	);
 	
 	/**
 	 * the constructor has to be initialized with the weekly hours available,
@@ -91,11 +123,98 @@ abstract class WorkoutProvider {
 	}
 	
 	/**
+	 * generates a lsd workout for a specific race
+	 * @param Race $ldRace the next long-distance race
+	 * @return Workout a workout
+	 */
+	protected abstract function generateLSDWorkout(Race $ldRace);
+	
+	/**
+	 * Retrieve the specific workouttypesequence for this sport
+	 * like TriRunWorkouttypeSequence for running
+	 *
+	 * @param Database $DB db reference
+	 * @param String $phase current phase
+	 * @param Athlete $athlete athlete reference
+	 * @param DateTime $week current week
+	 * @return Sequence a workout sequence
+	 */
+	protected abstract function getWorkoutTypeSequence(Database $DB, $phase, Athlete $athlete, DateTime $week);
+	
+	/**
+	 * determine workout duration based on
+	 * - next A race, or your training target (Ironman, Half Marathon, ...)
+	 * - personal modificator
+	 * - the training type
+	 * - past utilization of a specific training type (increase duration for repaetently used trainings)
+	 * @param String $type training type like E1...
+	 * @param String $raceType identifier like TRIATHLON_IRONMAN
+	 * @return int workout duration in minutes
+	 */
+	protected abstract function getDuration($trainingType, $raceType);
+	
+	/**
+	 * generate a new workout of an appropriate type
+	 * @param String $type the workout type like E1...
+	 * @param int $duration in minutes
+	 * @return Workout
+	 */
+	protected abstract function newWorkout($type, $duration);
+	
+	/**
 	 * generate workouts based on the provider class
+	 * 
+	 * this is our base method for the template method pattern.
+	 * the function will first check for the athlete's next
+	 * a race, and generate an lsd workout. then a new workout-
+	 * typesequence is instantiated, and workouts are added.
+	 * the duation is retrieved from getDuration().
+	 * 
+	 * This is the invocation sequence that is used.
+	 * 
+	 * $this->generateLSDWorkout()
+	 * $this->getWorkoutTypeSequence()
+	 * $this->getDuration()
+	 * 
 	 * @param DateTime $week generate the workout for a given week which starts at date
 	 * @return unknown_type
 	 */
-	public abstract function generate(DateTime $week);
+	public final function generate(DateTime $week) {
+		$this->generateWeek = $week;
+		$nextA = $this->athlete->getSchedule()->getNextARace($week);
+
+		// determine if LSD run is needed
+		$ldRace = $this->athlete->getSchedule()->getNextLDRace($week);
+
+		// lsd trainings start 12 weeks before the event
+		if ($ldRace && $ldRace->getWeeksTillRaceday($week) <= 12) {
+			$lsdWorkout = $this->generateLSDWorkout($ldRace);
+			if ($lsdWorkout) {
+				$this->addWorkout($lsdWorkout);
+			}
+		}
+
+		// distribute remaining minutes as long as there are some
+		$wType = $this->getWorkoutTypeSequence(
+			$this->DB, $this->phase["phase"], $this->athlete, $week
+		);
+
+		$i = 0;
+		while ($this->timeBudget > $this->workoutDurations) {
+			$i++;
+			$type = $wType->next();
+			$duration = $this->getDuration($type, $nextA->getType());
+			$this->addWorkout($this->newWorkout($type, $duration));
+			if ($i == 100) {
+				throw new Exception("Provider generated 100 Workouts - " .
+					"looks like an endless loop");
+			}
+		}
+
+		// finally persist the sequences
+		$wType->save();
+		return $this->workouts;
+	}
 	
 	/**
 	 * stores generated workouts back to the database
@@ -127,6 +246,42 @@ abstract class WorkoutProvider {
 		
 		// now save new ones
 		$this->DB->query($sql);
+	}
+
+	/**
+	 * calculates a training modificator based on the past 
+	 * utilization (last 4 weeks) of a specific training type
+	 * @param String $type training type like E1, S2, ...
+	 * @return double training modificator like 1.3 or 1.05
+	 */
+	protected function getModificator($type) {
+		// prefill cache if it has not been initialized yet
+		if (!$this->modificatorCount["initialized"]) {
+			$lastWeek = clone $this->generateWeek;
+			$lastWeek = $lastWeek->sub(new DateInterval("P7D"))->format("Y-m-d");
+			
+			// time frame is from last week 4 weeks back; exclude PREP & TRANS phases 
+			$sql = "SELECT s.type, count(*) c FROM scheduledtrainings s
+				INNER JOIN mesocyclephases m ON s.week = m.date 
+				WHERE s.sport = '{$this->SPORT}'
+				AND m.phase != 'PREP'
+				AND m.phase != 'TRANS'
+				AND s.week >= date_sub('$lastWeek', INTERVAL 4 WEEK)
+				AND s.week <= '$lastWeek'
+				GROUP BY type";
+
+			$res = $this->DB->query($sql);
+			if ($res) {
+				while(list($k,$v) = each($res)) {
+					$this->modificatorCount[$v["type"]] = intval($v["c"]);
+				}
+			}
+			$this->modificatorCount["initialized"] = true;
+		}
+		
+		$modificator = 1 + ($this->modificatorCount[$type] * 0.1);
+		$this->modificatorCount[$type]++;
+		return $modificator;
 	}
 }
 ?>

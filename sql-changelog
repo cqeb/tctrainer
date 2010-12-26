@@ -27,3 +27,15 @@ ALTER TABLE  `mesocyclephases` ADD  `ratio` VARCHAR( 20 ) NOT NULL AFTER  `usert
 2010-11-13 KMS
 ALTER TABLE `trainingstatistics` CHANGE `date` `date` DATE NULL DEFAULT NULL;
 ALTER TABLE `trainingstatistics` ADD `workout_link` VARCHAR( 255 ) NOT NULL AFTER `competition`;
+
+2010-12-26 CP
+CREATE TABLE IF NOT EXISTS `tribikeworkouttypesequence` (
+  `athlete_id` int(11) NOT NULL,
+  `week` date NOT NULL,
+  `position` int(11) NOT NULL,
+  `e` int(11) NOT NULL,
+  `f` int(11) NOT NULL,
+  `m` int(11) NOT NULL,
+  `s` int(11) NOT NULL,
+  PRIMARY KEY (`athlete_id`,`week`)
+)

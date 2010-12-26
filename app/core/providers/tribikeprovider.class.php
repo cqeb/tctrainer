@@ -1,12 +1,12 @@
 <?php
 /**
- * the TriRunProvider provides triathlon-specific run workouts
+ * the TriBikeProvider provides triathlon-specific bike workouts
  * @author clemens
  */
-class TriRunProvider extends WorkoutProvider {
+class TriBikeProvider extends WorkoutProvider {
 	
-	protected $SPORT = 'RUN';
-	
+	protected $SPORT = 'BIKE';
+		
 	/**
 	 * generates an LSD Run, which will typically be an E2 workout
 	 * @param $ldRace the next ld race from the schedule
@@ -14,19 +14,19 @@ class TriRunProvider extends WorkoutProvider {
 	 */
 	protected function generateLSDWorkout(Race $ldRace) {
 		$NOW = new DateTime();
-		$duration = RunWorkout::$LSD_TIMES[$this->athlete->getLevel()]
+		$duration = BikeWorkout::$LSD_TIMES[$this->athlete->getLevel()]
 		[$ldRace->getWeeksTillRaceday(new DateTime())];
 		if ($duration == 0) {
 			return false;
 		}
-		return new RunWorkout(Workout::E2, $duration, true);
+		return new BikeWorkout(Workout::E2, $duration, true);
 	}
 
 	/*
 	 * @see parent class
 	 */
 	protected function getWorkoutTypeSequence(Database $DB, $phase, Athlete $athlete, DateTime $week) {
-		return new TriRunWorkoutTypeSequence(
+		return new TriBikeWorkoutTypeSequence(
 			$this->DB, $this->phase["phase"], $this->athlete, $week);
 	}
 	
@@ -34,9 +34,9 @@ class TriRunProvider extends WorkoutProvider {
 	 * @see parent class
 	 */
 	protected function newWorkout($type, $duration) {
-		return new RunWorkout($this->athlete, $type, $duration);
+		return new BikeWorkout($this->athlete, $type, $duration);
 	}
-	
+
 	/**
 	 * determine workout duration based on
 	 * - next A race, or your training target (Ironman, Half Marathon, ...)
@@ -53,67 +53,53 @@ class TriRunProvider extends WorkoutProvider {
 			case "E1":
 				switch($distance) {
 					case "SPRINT":
-						$d = 30;
+						$d = 40;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
-					default:
 						$d = 50;
+						break;
+					default:
+						$d = 60;
 						break;
 				}
 				break;
 			case "E2":
-			case "S2":
 				switch($distance) {
 					case "SPRINT":
-						$d = 45;
+						$d = 100;
 						break;
 					case "SHORT";
-					$d = 60;
-					break;
-					case "MIDDLE":
-						$d = 75;
+						$d = 110;
 						break;
-					case "LONG":
-						$d = 90;
+					default:
+						$d = 120;
 						break;
 				}
 				break;
 			case "E3":
 				switch($distance) {
 					case "SPRINT":
-						$d = 30;
+						$d = 45;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
-					case "MIDDLE":
-						$d = 50;
-						break;
-					case "LONG":
 						$d = 60;
 						break;
-				}
-				break;
-			case "F1":
-			case "F2":
-				switch($distance) {
-					case "SPRINT":
-						$d = 30;
-						break;
-					case "SHORT";
-					$d = 40;
-					break;
 					case "MIDDLE":
-						$d = 60;
-						break;
-					case "LONG":
 						$d = 80;
 						break;
+					case "LONG":
+						$d = 100;
+						break;
 				}
 				break;
+			// F-type and S-type workouts are quite harsh, 
+			// so I'll keep them a bit shorter
+			case "F1":
+			case "F2":
 			case "F3":
+			case "S1":
+			case "S2":
+			case "S3":
 				switch($distance) {
 					case "SPRINT":
 						$d = 30;
@@ -122,24 +108,10 @@ class TriRunProvider extends WorkoutProvider {
 					$d = 40;
 					break;
 					case "MIDDLE":
-					case "LONG":
-						$d = 60;
-						break;
-				}
-				break;
-			case "S1":
-				switch($distance) {
-					case "SPRINT":
-						$d = 30;
-						break;
-					case "SHORT";
-					$d = 45;
-					break;
-					case "MIDDLE":
 						$d = 50;
 						break;
 					case "LONG":
-						$d = 60;
+						$d = 70;
 						break;
 				}
 				break;
@@ -162,6 +134,7 @@ class TriRunProvider extends WorkoutProvider {
 			case "M2":
 			case "M3":
 			case "M4":
+			case "M5":
 				switch($distance) {
 					case "SPRINT":
 						$d = 30;
@@ -177,23 +150,6 @@ class TriRunProvider extends WorkoutProvider {
 						break;
 				}
 				break;
-			case "M5":
-				switch($distance) {
-					case "SPRINT":
-						$d = 30;
-						break;
-					case "SHORT";
-					$d = 40;
-					break;
-					case "MIDDLE":
-						$d = 50;
-						break;
-					case "LONG":
-						$d = 60;
-						break;
-				}
-				break;
-
 		}
 
 		// apply modificator past trainings

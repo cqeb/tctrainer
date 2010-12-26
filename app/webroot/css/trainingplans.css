@@ -110,6 +110,23 @@ table.workouts td {
 	border-width: 0 1px 1px 0;
 }
 
+table.workouts td.description {
+	padding: 0 4px 0;
+}
+
+table.workouts td.description div {	
+	-webkit-border-radius: 0px 0px 2px 2px;
+	-moz-border-radius: 0px 0px 2px 2px;
+	border-radius: 0px 0px 2px 2px;
+	background-color: #efefef;
+	padding: 5px;
+	border: 1px solid #aaaaaa;
+	border-top-width: 0px;
+	margin-top: -5px;
+	display: bock;
+	font-size: 12px;
+}
+
 /* green */
 .type.E span.category {
 	background-color: #B2FF65;

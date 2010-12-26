@@ -1,6 +1,6 @@
 <?php
-class TriRunWorkoutTypeSequence extends WorkoutTypeSequence {
-	protected $TABLE = 'trirunworkouttypesequence';	
+class TriBikeWorkoutTypeSequence extends WorkoutTypeSequence {
+	protected $TABLE = 'tribikeworkouttypesequence';	
 	
 	/**
 	 * workouts grouped by phases
@@ -9,7 +9,7 @@ class TriRunWorkoutTypeSequence extends WorkoutTypeSequence {
 		"TRANS" => array(
 				"E" => array(1,2),
 				"F" => array(),
-				"S" => array(1),
+				"S" => array(),
 				"M" => array()
 	),
 		"PREP" => array(
@@ -39,25 +39,25 @@ class TriRunWorkoutTypeSequence extends WorkoutTypeSequence {
 		"BUILD1" => array(
 				"E" => array(1,2),
 				"F" => array(2,3),
-				"S" => array(1,2),
+				"S" => array(3),
 				"M" => array(2,3,4)
 	),
 		"BUILD2" => array(
 				"E" => array(1,2),
 				"F" => array(3),
-				"S" => array(1,2),
+				"S" => array(3),
 				"M" => array(2,3,4,5)
 	),
 		"PEAK" => array(
 				"E" => array(1,2),
 				"F" => array(3),
-				"S" => array(1,2),
+				"S" => array(3),
 				"M" => array(2,3,4,5)
 	),
 		"RACE" => array(
 				"E" => array(1,2),
 				"F" => array(),
-				"S" => array(1,2),
+				"S" => array(3),
 				"M" => array()
 	)
 

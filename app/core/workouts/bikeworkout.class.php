@@ -17,11 +17,16 @@ class BikeWorkout extends Workout {
 	 * is the race-week and thus identified by key 0 while
 	 * week 7 is the 7th week before the race, and thus
 	 * identified by key 7
+	 * 
+	 * start 11 weeks before the race
+	 * six long rides before the race
+	 * 3,5h ist the first long ride
+	 * last long ride 3 weeks before the race, bout 6hrs long
 	 */
-	/*public static $LSD_TIMES = array(
-		Athlete::BEGINNER => array (0, 180, 180, 0, 165, 150, 0, 135, 120, 0, 105, 95),
-		Athlete::ADVANCED => array (0, 180, 180, 0, 180, 180, 0, 165, 165, 0, 150, 150)		
-	);*/
+	public static $LSD_TIMES = array(
+		Athlete::BEGINNER => array (0, 180, 360, 0, 330, 300, 0, 270, 240, 0, 210, 180),
+		Athlete::ADVANCED => array (0, 180, 390, 0, 360, 330, 0, 300, 270, 0, 240, 210)		
+	);
 	
 	public function getTypeLabel() {
 		return "Bike Workout";
