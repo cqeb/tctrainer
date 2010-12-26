@@ -49,7 +49,7 @@ class ProviderComponent extends Object {
 			$genWeek->add(new DateInterval("P" . $offset . "D"));
 		}
 		
-		$mcp = new MesoCycleProvider($this->DB, $this->athlete, $genWeek);
+		$mcp = new MesoCycleProvider($this->DB, $this->athlete, clone $genWeek);
 		$time = $mcp->getTrainingTime($genWeek);
 
 		// now generate workouts
