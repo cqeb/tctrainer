@@ -1,5 +1,5 @@
 
-<?php __('Aloha'); ?> <?php echo $user['User']['firstname']; ?>,
+<?php __('Aloha'); ?> <?php if ( isset( $to_name ) ) echo $to_name; else echo $user['User']['firstname']; ?>,
 
 <?php __('don\'t be lazy. Train and track your trainings!'); ?>
 

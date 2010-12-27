@@ -1,5 +1,5 @@
 
-<?php __('Welcome'); ?> <?php echo $user['User']['firstname']; ?>,
+<?php __('Welcome'); ?> <?php if ( isset( $to_name ) ) echo $to_name; else echo $user['User']['firstname']; ?>,
 
 <?php __('30 Cents a day and you get your professional interactive training coach.'); ?>
 
