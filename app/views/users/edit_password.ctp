@@ -46,7 +46,7 @@ echo $form->input('passwordapprove',
      'class' => 'required',
      'label' => __('Repeat password',true),
      'error' => array( 
-        'notempty' => __('Repeat your password', true)
+        'notempty' => __('Repeat password', true)
      )
 ));
 

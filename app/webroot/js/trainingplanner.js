@@ -61,25 +61,12 @@ TrainingPlanner = {
 			});
 		}
 		
-		/*
-		 * prepare input fields
-		 */ 
-		// average weekly training hours
-		$('#avg').change(function() {
-			var v = TimeParser.parse(jQuery(this).val());
-			if (confirm("Sure? This will update..bla")) {
-				// update settings
-				jQuery.post(that.url + "/trainingplans/set_avg", 
-					{ time : v },
-					function () {
-						// seems to be successful so reload.
-						document.location.reload();
-					}
-				);
-			}
-		});
-		
-		// this weeks training hrs
+		// prepare input fields
+		// $('#avg').blur(avgUpdated).keyup(function (e) {
+		//	if (e.keyCode == 13) {
+		//		avgUpdated();
+		//	}
+		//});
 		$('#week').blur(function () {
 			that.weekUpdated(true);
 		}).keyup(function (e) {

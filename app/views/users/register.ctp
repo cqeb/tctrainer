@@ -110,10 +110,10 @@ echo $form->input('lactatethreshold',
      array(
  	   'class' => 'medium',
      'error' => array( 
-        'numeric' => __('Enter your max. lactate threshold heart rate',true),
+        'numeric' => __('Enter your lactate threshold heart rate',true),
         'greater' => __('Must be at least',true) . ' 120',
-        'lower' => __('Must be at lower than',true) . ' 220',
-        'notempty' => __('Enter your max. lactate threshold heart rate',true)
+        'lower' => __('Must be lower than',true) . ' 220',
+        'notempty' => __('Enter your lactate threshold heart rate',true)
      ),
      'label' => __('Lactate threshold', true)
 ));
@@ -135,7 +135,7 @@ echo $form->input('weeklyhours',
      'error' => array( 
           'numeric' => __('Enter your weekly available training hours', true),
           'greater' => __('Must be at least',true) . ' 0 ' . __('hours', true),
-          'lower' => __('Must be at lower than', true) . ' 60 ' . __('hours', true),
+          'lower' => __('Must be lower than', true) . ' 60 ' . __('hours', true),
           'notempty' => __('Enter your weekly available training hours',true) 
      ),
      'label' => __('Weekly hours', true)

@@ -98,6 +98,7 @@ class AppController extends Controller {
             // if not in session - read cookie
             $cookie = $this->Cookie->read('tct_auth');
 
+            pr($cookie);
             // no information about user in session
             if ( !$session_useremail || !$session_userid )
             {

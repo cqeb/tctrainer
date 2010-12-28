@@ -24,7 +24,7 @@ if ( $export == true )
 		<td colspan="12"><b><?php __('Export of statistics'); ?><b></td>
 </tr>
 <tr>
-		<td><b><?php __('Date:'); ?></b></td>
+		<td><b><?php __('Date'); ?>:</b></td>
 		<td colspan="11"><?php echo date("F j, Y, g:i a"); ?></td>
 </tr>
 <tr>
@@ -49,7 +49,7 @@ if ( $export == true )
 		<td class="tableTd"><?php __('Competition'); ?></td>
 		<td class="tableTd"><?php __('Location'); ?></td>
 		<td class="tableTd"><?php __('Weight'); ?></td>
-		<td class="tableTd"><?php __('Trimp'); ?></td>
+		<td class="tableTd"><?php __('TRIMP'); ?></td>
 		<!--td class="tableTd"><?php __('Comment'); ?></td-->
 </tr>
 <?php
@@ -172,7 +172,7 @@ echo $form->submit(__('Export',true), array('name' => 'excel', 'class' => 'none'
     <th><?php __('Sport'); ?></th>
     <th><?php __('Sum'); ?></th>
     <th><?php __('Duration'); ?></th>
-    <th><?php __('Trimp'); ?></th>
+    <th><?php __('TRIMP'); ?></th>
 </tr>
 <?php
 

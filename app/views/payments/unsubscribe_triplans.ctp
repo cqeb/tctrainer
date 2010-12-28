@@ -5,7 +5,7 @@
 
                    <?php echo $form->create('Payment', array('action' => 'unsubscribe_triplans')); ?>
                    <fieldset>
-                   <legend><?php __('Gain speed, loose weight.'); ?></legend>
+                   <legend><?php __('Gain speed, loose weight'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">

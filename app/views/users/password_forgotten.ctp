@@ -27,7 +27,7 @@ if ( $status != 'sent' )
            'class' => 'required',
            'label' => __('Your e-mail', true),
            'error' => array( 
-              'notempty' => __('You have to enter an e-mail, please.', true)
+              'notempty' => __('You have to enter an e-mail', true)
            )
       ));
 

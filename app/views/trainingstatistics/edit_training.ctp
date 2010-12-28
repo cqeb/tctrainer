@@ -245,7 +245,7 @@ echo $form->input('weight',
      'between' => '',
      'maxLength' => 5,
      'error' => array( 
-             'numeric' => __('Enter your current weight.',true),
+             'numeric' => __('Enter your current weight',true),
              'greater' => __('Must be at least',true) . ' ' . $min_weight,
              'lower' => __('Must be lower than',true) . ' ' . $max_weight,
              'notempty' => __('Enter your current weight',true)

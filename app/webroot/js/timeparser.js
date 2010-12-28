@@ -42,9 +42,6 @@ TimeParser = {
 		if (mins == null) {
 			mins = this.mins;
 		}
-		
-		mins = parseInt(mins);
-		
 		var h = parseInt(mins / 60);
 		var m = mins - (h * 60);
 		if (m < 10) {

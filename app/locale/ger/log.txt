@@ -1,3 +1,0 @@
-06:59:14: C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\locale\ger\default.pot:6: invalid nplurals value
-06:59:14: C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\locale\ger\default.pot:6: field `Language-Team' still has initial default value
-06:59:14: msgfmt: found 2 fatal errors

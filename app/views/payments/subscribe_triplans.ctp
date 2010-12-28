@@ -5,7 +5,7 @@
 
                    <?php //echo $form->create('User', array('action' => 'edit_metric', 'type' => 'file')); ?>
                    <fieldset>
-                   <legend><?php __('Gain speed, get professional.'); ?></legend>
+                   <legend><?php __('Gain speed, loose weight'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
@@ -71,7 +71,7 @@
 <tr class="odd">
     <td><?php __('Training schedule'); ?></td>
     <td style="text-align:center">X</td>
-    <td style="text-align:center"><?php __('NO'); ?></td>
+    <td style="text-align:center"><?php __('No'); ?></td>
 </tr>
 <!--
 <tfoot>
@@ -86,7 +86,7 @@
 <tr>
     <td colspan="3">
     <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
-    <b><?php __('1-month TriCoreTraining.com plans'); ?></b><br />
+    <b>1<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> 9.90 <?php echo $currency; ?>
     </a>
     </td>
@@ -94,7 +94,7 @@
 <tr class="odd">
     <td colspan="3">
     <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
-    <b><?php __('3-months TriCoreTraining.com plans'); ?></b><br />
+    <b>3<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> 27.00 <?php echo $currency; ?> (9.00 <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>
@@ -102,7 +102,7 @@
 <tr>
     <td colspan="3">
     <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:6">
-    <b><?php __('6-months TriCoreTraining.com plans'); ?></b><br />
+    <b>6<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> 51.00 <?php echo $currency; ?> (8.50 EUR <?php __('per month'); ?>)
     </a>
     </td>
@@ -110,7 +110,7 @@
 <tr class="odd">
     <td colspan="3">
     <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
-    <b><?php __('12-months TriCoreTraining.com plans'); ?></b><br />
+    <b>12<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> 96.00 <?php echo $currency; ?> (8.00 <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>

@@ -24,7 +24,7 @@ if ( $graphtype == 'chronic' )
  "halo-size": 2,
  "colour": "#FF6200",
  "fill": "#FFEC8A",     
- "text":"<?php __('Trimp PLANNED'); ?>",
+ "text":"<?php __('TRIMP planned'); ?>",
  "on-show":  {"type": "shrink-in", "cascade":1, "delay":0.5},
  "values":[<?php for ( $i = $day_back; $i < ( count($trimp_tl_planned) ); $i++ ) { echo "{ \"value\": "; echo round($trimp_tl_planned[$i]); echo ",\"colour\": \"#D02020\", \"tip\": \"" . __('TRIMP planned', true) . "\n"; echo round($trimp_tl_planned[$i]) . "\"}"; if ( $i < ( count( $trimp_tl_planned ) - 1 ) ) echo ","; } ?>]
 },*/
