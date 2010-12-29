@@ -43,7 +43,7 @@ urlencode(' ' . $distance['unit'] . ' ' . __('in',true) . ' ') . $duration .
 urlencode(' ' . __('WOW',true)) . '&u=http://tricoretraining.com'; 
 
 ?>
-<!--<a target="_blank" href="<?php echo $facebookurl; ?>">[F]</a>-->
+<a target="_blank" href="<?php echo $facebookurl; ?>">[F]</a>
     
 <?php 
 $twitterurl = 
@@ -54,7 +54,7 @@ __('in',true) . ' ' . $duration . ' ' . __('WOW',true) . ' http://tricoretrainin
 , 0, 140 )
 ); 
 ?>
-<!--    <a target="_blank" href="http://www.twitter.com/?status=<?php echo $twitterurl; ?>">[T]</a>-->
+<a target="_blank" href="http://www.twitter.com/?status=<?php echo $twitterurl; ?>">[T]</a>
 
     <?php if ( isset( $training['workout_link'] ) && $training['workout_link'] != '' ) { ?><a href="<?php echo $training['workout_link']; ?>" target="_blank"><?php __('[EXT]'); ?></a><?php } ?>
 
@@ -71,7 +71,17 @@ __('in',true) . ' ' . $duration . ' ' . __('WOW',true) . ' http://tricoretrainin
       echo $form->end();
 
 ?>
-
+<!--
+<?php 
+__('Mon');
+__('Tue');
+__('Wed');
+__('Thu');
+__('Fri');
+__('Sat');
+__('Sun');
+?>
+-->
 
 <?php
 

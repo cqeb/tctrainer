@@ -113,7 +113,7 @@ echo $form->input('rookie',
 ?>
 <br /><br />
 <?php
-echo $form->input('medicallimitations',
+echo $form->input('tos',
                                        array(
                                        'before' => __('Do you have any medical impacts preventing you from doing sports or did your doctor told you not to do any sports? Please talk to your doctor BEFORE starting your training!', true),
                                        'after' => '',

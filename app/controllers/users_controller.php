@@ -301,7 +301,7 @@ class UsersController extends AppController {
       $this->data['User']['coldestmonth'] = $this->Unitcalc->coldestmonth_for_country('DE');
       $this->data['User']['unit'] = $this->Unitcalc->unit_for_country('DE', 'unit');
       $this->data['User']['unitdate'] = $this->Unitcalc->unit_for_country('DE', 'unitdate');;
-      $this->data['User']['yourlanguage'] = $this->Session->read('session_userlanguage');
+      $this->data['User']['yourlanguage'] = $this->Session->read('Config.language');
 
       $this->data['User']['passwordcheck'] = "1";
       $this->data['User']['publicprofile'] = "0";
@@ -333,7 +333,7 @@ class UsersController extends AppController {
                'lactatethreshold', 
                'maximumheartrate',
                'typeofsport', 
-               'medicallimitations',
+               'tos',
                'passwordcheck', 'emailcheck', 
                'payed_from', 'payed_to',
                'rookie', 'weeklyhours',
@@ -498,7 +498,7 @@ class UsersController extends AppController {
 			if ($this->User->save( $this->data, array(
           'validate' => true,
           'fieldList' => array( 
-          'typeofsport', 'rookie', 'medicallimitations', 'weeklyhours',
+          'typeofsport', 'rookie', 'tos', 'weeklyhours',
           'dayofheaviesttraining', 'maximumheartrate', 'unit', 'unitdate',
           'coldestmonth', 'level', 'payed_from', 'payed_to', 'yourlanguage'
           ) ) ) )
@@ -835,7 +835,7 @@ class UsersController extends AppController {
 					//'dayofheaviesttraining',
 		        'weeklyhours', 'coldestmonth',
 		        'publicprofile', 'publictrainings', 
-		        'medicallimitations', 'maximumheartrate',
+		        'tos', 'maximumheartrate',
 		        'lactatethreshold'
 	        	)))) {
 	        	$statusbox = 'okbox';
@@ -1359,6 +1359,13 @@ class UsersController extends AppController {
 	function change_language()
 	{
 		$this->code = $this->params['named']['code'];
+
+    if ( $this->Session->read('session_userid') )
+    {
+          $this->User->id = $this->Session->read('session_userid');
+          $this->User->savefield('yourlanguage', $this->code, false);
+    }
+
 		$this->Session->write('Config.language', $this->code);
 		$this->Session->setFlash(__('Language changed.',true));
 		$this->redirect(array('action'=>'index'));
@@ -1542,9 +1549,9 @@ class UsersController extends AppController {
     **/
           
           // check for medical limitations
-          if ( $u['medicallimitations'] == '1')
+          if ( $u['tos'] == '0')
           { 
-              $text_for_mail .= '<li>' . __("Your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
+              $text_for_mail .= '<li>' . __("You haven't agreed to our terms of service or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
               " " . '<a href="' . Configure::read('App.hostUrl') . 
               Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
               "</li>\n";
@@ -1653,7 +1660,7 @@ class UsersController extends AppController {
  * mytrainingsphilosophy   
  * myrecommendation     // PRIO B check for recommendation (4)
  ** typeofsport   
- * medicallimitations   // check for medical limitations (5) 
+ * tos   // check for medical limitations (5) 
  * weight               // check for target weight 
  * targetweight  
  * targetweightcheck   

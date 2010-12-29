@@ -87,7 +87,7 @@ class User extends AppModel {
                    'message' => 'Your password check does not match!'
                    ),
           **/
-          'medicallimitations' => array(
+         'tos' => array(
                   'notempty' => array(
                       'rule' => array('equalTo', '1'),
                       'required' => true

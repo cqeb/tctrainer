@@ -39,3 +39,8 @@ CREATE TABLE IF NOT EXISTS `tribikeworkouttypesequence` (
   `s` int(11) NOT NULL,
   PRIMARY KEY (`athlete_id`,`week`)
 )
+
+2010-12-29 KMS
+ALTER TABLE `users` CHANGE `medicallimitations` `tos` TINYINT( 1 ) NULL DEFAULT NULL;
+ALTER TABLE `users` ADD `notifications` TINYINT NOT NULL AFTER `newsletter`;
+

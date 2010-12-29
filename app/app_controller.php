@@ -83,7 +83,7 @@ class AppController extends Controller {
             **/
 
             $this->set('locale', $locale);
-            $this->Session->write('session_userlanguage', $locale);
+            $this->Session->write('Config.language', $locale);
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
 
@@ -98,11 +98,10 @@ class AppController extends Controller {
             // if not in session - read cookie
             $cookie = $this->Cookie->read('tct_auth');
 
-            pr($cookie);
             // no information about user in session
             if ( !$session_useremail || !$session_userid )
             {
-                      if ( !$cookie['email'] || !$cookie['userid'] )
+                      if ( ( !$cookie['email'] || !$cookie['userid'] ) )
                       {
                            // to be sure
                            $this->Cookie->del('tct_auth');
@@ -117,7 +116,7 @@ class AppController extends Controller {
             } else
             {
                        // if cookie data are not the as session data, delete cookie
-                       if ( $cookie['email'] && $cookie['userid'] )
+                       if ( ( $cookie['email'] && $cookie['userid'] ) )
                        {
                           if ( ( $cookie['email'] != $session_useremail ) || ( $cookie['userid']  != $session_userid ) )
                           {
@@ -134,7 +133,7 @@ class AppController extends Controller {
                 		    $results = $this->User->findByEmail( $session_useremail );
                         //print_r($results); echo "test";                        
                 		    // if not correct, send to login page
-                        if ( !$results || $results['User']['id'] != $session_userid )
+                        if ( ( !$results || $results['User']['id'] != $session_userid ) )
                         {
                 			       $this->Session->delete('session_useremail');
                              $this->Session->delete('session_userid');
@@ -142,18 +141,20 @@ class AppController extends Controller {
                 			       $this->Session->setFlash(__('Incorrect session data. Sorry.',true));
                 			       $this->redirect('/users/login');
                 			       exit();
-		                    }
-
-                        $this->Session->write('session_userid', $results['User']['id']);
-                        $this->Session->write('session_useremail', $results['User']['email']);
-                        $this->Session->write('userobject', $results['User']);
-                        $this->set('userobject', $results['User']);
-
+		                    } else
+                        {  
+                             $this->Session->write('session_userid', $results['User']['id']);
+                             $this->Session->write('session_useremail', $results['User']['email']);
+                             $this->Session->write('userobject', $results['User']);
+                             $this->Session->write('Config.language', $results['User']['yourlanguage']);
+                             $this->set('userobject', $results['User']);
+                        }
 	          }
 
             $this->set('session_userid', $session_userid);
 
 	  }
+
 }
 
 ?>

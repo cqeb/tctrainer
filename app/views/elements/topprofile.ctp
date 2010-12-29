@@ -1,5 +1,5 @@
 
-<?php if ( !isset( $userobject ) ) { ?>
+<?php if ( !isset( $session_userid ) ) { ?>
 
 <!--<?php echo $html->link(__('Sign in',true),array('controller' => 'users', 'action' => 'login'))?>--> 
 

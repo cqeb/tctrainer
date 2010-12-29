@@ -32,7 +32,7 @@ echo $form->input('typeofsport',
                   'options' => $sporttype_array
                   ));
 
-echo '<br /><br />';
+echo '<br />';
 echo $form->input('rookie',
                   array(
                   'before' => __('Are you a beginner in sports?', true),
@@ -49,9 +49,9 @@ echo $form->input('rookie',
                   )
 ));
 
-echo $form->input('medicallimitations',
+echo $form->input('tos',
                   array(
-                  'before' => __('Are you healthy? If not, you HAVE TO talk to your doctor before starting your training!', true),
+                  'before' => __("You agree to our terms of service and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
                   'after' => '',
                   'between' => '',
                   'legend' => false,
@@ -162,10 +162,12 @@ echo $form->input('maximumheartrate',
 ));
 ?>
 
+<br />
 <div class="statusbox">
 <?php __('Calculating the lactate threshold by using the maximum heart rate is only an approximation.
 Please use your testworkouts to get a more specific value for your lactate threshold.'); ?>
 </div>
+<br />
 
 <div class="errorbox" id="errorlth"></div>
 

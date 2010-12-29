@@ -159,7 +159,7 @@ echo $form->input('rookie',
 <br /><br />
 
 <?php
-echo $form->input('medicallimitations',
+echo $form->input('tos',
      array(
      'type' => 'checkbox',
      'label' => __('I agree', true),

@@ -37,6 +37,7 @@ echo $form->input('unitdate', array(
                      'yyyymmdd' => __('YYYY-MM-DD', true)
            )));
 
+/**
 echo $form->input('yourlanguage', array(
            'before' => '',
            'after' => '',
@@ -47,6 +48,7 @@ echo $form->input('yourlanguage', array(
                       'ger' => __('German',true),
                       'eng' => __('English',true)
            )));
+**/
 
 /** not finished **/
 echo $form->hidden('id');

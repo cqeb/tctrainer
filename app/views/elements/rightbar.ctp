@@ -6,7 +6,7 @@
                           <br />
                           [<?php echo $html->link(__('English', true),array('controller' => 'users', 'action' => 'change_language', 'code' => "eng")); ?>]
                           <br />
-                          [<?php echo $html->link(__('Deutsch', true),array('controller' => 'users', 'action' => 'change_language', 'code' => "ger")); ?>]
+                          [<?php echo $html->link(__('Deutsch', true),array('controller' => 'users', 'action' => 'change_language', 'code' => "deu")); ?>]
                           <br />
                           <br />
                           <?php __('Current language'); ?>:
