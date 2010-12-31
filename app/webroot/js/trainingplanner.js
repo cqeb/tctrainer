@@ -27,6 +27,8 @@ TrainingPlanner = {
 		this.url = url;
 		this.sports = usersport.split(',');
 		
+		this.initDescriptionToggler();
+		
 		this.initDistributor();
 		
 		$('#avg').val(TimeParser.format(weeklymins));
@@ -98,6 +100,23 @@ TrainingPlanner = {
 	},
 	
 	/**
+	 * initializes the toggle description button state
+	 */
+	initDescriptionToggler : function () {
+		jQuery('#toggleDesc').click(function () {
+			// toggle description visibility
+			var descs = jQuery('td.description div');
+			descs.slideToggle();
+			
+			// toggle button text
+			var button = jQuery(this);
+			var descr = button.html();
+			button.html(button.attr('data-toggletext'));
+			button.attr('data-toggletext', descr);
+		});
+	},
+	
+	/**
 	 * initializes the sport time distributor
 	 */
 	initDistributor : function () {
@@ -158,6 +177,14 @@ TrainingPlanner = {
 	 */
 	getPlan : function () {
 		var that = this;
+		// remember description display status
+		if (this.initialized) {
+			var descriptionsVisible = jQuery('td.description div').is(':visible');
+		} else {
+			// TODO restore settings from cookie here!
+			var descriptionsVisible = true;
+		}
+		
 		$('#plan').fadeTo("slow", 0.4);
 		$('#loader').fadeIn();
 
@@ -168,6 +195,11 @@ TrainingPlanner = {
 		$.get(url, function (data) {
 			$('#plan').html(data);
 
+			// adapt visibility of descriptions
+			if (!descriptionsVisible) {
+				jQuery('td.description div').hide();
+			}
+			
 			// update weekly training hours
 			if (workoutSettings.usertime > 0) {
 				$('#week').val(TimeParser.format(workoutSettings.usertime));

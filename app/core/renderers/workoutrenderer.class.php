@@ -22,7 +22,7 @@ class WorkoutRenderer {
 		" . __($w->getTypeLabel(), true) . "<br />
 		<span class=\"category br\">" . __($w->getCategory(), true) . "</span>
 	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
-	<td class=\"trimp\">" . $w->getTRIMP() . "<small>pts.</small></td>
+	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
 </tr>
 <tr>
 	<td class=\"description\" colspan=\"4\">
@@ -37,7 +37,7 @@ class WorkoutRenderer {
 		
 		$html .= "<tr><td class=\"nobg\"></td><td class=\"nobg\"></td>
 	<td class=\"duration sum\">" . self::formatTime($length) . "<small>h</small></td>
-	<td class=\"trimp sum\">" . $trimps . "<small>pts.</small></td>
+	<td class=\"trimp sum\">" . $trimps . "<small>TRIMPs</small></td>
 </tr>";
 		
 		$html .= "\n</table>";
