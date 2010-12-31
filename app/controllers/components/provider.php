@@ -111,7 +111,6 @@ class ProviderComponent extends Object {
 		if (count($res) != 1) {
 			throw new Exception("Unexpected number of results in query '$sql'");
 		}
-		
 		if ($res[0]["ratio"] != "") {
 			$ratio = "[" . implode(",", explode(":", $res[0]["ratio"])) . "]";
 		} else {

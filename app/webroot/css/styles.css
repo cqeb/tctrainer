@@ -425,6 +425,10 @@ div.input.error {
 label[for=UserGenderM] {
 	width: 60px;	
 }
+div.required label{
+  font-weight:bold;  
+}
+
 /**
  * Misc
  */
@@ -515,7 +519,7 @@ a.reset:hover {
 
 #signup {
 	position: absolute;
-	margin: 90px 0px 0px 580px;
+	margin: 40px 0px 0px 480px;
 	padding: 0 15px 10px 15px;
 	background: white;
 	background: rgba(255,255,255,0.6);
@@ -526,6 +530,8 @@ a.reset:hover {
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	text-align: center;
+	width: 400px;
+	height: 230px;
 }
 
 #signup button {

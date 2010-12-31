@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2010-12-29 16:53+0100\n"
-"PO-Revision-Date: 2010-12-29 17:20+0100\n"
+"PO-Revision-Date: 2010-12-31 13:37+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1431,7 +1431,7 @@ msgstr "sei nicht faul. Traininere und zeichne deine Trainings auf!"
 #: \views\payments\subscribe_triplans.ctp:8
 #: \views\payments\unsubscribe_triplans.ctp:8
 msgid "Gain speed, loose weight"
-msgstr "Werde schnell und verliere Gewicht"
+msgstr "Werde schneller, werde leichter"
 
 #: \views\layouts\trainer_start.ctp:88
 msgid "Register FREE!"

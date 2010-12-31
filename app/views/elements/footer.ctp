@@ -3,7 +3,7 @@
 		<h2><?php __('Information'); ?></h2>
 		<p>
 			<a href="#"><?php __('Imprint'); ?></a><br />
-			<a href="#"><?php __('Support'); ?></a>
+			<a href="http://www.getsatisfaction.com/tricoretraining"><?php __('Support'); ?></a>
 		</p>
 	</div>
 	<div class="grid_3">
@@ -16,7 +16,8 @@
 	<div class="grid_3">
 		<h2><?php __('Updates'); ?></h2>
 		<p>
-			<a href="#"><?php __('RSS Feed'); ?></a>
+      <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a>
+			<a href=""><?php __('RSS Feed'); ?> TODO</a>
 		</p>
 	</div>
 	<div class="grid_3">

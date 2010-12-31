@@ -1,15 +1,25 @@
 
+<div class="tools">
 <?php if ( !isset( $session_userid ) ) { ?>
 
 <!--<?php echo $html->link(__('Sign in',true),array('controller' => 'users', 'action' => 'login'))?>--> 
 
 <?php } else { ?>
-<div class="tools">
 
-<?php echo $html->link(__('Dashboard',true),array('controller' => 'users', 'action' => 'index'))?> | 
-<?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?> | 
+<?php echo $html->link(__('Dashboard',true),array('controller' => 'users', 'action' => 'index'))?>
+ | 
+<?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?>
+ | 
 <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout')); ?> 
-
-</div> 
+ | 
 <?php } ?>
 
+<?php if ( $locale != 'eng' || $locale == '' ) { ?>
+<?php echo $html->link(__('English', true),array('controller' => 'users', 'action' => 'change_language', 'code' => "eng")); ?>
+<?php } ?>
+<?php if ( $locale != 'deu' ) { ?>
+<?php echo $html->link(__('Deutsch', true),array('controller' => 'users', 'action' => 'change_language', 'code' => "deu")); ?>
+<?php } ?>
+
+<!--<?php echo $locale; ?>-->
+</div> 

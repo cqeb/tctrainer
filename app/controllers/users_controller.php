@@ -30,11 +30,8 @@ class UsersController extends AppController {
 
 	function index()
 	{
-      $this->set('statusbox', 'statubox');		
-      if ( $this->Session->read('session_userid') ) 
-      {
-        $this->checkSession();
-      }
+      $this->checkSession();
+      $this->set('statusbox', 'statubox');    
 	}
 
 	function login()
@@ -237,6 +234,13 @@ class UsersController extends AppController {
 	 */
 	function register() 
 	{
+	  
+    if ( $this->Session->read('session_userid') ) 
+    {
+      $this->checkSession();
+      $this->redirect('/users/index');
+    }
+    
     $this->pageTitle = __('Create your account', true);
     $success = false;
     $statusbox = 'statusbox_none';
@@ -1368,7 +1372,10 @@ class UsersController extends AppController {
 
 		$this->Session->write('Config.language', $this->code);
 		$this->Session->setFlash(__('Language changed.',true));
-		$this->redirect(array('action'=>'index'));
+		if ( $this->referer() ) 
+		    $this->redirect($this->referer());
+    else 
+        $this->redirect(array('action'=>'index'));
 	}
 
 /**

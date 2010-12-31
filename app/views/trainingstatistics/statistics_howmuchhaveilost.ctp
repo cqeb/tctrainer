@@ -8,6 +8,9 @@
                    <?php $session->flash(); ?>
                    </div><br />
                    <?php } ?>
+                   
+<a href="/blog/en/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
+<br /><br />
 
                    <div>
 <?php

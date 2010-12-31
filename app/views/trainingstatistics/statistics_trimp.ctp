@@ -12,6 +12,8 @@
                    <br />
                    <?php } ?>
 
+<a href="/blog/en/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
+<br /><br />
 
                    <div>
 <?php
@@ -72,8 +74,6 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
       echo $form->end();
 
 ?>
-
-<br /><br />
 
 <h2><?php __('Grade of fatigue (Acute Training Load)'); ?></h2>
 
