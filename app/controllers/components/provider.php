@@ -117,6 +117,8 @@ class ProviderComponent extends Object {
 			$ratio = "[" . RATIO_TRIATHLON . "]";
 		}
 		
+		// TODO handle invalid ratio values here!
+		
 		return "<script type=\"text/javascript\">var workoutSettings = {
 			time : " . $res[0]["time"] . ",
 			usertime : " . $res[0]["usertime"] . ",

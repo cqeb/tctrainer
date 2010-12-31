@@ -15,6 +15,10 @@ class SwimWorkout extends Workout {
 		return "Swim Workout";
 	}
 	
+	public function getDescription() {
+		return;
+	}
+	
 	// TODO an athlete's historical workout data should aeffect the return val
 	// TODO review these values - they seem arbitrary & bogus
 	public function getAVGHR(Athlete $athlete) {

@@ -31,6 +31,11 @@ small {
 	font-weight: normal;
 }
 
+.small {
+	font-size: 10px;
+	font-weight: normal;
+}
+
 hr {
 	border: 0 #ccc solid;
 	border-top-width: 1px;
