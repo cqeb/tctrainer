@@ -38,7 +38,7 @@ class RunWorkout extends Workout {
 				return __('Sprints', true);
 				break;
 			case Workout::S2:
-				return __('Accelerations', true);
+				return __('Speedups', true);
 				break;
 			case Workout::F1:
 				return __('Small Hills', true);
