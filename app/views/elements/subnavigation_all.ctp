@@ -28,7 +28,7 @@
 		    <li><?php echo $html->link(__('Edit weight goals',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
 		    <li><?php echo $html->link(__('Change metric',true),array('controller' => 'users', 'action' => 'edit_metric'))?></li>
 		    <li><?php echo $html->link(__('Change password',true),array('controller' => 'users', 'action' => 'edit_password'))?></li>
-		    <li><?php echo $html->link(__('Edit images (later)',true),array('controller' => 'users', 'action' => 'edit_images'))?></li>
+		    <li><?php echo $html->link(__('Edit images',true),array('controller' => 'users', 'action' => 'edit_images'))?></li>
         <li><?php echo $html->link(__('Subscribe',true),array('controller' => 'payments', 'action' => 'subscribe_triplans'))?></li>
 
 <?php } ?>

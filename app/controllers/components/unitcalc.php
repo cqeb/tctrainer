@@ -395,7 +395,7 @@ class UnitcalcComponent extends Object {
 
    /**
     * calculate trimp
-    * 
+    *
     */
    function calc_trimp( $duration_total, $avg_pulse_total, $time_in_zones, $lth, $sport )
    {
@@ -405,7 +405,7 @@ class UnitcalcComponent extends Object {
            $minutes = $duration_total;
            //echo $sport;
            $this->threshold = $lth;
-           
+
            // fill with data from zones
            // copied the functions from athletes-class to unitcalc-component
            /**
@@ -415,23 +415,23 @@ class UnitcalcComponent extends Object {
            **/
 
            $zones = $this->getZones($sport);
-           if ($avgHR < $zones[1]) 
+           if ($avgHR < $zones[1])
            {
               $factor = 1;
-           } else if ($avgHR < $zones[2]) 
+           } else if ($avgHR < $zones[2])
            {
               $factor = 1.1;
-           } else if ($avgHR < $zones[3]) 
+           } else if ($avgHR < $zones[3])
            {
               $factor = 1.2;
-           } else if ($avgHR < $zones[4]) 
+           } else if ($avgHR < $zones[4])
            {
               $factor = 2.2;
-           } else 
+           } else
            {
               $factor = 4.5;
            }
-    
+
            // adapted to match athlete->calcTRIMP();
            return intval($minutes * $factor);
    }

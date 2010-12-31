@@ -1396,13 +1396,13 @@ class UsersController extends AppController {
       echo $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . '<br /><br />';
       
 			// check last training - if older than 10 days - reminder!
-			if ( $user['deactivated'] == 0 && $user['activated'] == 1 && ( date('w', time()) == $check_on_day ) ) 
+			if ( $user['deactivated'] == 0 && $user['activated'] == 1 && ( date('w', time()) == $check_on_day ) && $user['notifications'] != 1 ) 
 			         $this->_check_lasttraining( $user );
 
       if ( date('w', time()) == $check_on_day )
                $this->_check_more( $user );
               
-			if ( $user['level'] == 'freemember' )
+			if ( $user['level'] == 'freemember' && $user['notifications'] != 1 )
 			{
 				// if freemember remind him/her of premiumservice
 				$payed_to = strtotime( $user['payed_to'] );
@@ -1480,7 +1480,7 @@ class UsersController extends AppController {
       } 
       //else
       // that's ok - kms
-      if ( 1 == 1 ) {   
+      if ( 1 == 1 && $user['notifications'] != 1 ) {   
 
           // check name + address
           if ( !$u['firstname'] ) 

@@ -1,5 +1,5 @@
 
-                   <h1><?php __('Subscribe triplans'); ?></h1>
+                   <h1><?php __('Subscribe TriCoreTraining-memberships'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 
@@ -14,8 +14,8 @@
                    <?php } ?>
 
                    <div class="okbox">
-                   <?php __('Your current membership is valid from ' . $payed_from . ' to ' . $payed_to . ''); ?>.
-                   <?php __('You\'re a '); if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>
+                   <?php __('Your current membership is valid from') . ' ' . $payed_from . ' ' . __('to') . ' ' . $payed_to; ?>.
+                   <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>
                    </div>
 
                    <br />
@@ -71,7 +71,7 @@
 <tr class="odd">
     <td><?php __('Training schedule'); ?></td>
     <td style="text-align:center">X</td>
-    <td style="text-align:center"><?php __('No'); ?></td>
+    <td style="text-align:center"><b><?php __('No'); ?></b></td>
 </tr>
 <!--
 <tfoot>

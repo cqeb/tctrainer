@@ -9,6 +9,7 @@
                    <h1><?php __('Track trainings'); ?></h1>
 
                    <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
+                  
                    <fieldset>
                    <legend><?php __('Add or edit your training!'); ?></legend>
 

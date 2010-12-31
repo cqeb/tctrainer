@@ -10,4 +10,7 @@
                            
 <?php __('Yours, Clemens'); ?>
 
+<?php __('Stop sending me notifications!'); ?>
+<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/edit_userinfo/
+
 <?php echo $this->element('email/newsletter_footer'); ?>

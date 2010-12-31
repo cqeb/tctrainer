@@ -85,7 +85,13 @@ $(document).ready(function() {
 					<p>
 					<em><?php __('Gain speed, loose weight'); ?></em>
 					</p>
-					<!--button onclick="$('#signup').fadeOut(); $('.teaserimages').fadeOut();"--><button onClick="javascript:top.location.href='<?php echo Configure::read('App.serverUrl'); ?>/users/register/';"><img src="/trainer/img/signup.png" alt="<?php __('Register FREE!'); ?>"/></button>
+					<!--button onclick="$('#signup').fadeOut(); $('.teaserimages').fadeOut();"-->
+					<button onClick="javascript:top.location.href='<?php echo Configure::read('App.serverUrl'); ?>/users/register/';"><img src="/trainer/img/signup.png" alt="<?php __('Register FREE!'); ?>"/></button>
+					
+					<p>
+					<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode('http://www.facebook.com/pages/TriCoreTraining/150997251602079'); ?>&amp;layout=standard&amp;show_faces=false&amp;width=280&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=20" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:20px;" allowTransparency="true"></iframe>
+					</p>    
+
 				</div>
 				<div class="teaserimages">
 					<img src="/trainer/img/start/start-1.jpg" alt="" />
