@@ -14,6 +14,8 @@
 
                    <?php echo $html->link(__("Add workout",true), array('action' => 'edit_training'),null) ?>
                    <br /><br />
+                   <?php echo $html->link(__("Import workout",true), array('action' => 'import_workout'),null) ?>
+                   <br /><br />
 
 <table>
 <tr>

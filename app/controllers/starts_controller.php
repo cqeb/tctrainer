@@ -26,6 +26,12 @@ class StartsController extends AppController {
 
 	}
   
+  function features()
+  {
+    $this->layout = 'default_trainer';
+
+  }
+
   function fill_my_database()
   {
       $this->autoRender = false;            

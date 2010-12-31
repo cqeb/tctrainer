@@ -175,8 +175,7 @@ class Athlete {
 		}
 		
 		// divide by 100 to avoid getting very high numbers
-		// let's do that in in view not here (KMS)
-		return intval(($avgHR * $minutes * $factor));
+		return intval(($avgHR * $minutes * $factor)/100);
 	}
 	
 	public function getThreshold() {

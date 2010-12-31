@@ -126,6 +126,25 @@ echo $form->input('youknowus',
                                 'Other' => 'Other'
                   )));
 **/
+?>
+
+<br />
+<?php
+echo $form->input('notifications',
+                  array(
+                  'before' => __('Stop notifying me', true),
+                  'after' => '',
+                  'between' => '',
+                  'class' => 'required',
+                  'label' => '',
+                  'legend' => false,
+                  'type' => 'checkbox',
+                  //'multiple' => false,
+                  'options' => array(
+                            '1' => __('Yes',true),
+                            '0' => __('No',true)
+                  )
+));
 
 ?>
 

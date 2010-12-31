@@ -433,7 +433,7 @@ class UnitcalcComponent extends Object {
            }
     
            // divide by 100 to avoid getting very high numbers
-           return intval(($avgHR * $minutes * $factor));
+           return intval(($avgHR * $minutes * $factor)/100);
    }
 
     // from athletes class

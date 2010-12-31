@@ -1,12 +1,12 @@
 <ul>
 	<li>
-		<?php echo $html->link(__('Prices & Register',true),array('controller' => 'users', 'action' => 'register'), array('class' => 'active'))?>
+		<?php echo $html->link(__('Register',true),array('controller' => 'users', 'action' => 'register'), array('class' => 'active'))?>
 	</li>
 	<li>
 		<?php echo $html->link(__('Login',true),array('controller' => 'users', 'action' => 'login'), array('class' => 'main'))?>
 	</li>
 	<li>
-		<a href="#"><?php __('Features'); ?></a>
+    <?php echo $html->link(__('Features & Prices',true),array('controller' => 'starts', 'action' => 'features'), array('class' => 'main'))?>
 	</li>
   <li>
     <a href="/blog/<?php if ( $locale == 'ger' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a>

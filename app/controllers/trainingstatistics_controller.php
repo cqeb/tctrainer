@@ -39,6 +39,32 @@ class TrainingstatisticsController extends AppController {
             $this->set('statusbox', $statusbox);
    }
 
+  function import_workout()
+  {
+    $this->pageTitle = __('Import workouts',true);
+    $this->checkSession();
+    $statusbox = 'statusbox_none';
+
+    $session_userid = $this->Session->read('session_userid');
+    $this->User->id = $session_userid;
+
+    $this->set('unitmetric', $this->Unitcalc->get_unit_metric() );
+
+    if (!empty($this->data))
+    {
+      $this->set('UserID', $this->User->id);
+
+      $csv_file = $this->data['Trainingstatistic']['import_csv_upload'];
+      if ( $csv_file['tmp_name'] )
+      {
+        $userid = $this->User->id;
+        pr($csv_file);
+      }
+    }
+
+    $this->set('statusbox', $statusbox);
+  }
+
    function edit_training($id = null)
    {
             $this->checkSession();
