@@ -27,10 +27,7 @@ class WorkoutRenderer {
 <tr>
 	<td class=\"description\" colspan=\"4\">
 		<div>
-			Suche Dir, nachdem Du gut aufgewärmt bist einen steilen Hügel,
-			den Du in etwa einer Minute hinauf laufen kannst. Laufe bis zu
-			acht Mal möglichst Schnell hinauf (bis in Zone 5), und zur
-			Erholung ganz locker wieder herunter.
+			" . $w->getDescription() . "
 		</div>
 	</td>
 </tr>";
