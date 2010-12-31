@@ -153,9 +153,7 @@ abstract class Workout {
 	 * renders the workout's internationalized description
 	 * @return string descriptive text
 	 */
-	public function getDescription() {
-		return __('WORKOUT_' . $this->getSport() . '_' . $this->type, true);		
-	}
+	public abstract function getDescription();
 	
 	/**
 	 * return a human read- & understandable text label for this workout

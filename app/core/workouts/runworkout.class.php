@@ -26,48 +26,96 @@ class RunWorkout extends Workout {
 	public function getTypeLabel() {
 		switch ($this->type) {
 			case Workout::E1:
-				return 'Recovery';
+				return __('Recovery', true);
 				break;
 			case Workout::E2:
-				return 'Extensive Endurance';
+				return __('Extensive Endurance', true);
 				break;
 			case Workout::E3:
-				return 'Intensive Endurance';
+				return __('Intensive Endurance', true);
 				break;
 			case Workout::S1:
-				return 'Strides';
+				return __('Sprints', true);
 				break;
 			case Workout::S2:
-				return 'Pickups';
+				return __('Accelerations', true);
 				break;
 			case Workout::F1:
-				return 'Moderate Hills';
+				return __('Small Hills', true);
 				break;
 			case Workout::F2:
-				return 'Long Hills';
+				return __('Long Hills', true);
 				break;
 			case Workout::F3:
-				return 'Hill Reps';
+				return __('Hill Climbs', true);
 				break;
 			case Workout::M1:
-				return 'Tempo';
+				return __('Tempo Run', true);
 				break;
 			case Workout::M2:
-				return 'Cruise Intervals';
+				return __('Intervals', true);
 				break;
 			case Workout::M3:
-				return 'Hill Cruise Intervals';
+				return __('Hill Intervals', true);
 				break;
 			case Workout::M4:
-				return 'Criscross Threshold';
+				return __('Threshold Intevals', true);
 				break;
 			case Workout::M5:
-				return 'Threshold';
+				return __('Threshold Run', true);
 				break;
 			default:
 				return 'UNKNOWN';
 				break;
 		}
+	}
+	
+	public function getDescription() {
+		switch ($this->type) {
+			case Workout::E1:
+				return __('Pick a flat course and run easy in Zone 1.', true);
+				break;
+			case Workout::E2:
+				return __('Do an endurance run in Zone 2.', true);
+				break;
+			case Workout::E3:
+				return __('An intensive, aerobic workout. Run a course with small hills, which take you into Zone 3 frequently.', true);
+				break;
+			case Workout::S1:
+				return __('Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat four to eight times during the run.', true);
+				break;
+			case Workout::S2:
+				return __('Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for five kilometers. Repeat up to six times.', true);
+				break;
+			case Workout::F1:
+				return __('Pick a hilly course, and run in Zones 1-5. Do not ascend longer than five minutes.', true);
+				break;
+			case Workout::F2:
+				return __('Pick a hilly course with several ascents that take more than 5 minutes to climb. Your pulse may climb to Zone 5, but refrain from maxing out.', true);
+				break;
+			case Workout::F3:
+				return __('Warm up thoroughly. Pick a steep hill, which takes about one minute to ascend. Run fast uphills, and jog down very easy (take up to 4mins to recover). Repeat to a maximum of eight times.', true);
+				break;
+			case Workout::M1:
+				return __('Pick a flat course, and run in Zone 3 after warming up.', true);
+				break;
+			case Workout::M2:
+				return __('Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times.', true);
+				break;
+			case Workout::M3:
+				return __('Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep you pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds.', true);
+				break;
+			case Workout::M4:
+				return __('Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2.', true);
+				break;
+			case Workout::M5:
+				return __('Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous.', true);				
+				break;
+			default:
+				return 'UNKNOWN';
+				break;
+		}
+		
 	}
 	
 	// TODO an athlete's historical workout data should aeffect the return val
