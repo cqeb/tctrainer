@@ -150,6 +150,14 @@ abstract class Workout {
 	}
 	
 	/**
+	 * renders the workout's internationalized description
+	 * @return string descriptive text
+	 */
+	public function getDescription() {
+		return __('WORKOUT_' . $this->getSport() . '_' . $this->type, true);		
+	}
+	
+	/**
 	 * return a human read- & understandable text label for this workout
 	 * @param string $type string which identifies the workout type such as "E1"..
 	 */
