@@ -149,9 +149,6 @@ class Athlete {
 	
 	/**
 	 * calculate TRIMP points for a workout
-	 * for formula basics see
-	 * http://gpsrunning.nicolajsen.nl/?path=SportTracks/TRIMP
-	 * http://www.pponline.co.uk/encyc/training-schedules.html
 	 * 
 	 * @param string $sport
 	 * @param int $minutes training duration in minutes
@@ -159,8 +156,7 @@ class Athlete {
 	 * @return int TRIMP point value for that training 
 	 */
 	public function calcTRIMP($sport, $minutes, $avgHR) {
-
-    // if you change sth., please change it in unitcalc - component too
+    	// if you change sth., please change it in unitcalc - component too
 		$zones = $this->getZones($sport);
 		if ($avgHR < $zones[1]) {
 			$factor = 1;
@@ -174,9 +170,14 @@ class Athlete {
 			$factor = 4.5;
 		}
 		
-		// divide by 100 to avoid getting very high numbers
-		// let's do that in in view not here (KMS)
-		return intval(($avgHR * $minutes * $factor));
+		/*
+		 * switched to Zone-based TRIMP formula according to 
+		 * http://stuartmultisport.com/TrImp.aspx
+	 	 * http://gpsrunning.nicolajsen.nl/?path=SportTracks/TRIMP
+	 	 * http://www.pponline.co.uk/encyc/training-schedules.html
+	 	 * http://www.answers.com/topic/trimp-method
+	 	 */
+		return intval($minutes * $factor);
 	}
 	
 	public function getThreshold() {

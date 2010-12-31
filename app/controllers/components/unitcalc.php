@@ -432,8 +432,8 @@ class UnitcalcComponent extends Object {
               $factor = 4.5;
            }
     
-           // divide by 100 to avoid getting very high numbers
-           return intval(($avgHR * $minutes * $factor));
+           // adapted to match athlete->calcTRIMP();
+           return intval($minutes * $factor);
    }
 
     // from athletes class
