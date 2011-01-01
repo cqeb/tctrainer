@@ -36,6 +36,16 @@ class MesoCycleProvider {
 		$this->DB = $DB;
 		$this->athlete = $athlete;
 		
+		// the first three letters should identify the sports type
+		$sportId = substr($athlete->getSport(), 0, 3);
+		if ($sportId == 'TRI') {
+			$defaultRatio = RATIO_TRIATHLON;
+		} elseif ($sportId == 'DUA') {
+			$defaultRatio = RATIO_DUATHLON;
+		} else {
+			$defaultRatio = '100';
+		}
+		
 		// initialize the provider from the database
 		$res = $this->DB->query("SELECT date, phase, time, usertime, ratio, recovery 
 			FROM mesocyclephases 
@@ -44,11 +54,17 @@ class MesoCycleProvider {
 			ORDER BY date ASC");
 		if ($res) {
 			while(list($k, $data) = each($res)) {
+				// normalize ratio
+				$ratio = $data["ratio"];
+				if ($ratio == '') {
+					$ratio = $defaultRatio;
+				}
+				
 				$this->phaseTable[$data["date"]] = array(
 					"phase" => $data["phase"],
 					"time" => intval($data["time"]),
 					"usertime" => intval($data["usertime"]),
-					"ratio" => $data["ratio"],
+					"ratio" => $ratio,
 					"recovery" => ($data["recovery"] == "1")
 				);
 				if (!$this->firstKey) {

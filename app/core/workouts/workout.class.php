@@ -31,6 +31,10 @@ abstract class Workout {
 	const M4 = "M4";
 	const M5 = "M5";
 	
+	// test
+	const TEST_SHORT = "TS";
+	const TEST_LONG = "TL";
+	
 	/**
 	 * the workout's duration measured in minutes
 	 */
@@ -95,27 +99,6 @@ abstract class Workout {
 		return $this->trimp;
 	}
 	
-	public function getSport() {
-		// unfortunately this has to be implemented a bit akward
-		// didn't find a better solution to retrieve class variables
-		// from objects yet
-		$class = get_class($this);
-		switch ($class::$SPORT) {
-			case 'SWIM':
-				return 'Swim';
-				break;
-			case 'BIKE':
-				return 'Bike';
-				break;
-			case 'RUN':
-				return 'Run';
-				break;
-			default:
-				return 'Unknown';
-				break;
-		}
-	}
-	
 	/**
 	 * get a descriptive category label for this workout:
 	 * Endurance, Speed skills, Force or Muscular Endurance
@@ -123,18 +106,21 @@ abstract class Workout {
 	public function getCategory() {
 		switch(substr($this->type, 0, 1)) {
 			case 'E':
-				return 'Endurance';
+				return __('Endurance', true);
 				break;
 			case 'S':
 				// Speed Skills
-				return 'Speed';
+				return __('Speed', true);
 				break;
 			case 'F':
-				return 'Force';
+				return __('Force', true);
 				break;
 			case 'M': 
 				// Muscular Endurance
-				return 'Tempo Hardness';
+				return __('Tempo Hardness', true);
+				break;
+			case 'T':
+				return __('Test', true);
 				break;
 			default:
 				return 'Unknown';
@@ -167,5 +153,26 @@ abstract class Workout {
 	 * @return int average heart rate for this training
 	 */
 	public abstract function getAVGHR(Athlete $athlete);
+	
+	public function getSport() {
+		// unfortunately this has to be implemented a bit akward
+		// didn't find a better solution to retrieve class variables
+		// from objects yet
+		$class = get_class($this);
+		switch ($class::$SPORT) {
+			case 'SWIM':
+				return 'Swim';
+				break;
+			case 'BIKE':
+				return 'Bike';
+				break;
+			case 'RUN':
+				return 'Run';
+				break;
+			default:
+				return 'Unknown';
+				break;
+		}
+	}
 }
 ?>

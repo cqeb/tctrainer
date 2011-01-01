@@ -64,6 +64,12 @@ class RunWorkout extends Workout {
 			case Workout::M5:
 				return __('Threshold Run', true);
 				break;
+			case Workout::TEST_SHORT:
+				return __('Short Test', true);
+				break;
+			case Workout::TEST_LONG:
+				return __('Long Test', true);
+				break;
 			default:
 				return 'UNKNOWN';
 				break;
@@ -110,6 +116,12 @@ class RunWorkout extends Workout {
 				break;
 			case Workout::M5:
 				return __('Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous.', true);				
+				break;
+			case Workout::TEST_SHORT:
+				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 20 minutes.', true);
+				break;
+			case Workout::TEST_LONG:
+				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 50 minutes.', true);
 				break;
 			default:
 				return 'UNKNOWN';

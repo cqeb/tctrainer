@@ -151,6 +151,12 @@ table.workouts td.description div {
 	border-color: #036599;
 }
 
+/* grey */
+.type.T span.category {
+	background-color: #DFDFDF;
+	border-color: #888;
+}
+
 .workouts .duration, .workouts .trimp {
 	border: 1px solid #999;
 	border-width: 1px 0 1px 1px;

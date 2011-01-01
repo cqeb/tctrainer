@@ -4,13 +4,11 @@
  * @author clemens
  */
 class TriBikeProvider extends WorkoutProvider {
-	
 	protected $SPORT = 'BIKE';
-		
+
 	/**
-	 * generates an LSD Run, which will typically be an E2 workout
-	 * @param $ldRace the next ld race from the schedule
-	 * @return workout
+	 * (non-PHPdoc)
+	 * @see WorkoutProvider::generateLSDWorkout()
 	 */
 	protected function generateLSDWorkout(Race $ldRace) {
 		$NOW = new DateTime();
@@ -22,28 +20,42 @@ class TriBikeProvider extends WorkoutProvider {
 		return new BikeWorkout(Workout::E2, $duration, true);
 	}
 
-	/*
-	 * @see parent class
+	/**
+	 * (non-PHPdoc)
+	 * @see WorkoutProvider::generateTestWorkout()
+	 */
+	protected function generateTestWorkout() {
+		$ldRace = $this->athlete->getSchedule()->getNextARace($this->generateWeek);
+
+		// if the athlete got a long distance race defined
+		// we let him do long test workouts
+		if ($ldRace) {
+			return new BikeWorkout($this->athlete, Workout::TEST_LONG, 60);
+		} else {
+			return new BikeWorkout($this->athlete, Workout::TEST_SHORT, 30);
+		}
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see WorkoutProvider::getWorkoutTypeSequence()
 	 */
 	protected function getWorkoutTypeSequence(Database $DB, $phase, Athlete $athlete, DateTime $week) {
 		return new TriBikeWorkoutTypeSequence(
 			$this->DB, $this->phase["phase"], $this->athlete, $week);
 	}
 	
-	/*
-	 * @see parent class
+	/**
+	 * (non-PHPdoc)
+	 * @see WorkoutProvider::newWorkout()
 	 */
 	protected function newWorkout($type, $duration) {
 		return new BikeWorkout($this->athlete, $type, $duration);
 	}
 
 	/**
-	 * determine workout duration based on
-	 * - next A race, or your training target (Ironman, Half Marathon, ...)
-	 * - personal modificator
-	 * - the training type
-	 * - past utilization of a specific training type (increase duration for repaetently used trainings)
-	 * @param unknown_type $type
+	 * (non-PHPdoc)
+	 * @see WorkoutProvider::getDuration()
 	 */
 	protected function getDuration($trainingType, $raceType) {
 		// the determined duration
