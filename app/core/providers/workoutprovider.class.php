@@ -89,7 +89,6 @@ abstract class WorkoutProvider {
 	protected function addWorkout(Workout $workout) {
 		// there is no budget left, so we won't add this workout
 		if ($this->workoutDurations >= $this->timeBudget) {
-			var_dump($this);
 			throw new Exception("Not enough timeBudget left to add workout");
 		}
 		
