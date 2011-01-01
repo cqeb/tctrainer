@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2010-12-29 16:53+0100\n"
-"PO-Revision-Date: 2010-12-31 13:37+0100\n"
-"Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
+"PO-Revision-Date: 2011-01-01 13:36+0100\n"
+"Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1507,7 +1507,7 @@ msgstr "zurücksetzen"
 
 #: \views\layouts\trainingplans.ctp:91
 msgid "Workout Balance"
-msgstr "Trainingsbalance"
+msgstr "Aufteilung der Trainings"
 
 #: \views\payments\initiate.ctp:3
 #: \views\payments\notify.ctp:20
