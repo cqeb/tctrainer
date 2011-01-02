@@ -64,6 +64,12 @@ class RunWorkout extends Workout {
 			case Workout::M5:
 				return __('Threshold Run', true);
 				break;
+			case Workout::TEST_SHORT:
+				return __('Short Test', true);
+				break;
+			case Workout::TEST_LONG:
+				return __('Long Test', true);
+				break;
 			default:
 				return 'UNKNOWN';
 				break;
@@ -103,13 +109,19 @@ class RunWorkout extends Workout {
 				return __('Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times.', true);
 				break;
 			case Workout::M3:
-				return __('Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep you pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds.', true);
+				return __('Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds.', true);
 				break;
 			case Workout::M4:
 				return __('Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2.', true);
 				break;
 			case Workout::M5:
 				return __('Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous.', true);				
+				break;
+			case Workout::TEST_SHORT:
+				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 20 minutes.', true);
+				break;
+			case Workout::TEST_LONG:
+				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 50 minutes.', true);
 				break;
 			default:
 				return 'UNKNOWN';

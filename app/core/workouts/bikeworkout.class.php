@@ -29,17 +29,163 @@ class BikeWorkout extends Workout {
 	);
 	
 	public function getTypeLabel() {
-		return "Bike Workout";
+	switch ($this->type) {
+			case Workout::E1:
+				return __('Recovery', true);
+				break;
+			case Workout::E2:
+				return __('Extensive Endurance', true);
+				break;
+			case Workout::E3:
+				return __('Intensive Endurance', true);
+				break;
+			case Workout::S1:
+				return __('Cadence Intervals', true);
+				break;
+			case Workout::S2:
+				return __('Single Leg Intervals', true);
+				break;
+			case Workout::S3:
+				return __('Sprints', true);
+				break;
+			case Workout::F1:
+				return __('Moderate Hills', true);
+				break;
+			case Workout::F2:
+				return __('Long Hills', true);
+				break;
+			case Workout::F3:
+				return __('Hill Climbs', true);
+				break;
+			case Workout::M1:
+				return __('Tempo Ride', true);
+				break;
+			case Workout::M2:
+				return __('Intervals', true);
+				break;
+			case Workout::M3:
+				return __('Hill Intervals', true);
+				break;
+			case Workout::M4:
+				return __('Threshold Intevals', true);
+				break;
+			case Workout::M5:
+				return __('Threshold Ride', true);
+				break;
+			case Workout::TEST_SHORT:
+				return __('Short Test', true);
+				break;
+			case Workout::TEST_LONG:
+				return __('Long Test', true);
+				break;
+			default:
+				return 'UNKNOWN';
+				break;
+		}
 	}
 	
 	public function getDescription() {
-		return false;
+	switch ($this->type) {
+			case Workout::E1:
+				return __('Do an easy ride in Zone 1.', true);
+				break;
+			case Workout::E2:
+				return __('Do an endurance ride in Zone 2.', true);
+				break;
+			case Workout::E3:
+				return __('An intensive, aerobic workout. Ride a course with small hills, which take you into Zone 3 frequently.', true);
+				break;
+			case Workout::S1:
+				return __('Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over one minute, and hold as long as possible. Recover for one minute, and repeat several times.', true);
+				break;
+			case Workout::S2:
+				return __('Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times.', true);
+				break;
+			case Workout::S3:
+				return __('Do an endurance ride in Zone 2, but insert several ten-second sprints with maximum effort.', true);
+				break;
+			case Workout::F1:
+				return __('Pick a hilly course, and ride in Zones 1-5. The hills should take about five minutes to ascend. Do not stand up while climbing.', true);
+				break;
+			case Workout::F2:
+				return __('Pick a hilly course with several ascents that take more than 5 minutes to climb. Stay seated, and do not max out your pulse while climbing.', true);
+				break;
+			case Workout::F3:
+				return __('Warm up thoroughly. Pick a steep hill, which takes about one minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of eight times.', true);
+				break;
+			case Workout::M1:
+				return __('Pick a flat course, and ride in Zone 3 with low cadence after warming up.', true);
+				break;
+			case Workout::M2:
+				return __('Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times.', true);
+				break;
+			case Workout::M3:
+				return __('Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds.', true);
+				break;
+			case Workout::M4:
+				return __('Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals.', true);
+				break;
+			case Workout::M5:
+				return __('Pick a flat course. After warming up establish Zone 5, and stay there while maintaining low cadence. STOP immediately if you feel nauseous.', true);				
+				break;
+			case Workout::TEST_SHORT:
+				return __('Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 20 minutes.', true);
+				break;
+			case Workout::TEST_LONG:
+				return __('Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 50 minutes.', true);
+				break;
+			default:
+				return 'UNKNOWN';
+				break;
+		}
 	}
 	
 	// TODO an athlete's historical workout data should aeffect the return val
 	// TODO review these values - they seem arbitrary & bogus
 	public function getAVGHR(Athlete $athlete) {
-		return 140;
+		// zones
+		$z = $athlete->getZones($this->getSport());
+		switch ($this->type) {
+			case Workout::E1:
+				return intval(($z[0] + $z[1]) / 2);
+				break;
+			case Workout::E2:
+				return $z[1] + 3;
+				break;
+			case Workout::E3:
+				return $z[3] - 5;
+				break;
+			case Workout::S1:
+				return $z[2] + 2;
+				break;
+			case Workout::S2:
+				return $z[2] + 3;
+				break;
+			case Workout::S3:
+				return $z[2] + 5;
+				break;
+			case Workout::F1:
+				return $z[3] - 4;
+				break;
+			case Workout::F2:
+				return $z[3];
+				break;
+			case Workout::F3:
+				return $z[3] + 5;
+				break;
+			case Workout::M1:
+				return $z[3] - 3;
+				break;
+			case Workout::M2:
+				return $z[3];
+				break;
+			case Workout::M3:
+				return $z[3] - 2;
+				break;
+			default:
+				return 'UNKNOWN';
+				break;
+		}
 	}
 }
 ?>

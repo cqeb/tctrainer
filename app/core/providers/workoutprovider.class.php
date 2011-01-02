@@ -125,9 +125,15 @@ abstract class WorkoutProvider {
 	/**
 	 * generates a lsd workout for a specific race
 	 * @param Race $ldRace the next long-distance race
-	 * @return Workout a workout
+	 * @return Workout a workout or false
 	 */
 	protected abstract function generateLSDWorkout(Race $ldRace);
+	
+	/**
+	 * generates a test workout to assess your training status
+	 * @return Workout a workout or false
+	 */
+	protected abstract function generateTestWorkout();
 	
 	/**
 	 * Retrieve the specific workouttypesequence for this sport
@@ -173,6 +179,7 @@ abstract class WorkoutProvider {
 	 * This is the invocation sequence that is used.
 	 * 
 	 * $this->generateLSDWorkout()
+	 * $this->generateTestWorkout()
 	 * $this->getWorkoutTypeSequence()
 	 * $this->getDuration()
 	 * 
@@ -193,7 +200,15 @@ abstract class WorkoutProvider {
 				$this->addWorkout($lsdWorkout);
 			}
 		}
-
+		
+		// add a test workout if this is a recovery week
+		if ($this->phase["recovery"]) {
+			$testWorkout = $this->generateTestWorkout();
+			if ($testWorkout) {
+				$this->addWorkout($testWorkout);
+			}
+		}
+		
 		// distribute remaining minutes as long as there are some
 		$wType = $this->getWorkoutTypeSequence(
 			$this->DB, $this->phase["phase"], $this->athlete, $week
@@ -255,6 +270,11 @@ abstract class WorkoutProvider {
 	 * @return double training modificator like 1.3 or 1.05
 	 */
 	protected function getModificator($type) {
+		// test workouts will not be modified
+		if ($type == "TS" || $type == "TL") {
+			return 1;
+		}
+		
 		// prefill cache if it has not been initialized yet
 		if (!$this->modificatorCount["initialized"]) {
 			$lastWeek = clone $this->generateWeek;
