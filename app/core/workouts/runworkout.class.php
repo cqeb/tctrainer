@@ -4,13 +4,7 @@
  * @author clemens
  *
  */
-class RunWorkout extends Workout {
-	/**
-	 * this identifies the workout as a run workout in the database
-	 * @var string
-	 */
-	public static $SPORT = "RUN";
-	
+class RunWorkout extends Workout {	
 	/**
 	 * array of lsd-training duration in minutes
 	 * the array key represents the weeks to go, so week 0
@@ -23,6 +17,18 @@ class RunWorkout extends Workout {
 		Athlete::ADVANCED => array (0, 180, 180, 0, 180, 180, 0, 165, 165, 0, 150, 150)		
 	);
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see Workout::getSport()
+	 */
+	public function getSport() {
+		return "RUN";
+	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see Workout::getTypeLabel()
+	 */
 	public function getTypeLabel() {
 		switch ($this->type) {
 			case Workout::E1:
@@ -76,6 +82,10 @@ class RunWorkout extends Workout {
 		}
 	}
 	
+	/**
+	 * (non-PHPdoc)
+	 * @see Workout::getDescription()
+	 */
 	public function getDescription() {
 		switch ($this->type) {
 			case Workout::E1:
@@ -130,9 +140,13 @@ class RunWorkout extends Workout {
 		
 	}
 	
-	// TODO an athlete's historical workout data should aeffect the return val
-	// TODO review these values - they seem arbitrary & bogus
+	/**
+	 * (non-PHPdoc)
+	 * @see Workout::getAVGHR()
+	 */
 	public function getAVGHR(Athlete $athlete) {
+		// TODO an athlete's historical workout data should aeffect the return val
+		// TODO review these values - they seem arbitrary & bogus
 		// zones
 		$z = $athlete->getZones($this->getSport());
 		switch ($this->type) {

@@ -233,15 +233,14 @@ abstract class WorkoutProvider {
 	
 	/**
 	 * stores generated workouts back to the database
+	 * @param $purge wether to purge old trainings of this week. defaults to true
 	 */
-	public function save() {
+	public function save($purge=true) {
 		if (count($this->workouts) == 0) {
 			return false;
 		}
 		$week = $this->generateWeek->format("Y-m-d");
-		$delSql = "DELETE FROM scheduledtrainings WHERE athlete_id = " .
-			$this->athlete->getId() . " AND week = '$week'";
-		
+
 		$sql = "INSERT INTO scheduledtrainings (athlete_id, week, sport, type, duration, lsd, trimp) VALUES\n";
 		
 		$sqlArr = array();
@@ -257,7 +256,11 @@ abstract class WorkoutProvider {
 		$sql .= implode(",\n", $sqlArr);
 
 		// delete old entries first
-		$this->DB->query($delSql);
+		if ($purge) {
+			$delSql = "DELETE FROM scheduledtrainings WHERE athlete_id = " .
+				$this->athlete->getId() . " AND week = '$week'";
+			$this->DB->query($delSql);
+		}
 		
 		// now save new ones
 		$this->DB->query($sql);
