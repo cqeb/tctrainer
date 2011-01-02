@@ -142,35 +142,8 @@ echo $form->input('publictrainings', array('label' => __('Publish your trainings
 
 <br />
 <a name="zones"></a><h3><?php __('Zones'); ?></h3>
-<?php
-
-echo $form->input('maximumheartrate',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'class' => 'required',
-                  'maxLength' => 255,
-                  'error' => array( 
-                      'numeric' => __('Enter your maximum heart rate (approx. 220 minus your age)',true),
-                      'greater' => __('Must be at least 120',true),
-                      'lower' => __('Must be lower than 220',true),
-                      'notempty' => __('Enter your maximum heart rate (approx. 220 minus your age)',true)
-                  ),
-                  //'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                  'label' => __('Max. heart rate', true)
-));
-?>
-
-<br />
-<div class="statusbox">
-<?php __('Calculating the lactate threshold by using the maximum heart rate is only an approximation.
-Please use your testworkouts to get a more specific value for your lactate threshold.'); ?>
-</div>
-<br />
 
 <div class="errorbox" id="errorlth"></div>
-
 <?php
 echo $form->input('lactatethreshold',
                    array(
@@ -187,6 +160,24 @@ echo $form->input('lactatethreshold',
                    ),
                    //'error' => array('wrap' => 'div', 'style' => 'color:red'),
                    'label' => __('Lactate threshold', true)
+));
+?>
+<div class="errorbox" id="errorblth"></div>
+<?php
+echo $form->input('bikelactatethreshold',
+                   array(
+                   'before' => '',
+                   'after' => '',
+                   'between' => '',
+                   'class' => 'required',
+                   'maxLength' => 255,
+                   'error' => array( 
+                      'numeric' => __('Enter your current bike lactate threshold',true),
+                      'greater' => __('Must be at least 120',true),
+                      'lower' => __('Must be lower than 220',true),
+                      'notempty' => __('Enter your current bike lactate threshold',true)
+                   ),
+                   'label' => __('Bike lactate threshold', true)
 ));
 /**
 
@@ -294,11 +285,15 @@ $this->js_addon .= <<<EOG
 ');
                 } else
                 {
-                  lth = lth * 0.85;
+                  lth = parseInt(lth * 0.85);
                   \$('#errorlth').hide();
+                  \$('#errorblth').hide();
 
                   if ( \$('#UserLactatethreshold').val() == '' )
                         \$('#UserLactatethreshold').val(lth);
+
+                  if ( \$('#UserBikelactatethreshold').val() == '' )
+                        \$('#UserBikelactatethreshold').val(parseInt(lth*0.96));
 
                   if ( checkonly == false )
                   {
@@ -309,33 +304,46 @@ $this->js_addon .= <<<EOG
                 return false;
 }
 
+/**
+ * will check lactate threshold and bike lactate threshold values
+ */
 function check_lth() {
-               lth = parseInt( \$('#UserLactatethreshold').val() );
+               var lth = parseInt( \$('#UserLactatethreshold').val() );
+               var blth = parseInt( \$('#UserBikelactatethreshold').val() );
 
                if ( isNaN(lth) || lth > 220 || lth < 120 ) {
                             \$('#errorlth').show();
                             \$('#errorlth').html('
 EOG;
-
 $this->js_addon .= __('Your lactate threshold is not valid! Should be between 220 and 120.',true);
-
 $this->js_addon .= <<<EOH
 ');
-                            check_mhr();
                } else {
-                            //lth = lth * 0.85;
                             \$('#errorlth').hide();
                             zonestable = calculate_zones( lth );
-                            //alert(zonestable);
                             \$('#zones').html(zonestable);
                }
+
+			   // check bike lactate threshold
+               if ( isNaN(blth) || blth > 220 || blth < 120 ) {
+                            \$('#errorblth').show();
+                            \$('#errorblth').html('
+EOH;
+$this->js_addon .= __('Your bike lactate threshold is not valid! Should be between 220 and 120.',true);
+$this->js_addon .= <<<EOH
+');
+               } else {
+                            \$('#errorblth').hide();
+                            \$('#zones').html(zonestable);
+               }
+
                return false;
 }
 
 \$(document).ready(function() {
         var lth = parseInt( \$('#UserLactatethreshold').val() );
         var mhr = parseInt( \$('#UserMaximumheartrate').val() );
-        \$('#errorlth').hide();
+        \$('#errorlth, #errorblth').hide();
 
         var zonestable = '';
 

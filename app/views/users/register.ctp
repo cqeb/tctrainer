@@ -118,6 +118,18 @@ echo $form->input('lactatethreshold',
      'label' => __('Lactate threshold', true)
 ));
 
+echo $form->input('bikelactatethreshold',
+     array(
+ 	   'class' => 'medium',
+     'error' => array( 
+        'numeric' => __('Enter your bike lactate threshold heart rate',true),
+        'greater' => __('Must be at least',true) . ' 120',
+        'lower' => __('Must be lower than',true) . ' 220',
+        'notempty' => __('Enter your bike lactate threshold heart rate',true)
+     ),
+     'label' => __('Bike lactate threshold', true)
+));
+
 echo $form->input('typeofsport',
      array(
      'class' => 'required',
@@ -207,6 +219,9 @@ function finishAjax(id, response) {
 }
 
 \$(document).ready(function () {
+	// hide bike lactate threshold, because the user may not need to see it
+	\$('#UserBikelactatethreshold').parent().hide();
+
 	/**
 	 * calculate default lactate treshold value when
 	 * the user changes the his year of birth
@@ -215,7 +230,9 @@ function finishAjax(id, response) {
 		var year = this.value;
 		var d = new Date();
 		var lt = parseInt((220 - (d.getFullYear() - year)) * 0.85);
-		\$('#UserLactatethreshold').attr('value', lt).effect("highlight", {}, 3000);
+		\$('#UserLactatethreshold').attr('value', lt).effect("highlight", 3000);
+		var blt = parseInt(lt * 0.96);
+		\$('#UserBikelactatethreshold').attr('value', blt).effect("highlight", 3000);
 	});
 
 	/**
@@ -252,6 +269,30 @@ function finishAjax(id, response) {
 				break;
 		}
 		\$('#UserWeeklyhours').attr('value', val).effect("highlight", {}, 3000);
+
+		// show or hide bike lactate threshold
+		switch (this.value) {
+			case 'TRIATHLON IRONMAN':
+			case 'TRIATHLON HALFIRONMAN':
+			case 'TRIATHLON OLYMPIC':
+			case 'TRIATHLON SPRINT':
+			case 'DUATHLON MIDDLE':
+			case 'DUATHLON SHORT':
+				\$('#UserLactatethreshold').parent().slideDown();
+				\$('#UserBikelactatethreshold').parent().slideDown();
+				break;
+			case 'BIKE ULTRA':
+			case 'BIKE LONG':
+			case 'BIKE MIDDLE':
+			case 'BIKE SHORT':
+				\$('#UserLactatethreshold').parent().slideUp();
+				\$('#UserBikelactatethreshold').parent().slideDown();
+				break;
+			default:
+				\$('#UserLactatethreshold').parent().slideDown();
+				\$('#UserBikelactatethreshold').parent().slideUp();
+				break;
+		}
 	});
 
 	/**
@@ -297,7 +338,7 @@ EOE;
 	/**
 	 * validation of numeric fields
 	 */
-	\$('#UserLactatethreshold').blur(function () {
+	\$('#UserLactatethreshold, #UserBikelactatethreshold').blur(function () {
 		var field = $(this);
 		var val = parseInt(field.val());
 		if (val > 120 && val < 220) {
