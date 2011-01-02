@@ -4,16 +4,6 @@
  * @author clemens
  */
 class Race {
-	// race types
-	const SPRINT_TRIATHLON = "Triathlon Sprint";
-	const OLYMPIC_TRIATHLON = "Triathlon Olympic";
-	const HALF_IRONMAN = "Triathlon Half-Ironman";
-	const IRONMAN = "Triathlon Ironman";
-	const FIVEK = "Run 5k";
-	const TENK = "Run 10k";
-	const HALF_MARATHON = "Run Half-Marathon";
-	const MARATHON = "Run Marathon";
-	
 	/**
 	 * date of the race as DateTime object
 	 */
@@ -111,21 +101,28 @@ class Race {
 	 */
 	public static function getDistanceClass($type) {
 		switch($type) {
-			case self::SPRINT_TRIATHLON:
-			case self::FIVEK:
-				return "SPRINT";
+			case 'TRIATHLON IRONMAN':
+			case 'BIKE ULTRA':
+			case 'BIKE LONG':
+			case 'RUN ULTRA':
+			case 'RUN MARATHON':
+				return "LONG";
 				break;
-			case self::OLYMPIC_TRIATHLON:
-			case self::TENK:
-				return "SHORT";
-				break;
-			case self::HALF_IRONMAN:
-			case self::HALF_MARATHON:
+			case 'TRIATHLON HALFIRONMAN':
+            case 'DUATHLON MIDDLE':
+ 			case 'BIKE MIDDLE':
+			case 'RUN HALFMARATHON':
 				return "MIDDLE";
 				break;
-			case self::IRONMAN:
-			case self::MARATHON:
-				return "LONG";
+			case 'TRIATHLON OLYMPIC':
+            case 'DUATHLON SHORT':
+            case 'RUN 10K':
+				return "SHORT";
+				break;
+            case 'TRIATHLON SPRINT':
+			case 'RUN 5K':
+            case 'BIKE SHORT':
+				return "SPRINT";
 				break;
 			default:
 				throw new Exception("Unknown competition type {$type}");
