@@ -1219,7 +1219,7 @@ class UsersController extends AppController {
 		$filesize_accepted_images = 200000;
 
 		// none
-		$type_accepted_files = array("");
+		$type_accepted_files = array("vnd.ms-excel");
 		$filesize_accepted_files = 300000;
 
 		if ( $type == "image" )
@@ -1242,7 +1242,30 @@ class UsersController extends AppController {
 
 				} else
 				$return['error'] = 'filesize_not_accepted';
-			} else
+      }
+     } elseif ( $type == "file")
+     {
+      if ( in_array( $file['type'], $type_accepted_files ) )
+      {
+        if ( $file['size'] < $filesize_accepted_files )
+        {
+          $new_name = $addthis . '_' . $userid . '_' . $file['name'];
+          $destination .= $new_name;
+          $weburl .= $new_name;
+
+          if ( move_uploaded_file( $file['tmp_name'], $destination ) )
+          {
+            //unlink($file['tmp_name']);
+            $return['destination'] = $weburl;
+            $return['error'] = '';
+            return $return;
+          }
+        } else
+            $return['error'] = 'filesize_not_accepted';
+       
+       
+       
+     } else
 			$return['error'] = 'type_not_accepted';
 		}
 		return $return;

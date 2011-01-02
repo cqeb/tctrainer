@@ -3,6 +3,9 @@
 if ( $export == true )
 {
 
+$yesno[1] = __('Yes', true);
+$yesno[0] = __('No', true);
+
 ?>
 
 <style type="text/css">
@@ -20,6 +23,7 @@ if ( $export == true )
 </style>
 
 <table>
+<!--
 <tr>
 		<td colspan="12"><b><?php __('Export of statistics'); ?><b></td>
 </tr>
@@ -30,27 +34,23 @@ if ( $export == true )
 <tr>
 		<td colspan="12"></td>
 </tr>
+-->
 <tr id="titles">
 		<td class="tableTd"><?php __('Date'); ?></td>
-		<td class="tableTd"><?php __('Sport'); ?></td>
 		<td class="tableTd"><?php __('Name of Training'); ?></td>
-		<td class="tableTd"><?php __('Distance'); ?></td>
+    <td class="tableTd"><?php __('Sport'); ?></td>
 		<td class="tableTd"><?php __('Duration'); ?></td>
-		<td class="tableTd"><?php __('AVG Speed'); ?></td>
-		<td class="tableTd"><?php __('AVG Heart Rate'); ?></td>
-<!--
-		<td class="tableTd"><?php __('Zone 1 Heartrate'); ?></td>
-		<td class="tableTd"><?php __('Zone 2 Heartrate'); ?></td>
-		<td class="tableTd"><?php __('Zone 3 Heartrate'); ?></td>
-		<td class="tableTd"><?php __('Zone 4 Heartrate'); ?></td>
-		<td class="tableTd"><?php __('Zone 5 Heartrate'); ?></td>
--->
+    <td class="tableTd"><?php __('Distance'); ?></td>
+		<td class="tableTd"><?php __('AVG heart rate'); ?></td>
 		<td class="tableTd"><?php __('Testworkout'); ?></td>
 		<td class="tableTd"><?php __('Competition'); ?></td>
+    <td class="tableTd"><?php __('Comment'); ?></td>
 		<td class="tableTd"><?php __('Location'); ?></td>
 		<td class="tableTd"><?php __('Weight'); ?></td>
+    <td class="tableTd"><?php __('Link to workout'); ?></td>
 		<td class="tableTd"><?php __('TRIMP'); ?></td>
-		<!--td class="tableTd"><?php __('Comment'); ?></td-->
+    <td class="tableTd"><?php __('AVG Speed'); ?></td>
+    <td class="tableTd"><?php __('Burnt'); ?></td>
 </tr>
 <?php
 
@@ -58,28 +58,23 @@ if ( $export == true )
     {
         $dt = $trainings[$i]['Trainingstatistics'];
 
-			echo '<tr>';
-			echo '   <td class="tableTdContent">'.$dt['date'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['sportstype'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['distance'].'</td>';
-			echo '   <td class="tableTdContent">'.$unitcalc->seconds_to_time($dt['duration']).'</td>';
-			echo '   <td class="tableTdContent">'.$dt['avg_speed'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['avg_pulse'].'</td>';
-/**
-			echo '   <td class="tableTdContent">'.$dt['avg_pulse_zone1'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['avg_pulse_zone2'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['avg_pulse_zone3'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['avg_pulse_zone4'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['avg_pulse_zone5'].'</td>';
-**/
-			echo '   <td class="tableTdContent">'.$dt['testworkout'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['competition'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['location'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['weight'].'</td>';
-			echo '   <td class="tableTdContent">'.$dt['trimp'].'</td>';
-			//echo '    <td class="tableTdContent">'.$dt['comment'].'</td>';
-			echo '</tr>';
+  			echo '<tr>';
+  			echo '   <td class="tableTdContent">'.$unitcalc->check_date($dt['date'], 'show', 'single').'</td>';
+        echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
+  			echo '   <td class="tableTdContent">'.$dt['sportstype'].'</td>';
+  			echo '   <td class="tableTdContent">'.$unitcalc->seconds_to_time($dt['duration']).'</td>';
+        echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single').'</td>';
+  			echo '   <td class="tableTdContent">'.$dt['avg_pulse'].'</td>';
+  			echo '   <td class="tableTdContent">'.$yesno[$dt['testworkout']].'</td>';
+  			echo '   <td class="tableTdContent">'.$yesno[$dt['competition']].'</td>';
+        echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
+  			echo '   <td class="tableTdContent">'.$dt['location'].'</td>';
+  			echo '   <td class="tableTdContent">'.$unitcalc->check_weight($dt['weight'], 'show', 'single').'</td>';
+        echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
+  			echo '   <td class="tableTdContent">'.$dt['trimp'].'</td>';
+        echo '   <td class="tableTdContent">'.$dt['avg_speed'].'</td>';
+        echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
+  			echo '</tr>';
     }
 ?>
 </table>

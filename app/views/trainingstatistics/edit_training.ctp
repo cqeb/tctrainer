@@ -50,6 +50,9 @@ echo $form->input('name',
                   'label' => __('Name', true)
 ));
 
+__('RUN', true);
+__('BIKE', true);
+__('SWIM', true);
 
 echo $form->input('sportstype',
                   array(

@@ -13,7 +13,7 @@
                    <?php } ?>
 
                    <?php echo $html->link(__("Add workout",true), array('action' => 'edit_training'),null) ?>
-                   <br /><br />
+                   | 
                    <?php echo $html->link(__("Import workout",true), array('action' => 'import_workout'),null) ?>
                    <br /><br />
 
@@ -29,8 +29,8 @@
 <?php foreach ($trainingstatistics as $trainingstatistic): ?>
 <?php $training = $trainingstatistic['Trainingstatistic']; ?>
 <tr>
-    <td><?php echo $html->link($unitcalc->check_date($training['date']), array('action' => 'edit_training', 'id' => $trainingstatistic['Trainingstatistic']['id']),null); echo ', ' . date('D', strtotime($training['date']));  ?></td>
-    <td><?php echo $training['sportstype']; ?></td>
+    <td><?php echo $html->link($unitcalc->check_date($training['date']), array('action' => 'edit_training', 'id' => $trainingstatistic['Trainingstatistic']['id']),null); echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
+    <td><?php $stype = $training['sportstype']; __($stype); ?></td>
     <td><?php $distance = $unitcalc->check_distance($training['distance']); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
     <td><?php $duration = $unitcalc->seconds_to_time($training['duration']); echo $duration; ?></td>
     <td>

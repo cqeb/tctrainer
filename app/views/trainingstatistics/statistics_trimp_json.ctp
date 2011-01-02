@@ -69,7 +69,7 @@ if ( $graphtype == 'chronic' )
     "tick-height": 4,
 		"labels":{
       "rotate": "vertical",
-			"labels":[<?php for ( $i = $day_back; $i < ( count($trimp_dates) ); $i++ ) { if ( $i%$intervaldays == 0 ) { echo "\"" . date('D', strtotime($trimp_dates[$i])) . " "; echo $unitcalc->check_date($trimp_dates[$i],'show') . "\""; } else echo "\"\""; if ( $i < ( count( $trimp_dates ) - 1 ) ) echo ","; } ?> ]
+			"labels":[<?php for ( $i = $day_back; $i < ( count($trimp_dates) ); $i++ ) { if ( $i%$intervaldays == 0 ) { $sday = date('D', strtotime($trimp_dates[$i])); echo "\"" . __($sday, true) . " "; echo $unitcalc->check_date($trimp_dates[$i],'show') . "\""; } else echo "\"\""; if ( $i < ( count( $trimp_dates ) - 1 ) ) echo ","; } ?> ]
 			}
 		},
 	"bg_colour":"#ffffff"

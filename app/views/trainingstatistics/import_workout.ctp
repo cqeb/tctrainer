@@ -3,9 +3,14 @@
 
                    <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $form->create('User', array('action' => 'import_workout', 'type' => 'file')); ?>
+                   <?php echo $form->create('Trainingstatistic', array('action' => 'import_workout', 'type' => 'file')); ?>
                    <fieldset>
-                   <legend><?php __('Upload and import your workouts easily!'); ?></legend>
+                   <legend><?php
+if ( isset( $newimportfile ) )
+    __('Check import data und confirm import!');
+else
+    __('Upload and import your workouts easily!'); 
+?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
@@ -15,32 +20,69 @@
                    
 <?php
 
-__('Upload a CSV-file - you can save an Excel-file in this format.');
+if ( !isset( $newimportfile ) ) 
+{
+  
+    __('Upload a CSV-file - you can save an Excel-file in this format.');
+    
+    echo "<br />";
+    
+    echo $form->file('import_csv_upload');
+    
+    echo "<br /><br />";
+    
+    echo $form->submit(__('Import',true));
 
-echo "<br />";
+} else
+{
+  
+    echo $form->submit(__('Confirm import', true)); 
+    
+    echo $form->hidden('hiddenimportfile');
 
-echo $form->file('import_csv_upload');
-
-echo "<br /><br />";
-
-?>
-
-<br /><br />
-
-<?php
-
-echo $form->submit(__('Import',true));
+}
 
 ?>
                  <br />
 
+<?php
+
+if ( isset( $outputfile ) ) {
+  
+?>
+<table border="0">
+<tr>
+<th><?php __('Date'); ?></th>
+<!--<th><?php __('Time'); ?></th>-->
+<th><?php __('Name'); ?></th>
+<th><?php __('Sport'); ?></th>
+<th><?php __('Distance'); ?></th>
+<th><?php __('Duration'); ?></th>
+<!--
+<th>Workout</th>
+<th>Competition</th>
+<th>Comment</th>
+<th>Location</th>
+<th>Weight</th>
+<th>URL</th>
+-->
+<th><?php __('Status'); ?></th>
+</tr>
+<?php echo $outputfile; ?>
+</table>
+<?php
+
+    echo $form->submit(__('Confirm import', true)); 
+
+}
+
+?>
+
                  </fieldset>
 
 <?php
+      
       echo $form->end();
-?>
-
-<?php
 
       $this->js_addon = <<<EOE
 <script type="text/javascript">

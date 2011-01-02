@@ -1,18 +1,18 @@
-<b><?php __('Recommendation'); ?></b><br />
+<b><?php __('Recommendation'); ?></b>
+<br /><br />
 
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
-/* Sidebar right */
-google_ad_slot = "0124329898";
-google_ad_width = 234;
-google_ad_height = 60;
+/* Sidebar - rechts 2 */
+google_ad_slot = "5636489260";
+google_ad_width = 180;
+google_ad_height = 150;
 //-->
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 
-<br /><br />
 <div class="messagebox">
 <?php __('You MUST have a heart rate monitor like ') . '<a href="http://www.amazon.de/gp/product/B001NGOYMU?ie=UTF8&tag=trico-21&linkCode=as2&camp=1638&creative=6742&creativeASIN=B001NGOYMU" target="_blank">POLAR</a> ' . __('for your training as we offer heart rate oriented trainingplans only.') ?>
 <br /><br />
