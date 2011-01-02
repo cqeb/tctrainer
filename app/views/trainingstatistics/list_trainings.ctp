@@ -23,20 +23,28 @@
     <th><?php echo $paginator->sort(__('Sport',true), 'sportstype'); ?></th>
     <th><?php echo $paginator->sort(__('Distance',true), 'distance'); ?></th>
     <th><?php echo $paginator->sort(__('Duration',true), 'duration'); ?></th>
-    <th></th>
+    <th><?php __('Action'); ?></th>
 </tr>
+
+<?php 
+
+if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
+{
+  
+    echo '<td colspan="5">' . __('No workouts available.', true) . '</td>';  
+}
+ 
+?>
 
 <?php foreach ($trainingstatistics as $trainingstatistic): ?>
 <?php $training = $trainingstatistic['Trainingstatistic']; ?>
+
 <tr>
     <td><?php echo $html->link($unitcalc->check_date($training['date']), array('action' => 'edit_training', 'id' => $trainingstatistic['Trainingstatistic']['id']),null); echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
     <td><?php $stype = $training['sportstype']; __($stype); ?></td>
     <td><?php $distance = $unitcalc->check_distance($training['distance']); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
     <td><?php $duration = $unitcalc->seconds_to_time($training['duration']); echo $duration; ?></td>
-    <td>
-    
-    <?php echo $html->link(__('[X]',true), array('action' => 'delete', 'id' => $training['id']), null, __('Are you sure?',true) )?>
-
+    <td style="text-align:right;">
 <?php 
 
 $facebookurl = "http://www.facebook.com/sharer.php?t=" .
@@ -44,10 +52,6 @@ urlencode(__('My last training', true) . ' ') . $distance['amount'] .
 urlencode(' ' . $distance['unit'] . ' ' . __('in',true) . ' ') . $duration . 
 urlencode(' ' . __('WOW',true)) . '&u=http://tricoretraining.com'; 
 
-?>
-<a target="_blank" href="<?php echo $facebookurl; ?>">[F]</a>
-    
-<?php 
 $twitterurl = 
 urldecode(
 substr( 
@@ -55,10 +59,17 @@ __('My last training', true) . ' ' . $distance['amount'] . ' ' . $distance['unit
 __('in',true) . ' ' . $duration . ' ' . __('WOW',true) . ' http://tricoretraining.com'
 , 0, 140 )
 ); 
-?>
-<a target="_blank" href="http://www.twitter.com/?status=<?php echo $twitterurl; ?>">[T]</a>
 
-    <?php if ( isset( $training['workout_link'] ) && $training['workout_link'] != '' ) { ?><a href="<?php echo $training['workout_link']; ?>" target="_blank"><?php __('[EXT]'); ?></a><?php } ?>
+?>
+    
+<?php if ( isset( $training['workout_link'] ) && $training['workout_link'] != '' && $training['workout_link'] != 'http://' ) { ?>
+<a href="<?php echo $training['workout_link']; ?>" target="_blank"><img alt="<?php __('Link to workout'); ?>" width="20" src="/trainer/img/icon_external.gif" /></a>
+<?php } ?>
+
+<a target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="20" src="/trainer/img/icon_facebook.png" /></a>
+<a target="_blank" href="http://www.twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="20" src="/trainer/img/icon_twitter.png" /></a>
+
+<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/Trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="20" src="/trainer/img/icon_delete.png" /></a>
 
     </td>
 </tr>

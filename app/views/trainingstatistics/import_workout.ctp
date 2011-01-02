@@ -24,8 +24,14 @@ if ( !isset( $newimportfile ) )
 {
   
     __('Upload a CSV-file - you can save an Excel-file in this format.');
+
+    echo '<br /><br />';
     
-    echo "<br />";
+    echo '<a href="/trainer/example/example_workouts_import.xls" target="_blank">';
+    __('Here an example Excel-file for you.');
+    echo '</a>';
+        
+    echo '<br /><br />';
     
     echo $form->file('import_csv_upload');
     
@@ -36,10 +42,10 @@ if ( !isset( $newimportfile ) )
 } else
 {
   
-    echo $form->submit(__('Confirm import', true), array( 'class' => '' ) ); 
+    echo $form->submit(__('Confirm import', true), array( 'div' => false ) ); 
     echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
     
-    if ( isset( $form->hidden('hiddenimportfile') ) ) echo $form->hidden('hiddenimportfile');
+    echo $form->hidden('hiddenimportfile');
 
 }
 

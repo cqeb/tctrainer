@@ -8,20 +8,27 @@ $yesno[0] = __('No', true);
 
 ?>
 
-<style type="text/css">
-	.tableTd {
-	   	border-width: 0.5pt;
-		border: solid;
-	}
-	.tableTdContent{
-		border-width: 0.5pt;
-		border: solid;
-	}
-	#titles{
-		font-weight: bolder;
-	}
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TriCoreTraining.com Trainingstatistics</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
 
+    <style type="text/css">
+    	.tableTd {
+    	   	border-width: 0.5pt;
+    		border: solid;
+    	}
+    	.tableTdContent{
+    		border-width: 0.5pt;
+    		border: solid;
+    	}
+    	#titles{
+    		font-weight: bolder;
+    	}
+    </style>
+</head>
+<body>
 <table>
 <!--
 <tr>
@@ -78,6 +85,8 @@ $yesno[0] = __('No', true);
     }
 ?>
 </table>
+</body>
+</html>
 
 <?php
 } else
@@ -96,8 +105,8 @@ $yesno[0] = __('No', true);
                    </div><br />
                    <?php } ?>
 
-<a href="/blog/en/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
-<br /><br />
+                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <br /><br />
 
                    <div>
 <?php
@@ -147,11 +156,11 @@ echo $form->input('todate',
 echo $form->hidden('id');
 echo $form->hidden('user_id');
 
-echo $form->submit(__('Display',true), array('name' => 'display', 'class' => 'none'));
+echo $form->submit(__('Display',true), array('name' => 'display', 'div' => false));
 
-echo '<br />';
+echo '&nbsp;&nbsp;';
 
-echo $form->submit(__('Export',true), array('name' => 'excel', 'class' => 'none'));
+echo $form->submit(__('Export',true), array('name' => 'excel', 'div' => false));
 ?>
                    </div>
                    </fieldset>
@@ -180,17 +189,17 @@ for ( $j = 0; $j < count( $sumdata['collected_sportstypes'] ); $j++ )
 
 ?>
 <tr>
-    <td><?php echo $sumdata['collected_sportstypes'][$j]; ?></td>
+    <td><?php $sport = $sumdata['collected_sportstypes'][$j]; __($sport); ?></td>
     
-    <td>
+    <td style="text-align:right;">
     <?php $distance = $unitcalc->check_distance($sumdata['distance'][$sportstype]); echo $distance['amount'] . ' ' . $distance['unit']; ?>
     </td>
     
-    <td>
+    <td style="text-align:right;">
     <?php echo $unitcalc->seconds_to_time($sumdata['duration'][$sportstype]); ?> h
     </td>
     
-    <td>
+    <td style="text-align:right;">
     <?php echo round($sumdata['trimp'][$sportstype]); ?> <?php __('Points'); ?>
     </td>
 </tr>
@@ -202,7 +211,7 @@ for ( $j = 0; $j < count( $sumdata['collected_sportstypes'] ); $j++ )
 </table>
 <!--</div>-->
 
-<h2><?php __('Chart Distance'); ?></h2>
+<h2><?php __('Distance Statistics'); ?></h2>
 
 <?php
 
@@ -221,9 +230,13 @@ if ( count( $trainings ) > 0 )
 
 <div id="my_chart1"></div>
 
+<?php if ( $userobject['advanced_features'] ) { ?>
+<a href="<?php echo $jsonurl.'type:distance/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<?php } ?>
+
 <br /><br />
 
-<h2><?php __('Chart Duration'); ?></h2>
+<h2><?php __('Duration Statistics'); ?></h2>
 
 <?php
 
@@ -242,11 +255,15 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' .
 
 <div id="my_chart2"></div>
 
+<?php if ( $userobject['advanced_features'] ) { ?>
+<a href="<?php echo $jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<?php } ?>
+
 <?php
 /**
 <br /><br />
 
-<h2><?php __('Chart trimp'); ?></h2>
+<h2><?php __('TRIMP Statistics'); ?></h2>
 
 <?php
 
@@ -286,4 +303,5 @@ echo $ofc->createflash('my_chart4','680','400',$jsonurl.'type:weight/start:' . $
 EOE;
 
 }
+
 ?>

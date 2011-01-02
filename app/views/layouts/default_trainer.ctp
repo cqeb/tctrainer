@@ -94,6 +94,7 @@ echo $html->charset();
 		<!-- Right column -->
 		<div class="grid_3 right">
 
+<!--
 <?php if ( isset($userobject) ) { ?>
 			<div class="box userinfo">
 				<h1><?php __('Aloha'); ?>, <?php echo $userobject['firstname']; ?>!</h1>
@@ -103,6 +104,7 @@ echo $html->charset();
         <br /><br />
 			</div>
 <?php } ?>
+-->
 			
 			<div class="box last">
 				<?php echo $this->element('rightbar'); ?>

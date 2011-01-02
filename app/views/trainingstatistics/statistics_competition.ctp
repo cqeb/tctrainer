@@ -22,8 +22,8 @@
                    </div><br />
                    <?php } ?>
 
-<a href="/blog/en/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
-<br /><br />
+                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <br /><br />
 
                    <div>
 <?php
@@ -70,8 +70,8 @@ http://www.rodpetrovic.com/jquery/behavior/
     </div>
     </td>
     <td style="vertical-align: top;">
-    <?php __('In this season you should have reached training impulse (trimp): '); ?> <b><?php echo $total_trimp_tp; ?></b><br /><br />
-    <?php __('In this season you already reached this training impulse (trimp): '); ?> <b><?php echo $total_trimp; ?></b><br /><br />
+    <?php __('In this season you should have reached training impulse (TRIMP): '); ?> <b><?php echo $total_trimp_tp; ?></b><br /><br />
+    <?php __('In this season you already reached this training impulse (TRIMP): '); ?> <b><?php echo $total_trimp; ?></b><br /><br />
     <?php __('Percentage: '); echo $trafficlight_percent . ' %'; ?><br /><br />
     <?php 
     echo "<span style=\"color:green;\">";
@@ -93,7 +93,7 @@ http://www.rodpetrovic.com/jquery/behavior/
     echo "</span> ";
     __('means'); 
     echo ", ";
-    __('you didn\'t do enough or too much. You cann\'t finish your competition.');
+    __("you didn't do enough or too much. You can't finish your competition.");
     ?>
     </td>
 </tr>

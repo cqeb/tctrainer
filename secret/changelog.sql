@@ -47,3 +47,6 @@ ALTER TABLE `users` ADD `notifications` TINYINT NOT NULL AFTER `newsletter`;
 2011-01-02 KMS
 // for beta users
 ALTER TABLE `users` ADD `advanced_features` TINYINT NOT NULL AFTER `cancelation_reason` 
+
+ALTER TABLE `users` CHANGE `cancelation_reason` `cancellation_reason` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
+

@@ -705,6 +705,23 @@ class UnitcalcComponent extends Object {
                              'BIKE SHORT' => $bike_short
                  )
             );
+
+            // for translation
+            __('TRIATHLON IRONMAN', true);
+            __('TRIATHLON HALFIRONMAN', true);
+            __('TRIATHLON OLYMPIC', true);
+            __('TRIATHLON SPRINT', true);
+            __('RUN ULTRA', true);
+            __('RUN MARATHON', true);
+            __('RUN HALFMARATHON', true);
+            __('RUN 10K', true);
+            __('RUN 5K', true);
+            __('DUATHLON MIDDLE', true);
+            __('DUATHLON SHORT', true);
+            __('BIKE ULTRA', true);
+            __('BIKE LONG', true);
+            __('BIKE MIDDLE', true);
+            __('BIKE SHORT', true);
             
             return $sports; 
    }

@@ -12,8 +12,8 @@
                    <br />
                    <?php } ?>
 
-<a href="/blog/en/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
-<br /><br />
+                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <br /><br />
 
                    <div>
 <?php
@@ -87,9 +87,13 @@ echo $ofc->createflash('my_chart1','680','400',$jsonurl . 'stype:' . $sportstype
 
 <div id="my_chart1"></div>
 
+<?php if ( $userobject['advanced_features'] ) { ?>
+<a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<?php } ?>
+
 <br /><br />
 
-<h2><?php __('Grade of fitness (Chronic Training Load)  '); ?></h2>
+<h2><?php __('Grade of fitness (Chronic Training Load)'); ?></h2>
 
 <?php
 
@@ -101,6 +105,9 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl . 'stype:' . $sportstype
 
 <div id="my_chart2"></div>
 
+<?php if ( $userobject['advanced_features'] ) { ?>
+<a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<?php } ?>
 
 <?php
 

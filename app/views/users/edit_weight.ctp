@@ -101,7 +101,7 @@ if ($form->isFieldError('targetweightcheck'))
 echo $form->hidden('id');
 echo $form->hidden('birthday');
 
-echo $form->submit('Save');
+echo $form->submit(__('Save', true));
 
 ?>
                  <br />

@@ -38,7 +38,7 @@ if ( $stype == 'distance' )
 		"grid-colour":"#dddddd",
 		"labels":{
       "rotate": "vertical",
-			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . $weeks[$i] . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
+			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
 			}
 		},
 	"bg_colour":"#ffffff"
@@ -86,7 +86,7 @@ if ( $stype == 'duration' )
 		"grid-colour":"#dddddd",
 		"labels":{
       "rotate": "vertical",
-			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . $weeks[$i] . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
+			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
 			}
 		},
 	"bg_colour":"#ffffff"

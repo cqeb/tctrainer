@@ -924,7 +924,7 @@ class UsersController extends AppController {
               $weight_per_month = round( $weight_per_month_array['amount'], 2);
               $weight_unit = $weight_per_month_array['unit'];
               $additional_message = __('You have to loose', true) . ' ' . $weight_per_month .
-                  ' ' . $weight_unit . ' ' . 'per month to achieve your goal.';
+                  ' ' . $weight_unit . ' ' . __('per month to achieve your goal.', true);
                   
               // maximum 2 kg per month
               if ( $weight_per_month > 2 )
@@ -1714,7 +1714,7 @@ class UsersController extends AppController {
  * payed_from  
  * payed_to              // if payed_to is reached - set level to freemember (8) 
  * canceled               
- * cancelation_reason  
+ * cancellation_reason  
  * created   
  * modified
 **/

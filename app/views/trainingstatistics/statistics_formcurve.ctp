@@ -12,8 +12,8 @@
                    <br />
                    <?php } ?>
                    
-<a href="/blog/en/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
-<br /><br />
+                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <br /><br />
 
                    <div>
 <?php
@@ -100,25 +100,31 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 
 <br />
 
-<h2><?php __('Chart Formcurve'); ?></h2>
+<h2><?php __('Formcurve'); ?></h2>
 
 <?php
 
-if ( $searchfilter )
+if ( $searchfilter && count($testworkoutsfilter) > 0 )
 {
   $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_formcurve_json/';
 
   echo $ofc->createflash('my_chart1','680','400',$jsonurl.'searchfilter:' . $searchfilter . '/type:' . $sportstype . '/start:' . $start . '/end:' . $end);
+
+?>
+
+<div id="my_chart1"></div>
+
+<?php if ( $userobject['advanced_features'] ) { ?>
+<a href="<?php echo $jsonurl.'searchfilter:' . $searchfilter . '/type:' . $sportstype . '/start:' . $start . '/end:' . $end; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<?php } ?>
+
+<?php
+
 } else
 {
   __('Sorry, no graph available - choose a testworkout please.');
 
 }
-?>
-
-<div id="my_chart1"></div>
-
-<?php
 
       $this->js_addon = <<<EOE
 EOE;

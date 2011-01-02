@@ -24,6 +24,7 @@ class TrainingstatisticsController extends AppController {
    // list all trainings
    function list_trainings()
    {
+     
             $this->checkSession();
             $this->layout = 'default_trainer';
             $statusbox = 'statusbox';
@@ -46,7 +47,7 @@ class TrainingstatisticsController extends AppController {
     $statusbox = 'statusbox_none';
 
     $newimportfile = '';
-    $newimportfilearray = '';
+    $newimportfilearray[] = '';
     $outputfile = '';
     $import_error = '';
     
@@ -90,7 +91,7 @@ class TrainingstatisticsController extends AppController {
           $importdata = unserialize($this->data['Trainingstatistic']['hiddenimportfile']);
         }
 
-        if ( !isset( $importdata ) && ( count($importdata) < 1 ) )  
+        if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
         {
             $this->Session->setFlash(__('No import data found!', true));
             $this->set('errorbox', $statusbox);
@@ -486,6 +487,10 @@ if ( isset( $import_error ) && $import_error == '' )
                           $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
                           $this->data['Trainingstatistic']['distance'] = $distance['amount'];
                      }
+                     
+                     if ( !isset( $this->data['Trainingstatistic']['weight'] ) )
+                          $this->data['Trainingstatistic']['weight'] = $this->Unitcalc->check_weight( $results['User']['weight'], 'show', 'single' );
+                     
             } else
             {
                      $statusbox = 'statusbox';
@@ -493,6 +498,7 @@ if ( isset( $import_error ) && $import_error == '' )
                      // check for metric / unit
                      if ( $this->data['Trainingstatistic']['distance'] )
                         $this->data['Trainingstatistic']['distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Trainingstatistic']['distance'] ), 'save', 'single' );
+
                      if ( $this->data['Trainingstatistic']['duration'] )
                         $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
 
@@ -510,7 +516,6 @@ if ( isset( $import_error ) && $import_error == '' )
                         );
                      
                         $this->data['Trainingstatistic']['avg_speed'] = round( ( $this->data['Trainingstatistic']['distance'] / ( $this->data['Trainingstatistic']['duration'] / 3600 ) ), 2); 
-                        $weight = $results['User']['weight'];
                         
                         if ( $results['User']['gender'] && $results['User']['weight'] && $results['User']['birthday'] )
                         {
@@ -542,11 +547,20 @@ if ( isset( $import_error ) && $import_error == '' )
  
                      $this->data['Trainingstatistic']['user_id'] = $session_userid;
 
+                     if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] != '' )
+                     { 
+                          $saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
+                          $saveweight = str_replace( ',', '.', $saveweight );
+                     } else
+                          $saveweight = $results['User']['weight'];
+
+                     $this->data['Trainingstatistic']['weight'] = $saveweight;
+                                            
                      // save workout for user 
                      if ($this->Trainingstatistic->save( $this->data, array('validate' => true)))
                      {
                           $this->User->id = $session_userid;
-                          $this->User->savefield('weight', $weight, false);
+                          if ( isset( $saveweight ) && $saveweight > 0 ) $this->User->savefield('weight', $saveweight, false);
                           
                           $this->Session->setFlash('Training saved.');
                           $this->set('statusbox', $statusbox);
@@ -565,6 +579,11 @@ if ( isset( $import_error ) && $import_error == '' )
                           $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
                           $this->data['Trainingstatistic']['distance'] = $distance['amount'];
                      }
+
+                     if ( isset( $this->data['Trainingstatistic']['weight'] ) )
+                     {
+                          $this->data['Trainingstatistic']['weight'] = $this->Unitcalc->check_weight($this->data['Trainingstatistic']['weight'], 'show', 'single' );
+                     } 
             }
 
             $this->set('unit', $unit);
@@ -687,7 +706,7 @@ if ( isset( $import_error ) && $import_error == '' )
             $sql .= "( week BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
                         
             $scheduled_trainingdata = $this->Trainingstatistic->query( $sql );
-            
+
             // go through all planned trainings
             for ( $i = 0; $i < count( $scheduled_trainingdata ); $i++ )
             {
@@ -703,6 +722,7 @@ if ( isset( $import_error ) && $import_error == '' )
                   {
                        $trimp_planned[$day] = ( $dt['trimp'] );
                   }
+
             }
 
             // TODO (B) limit period of difference to x days?
@@ -741,7 +761,7 @@ if ( isset( $import_error ) && $import_error == '' )
                 {
                     if ( !isset( $trimp_tl_done[$j] ) ) $trimp_tl_done[$j] = 0;
                     $trimp_tl_done[$j] += $trimp_done[$rightday];
-                    
+
                     // here we insert the planned trimp of the trainingplan
                     if ( !isset( $trimp_tl_planned[$j] ) ) $trimp_tl_planned[$j] = 0;
                     $trimp_tl_planned[$j] += $trimp_planned[$rightday];
@@ -756,6 +776,8 @@ if ( isset( $import_error ) && $import_error == '' )
             $trimp_tl_planned = array_reverse($trimp_tl_planned);
             $trimp_dates = array_reverse($trimp_dates);
 
+            if ( isset( $max_unit ) && $max_unit < 1 ) $max_unit = 50;
+            
             $this->set('start', $start);
             $this->set('end', $end);
             $this->set('max_unit', $max_unit);
@@ -1451,7 +1473,32 @@ if ( isset( $import_error ) && $import_error == '' )
    {
             $this->checkSession();
 
+            $session_userid = $this->Session->read('session_userid');
+
+            // security check - don't view workouts of other users
+            if ( $id )
+            {
+               $result = $this->Trainingstatistic->find ('all', 
+                  array('conditions' => 
+                      array( 'and' => 
+                          array( 'id' => $id, 'user_id' => $session_userid ) 
+                      ) 
+                  )
+               );
+
+               if ( isset( $result[0] ) )
+                  $this->data = $result[0];
+               else
+               {
+                  $this->Session->setFlash(__('Sorry. This is not your entry!', true));
+                  $this->set('statusbox', 'errorbox');
+                  $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+               }
+            }
+
             $this->Trainingstatistic->delete($id);
+            
+            $this->set('statusbox', 'statusbox');
             $this->Session->setFlash(__('Workout deleted.',true));
             $this->redirect(array('action'=>'list_trainings'));
    }

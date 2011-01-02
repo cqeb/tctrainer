@@ -16,7 +16,7 @@
 	<div class="grid_3">
 		<h2><?php __('Updates'); ?></h2>
 		<p>
-      <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a>
+      <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a><br />
 			<a href=""><?php __('RSS Feed'); ?> TODO</a>
 		</p>
 	</div>
