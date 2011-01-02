@@ -36,9 +36,10 @@ if ( !isset( $newimportfile ) )
 } else
 {
   
-    echo $form->submit(__('Confirm import', true)); 
+    echo $form->submit(__('Confirm import', true), array( 'class' => '' ) ); 
+    echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
     
-    echo $form->hidden('hiddenimportfile');
+    if ( isset( $form->hidden('hiddenimportfile') ) ) echo $form->hidden('hiddenimportfile');
 
 }
 
