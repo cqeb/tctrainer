@@ -104,7 +104,13 @@ abstract class WorkoutProvider {
 		// we'll just drop it
 		$openTime = $this->timeBudget - $this->workoutDurations;
 		
+		// test or lsd workouts should not be adapted in their length, so return
+		if ($workout->isLsd() || $workout->isTest()) {
+			return true;
+		}
+		
 		// oops - we've spent more time than we have (once again...)
+		// adapt time
 		if ($openTime < 0) {
 			$lastWorkout = $this->workouts[(count($this->workouts) - 1)];
 			$lastWorkout->setDuration(

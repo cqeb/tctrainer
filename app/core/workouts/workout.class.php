@@ -89,6 +89,18 @@ abstract class Workout {
 		return $this->lsd;
 	}
 	
+	/**
+	 * determine if this is a test workout
+	 * @return true if it's a test workout
+	 */
+	public function isTest() {
+		if ($this->getCategory() === 'T') {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public function getTRIMP() {
 		return $this->trimp;
 	}

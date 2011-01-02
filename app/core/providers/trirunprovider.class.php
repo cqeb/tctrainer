@@ -17,6 +17,7 @@ class TriRunProvider extends WorkoutProvider {
 		if ($duration == 0) {
 			return false;
 		}
+
 		return new RunWorkout($this->athlete, Workout::E2, $duration, true);
 	}
 
