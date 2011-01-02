@@ -62,7 +62,7 @@ class Race {
 	 * @return int number of weeks
 	 */
 	public function getWeeksTillRaceday(DateTime $now) {
-		return DateTimeHelper::diffWeeks($now, $this->date);
+		return (DateTimeHelper::diffWeeks($now, $this->date) - 1);
 	}
 	
 	public function getDate() {
