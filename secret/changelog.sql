@@ -48,9 +48,9 @@ ALTER TABLE `users` ADD `notifications` TINYINT NOT NULL AFTER `newsletter`;
 -- for beta users
 ALTER TABLE `users` ADD `advanced_features` TINYINT NOT NULL AFTER `cancelation_reason`
 
-
-
 2011-01-02 CP
-ALTER TABLE `users` CHANGE `cancelation_reason` `cancellation_reason` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
 -- added bike lactate threshold
 ALTER TABLE  `users` ADD  `bikelactatethreshold` INT NOT NULL AFTER  `lactatethreshold` 
+
+2011-01-03 KMS
+ALTER TABLE `users` CHANGE `cancelation_reason` `cancellation_reason` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
