@@ -56,12 +56,6 @@ abstract class Workout {
 	protected $trimp;
 	
 	/**
-	 * this identifies the workout provider, like RUN, BIKE, etc.
-	 * @var string
-	 */
-	public static $SPORT;
-	
-	/**
 	 * generate a new workout
 	 * @param Athlete $athlete athlete
 	 * @param $type of the workout
@@ -93,6 +87,18 @@ abstract class Workout {
 	
 	public function isLsd() {
 		return $this->lsd;
+	}
+	
+	/**
+	 * determine if this is a test workout
+	 * @return true if it's a test workout
+	 */
+	public function isTest() {
+		if ($this->getCategory() === 'T') {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public function getTRIMP() {
@@ -154,25 +160,9 @@ abstract class Workout {
 	 */
 	public abstract function getAVGHR(Athlete $athlete);
 	
-	public function getSport() {
-		// unfortunately this has to be implemented a bit akward
-		// didn't find a better solution to retrieve class variables
-		// from objects yet
-		$class = get_class($this);
-		switch ($class::$SPORT) {
-			case 'SWIM':
-				return 'Swim';
-				break;
-			case 'BIKE':
-				return 'Bike';
-				break;
-			case 'RUN':
-				return 'Run';
-				break;
-			default:
-				return 'Unknown';
-				break;
-		}
-	}
+	/**
+	 * return sport type for the workout
+	 */
+	public abstract function getSport();
 }
 ?>

@@ -15,11 +15,16 @@ class WorkoutRenderer {
 		$length = 0;
 		$trimps = 0;
 		foreach ($workouts as $k => $w) {
+			if ($w->isLsd()) {
+				$star = '<img src="/trainer/img/star.gif" /> ';
+			} else {
+				$star = false;
+			}
 			$html .= "
 <tr>
 	<td class=\"sport\">" . __($w->getSport(), true) . "</td>
 	<td class=\"type " . $w->getShortCategory() . "\">
-		" . __($w->getTypeLabel(), true) . "<br />
+		$star" . __($w->getTypeLabel(), true) . "<br />
 		<span class=\"category br\">" . __($w->getCategory(), true) . "</span>
 	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>

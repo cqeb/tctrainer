@@ -45,8 +45,12 @@ ALTER TABLE `users` CHANGE `medicallimitations` `tos` TINYINT( 1 ) NULL DEFAULT 
 ALTER TABLE `users` ADD `notifications` TINYINT NOT NULL AFTER `newsletter`;
 
 2011-01-02 KMS
-// for beta users
-ALTER TABLE `users` ADD `advanced_features` TINYINT NOT NULL AFTER `cancelation_reason` 
+-- for beta users
+ALTER TABLE `users` ADD `advanced_features` TINYINT NOT NULL AFTER `cancelation_reason`
 
+
+
+2011-01-02 CP
 ALTER TABLE `users` CHANGE `cancelation_reason` `cancellation_reason` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
-
+-- added bike lactate threshold
+ALTER TABLE  `users` ADD  `bikelactatethreshold` INT NOT NULL AFTER  `lactatethreshold` 

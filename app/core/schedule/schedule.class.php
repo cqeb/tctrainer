@@ -95,7 +95,7 @@ class Schedule {
 		// create a dummy race if there are no races available
 		$aRaceDate = clone $offset;
 		$aRaceDate->add(new DateInterval("P13W"));
-		return new Race(-1, Race::HALF_MARATHON, $aRaceDate, false, "Dummy");
+		return new Race(-1, "RUN HALFMARATHON", $aRaceDate, false, "Dummy");
 	}
 }
 ?>

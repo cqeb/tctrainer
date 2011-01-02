@@ -83,12 +83,14 @@ abstract class WorkoutProvider {
 	
 	/**
 	 * add a workout as long as the hour budget will tolerate it
-	 * @param unknown_type $workout
+	 * @param Workout $workout
+	 * @param boolean $checkTime set to false if time budget should not be checked. 
+	 * 		Just meant to be used for adding test and lsd workouts
 	 * @return boolean false if no workouts can be added anymore, true if everything is fine
 	 */
-	protected function addWorkout(Workout $workout) {
+	protected function addWorkout(Workout $workout, $checkTime=true) {
 		// there is no budget left, so we won't add this workout
-		if ($this->workoutDurations >= $this->timeBudget) {
+		if ($checkTime && $this->workoutDurations >= $this->timeBudget) {
 			throw new Exception("Not enough timeBudget left to add workout");
 		}
 		
@@ -102,7 +104,13 @@ abstract class WorkoutProvider {
 		// we'll just drop it
 		$openTime = $this->timeBudget - $this->workoutDurations;
 		
+		// test or lsd workouts should not be adapted in their length, so return
+		if ($workout->isLsd() || $workout->isTest()) {
+			return true;
+		}
+		
 		// oops - we've spent more time than we have (once again...)
+		// adapt time
 		if ($openTime < 0) {
 			$lastWorkout = $this->workouts[(count($this->workouts) - 1)];
 			$lastWorkout->setDuration(
@@ -197,7 +205,7 @@ abstract class WorkoutProvider {
 		if ($ldRace && $ldRace->getWeeksTillRaceday($week) <= 12) {
 			$lsdWorkout = $this->generateLSDWorkout($ldRace);
 			if ($lsdWorkout) {
-				$this->addWorkout($lsdWorkout);
+				$this->addWorkout($lsdWorkout, false);
 			}
 		}
 		
@@ -205,7 +213,7 @@ abstract class WorkoutProvider {
 		if ($this->phase["recovery"]) {
 			$testWorkout = $this->generateTestWorkout();
 			if ($testWorkout) {
-				$this->addWorkout($testWorkout);
+				$this->addWorkout($testWorkout, false);
 			}
 		}
 		
@@ -233,15 +241,14 @@ abstract class WorkoutProvider {
 	
 	/**
 	 * stores generated workouts back to the database
+	 * @param $purge wether to purge old trainings of this week. defaults to true
 	 */
-	public function save() {
+	public function save($purge=true) {
 		if (count($this->workouts) == 0) {
 			return false;
 		}
 		$week = $this->generateWeek->format("Y-m-d");
-		$delSql = "DELETE FROM scheduledtrainings WHERE athlete_id = " .
-			$this->athlete->getId() . " AND week = '$week'";
-		
+
 		$sql = "INSERT INTO scheduledtrainings (athlete_id, week, sport, type, duration, lsd, trimp) VALUES\n";
 		
 		$sqlArr = array();
@@ -257,7 +264,11 @@ abstract class WorkoutProvider {
 		$sql .= implode(",\n", $sqlArr);
 
 		// delete old entries first
-		$this->DB->query($delSql);
+		if ($purge) {
+			$delSql = "DELETE FROM scheduledtrainings WHERE athlete_id = " .
+				$this->athlete->getId() . " AND week = '$week'";
+			$this->DB->query($delSql);
+		}
 		
 		// now save new ones
 		$this->DB->query($sql);

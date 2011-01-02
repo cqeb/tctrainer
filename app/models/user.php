@@ -163,6 +163,21 @@ class User extends AppModel {
                              //'message' => 'Enter a lactate threshold, please (get it from your testworkouts - for approx. take 85% of your maximum heart rate).'
                              ),
                              ),
+          'bikelactatethreshold' => array(
+                  'numeric' => array(
+                            'rule' => 'numeric'
+                            ),
+                  'greater' => array(
+                            'rule' => array('comparison', '>=', 120)
+                            ),
+                  'lower' => array(
+                            'rule' => array('comparison', '<=', 220)
+                            ),
+                  'notempty' => array(
+                             'rule' => 'notEmpty',
+                             'required' => true
+                             ),
+                             ),
           'weight' => array(
                   'numeric' => array(
                             'rule' => 'numeric'

@@ -335,6 +335,7 @@ class UsersController extends AppController {
                'password', 
                'birthday',
                'lactatethreshold', 
+               'bikelactatethreshold', 
                'maximumheartrate',
                'typeofsport', 
                'tos',
@@ -839,8 +840,9 @@ class UsersController extends AppController {
 					//'dayofheaviesttraining',
 		        'weeklyhours', 'coldestmonth',
 		        'publicprofile', 'publictrainings', 
-		        'tos', 'maximumheartrate',
-		        'lactatethreshold'
+		        'tos', 
+		        'lactatethreshold',
+		        'bikelactatethreshold'
 	        	)))) {
 	        	$statusbox = 'okbox';
 	        	$this->Session->setFlash('Traininginfo saved.');
@@ -1481,7 +1483,7 @@ class UsersController extends AppController {
       // check if profile is complete from technical point of view
       $wrong_attributes = "";
       $check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
-        'password', 'passwordcheck', 'lactatethreshold', 'typeofsport',
+        'password', 'passwordcheck', 'lactatethreshold', 'bikelactatethreshold', 'typeofsport',
         'coldestmonth', 'unit', 'unitdate', 'weeklyhours',
         'dayofheaviesttraining', 'yourlanguage', 'level' );
 
@@ -1560,10 +1562,19 @@ class UsersController extends AppController {
             $text_for_mail .= '<li>' . __('Your birthday is missing! This is essentiell for calculations.', true) . "</li>\n";
           
           // check lactatethreshold
-          if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) 
+          if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) {
             $nothing = "";
-          else {
+          } else {
             $text_for_mail .= '<li>' . __('Your lactate threshold must be between 100 and 210.', true) . 
+              " " . '<a href="' . Configure::read('App.hostUrl') . 
+              Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
+          }
+
+          // check bike lactatethreshold
+          if ( $u['bikelactatethreshold'] > 100 && $u['bikelactatethreshold'] < 210 ) {
+            $nothing = "";
+          } else {
+            $text_for_mail .= '<li>' . __('Your bike lactate threshold must be between 100 and 210.', true) . 
               " " . '<a href="' . Configure::read('App.hostUrl') . 
               Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
           }
