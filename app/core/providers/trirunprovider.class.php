@@ -26,7 +26,7 @@ class TriRunProvider extends WorkoutProvider {
 	 * @see WorkoutProvider::generateTestWorkout()
 	 */
 	protected function generateTestWorkout() {
-		$ldRace = $this->athlete->getSchedule()->getNextARace($this->generateWeek);
+		$ldRace = $this->athlete->getSchedule()->getNextLDRace($this->generateWeek);
 
 		// if the athlete got a long distance race defined
 		// we let him do long test workouts
