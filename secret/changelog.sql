@@ -44,3 +44,6 @@ CREATE TABLE IF NOT EXISTS `tribikeworkouttypesequence` (
 ALTER TABLE `users` CHANGE `medicallimitations` `tos` TINYINT( 1 ) NULL DEFAULT NULL;
 ALTER TABLE `users` ADD `notifications` TINYINT NOT NULL AFTER `newsletter`;
 
+2011-01-02 KMS
+// for beta users
+ALTER TABLE `users` ADD `advanced_features` TINYINT NOT NULL AFTER `cancelation_reason` 
