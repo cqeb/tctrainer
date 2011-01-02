@@ -12,9 +12,8 @@ class TriRunProvider extends WorkoutProvider {
 	 * @see WorkoutProvider::generateLSDWorkout()
 	 */
 	protected function generateLSDWorkout(Race $ldRace) {
-		$NOW = new DateTime();
 		$duration = RunWorkout::$LSD_TIMES[$this->athlete->getLevel()]
-		[$ldRace->getWeeksTillRaceday(new DateTime())];
+			[$ldRace->getWeeksTillRaceday($this->generateWeek)];
 		if ($duration == 0) {
 			return false;
 		}

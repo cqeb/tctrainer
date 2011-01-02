@@ -83,12 +83,14 @@ abstract class WorkoutProvider {
 	
 	/**
 	 * add a workout as long as the hour budget will tolerate it
-	 * @param unknown_type $workout
+	 * @param Workout $workout
+	 * @param boolean $checkTime set to false if time budget should not be checked. 
+	 * 		Just meant to be used for adding test and lsd workouts
 	 * @return boolean false if no workouts can be added anymore, true if everything is fine
 	 */
-	protected function addWorkout(Workout $workout) {
+	protected function addWorkout(Workout $workout, $checkTime=true) {
 		// there is no budget left, so we won't add this workout
-		if ($this->workoutDurations >= $this->timeBudget) {
+		if ($checkTime && $this->workoutDurations >= $this->timeBudget) {
 			throw new Exception("Not enough timeBudget left to add workout");
 		}
 		
@@ -197,7 +199,7 @@ abstract class WorkoutProvider {
 		if ($ldRace && $ldRace->getWeeksTillRaceday($week) <= 12) {
 			$lsdWorkout = $this->generateLSDWorkout($ldRace);
 			if ($lsdWorkout) {
-				$this->addWorkout($lsdWorkout);
+				$this->addWorkout($lsdWorkout, false);
 			}
 		}
 		
@@ -205,7 +207,7 @@ abstract class WorkoutProvider {
 		if ($this->phase["recovery"]) {
 			$testWorkout = $this->generateTestWorkout();
 			if ($testWorkout) {
-				$this->addWorkout($testWorkout);
+				$this->addWorkout($testWorkout, false);
 			}
 		}
 		
