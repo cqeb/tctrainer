@@ -12,17 +12,8 @@
                    </div><br />
                    <?php } ?>
 
-<?php 
-                   
+<?php                  
 echo $html->link(__('Add competition', true), array('action' => 'edit_competition'), null);  
-
-if ( $create_dummy == 'true' )
-{
-      echo ' '; 
-      __('Don\'t know what to do? ');
-      echo $html->link(__('Create dummy competition.',true), array('controller' => 'competitions', 'action' => 'edit_competition', 'id' => 'dummy'),null);
-}
-
 ?>
                    <br /><br />
 
