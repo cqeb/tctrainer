@@ -3,6 +3,7 @@
         <li>&nbsp;</li>
         <li><?php echo $html->link(__('Home',true),array('controller' => 'starts', 'action' => 'index'))?></li>
         <li><?php echo $html->link(__('Register',true),array('controller' => 'users', 'action' => 'register'))?></li>
+        <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); echo ' - '; __('Support'); ?></a></li>        
 <?php } ?>
  
 
@@ -28,7 +29,8 @@
 		    <li><?php echo $html->link(__('Edit weight goals',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
 		    <li><?php echo $html->link(__('Change metric',true),array('controller' => 'users', 'action' => 'edit_metric'))?></li>
 		    <li><?php echo $html->link(__('Change password',true),array('controller' => 'users', 'action' => 'edit_password'))?></li>
-		    <li><?php echo $html->link(__('Edit images',true),array('controller' => 'users', 'action' => 'edit_images'))?></li>
+		    <?php if ( isset( $userobject ) && $userobject['advanced_features'] ) { ?><li><?php echo $html->link(__('Edit images',true),array('controller' => 'users', 'action' => 'edit_images'))?></li><?php } ?>
+        <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); echo ' - '; __('Support'); ?></a></li>        
         <li><?php echo $html->link(__('Subscribe',true),array('controller' => 'payments', 'action' => 'subscribe_triplans'))?></li>
 
 <?php } ?>

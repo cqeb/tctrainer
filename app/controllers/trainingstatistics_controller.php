@@ -24,7 +24,6 @@ class TrainingstatisticsController extends AppController {
    // list all trainings
    function list_trainings()
    {
-     
             $this->checkSession();
             $this->layout = 'default_trainer';
             $statusbox = 'statusbox';
@@ -562,7 +561,7 @@ if ( isset( $import_error ) && $import_error == '' )
                           $this->User->id = $session_userid;
                           if ( isset( $saveweight ) && $saveweight > 0 ) $this->User->savefield('weight', $saveweight, false);
                           
-                          $this->Session->setFlash('Training saved.');
+                          $this->Session->setFlash(__('Training saved.',true));
                           $this->set('statusbox', $statusbox);
                           $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
                      } else
@@ -1188,15 +1187,17 @@ if ( isset( $import_error ) && $import_error == '' )
 
           $results['User'] = $this->Session->read('userobject');
           $session_userid = $results['User']['id'];
+          
           $targetweight = $results['User']['targetweight'];
           $targetweightdate = $results['User']['targetweightdate'];
+          $diff_week = 0;
           
           // type of graph
           $type = $this->params['named']['type'];
 
           $start = $this->params['named']['start'];
           $end = $this->params['named']['end'];
-          if ( $targetweightdate && $targetweight ) $end = $targetweightdate; 
+          if ( $targetweightdate && $targetweight ) { $end = $targetweightdate; } 
           $start_ts = strtotime($start);
           $end_ts = strtotime($end);
          
@@ -1209,78 +1210,81 @@ if ( isset( $import_error ) && $import_error == '' )
           $trainings = $this->Trainingstatistic->query( $sql );
           
           $lastentry = count($trainings);
-          $firsttraining = $trainings[0][0];
-          $start_ts = strtotime( $firsttraining['weekday'] );
           
-          $weeks_between_dates = round(($end_ts - $start_ts)/(86400*7),0)+1;
-          $week_ts = $start_ts;
-          
-          if ( $targetweightdate && $targetweight )
+          if ( $lastentry > 0 )
           {
-                $train_array = $trainings[$lastentry-1][0];
-                $diff_time = strtotime( $targetweightdate ) - strtotime( $train_array['weekday'] );
-
-                // weeks between last trainingstatistics entry and target weight date
-                $diff_week = round( $diff_time / ( 86400 * 7 ) );
-                // diff between last weight entry and target weight
-                $diff_weight = $targetweight - $train_array['avgweight'];
-                // how much do you have to loose to reach your weight goal
-                $diff_per_week = ($diff_weight / $diff_week);
-
-                $lastweight = $train_array['avgweight'];
-                $lastweightdate = $train_array['weekday'];
-          }
-             
-          for ( $i = 0; $i < $weeks_between_dates; $i ++)
-          {
-              $nweek[$i] = date('W', $week_ts);
-              $nyear[$i] = date('o', $week_ts);
-              $week_ts += (86400*7);
-              //echo $nyear[$i] . '-' . $nweek[$i] . '<br />';
-              $weeks[$i] = $nyear[$i]. $nweek[$i]; 
-          }
-
-          for ( $i = 0; $i < count( $trainings ); $i++ )
-          {
-               $week = $trainings[$i][0]['week'];
-               $train[$week]['avgweight'] = $trainings[$i][0]['avgweight'];
-          }
-
-          $avg_weight_lastweek = 'null'; 
-          // go through all weeks - in case you have weeks without trainings you have to set them to 0
-          for( $i = 0; $i < ( $weeks_between_dates ); $i++ )
-          {
-               $yearweek = $nyear[$i] . '' . $nweek[$i]; 
-               //echo $yearweek . '<br />';
-               if ( $i > ( $weeks_between_dates - $diff_week ) ) 
-               {
-                   $train[$yearweek]['avgweight'] = 'null';
-               } else
-               {
-                  if ( empty($train[$yearweek]['avgweight']) || $train[$yearweek]['avgweight'] == 0 )
-                  {
-                      $train[$yearweek]['avgweight'] = $avg_weight_lastweek;
-                  } else
-                  {
-                      $avg_weight_lastweek = $train[$yearweek]['avgweight'];
+            $firsttraining = $trainings[0][0];
+            $start_ts = strtotime( $firsttraining['weekday'] );
+            
+            $weeks_between_dates = round(($end_ts - $start_ts)/(86400*7),0)+1;
+            $week_ts = $start_ts;
+            
+            if ( $targetweightdate && $targetweight )
+            {
+                  $train_array = $trainings[$lastentry-1][0];
+                  $diff_time = strtotime( $targetweightdate ) - strtotime( $train_array['weekday'] );
+  
+                  // weeks between last trainingstatistics entry and target weight date
+                  $diff_week = round( $diff_time / ( 86400 * 7 ) );
+                  // diff between last weight entry and target weight
+                  $diff_weight = $targetweight - $train_array['avgweight'];
+                  // how much do you have to loose to reach your weight goal
+                  $diff_per_week = ($diff_weight / $diff_week);
+  
+                  $lastweight = $train_array['avgweight'];
+                  $lastweightdate = $train_array['weekday'];
+            }
+               
+            for ( $i = 0; $i < $weeks_between_dates; $i ++)
+            {
+                $nweek[$i] = date('W', $week_ts);
+                $nyear[$i] = date('o', $week_ts);
+                $week_ts += (86400*7);
+                //echo $nyear[$i] . '-' . $nweek[$i] . '<br />';
+                $weeks[$i] = $nyear[$i]. $nweek[$i]; 
+            }
+  
+            for ( $i = 0; $i < count( $trainings ); $i++ )
+            {
+                 $week = $trainings[$i][0]['week'];
+                 $train[$week]['avgweight'] = $trainings[$i][0]['avgweight'];
+            }
+  
+            $avg_weight_lastweek = 'null'; 
+            // go through all weeks - in case you have weeks without trainings you have to set them to 0
+            for( $i = 0; $i < ( $weeks_between_dates ); $i++ )
+            {
+                 $yearweek = $nyear[$i] . '' . $nweek[$i]; 
+                 //echo $yearweek . '<br />';
+                 if ( $i > ( $weeks_between_dates - $diff_week ) ) 
+                 {
+                     $train[$yearweek]['avgweight'] = 'null';
+                 } else
+                 {
+                    if ( empty($train[$yearweek]['avgweight']) || $train[$yearweek]['avgweight'] == 0 )
+                    {
+                        $train[$yearweek]['avgweight'] = $avg_weight_lastweek;
+                    } else
+                    {
+                        $avg_weight_lastweek = $train[$yearweek]['avgweight'];
+                    }
                   }
-                }
-          }
-          ksort($train);
+            }
+            ksort($train);
           
-          //pr($train);
-          $this->set('start', $start);
-          $this->set('end', $end);
-          $this->set('diffweek', $diff_week);
-          $this->set('diffweight', $diff_weight);
-          $this->set('diff_per_week', $diff_per_week);
-          $this->set('lastweight', $lastweight);
-          $this->set('targetweight', $targetweight);
-          $this->set('maxweeks', $weeks_between_dates);
+            $this->set('start', $start);
+            $this->set('end', $end);
+            if ( isset( $diff_week ) ) $this->set('diffweek', $diff_week);
+            if ( isset( $diff_weight ) ) $this->set('diffweight', $diff_weight);
+            if ( isset( $diff_per_week ) ) $this->set('diff_per_week', $diff_per_week);
+            if ( isset( $lastweight ) ) $this->set('lastweight', $lastweight);
+            if ( isset( $targetweight ) ) $this->set('targetweight', $targetweight);
+            $this->set('maxweeks', $weeks_between_dates);
+            $this->set('weeks', $weeks);
+            $this->set('trainings2', $train);
+            $this->set('weight_unit', $unit['weight']);
+          }
           $this->set('stype', $type);
-          $this->set('weeks', $weeks);
-          $this->set('trainings2', $train);
-          $this->set('weight_unit', $unit['weight']);
    }
 
    /**

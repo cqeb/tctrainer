@@ -1158,7 +1158,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `targetweightdate` date DEFAULT NULL,
   `height` decimal(10,5) DEFAULT NULL,
   `coldestmonth` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `unit` enum('metric','english') COLLATE utf8_unicode_ci NOT NULL,
+  `unit` enum('metric','imperial') COLLATE utf8_unicode_ci NOT NULL,
   `unitdate` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `publicprofile` tinyint(1) DEFAULT NULL,
   `publictrainings` tinyint(1) DEFAULT NULL,
@@ -1186,7 +1186,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `gender`, `phonemobile`, `address`, `zip`, `city`, `country`, `email`, `emailcheck`, `birthday`, `password`, `passwordcheck`, `maximumheartrate`, `lactatethreshold`, `youknowus`, `newsletter`, `mytrainingsphilosophy`, `myrecommendation`, `typeofsport`, `tos`, `weight`, `targetweight`, `targetweightcheck`, `targetweightdate`, `height`, `coldestmonth`, `unit`, `unitdate`, `publicprofile`, `publictrainings`, `rookie`, `traininglevel`, `weeklyhours`, `dayofheaviesttraining`, `activated`, `deactivated`, `yourlanguage`, `myimage`, `mybike`, `level`, `payed_from`, `payed_to`, `canceled`, `cancelation_reason`, `created`, `modified`) VALUES
-(110, 'Klaus-M.', 'Schremser', 'm', '+43 699 16301524', 'Reisenbauerring 4', '2351', 'Wiener Neudorf', 'D', 'tri@schremser.com', 1, '1975-11-26', 'e7efda40b1c94805070cd9bf9638ae27', 1, 190, 162, 'Google', 1, '', '', 'TRIATHLON IRONMAN', 1, '80.00000', '78.00000', 0, '2011-01-31', '182.00000', '1', 'english', 'ddmmyyyy', 0, 0, 0, 0, 12, 'FRI', 1, 0, 'ger', '/trainer/files/myimage_110_simpsons_icon01.png', '/trainer/files/mybike_110_kms_wolf.png', 'paymember', '2010-11-21', '2011-01-14', 1, '', '2010-02-05 23:02:59', '2010-12-08 21:32:56'),
+(110, 'Klaus-M.', 'Schremser', 'm', '+43 699 16301524', 'Reisenbauerring 4', '2351', 'Wiener Neudorf', 'D', 'tri@schremser.com', 1, '1975-11-26', 'e7efda40b1c94805070cd9bf9638ae27', 1, 190, 162, 'Google', 1, '', '', 'TRIATHLON IRONMAN', 1, '80.00000', '78.00000', 0, '2011-01-31', '182.00000', '1','imperial', 'ddmmyyyy', 0, 0, 0, 0, 12, 'FRI', 1, 0, 'ger', '/trainer/files/myimage_110_simpsons_icon01.png', '/trainer/files/mybike_110_kms_wolf.png', 'paymember', '2010-11-21', '2011-01-14', 1, '', '2010-02-05 23:02:59', '2010-12-08 21:32:56'),
 (200, 'Klaus-M.', 'Schremser', 'm', NULL, '', '', '', '', 'testix@schremser.com', 1, '1975-11-13', 'e7efda40b1c94805070cd9bf9638ae27', 1, 185, 157, NULL, 1, NULL, '', 'TRIATHLON HALFIRONMAN', 1, NULL, NULL, 0, NULL, NULL, '1', 'metric', 'yyyymmdd', 0, 0, 0, 0, 8, 'FRI', 1, 0, 'eng', '', '', 'freemember', '2010-11-13', '2010-12-13', 0, '', '2010-11-13 15:31:48', '2010-11-13 15:49:17'),
 (201, 'Andreas', 'Perhab', 'm', NULL, '', '', '', '', 'a.perhab@schremser.com', 1, '1975-11-22', 'e7efda40b1c94805070cd9bf9638ae27', 1, 185, 157, NULL, 1, NULL, '', 'TRIATHLON IRONMAN', 1, NULL, NULL, 0, NULL, NULL, '1', 'metric', 'yyyymmdd', 0, 0, 0, 0, 12, 'FRI', 0, 0, 'eng', '', '', 'freemember', '2010-11-23', '2010-12-23', 0, '', '2010-11-23 07:39:41', '2010-11-23 07:39:41'),
 (202, NULL, NULL, 'm', NULL, '', '', '', '', 'klausi@schremser.com', 1, NULL, 'finger', 1, NULL, NULL, NULL, NULL, NULL, '', 'IM', 1, '88.00000', '82.00000', 1, '2010-11-30', NULL, NULL, 'metric', NULL, NULL, NULL, 1, 0, 5, 'FRI', 0, 0, 'GER', '', '', 'premiummember', '0000-00-00', '2010-11-15', 0, '', '0000-00-00 00:00:00', '0000-00-00 00:00:00');

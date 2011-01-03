@@ -29,30 +29,12 @@ echo $html->charset();
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
     <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
+    <!--script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script-->
+    <!--script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
 
     <?php echo $scripts_for_layout; ?>
-
-
-<script type="text/javascript" charset="utf-8">
-  var is_ssl = ("https:" == document.location.protocol);
-  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  var feedback_widget_options = {};
-
-  feedback_widget_options.display = "overlay";  
-  feedback_widget_options.company = "tricoretraining";
-  feedback_widget_options.placement = "left";
-  feedback_widget_options.color = "#222";
-  feedback_widget_options.style = "idea";
-  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-</script>
 
 </head>
 <body>
@@ -124,7 +106,7 @@ echo $html->charset();
 	<!-- /Footer -->
 
 	<?php if ( isset( $this->js_addon ) ) echo $this->js_addon; ?>
-	
+
 	<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -136,5 +118,26 @@ echo $html->charset();
 	pageTracker._trackPageview();
 	} catch(err) {}
 	</script>
+
+<?php
+/**
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";
+  feedback_widget_options.company = "tricoretraining";
+  feedback_widget_options.placement = "left";
+  feedback_widget_options.color = "#222";
+  feedback_widget_options.style = "idea";
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+**/
+?>
 </body>
 </html>

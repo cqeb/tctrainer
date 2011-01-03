@@ -54,3 +54,4 @@ ALTER TABLE  `users` ADD  `bikelactatethreshold` INT NOT NULL AFTER  `lactatethr
 
 2011-01-03 KMS
 ALTER TABLE `users` CHANGE `cancelation_reason` `cancellation_reason` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
+ALTER TABLE `users` CHANGE `unit` `unit` ENUM( 'metric', 'imperial' ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;

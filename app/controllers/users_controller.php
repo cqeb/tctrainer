@@ -845,7 +845,7 @@ class UsersController extends AppController {
 		        'bikelactatethreshold'
 	        	)))) {
 	        	$statusbox = 'okbox';
-	        	$this->Session->setFlash('Traininginfo saved.');
+	        	$this->Session->setFlash(__('Traininginfo saved.', true));
 	        	// recalculate time track by updating athlete
 	        	$this->Provider->athlete->setTrainingTime(
 	        		$this->data['User']['weeklyhours'] * 60
@@ -871,6 +871,7 @@ class UsersController extends AppController {
     
 		$session_userid = $this->Session->read('session_userid');
     $this->User->id = $session_userid;
+    //pr($this->Session->read('userobject'));
 
 		if ( empty($this->data) )
 		{
@@ -1127,7 +1128,8 @@ class UsersController extends AppController {
 			$this->set('UserID', $this->User->id);
 			$this->set('user', $this->data['User']);
 
-			if ($this->User->save( $this->data, array(
+			//pr($this->data);
+		  if ($this->User->save( $this->data, array(
          'validate' => true,
          'fieldList' => array(
          'unit', 'unitdate', 'yourlanguage'

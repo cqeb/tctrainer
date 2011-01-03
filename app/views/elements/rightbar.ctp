@@ -2,8 +2,8 @@
 <br /><br />
 
 <script type="text/javascript"><!--
-google_ad_client = "ca-pub-1221279145141294";
 /* Sidebar - rechts 2 */
+google_ad_client = "ca-pub-1221279145141294";
 google_ad_slot = "5636489260";
 google_ad_width = 180;
 google_ad_height = 150;
@@ -22,7 +22,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </center>
 </div>  
    
-<?php if ( $userobject['advanced_features'] ) { ?>                          
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 <h2>Debugging</h2>
 <ul>
         <li><a href="<?php echo Configure::read('App.serverUrl'); ?>/app/webroot/flash.php">(<?php __('Graphs'); ?>)</a></li>

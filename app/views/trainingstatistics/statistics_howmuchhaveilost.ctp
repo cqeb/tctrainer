@@ -59,7 +59,7 @@ echo $form->submit(__('Display',true), array('name' => 'display', 'class' => 'no
 
 <?php
 
-if ( count( $trainings ) > 0 ) 
+if ( count( $trainings ) > 1 ) 
 {
     
 $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_howmuchhaveilost_json/';

@@ -27,7 +27,7 @@
 
                    <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
                    <br /><br />
-                   For DEBUGGING:
+                   For DEBUGGING (only localhost):
                    <br />
 
 <?php

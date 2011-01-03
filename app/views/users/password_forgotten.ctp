@@ -49,10 +49,10 @@ if ( $status != 'sent' )
 <?php } ?>
                  </fieldset>
 
-<?php if ( DEBUG ) { ?>
-DEBUG
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+For DEBUGGING (only localhost):
 <a href="<?php echo Configure::read('App.serverUrl'); ?>/users/password_reset/transaction_id:<?php echo $transaction_id?>">click to reset your password</a>
-<br /><br /><br />
+<br /><br />
 <?php } ?>
 
 <?php $this->js_addon = ''; ?>

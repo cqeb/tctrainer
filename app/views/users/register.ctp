@@ -117,7 +117,9 @@ echo $form->input('lactatethreshold',
      ),
      'label' => __('Lactate threshold', true)
 ));
-
+?>
+<a target="_blank" href="/blog/en/url....">TODO [?]</a>
+<?php
 echo $form->input('bikelactatethreshold',
      array(
  	   'class' => 'medium',

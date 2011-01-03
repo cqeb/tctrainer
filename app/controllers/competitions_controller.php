@@ -38,6 +38,10 @@ list all competitions with paging
             $session_userid = $this->Session->read('session_userid');
             $results['User'] = $this->Session->read('userobject');
             
+            $sql = "SELECT * FROM Competitions WHERE user_id = $session_userid AND " .
+                "competitiondate > '" . date('Y-m-d', time()) . "' ORDER BY competitiondate ASC LIMIT 1";
+            $checkcompetition = $this->Competition->query( $sql );
+            
             // get season for this user
             $season = $this->Unitcalc->get_season( $results, $this->data );
 
@@ -58,6 +62,7 @@ list all competitions with paging
             );
 
             $this->set('competitions', $this->paginate('Competition'));
+            $this->set('checkcompetition', $checkcompetition);
             $this->set('statusbox', $statusbox);
             $this->set('create_dummy', $create_dummy);
 

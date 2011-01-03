@@ -36,49 +36,50 @@ if ( $create_dummy == 'true' && 1 == 2 )
                         <th></th>
                    </tr>
                    <?php 
-                   
-                   if ( count( $competitions ) < 1 ) {
-                      echo '<tr><td /><td colspan="4"><br />' . __('No competitions defined.', true) . '</td></tr>'; 
-                      $no_event = true;
-                   }
-                   
-                   ?>
-                   <?php $newest_set = false; $i = 0; ?> 
-                   <?php foreach ($competitions as $competition): ?>
-
-                   <?php 
-                   if ( strtotime( $competition['Competition']['competitiondate'] ) < time() && $newest_set == false )
+                   if ( count( $competitions ) < 1 ) 
                    {
-                        $setcolor = $i;
-                        $newest_set = true;
-                   }
                    ?>
-                   <tr id="comp-<?php echo $i; ?>">
-                        <td><?php if ( $competition['Competition']['important'] ) { echo '<img src="../img/star.gif" alt="'; __('Important',true); echo '" />'; } ?></td>
+                   <tr>
+                      <td />
+                      <td colspan="4"><br /><?php __('No competitions defined.'); ?></td>
+                   </tr>
+                   <?php 
+                   }
+                   
+                   if ( isset( $checkcompetition[0]['Competitions']['id'] ) ) 
+                        $next_comp_id = $checkcompetition[0]['Competitions']['id'];
+                   else
+                        $next_comp_id = '';
+                   
+                   ?>
+                   <?php foreach ($competitions as $competition): ?>
+                   <?php
+
+                   $this_comp_id = $competition['Competition']['id'];
+                   if ( $this_comp_id == $next_comp_id)
+                   {
+                   ?>
+                   <tr>
+                      <td />
+                      <td colspan="4"><b><?php __('Your next competition ...'); ?></b></td>
+                   </tr>
+                   <?php
+                   }
+                   ?> 
+                   <tr id="comp-<?php echo $this_comp_id; ?>">
+                        <td style="text-align:center;"><?php if ( $competition['Competition']['important'] ) { echo '<img src="../img/star.gif" alt="'; __('Important',true); echo '" />'; } ?></td>
                         <td><?php echo $html->link($unitcalc->check_date($competition['Competition']['competitiondate']), array('action' => 'edit_competition', 'id' => $competition['Competition']['id']),null); $cday = date('D', strtotime($competition['Competition']['competitiondate'])); echo ", " . __($cday, true); ?></td>
                         <td><?php echo $html->link($competition['Competition']['sportstype'], array('action' => 'edit_competition', 'id' => $competition['Competition']['id']),null) ?></td>
                         <td><?php echo $html->link($competition['Competition']['name'], array('action' => 'edit_competition', 'id' => $competition['Competition']['id']),null) ?></td>
                         <td><a href="/trainer/Competitions/delete/<?php echo $competition['Competition']['id']; ?>" onClick="return confirm('<?php __('Are you sure?'); ?>');"><img alt="<?php __('Are you sure?'); ?>" width="20" src="/trainer/img/icon_delete.png" /></a></td>
                    </tr>
-                   <?php $i += 1; endforeach; ?>
+                   <?php endforeach; ?>
                    </table>
 
 <?php 
 
 echo $paginator->numbers( array( 'seperator' => '|' ) );
 
-if ( !isset( $no_event ) )
-{
-
-    if ( !isset( $setcolor ) ) $setcolor = $i - 1;
-    
-    // TODO highlight next competition
-?>
-<script language="JavaScript">
- $("#comp-<?php echo $setcolor; ?>").css('background-color','lightblue');
-</script>
-<?php 
-} 
 ?>
 
                    </fieldset>

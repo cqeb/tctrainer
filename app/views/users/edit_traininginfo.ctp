@@ -32,41 +32,6 @@ echo $form->input('typeofsport',
                   'options' => $sporttype_array
                   ));
 
-echo '<br />';
-echo $form->input('rookie',
-                  array(
-                  'before' => __('Are you a beginner in sports?', true),
-                  'after' => '',
-                  'between' => '',
-                  'class' => 'required',
-                  'label' => '',
-                  'legend' => false,
-                  'type' => 'checkbox',
-                  //'multiple' => false,
-                  'options' => array(
-                            '1' => __('Yes',true),
-                            '0' => __('No',true)
-                  )
-));
-
-echo $form->input('tos',
-                  array(
-                  'before' => __("You agree to our terms of service and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
-                  'after' => '',
-                  'between' => '',
-                  'legend' => false,
-                  'label' => '',
-                  'type' => 'checkbox',
-                  //'multiple' => false,
-                  'default' => '0',
-                  'options' => array(
-                            '1' => __('Yes',true),
-                            '0' => __('No',true)
-                  )
-));
-
-?><br /><?php
-
 echo $form->input('weeklyhours',
      array(
      'before' => '',
@@ -102,7 +67,6 @@ echo $form->input('dayofheaviesttraining',
                                  'SAT' => __('Saturday', true),
                                  'SUN' => __('Sunday', true)
                                  )));
-**/
 
 echo $form->input('coldestmonth',
                   array(
@@ -126,19 +90,13 @@ echo $form->input('coldestmonth',
                             '12' => __('December',true)
                   )));
 
-?>
-
-<!--//
-<br />
-TODO (B)
-<?php
+// TODO (B)
+// authentification missing
 echo $form->input('publicprofile', array('label' => __('Make your profile public?', true), 'type' => 'checkbox'));
-
-// TODO authentification missing
 echo $form->input('publictrainings', array('label' => __('Publish your trainings automatically to Twitter or Facebook', true), 'type' => 'checkbox'));
 
+**/
 ?>
--->
 
 <br />
 <a name="zones"></a><h3><?php __('Zones'); ?></h3>
@@ -153,13 +111,13 @@ echo $form->input('lactatethreshold',
                    'class' => 'required',
                    'maxLength' => 255,
                    'error' => array( 
-                      'numeric' => __('Enter your current lactate threshold',true),
+                      'numeric' => __('Enter your current run lactate threshold',true),
                       'greater' => __('Must be at least 120',true),
                       'lower' => __('Must be lower than 220',true),
-                      'notempty' => __('Enter your current lactate threshold',true)
+                      'notempty' => __('Enter your current run lactate threshold',true)
                    ),
                    //'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                   'label' => __('Lactate threshold', true)
+                   'label' => __('Run lactate threshold', true)
 ));
 ?>
 <div class="errorbox" id="errorblth"></div>
@@ -210,6 +168,47 @@ Zone 5c More than 106% of LTHR
 
 <?php
 
+echo '<br />';
+
+echo $form->input('rookie',
+                  array(
+                  'before' => __('Are you a beginner in sports?', true),
+                  'after' => '',
+                  'between' => '',
+                  'class' => 'required',
+                  'label' => '',
+                  'legend' => false,
+                  'type' => 'checkbox',
+                  //'multiple' => false,
+                  'options' => array(
+                            '1' => __('Yes',true),
+                            '0' => __('No',true)
+                  )
+));
+
+echo $form->input('tos',
+                  array(
+                  'before' => __("You agree to our terms of service and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
+                  'after' => '',
+                  'between' => '',
+                  'legend' => false,
+                  'label' => '',
+                  'type' => 'checkbox',
+                  'class' => 'required',
+                  'default' => '0',
+                  'options' => array(
+                            '1' => __('Yes',true),
+                            '0' => __('No',true)
+                  )
+));
+
+echo '<br /><br />';
+?>
+<a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/users/show_tos" target="_blank"><?php __('Read terms of service.'); ?></a>
+
+<?php
+echo '<br /><br />';
+
 echo $form->submit(__('Save',true));
 
 ?>
@@ -239,6 +238,9 @@ $this->js_addon .= '
 function calculate_zones(lth) 
 {
                    var zonestable = \'    \
+' . __('Set these zones in your heart rate monitor!', true) . '<br /><br />'; 
+
+$this->js_addon .= ' \
 <table border="1" width="100%">          \
 <tr>                                     \
     <th>' . __('Type',true) . '</th>                        \

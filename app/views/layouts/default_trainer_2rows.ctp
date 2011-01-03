@@ -6,12 +6,6 @@
 $url = Configure::read('App.serverUrl');
 echo $html->charset();
 ?>
-    <?php 
-    /**
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    */
-    ?>
     <?php echo $html->meta('icon'); ?>
 
     <?php echo $this->element('metanavigation'); ?>
@@ -29,13 +23,15 @@ echo $html->charset();
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
     <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
+    <!--script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script-->
+    <!--script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
 
 <?php echo $scripts_for_layout; ?>
 
+<?php
+/**
 <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
   var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
@@ -52,7 +48,8 @@ echo $html->charset();
   feedback_widget_options.style = "idea";
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
-
+**/
+?>
 </head>
 <body>
   <!-- Header -->

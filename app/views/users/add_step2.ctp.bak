@@ -52,7 +52,7 @@ $sporttype_array_metric = array(
                                  )
                          );
 
-$sporttype_array_english = array(
+$sporttype_array_imperial = array(
                                  'Triathlon' => array (
                                              'Triathlon Ironman' => __('Ironman (3.8mi swim, 180mi bike, 42mi run)', true),
                                              'Triathlon Half-Ironman' => __('Half-Ironman (1.9mi swim, 90mi bike, 21mi run)', true),
@@ -234,7 +234,7 @@ echo $form->input('unit', array(
                                  'label' => __('Unit', true),
                                  'options' => array(
                                  'metric' => __('Metric (Kilometres, Kilograms, Centimeters)', true),
-                                 'english' => __('English (Miles, Pounds, Feet)', true)
+                                 'imperial' => __('Imperial (Miles, Pounds, Feet)', true)
                                  )));
 
 echo $form->input('unitdate', array(

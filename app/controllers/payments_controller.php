@@ -28,7 +28,6 @@ class PaymentsController extends AppController {
             $this->checkSession();
             $results['User'] = $this->Session->read('userobject');
             $session_userid = $results['User']['id'];
-
             $currency = $this->Unitcalc->currency_for_country( $results['User']['country'] );
 
             // maybe user has not added his country yet.
@@ -110,7 +109,16 @@ class PaymentsController extends AppController {
             if ( !$timeinterval ) $timeinterval = 1;
 
             // TODO use final prices // diffentiate between USD EUR?
-            //$price_array = array( '1' => '9.90', '3' => '27.00', '6' => '51.00', '12' => '96.00' );
+            /**
+            if ( $this->Unitcalc->currency_for_country($results['User']['country']) == 'USD' )
+            {
+              $price_array = array( '1' => '14.90', '3' => '39.90', '6' => '74.90', '12' => '139.90' );
+            } else 
+            {
+              $price_array = array( '1' => '9.90', '3' => '26.90', '6' => '49.90', '12' => '94.90' );
+            }
+            **/
+            
             $price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
 
             // check address in user profile - otherwise redirect to edit profile
@@ -376,13 +384,15 @@ class PaymentsController extends AppController {
             $this->set('payments', $payments);
    }
 
+   /**
    function delete( $id )
    {
             $this->Payment->delete($id);
             $this->Session->setFlash(__('Payment with ID:',true) . ' ' . $id . ' ' . __('deleted',true) . '.');
             $this->redirect(array('action'=>'show_payments'));
    }
-
+   **/
+    
    function show_invoice($id = null)
    {
             $this->checkSession();

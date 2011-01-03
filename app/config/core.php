@@ -38,7 +38,9 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-Configure::write('debug', 2);
+if ( $_SERVER['HTTP_HOST'] == 'localhost' ) Configure::write('debug', 2);
+else Configure::write('debug', 0);
+
 /**
  * Application wide charset encoding
  */
@@ -59,40 +61,67 @@ Configure::write('App.encoding', 'UTF-8');
   * this is correct
   * 
   */
-if (gethostname() === "Main") {
-	
-	// Clemens' config
-	
-	Configure::write('App.serverUrl', '/trainer');
-	Configure::write('App.uploadDir', 'C:\DRIVE_D\xampplite\xampplite\htdocs\trainer\app\webroot\files\\');
-	// Domain with protocol and NO trailing slash
-	Configure::write('App.hostUrl', 'http://localhost');
 
+// local configuration
+if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+{
+  
+    if (function_exists( 'gethostname' ) && gethostname() === "Main") {
+    	
+    	// Clemens' config
+    	
+    	Configure::write('App.serverUrl', '/trainer');
+    	Configure::write('App.uploadDir', 'C:\DRIVE_D\xampplite\xampplite\htdocs\trainer\app\webroot\files\\');
+    	// Domain with protocol and NO trailing slash
+    	Configure::write('App.hostUrl', 'http://localhost');
+    
+    
+    } else {
+    	
+    	// Klaus-M. config
+    	
+    	// this is the path-information - I know the variable is not named correctly :) (so please without host-info)
+    	// rename this variable
+    	Configure::write('App.serverUrl', '/trainer');
+    	// Domain with protocol and NO trailing slash
+    	Configure::write('App.hostUrl', 'http://localhost');
+    	Configure::write('App.uploadDir', 'C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\webroot\files\\');
+    
+    }
 
-} else {
-	
-	// Klaus-M. config
-	
-	// this is the path-information - I know the variable is not named correctly :) (so please without host-info)
-	// rename this variable
-	Configure::write('App.serverUrl', '/trainer');
-	// Domain with protocol and NO trailing slash
-	Configure::write('App.hostUrl', 'http://localhost');
-	Configure::write('App.uploadDir', 'C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\webroot\files\\');
+    /**
+     * mail sending options
+     */
+
+    Configure::write('App.mailFrom', 'TriCoreTraining <cqeb@gmx.net>');
+    Configure::write('App.mailAdmin', 'support@tricoretraining.com');
+    Configure::write('App.mailPort', '25');
+    Configure::write('App.mailHost', 'mail.gmx.net');
+    Configure::write('App.mailUser', 'cqeb@gmx.net');
+    Configure::write('App.mailPassword', 'finger99');
+
+} else
+{
+// server configuration
+
+      // rename this variable
+      Configure::write('App.serverUrl', '/trainer');
+      // Domain with protocol and NO trailing slash
+      Configure::write('App.hostUrl', 'http://www.tricoretrainig.com');
+      Configure::write('App.uploadDir', '/var/www/trainer/app/webroot/files/');
+
+    /**
+     * mail sending options
+     */
+
+    Configure::write('App.mailFrom', 'TriCoreTraining <support@tricoretraining.com>');
+    Configure::write('App.mailAdmin', 'support@tricoretraining.com');
+    Configure::write('App.mailPort', '25');
+    Configure::write('App.mailHost', 'localhost');
+    Configure::write('App.mailUser', '');
+    Configure::write('App.mailPassword', '');
 
 }
-
-  /**
-   * mail sending options
-   */
-
-  Configure::write('App.mailFrom', 'TriCoreTraining <cqeb@gmx.net>');
-  Configure::write('App.mailAdmin', 'support@tricoretraining.com');
-  Configure::write('App.mailPort', '25');
-  Configure::write('App.mailHost', 'mail.gmx.net');
-  Configure::write('App.mailUser', 'cqeb@gmx.net');
-  Configure::write('App.mailPassword', 'finger99');
-
 
 /**
  * Uncomment the define below to use CakePHP admin routes.

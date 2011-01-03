@@ -420,7 +420,7 @@ function show_layer() {
 
 EOE;
     
-if ( !isset ( $data ) )
+if ( !isset ( $data ) || count($data) < 2 )
       $this->js_addon .= "$('#layer_hidden').hide();";
         
       $this->js_addon .= <<<EOE

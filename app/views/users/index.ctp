@@ -14,7 +14,7 @@
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/competitions/list_competitions"><?php __('Add your goals'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingplans/view"><?php __('Study and fulfill your training schedule'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingstatistics/list_trainings"><?php __('Track your workouts'); ?></a></li>
-       <li><a href="<?php echo Configure::read('App.hostUrl'); ?>/blog/"><?php __('Read our FAQs and our blog'); ?></a></li>
+       <li><a href="<?php echo Configure::read('App.hostUrl'); ?>/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/"><?php __('Read our FAQs and our blog'); ?></a></li>
      </ol>
 
      <h2><?php __('Referral'); ?></h2>
@@ -27,7 +27,7 @@ $referral_text[] = __('10:45 for Ironman in Carinthia was the goal and TriCoreTr
 $referral_name[] = 'Clemens Prerovsky, 30 ys';
 $referral_email[] = 'c.prerovsky@gmail.com';
 
-$count_referrals = count( $referral_text );
+$count_referrals = count( $referral_text ) - 1;
 $rand_number = rand( 0, $count_referrals );
 
 echo '<span style="width:50px;"><i>"' . 

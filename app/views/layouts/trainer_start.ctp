@@ -30,13 +30,12 @@ echo $html->charset();
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
     <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
+    <!--script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script-->
+    <!--script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
 
 <?php echo $scripts_for_layout; ?>
-
 
 <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
@@ -55,6 +54,7 @@ echo $html->charset();
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
 
+?>
 <script type="text/javascript">
 // image fader
 $(document).ready(function() {

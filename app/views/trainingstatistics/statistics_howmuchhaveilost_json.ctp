@@ -6,7 +6,11 @@ if ( $stype == 'weight' )
 ?>
 {
 	"elements":[
-    {
+<?php
+if ( isset( $diff_per_week ) )
+{
+?>
+{
       "type":"area",
       "fill-alpha": 0.4,
       "width": 2,
@@ -34,7 +38,8 @@ for ( $i = 0; $i < count($weeks); $i++ )
 } 
 ?>]
     },
-		{
+<?php } ?>
+{
       "type":"area",
       "fill-alpha": 0.4,
       "width": 2,
