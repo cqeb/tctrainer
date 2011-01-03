@@ -171,8 +171,90 @@ class ProviderComponent extends Object {
 		return false;
 	}
 	
-	public function purge() {
-			
+	/**
+	 * check if a new competition is to be added in the timespan till
+	 * the nearest competition is scheduled. Meant to be called BEFORE
+	 * the new competition is added to the database.
+	 * @param string $date of the competition to be added or deleted. supply
+	 * 		ISO timestamp value
+	 * @param string $type of the competition
+	 * @return false if nothing was purged 
+	 */
+	public function smartPurgeOnSave($date, $type) {
+		// check if earlier entry exists
+		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
+			WHERE competitiondate < '$date'
+			AND user_id = " . $this->athlete->getId());
+		if ($r[0]['c'] > 0) {
+			// there are earlier entries - do not purge
+			return false;
+		}			
+
+		// select if same entry already exists and nothing important changed
+		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
+			WHERE competitiondate = '$date' AND sportstype = '$type'
+			AND user_id = " . $this->athlete->getId());
+		if ($r[0]['c'] > 0) {
+			// same entry exists - do not purge
+			return false;
+		}			
+
+		// now check if the entry is before our earliest entry to date
+		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
+			WHERE competitiondate > NOW()
+			AND competitiondate < '$date'
+			AND user_id = " . $this->athlete->getId());
+		if ($r[0]['c'] > 0) {
+			// there is an earlier entry - do not purge
+			return false;
+		}
+		
+		// it seems all checks failed, so we have to purge
+		return $this->purge($date);
+	}
+	
+	/**
+	 * check if a new competition is to be delete in the timespan before
+	 * the nearest competition is scheduled. Meant to be called BEFORE
+	 * the new competition is deleted from the database.
+	 * @param integer $id of the competition to be deleted
+	 * @return false if nothing was purged 
+	 */
+	public function smartPurgeOnDelete($id) {
+		// now check if the entry is before our earliest entry to date
+		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
+			WHERE competitiondate > NOW()
+			AND competitiondate < (
+				SELECT competitiondate FROM competitions
+				WHERE id = $id 
+			)
+			AND user_id = " . $this->athlete->getId());
+		if (array_key_exists('c', $r) && $r['c'] > 0) {
+			// there is an earlier entry - do not purge
+			return false;
+		}
+		
+		$r = $this->DB->query("SELECT competitiondate d FROM competitions
+			WHERE id = $id");
+		
+		// it seems all checks failed, so we have to purge
+		return $this->purge($r[0]['d']);
+	}
+	
+	/**
+	 * internal purge function which will wipe the mesocycle and trainings
+	 * only meant to be called from Provider::smartPurge()
+	 */
+	private function purge($date) {
+		$this->DB->query("DELETE FROM mesocyclephases WHERE date >= NOW() 
+			AND athlete_id = " . $this->athlete->getId());
+		$this->DB->query("DELETE FROM scheduledtrainings WHERE week >= NOW() 
+			AND athlete_id = " . $this->athlete->getId());
+		$this->DB->query("DELETE FROM trirunworkouttypesequence WHERE week >= NOW() 
+			AND athlete_id = " . $this->athlete->getId());
+		$this->DB->query("DELETE FROM tribikeworkouttypesequence WHERE week >= NOW() 
+			AND athlete_id = " . $this->athlete->getId());
+		return true;
 	}
 	
 	/**

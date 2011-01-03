@@ -8,7 +8,7 @@ class CompetitionsController extends AppController {
    var $name = 'Competitions';
 
    var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc'); 
-   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc');
+   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Provider');
 
 /**
 list all competitions with paging
@@ -234,7 +234,12 @@ list all competitions with paging
 
                if ( $error == "" )
                {
-                    if ($this->Competition->save( $this->data, array('validate' => true)))
+                    $this->Provider->smartPurgeOnSave(
+                    	"SAVE", 
+                    	$this->data["Competition"]["competitiondate"]["year"] . '-' . $this->data["Competition"]["competitiondate"]["month"] . '-' . $this->data["Competition"]["competitiondate"]["day"],
+                    	$this->data["Competition"]["sportstype"]
+                    );
+               		if ($this->Competition->save( $this->data, array('validate' => true)))
                     {
                           $this->Session->setFlash(__('Competition saved.',true));
                           $this->redirect(array('action' => 'list_competitions', $this->User->id));
@@ -271,7 +276,8 @@ list all competitions with paging
 
    function delete($id) 
    {
-            $this->Competition->delete($id);
+            $this->Provider->smartPurgeOnDelete($id);
+   			$this->Competition->delete($id);
             $this->Session->setFlash(__('The competition has been deleted.', true));
             $this->redirect(array('action'=>'list_competitions'));
    }
