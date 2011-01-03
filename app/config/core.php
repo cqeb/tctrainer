@@ -214,9 +214,6 @@ Configure::write('Acl.database', 'default');
  * to fix the date & time related errors.
  */
 
- 
-
-
 //date_default_timezone_set('UTC');
 /**
  *

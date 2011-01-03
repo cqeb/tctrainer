@@ -23,7 +23,7 @@
                    </p>
 
 <?php
-                   echo $form->textarea('cancelation_reason',
+                   echo $form->textarea('cancellation_reason',
                    array(
                          'rows' => '10',
                          'cols' => '45'

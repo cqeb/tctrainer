@@ -39,10 +39,6 @@ echo $form->input('competitiondate',
      'label' => __('Date', true)
 ));
 
-echo '<br />';
-__('You should only define 3 important competitions per year!');
-echo '<br />';
-
 /**
 echo $form->input('important',
        array(
@@ -59,19 +55,6 @@ echo $form->input('important',
        )
 ));
 **/
-echo $form->input('important',
-       array(
-       'label' => __('Important', true),
-       'after' => '',
-       'between' => '',
-       'legend' => false,
-       'type' => 'checkbox',
-       'default' => '1',
-       'options' => array(
-                 '1' => __('Yes', true),
-                 '0' => __('No', true),
-       )
-));
 
 $sporttype_array = $sports;
 
@@ -100,6 +83,22 @@ echo $form->input('name',
      'label' => __('Name', true)
      ));
 
+__('You should only define 3 important competitions per year!');
+echo '<br /><br />';
+
+echo $form->input('important',
+       array(
+       'label' => __('Important', true),
+       'after' => '',
+       'between' => '',
+       'legend' => false,
+       'type' => 'checkbox',
+       'default' => '1',
+       'options' => array(
+                 '1' => __('Yes', true),
+                 '0' => __('No', true),
+       )
+));
 
 echo $form->input('location',
      array(

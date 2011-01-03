@@ -3,7 +3,7 @@
 class Competition extends AppModel {
 
 	var $name = 'Competition';
-        var $belongsTo = array ('User');
+        //var $belongsTo = array ('User');
 
         var $validate = array(
           'name' => array(

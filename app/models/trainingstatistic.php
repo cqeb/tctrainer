@@ -6,7 +6,13 @@ class Trainingstatistic extends AppModel {
         //var $belongsTo = array ('User');
 
         var $validate = array(
-          'name' => array(
+          'date' => array(
+                  'notempty' => array(
+                             'rule' => 'notEmpty',
+                             'required' => true
+                  ),
+          ),
+          'sportstype' => array(
                   'notempty' => array(
                              'rule' => 'notEmpty',
                              'required' => true
@@ -27,6 +33,7 @@ class Trainingstatistic extends AppModel {
                              'required' => true
                   ),
           ),
+          /**
           'weight' => array(
                   'numeric' => array(
                             'rule' => 'numeric'
@@ -41,6 +48,7 @@ class Trainingstatistic extends AppModel {
                             //'message' => 'Must be lower than 150 kilograms.'
                             ),
           ),
+          */
           'avg_pulse' => array( // should be avgHR
                   'numeric' => array(
                             'rule' => 'numeric'

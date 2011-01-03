@@ -1,0 +1,65 @@
+Datum;Name des Trainings;Sport;Distanz;Dauer;Durchschnittl. Herzfrequenz;Test-Training;Wettkampf;Kommentar;Ort;Gewicht;Link zum Workout;TRIMP;Durchschnittliche Geschwindigkeit;Verbrannt
+15.09.2010;;RUN;7,4;00:43:00;159;Nein;Nein;09:25;Wiener Neudorf, Austria;84;;51;10,33;669
+17.09.2010;Gentics Office Run;RUN;20;01:57:00;152;Nein;Nein;07:53;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;0;;128;10,26;1231
+18.09.2010;;BIKE;35;01:17:00;141;Nein;Nein;18:47;;0;;84;27,27;682
+21.09.2010;;RUN;9,7;00:57:00;138;Nein;Nein;06:40;;0;;57;10,21;479
+24.09.2010;Gentics Office Run;RUN;20;01:52:00;152;Nein;Nein;07:17;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;0;;123;10,71;1178
+25.09.2010;;RUN;11;01:06:00;140;Nein;Nein;17:09;;0;;66;10;575
+29.09.2010;;RUN;9,7;00:50:20;159;Nein;Nein;06:40;Wiener Neudorf, Österreich;84;;60;11,56;784
+01.10.2010;Gentics Office Run;RUN;20;01:51:22;151;Nein;Nein;06:47;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;0;;122;10,78;1155
+04.10.2010;;RUN;11,8;01:03:52;152;Nein;Nein;06:38;;0;;70;11,09;672
+05.10.2010;;RUN;10,3;00:58:50;146;Nein;Nein;06:41;Wiener Neudorf, Österreich;84;;64;10,5;801
+08.10.2010;Gentics Office Run;RUN;20;01:54:08;151;Nein;Nein;07:16;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;0;;125;10,51;1184
+09.10.2010;;RUN;9,7;00:53:30;150;Nein;Nein;14:35;;0;;58;10,88;547
+10.10.2010;Husarentempel;RUN;17,6;01:41:00;158;Nein;Nein;09:49;Husarentempel, Mödling, Österreich;84;;121;10,46;1557
+12.10.2010;;RUN;9,5;00:52:00;146;Nein;Nein;06:41;;0;;57;10,96;500
+18.10.2010;;RUN;9,3;00:58:08;143;Nein;Nein;06:45;;84;;58;9,6;765
+19.10.2010;;RUN;10,9;01:08:00;147;Nein;Nein;06:41;;0;;74;9,62;664
+21.10.2010;;RUN;5,6;00:35:00;150;Nein;Nein;07:02;;82;;38;9,6;494
+22.10.2010;;BIKE;30;02:04:43;152;Nein;Nein;06:42;;0;;137;14,43;1312
+23.10.2010;;RUN;9;00:51:41;145;Nein;Nein;18:08;;0;;51;10,45;489
+25.10.2010;;RUN;10,3;01:05:00;144;Nein;Nein;06:43;;0;;65;9,51;605
+27.10.2010;;RUN;8,3;00:52:08;147;Nein;Nein;06:47;;82;;57;9,55;712
+25.10.2010;;SWIM;2;00:45:00;130;Nein;Nein;19:00;;0;;45;2,67;324
+29.10.2010;Gentics Office Run;RUN;20;02:03:33;155;Nein;Nein;07:23;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;0;;148;9,71;1356
+31.10.2010;Baden - Richtung Neufeldersee / Tadej;BIKE;30;01:59:31;116;Nein;Nein;09:30;;0;;119;15,06;609
+01.11.2010;;SWIM;2;00:45:00;130;Nein;Nein;19:00;;0;;45;2,67;324
+03.11.2010;Aarhus City;RUN;4,2;00:24:13;158;Nein;Nein;06:38;Aarhus, Denmark;0;;29;10,41;277
+05.11.2010;Kopenhagen City;RUN;4,4;00:33:50;139;Nein;Nein;09:44;Copenhagen, Denmark;0;;33;7,8;290
+06.11.2010;Biedermannsdorf Runde;RUN;9;00:50:01;147;Nein;Nein;07:14;Biedermannsdorf, Austria;82;;55;10,8;683
+06.11.2010;MTB Thallern Runde;BIKE;30;02:17:43;123;Nein;Nein;14:31;;0;;137;13,07;847
+08.11.2010;;SWIM;2;00:45:00;130;Nein;Nein;19:00;;0;;45;2,67;324
+07.11.2010;Mödling Lauf;RUN;9,7;00:56:13;138;Nein;Nein;09:11;Mödling, Austria;0;;56;10,35;473
+09.11.2010;Mödling;RUN;11;01:14:20;150;Nein;Nein;06:44;Mödling, Austria;0;;81;8,88;760
+12.11.2010;Mödling;RUN;20;01:55:27;155;Nein;Nein;06:47;Mödling, Austria;0;;138;10,39;1267
+14.11.2010;Berglauf;RUN;14,6;01:32:17;146;Nein;Nein;11:08;Husarentempel, Mödling, Austria;83;;101;9,49;1251
+15.11.2010;;SWIM;2;00:45:00;130;Nein;Nein;19:00;;0;;45;2,67;324
+15.11.2010;Mödling;RUN;9,3;01:00:37;140;Nein;Nein;07:21;Mödling, Austria;0;;60;9,21;528
+16.11.2010;Mödling;RUN;8,4;00:55:58;138;Nein;Nein;07:41;Mödling, Austria;0;;55;9,01;471
+18.11.2010;Mödling;RUN;9,3;01:00:06;136;Nein;Nein;06:48;Mödling, Austria;0;;60;9,28;487
+21.11.2010;Husarentempel;RUN;16,4;01:47:32;139;Nein;Nein;14:53;Husarentempel, Mödling, Austria;0;;107;9,15;921
+22.11.2010;;SWIM;2;00:45:00;130;Nein;Nein;19:00;;0;;45;2,67;324
+23.11.2010;Mödling;RUN;9;00:55:06;141;Nein;Nein;08:05;Mödling, Austria;0;;55;9,8;488
+24.11.2010;?;RUN;9,5;01:00:45;134;Nein;Nein;06:40;Mödling, Austria;83;;60;9,38;714
+26.11.2010;Gentics Office Run;RUN;20;02:00:15;151;Nein;Nein;06:56;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;0;;132;9,98;1247
+28.11.2010;Mödling - Laxemburg - rechts rein;RUN;14;01:30:00;150;Nein;Nein;08:00;Laxenburg, Austria;0;;99;9,33;920
+29.11.2010;;SWIM;2;00:45:00;130;Nein;Nein;19:00;;0;;45;2,67;324
+30.11.2010;Gentics - Prater;RUN;9,4;01:07:00;138;Nein;Nein;06:45;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;0;;67;8,42;564
+02.12.2010;Mödling Lauf;RUN;9,7;01:03:00;147;Nein;Nein;06:42;;82,5;;69;9,24;862
+03.12.2010;Mödling Lauf;RUN;9,7;01:03:00;142;Nein;Nein;06:42;Mödling Austria;82;;63;9,24;813
+06.12.2010;Mödling Lauf;RUN;9,7;01:04:24;142;Nein;Nein;06:40;Mödling Austria;82;;64;9,04;831
+07.12.2010;Gentics Runners Point;RUN;11;01:09:07;137;Nein;Nein;07:53;Gonzagagasse 11, 1010 Wien, Austria;0;;69;9,55;571
+09.12.2010;Mödling Lauf;RUN;9,7;01:00:00;154;Nein;Nein;06:50;Mödling Austria;83;;72;9,7;886
+10.12.2010;Laxenburg-Mödling;RUN;13,3;01:29:54;146;Nein;Nein;06:44;Laxemburg, Austria;0;;98;8,88;865
+12.12.2010;;RUN;14,1;01:30:31;141;Nein;Nein;17:03;;0;;90;9,35;802
+14.12.2010;Gentics Runners Point;RUN;10;01:00:00;150;Nein;Nein;08:01;Gonzagagasse 11, 1010 Wien, Austria;0;;66;10;613
+18.12.2010;;RUN;11,2;01:15:40;150;Nein;Nein;16:46;;82;;83;8,88;1068
+20.12.2010;Mödling Lauf;RUN;9,2;00:56:17;146;Nein;Nein;06:44;;0;;61;9,81;541
+21.12.2010;Gentics Runners Point;RUN;10,7;01:07:00;142;Nein;Nein;07:47;;82;;67;9,58;865
+22.12.2010;Mödling Lauf;RUN;9,7;01:01:00;145;Nein;Nein;06:40;;0;;61;9,54;577
+23.12.2010;Gentics Office Run;RUN;20;01:50:28;157;Nein;Nein;06:58;Gentics, Gonzagagasse 11, 1010 Vienna, Austria;81,5;;132;10,86;1673
+25.12.2010;St. Veit - Wr. Neudorf;RUN;28;02:38:00;139;Nein;Nein;16:15;St. Veit;82;;158;10,63;1968
+26.12.2010;Mödling;RUN;9,7;01:00:00;146;Nein;Nein;15:00;;0;;66;9,7;577
+28.12.2010;Laxenburg-Mödling;RUN;10,5;01:06:00;152;Nein;Nein;06:38;;82;;72;9,55;952
+30.12.2010;Gentics Office Run;RUN;20;02:02:00;146;Nein;Nein;06:46;;82;;134;9,84;1649
+01.01.2011;Neujahrslauf 2011;RUN;24;02:49:26;142;Nein;Nein;Lauf mit Clemens und Wildschwein;Anninger, Austria;81,5;http://;169;8,5;2236

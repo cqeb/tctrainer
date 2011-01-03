@@ -32,7 +32,7 @@ list all competitions with paging
 
    function list_competitions()
    {
-            $statusbox = '';
+            $statusbox = 'statusbox';
             $create_dummy = '';
 
             $session_userid = $this->Session->read('session_userid');
@@ -74,6 +74,34 @@ list all competitions with paging
             $season = $this->Unitcalc->get_season( $results, $this->data );
 
             $unit = $this->Unitcalc->get_unit_metric();
+
+            $session_userid = $this->Session->read('session_userid');
+            $results['User'] = $this->Session->read('userobject');
+            
+            if ( empty($this->data) )
+            {
+                     // security check - don't view workouts of other users
+                     if ( $id )
+                     {
+                       $result = $this->Competition->find ('all', 
+                          array('conditions' => 
+                              array( 'and' => 
+                                  array( 'id' => $id, 'user_id' => $session_userid ) 
+                              ) 
+                          )
+                       );
+                       
+                       if ( isset( $result[0] ) )
+                       {
+                          //$this->data = $result[0];
+                       } else
+                       {
+                          $this->Session->setFlash(__('Sorry. This is not your entry!', true));
+                          $this->set('statusbox', 'errorbox');
+                          $this->redirect(array('controller' => 'Competitions', 'action' => 'list_competitions'));
+                       }
+                     }
+            }
 
             if (empty( $this->data ) && $id != 'dummy')
             {
@@ -245,7 +273,7 @@ list all competitions with paging
    {
             $this->Provider->smartPurgeOnDelete($id);
    			$this->Competition->delete($id);
-            $this->Session->setFlash('The competition has been deleted.');
+            $this->Session->setFlash(__('The competition has been deleted.', true));
             $this->redirect(array('action'=>'list_competitions'));
    }
 

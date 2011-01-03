@@ -6,12 +6,12 @@
 
 ?>
 
-                   <h1><?php __('Track trainings'); ?></h1>
+                   <h1><?php __('Track workouts'); ?></h1>
 
                    <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
                   
                    <fieldset>
-                   <legend><?php __('Add or edit your training!'); ?></legend>
+                   <legend><?php __('Add or edit your workout!'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
@@ -19,7 +19,7 @@
                    </div><br />
                    <?php } ?>
 
-                   <?php echo $html->link(__('Back to list of trainings',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null) ?>
+                   <?php echo $html->link(__('Back to list of workouts',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null) ?>
                    <br /><br />
 
 <?php
@@ -133,30 +133,30 @@ echo $form->input('competition', array(
 <h2><?php __('Optional data'); ?></h2>
 
 <a href="#AF" onClick="javascript:show_layer();return false;"><?php __('Show advanced functions'); ?></a>
-<br /><br />
-<div id="layer_hidden">
 
+<div id="layer_hidden">
 
 <ul>
 <?php
 
-$avg_speed = $unitcalc->check_distance($data['avg_speed']);
+if ( isset( $data['avg_speed'] ) ) $avg_speed = $unitcalc->check_distance($data['avg_speed']);
 
-if ( $avg_speed['amount'] ) {
+if ( isset( $avg_speed['amount'] ) ) {
+   echo '<br /><br />';
    echo '<li>';
    __('AVG Speed'); 
    echo ' ' . $avg_speed['amount'] . ' ' . $unit['length'] . '/h';
    echo '</li>'; 
 }
 
-if ( $data['trimp'] ) {
+if ( isset( $data['trimp'] ) ) {
    echo '<li>';
    __('TRIMP'); 
    echo ' ' . $data['trimp'];
    echo '</li>'; 
 }
  
-if ( $data['kcal'] ) {
+if ( isset( $data['kcal'] ) ) {
    echo '<li>';
    __('Burnt'); 
    echo ' ' . $data['kcal'] . ' ' . 'kcal';
@@ -258,9 +258,18 @@ echo $form->input('weight',
 ));
 ?>
 
-<a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a>
-<br />
-<a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a>
+<?php
+
+__('Comment');
+echo '<br />';
+echo $form->textarea('comment',
+                  array(
+                  'rows' => '5',
+                  'cols' => '45'
+           ));
+echo '<br /><br />';
+
+?>
 
 <?php
 
@@ -274,16 +283,12 @@ echo $form->input('workout_link',
      'label' => __('Link workout', true)
 ));
 
-__('Comment');
-echo '<br />';
-echo $form->textarea('comment',
-                  array(
-                  'rows' => '5',
-                  'cols' => '45'
-           ));
-echo '<br /><br />';
-
 ?>
+<ul>
+<li><a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a></li>
+<li><a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a></li>
+</ul>
+
 
 <table border="0" width="100%">
 <tr>
@@ -397,9 +402,7 @@ function show_layer() {
     \$('#layer_hidden').show();
 }
 \$(document).ready(function() {
-  
-        \$('#layer_hidden').hide();
-        
+      
         // facebox box
         \$('a[rel*=facebox]').facebox();
         
@@ -414,6 +417,13 @@ function show_layer() {
                   address: \$("#TrainingstatisticLocation").val(),
                   zoom: 10 });
         }
+
+EOE;
+    
+if ( !isset ( $data ) )
+      $this->js_addon .= "$('#layer_hidden').hide();";
+        
+      $this->js_addon .= <<<EOE
 });
 </script>
 EOE;

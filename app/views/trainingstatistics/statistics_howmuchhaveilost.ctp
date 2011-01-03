@@ -1,4 +1,6 @@
 
+                   <h1><?php __('Statistics'); ?></h1>
+
                    <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_howmuchhaveilost')); ?>
                    <fieldset>
                    <legend><?php __('How much have I lost?'); ?></legend>
@@ -9,8 +11,8 @@
                    </div><br />
                    <?php } ?>
                    
-<a href="/blog/en/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
-<br /><br />
+                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/?s=faq"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <br /><br />
 
                    <div>
 <?php
@@ -53,7 +55,7 @@ echo $form->submit(__('Display',true), array('name' => 'display', 'class' => 'no
 
 <br />
 
-<h2><?php __('Chart Weight'); ?></h2>
+<h2><?php __('Weight Statistics'); ?></h2>
 
 <?php
 
@@ -72,6 +74,9 @@ echo $ofc->createflash('my_chart4','680','400',$jsonurl.'type:weight/start:' . $
 
 <div id="my_chart4"></div>
 
+<?php if ( $userobject['advanced_features'] ) { ?>
+<a target="_blank" href="<?php echo $jsonurl.'type:weight/start:' . $start . '/end:' . $end; ?>"><?php echo $jsonurl; ?></a>
+<?php } ?>
 
 <?php
 
