@@ -54,7 +54,6 @@ echo $html->charset();
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
 
-?>
 <script type="text/javascript">
 // image fader
 $(document).ready(function() {
