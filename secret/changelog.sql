@@ -55,3 +55,16 @@ ALTER TABLE  `users` ADD  `bikelactatethreshold` INT NOT NULL AFTER  `lactatethr
 2011-01-03 KMS
 ALTER TABLE `users` CHANGE `cancelation_reason` `cancellation_reason` TEXT CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
 ALTER TABLE `users` CHANGE `unit` `unit` ENUM( 'metric', 'imperial' ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL;
+
+2011-01-04 CP
+-- added tri swim provider - swim workouts, finally!
+CREATE TABLE IF NOT EXISTS `triswimworkouttypesequence` (
+  `athlete_id` int(11) NOT NULL,
+  `week` date NOT NULL,
+  `position` int(11) NOT NULL,
+  `e` int(11) NOT NULL,
+  `f` int(11) NOT NULL,
+  `m` int(11) NOT NULL,
+  `s` int(11) NOT NULL,
+  PRIMARY KEY (`athlete_id`,`week`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
