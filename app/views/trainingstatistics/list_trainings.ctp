@@ -1,4 +1,8 @@
-
+<?php
+__('RUN workout', true);
+__('BIKE workout', true);
+__('SWIM workout', true);
+?>
                    <h1><?php __('Track workouts'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
@@ -52,12 +56,17 @@ urlencode(__('My last training', true) . ' ') . $distance['amount'] .
 urlencode(' ' . $distance['unit'] . ' ' . __('in',true) . ' ') . $duration . 
 urlencode(' ' . __('WOW',true)) . '&u=http://tricoretraining.com'; 
 
+$facebookurl = '/trainer/starts/index/distance:'.$distance['amount'].'/distance_unit:'. $distance['unit'] .'/duration:' . $duration . '/stype:' . $stype;
+
+$facebookurl = 'http://www.facebook.com/sharer.php?u=http://www.tricoretraining.com/fb.html';
+
 $twitterurl = 
 urldecode(
 substr( 
-__('My last training', true) . ' ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . 
-__('in',true) . ' ' . $duration . ' ' . __('WOW',true) . ' http://tricoretraining.com'
-, 0, 140 )
+__('WOW', true) . ' - ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . __($stype . ' workout', true) . ' ' . 
+__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . '- http://tricoretraining.com - ' . __('great online coach', true) 
+, 0, 140 
+)
 ); 
 
 ?>
@@ -67,7 +76,7 @@ __('in',true) . ' ' . $duration . ' ' . __('WOW',true) . ' http://tricoretrainin
 <?php } ?>
 
 <a target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="20" src="/trainer/img/icon_facebook.png" /></a>
-<a target="_blank" href="http://www.twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="20" src="/trainer/img/icon_twitter.png" /></a>
+<a target="_blank" href="http://twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="20" src="/trainer/img/icon_twitter.png" /></a>
 
 <a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/Trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="20" src="/trainer/img/icon_delete.png" /></a>
 

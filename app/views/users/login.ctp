@@ -67,7 +67,7 @@ echo $form->input('password',
 
                    </fieldset>
 
-<?php echo $html->link(__('Can\'t remember your password?', true),array('controller' => 'users', 'action' => 'password_forgotten'))?>
+<?php echo $html->link(__("Can't remember your password?", true),array('controller' => 'users', 'action' => 'password_forgotten'))?>
 
 <br /><br /><br />
 

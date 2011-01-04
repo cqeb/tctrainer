@@ -15,7 +15,7 @@
  <?php __('Old period:'); ?> <?php echo $payed_from; ?> <?php __('to'); ?> <?php echo $payed_to; ?><br />
  <?php __('New period:'); ?> <?php echo $payed_new_from; ?> <?php __('to'); ?> <?php echo $payed_new_to; ?>
  </p>
- <!--<p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/trainingstatistics/"><?php __('Yes, I\'ll do!'); ?></a></p>-->
+ <!--<p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/trainingstatistics/"><?php __("Yes, I'll do!"); ?></a></p>-->
  
  <p><?php __('Yours, Clemens'); ?></p>
  <br />

@@ -49,6 +49,10 @@ echo $form->input('weeklyhours',
      'label' => __('Weekly hours', true)
 ));
 
+?>
+<span id="weeklyhours"></span>
+<?php
+
 /**
 echo $form->input('dayofheaviesttraining',
                   array(
@@ -188,7 +192,7 @@ echo $form->input('rookie',
 
 echo $form->input('tos',
                   array(
-                  'before' => __("You agree to our terms of service and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
+                  'before' => __("You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
                   'after' => '',
                   'between' => '',
                   'legend' => false,
@@ -204,7 +208,7 @@ echo $form->input('tos',
 
 echo '<br /><br />';
 ?>
-<a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/users/show_tos" target="_blank"><?php __('Read terms of service.'); ?></a>
+<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 
 <?php
 echo '<br /><br />';
@@ -342,6 +346,24 @@ $this->js_addon .= <<<EOH
                return false;
 }
 
+function setwhrs() 
+{
+      if ( \$('#UserWeeklyhours').val() != '' )
+      {
+          var whrs = \$('#UserWeeklyhours').val();
+EOH;
+
+$this->js_addon .= '
+          var whrsmsg = "<br />' . __('Weekly training load varies between', true) . '"+" "+Math.round(whrs*0.7)+" "+"' .
+            __('and', true) . '"+" "+Math.round(whrs*1.5)+" ' . __('hours',true).'.<br />"';
+
+$this->js_addon .= <<<EOH
+                      
+                    \$('#weeklyhours').html(whrsmsg);
+      }
+      return false;
+}
+
 \$(document).ready(function() {
         var lth = parseInt( \$('#UserLactatethreshold').val() );
         var mhr = parseInt( \$('#UserMaximumheartrate').val() );
@@ -356,6 +378,10 @@ $this->js_addon .= <<<EOH
                 \$('#zones').html(zonestable);
         }
 
+        \$('#UserWeeklyhours').blur(setwhrs());
+        
+        setwhrs();
+
         // set lth with calculated value
         \$('#UserMaximumheartrate').blur(function() {
                 if ( \$('#UserLactatethreshold').val() != '' )
@@ -369,7 +395,7 @@ $this->js_addon .= <<<EOH
                   }
                 }
                 return false;
-  });
+        });
 
         \$('#UserLactatethreshold').blur(function() {
                 if ( \$('#UserLactatethreshold').val() != '' )

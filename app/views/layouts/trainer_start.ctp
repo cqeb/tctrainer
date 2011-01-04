@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
-    <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-<?php
-$url = Configure::read('App.serverUrl');
-echo $html->charset();
+    <title><?php
+if ( $distance ) 
+{
+  // facebook text
+  $title = __('WOW', true) . ' - ' . $distance . ' ' . $distance_unit . ' ' . __($stype . ' workout', true) . ' ' . 
+  __('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . '- http://tricoretraining.com - ' . __('great online coach', true); 
+  echo $title;
+} else
+{
 ?>
-    <?php 
-    /**
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    */
-    ?>
+TriCoreTraining.com <?php echo $title_for_layout;
+}
+?></title>
+    <?php $url = Configure::read('App.serverUrl'); echo $html->charset(); ?>
     <?php echo $html->meta('icon'); ?>
 
     <?php echo $this->element('metanavigation'); ?>
@@ -54,7 +57,6 @@ echo $html->charset();
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
 
-?>
 <script type="text/javascript">
 // image fader
 $(document).ready(function() {

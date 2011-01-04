@@ -1,6 +1,5 @@
-<?php $currency = 'EUR'; ?>
 
-                   <h1><?php __('TriCoreTraining features'); ?></h1>
+                   <h1><?php __('Subscribe TriCoreTraining-memberships'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 
@@ -13,6 +12,17 @@
                    <?php $session->flash(); ?>
                    </div><br />
                    <?php } ?>
+
+<?php
+/**
+                   <div class="okbox">
+                   <?php echo __('Your current membership is valid from', true) . ' ' . $payed_from . ' ' . __('to', true) . ' ' . $payed_to; ?>.
+                   <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>
+                   </div>
+
+                   <br />
+**/
+?>
 
 <table summary="<?php __('All possible subscriptions'); ?>">
 <!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->
@@ -79,35 +89,58 @@
 <tr>
     <td colspan="3">&nbsp;</td>
 </tr>
+<?php
+
+$currency = 'EUR';
+
+$price1m['EUR'] = '9.90';
+$price1pm['EUR'] = '9.90';
+$price3m['EUR'] = '26.90';
+$price3pm['EUR'] = '8.97';
+$price6m['EUR'] = '49.90';
+$price6pm['EUR'] = '8.32';
+$price12m['EUR'] = '94.90';
+$price12pm['EUR'] = '7.91';
+
+$price1m['USD'] = '14.90';
+$price1pm['USD'] = '14.90';
+$price3m['USD'] = '39.90';
+$price3pm['USD'] = '13.30';
+$price6m['USD'] = '74.90';
+$price6pm['USD'] = '12.48';
+$price12m['USD'] = '139.90';
+$price12pm['USD'] = '11.66';
+
+?>
 <tr>
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
-    <b>1<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
-    <?php __('for ONLY'); ?> 9.90 <?php echo $currency; ?>
+    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
+    <b>1 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <?php __('for ONLY'); ?> <?php echo $price1m[$currency]; ?> <?php echo $currency; ?>
     </a>
     </td>
 </tr>
 <tr class="odd">
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
-    <b>3<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
-    <?php __('for ONLY'); ?> 27.00 <?php echo $currency; ?> (9.00 <?php echo $currency; ?> <?php __('per month'); ?>)
+    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
+    <b>3 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <?php __('for ONLY'); ?> <?php echo $price3m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price3pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>
 </tr>
 <tr>
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:6">
-    <b>6<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
-    <?php __('for ONLY'); ?> 51.00 <?php echo $currency; ?> (8.50 EUR <?php __('per month'); ?>)
+    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:6">
+    <b>6 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <?php __('for ONLY'); ?> <?php echo $price6m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price6pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>
 </tr>
 <tr class="odd">
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
-    <b>12<?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
-    <?php __('for ONLY'); ?> 96.00 <?php echo $currency; ?> (8.00 <?php echo $currency; ?> <?php __('per month'); ?>)
+    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
+    <b>12 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <?php __('for ONLY'); ?> <?php echo $price12m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price12pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>
 </tr>
@@ -115,9 +148,13 @@
 </table>
 
 <img alt="<?php __('PAYPAL - secure payment solutions'); ?>" src="<?php echo Configure::read('App.serverUrl'); ?>/img/paypal_logo.gif" />
-<br />
-<?php __('All payments will be processed by PAYPAL - a reputable and well-known payment solution provider (owned by e-Bay). Your payment will be processed via a SSL-secured connection and we will not receive your confidential payment information (only the payment itself).'); ?>
+
+<?php __('What is PAYPAL? It is a reputable and well-known payment solution provider (owned by e-Bay) and provides creditcard/payment
+solutions for websites. You send your necessary confidential payment information via a secure connection (128-bit encrypted SSL-connection)
+and provide these confidential data only to PAYPAL and NOT to us (we only receive your payment).'); ?>
 <br /><br />
+<?php __('Your trial period will be added if you subscribe to a PREMIUM membership.'); ?>
+<br />
 
                 </fieldset>
 

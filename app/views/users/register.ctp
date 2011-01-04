@@ -82,7 +82,6 @@ if ($form->isFieldError('emailcheck'))
 ?>
 </span>
 
-
 <?php
 
 echo $form->input('password',
@@ -117,9 +116,6 @@ echo $form->input('lactatethreshold',
      ),
      'label' => __('Lactate threshold', true)
 ));
-?>
-<a target="_blank" href="/blog/en/url....">TODO [?]</a>
-<?php
 echo $form->input('bikelactatethreshold',
      array(
  	   'class' => 'medium',
@@ -131,7 +127,9 @@ echo $form->input('bikelactatethreshold',
      ),
      'label' => __('Bike lactate threshold', true)
 ));
-
+?>
+<!--<a target="_blank" href="/blog/en/url....">TODO [?]</a>-->
+<?php
 echo $form->input('typeofsport',
      array(
      'class' => 'required',
@@ -155,6 +153,10 @@ echo $form->input('weeklyhours',
      'label' => __('Weekly hours', true)
 ));
 
+?>
+<span id="weeklyhours"></span>
+<?php
+
 echo $form->input('rookie',
      array(
      'type' => 'checkbox',
@@ -168,8 +170,8 @@ echo $form->input('rookie',
 </div>
 -->
 
-<b><?php __('You hereby confirm that you\'ve read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!'); ?></b>  
-<a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/users/show_tos" target="_blank"><?php __('Read terms of service.'); ?></a>
+<b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!"); ?></b>  
+<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 <br /><br />
 
 <?php
@@ -178,7 +180,7 @@ echo $form->input('tos',
      'type' => 'checkbox',
      'label' => __('I agree', true),
      'error' => array( 
-          'notempty' => __("You HAVE TO agree to our terms of service! That's the way you protect our rights :).", true)
+          'notempty' => __("You HAVE TO agree to our terms and conditions! That's the way you protect our rights :).", true)
      )
 ));
 
@@ -187,7 +189,7 @@ if ( isset( $tos_warning ) && $tos_warning == 'true' )
 {
 ?>
 <div class="error-message">
-<?php __('You HAVE TO agree with our terms of service! That\'s the way you protect our rights :).'); ?>
+<?php __("You HAVE TO agree to our terms and conditions! That's the way you protect our rights :)."); ?>
 </div>
 <?php
 }
@@ -220,6 +222,24 @@ function finishAjax(id, response) {
          \$('#'+id).fadeIn();
 }
 
+function setwhrs() 
+{
+      var whrs = \$('#UserWeeklyhours').val();
+  
+      if ( whrs != '' )
+      {
+EOE;
+$this->js_addon .= '
+          var whrsmsg = "<br />' . __('Weekly training load varies between', true) . '"+" "+Math.round(whrs*0.7)+" "+"' .
+            __('and', true) . '"+" "+Math.round(whrs*1.5)+" ' . __('hours',true).'.<br /><br />"';
+$this->js_addon .= <<<EOE
+                      
+          //alert(whrsmsg);
+          \$('#weeklyhours').html(whrsmsg);
+      }
+      return false;
+}
+
 \$(document).ready(function () {
 	// hide bike lactate threshold, because the user may not need to see it
 	\$('#UserBikelactatethreshold').parent().hide();
@@ -237,7 +257,10 @@ function finishAjax(id, response) {
 		\$('#UserBikelactatethreshold').attr('value', blt).effect("highlight", 3000);
 	});
 
-	/**
+  setwhrs();
+  \$('#UserWeeklyhours').blur(setwhrs());
+
+  /**
 	 * provide a basic number of weekly hours after
 	 * the user has selected a sport
 	 */

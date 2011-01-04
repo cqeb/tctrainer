@@ -24,6 +24,16 @@ class StartsController extends AppController {
 	function index()
 	{
 
+      $distance = $this->params['named']['distance'];
+      $distance_unit = $this->params['named']['distance_unit'];
+      $duration = $this->params['named']['duration'];
+      $stype = $this->params['named']['stype'];
+
+      $this->set('distance', $distance);
+      $this->set('distance_unit', $distance_unit);
+      $this->set('duration', $duration);
+      $this->set('stype', $stype);
+      
 	}
   
   function features()

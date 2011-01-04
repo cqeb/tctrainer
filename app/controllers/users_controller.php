@@ -224,11 +224,6 @@ class UsersController extends AppController {
     $this->set('statusbox',$statusbox);
 	}
 
-  function show_tos()
-  {
-
-  }
-  
 	/**
 	 * registration for new users 
 	 */
@@ -362,7 +357,7 @@ class UsersController extends AppController {
           $this->redirect(array('action' => 'register_finish', $this->User->id));
       } else
       {
-          $this->data['User']['password'] = $password_unenc ;
+          if ( isset( $password_unenc ) ) $this->data['User']['password'] = $password_unenc;
           //pr($this->User->invalidFields( ));
       }
 
@@ -1594,7 +1589,7 @@ class UsersController extends AppController {
           // check for medical limitations
           if ( $u['tos'] == '0')
           { 
-              $text_for_mail .= '<li>' . __("You haven't agreed to our terms of service or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
+              $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
               " " . '<a href="' . Configure::read('App.hostUrl') . 
               Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
               "</li>\n";

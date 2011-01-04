@@ -5,7 +5,7 @@
 
 <?php __('Gain speed, loose weight'); echo '!'; __('Go to TriCoreTraining.com and subscribe to a membership for less than 10 bucks!'); ?>
 
-<?php __('Yes, I\'ll do!'); ?>
+<?php __("Yes, I'll do!"); ?>
 <?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/subscribe_triplans/
                            
 <?php __('Yours, Clemens'); ?>

@@ -32,10 +32,10 @@ if ( $level == 'freemember' )
 }
 **/
 
-__('By clicking the SUBSCRIBE button you also accept these terms of service (TOS) - please read them carefully.'); 
+__('By clicking the SUBSCRIBE button you also accept these terms and conditions - please read them carefully.'); 
 
 ?>
-<a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/users/show_tos" target="_blank"><?php __('Read terms of service.'); ?></a>
+<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 
 <br /><br />
 <?php 
