@@ -13,7 +13,7 @@
  
  <p><?php __('Gain speed, loose weight'); echo '!<br /><br />'; __('Go to TriCoreTraining.com and subscribe to a membership for less than 10 bucks a month!'); ?></p>
  
- <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/subscribe_triplans/"><?php __('Yes, I\'ll do!'); ?></a></p>
+ <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/subscribe_triplans/"><?php __("Yes, I'll do!"); ?></a></p>
                            
  <p><?php __('Yours, Clemens'); ?></p>
  <br />

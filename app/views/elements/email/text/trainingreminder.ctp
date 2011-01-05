@@ -1,11 +1,11 @@
 
 <?php __('Aloha'); ?> <?php if ( isset( $to_name ) ) echo $to_name; else echo $user['User']['firstname']; ?>,
 
-<?php __('don\'t be lazy. Train and track your trainings!'); ?>
+<?php __("don't be lazy. Train and track your trainings!"); ?>
 
 <?php __('Go to'); ?> TriCoreTraining.com (http://www.tricoretraining.com) <?php __('and track your workouts - NOW!'); ?>
 
-<?php __('Yes, I\'ll do!'); ?>
+<?php __("Yes, I'll do!"); ?>
 
 <?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/trainingstatistics/list_trainings/
  

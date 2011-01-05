@@ -250,7 +250,7 @@
          <table width="580" border="0" cellspacing="0" cellpadding="0" class="main">
             <tr>
                <td align="center" class="permission">
-                  <p><?php __('You\'re receiving this notification because you are registered at TriCoreTraining.com.'); ?></p>
+                  <p><?php __("You're receiving this notification because you are registered at TriCoreTraining.com."); ?></p>
                </td>
             </tr>
             <tr>
@@ -280,7 +280,7 @@
                            </table>
                            <p>
                            <?php __('Hi'); ?>,<br />
-                           <?php __('my name is Clemens and I\'m one of the founders of TriCoreTraining.'); ?>
+                           <?php __("my name is Clemens and I'm one of the founders of TriCoreTraining."); ?>
                            <?php __('If you need help, please'); ?> <a href="mailto:support@tricoretraining.com"><?php __('just ask me'); ?></a>.
                            <br /><br />
                            <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/cp_sporty.png" alt="Clemens Prerovsky" />
