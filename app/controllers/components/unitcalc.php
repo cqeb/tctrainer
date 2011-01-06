@@ -324,7 +324,8 @@ class UnitcalcComponent extends Object {
    **/
    function how_old( $birthday )
    {
-            if ( !$birthday ) return 0;
+			if ( is_array( $birthday ) ) $birthday = $birthday['year'] . '-' . $birthday['month'] . '-' . $birthday['day'];
+            if ( !isset( $birthday ) ) return 0;
             //calculate years of age (input string: YYYY-MM-DD)
             list($year,$month,$day) = explode("-",$birthday);
             $year_diff  = date("Y") - $year;
@@ -663,7 +664,7 @@ class UnitcalcComponent extends Object {
                 
             $run_ultra = __('Ultrarun', true) . ' (> ' . $this->convert_metric( '50', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
             $run_marathon = __('Marathon', true) . ' (' . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
-            $run_halfmarathon = __('Half-Marathon', true) . ' (' . $this->convert_metric( '42', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
+            $run_halfmarathon = __('Half-Marathon', true) . ' (' . $this->convert_metric( '21', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
             $run_10k = __('Race', true) . ' (' . $this->convert_metric( '10', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
             $run_5k = __('Race', true) . ' (' . $this->convert_metric( '5', $convertunit, 0 ) . ' ' . $unit . ' ' . __('Run', true) . ')';
                 

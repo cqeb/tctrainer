@@ -306,9 +306,6 @@ class UsersController extends AppController {
       $this->data['User']['publicprofile'] = "0";
       $this->data['User']['publictrainings'] = "0";
       
-      // approximation - max. heart rate is not in use any more
-      $this->data['User']['maximumheartrate'] = $this->data['User']['lactatethreshold'] / 0.85;
-      
       /**
       if ($this->User->save($this->data, array(
                'validate' => 'only',
@@ -323,6 +320,49 @@ class UsersController extends AppController {
         $this->data['User']['password'] = md5( $password_unenc );
       }
       
+	  
+      if ( isset( $this->data['User']['birthday'] ) )
+      {
+			$age = $this->Unitcalc->how_old( $this->data['User']['birthday'] );
+			
+			// default value for weekly hours
+			$whrs = 6;
+			
+			switch ($this->data['User']['typeofsport']) {
+				case 'TRIATHLON IRONMAN':
+				case 'RUN ULTRA':
+				case 'BIKE ULTRA':
+					$whrs = 12;
+					break;
+				case 'TRIATHLON HALFIRONMAN':
+				case 'RUN MARATHON':
+				case 'DUATHLON MIDDLE':
+				case 'BIKE LONG':
+					$whrs = 8;
+					break;
+				case 'TRIATHLON OLYMPIC':
+				case 'RUN HALFMARATHON':
+				case 'DUATHLON SHORT':
+				case 'BIKE MIDDLE':
+					$whrs = 6;
+					break;
+				case 'TRIATHLON SPRINT':
+				case 'RUN 10K':
+				case 'BIKE SHORT':
+					$whrs = 5;
+					break;
+				default:
+					$whrs = 4;
+					break;
+			}
+			$this->data['User']['weeklyhours'] = $whrs;
+						
+      		// approximations
+      		$this->data['User']['lactatethreshold'] = round( ( 220 - $age ) * 0.85 );
+      		$this->data['User']['bikelactatethreshold'] = round ( $this->data['User']['lactatethreshold'] * 0.96 );
+      		$this->data['User']['maximumheartrate'] = round ( $this->data['User']['lactatethreshold'] / 0.85 );
+	  }
+	  //pr($this->data);
       if ( $this->User->save( $this->data, array(
            'validate' => true,
            'fieldList' => array(
@@ -602,7 +642,7 @@ class UsersController extends AppController {
 		//$this->render('check_email');
 		$usethisemail = "true";
 		$shownoerror = "false";
-    $error_msg = "";
+    	$error_msg = "";
     
 		// if no userid is set but email
 		if ( !$checkuserid && $checkuseremail )
@@ -652,31 +692,31 @@ class UsersController extends AppController {
 		// check whether email format is correct
 		if ( !eregi("^[a-z0-9]+([-_\.]?[a-z0-9])+@[a-z0-9]+([-_\.]?[a-z0-9])+\.[a-z]{2,4}$", $checkuseremail ))
 		{
-		  $error_msg = '<div class="error-message">';
-		  $error_msg .= __('Sorry, your e-mail is not correct!', true);
-      /**
-      $error_msg .= ' ' . $checkuseremail . ' '; 
-		  $error_msg .= __('is not correct!', true);
-      **/
-      $error_msg .= '</div>';
+			  	$error_msg = '<div class="error-message">';
+			  	$error_msg .= __('Sorry, your e-mail is not correct!', true);
+		      	/**
+		      	$error_msg .= ' ' . $checkuseremail . ' '; 
+				$error_msg .= __('is not correct!', true);
+		      	**/
+		      	$error_msg .= '</div>';
 			
-			$this->set("emailcheck", $error_msg);
-			$this->set("emailcheck_var", "false");
-			return 0;
+				$this->set("emailcheck", $error_msg);
+				$this->set("emailcheck_var", "false");
+				return 0;
 
 		} else
 		{
 			// you can not use this email at registration or at profile changes
 			if ( $usethisemail == "false" )
 			{
-        $error_msg = '<div class="error-message">';
-        $error_msg .= __('Sorry, your e-mail is already registered!', true);
-        //$error_msg .= ' ' . $checkuseremail . ' ';
-        /**
-        $error_msg .= ' ';  
-        $error_msg .= __('is already registered!', true);
-        **/
-        $error_msg .= '</div>';
+		        $error_msg = '<div class="error-message">';
+		        $error_msg .= __('Sorry, your e-mail is already registered!', true);
+		        //$error_msg .= ' ' . $checkuseremail . ' ';
+		        /**
+		        $error_msg .= ' ';  
+		        $error_msg .= __('is already registered!', true);
+		        **/
+		        $error_msg .= '</div>';
         
 				$this->set("emailcheck", $error_msg);
 				$this->set("emailcheck_var", "false");
@@ -685,16 +725,16 @@ class UsersController extends AppController {
 				// that's good, you can use this email at registration
 				if ( $shownoerror == "false" )
 				{
-          $error_msg = '<div class="ok-message">';
-          $error_msg .= __('E-mail is not registered!', true);
-          $error_msg .= '</div>';
-
-					$this->set("emailcheck", $error_msg);
+			          	$error_msg = '<div class="ok-message">';
+			          	$error_msg .= __('E-mail is not registered!', true);
+			          	$error_msg .= '</div>';
+						$error_msg = '';
+						$this->set("emailcheck", $error_msg);
 				} else
 				{
-          $error_msg = '<div class="error-message">';
-          $error_msg .= __('E-mail changed!', true);
-          $error_msg .= '</div>';
+			          $error_msg = '<div class="error-message">';
+			          $error_msg .= __('E-mail changed!', true);
+			          $error_msg .= '</div>';
 
 					$this->set("emailcheck", $error_msg);
 				}

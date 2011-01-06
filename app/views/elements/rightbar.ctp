@@ -1,12 +1,10 @@
-<b><?php __('TriCoreTraining Blog'); ?></b>
-<br /><br />
-<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('News'); ?></a>
-
-<br /><br />
-
-
 <b><?php __('Recommendation'); ?></b>
 <br /><br />
+<ul>
+<li><a href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('Become PREMIUM'); ?></b></a></li>
+<li><a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a></li>
+</ul>
+
 
 <script type="text/javascript"><!--
 /* Sidebar - rechts 2 */
@@ -20,6 +18,7 @@ google_ad_height = 150;
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 
+<!--
 <br /><br />
 <div class="messagebox">
 <center>
@@ -27,6 +26,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </center>
 <?php __('Still no heart rate monitor?'); ?>
 </div>  
+-->
    
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 <br /><br /><br />

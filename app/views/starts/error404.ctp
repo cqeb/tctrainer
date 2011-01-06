@@ -7,7 +7,7 @@
                    <legend><?php __('Gain speed, loose weight'); ?></legend>
 
                    <div class="errorbox">
-                   <?php __('Mysteries of the universe - where did this page disappear? Who knows ... '); ?>
+                   <?php __('Mysteries of the universe - where did this page go? Who knows ... '); ?>
                    </div><br />
                    </fieldset>
 
