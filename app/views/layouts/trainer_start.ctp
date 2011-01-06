@@ -29,6 +29,7 @@ TriCoreTraining.com <?php echo $title_for_layout;
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css" />
 
     <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-1.3.2.min.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
@@ -103,17 +104,31 @@ $(document).ready(function() {
 	</div>
 
     
-    <div class="grid_12 center">
-          <div class="box last">
-          <!--<h2><?php __('TriCoreTraining - your personal, interactive online coach for triathlon, running, biking'); ?></h2>-->
-          <?php __("You have ambitious sport goals (like Ironman, marathon or half the race) but you're working, having a family and you're short in time? ... You're absolutely right HERE. Start your hobby athlete career now."); ?>
-          <ul>
-            <li><a href="#">&raquo; <?php __('What can I expect from TriCoreTraining? Click here!'); ?></a></li>
-            <li><a href="#">&raquo; <?php __("Except cheap prices and easy usage - what else are the benefits of TriCoreTraining?"); ?></a></li>
-          </ul>
-          
-          </div>
-    </div>    
+    <div class="grid_3">
+    	<div class="box">
+	        <?php __("You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"); ?>
+        </div>
+    	<div class="box last">
+	        <?php __("You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"); ?>
+        </div>
+    </div>
+    
+    <div class="grid_9">
+    	<div class="box last features">
+    		<div>
+    			<img src="/trainer/img/startpage-feature-track.jpg" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"/>
+    			<p><?php __('Log your trainings, manage your competitions, and also keep track of your weight.');?></p>
+    		</div>
+    		<div>
+    			<img src="/trainer/img/startpage-feature-stats.jpg" alt="<?php __('Analyze your workouts');?>" title="<?php __('Analyze your workouts');?>"/>
+    			<p><?php __('Use detailed statistics to assess yor fitness and gain even more from your workouts.');?></p>
+    		</div>
+    		<div style="padding-right: 0px;">
+    			<img src="/trainer/img/startpage-feature-plans.jpg" alt="<?php __('Get individual training plans');?>" title="<?php __('Get individual training plans');?>"/>
+    			<p><?php __('Receive individual training plans based on your workouts and upcoming competitions.');?></p>
+    		</div>
+    	</div>
+    </div>
 
   <!-- /Center column -->
   <div class="clear"></div>

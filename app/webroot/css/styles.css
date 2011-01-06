@@ -135,7 +135,7 @@ td.nobg {
 	padding-bottom: 60px;
 }
 
-.grid_6 .box.last {
+.grid_6 .box.last, .grid_7 .box.last, .grid_8 .box.last, .grid_9 .box.last {
 	background: white url('../img/bg-box-6-last.png') no-repeat center bottom;
 	padding-bottom: 60px;
 }
@@ -347,6 +347,10 @@ button, input[type=submit] {
 	box-shadow: 0 0 6px #bbb;
 	-webkit-box-shadow: 0 0 6px #bbb;
 	-moz-box-shadow: 0 0 6px #bbb;
+	-webkit-transform: scale(1);
+	-webkit-transition-duration: 300ms;
+	-moz-transform: scale(1);
+	-moz-transition-duration: 300ms;
 }
 
 button:hover, input[type=submit]:hover {
