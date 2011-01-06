@@ -44,6 +44,16 @@ class ProviderComponent extends Object {
 	 * get a plan
 	 */
 	public function getPlan() {
+		if (!$this->athlete->isValid()) {
+			return '<div class="statusbox errorbox">' .
+				__("Sorry, you are not eligible to receive training plans as your premium membership has expired or you resigned our terms and conditions.", true) . 
+				'</div>' . 
+				"<script type=\"text/javascript\">
+					$('#plan').fadeTo('#normal', 1);
+					$('#loader, #toggleDesc, #prev, #next').hide();
+				</script>";
+		}
+		
 		$genWeek = DateTimeHelper::getWeekStartDay(new DateTime());
 
 		if (isset($_GET['o'])) {

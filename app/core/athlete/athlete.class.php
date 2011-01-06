@@ -52,12 +52,25 @@ class Athlete {
 	 * @var int
 	 */
 	protected $threshold;
+
+	/**
+	 * bike lactate threshold
+	 * @var int
+	 */
+	protected $bikethreshold;
 	
 	/**
 	 * sport
 	 * @var string
 	 */
 	protected $sport;
+	
+	/**
+	 * a user is considered to be valid if he has paid and accepted the
+	 * terms of service 
+	 * @var boolean
+	 */
+	protected $valid;
 	
 	/**
 	 * database reference
@@ -85,8 +98,10 @@ class Athlete {
 		}
 		$this->trainingTime = $user["weeklyhours"] * 60;
 		$this->threshold = $user["lactatethreshold"];
+		$this->bikethreshold = $user["bikelactatethreshold"];
 		$this->sport = $user["typeofsport"];
-		
+		$this->valid = (($user['payed_to'] > date('Y-m-d') && $user['tos'] === '1'));
+
 		// initialize his schedule
 		if ($DB) {
 			$this->schedule = new Schedule($DB, $this->id);
@@ -126,11 +141,11 @@ class Athlete {
 		switch ($sport) {
 			case "BIKE":			
 				return array(
-					0 => intval($this->threshold * 0.65),
-					1 => intval($this->threshold * 0.81),
-					2 => intval($this->threshold * 0.89),
-					3 => intval($this->threshold * 0.93),
-					4 => $this->threshold - 1
+					0 => intval($this->bikethreshold * 0.65),
+					1 => intval($this->bikethreshold * 0.81),
+					2 => intval($this->bikethreshold * 0.89),
+					3 => intval($this->bikethreshold * 0.93),
+					4 => $this->bikethreshold - 1
 				);
 				break;
 			// running will also be our default setting
@@ -178,6 +193,10 @@ class Athlete {
 	 	 * http://www.answers.com/topic/trimp-method
 	 	 */
 		return intval($minutes * $factor);
+	}
+	
+	public function isValid() {
+		return $this->valid;
 	}
 	
 	public function getThreshold() {
