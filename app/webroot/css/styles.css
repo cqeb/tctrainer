@@ -323,18 +323,18 @@ input[type=text]:focus, input[type=password]:focus, button:focus, input[type=sub
 
 button, input[type=submit] {
 	color: #666;
-	border: 1px solid #999;
-	border-color: #ccc #999 #999 #ccc;
+	border: 2px solid #67C5F8;
+	border-color: #67C5F8 #238cc5 #238cc5 #67C5F8;
 	padding: 5px 10px;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
 	background: #efefef;
 	background: -webkit-gradient(
 	    linear,
     	left bottom,
     	left top,
-	    color-stop(0, #ddd),
+	    color-stop(0, #ccc),
 	    color-stop(1, rgb(255,255,255))
 	);
 	background: -moz-linear-gradient(
@@ -344,12 +344,33 @@ button, input[type=submit] {
 	);
 	text-shadow: 1px 1px 1px white;
 	cursor: pointer;
+	box-shadow: 0 0 6px #bbb;
+	-webkit-box-shadow: 0 0 6px #bbb;
+	-moz-box-shadow: 0 0 6px #bbb;
 }
 
 button:hover, input[type=submit]:hover {
-	-webkit-box-shadow: 0 0 5px #67c5f8;
-	-moz-box-shadow: 0 0 5px #67c5f8;
-	box-shadow: 0 0 5px #67c5f8;
+	-webkit-box-shadow: 5px 5px 5px #ccc;
+	-moz-box-shadow: 5px 5px 5px #ccc;
+	box-shadow: 5px 5px 5px #ccc;
+	-webkit-transform: scale(1.05);
+	-webkit-transition-duration: 500ms;
+	-moz-transform: scale(1.05);
+	-moz-transition-duration: 500ms;
+	transition: opacity 1s ease-in-out;
+	background: #d1eeff;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #c5dae5),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#c5dae5 0%,
+    	#fff 100%
+	);
 }
 
 button:active, input[type=submit]:active {
