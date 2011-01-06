@@ -3,7 +3,7 @@
         <li>&nbsp;</li>
         <li><?php echo $html->link(__('Home',true),array('controller' => 'starts', 'action' => 'index'))?></li>
         <li><?php echo $html->link(__('Register',true),array('controller' => 'users', 'action' => 'register'))?></li>
-        <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); echo ' - '; __('Support'); ?></a></li>        
+        <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); ?></a></li>        
 <?php } ?>
  
 
@@ -17,6 +17,8 @@
 <?php if ( $this->name == 'Trainingstatistics' ) { ?>
 		    <li><?php echo $html->link(__('Track workouts',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'))?></li>
 		    <!--<li><?php echo $html->link(__('(Add training)',true),array('controller' => 'trainingstatistics', 'action' => 'edit_training'))?></li>-->
+		    <li>&nbsp;</li>
+		    <li><b><?php __('Statistics'); ?></b></li>
 		    <li><?php echo $html->link(__('How fit am I?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_trimp'))?></li>
 		    <li><?php echo $html->link(__('How fast am I?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_formcurve'))?></li>
 		    <li><?php echo $html->link(__('Can I finish the next competition?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_competition'))?></li>
@@ -24,14 +26,15 @@
 		    <li><?php echo $html->link(__('What have I achieved?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_whathaveidone'))?></li>
 <?php } ?>
 <?php if ( $this->name == 'Users' && $session_userid ) { ?>
+        <li><a href="/trainer/payments/subscribe_triplans"><b><?php __('Become PREMIUM'); ?></b></a></li>
+        <li>&nbsp;</li>
+        <li><?php echo $html->link(__('Edit training info',true),array('controller' => 'users', 'action' => 'edit_traininginfo'))?></li>
+        <li><?php echo $html->link(__('Edit weight goals',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
 		    <li><?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?></li>
-		    <li><?php echo $html->link(__('Edit training info',true),array('controller' => 'users', 'action' => 'edit_traininginfo'))?></li>
-		    <li><?php echo $html->link(__('Edit weight goals',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
-		    <li><?php echo $html->link(__('Change metric',true),array('controller' => 'users', 'action' => 'edit_metric'))?></li>
-		    <li><?php echo $html->link(__('Change password',true),array('controller' => 'users', 'action' => 'edit_password'))?></li>
+        <li><?php echo $html->link(__('Change password',true),array('controller' => 'users', 'action' => 'edit_password'))?></li>
 		    <?php if ( isset( $userobject ) && $userobject['advanced_features'] ) { ?><li><?php echo $html->link(__('Edit images',true),array('controller' => 'users', 'action' => 'edit_images'))?></li><?php } ?>
+        <li><?php echo $html->link(__('Change metric',true),array('controller' => 'users', 'action' => 'edit_metric'))?></li>
         <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); echo ' - '; __('Support'); ?></a></li>        
-        <li><?php echo $html->link(__('Subscribe',true),array('controller' => 'payments', 'action' => 'subscribe_triplans'))?></li>
 
 <?php } ?>
 <?php if ( $this->name == 'Payments' ) { ?>

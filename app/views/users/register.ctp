@@ -158,10 +158,31 @@ echo $form->input('weeklyhours',
 <?php
 
 echo $form->input('rookie',
+                  array(
+                  'before' => __('Are you a beginner in sports?', true),
+                  'after' => '',
+                  'between' => '',
+                  'class' => 'required',
+                  'label' => '',
+                  'legend' => false,
+                  'type' => 'checkbox',
+                  //'multiple' => false,
+                  'options' => array(
+                            '1' => __('Yes',true),
+                            '0' => __('No',true)
+                  )
+));
+
+
+/**
+echo $form->input('rookie',
      array(
      'type' => 'checkbox',
      'label' => __('Beginner', true) . '?'
 ));
+
+**/
+
 ?>
 <!--
 <div class="messagebox" style="overflow:auto; width: 420px; height: 100px;">

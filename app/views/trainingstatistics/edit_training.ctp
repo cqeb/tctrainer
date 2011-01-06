@@ -37,19 +37,6 @@ echo $form->input('date',
                   'maxYear' => date('Y',time())+1
 ));
 
-echo $form->input('name',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 255,
-                  'class' => 'required',
-                  'error' => array(
-                      'notempty' => __('Enter name for your workout', true)
-                  ),
-                  'label' => __('Name', true)
-));
-
 __('RUN', true);
 __('BIKE', true);
 __('SWIM', true);
@@ -90,6 +77,7 @@ echo $form->input('duration',
                   'before' => '',
                   'after' => '',
                   'between' => '',
+                  'default' => '00:00:00',
                   'maxLength' => 255,
                   'class' => 'required',
                   'error' => array(
@@ -112,6 +100,19 @@ echo $form->input('avg_pulse',
                       'lower' => __('Must be lower than',true) . ' 240'
                   ),
                   'label' => __('Avg. heart rate', true)
+));
+
+echo $form->input('name',
+                  array(
+                  'before' => '',
+                  'after' => '',
+                  'between' => '',
+                  'maxLength' => 255,
+                  'class' => 'required',
+                  'error' => array(
+                      'notempty' => __('Enter name for your (test-)workout route', true)
+                  ),
+                  'label' => __('Name for (test-) workout route', true)
 ));
 
 echo $form->input('testworkout', array(

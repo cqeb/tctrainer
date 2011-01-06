@@ -14,17 +14,22 @@ else $trainingstatistics_class = 'main';
 ?>
 <ul>
 	<li>
-		<?php echo $html->link(__('Competitions',true),array('controller' => 'competitions', 'action' => 'list_competitions'), array('class' => $competitions_class))?>
-	</li>
-	<li>
 		<?php echo $html->link(__('Training Schedule',true),array('controller' => 'trainingplans', 'action' => 'view'), array('class' => $trainingplans_class ))?>
 	</li>
   <li>
     <?php echo $html->link(__('Logbook',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'), array('class' => $trainingstatistics_class))?>
   </li>
+  <li>
+    <?php echo $html->link(__('Sport goals',true),array('controller' => 'competitions', 'action' => 'list_competitions'), array('class' => $competitions_class))?>
+  </li>
+  <li>
+    <?php echo $html->link(__('Settings',true),array('controller' => 'users', 'action' => 'edit_userinfo'), array('class' => $competitions_class))?>
+  </li>
+	<!--
 	<li>
-		<a class="<?php echo $magazine_class; ?>" href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a>
+		<a class="<?php echo $magazine_class; ?>" href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Blog'); ?></a>
 	</li>
+  -->
   <li>
     <a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img width="30" alt="TriCoreTraining.com Facebook Page" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" /></a>
   </li>

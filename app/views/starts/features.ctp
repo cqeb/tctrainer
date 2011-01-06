@@ -13,16 +13,6 @@
                    </div><br />
                    <?php } ?>
 
-<?php
-/**
-                   <div class="okbox">
-                   <?php echo __('Your current membership is valid from', true) . ' ' . $payed_from . ' ' . __('to', true) . ' ' . $payed_to; ?>.
-                   <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>
-                   </div>
-
-                   <br />
-**/
-?>
 
 <table summary="<?php __('All possible subscriptions'); ?>">
 <!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->

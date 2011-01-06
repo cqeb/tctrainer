@@ -83,6 +83,9 @@
 <tr>
     <td colspan="3">&nbsp;</td>
 </tr>
+<tr>
+    <td colspan="3"><h2><?php __('Click to subscribe to a PREMIUM membership'); ?></h2></td>
+</tr>
 <?php
 $price1m['EUR'] = '9.90';
 $price1pm['EUR'] = '9.90';

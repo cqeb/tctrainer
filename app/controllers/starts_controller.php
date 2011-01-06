@@ -12,18 +12,21 @@ class StartsController extends AppController {
 	var $paginate = array(
        'User' => array(
                 'limit' => 15
-	     )
+		)
 	);
 
 	function beforeFilter()
 	{
-		parent::beforeFilter();
-		$this->layout = 'trainer_start';
+  		parent::beforeFilter();
+  		$this->layout = 'trainer_start';
 	}
 
 	function index()
 	{
 
+      if ( $this->Session->read('session_userid') )
+            $this->redirect('/users/index');
+      
       $this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
 
       if ( isset( $this->params['named'] ) ) 
@@ -52,6 +55,7 @@ class StartsController extends AppController {
   function features()
   {
     $this->layout = 'default_trainer';
+
   }
 
   function fill_my_database()
@@ -61,6 +65,5 @@ class StartsController extends AppController {
       $this->autoRender = false;            
       $this->Filldatabase->prefill($this->Start);      
   }
-
 }
 ?>

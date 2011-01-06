@@ -9,7 +9,7 @@
     <?php echo $html->link(__('Features & Prices',true),array('controller' => 'starts', 'action' => 'features'), array('class' => 'main'))?>
 	</li>
   <li>
-    <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a>
+    <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Blog'); ?></a>
   </li>
 	<li>
 	<a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img width="30" alt="TriCoreTraining.com Facebook Page" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" /></a>

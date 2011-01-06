@@ -7,6 +7,12 @@
      </div><br />
      <?php } ?>
 
+     <div class="errorbox">
+     You haven't defined your sport goals. Do this first!
+     <br /><br />
+     <button name="button" type="button" value="Define goals">Define goals</button>
+     </div><br /> 
+     
      <div class="clear"></div>
 
      <h2><?php __('Next steps to use TriCoreTraining'); ?></h2>

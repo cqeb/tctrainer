@@ -16,9 +16,15 @@ __('SWIM workout', true);
                    </div><br />
                    <?php } ?>
 
+                   <a href="/trainer/trainingstatistics/edit_training"><button value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
+                   
+                   <a href="/trainer/trainingstatistics/import_workout"><button value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+
+                   <!--
                    <?php echo $html->link(__("Add workout",true), array('action' => 'edit_training'),null) ?>
                    | 
                    <?php echo $html->link(__("Import workout",true), array('action' => 'import_workout'),null) ?>
+                   -->
                    <br /><br />
 
 <table>

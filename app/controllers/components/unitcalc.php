@@ -379,14 +379,15 @@ class UnitcalcComponent extends Object {
                       break;
 
                       case "mmddyyyy":
-                      $date_split = split( '.', $date );
+                      $date_split = split( '\.', $date );
                       $return = $date_split[2] . '-' . $date_split[0] . '-' . $date_split[1];
                       break;
 
                       case "yyyymmdd":
-                      //$date_split = split( '.', $date );
-                      //$return = $date_split[2] . '-' . $date_split[1] . '-' . $date_split[0];
-                      $return = $date;
+                      $date_split = split( '-', $date );
+                      // in case you get a wrong format
+                      $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
+                      //$return = $date;
                       break;
                }
 

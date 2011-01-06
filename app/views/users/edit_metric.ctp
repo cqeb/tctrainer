@@ -1,5 +1,5 @@
 
-                   <h1><?php __('Change profile'); ?></h1>
+                   <h1><?php __('Settings'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 

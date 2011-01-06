@@ -18,6 +18,8 @@
                    </div><br />
                    <?php } ?>
 
+                   <?php echo $html->link(__('Log into the world of TriCoreTraining.', true), array('controller' => 'users', 'action' => 'login')); ?>
+                   
                    </fieldset>
 
 <?php

@@ -114,6 +114,11 @@ class TrainingstatisticsController extends AppController {
                 if ( strtotime( $importdatalines[0] ) )
                 { 
                       $importdate = $this->Unitcalc->check_date( $importdatalines[0], 'save' );
+                      if ( !is_numeric( strtotime( $importdate ) ) ) 
+                      {
+                          $import_error = '<br />' . __('Date', true) . ' ' . __('is not valid!', true);
+                          $importdate = '';
+                      }
                 } else
                 { 
                       $import_error = '<br />' . __('Date', true) . ' ' . __('is not valid!', true);

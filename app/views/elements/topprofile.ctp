@@ -6,9 +6,11 @@
 
 <?php } else { ?>
 
-<?php echo $html->link(__('Dashboard',true),array('controller' => 'users', 'action' => 'index'))?>
+<?php echo $html->link(__('Home',true),array('controller' => 'users', 'action' => 'index'))?>
+<!--
  | 
 <?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?>
+-->
  | 
 <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout')); ?> 
  | 

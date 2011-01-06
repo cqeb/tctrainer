@@ -25,10 +25,10 @@ if ( !isset( $newimportfile ) )
   
     __('Upload a CSV-file - you can save an Excel-file in this format.');
 
-    echo '<br /><br />';
+    echo ' '; //'<br /><br />';
     
-    echo '<a href="/trainer/example/example_workouts_import.xls" target="_blank">';
-    __('Here an example Excel-file for you.');
+    echo '<a href="/trainer/example/example_workouts_import.xls" target="_blank">&raquo; ';
+    __('Here you can download an example Excel file for you.');
     echo '</a>';
         
     echo '<br /><br />';
@@ -37,14 +37,14 @@ if ( !isset( $newimportfile ) )
     
     echo "<br /><br />";
     
-    echo $form->submit(__('Import',true));
+    echo $form->submit(__('Import workouts',true));
 
 } else
 {
-  
+    echo '<div class="statusbox">'; 
     echo $form->submit(__('Confirm import', true), array( 'div' => false ) ); 
     echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
-    
+    echo '</div>';
     echo $form->hidden('hiddenimportfile');
 
 }
@@ -78,8 +78,10 @@ if ( isset( $outputfile ) ) {
 <?php echo $outputfile; ?>
 </table>
 <?php
-
-    echo $form->submit(__('Confirm import', true)); 
+    echo '<div class="statusbox">';
+    echo $form->submit(__('Confirm import', true));
+    echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
+    echo '</div>'; 
 
 }
 

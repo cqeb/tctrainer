@@ -1,5 +1,5 @@
 
-                   <h1><?php __('Change profile'); ?></h1>
+                   <h1><?php __('Settings'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 
@@ -110,7 +110,7 @@ echo $form->input('publictrainings', array('label' => __('Publish your trainings
 echo $form->input('lactatethreshold',
                    array(
                    'before' => '',
-                   'after' => '',
+                   'after' => ' <a href="/blog/en/how-do-i-find-out-my-lactate-thresholds/" target="_blank">[?]</a>',
                    'between' => '',
                    'class' => 'required',
                    'maxLength' => 255,
@@ -129,7 +129,7 @@ echo $form->input('lactatethreshold',
 echo $form->input('bikelactatethreshold',
                    array(
                    'before' => '',
-                   'after' => '',
+                   'after' => ' <a href="/blog/en/how-do-i-find-out-my-lactate-thresholds/" target="_blank">[?]</a>',
                    'between' => '',
                    'class' => 'required',
                    'maxLength' => 255,

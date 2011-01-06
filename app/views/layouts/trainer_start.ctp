@@ -108,7 +108,6 @@ $(document).ready(function() {
 					<!--button onclick="$('#signup').fadeOut(); $('.teaserimages').fadeOut();"-->
 					<button onClick="javascript:top.location.href='<?php echo Configure::read('App.serverUrl'); ?>/users/register/';"><img src="/trainer/img/signup.png" alt="<?php __('Register FREE!'); ?>"/></button>
 					
-					
 					<p style="margin-top:20px">
 					<iframe src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode('http://www.facebook.com/pages/TriCoreTraining/150997251602079'); ?>&amp;layout=standard&amp;show_faces=false&amp;width=280&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=30" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:280px; height:30px;" allowTransparency="true"></iframe>
 					</p>    
@@ -124,7 +123,22 @@ $(document).ready(function() {
 			</div>
 			<!-- /Content -->
 		</div>
-		
+
+    <div class="clear"></div>
+    
+    <div class="grid_12 center">
+          <div class="box last">
+          <h2><?php __('TriCoreTraining - your personal, interactive online coach for triathlon, running, biking'); ?></h2>
+          <?php __("You have ambitious sport goals (like Ironman, marathon or half the race) but you're working, having a family and you're short in time? ... You're absolutely right HERE. Start your hobby athlete career now."); ?>
+          <br /><br />
+          <ul>
+            <li><a href="#">&raquo; <?php __('What can I expect from TriCoreTraining? Click here!'); ?></a></li>
+            <li><a href="#">&raquo; <?php __("Except cheap prices and easy usage - what else are the benefits of TriCoreTraining?"); ?></a></li>
+          </ul>
+          
+          </div>
+    </div>		
+<!--
 		<div class="grid_4">
 			<div class="box last">
 				<h1><?php __('Easier.'); ?></h1>
@@ -160,18 +174,20 @@ $(document).ready(function() {
 				</ul>
 			</div>
 		</div>
+-->
 
 		<!-- /Center column -->
 	<div class="clear"></div>
 	<!-- /Main -->
 	
-	<div class="container_12">
-	<?php echo $cakeDebug; ?>
-  </div>
-	
   <!-- Footer -->
   <?php echo $this->element('footer'); ?>
   <!-- /Footer -->
+
+  <div class="container_12">
+  <?php echo $cakeDebug; ?>
+  </div>
+
   <script type="text/javascript">
   var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
   document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
