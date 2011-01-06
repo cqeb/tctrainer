@@ -2,7 +2,8 @@
 <html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title><?php
-if ( $distance ) 
+
+if ( isset( $distance ) && $distance != '' ) 
 {
   // facebook text
   $title = __('WOW', true) . ' - ' . $distance . ' ' . $distance_unit . ' ' . __($stype . ' workout', true) . ' ' . 
@@ -19,7 +20,7 @@ TriCoreTraining.com <?php echo $title_for_layout;
 
     <?php echo $this->element('metanavigation'); ?>
 
-    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="#" />
+    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
@@ -39,23 +40,6 @@ TriCoreTraining.com <?php echo $title_for_layout;
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
 
 <?php echo $scripts_for_layout; ?>
-
-<script type="text/javascript" charset="utf-8">
-  var is_ssl = ("https:" == document.location.protocol);
-  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  var feedback_widget_options = {};
-
-  feedback_widget_options.display = "overlay";  
-  feedback_widget_options.company = "tricoretraining";
-  feedback_widget_options.placement = "left";
-  feedback_widget_options.color = "#222";
-  feedback_widget_options.style = "idea";
-  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-</script>
 
 <script type="text/javascript">
 // image fader
@@ -118,17 +102,32 @@ $(document).ready(function() {
 		<!-- /Content -->
 	</div>
 
-	<!-- /Center column -->
-<div class="clear"></div>
-<!-- /Main -->
+    
+    <div class="grid_12 center">
+          <div class="box last">
+          <!--<h2><?php __('TriCoreTraining - your personal, interactive online coach for triathlon, running, biking'); ?></h2>-->
+          <?php __("You have ambitious sport goals (like Ironman, marathon or half the race) but you're working, having a family and you're short in time? ... You're absolutely right HERE. Start your hobby athlete career now."); ?>
+          <ul>
+            <li><a href="#">&raquo; <?php __('What can I expect from TriCoreTraining? Click here!'); ?></a></li>
+            <li><a href="#">&raquo; <?php __("Except cheap prices and easy usage - what else are the benefits of TriCoreTraining?"); ?></a></li>
+          </ul>
+          
+          </div>
+    </div>    
 
-<div class="container_12">
-<?php echo $cakeDebug; ?>
-</div>
-	
+  <!-- /Center column -->
+  <div class="clear"></div>
+  <!-- /Main -->
+
 <!-- Footer -->
 <?php echo $this->element('footer'); ?>
 <!-- /Footer -->
+
+<!--
+<div class="container_12">
+<?php echo $cakeDebug; ?>
+</div>
+-->
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -140,5 +139,23 @@ try {
 	pageTracker._trackPageview();
 } catch(err) {}
 </script>
+
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";  
+  feedback_widget_options.company = "tricoretraining";
+  feedback_widget_options.placement = "left";
+  feedback_widget_options.color = "#222";
+  feedback_widget_options.style = "idea";
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+
 </body>
 </html>

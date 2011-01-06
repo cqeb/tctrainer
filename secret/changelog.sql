@@ -68,3 +68,7 @@ CREATE TABLE IF NOT EXISTS `triswimworkouttypesequence` (
   `s` int(11) NOT NULL,
   PRIMARY KEY (`athlete_id`,`week`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+2011-01-06 KMS
+DROP TABLE  `starts`;
+

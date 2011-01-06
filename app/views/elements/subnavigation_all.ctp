@@ -2,7 +2,7 @@
 <?php if ( !$session_userid ) { ?>
         <li>&nbsp;</li>
         <li><?php echo $html->link(__('Home',true),array('controller' => 'starts', 'action' => 'index'))?></li>
-        <li><?php echo $html->link(__('Signup FREE',true),array('controller' => 'users', 'action' => 'register'))?></li>
+        <!--<li><?php echo $html->link(__('Signup FREE',true),array('controller' => 'users', 'action' => 'register'))?></li>-->
         <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); ?></a></li>        
 <?php } ?>
  

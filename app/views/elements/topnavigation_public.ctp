@@ -1,12 +1,27 @@
+<?php
+
+$class['register'] = 'main';
+$class['login'] = 'main';
+$class['features'] = 'main';
+
+if ( isset( $this->params['action'] ) )
+{
+    if ( $this->params['action'] == 'register' ) $class['register'] = 'active';
+    if ( $this->params['action'] == 'login' ) $class['login'] = 'active';
+    if ( $this->params['action'] == 'features' ) $class['features'] = 'active';
+}
+
+?>
+
 <ul>
 	<li>
-		<?php echo $html->link(__('Signup FREE',true),array('controller' => 'users', 'action' => 'register'), array('class' => 'active'))?>
+		<?php echo $html->link(__('Signup FREE',true),array('controller' => 'users', 'action' => 'register'), array('class' => $class['register']))?>
 	</li>
 	<li>
-		<?php echo $html->link(__('Login',true),array('controller' => 'users', 'action' => 'login'), array('class' => 'main'))?>
+		<?php echo $html->link(__('Login',true),array('controller' => 'users', 'action' => 'login'), array('class' => $class['login']))?>
 	</li>
 	<li>
-    <?php echo $html->link(__('Features & Prices',true),array('controller' => 'starts', 'action' => 'features'), array('class' => 'main'))?>
+    <?php echo $html->link(__('Features & Prices',true),array('controller' => 'starts', 'action' => 'features'), array('class' => $class['features']))?>
 	</li>
   <li>
     <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Blog'); ?></a>

@@ -728,6 +728,22 @@ class UsersController extends AppController {
 				$this->User->savefield('activated', 1, false);
 
 				$this->Session->setFlash(__('You will receive regularly training schedules from TriCoreTraining.com. Start your sports career.',true));
+        
+        if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
+        {
+          $this->Session->write('session_useremail', $results['User']['email']);
+          $this->Session->write('session_userid', $results['User']['id']);
+          $this->set('session_userid', $results['User']['id']);
+
+          // set "last_login" session equal to users last login time
+          $results['User']['last_login'] = date("Y-m-d H:i:s");
+          $this->Session->write('last_login', $results['User']['last_login']);
+
+          // save last_login date
+          //$this->User->save($results);
+          //$this->Session->setFlash(__('Logged in. Welcome.', true));
+          $this->redirect('/users/index');
+        }
 			} else
 			{
 				$this->Session->setFlash( __("Something went wrong - sorry. Maybe you're already activated?", true) . ' ' . __('If not', true) . ', <a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '.</a>');

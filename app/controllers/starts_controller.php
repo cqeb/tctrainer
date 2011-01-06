@@ -3,18 +3,20 @@
 class StartsController extends AppController {
 	var $name = 'Starts';
 	// use no model
-	//var $uses = null;
+	var $uses = null;
 	var $useTable = false;
 
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session'); // 'TabDisplay',
 	var $components = array('Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Filldatabase');
 
-	var $paginate = array(
+	/**
+  var $paginate = array(
        'User' => array(
                 'limit' => 15
 		)
 	);
-
+  **/
+  
 	function beforeFilter()
 	{
   		parent::beforeFilter();
