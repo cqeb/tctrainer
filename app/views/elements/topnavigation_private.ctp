@@ -11,6 +11,9 @@ else $trainingplans_class = 'main';
 if ( $this->name == 'Trainingstatistics' ) { $trainingstatistics_class = 'active'; $magazine_class = 'main'; }
 else $trainingstatistics_class = 'main';
 
+if ( $this->name == 'Users' ) { $users_class = 'active'; $magazine_class = 'main'; }
+else $users_class = 'main';
+
 ?>
 <ul>
 	<li>
@@ -23,7 +26,7 @@ else $trainingstatistics_class = 'main';
     <?php echo $html->link(__('Sport goals',true),array('controller' => 'competitions', 'action' => 'list_competitions'), array('class' => $competitions_class))?>
   </li>
   <li>
-    <?php echo $html->link(__('Settings',true),array('controller' => 'users', 'action' => 'edit_userinfo'), array('class' => $competitions_class))?>
+    <?php echo $html->link(__('Settings',true),array('controller' => 'users', 'action' => 'edit_userinfo'), array('class' => $users_class))?>
   </li>
 	<!--
 	<li>
