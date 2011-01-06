@@ -2,21 +2,15 @@
 <html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-<?php
-$url = Configure::read('App.serverUrl');
-echo $html->charset();
-?>
-    <?php 
-    /**
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    */
+    <?php
+    $url = Configure::read('App.serverUrl');
+    echo $html->charset();
     ?>
     <?php echo $html->meta('icon'); ?>
 
     <?php echo $this->element('metanavigation'); ?>
 
-    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="#" />
+    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
@@ -119,8 +113,6 @@ echo $html->charset();
 	} catch(err) {}
 	</script>
 
-<?php
-/**
 <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
   var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
@@ -137,7 +129,6 @@ echo $html->charset();
   feedback_widget_options.style = "idea";
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
-**/
-?>
+
 </body>
 </html>

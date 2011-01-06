@@ -2,21 +2,15 @@
 <html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-<?php
-$url = Configure::read('App.serverUrl');
-echo $html->charset();
-?>
-    <?php 
-    /**
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    */
+    <?php
+    $url = Configure::read('App.serverUrl');
+    echo $html->charset();
     ?>
     <?php echo $html->meta('icon'); ?>
 
     <?php echo $this->element('metanavigation'); ?>
 
-    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="#" />
+    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
@@ -37,26 +31,6 @@ echo $html->charset();
 
 <?php echo $scripts_for_layout; ?>
 
-<?php 
-/**
-<script type="text/javascript" charset="utf-8">
-  var is_ssl = ("https:" == document.location.protocol);
-  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  var feedback_widget_options = {};
-
-  feedback_widget_options.display = "overlay";  
-  feedback_widget_options.company = "tricoretraining";
-  feedback_widget_options.placement = "left";
-  feedback_widget_options.color = "#222";
-  feedback_widget_options.style = "idea";
-  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-</script>
-**/ 
-?>
 </head>
 <body>
 	<!-- Header -->
@@ -133,7 +107,15 @@ echo $html->charset();
 	<?php echo $this->element('footer'); ?>
 	<!-- /Footer -->
 
-	<script type="text/javascript">
+<script language="JavaScript" type="text/javascript">
+// initialize the view
+$(document).ready(function() {
+  TrainingPlanner.init('<?php echo $url; ?>', <?php echo ($weeklyhours * 60); ?>, '<?php echo $usersport; ?>');
+});
+
+</script>
+
+<script type="text/javascript">
 	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 	</script>
@@ -144,10 +126,24 @@ echo $html->charset();
 	pageTracker._trackPageview();
 	} catch(err) {}
 
-// initialize the view
-$(document).ready(function() {
-	TrainingPlanner.init('<?php echo $url; ?>', <?php echo ($weeklyhours * 60); ?>, '<?php echo $usersport; ?>');
-});
 	</script>
+
+<script type="text/javascript" charset="utf-8">
+  var is_ssl = ("https:" == document.location.protocol);
+  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  var feedback_widget_options = {};
+
+  feedback_widget_options.display = "overlay";  
+  feedback_widget_options.company = "tricoretraining";
+  feedback_widget_options.placement = "left";
+  feedback_widget_options.color = "#222";
+  feedback_widget_options.style = "idea";
+  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+
 </body>
 </html>
