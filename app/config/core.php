@@ -71,7 +71,7 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
     	// Clemens' config
     	
     	Configure::write('App.serverUrl', '/trainer');
-    	Configure::write('App.uploadDir', 'C:\DRIVE_D\xampplite\xampplite\htdocs\trainer\app\webroot\files\\');
+    	Configure::write('App.uploadDir', 'D:\clemens\Documents\Projects\xampp\htdocs\trainer\app\webroot\files\\');
     	// Domain with protocol and NO trailing slash
     	Configure::write('App.hostUrl', 'http://localhost');
     

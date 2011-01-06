@@ -24,7 +24,7 @@ require '../../app/core/workouts/runworkout.class.php';
 require '../../app/core/renderers/workoutrenderer.class.php';
 
 class ProviderComponent extends Object {
-	var $components = array('Session');
+	var $components = array('Session', 'Unitcalc');
 	var $helpers = array('Session');
 	var $DB;
 	var $athlete;
@@ -100,7 +100,7 @@ class ProviderComponent extends Object {
 		
 		$workouts = array_merge($swimWorkouts, $bikeWorkouts, $runWorkouts);
 
-		$html = "<h1>Week " . $genWeek->format("d.m.Y") . " (" . $phase["phase"] . ")</h1>";
+		$html = "<h1>Week " . $this->Unitcalc->check_date($genWeek->format("Y-m-d")) . " (" . $phase["phase"] . ")</h1>";
 		$html .= WorkoutRenderer::render($workouts);
 		
 		// also attach time and workout settings
