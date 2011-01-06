@@ -16,6 +16,8 @@
  | 
 <?php } ?>
 
+<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>"><?php __('Blog'); ?></a>
+  |
 <?php if ( $locale != 'eng' || $locale == '' ) { ?>
 <?php echo $html->link(__('English', true),array('controller' => 'users', 'action' => 'change_language', 'code' => "eng")); ?>
 <?php } ?>

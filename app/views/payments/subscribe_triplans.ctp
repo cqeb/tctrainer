@@ -1,5 +1,5 @@
 
-                   <h1><?php __('Subscribe TriCoreTraining-memberships'); ?></h1>
+                   <h1><?php __('Subscribe TriCoreTraining PREMIUM membership'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 

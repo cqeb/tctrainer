@@ -17,9 +17,11 @@
 
      <h2><?php __('Next steps to use TriCoreTraining'); ?></h2>
      <ol>
-       <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/competitions/list_competitions"><?php __('Add your goals'); ?></a></li>
+       <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/competitions/list_competitions"><?php __('Define your goals'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingplans/view"><?php __('Study and fulfill your training schedule'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingstatistics/list_trainings"><?php __('Track your workouts'); ?></a></li>
+       <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingstatistics/statistics_whathaveidone"><?php __('Analyse your workouts'); ?></a></li>
+       <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/users/edit_traininginfo"><?php __('Optimize your settings'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl'); ?>/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/"><?php __('Read our FAQs and our blog'); ?></a></li>
      </ol>
 

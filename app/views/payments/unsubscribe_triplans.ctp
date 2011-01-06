@@ -1,5 +1,5 @@
 
-                   <h1><?php __('Subscribe triplans'); ?></h1>
+                   <h1><?php __('Unsubscribe PREMIUM'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 
@@ -41,7 +41,7 @@
 
                    <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
                    <br /><br />
-                   For Debugging (only localhost): PAYPAL - TEST
+                   For Debugging (only localhost): PAYPAL - TEST<br />
                    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=payment@tricoretraining.com" _fcksavedurl="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=payment@tricoretraining.com"><img border="0" src="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" /></a>
                    <br /><br />
                    <?php } ?> 

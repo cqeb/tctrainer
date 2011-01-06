@@ -2,7 +2,7 @@
 <?php if ( !$session_userid ) { ?>
         <li>&nbsp;</li>
         <li><?php echo $html->link(__('Home',true),array('controller' => 'starts', 'action' => 'index'))?></li>
-        <li><?php echo $html->link(__('Register',true),array('controller' => 'users', 'action' => 'register'))?></li>
+        <li><?php echo $html->link(__('Signup FREE',true),array('controller' => 'users', 'action' => 'register'))?></li>
         <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); ?></a></li>        
 <?php } ?>
  
@@ -38,9 +38,10 @@
 
 <?php } ?>
 <?php if ( $this->name == 'Payments' ) { ?>
-		    <li><?php echo $html->link(__('Subscribe',true),array('controller' => 'payments', 'action' => 'subscribe_triplans'))?></li>
+        <li><a href="/trainer/payments/subscribe_triplans"><b><?php __('Become PREMIUM'); ?></b></a></li>
+        <li>&nbsp;</li>
 		    <li><?php echo $html->link(__('Show payments',true),array('controller' => 'payments', 'action' => 'show_payments'))?></li>
-		    <li><?php echo $html->link(__('Cancel subscription',true),array('controller' => 'payments', 'action' => 'unsubscribe_triplans'))?></li>
+		    <li><?php echo $html->link(__('Cancel subscription' . ' :(',true),array('controller' => 'payments', 'action' => 'unsubscribe_triplans'))?></li>
 <?php } ?>
 <!--
         <li><?php echo $html->link(__('Prices & Register',true),array('controller' => 'users', 'action' => 'add_step1'))?></li>

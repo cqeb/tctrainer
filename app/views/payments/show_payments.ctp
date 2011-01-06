@@ -1,5 +1,5 @@
 
-                   <h1><?php __('Payments'); ?></h1>
+                   <h1><?php __('Show your payments'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 
@@ -38,6 +38,15 @@
                         <?php /** <td><?php echo $html->link('Delete', array('action' => 'delete', 'id' => $payment['Payment']['id']), null, 'Are you sure?' )?></td> **/ ?> 
                    </tr>
                    <?php endforeach; ?>
+                   <?php if ( count( $payments ) < 1 ) 
+                   {
+                   ?>
+                   <tr>
+                        <td></td><td colspan="4"><?php __('No payments available.'); ?></td>
+                   </tr>
+                   <?php  
+                   } 
+                   ?>
                    </table>
                     
                    <?php echo $paginator->numbers(); ?>
