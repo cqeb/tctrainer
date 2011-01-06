@@ -2,7 +2,8 @@
 <html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title><?php
-if ( isset( $distance ) ) 
+
+if ( isset( $distance ) && $distance != '' ) 
 {
   // facebook text
   $title = __('WOW', true) . ' - ' . $distance . ' ' . $distance_unit . ' ' . __($stype . ' workout', true) . ' ' . 
