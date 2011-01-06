@@ -23,7 +23,7 @@ else $users_class = 'main';
     <?php echo $html->link(__('Logbook',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'), array('class' => $trainingstatistics_class))?>
   </li>
   <li>
-    <?php echo $html->link(__('Sport goals',true),array('controller' => 'competitions', 'action' => 'list_competitions'), array('class' => $competitions_class))?>
+    <?php echo $html->link(__('Competitions',true),array('controller' => 'competitions', 'action' => 'list_competitions'), array('class' => $competitions_class))?>
   </li>
   <li>
     <?php echo $html->link(__('Settings',true),array('controller' => 'users', 'action' => 'edit_userinfo'), array('class' => $users_class))?>

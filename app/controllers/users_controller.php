@@ -782,7 +782,7 @@ class UsersController extends AppController {
           // save last_login date
           //$this->User->save($results);
           //$this->Session->setFlash(__('Logged in. Welcome.', true));
-          $this->redirect('/users/index');
+          $this->redirect('/trainingplans/view');
         }
 			} else
 			{

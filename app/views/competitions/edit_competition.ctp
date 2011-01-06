@@ -17,10 +17,8 @@
                    </div><br />
                    <?php } ?>
 
-                   <?php echo $html->link(__('Back to your competitions list',true),array('controller' => 'competitions', 'action' => 'list_competitions')); ?>
-
-                   <br /><br />
-                   <a href="http://www.trimapper.com" target="_blank"><?php __('Where are triathlons worldwide?'); ?></a>
+                   <!--<?php echo $html->link(__('Back to your competitions list',true),array('controller' => 'competitions', 'action' => 'list_competitions')); ?>-->
+                   <a href="http://www.trimapper.com" target="_blank">&raquo; <?php __('Where are triathlons worldwide?'); ?></a>
                    <br /><br />
 
 <?php
