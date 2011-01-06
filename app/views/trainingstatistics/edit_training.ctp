@@ -19,8 +19,7 @@
                    </div><br />
                    <?php } ?>
 
-                   <?php echo $html->link(__('Back to list of workouts',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null) ?>
-                   <br /><br />
+                   <!--<?php echo $html->link(__('Back to list of workouts',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null) ?>-->
 
 <?php
 
@@ -102,6 +101,20 @@ echo $form->input('avg_pulse',
                   'label' => __('Avg. heart rate', true)
 ));
 
+echo '<br />';
+
+/*
+echo $form->input('competition', array(
+                'label' => __('Competition',true), 
+                'type' => 'checkbox')
+                );
+*/
+
+echo $form->input('testworkout', array(
+                'label' => __('Testworkout',true), 
+                'type' => 'checkbox')
+                );
+
 echo $form->input('name',
                   array(
                   'before' => '',
@@ -115,20 +128,12 @@ echo $form->input('name',
                   'label' => __('Name for (test-) workout route', true)
 ));
 
-echo $form->input('testworkout', array(
-                'label' => __('Testworkout',true), 
-                'type' => 'checkbox')
-                );
-
-echo $form->input('competition', array(
-                'label' => __('Competition',true), 
-                'type' => 'checkbox')
-                );
-
 ?>
+<br />
 <a name="AF"></a>
 <!--<a href="#Save">Save only necessary data</a>-->
 
+<!--
 <hr />
 
 <h2><?php __('Optional data'); ?></h2>
@@ -136,13 +141,38 @@ echo $form->input('competition', array(
 <a href="#AF" onClick="javascript:show_layer();return false;"><?php __('Show advanced functions'); ?></a>
 
 <div id="layer_hidden">
+-->
 
+<?php
+
+$min_weight = $unitcalc->check_weight('40', 'single');
+$min_weight = $min_weight['amount'] . ' ' . $unit['weight'];
+$max_weight = $unitcalc->check_weight('150', 'single');
+$max_weight = $max_weight['amount'] . ' ' . $unit['weight'];
+//$max_weight = $unitcalc->check_weight('150', 'single') . ' ' . $unit['weight'];
+
+echo $form->input('weight',
+     array(
+     'before' => '',
+     'after' => '',
+     'between' => '',
+     'maxLength' => 5,
+     'error' => array( 
+             'numeric' => __('Enter your current weight',true),
+             'greater' => __('Must be at least',true) . ' ' . $min_weight,
+             'lower' => __('Must be lower than',true) . ' ' . $max_weight,
+             'notempty' => __('Enter your current weight',true)
+     ),
+     'label' => __('Weight', true) . ' (' . $unit['weight'] . ')'
+));
+
+?>
 <ul>
 <?php
 
-if ( isset( $data['avg_speed'] ) ) $avg_speed = $unitcalc->check_distance($data['avg_speed']);
+if ( isset( $data['avg_speed'] ) && $data['avg_speed'] > 0 ) $avg_speed = $unitcalc->check_distance($data['avg_speed']);
 
-if ( isset( $avg_speed['amount'] ) ) {
+if ( isset( $avg_speed['amount'] ) && $data['avg_speed'] > 0 ) {
    echo '<br /><br />';
    echo '<li>';
    __('AVG Speed'); 
@@ -150,14 +180,14 @@ if ( isset( $avg_speed['amount'] ) ) {
    echo '</li>'; 
 }
 
-if ( isset( $data['trimp'] ) ) {
+if ( isset( $data['trimp'] ) && $data['trimp'] > 0 ) {
    echo '<li>';
    __('TRIMP'); 
    echo ' ' . $data['trimp'];
    echo '</li>'; 
 }
  
-if ( isset( $data['kcal'] ) ) {
+if ( isset( $data['kcal'] ) && $data['kcal'] > 0 ) {
    echo '<li>';
    __('Burnt'); 
    echo ' ' . $data['kcal'] . ' ' . 'kcal';
@@ -166,9 +196,23 @@ if ( isset( $data['kcal'] ) ) {
 
 ?>
 </ul>
+
+<?php
+__('Comment');
+echo '<br />';
+echo $form->textarea('comment',
+                  array(
+                  'rows' => '5',
+                  'cols' => '45'
+           ));
+echo '<br /><br />';
+
+?>
+
+
 <?php
 
-/**
+/*
 echo $form->input('avg_pulse_zone1',
                   array(
                   'before' => '',
@@ -218,7 +262,6 @@ echo $form->input('avg_pulse_zone5',
                   'error' => array('wrap' => 'div', 'style' => 'color:red'),
                   'label' => __('Zone 5', true)
 ));
-**/
 
 $location_label = __('Location', true) . '<br />(' . __('City', true) . ', ' . __('Country', true) . ')';
 
@@ -237,43 +280,6 @@ echo $form->input('location',
 
 <?php
 
-$min_weight = $unitcalc->check_weight('40', 'single');
-$min_weight = $min_weight['amount'] . ' ' . $unit['weight'];
-$max_weight = $unitcalc->check_weight('150', 'single');
-$max_weight = $max_weight['amount'] . ' ' . $unit['weight'];
-//$max_weight = $unitcalc->check_weight('150', 'single') . ' ' . $unit['weight'];
-
-echo $form->input('weight',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 5,
-     'error' => array( 
-             'numeric' => __('Enter your current weight',true),
-             'greater' => __('Must be at least',true) . ' ' . $min_weight,
-             'lower' => __('Must be lower than',true) . ' ' . $max_weight,
-             'notempty' => __('Enter your current weight',true)
-     ),
-     'label' => __('Weight', true) . ' (' . $unit['weight'] . ')'
-));
-?>
-
-<?php
-
-__('Comment');
-echo '<br />';
-echo $form->textarea('comment',
-                  array(
-                  'rows' => '5',
-                  'cols' => '45'
-           ));
-echo '<br /><br />';
-
-?>
-
-<?php
-
 echo $form->input('workout_link',
      array(
      'before' => '',
@@ -289,7 +295,6 @@ echo $form->input('workout_link',
 <li><a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a></li>
 <li><a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a></li>
 </ul>
-
 
 <table border="0" width="100%">
 <tr>
@@ -368,15 +373,15 @@ echo $form->radio('conditions_mood',
 </table>
 
 <?php
-/**
+
 // TODO (B)
 echo $form->input('publish_community', array('label' => __('Publish to community',true), 'type' => 'checkbox'));
 echo $form->input('publish_facebook', array('label' => __('Publish to facebook',true), 'type' => 'checkbox'));
 echo $form->input('publish_twitter', array('label' => __('Publish to twitter',true), 'type' => 'checkbox'));
-**/
+*/
 
 ?>
-</div>
+<!--</div>-->
 
 <hr>
 

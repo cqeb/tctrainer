@@ -8,16 +8,16 @@
      <?php } ?>
 
      <div class="errorbox">
-     You haven't defined your sport goals. Do this first!
+     You haven't defined your competitions (goals). Do this first!
      <br /><br />
-     <button name="button" type="button" value="Define goals">Define goals</button>
+     <a href="/trainer/competitions/edit_competition"><button value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button></a>
      </div><br /> 
      
      <div class="clear"></div>
 
      <h2><?php __('Next steps to use TriCoreTraining'); ?></h2>
      <ol>
-       <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/competitions/list_competitions"><?php __('Define your goals'); ?></a></li>
+       <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/competitions/list_competitions"><?php __('Define your competitions (goals)'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingplans/view"><?php __('Study and fulfill your training schedule'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingstatistics/list_trainings"><?php __('Track your workouts'); ?></a></li>
        <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingstatistics/statistics_whathaveidone"><?php __('Analyse your workouts'); ?></a></li>

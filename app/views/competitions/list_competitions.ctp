@@ -12,9 +12,8 @@
                    </div><br />
                    <?php } ?>
 
-<?php                  
-echo $html->link(__('Add competition', true), array('action' => 'edit_competition'), null);  
-?>
+                   <a href="/trainer/competitions/edit_competition"><button value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button></a>
+
                    <br /><br />
 
                    <table>

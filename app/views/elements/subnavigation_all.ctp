@@ -17,7 +17,7 @@
 		    <li><?php echo $html->link(__('Track workouts',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'))?></li>
 		    <!--<li><?php echo $html->link(__('(Add training)',true),array('controller' => 'trainingstatistics', 'action' => 'edit_training'))?></li>-->
 		    <li>&nbsp;</li>
-		    <li><b><?php __('Statistics'); ?></b></li>
+		    <li style="padding-left: 15px;"><b><?php __('Statistics'); ?></b></li>
 		    <li><?php echo $html->link(__('How fit am I?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_trimp'))?></li>
 		    <li><?php echo $html->link(__('How fast am I?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_formcurve'))?></li>
 		    <li><?php echo $html->link(__('Can I finish the next competition?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_competition'))?></li>
