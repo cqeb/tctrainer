@@ -419,7 +419,7 @@ img.loader {
 }
 
 div.input.error {
-	height: 80px;
+	height: 100px;
 }
 
 #UserGenderM {
@@ -612,47 +612,32 @@ iframe#facebook {
 /**
  * status messages
  */
-.errorbox, .okbox, .statusbox, .error-message, .ok-message {
+.statusbox, .error-message {
 	padding: 10px;
 	border: 1px solid #999;
+	border-color: #C7B110;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;
-	color: white;
 	font-weight: bold;
-	text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+	background: #feec64;
+	color: #666;
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
 
-.error-message {
-	width: 180px;
-	margin-left: 120px;
-}
-
-.errorbox, .error-message {
+.statusbox.error, .error-message {
 	background: #ff8e66;
 	border-color: #A1603A;
 }
 
-.ok-message {
-  width: 180px;
-  margin-left: 120px;
+.error-message {
+	margin-top: 15px;
+	margin-bottom: 15px;	
+}
+
+.statusbox.ok {
   background: #b2ff65;
   border-color: #6D9452;
-}
-
-
-.statusbox {
-	background: #feec64;
-	border-color: #C7B110;
-	color: #666;
-	text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
-}
-
-.okbox {
-	background: #b2ff65;
-	border-color: #6D9452;
-	color: #666;
-	text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
 
 #sidebar ul {
