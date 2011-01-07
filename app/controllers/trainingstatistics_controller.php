@@ -551,7 +551,7 @@ if ( isset( $import_error ) && $import_error == '' )
  
                      $this->data['Trainingstatistic']['user_id'] = $session_userid;
 
-                     if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] != '' )
+                     if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] != '' && ( strtotime( $this->data['Trainingstatistic']['date'] ) > ( time() - 86400 * 7 ) ) )
                      { 
                           $saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
                           $saveweight = str_replace( ',', '.', $saveweight );

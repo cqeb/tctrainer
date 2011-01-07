@@ -12,6 +12,8 @@
 <?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?>
 -->
  | 
+<?php if ( isset ( $userobject ) ) { echo $userobject['firstname']; } ?>
+ | 
 <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout')); ?> 
  | 
 <?php } ?>

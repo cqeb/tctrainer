@@ -190,9 +190,14 @@ echo $form->input('rookie',
                   )
 ));
 
+$tos_link = '<a href="/blog/';
+if ( $locale == 'deu' ) $tos_link .= 'de/'; else $tos_link .= 'en/';
+$tos_link .= 'terms-of-service-2/" target="_blank">' .
+	__('Read our terms and conditions.',true) . '</a><br />';
+
 echo $form->input('tos',
                   array(
-                  'before' => __("You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
+                  'before' => $tos_link . __("You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
                   'after' => '',
                   'between' => '',
                   'legend' => false,
@@ -208,7 +213,6 @@ echo $form->input('tos',
 
 echo '<br /><br />';
 ?>
-<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 
 <?php
 echo '<br /><br />';
@@ -346,8 +350,11 @@ $this->js_addon .= <<<EOH
                return false;
 }
 
-function setwhrs() 
+function setwhrs(val) 
 {
+	  //alert(val);
+	  if ( val ) \$('#UserWeeklyhours').val(val);
+      
       if ( \$('#UserWeeklyhours').val() != '' )
       {
           var whrs = \$('#UserWeeklyhours').val();
@@ -366,7 +373,7 @@ $this->js_addon .= <<<EOH
 
 \$(document).ready(function() {
         var lth = parseInt( \$('#UserLactatethreshold').val() );
-        var mhr = parseInt( \$('#UserMaximumheartrate').val() );
+        //var mhr = parseInt( \$('#UserMaximumheartrate').val() );
         \$('#errorlth, #errorblth').hide();
 
         var zonestable = '';
@@ -377,6 +384,42 @@ $this->js_addon .= <<<EOH
                 zonestable = calculate_zones( lth );
                 \$('#zones').html(zonestable);
         }
+
+  /**
+	 * provide a basic number of weekly hours after
+	 * the user has selected a sport
+	 */
+	\$('#UserTypeofsport').change(function () {
+		var val;
+		switch (this.value) {
+			case 'TRIATHLON IRONMAN':
+			case 'RUN ULTRA':
+			case 'BIKE ULTRA':
+				val = 12;
+				break;
+			case 'TRIATHLON HALFIRONMAN':
+			case 'RUN MARATHON':
+			case 'DUATHLON MIDDLE':
+			case 'BIKE LONG':
+				val = 8;
+				break;
+			case 'TRIATHLON OLYMPIC':
+			case 'RUN HALFMARATHON':
+			case 'DUATHLON SHORT':
+			case 'BIKE MIDDLE':
+				val = 6;
+				break;
+			case 'TRIATHLON SPRINT':
+			case 'RUN 10K':
+			case 'BIKE SHORT':
+				val = 5;
+				break;
+			default:
+				val = 4;
+				break;
+		}
+		setwhrs(val);
+	});
 
         \$('#UserWeeklyhours').blur(setwhrs());
         
@@ -403,7 +446,7 @@ $this->js_addon .= <<<EOH
                    check_lth();
                 }
                 return false;
-  });
+  		});
 
         // facebox box
         \$('a[rel*=facebox]').facebox();

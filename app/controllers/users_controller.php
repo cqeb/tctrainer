@@ -36,23 +36,24 @@ class UsersController extends AppController {
 
 	function login()
 	{
-    if ( $this->Session->read('session_userid') ) 
-    {
-      $this->checkSession();
-      $this->redirect('/users/index');
-    } else
-    {
+	    if ( $this->Session->read('session_userid') ) 
+	    {
+	      $this->checkSession();
+	      $this->redirect('/trainingplans/view');
+
+	    } else
+	    {
 		  $this->pageTitle = __('Login', true);
 		  $this->set('error', false);
 
-		if ($this->data)
-		{
-      $this->User->set( $this->data );
+			if ($this->data)
+			{
+		      $this->User->set( $this->data );
+		
+		      if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
+		      { }
 
-      if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
-      { }
-
-      // check submitted email address against database
+      		// check submitted email address against database
 			$results = $this->User->findByEmail($this->data['User']['email']);
 
 			// is password valid?
@@ -85,8 +86,8 @@ class UsersController extends AppController {
 
 					// save last_login date
 					//$this->User->save($results);
-					$this->Session->setFlash(__('Logged in. Welcome.', true));
-					$this->redirect('/users/index');
+					//$this->Session->setFlash(__('Logged in. Welcome.', true));
+					$this->redirect('/trainingplans/view');
 				} else
 				{
 					// login data is wrong, redirect to login page
@@ -97,7 +98,7 @@ class UsersController extends AppController {
 			{
 				// login data is wrong, redirect to login page
 				$this->Session->setFlash(__('Wrong or non-existing e-mail or password. Please try again.', true));
-        // You must not redirect otherwise you won't see errors
+        		// You must not redirect otherwise you won't see errors
 				//$this->redirect('/users/login');
 			}
 		}
@@ -233,7 +234,7 @@ class UsersController extends AppController {
     if ( $this->Session->read('session_userid') ) 
     {
       $this->checkSession();
-      $this->redirect('/users/index');
+      $this->redirect('/trainingplans/view');
     }
     
     $this->pageTitle = __('Create your account', true);
@@ -1442,18 +1443,20 @@ class UsersController extends AppController {
 	{
 		$this->code = $this->params['named']['code'];
 
-    if ( $this->Session->read('session_userid') )
-    {
-          $this->User->id = $this->Session->read('session_userid');
-          $this->User->savefield('yourlanguage', $this->code, false);
-    }
+	    if ( $this->Session->read('session_userid') )
+	    {
+	          $this->User->id = $this->Session->read('session_userid');
+	          $this->User->savefield('yourlanguage', $this->code, false);
+	    }
 
 		$this->Session->write('Config.language', $this->code);
 		$this->Session->setFlash(__('Language changed.',true));
+
 		if ( $this->referer() ) 
 		    $this->redirect($this->referer());
-    else 
-        $this->redirect(array('action'=>'index'));
+	    else 
+	        $this->redirect(array('action'=>'index'));
+
 	}
 
 /**
@@ -1467,9 +1470,9 @@ class UsersController extends AppController {
 
 	function check_notifications()
 	{
-    $this->layout = 'plain';
-    // Sun = 0
-    $check_on_day = 0;
+	    $this->layout = 'plain';
+	    // Sun = 0
+	    $check_on_day = 0;
     
 		$sql = "SELECT * FROM users";
 		$results = $this->User->query($sql);
@@ -1478,20 +1481,20 @@ class UsersController extends AppController {
 		{
 			$user = $results[$i]['users'];
 
-      echo $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . '<br /><br />';
+      		echo $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . '<br /><br />';
       
 			// check last training - if older than 10 days - reminder!
 			if ( $user['deactivated'] == 0 && $user['activated'] == 1 && ( date('w', time()) == $check_on_day ) && $user['notifications'] != 1 ) 
 			         $this->_check_lasttraining( $user );
 
-      if ( date('w', time()) == $check_on_day )
+      		if ( date('w', time()) == $check_on_day )
                $this->_check_more( $user );
               
 			if ( $user['level'] == 'freemember' && $user['notifications'] != 1 )
 			{
 				// if freemember remind him/her of premiumservice
 				$payed_to = strtotime( $user['payed_to'] );
-        //echo $user['payed_to'] . ' ' . date('w', time()) . '<br /><br />';
+        		//echo $user['payed_to'] . ' ' . date('w', time()) . '<br /><br />';
 				// from 1 week to end remind user of premium service
 				if ( ( time() > ( $payed_to - ( 86400 * 7 ) ) ) && ( date('w', time()) == $check_on_day ) ) 
 				{
@@ -1565,8 +1568,8 @@ class UsersController extends AppController {
       } 
       //else
       // that's ok - kms
-      if ( 1 == 1 && $user['notifications'] != 1 ) {   
-
+      if ( $user['notifications'] != 1 ) 
+      {   
           // check name + address
           if ( !$u['firstname'] ) 
             $text_for_mail .= '<li>' . __('Your firstname is missing!',true) . ' ' . __('Please add it to your profile.', true) .
@@ -1632,25 +1635,6 @@ class UsersController extends AppController {
               Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
           }
           
-          // check for recommendations
-          // TODO (B) not yet implemented
-    /**
-          if ( !$u['recommendation'] )
-          { 
-              $text_for_mail .= __('Please recommend our service! Get a free trainingmonth.', true) . '[LINK].', true);
-              $text_for_mail .= '<br />';
-          }
-    **/
-          
-          // check for medical limitations
-          if ( $u['tos'] == '0')
-          { 
-              $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
-              " " . '<a href="' . Configure::read('App.hostUrl') . 
-              Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
-              "</li>\n";
-          }
-          
           //echo $u['targetweight']; echo $u['targetweightdate'];
           
           // check for target weight
@@ -1701,100 +1685,68 @@ class UsersController extends AppController {
               Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
               "</li>\n";
           }   
-    
-          if ( 
-            ( ( strtotime( $u['created'] ) + (86400*5) ) < time() ) && 
-            ( ( strtotime( $u['created'] ) + (86400*25) ) > time() ) && 
-            $u['activated'] != '1' )
-          {
-              $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
-          }   
-    
-          if ( ( strtotime( $u['payed_to'] ) < time() ) && $u['level'] != 'freemember' )
-          {
-              // set level = paymember
-              $this->User->id = $u['id'];
-              $this->User->savefield('level', 'freemember', false);
-              $text_for_mail .= '<li>' . __('Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please', true) . ' ' .
-                '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "</li>\n";
-          }
-    
-          if ( $text_for_mail )
-          {
-              $mailsubject = __('TriCoreTraining informs you.', true);
-              $template = 'standardmail';
-              $content = __('This TriCoreTraining message comes to you because some information in your profile is missing.', true) . 
-              '<br />' . '<ol>' . $text_for_mail . '</ol>';
-              //echo $content . '<br /><br />';
-    
-              $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
-          } 
-      
+
       } 
 
+      // check for recommendations
+      // TODO (B) not yet implemented
 /**
- * id  
- ** firstname            // check for given name + address (1)   
- ** lastname  
- ** gender  
- * phonemobile   
- * address   
- * zip   
- * city  
- * country   
- ** email   
- ** emailcheck  
- ** birthday             // check for given birthday (2) 
- ** password  
- ** passwordcheck   
- * maximumheartrate  
- ** lactatethreshold     // check for lactatethreshold (3)  
- * youknowus   
- * newsletter  
- * mytrainingsphilosophy   
- * myrecommendation     // PRIO B check for recommendation (4)
- ** typeofsport   
- * tos   // check for medical limitations (5) 
- * weight               // check for target weight 
- * targetweight  
- * targetweightcheck   
- * targetweightdate  
- * height  
- ** coldestmonth  
- ** unit  
- ** unitdate  
- * publicprofile   
- * publictrainings   
- * rookie               // check for rookie (how long been)? (6) 
- * traininglevel   
- ** weeklyhours          // enough for sport? (7) 
- ** dayofheaviesttraining   
- * activated           // still not activated (7a)    
- * deactivated          // do not check   
- ** yourlanguage  
- * myimage   
- * mybike  
- ** level                // free? take advantage from our great premium services?
- * payed_from  
- * payed_to              // if payed_to is reached - set level to freemember (8) 
- * canceled               
- * cancellation_reason  
- * created   
- * modified
+      if ( !$u['recommendation'] )
+      { 
+          $text_for_mail .= __('Please recommend our service! Get a free trainingmonth.', true) . '[LINK].', true);
+          $text_for_mail .= '<br />';
+      }
 **/
+      
+      // check for medical limitations
+      if ( $u['tos'] == '0')
+      { 
+          $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
+          " " . '<a href="' . Configure::read('App.hostUrl') . 
+          Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
+          "</li>\n";
+      }
+
+      if ( 
+        ( ( strtotime( $u['created'] ) + (86400*5) ) < time() ) && 
+        ( ( strtotime( $u['created'] ) + (86400*25) ) > time() ) && 
+        $u['activated'] != '1' )
+      {
+          $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
+      }   
+
+      if ( ( strtotime( $u['payed_to'] ) < time() ) && $u['level'] != 'freemember' )
+      {
+          // set level = paymember
+          $this->User->id = $u['id'];
+          $this->User->savefield('level', 'freemember', false);
+          $text_for_mail .= '<li>' . __('Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please', true) . ' ' .
+            '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "</li>\n";
+      }
+
+      if ( $text_for_mail )
+      {
+          $mailsubject = __('TriCoreTraining informs you.', true);
+          $template = 'standardmail';
+          $content = __('This TriCoreTraining message comes to you because some information in your profile is missing.', true) . 
+          '<br />' . '<ol>' . $text_for_mail . '</ol>';
+          //echo $content . '<br /><br />';
+
+          $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
+      } 
   
 	}
 
 	function _sendMail($user, $subject, $template, $content = '', $language = 'eng', $to_user = '' )
 	{
-	  if ( $language ) Configure::write('Config.language',$language);
+	  	if ( $language ) Configure::write('Config.language',$language);
     
-    if ( isset( $user['User'] ) ) $user = $user['User'];
+    	if ( isset( $user['User'] ) ) $user = $user['User'];
     
-    if ( !isset($to_user['email']) ) $to_user['email'] = $user['email'];
-    if ( !isset($to_user['email']) ) $to_user['email'] = $user['User']['email'];
-    if ( !isset($to_user['name']) ) $to_user['name'] = $user['firstname'];
-    if ( !isset($to_user['name']) && isset( $user['User'] ) ) $to_user['name'] = $user['User']['firstname'];
+	    if ( !isset($to_user['email']) ) $to_user['email'] = $user['email'];
+	    if ( !isset($to_user['email']) ) $to_user['email'] = $user['User']['email'];
+	    if ( !isset($to_user['name']) ) $to_user['name'] = $user['firstname'];
+	    if ( !isset($to_user['name']) && isset( $user['User'] ) ) $to_user['name'] = $user['User']['firstname'];
 
 		$this->Email->to = $to_user['email'];
 		$this->Email->replyTo = Configure::read('App.mailFrom');
@@ -1804,10 +1756,9 @@ class UsersController extends AppController {
 		//Set view variables as normal
 		if ( isset( $to_user['name'] ) ) $this->set('to_name', $to_user['name']);
 		$this->set('user', $user);
-    //$this->set('content', $content);
-    $this->set('mcontent', $content);
+	    //$this->set('content', $content);
+	    $this->set('mcontent', $content);
 
-		//echo $template;
 		$this->Email->template = $template; // note no '.ctp'
 
 		//Send as 'html', 'text' or 'both' (default is 'text')
@@ -1828,16 +1779,16 @@ class UsersController extends AppController {
         'client'=>'smtp_helo_hostname'
         );
 
-    /* Set delivery method */
-    $this->Email->delivery = 'smtp';
-    /* Do not pass any args to send() */
-    $this->Email->send();
-    /* Check for SMTP errors. */
-    $this->set('smtperrors', $this->Email->smtpError);
-    $this->set('mailsend', 'mail sent');
-
-    // TODO (B) maybe later to prevent spam-suspicion
-    //sleep(5); 
+	    /* Set delivery method */
+	    $this->Email->delivery = 'smtp';
+	    /* Do not pass any args to send() */
+	    $this->Email->send();
+	    /* Check for SMTP errors. */
+	    $this->set('smtperrors', $this->Email->smtpError);
+	    $this->set('mailsend', 'mail sent');
+	
+	    // TODO (B) maybe later to prevent spam-suspicion
+	    //sleep(5); 
 	}
 }
 

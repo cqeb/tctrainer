@@ -1,5 +1,5 @@
 
-     <h1><?php __('TriCoreTraining Dashboard'); ?></h1>
+     <h1><?php __('TriCoreTraining'); ?></h1>
 
      <?php if ($session->check('Message.flash')) { ?>
      <div class="<?php echo $statusbox; ?>">
@@ -7,11 +7,13 @@
      </div><br />
      <?php } ?>
 
+<!--
      <div class="errorbox">
      You haven't defined your competitions (goals). Do this first!
      <br /><br />
      <a href="/trainer/competitions/edit_competition"><button value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button></a>
      </div><br /> 
+-->
      
      <div class="clear"></div>
 
@@ -26,25 +28,8 @@
      </ol>
 
      <h2><?php __('Referral'); ?></h2>
-<?php
-$referral_text[] = __('TriCoreTraining sped up my Half-Ironman time from 06:30 to 05:30 hours. It is awesome. Thanks.', true);
-$referral_name[] = 'Klaus-M. Schremser, 35 ys';
-$referral_email[] = 'km.schremser@gentics.com';
+	 <?php echo $this->element('referral'); ?>
 
-$referral_text[] = __('10:45 for Ironman in Carinthia was the goal and TriCoreTraining helped me to achieve it. Thank you.', true);
-$referral_name[] = 'Clemens Prerovsky, 30 ys';
-$referral_email[] = 'c.prerovsky@gmail.com';
-
-$count_referrals = count( $referral_text ) - 1;
-$rand_number = rand( 0, $count_referrals );
-
-echo '<span style="width:50px;"><i>"' . 
-    $referral_text[$rand_number] . '"</i></span><br /><br />';
-echo '<span style="width:50px;"><img border="0" alt="' . $referral_name[$rand_number] . '" src="http://0.gravatar.com/avatar/' . 
-    md5( $referral_email[$rand_number] ) . '?s=69&d=identicon" /></span>';
-     
-
-?>
      <div class="clear"></div>
 
 <?php

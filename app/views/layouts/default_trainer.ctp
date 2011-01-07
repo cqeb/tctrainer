@@ -82,9 +82,8 @@
 <?php } ?>
 -->
 			
-			<div class="box last">
-				<?php echo $this->element('rightbar'); ?>
-	      	</div>
+			<?php echo $this->element('rightbar'); ?>
+
 		</div>
 		<!-- /Right column -->
 	</div>

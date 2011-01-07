@@ -17,10 +17,10 @@
   */
 class AppController extends Controller {
 
-	   var $components = array('Session', 'RequestHandler');
+	   	var $components = array('Session', 'RequestHandler');
 
-	   function beforeFilter()
-     {
+	   	function beforeFilter()
+     	{
 
             if ( $this->Session->read('Config.language') )
                 Configure::write('Config.language',$this->Session->read('Config.language'));
@@ -91,8 +91,8 @@ class AppController extends Controller {
 
      function checkSession()
      {
-	          // fill $username with session data
-	          $session_useremail = $this->Session->read('session_useremail');
+	        // fill $username with session data
+	        $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');
 
             // if not in session - read cookie

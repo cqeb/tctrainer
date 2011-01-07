@@ -11,9 +11,10 @@ if ( isset( $distance ) && $distance != '' )
   echo $title;
 } else
 {
-?>
-TriCoreTraining.com <?php echo $title_for_layout;
+	
+	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
 }
+
 ?></title>
     <?php $url = Configure::read('App.serverUrl'); echo $html->charset(); ?>
     <?php echo $html->meta('icon'); ?>

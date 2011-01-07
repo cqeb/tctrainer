@@ -27,7 +27,7 @@ class StartsController extends AppController {
 	{
 
       if ( $this->Session->read('session_userid') )
-            $this->redirect('/users/index');
+            $this->redirect('/trainingplans/view');
       
       $this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
 

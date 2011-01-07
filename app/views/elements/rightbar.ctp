@@ -1,10 +1,14 @@
+<div class="box">
+<b><?php __('Hot News'); ?></b>
+<br /><br />
+<a href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('Become PREMIUM'); ?></b></a>
+<br />
+<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
+</div>
+
+<div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
 <b><?php __('Recommendation'); ?></b>
 <br /><br />
-<ul>
-<li><a href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('Become PREMIUM'); ?></b></a></li>
-<li><a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a></li>
-</ul>
-
 
 <script type="text/javascript"><!--
 /* Sidebar - rechts 2 */
@@ -29,11 +33,15 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 -->
    
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-<br /><br /><br />
+</div>
+<div class="box last">
 <b>Debugging (only localhost)</b>
+<br /><br />
 <ul>
         <li><a href="<?php echo Configure::read('App.serverUrl'); ?>/app/webroot/flash.php">(<?php __('Graphs'); ?>)</a></li>
         <li><a href="/phpmyadmin/">(<?php __('PHPMyAdmin'); ?>)</a></li>
         <li><a href="/trainer/starts/fill_my_database">(<?php __('Fill my database'); ?>)</a></li>
 </ul>
 <?php } ?>
+
+</div>
