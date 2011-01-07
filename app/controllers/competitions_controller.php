@@ -235,7 +235,6 @@ list all competitions with paging
                if ( $error == "" )
                {
                     $this->Provider->smartPurgeOnSave(
-                    	"SAVE", 
                     	$this->data["Competition"]["competitiondate"]["year"] . '-' . $this->data["Competition"]["competitiondate"]["month"] . '-' . $this->data["Competition"]["competitiondate"]["day"],
                     	$this->data["Competition"]["sportstype"]
                     );

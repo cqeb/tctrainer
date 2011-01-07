@@ -221,7 +221,7 @@ class ProviderComponent extends Object {
 		}
 		
 		// it seems all checks failed, so we have to purge
-		return $this->purge($date);
+		return $this->purge();
 	}
 	
 	/**
@@ -237,7 +237,7 @@ class ProviderComponent extends Object {
 			WHERE competitiondate > NOW()
 			AND competitiondate < (
 				SELECT competitiondate FROM competitions
-				WHERE id = $id 
+				WHERE id = " . intval($id) . " 
 			)
 			AND user_id = " . $this->athlete->getId());
 		if (array_key_exists('c', $r) && $r['c'] > 0) {
@@ -245,25 +245,23 @@ class ProviderComponent extends Object {
 			return false;
 		}
 		
-		$r = $this->DB->query("SELECT competitiondate d FROM competitions
-			WHERE id = $id");
-		
 		// it seems all checks failed, so we have to purge
-		return $this->purge($r[0]['d']);
+		return $this->purge();
 	}
 	
 	/**
 	 * internal purge function which will wipe the mesocycle and trainings
 	 * only meant to be called from Provider::smartPurge()
 	 */
-	private function purge($date) {
-		$this->DB->query("DELETE FROM mesocyclephases WHERE date >= NOW() 
+	private function purge() {
+		$date = DateTimeHelper::getWeekStartDay(new DateTime())->format("Y-m-d");
+		$this->DB->query("DELETE FROM mesocyclephases WHERE date >= $date 
 			AND athlete_id = " . $this->athlete->getId());
-		$this->DB->query("DELETE FROM scheduledtrainings WHERE week >= NOW() 
+		$this->DB->query("DELETE FROM scheduledtrainings WHERE week >= $date 
 			AND athlete_id = " . $this->athlete->getId());
-		$this->DB->query("DELETE FROM trirunworkouttypesequence WHERE week >= NOW() 
+		$this->DB->query("DELETE FROM trirunworkouttypesequence WHERE week >= $date 
 			AND athlete_id = " . $this->athlete->getId());
-		$this->DB->query("DELETE FROM tribikeworkouttypesequence WHERE week >= NOW() 
+		$this->DB->query("DELETE FROM tribikeworkouttypesequence WHERE week >= $date 
 			AND athlete_id = " . $this->athlete->getId());
 		return true;
 	}
