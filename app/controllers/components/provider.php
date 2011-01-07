@@ -45,7 +45,7 @@ class ProviderComponent extends Object {
 	 */
 	public function getPlan() {
 		if (!$this->athlete->isValid()) {
-			return '<div class="statusbox errorbox">' .
+			return '<div class="errorbox">' .
 				__("Sorry, you are not eligible to receive training plans as your premium membership has expired or you resigned our terms and conditions.", true) . 
 				'</div>' . 
 				"<script type=\"text/javascript\">
