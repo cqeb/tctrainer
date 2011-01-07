@@ -107,7 +107,7 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
       // rename this variable
       Configure::write('App.serverUrl', '/trainer');
       // Domain with protocol and NO trailing slash
-      Configure::write('App.hostUrl', 'http://www.tricoretrainig.com');
+      Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
       Configure::write('App.uploadDir', '/var/www/trainer/app/webroot/files/');
 
     /**
