@@ -381,8 +381,6 @@ HEADBLOC;
 
 This is the body of the message
 
-This email was sent using the CakePHP Framework, http://cakephp.org.
-
 
 TEXTBLOC;
 
@@ -396,7 +394,6 @@ TEXTBLOC;
 
 <body>
 	<p> This is the body of the message</p><p> </p>
-	<p>This email was sent using the <a href="http://cakephp.org">CakePHP Framework</a></p>
 </body>
 </html>
 
@@ -431,7 +428,6 @@ HTMLBLOC;
 
 <body>
 	<p> This is the body of the message</p><p> </p>
-	<p>This email was sent using the CakePHP Framework</p>
 </body>
 </html>
 
@@ -449,8 +445,6 @@ HTMLBLOC;
 This element has some text that is just too wide to comply with email
 standards.
 This is the body of the message
-
-This email was sent using the CakePHP Framework, http://cakephp.org.
 
 
 TEXTBLOC;
