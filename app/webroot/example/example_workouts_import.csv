@@ -1,0 +1,4 @@
+Date (YYYY-MM-DD / DD.MM.YYYY);Sport (RUN/BIKE/SWIM);Distance (km/mi);Duration (HH:MM:SS);Avg. heart rate;Testworkout (Yes/No);Name of (Test-)Workout;Weight (kg/lbs);Comment (no breaks!)
+2010-09-14;RUN;10;01:01:00;136;Yes;Run Workout;80.0;
+2010-09-15;RUN;5;00:25:49;159;No;Run Workout;80.5;
+2010-09-17;BIKE;20;01:10:00;136;No;Bike tour ;79.5;
