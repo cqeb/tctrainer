@@ -13,11 +13,6 @@
                    </div><br />
                    <?php } ?>
 
-<!--
-<?php __('Passwort-Strength') ?> <div id="passwordStrengthDiv" class="is0"></div>
-<br /><br />
--->
-
 <?php
 
 echo $form->input('password',
@@ -62,7 +57,7 @@ if ($form->isFieldError('passwordcheck')){
 **/
 
 ?>
-<div class="error-message" id="PWNotMatch"><?php if ( isset( $errormessage ) ) { echo $errormessage; } ?></div>
+<div class="statusbox error" id="PWNotMatch"><?php if ( isset( $errormessage ) ) { echo $errormessage; } ?></div>
 
 <br />
 <?php
@@ -197,14 +192,14 @@ if ( !isset( $errormessage ) )
 
                 if ( val1 == val2 ) {
                    \$('#PWNotMatch').html(pwokmessage);
-                   \$('#PWNotMatch').removeClass("error-message");
-                   \$('#PWNotMatch').addClass("ok-message");
+                   \$('#PWNotMatch').removeClass("statusbox error");
+                   \$('#PWNotMatch').addClass("statusbox ok");
                    \$('#UserPasswordcheck').val("1");
                    return true;
                 } else {
                    \$('#PWNotMatch').html(pwerrormessage);
-                   \$('#PWNotMatch').removeClass("ok-message");
-                   \$('#PWNotMatch').addClass("error-message");
+                   \$('#PWNotMatch').removeClass("statusbox ok");
+                   \$('#PWNotMatch').addClass("statusbox error");
                    \$('#UserPasswordcheck').val("0");
     	           return false;
                 }

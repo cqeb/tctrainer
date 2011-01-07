@@ -389,8 +389,6 @@ echo $form->input('publish_twitter', array('label' => __('Publish to twitter',tr
 ?>
 <!--</div>-->
 
-<hr>
-
 <?php
 /** not finished **/
 echo $form->hidden('avg_speed');

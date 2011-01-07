@@ -1,8 +1,10 @@
 <div class="box">
 <b><?php __('Hot News'); ?></b>
 <br /><br />
+<?php if ( $session_userid ) { ?>
 <a href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('Become PREMIUM'); ?></b></a>
 <br />
+<?php } ?>
 <a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
 </div>
 

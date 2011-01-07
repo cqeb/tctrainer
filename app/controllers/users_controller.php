@@ -919,11 +919,11 @@ class UsersController extends AppController {
     
 		$statusbox = 'statusbox_none';
 		$targetweighterror = '';
-    $additional_message = '';
+    	$additional_message = '';
     
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
-    //pr($this->Session->read('userobject'));
+    	$this->User->id = $session_userid;
+    	//pr($this->Session->read('userobject'));
 
 		if ( empty($this->data) )
 		{
@@ -937,7 +937,7 @@ class UsersController extends AppController {
     			if ( isset( $this->data['User']['targetweight'] ) )
     			       $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
     		
-    } else 
+    	} else 
 		{
   			// check decimal + convert metric to save
   			if ( isset( $this->data['User']['weight'] ) )
@@ -1208,60 +1208,60 @@ class UsersController extends AppController {
 		$statusbox = 'statusbox_none';
 
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
+    	$this->User->id = $session_userid;
 
 		if (empty($this->data))
 		{
 			$this->data = $this->User->read();
 			$this->set('UserID', $this->User->id);
-      $this->data['User']['password'] = '';
-      $this->data['User']['passwordapprove'] = '';
+      		$this->data['User']['password'] = '';
+      		$this->data['User']['passwordapprove'] = '';
       
 		} else
 		{
-      $this->User->set($this->data);
-      /**
-      if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
-      { }
-      **/
-      
-      $save_pw = $this->data['User']['password'];
-      
-      if ( !$this->data['User']['password'] || !$this->data['User']['passwordapprove'] ||
-           $this->data['User']['password'] != $this->data['User']['passwordapprove'] )
-      {      
-          $this->set('errormessage', __('No passwords entered or passwords do not match!', true) );
-      } else
-      {
-          $this->data['User']['password'] = md5($this->data['User']['password']);
-          $this->data['User']['passwordcheck'] = 1;
-    
-    			if ($this->User->save( $this->data, array(
-             'validate' => true,
-             'fieldList' => array(
-             'password', 'passwordcheck'
-             ) ) ) )
-             {
-             	  $this->Session->setFlash(__('New password saved.',true));
-             	  $statusbox = 'statusbox ok';
-                $this->data['User']['password'] = '';
-                $this->data['User']['passwordapprove'] = '';
-                
-             } else
-             {
-                $this->data['User']['password'] = $save_pw;
-    
-                //pr($this->User->validationErrors);
-                
-             	  $statusbox = 'statusbox error';
-             	  $this->Session->setFlash(__('Some errors occured.',true));
-             }
-      }
-    }
+	      $this->User->set($this->data);
+	      /**
+	      if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
+	      { }
+	      **/
+	      
+	      $save_pw = $this->data['User']['password'];
+	      
+	      if ( !$this->data['User']['password'] || !$this->data['User']['passwordapprove'] ||
+	           $this->data['User']['password'] != $this->data['User']['passwordapprove'] )
+	      {      
+	          $this->set('errormessage', __('No passwords entered or passwords do not match!', true) );
+	      } else
+	      {
+	          $this->data['User']['password'] = md5($this->data['User']['password']);
+	          $this->data['User']['passwordcheck'] = 1;
+	    
+	    			if ($this->User->save( $this->data, array(
+	             'validate' => true,
+	             'fieldList' => array(
+	             'password', 'passwordcheck'
+	             ) ) ) )
+	             {
+	             	  $this->Session->setFlash(__('New password saved.',true));
+	             	  $statusbox = 'statusbox ok';
+	                $this->data['User']['password'] = '';
+	                $this->data['User']['passwordapprove'] = '';
+	                
+	             } else
+	             {
+	                $this->data['User']['password'] = $save_pw;
+	    
+	                //pr($this->User->validationErrors);
+	                
+	             	  $statusbox = 'statusbox error';
+	             	  $this->Session->setFlash(__('Some errors occured.',true));
+	             }
+	      }
+	    }
 		$this->set('statusbox', $statusbox);
 	}
 
-  /** protect method by adding _ in front of the name **/
+  	/** protect method by adding _ in front of the name **/
 	function _save_file($file, $userid, $type = "image", $addthis = "")
 	{
 		//$num_args = func_num_args();
@@ -1349,7 +1349,7 @@ class UsersController extends AppController {
 
 		$this->Email->to = $User['User']['email'];
 		//$this->Email->bcc = array('secret@example.com');
-		$this->Email->subject = __('TriCoreTraining.com registration',true);
+		$this->Email->subject = __('TriCoreTraining registration',true);
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 

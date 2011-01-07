@@ -114,7 +114,10 @@ if ( $searchfilter && count($testworkoutsfilter) > 0 )
 
 <div id="my_chart1"></div>
 
-<?php if ( $userobject['advanced_features'] ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
+
 <a href="<?php echo $jsonurl.'searchfilter:' . $searchfilter . '/type:' . $sportstype . '/start:' . $start . '/end:' . $end; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 

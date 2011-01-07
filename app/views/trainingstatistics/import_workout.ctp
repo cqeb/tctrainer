@@ -27,13 +27,13 @@ if ( !isset( $newimportfile ) )
   
     __('Upload a CSV-file - you can save an Excel-file in this format.');
 
-    echo ' '; //'<br /><br />';
+    echo '<br /><br />';
     
     echo '<a href="/trainer/example/example_workouts_import.xls" target="_blank">&raquo; ';
     __('Here you can download an example Excel file for you.');
     echo '</a>';
         
-    echo '<br /><br />';
+    echo '<br /><br /><br />';
     
     echo $form->file('import_csv_upload');
     

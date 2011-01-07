@@ -74,7 +74,10 @@ echo $ofc->createflash('my_chart4','680','400',$jsonurl.'type:weight/start:' . $
 
 <div id="my_chart4"></div>
 
-<?php if ( $userobject['advanced_features'] ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
+
 <a target="_blank" href="<?php echo $jsonurl.'type:weight/start:' . $start . '/end:' . $end; ?>"><?php echo $jsonurl; ?></a>
 <?php } ?>
 

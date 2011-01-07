@@ -234,7 +234,9 @@ if ( count( $trainings ) > 0 )
 
 <div id="my_chart1"></div>
 
-<?php if ( $userobject['advanced_features'] ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl.'type:distance/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
@@ -259,7 +261,9 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' .
 
 <div id="my_chart2"></div>
 
-<?php if ( $userobject['advanced_features'] ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 

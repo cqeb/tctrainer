@@ -137,6 +137,16 @@ $price12pm['USD'] = '11.66';
 </tbody>
 </table>
 
+<?php
+
+__('Signup FREE and get training plans for triathlon, biking and running for 1 month FREE. Then you can upgrade to PREMIUM for less than 3 coffees a month!');
+
+?>
+<br /><br />
+<a href="/trainer/users/register"><button value="<?php __('Signup FREE'); ?>"><?php __('Signup FREE'); ?></button></a>
+
+<!--
+
 <img alt="<?php __('PAYPAL - secure payment solutions'); ?>" src="<?php echo Configure::read('App.serverUrl'); ?>/img/paypal_logo.gif" />
 
 <?php __('What is PAYPAL? It is a reputable and well-known payment solution provider (owned by e-Bay) and provides creditcard/payment
@@ -145,6 +155,7 @@ and provide these confidential data only to PAYPAL and NOT to us (we only receiv
 <br /><br />
 <?php __('Your trial period will be added if you subscribe to a PREMIUM membership.'); ?>
 <br />
+-->
 
                 </fieldset>
 

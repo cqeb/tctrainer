@@ -9,14 +9,6 @@ class StartsController extends AppController {
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session'); // 'TabDisplay',
 	var $components = array('Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Filldatabase');
 
-	/**
-  var $paginate = array(
-       'User' => array(
-                'limit' => 15
-		)
-	);
-  **/
-  
 	function beforeFilter()
 	{
   		parent::beforeFilter();
@@ -57,15 +49,18 @@ class StartsController extends AppController {
   function features()
   {
     $this->layout = 'default_trainer';
-
+	$this->set('statusbox', 'statusbox');
   }
 
   function fill_my_database()
   {
       $this->checkSession();
-      
-      $this->autoRender = false;            
-      $this->Filldatabase->prefill($this->Start);      
+	  $userobject = $this->Session->read('userobject');
+      if ( isset( $userobject['advanced_features'] ) && $userobject['advanced_features'] == 1 )
+	  {
+		      $this->autoRender = false;            
+		      $this->Filldatabase->prefill($this->Start);
+	  }      
   }
 }
 ?>

@@ -144,17 +144,23 @@ class UnitcalcComponent extends Object {
               $session_userobject = $this->Session->read('userobject');
               if (  $session_userobject['unit'] == 'imperial' )
               {
-                 if ( $mode == 'show' ) $convert = 'cm_ft';
-                 else
+                 if ( $mode == 'show' ) 
+                 {
+                 	$convert = 'cm_ft';
+					$amount = $this->convert_metric( $amount, $convert );
+                 } else
                      $convert = 'ft_cm';
 
-                  //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  $amount_array['amount'] = $amount;
+                  $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  //$amount_array['amount'] = $amount;
                   $amount_array['unit'] = 'ft';
               } else
               {
-                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  else $amount_array['amount'] = $amount;
+                  if ( $mode == 'show' ) 
+                  		$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  else 
+                  		$amount_array['amount'] = $amount;
+                  
                   $amount_array['unit'] = 'cm';
               }
 
@@ -386,8 +392,14 @@ class UnitcalcComponent extends Object {
 
                       case "yyyymmdd":
                       $date_split = split( '-', $date );
-                      // in case you get a wrong format
-                      $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
+                      if ( count( $date_split ) == 3 )
+					  {
+	                      // in case you get a wrong format
+	                      $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
+					  } else
+					  {
+					  		$return = 0;
+					  }
                       //$return = $date;
                       break;
                }

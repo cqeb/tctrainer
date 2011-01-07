@@ -980,22 +980,26 @@ if ( isset( $import_error ) && $import_error == '' )
             $end   = $season['end'];
             $end = date( 'Y-m-d', time() );
 
-/**
-            if ( empty( $this->data['Trainingstatistic'] ) )
-            {
-               $start = $season['start'];
-               $end   = $season['end'];
-            } else
-            {
-               $start = $start['year'] . '-' . $start['month'] . '-' . $start['day'];
-               $end = $end['year'] . '-' . $end['month'] . '-' . $end['day'];
-            }
-**/
             $sportstype = $this->data['Trainingstatistic']['sportstype'];
+
+            $sql = "SELECT max(week) as maxdate FROM scheduledtrainings WHERE " . 
+                "athlete_id = $session_userid AND ";
+            if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
+            $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY maxdate ASC";
+            $start_tp = $this->Trainingstatistic->query( $sql );
+
+			//pr( $start_tp );
+			// if your training plans start later than tracking - you have to re-set the start date
+			if ( count( $start_tp ) > 0 )
+			{
+				$maxstart = $start_tp[0][0]['maxdate'];
+				if ( strtotime( $maxstart ) > strtotime( $start ) )
+					$start = $maxstart;
+			}
+
             $sql = "SELECT * FROM Trainingstatistics WHERE user_id = $session_userid AND ";
             if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
             $sql .= "(date BETWEEN '" . $start . "' AND '" . $end . "')";
-            //echo $sql . "<br>";
 
             $trainings = $this->Trainingstatistic->query( $sql );
             $sumdata['collected_sportstypes'] = array();
@@ -1019,7 +1023,6 @@ if ( isset( $import_error ) && $import_error == '' )
 
                   // cummulate values per sportstype
                   $sumdata['duration'][$sportstype_set] += $dt['duration'];
-                  //$sumdata['distance'][$sportstype] += $dt['distance'];
 
                   if ( $dt['trimp'] > 0 )
                   {
@@ -1035,14 +1038,10 @@ if ( isset( $import_error ) && $import_error == '' )
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
                 "athlete_id = $session_userid AND ";
-                //"user_id = $session_userid AND ";
             if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
-            //$sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
             $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY date ASC";
-            //echo $sql . "<br>";
             
             $Trainingplans = $this->Trainingstatistic->query( $sql );
-            //$Trainingplans = $this->Trainingplan->query( $sql );
 
             $sumdata_tp['collected_sportstypes'] = array();
             $sumdata_tp['duration'] = array();
@@ -1062,9 +1061,7 @@ if ( isset( $import_error ) && $import_error == '' )
                   }
 
                   $sumdata_tp['duration'][$sportstype_set] += $dt['duration'];
-                  //$sumdata_tp['distance'][$sportstype_set] += $dt['distance'];
                  
-                  //$dt['trimp'] *= 150;
                   if ( $dt['trimp'] )
                   {
                        $sumdata_tp['trimp'][$sportstype_set] += ( $dt['trimp'] );
@@ -1450,8 +1447,8 @@ if ( isset( $import_error ) && $import_error == '' )
             $this->set('weeks', $weeks);
             $this->set('trainings2', $trainings2);
             $this->set('stype', $type);
-            $this->set('maxdistance', $maxdistance);
-            $this->set('maxduration', $maxduration);
+            $this->set('maxdistance', $maxdistance*1.1);
+            $this->set('maxduration', $maxduration*1.1);
             $this->set('length_unit', $unit['length']);
    }
 
