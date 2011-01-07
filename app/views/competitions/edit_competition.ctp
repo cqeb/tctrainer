@@ -78,9 +78,10 @@ echo $form->input('name',
      'error' => array( 
         'notempty' => __('Enter a name for the competition', true) 
      ),
-     'label' => __('Name', true)
+     'label' => __('Name of competition', true)
      ));
 
+echo '<br />';
 __('You should only define 3 important competitions per year!');
 echo '<br /><br />';
 

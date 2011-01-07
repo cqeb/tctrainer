@@ -65,8 +65,8 @@ echo $form->input('distance',
                   'class' => 'required',
                   'maxLength' => 255,
                   'error' => array(
-                      'numeric' => __('Enter a distance for your training',true), 
-                      'notempty' => __('Enter a distance for your training',true)
+                      'numeric' => __('Enter a distance for your workout',true), 
+                      'notempty' => __('Enter a distance for your workout',true)
                   ),
                   'label' => __('Distance (' . $unit['length'] . ')', true)
 ));
@@ -80,7 +80,8 @@ echo $form->input('duration',
                   'maxLength' => 255,
                   'class' => 'required',
                   'error' => array(
-                      'notempty' => __('Enter a duration for your training',true)
+                      'notempty' => __('Enter a duration for your workout', true),
+                      'greater' => __('Enter a duration for your workout', true)
                   ),
                   'label' => __('Duration (HH:MM:SS)', true)
 ));
@@ -93,8 +94,8 @@ echo $form->input('avg_pulse',
                   'maxLength' => 255,
                   'class' => 'required',
                   'error' => array(
-                      'numeric' => __('Enter an average heart rate for your training',true),
-                      'notempty' => __('Enter an average heart rate for your training',true),
+                      'numeric' => __('Enter an average heart rate for your workout',true),
+                      'notempty' => __('Enter an average heart rate for your workout',true),
                       'greater' => __('Must be greater than',true) . ' 80',
                       'lower' => __('Must be lower than',true) . ' 240'
                   ),
@@ -103,13 +104,12 @@ echo $form->input('avg_pulse',
 
 echo '<br />';
 
-/*
+if ( $userobject['advanced_features'] ) {
 echo $form->input('competition', array(
                 'label' => __('Competition',true), 
                 'type' => 'checkbox')
                 );
-*/
-
+}
 echo $form->input('testworkout', array(
                 'label' => __('Testworkout',true), 
                 'type' => 'checkbox')
@@ -131,7 +131,6 @@ echo $form->input('name',
 ?>
 <br />
 <a name="AF"></a>
-<!--<a href="#Save">Save only necessary data</a>-->
 
 <!--
 <hr />
@@ -263,6 +262,10 @@ echo $form->input('avg_pulse_zone5',
                   'label' => __('Zone 5', true)
 ));
 
+*/
+
+if ( $userobject['advanced_features'] ) {
+
 $location_label = __('Location', true) . '<br />(' . __('City', true) . ', ' . __('Country', true) . ')';
 
 echo $form->input('location',
@@ -374,11 +377,14 @@ echo $form->radio('conditions_mood',
 
 <?php
 
+/*
 // TODO (B)
 echo $form->input('publish_community', array('label' => __('Publish to community',true), 'type' => 'checkbox'));
 echo $form->input('publish_facebook', array('label' => __('Publish to facebook',true), 'type' => 'checkbox'));
 echo $form->input('publish_twitter', array('label' => __('Publish to twitter',true), 'type' => 'checkbox'));
 */
+
+}
 
 ?>
 <!--</div>-->
