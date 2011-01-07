@@ -35,7 +35,7 @@
 </thead>
 <tbody>
 <tr class="odd">
-    <td><?php __('Magazine'); ?></td>
+    <td><?php __('Magazine'); ?> - <?php __('Blog'); ?></td>
     <td style="text-align:center">X</td>
     <td style="text-align:center">X</td>
 </tr>
@@ -45,7 +45,7 @@
     <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
-    <td><?php __('Change profile'); ?></td>
+    <td><?php __('Settings'); ?></td>
     <td style="text-align:center">X</td>
     <td style="text-align:center">X</td>
 </tr>
@@ -60,13 +60,13 @@
     <td style="text-align:center">X</td>
 </tr>
 <tr>
-    <td><?php __('Training statistics'); ?></td>
+    <td><?php __('Statistics'); ?></td>
     <td style="text-align:center">X</td>
     <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
-    <td><?php __('Training schedule'); ?></td>
-    <td style="text-align:center">X</td>
+    <td><b><?php __('Interactive training plan'); ?></b></td>
+    <td style="text-align:center"><b>X</b></td>
     <td style="text-align:center"><b><?php __('No'); ?></b></td>
 </tr>
 <!--
