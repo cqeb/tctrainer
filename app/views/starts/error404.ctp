@@ -6,7 +6,7 @@
                    <fieldset>
                    <legend><?php __('Gain speed, loose weight'); ?></legend>
 
-                   <div class="errorbox">
+                   <div class="statusbox error">
                    <?php __('Mysteries of the universe - where did this page go? Who knows ... '); ?>
                    </div><br />
                    </fieldset>

@@ -105,7 +105,7 @@ echo $form->input('publictrainings', array('label' => __('Publish your trainings
 <br />
 <a name="zones"></a><h3><?php __('Zones'); ?></h3>
 
-<div class="errorbox" id="errorlth"></div>
+<div class="statusbox error" id="errorlth"></div>
 <?php
 echo $form->input('lactatethreshold',
                    array(
@@ -124,7 +124,7 @@ echo $form->input('lactatethreshold',
                    'label' => __('Run lactate threshold', true)
 ));
 ?>
-<div class="errorbox" id="errorblth"></div>
+<div class="statusbox error" id="errorblth"></div>
 <?php
 echo $form->input('bikelactatethreshold',
                    array(

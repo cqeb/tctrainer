@@ -63,7 +63,7 @@ class PaymentsController extends AppController {
                        $this->User->savefield('canceled', true, false);
                        $this->User->savefield('cancellation_reason', $this->data['Payment']['cancelation_reason'], false);
 
-                       $statusbox = 'okbox';
+                       $statusbox = 'statusbox ok';
                        $this->Session->setFlash(__('Registered cancellation request.', true));
 
                        // notification mail for admin

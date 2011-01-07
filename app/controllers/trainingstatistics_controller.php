@@ -93,7 +93,7 @@ class TrainingstatisticsController extends AppController {
         if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
         {
             $this->Session->setFlash(__('No import data found!', true));
-            $this->set('errorbox', $statusbox);
+            $this->set('statusbox', $statusbox);
             $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
             die();
         }
@@ -452,7 +452,7 @@ if ( isset( $import_error ) && $import_error == '' )
                        else
                        {
                           $this->Session->setFlash(__('Sorry. This is not your entry!', true));
-                          $this->set('errorbox', $statusbox);
+                          $this->set('statusbox', $statusbox);
                           $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
                        }
                      }
@@ -548,7 +548,7 @@ if ( isset( $import_error ) && $import_error == '' )
                           $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
                      } else
                      {
-                          $statusbox = 'errorbox';
+                          $statusbox = 'statusbox error';
                           $this->Session->setFlash(__('Some errors occured',true));
                      }
 
@@ -597,7 +597,7 @@ if ( isset( $import_error ) && $import_error == '' )
                $end = date( 'Y-m-d', time() );
                $this->data['Trainingstatistic']['fromdate'] = $start;
                $this->data['Trainingstatistic']['todate'] = $end;
-               $statusbox = 'okbox';
+               $statusbox = 'statusbox ok';
             } else
             {
                $start = $this->data['Trainingstatistic']['fromdate'];
@@ -1477,7 +1477,7 @@ if ( isset( $import_error ) && $import_error == '' )
                else
                {
                   $this->Session->setFlash(__('Sorry. This is not your entry!', true));
-                  $this->set('statusbox', 'errorbox');
+                  $this->set('statusbox', 'statusbox error');
                   $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
                }
             }

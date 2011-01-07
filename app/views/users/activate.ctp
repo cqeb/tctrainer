@@ -13,7 +13,7 @@
                    <legend><?php __('Log in and start forming your body'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
-                   <div id="okbox">
+                   <div id="statusbox ok">
                    <?php $session->flash(); ?>
                    </div><br />
                    <?php } ?>

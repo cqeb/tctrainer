@@ -10,7 +10,7 @@
                    <?php } ?>
 
                    <?php if ( $error ) { ?>
-                   <div class="errorbox">
+                   <div class="statusbox error">
                    <?php echo $error; ?>
                    </div><br />
                    <?php } ?>

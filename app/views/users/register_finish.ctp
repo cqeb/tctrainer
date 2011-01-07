@@ -9,7 +9,7 @@
                    <legend><?php __('Thank your for registering at TriCoreTraining.com.'); ?></legend>
 
                     <?php if ($session->check('Message.flash')) { ?>
-                    <div class="okbox">
+                    <div class="statusbox ok">
                     <?php $session->flash(); ?>
                     </div>
                     <br />

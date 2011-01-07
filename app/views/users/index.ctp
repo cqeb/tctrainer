@@ -6,15 +6,7 @@
      <?php $session->flash(); ?>
      </div><br />
      <?php } ?>
-
-<!--
-     <div class="errorbox">
-     You haven't defined your competitions (goals). Do this first!
-     <br /><br />
-     <a href="/trainer/competitions/edit_competition"><button value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button></a>
-     </div><br /> 
--->
-     
+    
      <div class="clear"></div>
 
      <h2><?php __('Next steps to use TriCoreTraining'); ?></h2>
