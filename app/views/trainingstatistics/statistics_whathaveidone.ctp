@@ -3,8 +3,8 @@
 if ( $export == true )
 {
 
-$yesno[1] = __('Yes', true);
-$yesno[0] = __('No', true);
+		$yesno[1] = __('Yes', true);
+		$yesno[0] = __('No', true);
 
 ?>
 
@@ -44,20 +44,24 @@ $yesno[0] = __('No', true);
 -->
 <tr id="titles">
 		<td class="tableTd"><?php __('Date'); ?></td>
-		<td class="tableTd"><?php __('Name of Training'); ?></td>
-    <td class="tableTd"><?php __('Sport'); ?></td>
+    	<td class="tableTd"><?php __('Sport'); ?></td>
+    	<td class="tableTd"><?php __('Distance'); ?></td>
 		<td class="tableTd"><?php __('Duration'); ?></td>
-    <td class="tableTd"><?php __('Distance'); ?></td>
 		<td class="tableTd"><?php __('AVG heart rate'); ?></td>
-		<td class="tableTd"><?php __('Testworkout'); ?></td>
+<?php if ( $userobject['advanced_features'] ) { ?>
 		<td class="tableTd"><?php __('Competition'); ?></td>
-    <td class="tableTd"><?php __('Comment'); ?></td>
-		<td class="tableTd"><?php __('Location'); ?></td>
+<?php } ?>
+		<td class="tableTd"><?php __('Testworkout'); ?></td>
+		<td class="tableTd"><?php __('Name of (Test-)Workout'); ?></td>
+    	<td class="tableTd"><?php __('Comment'); ?></td>
 		<td class="tableTd"><?php __('Weight'); ?></td>
-    <td class="tableTd"><?php __('Link to workout'); ?></td>
+<?php if ( $userobject['advanced_features'] ) { ?>
+		<td class="tableTd"><?php __('Location'); ?></td>
+    	<td class="tableTd"><?php __('Link to workout'); ?></td>
+<?php } ?>
 		<td class="tableTd"><?php __('TRIMP'); ?></td>
-    <td class="tableTd"><?php __('AVG Speed'); ?></td>
-    <td class="tableTd"><?php __('Burnt'); ?></td>
+    	<td class="tableTd"><?php __('AVG Speed'); ?></td>
+    	<td class="tableTd"><?php __('Burnt'); ?></td>
 </tr>
 <?php
 

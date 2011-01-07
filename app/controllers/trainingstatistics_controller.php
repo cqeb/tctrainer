@@ -1312,7 +1312,7 @@ if ( isset( $import_error ) && $import_error == '' )
             if ( isset( $this->params['form']['excel'] ) ) {
                $export = true;
                $this->layout = "xls";
-               Configure::write('debug', 1);
+               Configure::write('debug', 0);
             }
 
             $this->set('js_addon','');
