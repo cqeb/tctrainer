@@ -62,8 +62,8 @@
 		
 		<!-- Right column -->
 		<div class="grid_6 center">
-			<div class="box">
-				<?php echo $rightcol; ?>
+			<div class="box info">
+				<?php echo $info; ?>
 				<div class="clear"></div>
 	      	</div>
 		</div>

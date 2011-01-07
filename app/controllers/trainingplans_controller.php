@@ -60,8 +60,18 @@ class TrainingplansController extends AppController {
 		}
 		$this->set('usersport', $usersport);
 		$this->set('weeklyhours', $u['weeklyhours']);
-//		$this->set('rightcol', $this->Provider->renderMesoCycle($now, $u["id"]));
-		$this->set('rightcol', "mesocycle");
+		
+		// fill the info section
+		if (count($this->Provider->athlete->getSchedule()->getRaces()) == 0) {
+			$this->set('info', '<div class="statusbox"><p>' . 
+			__("You might want to add some competitions to refine your training plan.", true) . 
+			"</p><a href=\"/trainer/competitions/list_competitions/\"><button>
+			" . __("Add competition", true) . "
+			</button></a>
+			</div>");
+		} else {
+			$this->set('info', '<script type="text/javascript">jQuery(".box.info").hide();</script>');
+		}
 	}
 	
 	/**
