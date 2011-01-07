@@ -18,7 +18,9 @@ __('SWIM workout', true);
 
                    <a href="/trainer/trainingstatistics/edit_training"><button value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
                    
+                   <?php if ( $userobject['advanced_features'] ) { ?>
                    <a href="/trainer/trainingstatistics/import_workout"><button value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+                   <?php } ?>
 
                    <!--
                    <?php echo $html->link(__("Add workout",true), array('action' => 'edit_training'),null) ?>

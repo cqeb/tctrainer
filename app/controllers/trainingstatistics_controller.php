@@ -506,7 +506,7 @@ if ( isset( $import_error ) && $import_error == '' )
                      if ( $this->data['Trainingstatistic']['duration'] )
                         $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
 
-                     if ( $this->data['Trainingstatistic']['duration'] && $this->data['Trainingstatistic']['distance'] && $this->data['Trainingstatistic']['avg_pulse'] ) 
+                     if ( ( isset( $this->data['Trainingstatistic']['duration'] ) && $this->data['Trainingstatistic']['duration'] > 0 ) && $this->data['Trainingstatistic']['distance'] && $this->data['Trainingstatistic']['avg_pulse'] ) 
                      {
                         $time_in_zones = "";
                         $this->data['Trainingstatistic']['trimp'] = round(
@@ -551,7 +551,10 @@ if ( isset( $import_error ) && $import_error == '' )
  
                      $this->data['Trainingstatistic']['user_id'] = $session_userid;
 
-                     if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] != '' && ( strtotime( $this->data['Trainingstatistic']['date'] ) > ( time() - 86400 * 7 ) ) )
+					 $tdate = $this->data['Trainingstatistic']['date'];
+					 $tdate = $tdate['year'] . '-' . $tdate['month'] . '-' . $tdate['day'];
+					 
+                     if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] != '' && ( strtotime( $tdate ) > ( time() - 86400 * 7 ) ) )
                      { 
                           $saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
                           $saveweight = str_replace( ',', '.', $saveweight );

@@ -18,7 +18,7 @@
 		<h2><?php __('Updates'); ?></h2>
 		<p>
       <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a><br />
-			<a href="#"><?php __('RSS Feed'); ?> TODO</a>
+			<a href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'deu' ) echo 'DE'; else echo 'EN'; ?>"><?php __('RSS Feed'); ?></a>
 		</p>
 	</div>
 	<div class="grid_3">
