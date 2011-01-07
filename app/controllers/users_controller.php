@@ -1512,7 +1512,7 @@ class UsersController extends AppController {
 		$this->loadModel('Transaction');
 
 		// delete old transactions
-		$this->Transactionhandler->_delete_all_transactions( $this->Transaction );
+		$this->Transactionhandler->_delete_old_transactions( $this->Transaction );
 
 
 	}

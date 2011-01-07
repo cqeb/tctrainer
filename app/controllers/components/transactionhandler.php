@@ -60,12 +60,12 @@ class TransactionhandlerComponent extends Object {
             return true;
    }
 
-   function _delete_old_transaction( $model )
+   function _delete_old_transactions( $model )
    {
-   			$until_date = date( 'Y-m-d', (time()-86400*14) );
-   			$conditions = 'created BETWEEN \"2010-01-01\" AND \"' . $until_date . '\"';
-			
-			// PRIO (B) currently deactivated
+            $until_date = date( 'Y-m-d', (time()-86400*14) );
+            $conditions = 'created BETWEEN \"2010-01-01\" AND \"' . $until_date . '\"';
+
+            // PRIO (B) currently deactivated
             //$model->deleteAll($conditions);
             return true;
    }
