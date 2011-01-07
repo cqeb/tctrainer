@@ -44,6 +44,14 @@ class Schedule {
 	}
 	
 	/**
+	 * retrieve array of all races scheduled by the athlete
+	 * there will be no dummy events added automatically!
+	 */
+	public function getRaces() {
+		return $this->races;
+	}
+	
+	/**
 	 * determines the next LD race
 	 * @param DateTime search from this date on
 	 * @return next ld race or false if there is none
