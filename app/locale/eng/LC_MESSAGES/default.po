@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-01-07 15:32+0100\n"
-"PO-Revision-Date: 2011-01-07 16:58+0100\n"
+"PO-Revision-Date: 2011-01-07 17:05+0100\n"
 "Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -2361,15 +2361,15 @@ msgstr ""
 
 #: \views\trainingstatistics\edit_training.ctp:39
 msgid "RUN"
-msgstr ""
+msgstr "Run"
 
 #: \views\trainingstatistics\edit_training.ctp:40
 msgid "BIKE"
-msgstr ""
+msgstr "Bike"
 
 #: \views\trainingstatistics\edit_training.ctp:41
 msgid "SWIM"
-msgstr ""
+msgstr "Swim"
 
 #: \views\trainingstatistics\edit_training.ctp:53
 msgid "Bike / Mountain-Bike"
