@@ -17,8 +17,8 @@
 
 <?php
 
-$min_height = $unitcalc->check_height('100') . ' ' . $unit['height'];
-$max_height = $unitcalc->check_height('230') . ' ' . $unit['height'];
+$min_height = $unitcalc->check_height('100', 'show', 'single') . ' ' . $unit['height'];
+$max_height = $unitcalc->check_height('230', 'show', 'single') . ' ' . $unit['height'];
 
 echo $form->input('height',
      array(
@@ -35,8 +35,8 @@ echo $form->input('height',
      'label' => __('Height', true) . ' (' . $unit['height'] . ')'
      ));
 
-$min_weight = $unitcalc->check_height('40') . ' ' . $unit['weight'];
-$max_weight = $unitcalc->check_height('150') . ' ' . $unit['weight'];
+$min_weight = $unitcalc->check_weight('40', 'show', 'single') . ' ' . $unit['weight'];
+$max_weight = $unitcalc->check_weight('150', 'show', 'single') . ' ' . $unit['weight'];
 
 echo $form->input('weight',
      array(

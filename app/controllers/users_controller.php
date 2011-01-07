@@ -923,19 +923,19 @@ class UsersController extends AppController {
     
 		$session_userid = $this->Session->read('session_userid');
     	$this->User->id = $session_userid;
-    	//pr($this->Session->read('userobject'));
 
 		if ( empty($this->data) )
 		{
     			$this->data = $this->User->read();
-    
+
     			// convert back to show in form
-    			if ( isset( $this->data['User']['weight'] ) )
-    			       $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
     			if ( isset( $this->data['User']['height'] ) )
-    			       $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
+    			       $this->data['User']['height'] = round( $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' ), 2);
+
+    			if ( isset( $this->data['User']['weight'] ) )
+    			       $this->data['User']['weight'] = round( $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' ), 1);
     			if ( isset( $this->data['User']['targetweight'] ) )
-    			       $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
+    			       $this->data['User']['targetweight'] = round( $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' ), 1);
     		
     	} else 
 		{
@@ -970,31 +970,35 @@ class UsersController extends AppController {
   
   				} else
   				{
-      				// calculate weight per month
-      				$weight_per_month = $diff_weight / $diff_time['months'];
-      				if ( $weight_per_month < 0 ) $weight_per_month * (-1);
+      				  // calculate weight per month
+      				  $weight_per_month_kg = $diff_weight / $diff_time['months'];
 
-              $max_weight_per_month = round( $this->Unitcalc->check_weight( 2, 'show', 'single' ), 2 );
-              $weight_per_month_array = $this->Unitcalc->check_weight( $weight_per_month, 'show' );
-              $weight_per_month = round( $weight_per_month_array['amount'], 2);
-              $weight_unit = $weight_per_month_array['unit'];
-              $additional_message = __('You have to loose', true) . ' ' . $weight_per_month .
-                  ' ' . $weight_unit . ' ' . __('per month to achieve your goal.', true);
+      				  if ( $weight_per_month_kg < 0 ) $weight_per_month_kg * (-1);
+
+		              $max_weight_per_month = round( $this->Unitcalc->check_weight( 2, 'show', 'single' ), 2 );
+					  
+		              $weight_per_month_array = $this->Unitcalc->check_weight( $weight_per_month_kg, 'show' );
+		              
+		              $weight_per_month = round( $weight_per_month_array['amount'], 2);
+					  
+		              $weight_unit = $weight_per_month_array['unit'];
+		              
+		              $additional_message = __('You have to loose', true) . ' ' . $weight_per_month .
+                      	' ' . $weight_unit . ' ' . __('per month to achieve your goal.', true);
                   
-              // maximum 2 kg per month
-              if ( $weight_per_month > 2 )
-              {
-                    $targetweighterror = __('You should at maximum loose', true) . ' ' .  
-                        $this->Unitcalc->check_weight('2', 'show', 'single') . ' ' . $weight_unit . ' ' . 
-                        __('per month.', true);
-                    //echo $targetweighterror;     
-                    $this->data['User']['targetweightcheck'] = 1;
-              } else
-              {
-                    $this->data['User']['targetweightcheck'] = 0;
-              }
-      				$this->set('weight_unit', $weight_unit);
-              $this->set('targetweighterror', $targetweighterror);
+		              // maximum 2 kg per month
+		              if ( $weight_per_month_kg > 2 )
+		              {
+		                    $targetweighterror = __('You should at maximum loose', true) . ' ' .  
+		                        $this->Unitcalc->check_weight('2', 'show', 'single') . ' ' . $weight_unit . ' ' . 
+		                        __('per month.', true);
+		                    $this->data['User']['targetweightcheck'] = 1;
+		              } else
+		              {
+		                    $this->data['User']['targetweightcheck'] = 0;
+		              }
+      				  $this->set('weight_unit', $weight_unit);
+              		  $this->set('targetweighterror', $targetweighterror);
   				}
   
   			} else
@@ -1006,11 +1010,11 @@ class UsersController extends AppController {
   
   			if ( $this->data['User']['weight'] && $this->data['User']['height'] )
   			{
-  			   $bmi = $this->Unitcalc->calculate_bmi( $this->data['User']['weight'], $this->data['User']['height'], $age );
-        }
+  			   	   $bmi = $this->Unitcalc->calculate_bmi( $this->data['User']['weight'], $this->data['User']['height'], $age );
+        	}
         
   			if ( $this->data['User']['targetweight'] == 0 )
-        {
+        	{
   			       unset( $this->data['User']['targetweight'] );
   			} else
   			{
@@ -1020,14 +1024,13 @@ class UsersController extends AppController {
   					   if ( $this->data['User']['targetweight'] && $this->data['User']['height'] )
   					   {
   					       $targetbmi = $this->Unitcalc->calculate_bmi( $this->data['User']['targetweight'], $this->data['User']['height'], $age );
-               }
-               
-  					   if ( $targetbmi['bmi'] < 16 || $targetbmi['bmi'] > 30 )
-  					   {
-          						$targetweighterror = __('Your target weight is not ok. Your goals would bring your BMI to a critical',true) . ' ' . $targetbmi['bmi'];
-          						$this->data['User']['targetweightcheck'] = 1;
-          						$this->set('targetweighterror', $targetweighterror);
-  					   }
+	  					   if ( $targetbmi['bmi'] < 16 || $targetbmi['bmi'] > 30 )
+	  					   {
+	          						$targetweighterror = __('Your target weight is not ok. Your goals would bring your BMI to a critical',true) . ' ' . $targetbmi['bmi'];
+	          						$this->data['User']['targetweightcheck'] = 1;
+	          						$this->set('targetweighterror', $targetweighterror);
+	  					   }
+					   }
   				}
           /**
           if ( isset( $weight_per_month ) && !isset( $targetweighterror ) )
@@ -1052,12 +1055,12 @@ class UsersController extends AppController {
                  $statusbox = 'statusbox ok';
         
                  // convert back in case of error and no redirect
-                 if ( isset( $this->data['User']['weight'] ) )
-                      $this->data['User']['weight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' );
                  if ( isset( $this->data['User']['height'] ) )
-                 	    $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
+                 	    $this->data['User']['height'] = round($this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' ), 2);
+                 if ( isset( $this->data['User']['weight'] ) )
+                      $this->data['User']['weight'] = round($this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' ), 1);
                  if ( isset( $this->data['User']['targetweight'] ) )
-                 	    $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
+                 	    $this->data['User']['targetweight'] = round($this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' ), 1);
                  //$this->redirect(array('action' => 'edit_weight', $this->User->id));
            
            } else

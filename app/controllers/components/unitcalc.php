@@ -139,21 +139,24 @@ class UnitcalcComponent extends Object {
    **/
    function check_height( $amount, $mode = 'show', $ret = 'both' )
    {
+
             if ( is_numeric( $amount ) )
             {
+		
               $session_userobject = $this->Session->read('userobject');
+
               if (  $session_userobject['unit'] == 'imperial' )
               {
                  if ( $mode == 'show' ) 
                  {
                  	$convert = 'cm_ft';
-					$amount = $this->convert_metric( $amount, $convert );
                  } else
                      $convert = 'ft_cm';
 
-                  $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  //$amount_array['amount'] = $amount;
-                  $amount_array['unit'] = 'ft';
+				 $amount = $this->convert_metric( $amount, $convert );
+                 //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                 $amount_array['amount'] = $amount;
+                 $amount_array['unit'] = 'ft';
               } else
               {
                   if ( $mode == 'show' ) 
