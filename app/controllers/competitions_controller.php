@@ -38,7 +38,7 @@ list all competitions with paging
             $session_userid = $this->Session->read('session_userid');
             $results['User'] = $this->Session->read('userobject');
             
-            $sql = "SELECT * FROM Competitions WHERE user_id = $session_userid AND " .
+            $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND " .
                 "competitiondate > '" . date('Y-m-d', time()) . "' ORDER BY competitiondate ASC LIMIT 1";
             $checkcompetition = $this->Competition->query( $sql );
             
@@ -56,7 +56,7 @@ list all competitions with paging
             }
 
             $this->paginate = array(
-                  'conditions' => array('Competition.user_id = ' => $session_userid),
+
                   'limit' => 15,
                   'order' => array('Competition.competitiondate' => 'desc')
             );

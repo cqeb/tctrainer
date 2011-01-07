@@ -246,7 +246,7 @@ class TrainingstatisticsController extends AppController {
 
                 if ( isset( $import_error ) && $import_error == '' ) 
                 {
-                  $sql = "SELECT * FROM Trainingstatistics WHERE user_id = $session_userid AND " .
+                  $sql = "SELECT * FROM trainingstatistics WHERE user_id = $session_userid AND " .
                       "date = '" . $importdate . "' AND sportstype = '" . $importsport . "' AND " .
                       "duration = " . $importduration;
                   $checktrainingdata = $this->Trainingstatistic->query( $sql );
@@ -652,7 +652,7 @@ if ( isset( $import_error ) && $import_error == '' )
             $diff_dates = $this->Unitcalc->diff_dates( $start_calc, $end );
 
             // real training data (tracks)
-            $sql = "SELECT duration, trimp, date FROM Trainingstatistics WHERE
+            $sql = "SELECT duration, trimp, date FROM trainingstatistics WHERE
                    user_id = $session_userid AND ";
             if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
             $sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
@@ -874,7 +874,7 @@ if ( isset( $import_error ) && $import_error == '' )
 
             // TODO (B) select different avg_pulse_zones
             // select all entries for this special test-workout - filtered by the name and the sportstype
-            $sql = "SELECT date, distance, duration, avg_pulse FROM Trainingstatistics WHERE user_id = $session_userid ";
+            $sql = "SELECT date, distance, duration, avg_pulse FROM trainingstatistics WHERE user_id = $session_userid ";
               //AND sportstype = '" . $sportstype . "'
             $sql .= "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
               "' AND distance = '" . $searchsplit[1] . "'";
@@ -997,7 +997,7 @@ if ( isset( $import_error ) && $import_error == '' )
 					$start = $maxstart;
 			}
 
-            $sql = "SELECT * FROM Trainingstatistics WHERE user_id = $session_userid AND ";
+            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $session_userid AND ";
             if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
             $sql .= "(date BETWEEN '" . $start . "' AND '" . $end . "')";
 
@@ -1140,7 +1140,7 @@ if ( isset( $import_error ) && $import_error == '' )
             }
 
             // select trainingsdata
-            $sql = "SELECT * FROM Trainingstatistics WHERE user_id = $session_userid AND date BETWEEN '" .
+            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $session_userid AND date BETWEEN '" .
                 $start . "' AND '" . $end . "'";
             $trainings = $this->Trainingstatistic->query( $sql );
 
@@ -1314,7 +1314,7 @@ if ( isset( $import_error ) && $import_error == '' )
             }
 
             // select trainingsdata
-            $sql = "SELECT * FROM Trainingstatistics WHERE user_id = $session_userid AND date BETWEEN '" .
+            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $session_userid AND date BETWEEN '" .
                 $start . "' AND '" . $end . "'";
             $trainings = $this->Trainingstatistic->query( $sql );
 
@@ -1399,7 +1399,7 @@ if ( isset( $import_error ) && $import_error == '' )
 
                $sql = "SELECT count(*) as 'count', sum(distance) as sumdistance, sum(duration) as sumduration,
                       date_format(min(date), '%Y-%M-%d') as 'week commencing',
-                      date_format(date, '%Y%u') as 'week' from Trainingstatistics where user_id = $session_userid AND
+                      date_format(date, '%Y%u') as 'week' FROM trainingstatistics where user_id = $session_userid AND
                       date BETWEEN '" . $start . "' AND '" . $end . "' ";
                if ( $sportstype ) $sql .= " AND sportstype = '" . $sportstype . "' ";
                $sql .= "group by week order by week asc";
