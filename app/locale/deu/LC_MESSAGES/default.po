@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-01-07 15:32+0100\n"
-"PO-Revision-Date: 2011-01-07 16:15+0100\n"
+"PO-Revision-Date: 2011-01-07 16:49+0100\n"
 "Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -593,7 +593,6 @@ msgid "This TriCoreTraining message comes to you because some information in you
 msgstr "Diese TriCoreTraining Nachricht wird dir zugesendet, weil einige Informationen in deinem Profil nicht korrekt sind oder fehlen."
 
 #: \controllers\components\provider.php:49
-#, fuzzy
 msgid "Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions."
 msgstr "Wir können dir im Moment leider keinen Trainingsplan erstellen, da deine PREMIUM Mitgliedschaft abgelaufen ist."
 
@@ -939,19 +938,19 @@ msgstr "Anderes"
 #: \core\workouts\runworkout.class.php:35
 #: \core\workouts\swimworkout.class.php:32
 msgid "Recovery"
-msgstr "Erholung"
+msgstr "Regeneration"
 
 #: \core\workouts\bikeworkout.class.php:43
 #: \core\workouts\runworkout.class.php:38
 #: \core\workouts\swimworkout.class.php:35
 msgid "Extensive Endurance"
-msgstr "Extensive Grundlage"
+msgstr "Extensive Ausdauer"
 
 #: \core\workouts\bikeworkout.class.php:46
 #: \core\workouts\runworkout.class.php:41
 #: \core\workouts\swimworkout.class.php:38
 msgid "Intensive Endurance"
-msgstr "Intensive Grundlage"
+msgstr "Intensive Ausdauer"
 
 #: \core\workouts\bikeworkout.class.php:49
 msgid "Cadence Intervals"
@@ -1019,7 +1018,7 @@ msgstr "Eine lockere Ausfahrt in Zone 1."
 
 #: \core\workouts\bikeworkout.class.php:103
 msgid "Do an endurance ride in Zone 2."
-msgstr "Eine Grundlagen-Ausfahrt in Zone 2."
+msgstr "Ein Ausdauertraining in Zone 2."
 
 #: \core\workouts\bikeworkout.class.php:106
 msgid "An intensive, aerobic workout. Ride a course with small hills, which take you into Zone 3 frequently."
@@ -1035,7 +1034,7 @@ msgstr "Fahre in Zone 2. Dann schalte in einen leichten Gang, und tritt nur mehr
 
 #: \core\workouts\bikeworkout.class.php:115
 msgid "Do an endurance ride in Zone 2, but insert several ten-second sprints with maximum effort."
-msgstr "Eine Grundlagenfahrt in Zone 2, bei der du mehrmals Sprints mit zehn Sekunden Dauer unter Maximalbelastung durchführst."
+msgstr "Ein Ausdauertraining in Zone 2, bei der du mehrmals Sprints mit zehn Sekunden Dauer unter Maximalbelastung durchführst."
 
 #: \core\workouts\bikeworkout.class.php:118
 msgid "Pick a hilly course, and ride in Zones 1-5. The hills should take about five minutes to ascend. Do not stand up while climbing."
@@ -1099,7 +1098,7 @@ msgstr "Wähle einen flachen Kurs und laufe in Zone 1."
 
 #: \core\workouts\runworkout.class.php:95
 msgid "Do an endurance run in Zone 2."
-msgstr "Unternimm einen Grundlagenlauf in Zone 2."
+msgstr "Unternimm einen Dauerlauf in Zone 2."
 
 #: \core\workouts\runworkout.class.php:98
 msgid "An intensive, aerobic workout. Run a course with small hills, which take you into Zone 3 frequently."
@@ -1107,11 +1106,11 @@ msgstr "Ein intensives, aerobes Training, für das du am besten eine strecke mit
 
 #: \core\workouts\runworkout.class.php:101
 msgid "Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat four to eight times during the run."
-msgstr "Unternimm einen Grundlagen-Lauf in Zone 2. Sprinte vier bis acht Mal für 20 Sekunden, nachdem du dich ordentlich warmgelaufen hast."
+msgstr "Unternimm einen Ausdauer-Lauf in Zone 2. Sprinte vier bis acht Mal für 20 Sekunden, nachdem du dich ordentlich warmgelaufen hast."
 
 #: \core\workouts\runworkout.class.php:104
 msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for five kilometers. Repeat up to six times."
-msgstr "Ein Grundlagenlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximl fünf Kilometer lang halten könntest. Wiederhole diese Beschleunigungen maximal sechs Mal."
+msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximl fünf Kilometer lang halten könntest. Wiederhole diese Beschleunigungen maximal sechs Mal."
 
 #: \core\workouts\runworkout.class.php:107
 msgid "Pick a hilly course, and run in Zones 1-5. Do not ascend longer than five minutes."
@@ -1131,128 +1130,128 @@ msgstr "Wähle einen flachen Kurs und laufe in Zone 3, nachdem du dich aufgewär
 
 #: \core\workouts\runworkout.class.php:119
 msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times."
-msgstr ""
+msgstr "Wähle einen flachen Kurs und wärme dich auf. Beschleunige bis zum oberen Ende der Zone 4. Behalte die Belastung für maximal zehn Minuten bei (beginne beim ersten Mal mit fünf), und erhole dich zwei Minuten nach jedem Intervall. Wiederhole drei bis fünf Mal."
 
 #: \core\workouts\runworkout.class.php:122
 msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds."
-msgstr ""
+msgstr "Wärme dich gut auf und wähle eine Strecke mit kleinen Hügeln. Beschleunige, bis dein Puls die Obergrenze von Zone 4 erreicht, und behalte die Geschwindigkeit maximal zehn Minuten lang bei (beginne mit fünf). Erhole dich für zwei Minuten nach jedem Intervall, und wiederhole drei bis fünf Mal. Du kannst dieses Training auch auf einer Strecke mit starkem Gegenwind durchführen."
 
 #: \core\workouts\runworkout.class.php:125
 msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2."
-msgstr ""
+msgstr "Beschleunige langsam bis in Zone 4, nachdem du dich aufgewärmt hast. Danach beschleunige, bis du das untere Drittel der Zone 5 erreichst. Verringere die Belastung über zwei Minuten, bis du die Untergrenze von Zone 4 erreichst, und wiederhole den Wechsel maximal 30 Minuten. Beende dein Training danach in Zone 2."
 
 #: \core\workouts\runworkout.class.php:128
 msgid "Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous."
-msgstr ""
+msgstr "Wähle einen flachen Kurs. Wärme dich gut auf, und beschleunige bis in die Zone 5. Halte deine Geschwindigkeit, und mach keine Pausen. Beende das Training sofort, solltest du dich unwohl fühlen."
 
 #: \core\workouts\runworkout.class.php:131
 msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes."
-msgstr ""
+msgstr "Wähle einen flachen kurs, und laufe mit Wettkampfgeschwindigkeit gleich von Beginn an. Nutze den \"Rundenzeit\"-Knopf auf deiner Pulsuhr, um die durchschnittliche Herzfrequenz der letzten 20 Minuten des Trainings zu ermitteln."
 
 #: \core\workouts\runworkout.class.php:134
 msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes."
-msgstr ""
+msgstr "Wähle einen flachen kurs, und laufe mit Wettkampfgeschwindigkeit gleich von Beginn an. Nutze den \"Rundenzeit\"-Knopf auf deiner Pulsuhr, um die durchschnittliche Herzfrequenz der letzten 50 Minuten des Trainings zu ermitteln."
 
 #: \core\workouts\swimworkout.class.php:41
 msgid "Swimming Technique Drills"
-msgstr ""
+msgstr "Schwimmtechnik"
 
 #: \core\workouts\swimworkout.class.php:44
 msgid "Buoyancy Drills"
-msgstr ""
+msgstr "Wasserlage"
 
 #: \core\workouts\swimworkout.class.php:47
 #: \core\workouts\workout.class.php:119
 msgid "Speed"
-msgstr ""
+msgstr "Geschwindigkeit"
 
 #: \core\workouts\swimworkout.class.php:50
 msgid "Open Water"
-msgstr ""
+msgstr "Freiwasser"
 
 #: \core\workouts\swimworkout.class.php:53
 msgid "Paddles"
-msgstr ""
+msgstr "Paddles"
 
 #: \core\workouts\swimworkout.class.php:56
 msgid "Strength Drills"
-msgstr ""
+msgstr "Kraftausdauer"
 
 #: \core\workouts\swimworkout.class.php:59
 msgid "Long Intervals"
-msgstr ""
+msgstr "Lange Intervalle"
 
 #: \core\workouts\swimworkout.class.php:62
 msgid "Short Intervals"
-msgstr ""
+msgstr "Kurze Intervalle"
 
 #: \core\workouts\swimworkout.class.php:65
 msgid "Threshold Swim"
-msgstr ""
+msgstr "Tempohärte"
 
 #: \core\workouts\swimworkout.class.php:80
 msgid "Do an easy recovery swim."
-msgstr ""
+msgstr "Ein lockeres Schwimmtraining zur Regeneration."
 
 #: \core\workouts\swimworkout.class.php:83
 msgid "Swim intervals of medium intensity, that take five to ten minutes, and recover for 30 to 60 seconds."
-msgstr ""
+msgstr "Schwimme Intervalle mit mittlerer Intensität, die drei bis fünf Minuten dauern. Erhole dich dazwischen für 30 bis 60 Sekunden."
 
 #: \core\workouts\swimworkout.class.php:86
 msgid "An intensive, aerobic workout. Swim intervals of medium effort which take 5 minutes, and recover for 30 seconds."
-msgstr ""
+msgstr "Ein intensives, aerobes Training. Schwimme intervalle mittlerer Intensität, die 5 Minuten lang dauern. Erhole dich dazwischen für jeweils 30 Sekunden."
 
 #: \core\workouts\swimworkout.class.php:89
 msgid "Use this workout to focus entirely on your technique flaws."
-msgstr ""
+msgstr "Konzentriere dich bei diesem Training voll auf deine Schwimmtechnik."
 
 #: \core\workouts\swimworkout.class.php:92
 msgid "Use this workout to focus on your buoyancy and body position."
-msgstr ""
+msgstr "Nutze dieses Training, um an deiner Wasserlage zu arbeiten."
 
 #: \core\workouts\swimworkout.class.php:95
 msgid "Do fast repeats for one swimming lane lengths at maximum effort, and recover for one minute between intervals. Focus on technique, even when fatigue sets in. Repeat to a maximum of 300 meters/yards."
-msgstr ""
+msgstr "Schwimme mit hoher Frequenz und maximaler Belastung über eine Länge. Erhole dich danach für eine minute. Konzentriere dich dabei auf deine Schwimmtechnik, auch, wenn deine Arme bereits ermüden. Wiederhole über eine Distanz von maximal 300 metern."
 
 #: \core\workouts\swimworkout.class.php:98
 msgid "Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous."
-msgstr ""
+msgstr "Schwimme in einem Fluss oder See."
 
 #: \core\workouts\swimworkout.class.php:101
 msgid "Use this workout to bring your paddles for endurance sets."
-msgstr ""
+msgstr "Trainiere mit Paddles."
 
 #: \core\workouts\swimworkout.class.php:104
 msgid "Use this workout to focus on strength drills."
-msgstr ""
+msgstr "Konzentriere dich bei diesem Training auf deine Kraft."
 
 #: \core\workouts\swimworkout.class.php:107
 msgid "Swim intervals of 6 minutes or more at high intensity. Recover for up to two minutes. Try to swim your next race distance."
-msgstr ""
+msgstr "Schwimme Intervalle mit hoher Belastung, die 6 Minuten oder länger dauern. Erhole dich dazwischen für zwei Minuten. Versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
 
 #: \core\workouts\swimworkout.class.php:110
 msgid "Swim intervals to a maximum of 5 minutes at high intensity. Recover for less than a minute, and try to cover your next race distance."
-msgstr ""
+msgstr "Schwimme Intervalle mit hoher Intensität, die maximal fünf Minuten dauern. Erhole dich kürzer als eine Minute, und versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
 
 #: \core\workouts\swimworkout.class.php:113
 msgid "Swim at race speed and do not recover. Stop after a maximum of thirty minutes."
-msgstr ""
+msgstr "Schwimme mit Wettkampfgeschwindigkeit, und mache keine Pausen für maximal 30 Minuten."
 
 #: \core\workouts\workout.class.php:115
 msgid "Endurance"
-msgstr ""
+msgstr "Ausdauer"
 
 #: \core\workouts\workout.class.php:122
 msgid "Force"
-msgstr ""
+msgstr "Kraft"
 
 #: \core\workouts\workout.class.php:126
 msgid "Tempo Hardness"
-msgstr ""
+msgstr "Tempohärte"
 
 #: \core\workouts\workout.class.php:129
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #: \views\competitions\edit_competition.ctp:8
 #: \views\competitions\list_competitions.ctp:2
@@ -1281,9 +1280,8 @@ msgid "Enter a name for the competition"
 msgstr "Gib einen Namen für den Wettkampf ein"
 
 #: \views\competitions\edit_competition.ctp:81
-#, fuzzy
 msgid "Name of competition"
-msgstr "Definiere Wettkämpfe"
+msgstr "Name des Wettkampfes"
 
 #: \views\competitions\edit_competition.ctp:85
 msgid "You should only define 3 important competitions per year!"
@@ -1425,9 +1423,8 @@ msgid "10:45 for Ironman in Carinthia was the goal and TriCoreTraining helped me
 msgstr "10:45 für den Ironman in Kärnten war das Ziel und TriCoreTraining half mir dieses zu erreichen. Vielen Dank."
 
 #: \views\elements\rightbar.ctp:2
-#, fuzzy
 msgid "Hot News"
-msgstr "News"
+msgstr "Neueste Nachrichten"
 
 #: \views\elements\rightbar.ctp:4
 #: \views\elements\subnavigation_all.ctp:28;41
@@ -1976,50 +1973,47 @@ msgstr "Werde schneller, verliere Gewicht!"
 
 #: \views\layouts\trainer_start.ctp:91
 msgid "TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!"
-msgstr ""
+msgstr "TriCoreTraining bringt dir <b>professionelle</b>, <b>einfach</b> verständliche Trainingspläne, für <b>Laufen</b>, <b>Radfahren</b> und <b>Triathlon</b>!"
 
 #: \views\layouts\trainer_start.ctp:92
-#, fuzzy
 msgid "Sign up now"
-msgstr "Einloggen"
+msgstr "Registriere dich jetzt"
 
 #: \views\layouts\trainer_start.ctp:92
 msgid "it´s free!"
-msgstr ""
+msgstr "gratis!"
 
 #: \views\layouts\trainer_start.ctp:110
 msgid "You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"
-msgstr ""
+msgstr "Du bist ambitionierter Sportler, und willst das Maximum aus deinem Training holen, aber weder deine Familie noch deinen Job vernachlässigen. <b>Bei uns bist du genau richtig.</b>"
 
 #: \views\layouts\trainer_start.ctp:113
 msgid "You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"
-msgstr ""
+msgstr "Du willst deinen ersten Marathon finishen, eine neue Bestzeit beim Halbironman laufen, oder genießt einfach nur das Laufen? <b>Wir helfen dir, mehr aus deinem Training zu machen.</b>"
 
 #: \views\layouts\trainer_start.ctp:120;120
-#, fuzzy
 msgid "Track your trainings"
 msgstr "Erfasse deine Trainings"
 
 #: \views\layouts\trainer_start.ctp:121
 msgid "Log your trainings, manage your competitions, and also keep track of your weight."
-msgstr ""
+msgstr "Verwalte Trainingseinheiten, Wettkampfe und sogar dein Gewicht."
 
 #: \views\layouts\trainer_start.ctp:124;124
-#, fuzzy
 msgid "Analyze your workouts"
 msgstr "Analysiere deine Trainings"
 
 #: \views\layouts\trainer_start.ctp:125
 msgid "Use detailed statistics to assess yor fitness and gain even more from your workouts."
-msgstr ""
+msgstr "Erfahre durch unsere detaillierten Statistiken mehr über deine Trainingseinheiten."
 
 #: \views\layouts\trainer_start.ctp:128;128
 msgid "Get individual training plans"
-msgstr ""
+msgstr "Erhalte individuell auf dich abgestimmte Trainingspläne."
 
 #: \views\layouts\trainer_start.ctp:129
 msgid "Receive individual training plans based on your workouts and upcoming competitions."
-msgstr ""
+msgstr "Erhalte trainingspläne, die individuell auf dein bisheriges Training und deine kommenden Wettkämpfe zugeschnitten sind."
 
 #: \views\layouts\trainingplans.ctp:75
 msgid "Training Hours"
@@ -2293,18 +2287,16 @@ msgid "Error (404) - file not found!"
 msgstr "Fehler (404) - Datei nicht gefunden!"
 
 #: \views\starts\error404.ctp:10
-#, fuzzy
 msgid "Mysteries of the universe - where did this page go? Who knows ... "
-msgstr "Mysterien des Universums- wohin ist diese Seite verschwunden? Wer weiß schon ..."
+msgstr "Eine der großen Fragen des Universums- wohin ist diese Seite verschwunden? Wer weiß ..."
 
 #: \views\starts\features.ctp:2
 msgid "Subscribe TriCoreTraining-memberships"
 msgstr "Abonniere eine TriCoreTraining-Mitgliedschaft"
 
 #: \views\starts\features.ctp:68
-#, fuzzy
 msgid "Interactive training plan"
-msgstr "Trainingsplan erstellen"
+msgstr "Interaktiver Trainingsplan"
 
 #: \views\trainingplans\show_cycles.ctp:2
 msgid "Trainingcycles"
@@ -2355,12 +2347,10 @@ msgid "Bike / Mountain-Bike"
 msgstr "Rennrad / Mountainbike"
 
 #: \views\trainingstatistics\edit_training.ctp:68;69
-#, fuzzy
 msgid "Enter a distance for your workout"
 msgstr "Gibt eine Distanz für dein Training an"
 
 #: \views\trainingstatistics\edit_training.ctp:83;84
-#, fuzzy
 msgid "Enter a duration for your workout"
 msgstr "Gib eine Dauer für dein Training an"
 
@@ -2369,7 +2359,6 @@ msgid "Duration (HH:MM:SS)"
 msgstr "Dauer (HH:MM:SS)"
 
 #: \views\trainingstatistics\edit_training.ctp:97;98
-#, fuzzy
 msgid "Enter an average heart rate for your workout"
 msgstr "Gib eine durchschnittliche Herzfrequenz für das Training ein"
 
@@ -3142,7 +3131,6 @@ msgid "Next steps to use TriCoreTraining"
 msgstr "Nächsten Schritte um TriCoreTraining zu benutzen"
 
 #: \views\users\index.ctp:22
-#, fuzzy
 msgid "Define your competitions (goals)"
 msgstr "Definiere Wettkämpfe"
 
