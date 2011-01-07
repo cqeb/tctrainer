@@ -68,7 +68,7 @@
                         <th><?php __('Trainingplan'); ?></th>
                         <td>
                         <?php echo $data['timeinterval']; ?> <?php __('month(s)'); ?><br />
-                        <?php __('From'); ?> <?php echo $data['payed_from']; ?> <?php __('to'); ?> <?php echo $data['payed_to']; ?></td>
+                        <?php __('From'); ?> <?php echo $data['paid_from']; ?> <?php __('to'); ?> <?php echo $data['paid_to']; ?></td>
                         <td class="currency"><?php echo $data['currency'] . ' ' . $data['price']; ?></td>
                    </tr>
                    <tr>

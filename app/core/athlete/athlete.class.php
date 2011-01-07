@@ -100,7 +100,7 @@ class Athlete {
 		$this->threshold = $user["lactatethreshold"];
 		$this->bikethreshold = $user["bikelactatethreshold"];
 		$this->sport = $user["typeofsport"];
-		$this->valid = (($user['payed_to'] > date('Y-m-d') && $user['tos'] === '1'));
+		$this->valid = (($user['paid_to'] > date('Y-m-d') && $user['tos'] === '1'));
 
 		// initialize his schedule
 		if ($DB) {

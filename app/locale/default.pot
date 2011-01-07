@@ -2044,7 +2044,7 @@ msgid "After successful subscription your TriCoreTraining-Plans will be generate
 msgstr ""
 
 #: \views\payments\initiate.ctp:23
-msgid "(including your already payed or free training-interval). You can cancel your subscription at any time and your payments will end after this period."
+msgid "(including your already paid or free training-interval). You can cancel your subscription at any time and your payments will end after this period."
 msgstr ""
 
 #: \views\payments\initiate.ctp:25
@@ -2273,7 +2273,7 @@ msgid "we want to make you HAPPY again!"
 msgstr ""
 
 #: \views\payments\unsubscribe_triplans.ctp:34
-msgid "You will be redirected to Paypal.com and have to unsubscribe there. IMPORTANT! You cancel all payments in the future. Refunding of already payed fees is not possible. The current subscription will automatically end with"
+msgid "You will be redirected to Paypal.com and have to unsubscribe there. IMPORTANT! You cancel all payments in the future. Refunding of already paid fees is not possible. The current subscription will automatically end with"
 msgstr ""
 
 #: \views\starts\error404.ctp:2

@@ -194,7 +194,7 @@ class UsersController extends AppController {
 		$this->userid = $transactions['forgotten_userid'];
 
 		// after usage - delete transaction information
-		$this->Transactionhandler->delete_transaction( $this->Transaction, $this->transaction_id );
+		$this->Transactionhandler->_delete_transaction( $this->Transaction, $this->transaction_id );
 
 		if ( $this->email )
 		{
@@ -204,7 +204,7 @@ class UsersController extends AppController {
 			{
 				// create a random password
 				$randompassword = rand(111111, 999999);
-        $randompassword_enc = md5( $randompassword );
+        		$randompassword_enc = md5( $randompassword );
         
 				// save single field to user profile
 				$this->User->id = $this->userid;
@@ -376,7 +376,7 @@ class UsersController extends AppController {
                'typeofsport', 
                'tos',
                'passwordcheck', 'emailcheck', 
-               'payed_from', 'payed_to',
+               'paid_from', 'paid_to',
                'rookie', 'weeklyhours',
                'newsletter', 'coldestmonth', 'dayofheaviesttraining',
                'publicprofile','publictrainings',
@@ -541,7 +541,7 @@ class UsersController extends AppController {
           'fieldList' => array( 
           'typeofsport', 'rookie', 'tos', 'weeklyhours',
           'dayofheaviesttraining', 'maximumheartrate', 'unit', 'unitdate',
-          'coldestmonth', 'level', 'payed_from', 'payed_to', 'yourlanguage'
+          'coldestmonth', 'level', 'paid_from', 'paid_to', 'yourlanguage'
           ) ) ) )
           {
           	//$this->_sendNewUserMail( $this->User->id );
@@ -581,8 +581,8 @@ class UsersController extends AppController {
 			$this->set('user', $User);
 			$this->set('smtperrors', '');
 
-			$this->set('payed_from', $this->Unitcalc->check_date($this->data['User']['payed_from']));
-			$this->set('payed_to', $this->Unitcalc->check_date($this->data['User']['payed_to']));
+			$this->set('paid_from', $this->Unitcalc->check_date($this->data['User']['paid_from']));
+			$this->set('paid_to', $this->Unitcalc->check_date($this->data['User']['paid_to']));
 
 			$session_register_userid = $this->Session->read('register_userid');
 
@@ -1493,10 +1493,10 @@ class UsersController extends AppController {
 			if ( $user['level'] == 'freemember' && $user['notifications'] != 1 )
 			{
 				// if freemember remind him/her of premiumservice
-				$payed_to = strtotime( $user['payed_to'] );
-        		//echo $user['payed_to'] . ' ' . date('w', time()) . '<br /><br />';
+				$paid_to = strtotime( $user['paid_to'] );
+        		//echo $user['paid_to'] . ' ' . date('w', time()) . '<br /><br />';
 				// from 1 week to end remind user of premium service
-				if ( ( time() > ( $payed_to - ( 86400 * 7 ) ) ) && ( date('w', time()) == $check_on_day ) ) 
+				if ( ( time() > ( $paid_to - ( 86400 * 7 ) ) ) && ( date('w', time()) == $check_on_day ) ) 
 				{
 					$mailsubject = __('My TriCoreTraining coach for the costs of a coffee a week.', true);
 					$mailtemplate = 'premiumreminder';
@@ -1505,6 +1505,13 @@ class UsersController extends AppController {
 			}
 
 		}
+
+		$this->loadModel('Transaction');
+
+		// delete old transactions
+		$this->Transactionhandler->_delete_all_transactions( $this->Transaction );
+
+
 	}
 
   /**
@@ -1715,7 +1722,7 @@ class UsersController extends AppController {
           $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
       }   
 
-      if ( ( strtotime( $u['payed_to'] ) < time() ) && $u['level'] != 'freemember' )
+      if ( ( strtotime( $u['paid_to'] ) < time() ) && $u['level'] != 'freemember' )
       {
           // set level = paymember
           $this->User->id = $u['id'];

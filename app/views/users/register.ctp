@@ -232,11 +232,11 @@ if ( isset( $tos_warning ) && $tos_warning == 'true' )
 **/
 
 // calculate FREE training period
-$payed_from = date( "Y-m-d", time() );
-$payed_to = date( "Y-m-d", time() + (30*24*60*60) );
+$paid_from = date( "Y-m-d", time() );
+$paid_to = date( "Y-m-d", time() + (30*24*60*60) );
 
-echo $form->input( 'payed_from', array('type' => 'hidden', 'value' => $payed_from));
-echo $form->input( 'payed_to', array('type' => 'hidden', 'value' => $payed_to));
+echo $form->input( 'paid_from', array('type' => 'hidden', 'value' => $paid_from));
+echo $form->input( 'paid_to', array('type' => 'hidden', 'value' => $paid_to));
 
 echo $form->hidden('id');
 

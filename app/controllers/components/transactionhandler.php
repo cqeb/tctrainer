@@ -54,9 +54,19 @@ class TransactionhandlerComponent extends Object {
             }
    }
 
-   function delete_transaction( $model, $tid )
+   function _delete_transaction( $model, $tid )
    {
             $model->deleteAll("Transaction = \"$tid\"");
+            return true;
+   }
+
+   function _delete_old_transaction( $model )
+   {
+   			$until_date = date( 'Y-m-d', (time()-86400*14) );
+   			$conditions = 'created BETWEEN \"2010-01-01\" AND \"' . $until_date . '\"';
+			
+			// PRIO (B) currently deactivated
+            //$model->deleteAll($conditions);
             return true;
    }
 

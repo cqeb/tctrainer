@@ -72,3 +72,6 @@ CREATE TABLE IF NOT EXISTS `triswimworkouttypesequence` (
 2011-01-06 KMS
 DROP TABLE  `starts`;
 
+2011-01-07 KMS
+ALTER TABLE `users` CHANGE `payed_from` `paid_from` DATE NOT NULL;
+ALTER TABLE `users` CHANGE `payed_to` `paid_to` DATE NOT NULL;

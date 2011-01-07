@@ -33,7 +33,7 @@
                         <td><?php echo $html->link(__('Invoice-No.', true) . ' ' . $payment['Payment']['invoice'],"/payments/show_invoice/".$payment['Payment']['id']); ?></td>
                         <td><?php echo $payment['Payment']['timeinterval']; ?></td>
                         <td><?php echo $unitcalc->format_number($payment['Payment']['price'],2,'','.'); ?> <?php echo $payment['Payment']['currency']; ?></td>
-                        <td><?php echo $unitcalc->check_date($payment['Payment']['payed_from']); ?> to <br /><?php echo $unitcalc->check_date($payment['Payment']['payed_to']); ?></td>
+                        <td><?php echo $unitcalc->check_date($payment['Payment']['paid_from']); ?> to <br /><?php echo $unitcalc->check_date($payment['Payment']['paid_to']); ?></td>
                         <td><?php echo $unitcalc->check_date($payment['Payment']['created']); ?></td>
                         <?php /** <td><?php echo $html->link('Delete', array('action' => 'delete', 'id' => $payment['Payment']['id']), null, 'Are you sure?' )?></td> **/ ?> 
                    </tr>

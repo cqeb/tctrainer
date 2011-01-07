@@ -33,8 +33,8 @@ class PaymentsController extends AppController {
             // maybe user has not added his country yet.
             if ( !$currency ) $currency = 'EUR';
 
-            $this->set('payed_from', $this->Unitcalc->check_date($results['User']['payed_from']));
-            $this->set('payed_to', $this->Unitcalc->check_date($results['User']['payed_to']));
+            $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
+            $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
             $this->set('pay_member', $results['User']['level']);
             $this->set('currency', $currency);
             $this->set('statusbox', 'statusbox_none');
@@ -51,8 +51,8 @@ class PaymentsController extends AppController {
             $results['User'] = $this->Session->read('userobject');
             $session_userid = $results['User']['id'];
 
-            $this->set('payed_from', $this->Unitcalc->check_date($results['User']['payed_from']));
-            $this->set('payed_to', $this->Unitcalc->check_date($results['User']['payed_to']));
+            $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
+            $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
             $this->set('pay_member', $results['User']['level']);
             $statusbox = 'statusbox_none';
 
@@ -133,17 +133,17 @@ class PaymentsController extends AppController {
             $today = date( 'Y-m-d', $today_ts );
             // calculate how many days the trial period is still active
             // user's paymentplan starts after this period
-            $days_to_end = $this->Unitcalc->diff_dates( $today, $results['User']['payed_to'] );
+            $days_to_end = $this->Unitcalc->diff_dates( $today, $results['User']['paid_to'] );
 
             if ( $days_to_end <= 0 )
             {
-               $results['User']['payed_new_from'] = $today;
-               $results['User']['payed_new_to'] = date( 'Y-m-d', $today_ts + ( $timeinterval * 31 * 24 * 3600 ) );
+               $results['User']['paid_new_from'] = $today;
+               $results['User']['paid_new_to'] = date( 'Y-m-d', $today_ts + ( $timeinterval * 31 * 24 * 3600 ) );
                $results['User']['days_to_end'] = 0;
             } else
             {
-               $results['User']['payed_new_from'] = $results['User']['payed_to'];
-               $results['User']['payed_new_to'] = $this->Unitcalc->date_plus_days( $results['User']['payed_to'], $timeinterval * 31 );
+               $results['User']['paid_new_from'] = $results['User']['paid_to'];
+               $results['User']['paid_new_to'] = $this->Unitcalc->date_plus_days( $results['User']['paid_to'], $timeinterval * 31 );
                $results['User']['days_to_end'] = $days_to_end;
             }
 
@@ -162,10 +162,10 @@ class PaymentsController extends AppController {
                $tid = $this->Transactionhandler->handle_transaction( $this->Transaction, '', 'create', 'pay_timeinterval', $timeinterval );
                $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_currency', $this->Unitcalc->currency_for_country($results['User']['country']) );
                $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_price', $price_array[$timeinterval]);
-               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_payed_from', $results['User']['payed_from']);
-               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_payed_to', $results['User']['payed_to']);
-               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_payed_new_from', $results['User']['payed_new_from']);
-               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_payed_new_to', $results['User']['payed_new_to']);
+               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_paid_from', $results['User']['paid_from']);
+               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_paid_to', $results['User']['paid_to']);
+               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_paid_new_from', $results['User']['paid_new_from']);
+               $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_paid_new_to', $results['User']['paid_new_to']);
                $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_member', $results['User']['level']);
                $this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'pay_userid', $session_userid);
 
@@ -174,11 +174,11 @@ class PaymentsController extends AppController {
             }
 
             $this->set('timeinterval', $timeinterval);
-            $this->set('payed_from', $this->Unitcalc->check_date($results['User']['payed_from']));
-            $this->set('payed_to', $this->Unitcalc->check_date($results['User']['payed_to']));
-            $this->set('payed_new_from', $this->Unitcalc->check_date($results['User']['payed_new_from']));
-            $this->set('payed_new_to', $this->Unitcalc->check_date($results['User']['payed_new_to']));
-            $this->set('payed_from_now', $this->Unitcalc->check_date(date('Y-m-d', time())));
+            $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
+            $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
+            $this->set('paid_new_from', $this->Unitcalc->check_date($results['User']['paid_new_from']));
+            $this->set('paid_new_to', $this->Unitcalc->check_date($results['User']['paid_new_to']));
+            $this->set('paid_from_now', $this->Unitcalc->check_date(date('Y-m-d', time())));
             $this->set('level', $results['User']['level']);
             $this->set('testing', $testing);
             $this->set('currency_code', $this->Unitcalc->currency_for_country($results['User']['country']));
@@ -285,21 +285,21 @@ class PaymentsController extends AppController {
                                   $this->data['Payment']['payment_transaction_id'] = $this->payment_tid;
                                   // this days PAYPAL gave us a positive verification
                                   $this->data['Payment']['payment_confirmed'] = 1;
-                                  $this->data['Payment']['payed_from'] = $transactions['pay_payed_new_from'];
-                                  $this->data['Payment']['payed_to'] = $transactions['pay_payed_new_to'];
+                                  $this->data['Payment']['paid_from'] = $transactions['pay_paid_new_from'];
+                                  $this->data['Payment']['paid_to'] = $transactions['pay_paid_new_to'];
 
                                   if ($this->Payment->save( $this->data, array(
                                               'validate' => true,
                                               'fieldList' => array( 'user_id', 'invoice', 'timeinterval', 'price', 'currency',
-                                              'payment_transaction_id', 'payment_confirmed', 'payed_from', 'payed_to'
+                                              'payment_transaction_id', 'payment_confirmed', 'paid_from', 'paid_to'
                                   ))))
                                   {
                                               // change user-model - set new level and period of training
                                               // save single fields
                                               $this->User->id = $transactions['pay_userid'];
                                               $now_ts = date('Y-m-d', time());
-                                              $this->User->savefield('payed_from', $now_ts, false);
-                                              $this->User->savefield('payed_to', $transactions['pay_payed_new_to'], false);
+                                              $this->User->savefield('paid_from', $now_ts, false);
+                                              $this->User->savefield('paid_to', $transactions['pay_paid_new_to'], false);
                                               $this->User->savefield('level', 'paymember', false);
 
                                               $this->_sendInvoice($transactions, 'invoice');
@@ -441,10 +441,10 @@ class PaymentsController extends AppController {
             if ( $mailtype == 'invoice' )
                            $this->set('invoice', $pay['pay_invoice']);
 
-            $this->set('payed_from', $this->Unitcalc->check_date($pay['pay_payed_from']));
-            $this->set('payed_to', $this->Unitcalc->check_date($pay['pay_payed_to']));
-            $this->set('payed_new_from', $this->Unitcalc->check_date($pay['pay_payed_new_from']));
-            $this->set('payed_new_to', $this->Unitcalc->check_date($pay['pay_payed_new_to']));
+            $this->set('paid_from', $this->Unitcalc->check_date($pay['pay_paid_from']));
+            $this->set('paid_to', $this->Unitcalc->check_date($pay['pay_paid_to']));
+            $this->set('paid_new_from', $this->Unitcalc->check_date($pay['pay_paid_new_from']));
+            $this->set('paid_new_to', $this->Unitcalc->check_date($pay['pay_paid_new_to']));
             $this->set('userobject', $this->Session->read('userobject'));
 
             $this->Email->to = $User['User']['email'];

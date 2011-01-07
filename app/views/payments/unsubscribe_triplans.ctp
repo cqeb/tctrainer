@@ -14,7 +14,7 @@
                    <?php } ?>
 
                    <div class="statusbox ok">
-                   <?php __('Your current membership is valid from'); echo ' ' . $payed_from . ' '; __('to'); echo ' ' . $payed_to; ?>.
+                   <?php __('Your current membership is valid from'); echo ' ' . $paid_from . ' '; __('to'); echo ' ' . $paid_to; ?>.
                    <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>.
                    </div><br />
                    
@@ -31,7 +31,7 @@
                    echo $form->hidden('canceled');
 ?>
                    <br /><br />
-                   <?php __('You will be redirected to Paypal.com and have to unsubscribe there. IMPORTANT! You cancel all payments in the future. Refunding of already payed fees is not possible. The current subscription will automatically end with'); ?><?php echo ' ' . $payed_to; ?>.
+                   <?php __('You will be redirected to Paypal.com and have to unsubscribe there. IMPORTANT! You cancel all payments in the future. Refunding of already paid fees is not possible. The current subscription will automatically end with'); ?><?php echo ' ' . $paid_to; ?>.
                    <br /><br />
 <?php
                    $button_url = '/img/btn_unsubscribe_LG.gif';

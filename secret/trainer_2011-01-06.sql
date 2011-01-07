@@ -174,8 +174,8 @@ CREATE TABLE IF NOT EXISTS `payments` (
   `currency` varchar(3) COLLATE utf8_unicode_ci DEFAULT NULL,
   `payment_transaction_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `payment_confirmed` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `payed_from` date DEFAULT NULL,
-  `payed_to` date DEFAULT NULL,
+  `paid_from` date DEFAULT NULL,
+  `paid_to` date DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `modified` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -477,8 +477,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `myimage` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `mybike` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `level` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'freemember',
-  `payed_from` date NOT NULL,
-  `payed_to` date NOT NULL,
+  `paid_from` date NOT NULL,
+  `paid_to` date NOT NULL,
   `canceled` tinyint(1) NOT NULL,
   `cancellation_reason` text COLLATE utf8_unicode_ci NOT NULL,
   `advanced_features` tinyint(4) NOT NULL,
@@ -491,7 +491,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Daten für Tabelle `users`
 --
 
-INSERT INTO `users` (`id`, `firstname`, `lastname`, `gender`, `phonemobile`, `address`, `zip`, `city`, `country`, `email`, `emailcheck`, `birthday`, `password`, `passwordcheck`, `maximumheartrate`, `lactatethreshold`, `bikelactatethreshold`, `youknowus`, `newsletter`, `notifications`, `mytrainingsphilosophy`, `myrecommendation`, `typeofsport`, `tos`, `weight`, `targetweight`, `targetweightcheck`, `targetweightdate`, `height`, `coldestmonth`, `unit`, `unitdate`, `publicprofile`, `publictrainings`, `rookie`, `traininglevel`, `weeklyhours`, `dayofheaviesttraining`, `activated`, `deactivated`, `yourlanguage`, `myimage`, `mybike`, `level`, `payed_from`, `payed_to`, `canceled`, `cancellation_reason`, `advanced_features`, `created`, `modified`) VALUES
+INSERT INTO `users` (`id`, `firstname`, `lastname`, `gender`, `phonemobile`, `address`, `zip`, `city`, `country`, `email`, `emailcheck`, `birthday`, `password`, `passwordcheck`, `maximumheartrate`, `lactatethreshold`, `bikelactatethreshold`, `youknowus`, `newsletter`, `notifications`, `mytrainingsphilosophy`, `myrecommendation`, `typeofsport`, `tos`, `weight`, `targetweight`, `targetweightcheck`, `targetweightdate`, `height`, `coldestmonth`, `unit`, `unitdate`, `publicprofile`, `publictrainings`, `rookie`, `traininglevel`, `weeklyhours`, `dayofheaviesttraining`, `activated`, `deactivated`, `yourlanguage`, `myimage`, `mybike`, `level`, `paid_from`, `paid_to`, `canceled`, `cancellation_reason`, `advanced_features`, `created`, `modified`) VALUES
 (3, 'Klaus-M.', 'Schremser', 'm', NULL, '', '', '', '', 'tri@schremser.com', 1, '1975-11-26', 'e7efda40b1c94805070cd9bf9638ae27', 1, 184, 156, 149, NULL, 1, 0, NULL, '', 'TRIATHLON HALFIRONMAN', 1, '82.00000', NULL, 0, NULL, NULL, '1', 'metric', 'ddmmyyyy', 0, 0, 0, 0, 8, 'FRI', 1, 0, 'eng', '', '', 'freemember', '2011-01-06', '2011-02-05', 0, '', 0, '2011-01-06 11:58:29', '2011-01-06 14:31:43');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

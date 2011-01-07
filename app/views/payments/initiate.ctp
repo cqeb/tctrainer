@@ -13,14 +13,14 @@
 <?php
 
 __('Your membership is valid from');
-echo ' <b>' . $payed_from . ' ';
+echo ' <b>' . $paid_from . ' ';
 __('to');
-echo ' ' . $payed_to . '</b>.<br /><br />';
+echo ' ' . $paid_to . '</b>.<br /><br />';
 __('After successful subscription your TriCoreTraining-Plans will be generated from');
-echo ' <b>' . $payed_from_now . ' ';
+echo ' <b>' . $paid_from_now . ' ';
 __('to');
-echo ' ' . $payed_new_to . '</b> ';
-__('(including your already payed or free training-interval). You can cancel your subscription at any time and your payments will end after this period.');
+echo ' ' . $paid_new_to . '</b> ';
+__('(including your already paid or free training-interval). You can cancel your subscription at any time and your payments will end after this period.');
 echo '<br /><br /><h3>';
 __('Your investment');
 echo ': ' . $price . ' ' . $currency_code . '</h3>';

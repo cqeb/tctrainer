@@ -10,8 +10,8 @@
 
 <?php __('Trainingplan'); ?> | <?php echo $timeinterval; ?> <?php __('month(s)'); ?> | <?php echo $currency . ' ' . $price; ?>
 
-<?php __('Previous period:'); ?> <?php echo $payed_from; ?> <?php __('to'); ?> <?php echo $payed_to; ?>
-<?php __('New period:'); ?> <?php echo $payed_new_from; ?> <?php __('to'); ?> <?php echo $payed_new_to; ?>
+<?php __('Previous period:'); ?> <?php echo $paid_from; ?> <?php __('to'); ?> <?php echo $paid_to; ?>
+<?php __('New period:'); ?> <?php echo $paid_new_from; ?> <?php __('to'); ?> <?php echo $paid_new_to; ?>
 
 <?php __('Yours, Clemens'); ?>
 

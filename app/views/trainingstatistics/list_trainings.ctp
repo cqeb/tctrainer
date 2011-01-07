@@ -59,14 +59,8 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
     <td style="text-align:right;">
 <?php 
 
-$facebookurl = "http://www.facebook.com/sharer.php?t=" .
-urlencode(__('My last training', true) . ' ') . $distance['amount'] . 
-urlencode(' ' . $distance['unit'] . ' ' . __('in',true) . ' ') . $duration . 
-urlencode(' ' . __('WOW',true)) . '&u=http://tricoretraining.com'; 
-
-$facebookurl = '/trainer/starts/index/distance:'.$distance['amount'].'/distance_unit:'. $distance['unit'] .'/duration:' . $duration . '/stype:' . $stype;
-
-$facebookurl = 'http://www.facebook.com/sharer.php?u=http://www.tricoretraining.com/fb.html';
+$facebookurl = "http://www.facebook.com/sharer.php?u=http://tricoretraining.com"; 
+$facebookurl .= '/trainer/starts/index/distance:'.$distance['amount'].'/distance_unit:'. $distance['unit'] .'/duration:' . $duration . '/stype:' . $stype;
 
 $twitterurl = 
 urldecode(
