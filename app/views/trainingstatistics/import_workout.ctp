@@ -6,10 +6,12 @@
                    <?php echo $form->create('Trainingstatistic', array('action' => 'import_workout', 'type' => 'file')); ?>
                    <fieldset>
                    <legend><?php
+                   
 if ( isset( $newimportfile ) )
     __('Check import data und confirm import!');
 else
-    __('Upload and import your workouts easily!'); 
+    __('Upload and import your workouts easily!');
+	 
 ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
@@ -42,7 +44,8 @@ if ( !isset( $newimportfile ) )
 } else
 {
     echo '<div class="statusbox">'; 
-    echo $form->submit(__('Confirm import', true), array( 'div' => false ) ); 
+    echo $form->submit(__('Confirm import', true), array( 'div' => false ) );
+	echo '&nbsp;&nbsp;'; 
     echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
     echo '</div>';
     echo $form->hidden('hiddenimportfile');
@@ -60,19 +63,10 @@ if ( isset( $outputfile ) ) {
 <table border="0">
 <tr>
 <th><?php __('Date'); ?></th>
-<!--<th><?php __('Time'); ?></th>-->
 <th><?php __('Name'); ?></th>
 <th><?php __('Sport'); ?></th>
 <th><?php __('Distance'); ?></th>
 <th><?php __('Duration'); ?></th>
-<!--
-<th>Workout</th>
-<th>Competition</th>
-<th>Comment</th>
-<th>Location</th>
-<th>Weight</th>
-<th>URL</th>
--->
 <th><?php __('Status'); ?></th>
 </tr>
 <?php echo $outputfile; ?>
@@ -80,7 +74,10 @@ if ( isset( $outputfile ) ) {
 <?php
     echo '<div class="statusbox">';
     echo $form->submit(__('Confirm import', true));
+	/*
+	echo '&nbsp;&nbsp;'; 
     echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
+    */
     echo '</div>'; 
 
 }

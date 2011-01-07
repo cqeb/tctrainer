@@ -58,7 +58,7 @@ if ( $error == 'address' )
 ?>
 
 <br /><br />
-<div class="errorbox">
+<div class="statusbox error">
 <?php 
 
 __('Sorry, but we miss your address which we need for your invoice. Please be kind and add it now.');
@@ -74,7 +74,7 @@ echo $html->link(__('Add address',true),array('controller' => 'users', 'action' 
 {
 ?>
 
-            <div class="errorbox">
+            <div class="statusbox error">
             <?php __('You can just buy a new subscription if your subscription-period is less than 90 days. Sorry.'); ?>
             </div>
 

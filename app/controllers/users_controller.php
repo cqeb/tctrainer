@@ -150,17 +150,17 @@ class UsersController extends AppController {
 			// captcha checks for your correct entry
 			if( !$this->Recaptcha->valid($this->params['form']) )
 			{
-				$statusbox = 'errorbox';
+				$statusbox = 'statusbox error';
 				$this->Session->setFlash(__('Sorry Captcha not correct!',true));
 				//$this->redirect('/users/password_forgotten');
 			}
 
-			if ( $statusbox != 'errorbox' )
+			if ( $statusbox != 'statusbox error' )
 			{
 				$results = $this->User->findByEmail($this->data['User']['email']);
 				if ( !is_array($results) )
 				{
-					$statusbox = 'errorbox';
+					$statusbox = 'statusbox error';
 					$this->Session->setFlash(__('E-mail was not found in database!',true));
 				} else
 				{
@@ -217,7 +217,7 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Your new password is sent to your e-mail.',true));
 			} else
 			{
-			  $statusbox = 'errorbox';
+			  $statusbox = 'statusbox error';
         $flash_message = __('Something is wrong - sorry.', true) . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support.', true) . '</a>';
 				$this->Session->setFlash($flash_message);
 			}
@@ -402,7 +402,7 @@ class UsersController extends AppController {
           //pr($this->User->invalidFields( ));
       }
 
-      $statusbox = 'errorbox';
+      $statusbox = 'statusbox error';
       $this->Session->setFlash(__('Some errors occured',true));
       $this->set('statusbox', $statusbox);
     }
@@ -488,7 +488,7 @@ class UsersController extends AppController {
 			} else
 			{
 			  $this->data['User']['password'] = $save_pw; 
-				$statusbox = 'errorbox';
+				$statusbox = 'statusbox error';
 				$this->Session->setFlash(__('Some errors occured',true));
 				$this->set('statusbox', $statusbox);
 			}
@@ -501,7 +501,7 @@ class UsersController extends AppController {
     die();
 
 		$this->pageTitle = __('Registration - Step 2/2',true);
-		$statusbox = 'okbox';
+		$statusbox = 'statusbox ok';
 
 		if (empty($this->data))
 		{
@@ -556,7 +556,7 @@ class UsersController extends AppController {
           	$this->redirect(array('action' => 'register_finish', $this->User->id));
           } else
           {
-          	$statusbox = 'errorbox';
+          	$statusbox = 'statusbox error';
           	$this->Session->setFlash(__('Some errors occured',true));
           	$this->set('statusbox', $statusbox);
           }
@@ -806,7 +806,7 @@ class UsersController extends AppController {
 		if ( $bmi_return['bmi'] < 60 && $bmi_return['bmi'] > 10 )
 		{
 			$bmi_message = __("Your BMI is",true) . ' ' . $bmi_return['bmi'] . '. ' . __("Your BMI-check says:",true) . ' ' . $bmi_return['bmi_status'] . ".";
-      $class = "okbox";
+      $class = "statusbox ok";
 		} else
 		{
 			$bmi_message = __('Please check your height and weight again - we got an incorrect BMI', true) . ' ' . $bmi_return['bmi'] . ') - ' . __("thank you", true) . '.';
@@ -858,12 +858,12 @@ class UsersController extends AppController {
                       $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
                 }
            }
-      	   $statusbox = 'okbox';
+      	   $statusbox = 'statusbox ok';
       	   $this->Session->setFlash(__('User profile saved.',true));
 
       } else
       {
-      	   $statusbox = 'errorbox';
+      	   $statusbox = 'statusbox error';
       	   $this->Session->setFlash(__('Some errors occured.',true));
       }
 		}
@@ -896,7 +896,7 @@ class UsersController extends AppController {
 		        'lactatethreshold',
 		        'bikelactatethreshold'
 	        	)))) {
-	        	$statusbox = 'okbox';
+	        	$statusbox = 'statusbox ok';
 	        	$this->Session->setFlash(__('Traininginfo saved.', true));
 	        	// recalculate time track by updating athlete
 	        	$this->Provider->athlete->setTrainingTime(
@@ -904,7 +904,7 @@ class UsersController extends AppController {
 	        	);
 	        } else {
 	        	$this->Session->setFlash(__('Some errors occured.', true));
-	        	$statusbox = 'errorbox';
+	        	$statusbox = 'statusbox error';
 	        }
 		}
 		$this->set('statusbox', $statusbox);
@@ -1049,7 +1049,7 @@ class UsersController extends AppController {
            ) ) ) )
            {
                  $this->Session->setFlash(__('Your settings are saved.',true).' '.$additional_message);
-                 $statusbox = 'okbox';
+                 $statusbox = 'statusbox ok';
         
                  // convert back in case of error and no redirect
                  if ( isset( $this->data['User']['weight'] ) )
@@ -1069,7 +1069,7 @@ class UsersController extends AppController {
                    	  $this->data['User']['height'] = $this->Unitcalc->check_height( $this->Unitcalc->check_decimal( $this->data['User']['height'] ), 'show', 'single' );
                  if ( isset( $this->data['User']['targetweight'] ) )
                    	  $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
-                 $statusbox = 'errorbox';
+                 $statusbox = 'statusbox error';
                  if ( $targetweighterror )
                     $this->Session->setFlash(__($targetweighterror,true));
                  else
@@ -1133,13 +1133,13 @@ class UsersController extends AppController {
           'mytrainingsphilosophy'
           ) ) ) )
           {
-          	$statusbox = 'okbox';
+          	$statusbox = 'statusbox ok';
           	$this->Session->setFlash(__('Image(s) saved.',true));
           	//$this->redirect(array('action' => 'edit_images', $this->User->id));
           } else
           {
           	$this->Session->setFlash(__('Some errors occured.',true));
-          	$statusbox = 'errorbox';
+          	$statusbox = 'statusbox error';
           }
 		}
 		$this->set('statusbox', $statusbox);
@@ -1190,10 +1190,10 @@ class UsersController extends AppController {
          	$this->Session->setFlash(__('Metric information saved.',true));
          	$this->Session->write('session_unit', $this->data['User']['unit']);
          	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-         	$statusbox = 'okbox';
+         	$statusbox = 'statusbox ok';
          } else
          {
-         	$statusbox = 'errorbox';
+         	$statusbox = 'statusbox error';
          	$this->Session->setFlash(__('Some errors occured.',true));
          }
 		}
@@ -1243,7 +1243,7 @@ class UsersController extends AppController {
              ) ) ) )
              {
              	  $this->Session->setFlash(__('New password saved.',true));
-             	  $statusbox = 'okbox';
+             	  $statusbox = 'statusbox ok';
                 $this->data['User']['password'] = '';
                 $this->data['User']['passwordapprove'] = '';
                 
@@ -1253,7 +1253,7 @@ class UsersController extends AppController {
     
                 //pr($this->User->validationErrors);
                 
-             	  $statusbox = 'errorbox';
+             	  $statusbox = 'statusbox error';
              	  $this->Session->setFlash(__('Some errors occured.',true));
              }
       }

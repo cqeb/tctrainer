@@ -4,7 +4,7 @@
                    <?php echo $this->element('js_error'); ?>
 
                    <?php if ($session->check('Message.flash')) { ?>
-                   <div class="okbox">
+                   <div class="statusbox ok">
                    <?php $session->flash(); ?>
                    </div><br />
                    <?php } ?>

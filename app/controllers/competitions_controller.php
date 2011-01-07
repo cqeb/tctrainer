@@ -102,7 +102,7 @@ list all competitions with paging
                        } else
                        {
                           $this->Session->setFlash(__('Sorry. This is not your entry!', true));
-                          $this->set('statusbox', 'errorbox');
+                          $this->set('statusbox', 'statusbox error');
                           $this->redirect(array('controller' => 'Competitions', 'action' => 'list_competitions'));
                        }
                      }
@@ -246,7 +246,7 @@ list all competitions with paging
                } else
                {
 
-                     $statusbox = 'errorbox';
+                     $statusbox = 'statusbox error';
                      $this->Session->setFlash($error);
                }
             }

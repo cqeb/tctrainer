@@ -13,7 +13,7 @@
                    </div><br />
                    <?php } ?>
 
-                   <div class="okbox">
+                   <div class="statusbox ok">
                    <?php __('Your current membership is valid from'); echo ' ' . $payed_from . ' '; __('to'); echo ' ' . $payed_to; ?>.
                    <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>.
                    </div><br />

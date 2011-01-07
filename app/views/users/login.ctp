@@ -25,7 +25,7 @@ if ( $session_userid && $session_useremail )
                    <legend><?php __('Log in and start forming your body'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
-                   <div class="errorbox">
+                   <div class="statusbox error">
                    <?php $session->flash(); ?>
                    </div><br />
                    <?php } ?>
