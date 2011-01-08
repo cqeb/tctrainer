@@ -100,11 +100,17 @@ class Athlete {
 		$this->threshold = $user["lactatethreshold"];
 		$this->bikethreshold = $user["bikelactatethreshold"];
 		$this->sport = $user["typeofsport"];
-		$this->valid = (($user['paid_to'] > date('Y-m-d') && $user['tos'] === '1'));
+		if (array_key_exists('paid_to', $user)) {
+			$this->valid = (($user['paid_to'] > date('Y-m-d') && $user['tos'] === '1'));
+		} else {
+			$this->valid = false;
+		}
 
 		// initialize his schedule
 		if ($DB) {
 			$this->schedule = new Schedule($DB, $this->id);
+		} else {
+			throw new Exception("no DB object handed over on initialization of athlete");
 		}
 	}
 	
