@@ -4,3 +4,4 @@
 /.buildpath
 /app/tmp/logs/debug.log
 /app/tmp/logs/error.log
+/app/tmp

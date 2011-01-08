@@ -12,6 +12,7 @@
 
     <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
@@ -20,14 +21,11 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
 
-    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-1.3.2.min.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
-    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
 
 <?php echo $scripts_for_layout; ?>
 
@@ -73,9 +71,9 @@
 		    <div class="grid_2 avgweekly">
       		<div class="box last">
       			<label for="avg"><?php __('Training Hours'); ?></label>
-      			<input type="text" name="avg" id="avg" />
-      			<label for="week">This Week</label>
-      			<input type="text" name="week" id="week" />
+      			<input type="text" name="avg" id="avg" title="<?php __('These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected.'); ?>"/>
+      			<label for="week"><?php __('This Week'); ?></label>
+      			<input type="text" name="week" id="week" title="<?php __('This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week.'); ?>"/>
       			<a href="javascript:TrainingPlanner.resetWeeklyHours();" class="reset"><?php __('reset'); ?></a>
       		</div>
       	</div>
@@ -83,19 +81,7 @@
       	<div class="grid_4 distribution">
       		<div class="box last">
 	      		<label><?php __('Workout Balance'); ?></label>
-      			<div id="slider"></div>
-      			<!-- <div class="sporttime br">
-      				<h3><?php __('Swim'); ?> <small id="p1">0%</small></h3>
-      				<div id="time1"></div>
-      			</div>
-      			<div class="sporttime br">
-      				<h3><?php __('Bike'); ?> <small id="p2">0%</small></h3>
-      				<div id="time2"></div>
-      			</div>
-      			<div class="sporttime last br">
-      				<h3><?php __('Run'); ?> <small id="p3">0%</small></h3>
-      				<div id="time3"></div>
-      			</div>-->
+      			<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>"></div>
       		</div>
       	</div>
 	<!-- /Training hour distribution -->
@@ -111,6 +97,9 @@
 // initialize the view
 $(document).ready(function() {
  	TrainingPlanner.init('<?php echo $url; ?>', <?php echo ($weeklyhours * 60); ?>, '<?php echo $usersport; ?>', '<?php echo $advancedFeatures;?>');
+ 	jQuery('#slider').tipTip({ defaultPosition: 'top', maxWidth : "270px" });
+ 	jQuery('#avg').tipTip({ defaultPosition: 'top' });
+ 	jQuery('#week').tipTip();
 });
 
 </script>
