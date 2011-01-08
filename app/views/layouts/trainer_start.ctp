@@ -31,15 +31,14 @@ if ( isset( $distance ) && $distance != '' )
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 
-    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-1.3.2.min.js"></script>-->
+
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
-    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <!--script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script-->
-    <!--script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
 <?php echo $scripts_for_layout; ?>
 
@@ -62,6 +61,8 @@ $(document).ready(function() {
 		$($teasers[r]).fadeIn();
 		last = r;
 	}, 6000);
+	
+   $('.box.last.features a').fancybox();
 });
 </script>
 
@@ -117,15 +118,15 @@ $(document).ready(function() {
     <div class="grid_9">
     	<div class="box last features">
     		<div>
-    			<img src="/trainer/img/startpage-feature-track.jpg" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"/>
+    			<a href="/trainer/img/startpage-feature-track-big.jpg"><img src="/trainer/img/startpage-feature-track.jpg" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"/></a>
     			<p><?php __('Log your trainings, manage your competitions, and also keep track of your weight.');?></p>
     		</div>
     		<div>
-    			<img src="/trainer/img/startpage-feature-stats.jpg" alt="<?php __('Analyze your workouts');?>" title="<?php __('Analyze your workouts');?>"/>
+    			<a href="/trainer/img/startpage-feature-stats-big.jpg"><img src="/trainer/img/startpage-feature-stats.jpg" alt="<?php __('Analyze your workouts');?>" title="<?php __('Analyze your workouts');?>"/></a>
     			<p><?php __('Use detailed statistics to assess yor fitness and gain even more from your workouts.');?></p>
     		</div>
     		<div style="padding-right: 0px;">
-    			<img src="/trainer/img/startpage-feature-plans.jpg" alt="<?php __('Get individual training plans');?>" title="<?php __('Get individual training plans');?>"/>
+    			<a href="/trainer/img/startpage-feature-plans-big.jpg"><img src="/trainer/img/startpage-feature-plans.jpg" alt="<?php __('Get individual training plans');?>" title="<?php __('Get individual training plans');?>"/></a>
     			<p><?php __('Receive individual training plans based on your workouts and upcoming competitions.');?></p>
     		</div>
     	</div>

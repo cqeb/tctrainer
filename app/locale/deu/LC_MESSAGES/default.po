@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-01-07 19:06+0100\n"
-"PO-Revision-Date: 2011-01-07 19:10+0100\n"
-"Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
+"PO-Revision-Date: 2011-01-08 16:33+0100\n"
+"Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2013,7 +2013,7 @@ msgstr "Erhalte individuell auf dich abgestimmte Trainingspläne."
 
 #: \views\layouts\trainer_start.ctp:129
 msgid "Receive individual training plans based on your workouts and upcoming competitions."
-msgstr "Erhalte trainingspläne, die individuell auf dein bisheriges Training und deine kommenden Wettkämpfe zugeschnitten sind."
+msgstr "Erhalte Trainingspläne, die individuell auf dein bisheriges Training und deine kommenden Wettkämpfe zugeschnitten sind."
 
 #: \views\layouts\trainingplans.ctp:75
 msgid "Training Hours"
