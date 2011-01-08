@@ -345,8 +345,8 @@ button, input[type=submit] {
 	text-shadow: 1px 1px 1px white;
 	cursor: pointer;
 	box-shadow: 0 0 6px #bbb;
-	-webkit-box-shadow: 0 0 6px #bbb;
-	-moz-box-shadow: 0 0 6px #bbb;
+	-webkit-box-shadow: 0 0 6px rgba(0,0,0,0.4);
+	-moz-box-shadow: 0 0 6px rgba(0,0,0,0.2);
 	-webkit-transform: scale(1);
 	-webkit-transition-duration: 300ms;
 	-moz-transform: scale(1);
@@ -354,9 +354,9 @@ button, input[type=submit] {
 }
 
 button:hover, input[type=submit]:hover {
-	-webkit-box-shadow: 5px 5px 5px #ccc;
-	-moz-box-shadow: 5px 5px 5px #ccc;
-	box-shadow: 5px 5px 5px #ccc;
+	-webkit-box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+	-moz-box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.2);
 	-webkit-transform: scale(1.05);
 	-webkit-transition-duration: 500ms;
 	-moz-transform: scale(1.05);
