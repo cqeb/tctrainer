@@ -73,6 +73,12 @@ class Athlete {
 	protected $valid;
 	
 	/**
+	 * marks an user with elevated privileges
+	 * @var boolean
+	 */
+	protected $advancedFeatures = false;
+	
+	/**
 	 * database reference
 	 */
 	protected $DB;
@@ -104,6 +110,10 @@ class Athlete {
 			$this->valid = (($user['paid_to'] > date('Y-m-d') && $user['tos'] === '1'));
 		} else {
 			$this->valid = false;
+		}
+		
+		if (array_key_exists('advanced_features', $user)) {
+			$this->advancedFeatures = ($user["advanced_features"] == "1");
 		}
 
 		// initialize his schedule
@@ -203,6 +213,10 @@ class Athlete {
 	
 	public function isValid() {
 		return $this->valid;
+	}
+	
+	public function isAdvancedFeatures() {
+		return $this->advancedFeatures;
 	}
 	
 	public function getThreshold() {

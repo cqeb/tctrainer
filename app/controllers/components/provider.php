@@ -44,6 +44,11 @@ class ProviderComponent extends Object {
 	 * get a plan
 	 */
 	public function getPlan() {
+		// cut preview time to a maximum of 3 weeks
+		if (intval($_GET['o']) > 3 && !$this->athlete->isAdvancedFeatures()) {
+			$_GET['o'] == 3;
+		}
+		
 		if (!$this->athlete->isValid()) {
 			return '<div class="statusbox error"><p>' .
 				__("Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions.", true) . 

@@ -72,6 +72,8 @@ class TrainingplansController extends AppController {
 		} else {
 			$this->set('info', '<script type="text/javascript">jQuery(".box.info").hide();</script>');
 		}
+		
+		$this->set('advancedFeatures', $this->Provider->athlete->isAdvancedFeatures());
 	}
 	
 	/**

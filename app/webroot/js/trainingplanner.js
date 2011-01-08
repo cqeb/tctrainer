@@ -22,10 +22,11 @@ TrainingPlanner = {
 	 * @param weeklymins minutes for training for this week
 	 * @param usersport the user's sport
 	 */
-	init : function (url, weeklymins, usersport) {
+	init : function (url, weeklymins, usersport, advancedFeatures) {
 		var that = this;
 		this.url = url;
 		this.sports = usersport.split(',');
+		this.advancedFeatures = advancedFeatures;
 		
 		this.initDescriptionToggler();
 		
@@ -154,6 +155,10 @@ TrainingPlanner = {
 	next : function () {
 		this.offset++;
 		this.getPlan();
+		// no more previews than three months
+		if (this.offset == 3 && !this.advancedFeatures) {
+			this.n.fadeOut();
+		}
 	},
 	
 	/**
@@ -162,6 +167,9 @@ TrainingPlanner = {
 	prev : function () {
 		this.offset--;
 		this.getPlan();
+		if (this.offset < 3) {
+			this.n.fadeIn();
+		}
 	},
 	
 	/**

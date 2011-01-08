@@ -110,7 +110,7 @@
 <script language="JavaScript" type="text/javascript">
 // initialize the view
 $(document).ready(function() {
-  TrainingPlanner.init('<?php echo $url; ?>', <?php echo ($weeklyhours * 60); ?>, '<?php echo $usersport; ?>');
+ 	TrainingPlanner.init('<?php echo $url; ?>', <?php echo ($weeklyhours * 60); ?>, '<?php echo $usersport; ?>', '<?php echo $advancedFeatures;?>');
 });
 
 </script>
