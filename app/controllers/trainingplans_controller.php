@@ -3,6 +3,9 @@
 class TrainingplansController extends AppController {
 	var $name = 'Trainingplans';
 
+	var $uses = array();
+	var $useTable = false;
+		
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc');
 	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Provider');
 

@@ -18,7 +18,7 @@ class PaymentsController extends AppController {
 
    function beforeFilter()
    {
-	          parent::beforeFilter();
+	        parent::beforeFilter();
             $this->layout = 'default_trainer';
             $this->js_addon = '';
    }
@@ -97,38 +97,39 @@ class PaymentsController extends AppController {
             $tid = '';
 
             $results['User'] = $this->Session->read('userobject');
-            pr($results['User']);
-            pr($this->Session->read('userobject'));
+            //pr($results['User']);
+            //pr($this->Session->read('userobject'));
             $session_userid = $results['User']['id'];
 
             // debugging paypal
-            //$testing = 'sandbox.';
-            $testing = '';
+            $testing = 'sandbox.';
+            //$testing = '';
 
             $timeinterval = $this->params['named']['t'];
             if ( !$timeinterval ) $timeinterval = 1;
 
             // TODO use final prices // diffentiate between USD EUR?
-            /**
-            if ( $this->Unitcalc->currency_for_country($results['User']['country']) == 'USD' )
+            if ( $_SERVER['HTTP_HOST'] == 'localhost' )
             {
-              $price_array = array( '1' => '14.90', '3' => '39.90', '6' => '74.90', '12' => '139.90' );
-            } else 
-            {
-              $price_array = array( '1' => '9.90', '3' => '26.90', '6' => '49.90', '12' => '94.90' );
-            }
-            **/
+            	$price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
+            } else
+			{
+	            if ( $this->Unitcalc->currency_for_country($results['User']['country']) == 'USD' )
+	            {
+	              $price_array = array( '1' => '14.90', '3' => '39.90', '6' => '74.90', '12' => '139.90' );
+	            } else 
+	            {
+	              $price_array = array( '1' => '9.90', '3' => '26.90', '6' => '49.90', '12' => '94.90' );
+	            }
+			}
             
-            $price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
-
             // check address in user profile - otherwise redirect to edit profile
             // user has to give us an address for invoice
             if ( !$results['User']['address'] || !$results['User']['zip'] || !$results['User']['city'] || !$results['User']['country'] )
             {
                  $error = 'address';
-            } else
-            { }
-
+            } 
+			
             $today_ts = time();
             $today = date( 'Y-m-d', $today_ts );
             // calculate how many days the trial period is still active

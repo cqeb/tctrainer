@@ -38,8 +38,10 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-if ( $_SERVER['HTTP_HOST'] == 'localhost' ) Configure::write('debug', 2);
-else Configure::write('debug', 0);
+if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+	Configure::write('debug', 2);
+else 
+	Configure::write('debug', 0);
 
 /**
  * Application wide charset encoding
@@ -138,7 +140,11 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
  * Turn off all caching application-wide.
  *
  */
-Configure::write('Cache.disable', true);
+if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+ 	Configure::write('Cache.disable', true);
+else
+ 	Configure::write('Cache.disable', true);
+		
 /**
  * Enable cache checking.
  *
@@ -190,7 +196,8 @@ Configure::write('Session.cookie', 'CAKEPHP');
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
  */
-Configure::write('Session.timeout', '120');
+Configure::write('Session.timeout', '320000');
+
 /**
  * If set to false, sessions are not automatically started.
  */

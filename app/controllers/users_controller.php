@@ -50,8 +50,7 @@ class UsersController extends AppController {
 			{
 		      $this->User->set( $this->data );
 		
-		      if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
-		      { }
+		      $this->User->saveAll($this->data, array('validate' => 'only')); 
 
       		// check submitted email address against database
 			$results = $this->User->findByEmail($this->data['User']['email']);
@@ -70,7 +69,7 @@ class UsersController extends AppController {
 						$cookie['email'] = $results['User']['email'];
 						$cookie['userid'] = $results['User']['id'];
 
-						Configure::write('Session.timeout', $session_timeout);
+						//Configure::write('Session.timeout', $session_timeout);
 						$this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
 					}
 
@@ -297,6 +296,30 @@ class UsersController extends AppController {
       // we do not ask for "where do you know us from?" - for Clemens' sake :)
       $this->data['User']['dayofheaviesttraining'] = 'FRI';
 
+		// locate your country automatically
+		$countries = $this->Unitcalc->get_countries();
+
+		/*
+		https://github.com/fiorix/freegeoip/blob/master/README.rst
+		http://freegeoip.net/json/74.200.247.59
+		http://freegeoip.net/csv/74.200.247.59
+		http://freegeoip.net/xml/74.200.247.59
+		*/
+		
+		if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+			$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+		else
+			$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
+			
+		$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+
+		if ( isset( $yourlocation->country_code ) && isset( $countries[$yourlocation->country_code]) && strlen( $yourlocation->country_code ) > 0 )
+		{
+				$this->data['User']['country'] = $yourlocation->country_code;
+				//$this->data['User']['city'] = $yourlocation->city;
+		} else
+				$this->data['User']['country'] = 'DE';
+		
       // yet not implemented
       $this->data['User']['coldestmonth'] = $this->Unitcalc->coldestmonth_for_country('DE');
       $this->data['User']['unit'] = $this->Unitcalc->unit_for_country('DE', 'unit');
@@ -306,14 +329,6 @@ class UsersController extends AppController {
       $this->data['User']['passwordcheck'] = "1";
       $this->data['User']['publicprofile'] = "0";
       $this->data['User']['publictrainings'] = "0";
-      
-      /**
-      if ($this->User->save($this->data, array(
-               'validate' => 'only',
-               'fieldList' => array( 
-                  $check_array
-               )))) { }     
-      **/
       
       if ( $this->data['User']['password'] && strlen($this->data['User']['password']) > 3 ) 
       {
@@ -375,6 +390,7 @@ class UsersController extends AppController {
                'maximumheartrate',
                'typeofsport', 
                'tos',
+               'country',
                'passwordcheck', 'emailcheck', 
                'paid_from', 'paid_to',
                'rookie', 'weeklyhours',
@@ -1352,7 +1368,7 @@ class UsersController extends AppController {
 
 		$this->Email->to = $User['User']['email'];
 		//$this->Email->bcc = array('secret@example.com');
-		$this->Email->subject = __('TriCoreTraining registration',true);
+		$this->Email->subject = __('TriCoreTraining signup',true);
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 

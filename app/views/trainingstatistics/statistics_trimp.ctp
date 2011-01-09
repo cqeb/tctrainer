@@ -107,7 +107,9 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl . 'stype:' . $sportstype
 
 <div id="my_chart2"></div>
 
-<?php if ( $userobject['advanced_features'] ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
