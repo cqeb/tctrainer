@@ -1536,7 +1536,7 @@ class UsersController extends AppController {
 
 	function check_notifications()
 	{
-		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' ) die('No access!');
+		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.46.255.219' ) die('No access!');
 		$debug = true;
 		
 	    $this->layout = 'plain';
