@@ -5,7 +5,7 @@ class TriRunWorkoutTypeSequence extends WorkoutTypeSequence {
 	/**
 	 * workouts grouped by phases
 	 */
-	protected static $WORKOUT_TYPES = array(
+	protected $WORKOUT_TYPES = array(
 		"TRANS" => array(
 				"E" => array(1,2),
 				"F" => array(),

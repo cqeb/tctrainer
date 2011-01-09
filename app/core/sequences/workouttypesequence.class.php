@@ -31,7 +31,7 @@ class WorkoutTypeSequence extends Sequence {
 	 * 
 	 * OVERRIDE when implementing
 	 */
-	protected static $WORKOUT_TYPES = null;
+	protected $WORKOUT_TYPES = null;
 
 	/**
 	 * the current phase
@@ -146,8 +146,8 @@ class WorkoutTypeSequence extends Sequence {
 	 */
 	protected function nextSub($type) {
 		// check if there are workouts in this phase for the provided type
-		while (($numWorkoutsAvailable = count(TriRunWorkoutTypeSequence::
-			$WORKOUT_TYPES[$this->phase][$type])) == 0) {
+		while (($numWorkoutsAvailable = count(
+			$this->WORKOUT_TYPES[$this->phase][$type])) == 0) {
 			$this->nextMain();
 			if ($this->position == -1) {
 				$this->position = 0;
@@ -163,12 +163,12 @@ class WorkoutTypeSequence extends Sequence {
 			$this->subPositions[$type] = 0;
 		}
 
-		if (!TriRunWorkoutTypeSequence::$WORKOUT_TYPES[$this->phase][$type][$this->subPositions[$type]]) {
+		if (!$this->WORKOUT_TYPES[$this->phase][$type][$this->subPositions[$type]]) {
 			throw new Exception("Unknown sequence position for phase {$this->phase}, type {$type}, " .
 				"subposition " . $this->subPositions[$type]);
 		}
-		return $type . TriRunWorkoutTypeSequence::
-			$WORKOUT_TYPES[$this->phase][$type][$this->subPositions[$type]];
+		return $type . 
+			$this->WORKOUT_TYPES[$this->phase][$type][$this->subPositions[$type]];
 	}
 }
 ?>

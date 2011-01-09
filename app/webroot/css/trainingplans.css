@@ -209,3 +209,17 @@ a.reset {
 #toggleDesc {
 	float: right;
 }
+
+.phase {
+	font-weight: normal;
+	font-size: 14px;
+	border: 1px solid #666;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border-color: #ccc #666 #666 #ccc;
+	padding: 3px;
+	color: #666;
+	background: #eee;
+	text-shadow: 1px 1px 1px #fff;
+	vertical-align: 2px;
+}

@@ -86,7 +86,7 @@ class ProviderComponent extends Object {
 				
 				$tbp = new TriBikeProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
 				$bikeWorkouts = $tbp->generate($genWeek);
-				$tbp->save(); 
+				$tbp->save(false); 
 
 				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
@@ -117,7 +117,10 @@ class ProviderComponent extends Object {
 		
 		$workouts = array_merge($swimWorkouts, $bikeWorkouts, $runWorkouts);
 
-		$html = "<h1>" . __("Week", true) . " " . $this->Unitcalc->check_date($genWeek->format("Y-m-d")) . " (" . $phase["phase"] . ")</h1>";
+		$html = "<h1>" . __("Week", true) . " " . 
+			$this->Unitcalc->check_date($genWeek->format("Y-m-d")) . 
+			' <span class="phase ' . strtolower($phase["phase"]) . '">' . 
+			$phase["phase"] . "</span></h1>";
 		$html .= WorkoutRenderer::render($workouts);
 		
 		// also attach time and workout settings
