@@ -1181,7 +1181,7 @@ class TrainingstatisticsController extends AppController {
          
           $sql = "SELECT round(avg(weight),1) as avgweight, 
                   date_format(min(date), '%Y-%m-%d') as 'weekday',
-                  date_format(date, '%Y%u') as 'week' FROM Trainingstatistics WHERE 
+                  date_format(date, '%Y%u') as 'week' FROM trainingstatistics WHERE 
                   user_id = $session_userid AND weight != '' AND
                   date BETWEEN '" . $start . "' AND '" . $end . "' ";
           $sql .= "GROUP BY week ORDER BY week ASC";
