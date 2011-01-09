@@ -135,15 +135,7 @@ class UsersController extends AppController {
 		if ( $this->data )
 		{
         $this->User->set( $this->data );
-        if ($this->User->saveAll($this->data, array('validate' => 'only'))) {
-        } else {
-        }
-        /**
-        if ( !$this->User->validates( array( 'fieldList' => array( 'email' ) ) ) )
-        {
-            pr($this->User->invalidFields( array( 'fieldList' => array( 'email' ) ) ));
-        }
-        **/
+        if ($this->User->saveAll($this->data, array('validate' => 'only'))) {} 
 
 			// deactivate this if you're working offline
 			// captcha checks for your correct entry
@@ -276,20 +268,6 @@ class UsersController extends AppController {
       {
         $this->data['User']['emailcheck'] = "1";
       }
-
-/**
-      // check if password + password-approve field are equal
-      if ( $this->data['User']['password'] == $this->data['User']['passwordapprove'] )
-      {
-           $this->data['User']['passwordcheck'] = "1";
-           $save_pw = $this->data['User']['password'];
-           $this->data['User']['password'] = md5($this->data['User']['password']);
-           
-      } else
-      {
-           $this->data['User']['passwordcheck'] = "0";
-      }
-**/
 
         // no chance - you have to get the newsletter
         $this->data['User']['newsletter'] = "1";
@@ -1095,15 +1073,6 @@ class UsersController extends AppController {
 	  					   }
 					   }
   				}
-          /**
-          if ( isset( $weight_per_month ) && !isset( $targetweighterror ) )
-          {
-              $additional_message = 
-                    __('You have to loose', true) . 
-                    ' ' . $weight_per_month . ' ' . $weight_unit . ' ' . 
-                    __('per month to reach your weight goal', true);
-          }
-          **/
   			}
   
   			if ( $this->User->save( $this->data, 
@@ -1124,7 +1093,6 @@ class UsersController extends AppController {
                       $this->data['User']['weight'] = round($this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' ), 1);
                  if ( isset( $this->data['User']['targetweight'] ) )
                  	    $this->data['User']['targetweight'] = round($this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' ), 1);
-                 //$this->redirect(array('action' => 'edit_weight', $this->User->id));
            
            } else
            {
@@ -1136,6 +1104,7 @@ class UsersController extends AppController {
                  if ( isset( $this->data['User']['targetweight'] ) )
                    	  $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
                  $statusbox = 'statusbox error';
+
                  if ( $targetweighterror )
                     $this->Session->setFlash(__($targetweighterror,true));
                  else
@@ -1143,7 +1112,7 @@ class UsersController extends AppController {
            }
 		}
 
-    $this->set('unit', $this->Unitcalc->get_unit_metric());
+    	$this->set('unit', $this->Unitcalc->get_unit_metric());
 		$this->set('statusbox', $statusbox);
 		$this->set('targetweighterror', $targetweighterror);
 	}
@@ -1234,7 +1203,7 @@ class UsersController extends AppController {
 		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
+    	$this->User->id = $session_userid;
 
 		if (empty($this->data))
 		{
@@ -1369,34 +1338,31 @@ class UsersController extends AppController {
      {
       if ( in_array( $file['type'], $type_accepted_files ) )
       {
-        if ( $file['size'] < $filesize_accepted_files )
-        {
-          $new_name = $addthis . '_' . $userid . '_' . $file['name'];
-          $destination .= $new_name;
-          $weburl .= $new_name;
+	        if ( $file['size'] < $filesize_accepted_files )
+	        {
+		          $new_name = $addthis . '_' . $userid . '_' . $file['name'];
+		          $destination .= $new_name;
+          		  $weburl .= $new_name;
 
-          if ( move_uploaded_file( $file['tmp_name'], $destination ) )
-          {
-            //unlink($file['tmp_name']);
-            $return['destination'] = $weburl;
-            $return['error'] = '';
-            return $return;
-          }
-        } else
-            $return['error'] = 'filesize_not_accepted';
-       
-       
-       
-     } else
+		          if ( move_uploaded_file( $file['tmp_name'], $destination ) )
+		          {
+		            //unlink($file['tmp_name']);
+		            $return['destination'] = $weburl;
+		            $return['error'] = '';
+		            return $return;
+		          }
+
+	        } else
+	            $return['error'] = 'filesize_not_accepted';
+
+     	} else
 			$return['error'] = 'type_not_accepted';
 		}
 		return $return;
-		//$extension = substr($value[0]['name'] , strrpos($value[0]['name'] , '.') +1);
 	}
 
 	function _sendNewUserMail($id)
 	{
-    //$this->layout = 'newsletter';
 
 		$User = $this->User->read(null, $id);
 		$this->loadModel('Transaction');
@@ -1448,15 +1414,15 @@ class UsersController extends AppController {
 
 	function _sendPasswordForgotten($id, $randompassword = null)
 	{
-	  	//$this->layout = 'newsletter';
     
 		if ( $randompassword )
 		{
 			$this->template = 'passwordreset';
 			$this->set('randompassword',$randompassword);
-		} else
-		{
+			$subject = __('TriCoreTraining - password reset',true);
+		} else {
 			$this->template = 'passwordforgotten';
+			$subject = __('TriCoreTraining - password forgotten',true);
 		}
 
 		$User = $this->User->read(null,$id);
@@ -1465,11 +1431,8 @@ class UsersController extends AppController {
 		$tid = $this->Transactionhandler->handle_transaction( $this->Transaction, '', 'create', 'forgotten_userid', $User['User']['id'] );
 		$this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'forgotten_email', $User['User']['email'] );
 
-		//$encoded_email = base64_encode($User['User']['email']);
-		//$encoded_id    = base64_encode($User['User']['id']);
-
 		$this->Email->to = $User['User']['email'];
-		$this->Email->subject = __('TriCoreTraining - password reset',true);
+		$this->Email->subject = $subject;
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 

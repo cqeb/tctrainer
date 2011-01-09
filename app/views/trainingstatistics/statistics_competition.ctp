@@ -123,7 +123,6 @@ if ( !isset( $total_trimp_tp ) || $total_trimp_tp == 0 )
 
 <?php
 
-      $this->js_addon = <<<EOE
-EOE;
+      $this->js_addon = '';
 
 ?>

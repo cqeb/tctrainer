@@ -115,7 +115,6 @@ Debugging: (only localhost)<br />
 
 <?php
 
-      $this->js_addon = <<<EOE
-EOE;
+      $this->js_addon = '';
 
 ?>
