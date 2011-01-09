@@ -565,6 +565,9 @@ class UnitcalcComponent extends Object {
                   $sentdata['Competition']['competitiondate']['year'] = date('Y', time());
                }
 
+			   if ( $userdata['User']['coldestmonth'] < 10 )
+			   		$userdata['User']['coldestmonth'] = '0' . $userdata['User']['coldestmonth'];
+					
                $seasonstartmonth = $seasonendmonth = $userdata['User']['coldestmonth'];
                $compmonth = $sentdata['Competition']['competitiondate']['month'];
                $compyear = $sentdata['Competition']['competitiondate']['year'];
@@ -581,6 +584,7 @@ class UnitcalcComponent extends Object {
 
                $season['start'] = $seasonstartyear . '-' . $seasonstartmonth . '-01';
                $season['end']   = $seasonendyear . '-' . $seasonendmonth . '-01';
+
                return $season;
    }
 

@@ -30,18 +30,6 @@ if ( $export == true )
 </head>
 <body>
 <table>
-<!--
-<tr>
-		<td colspan="12"><b><?php __('Export of statistics'); ?><b></td>
-</tr>
-<tr>
-		<td><b><?php __('Date'); ?>:</b></td>
-		<td colspan="11"><?php echo date("F j, Y, g:i a"); ?></td>
-</tr>
-<tr>
-		<td colspan="12"></td>
-</tr>
--->
 <tr id="titles">
 		<td class="tableTd"><?php __('Date'); ?></td>
     	<td class="tableTd"><?php __('Sport'); ?></td>
@@ -263,47 +251,8 @@ Debugging: (only localhost)<br />
 <?php } ?>
 
 <?php
-/**
-<br /><br />
 
-<h2><?php __('TRIMP Statistics'); ?></h2>
-
-<?php
-
-$jsonurl = Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-
-echo $ofc->createflash('my_chart3','680','400',$jsonurl.'type:trimp/start:' . $start . '/end:' . $end);
-
-?>
-
-<div id="my_chart3"></div>
-?>
-<br /><br />
-
-<h2><?php __('Chart Weight'); ?></h2>
-
-<?php
-
-if ( count( $trainings ) > 0 ) 
-{
-    
-$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-echo $ofc->createflash('my_chart4','680','400',$jsonurl.'type:weight/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
-
-} else
-{
-  __('No Chart data.');
-}
-
-?>
-
-<div id="my_chart4"></div>
-
-<?php
-**/
-
-      $this->js_addon = <<<EOE
-EOE;
+      $this->js_addon = '';
 
 }
 
