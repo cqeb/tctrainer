@@ -248,6 +248,7 @@ class ProviderComponent extends Object {
 			AND competitiondate < (
 				SELECT competitiondate FROM competitions
 				WHERE id = " . intval($id) . " 
+				AND user_id = " . $this->athlete->getId() . "
 			)
 			AND user_id = " . $this->athlete->getId());
 		if (array_key_exists('c', $r) && $r['c'] > 0) {
