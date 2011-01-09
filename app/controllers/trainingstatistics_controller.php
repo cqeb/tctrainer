@@ -62,16 +62,16 @@ class TrainingstatisticsController extends AppController {
 	    {
 	      $this->set('UserID', $this->User->id);
 	
-	      if ( isset( $this->data['Trainingstatistic']['import_csv_upload'] ) )
+	      if ( isset( $this->data['trainingstatistic']['import_csv_upload'] ) )
 	      {
-	            $csv_file = $this->data['Trainingstatistic']['import_csv_upload'];
+	            $csv_file = $this->data['trainingstatistic']['import_csv_upload'];
 	
-	      } elseif ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
+	      } elseif ( isset( $this->data['trainingstatistic']['hiddenimportfile'] ) )
 	      {
-	            $csv_file_data = $this->data['Trainingstatistic']['hiddenimportfile'];
+	            $csv_file_data = $this->data['trainingstatistic']['hiddenimportfile'];
 	      }
 	      
-	      if ( isset( $csv_file['tmp_name'] ) || $this->data['Trainingstatistic']['hiddenimportfile'] )
+	      if ( isset( $csv_file['tmp_name'] ) || $this->data['trainingstatistic']['hiddenimportfile'] )
 	      {
 	
 	        $userid = $this->User->id;
@@ -89,7 +89,7 @@ class TrainingstatisticsController extends AppController {
 	
 	        } else
 	        {
-	          $importdata = unserialize($this->data['Trainingstatistic']['hiddenimportfile']);
+	          $importdata = unserialize($this->data['trainingstatistic']['hiddenimportfile']);
 	        }
 	
 	        if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
@@ -261,7 +261,7 @@ class TrainingstatisticsController extends AppController {
 	  
 		  $newimportfilearray[] = $value; 
 	  
-		  if ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
+		  if ( isset( $this->data['trainingstatistic']['hiddenimportfile'] ) )
 		  {
 		    
 		      $data['avg_pulse'] = $importheartrate;
@@ -340,14 +340,14 @@ class TrainingstatisticsController extends AppController {
 	              }  
 	        }
 	
-	        if ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
+	        if ( isset( $this->data['trainingstatistic']['hiddenimportfile'] ) )
 	        {
 	            $this->Session->setFlash(__('Import of workouts finished!', true));
 	            $this->set('statusbox', $statusbox);
 	            $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
 	        }  
 	
-	        $this->data['Trainingstatistic']['hiddenimportfile'] = serialize($newimportfilearray);
+	        $this->data['trainingstatistic']['hiddenimportfile'] = serialize($newimportfilearray);
 	        
 	        $this->set('importdata', $importdata);
 	        $this->set('newimportfile', serialize($newimportfile));
@@ -459,54 +459,54 @@ class TrainingstatisticsController extends AppController {
                        }
                      }
                      
-                     if ( isset( $this->data['Trainingstatistic']['duration'] ) )
-                          $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['Trainingstatistic']['duration'] );
+                     if ( isset( $this->data['trainingstatistic']['duration'] ) )
+                          $this->data['trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['trainingstatistic']['duration'] );
 
-                     if ( isset( $this->data['Trainingstatistic']['distance'] ) )
+                     if ( isset( $this->data['trainingstatistic']['distance'] ) )
                      {
-                          $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
-                          $this->data['Trainingstatistic']['distance'] = $distance['amount'];
+                          $distance = $this->Unitcalc->check_distance( $this->data['trainingstatistic']['distance'], 'show' );
+                          $this->data['trainingstatistic']['distance'] = $distance['amount'];
                      }
                      
-                     if ( !isset( $this->data['Trainingstatistic']['weight'] ) )
-                          $this->data['Trainingstatistic']['weight'] = $this->Unitcalc->check_weight( $results['User']['weight'], 'show', 'single' );
+                     if ( !isset( $this->data['trainingstatistic']['weight'] ) )
+                          $this->data['trainingstatistic']['weight'] = $this->Unitcalc->check_weight( $results['User']['weight'], 'show', 'single' );
                      
             } else
             {
                      $statusbox = 'statusbox';
 
                      // check for metric / unit
-                     if ( $this->data['Trainingstatistic']['distance'] )
-                        $this->data['Trainingstatistic']['distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Trainingstatistic']['distance'] ), 'save', 'single' );
+                     if ( $this->data['trainingstatistic']['distance'] )
+                        $this->data['trainingstatistic']['distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['trainingstatistic']['distance'] ), 'save', 'single' );
 
-                     if ( $this->data['Trainingstatistic']['duration'] )
-                        $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
+                     if ( $this->data['trainingstatistic']['duration'] )
+                        $this->data['trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['trainingstatistic']['duration'] );
 
-                     if ( ( isset( $this->data['Trainingstatistic']['duration'] ) && $this->data['Trainingstatistic']['duration'] > 0 ) && $this->data['Trainingstatistic']['distance'] && $this->data['Trainingstatistic']['avg_pulse'] ) 
+                     if ( ( isset( $this->data['trainingstatistic']['duration'] ) && $this->data['trainingstatistic']['duration'] > 0 ) && $this->data['trainingstatistic']['distance'] && $this->data['trainingstatistic']['avg_pulse'] ) 
                      {
                         $time_in_zones = "";
-                        $this->data['Trainingstatistic']['trimp'] = round(
+                        $this->data['trainingstatistic']['trimp'] = round(
                             $this->Unitcalc->calc_trimp( 
-                                $this->data['Trainingstatistic']['duration']/60, 
-                                $this->data['Trainingstatistic']['avg_pulse'], 
+                                $this->data['trainingstatistic']['duration']/60, 
+                                $this->data['trainingstatistic']['avg_pulse'], 
                                 $time_in_zones, 
                                 $results['User']['lactatethreshold'],
-                                $this->data['Trainingstatistic']['sportstype'] 
+                                $this->data['trainingstatistic']['sportstype'] 
                             )
                         );
                      
-                        $this->data['Trainingstatistic']['avg_speed'] = round( ( $this->data['Trainingstatistic']['distance'] / ( $this->data['Trainingstatistic']['duration'] / 3600 ) ), 2); 
+                        $this->data['trainingstatistic']['avg_speed'] = round( ( $this->data['trainingstatistic']['distance'] / ( $this->data['trainingstatistic']['duration'] / 3600 ) ), 2); 
                         
                         if ( $results['User']['gender'] && $results['User']['weight'] && $results['User']['birthday'] )
                         {
-                            $data['avg_pulse'] = $this->data['Trainingstatistic']['avg_pulse'];
-                            $data['duration'] = $this->data['Trainingstatistic']['duration'];
+                            $data['avg_pulse'] = $this->data['trainingstatistic']['avg_pulse'];
+                            $data['duration'] = $this->data['trainingstatistic']['duration'];
                             $data['birthday'] = $results['User']['birthday'];
                             $data['weight'] = $results['User']['weight'];
                             $data['gender'] = $results['User']['gender'];
   
                             // calculate kcal for workout
-                            $this->data['Trainingstatistic']['kcal'] = 
+                            $this->data['trainingstatistic']['kcal'] = 
                                 $this->Unitcalc->calc_kcal( $data );
                         }
 
@@ -525,19 +525,19 @@ class TrainingstatisticsController extends AppController {
                         */
                      }
  
-                     $this->data['Trainingstatistic']['user_id'] = $session_userid;
+                     $this->data['trainingstatistic']['user_id'] = $session_userid;
 
-					 $tdate = $this->data['Trainingstatistic']['date'];
+					 $tdate = $this->data['trainingstatistic']['date'];
 					 $tdate = $tdate['year'] . '-' . $tdate['month'] . '-' . $tdate['day'];
 					 
-                     if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] != '' && ( strtotime( $tdate ) > ( time() - 86400 * 7 ) ) )
+                     if ( isset( $this->data['trainingstatistic']['weight'] ) && $this->data['trainingstatistic']['weight'] != '' && ( strtotime( $tdate ) > ( time() - 86400 * 7 ) ) )
                      { 
-                          $saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
+                          $saveweight = $this->Unitcalc->check_weight( $this->data['trainingstatistic']['weight'], 'save', 'single' );
                           $saveweight = str_replace( ',', '.', $saveweight );
                      } else
                           $saveweight = $results['User']['weight'];
 
-                     $this->data['Trainingstatistic']['weight'] = $saveweight;
+                     $this->data['trainingstatistic']['weight'] = $saveweight;
                                             
                      // save workout for user 
                      if ($this->Trainingstatistic->save( $this->data, array('validate' => true)))
@@ -554,25 +554,25 @@ class TrainingstatisticsController extends AppController {
                           $this->Session->setFlash(__('Some errors occured',true));
                      }
 
-                     if ( isset( $this->data['Trainingstatistic']['duration'] ) )
-                          $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['Trainingstatistic']['duration'] );
+                     if ( isset( $this->data['trainingstatistic']['duration'] ) )
+                          $this->data['trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['trainingstatistic']['duration'] );
 
-                     if ( isset( $this->data['Trainingstatistic']['distance'] ) )
+                     if ( isset( $this->data['trainingstatistic']['distance'] ) )
                      {
-                          $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
-                          $this->data['Trainingstatistic']['distance'] = $distance['amount'];
+                          $distance = $this->Unitcalc->check_distance( $this->data['trainingstatistic']['distance'], 'show' );
+                          $this->data['trainingstatistic']['distance'] = $distance['amount'];
                      }
 
-                     if ( isset( $this->data['Trainingstatistic']['weight'] ) )
+                     if ( isset( $this->data['trainingstatistic']['weight'] ) )
                      {
-                          $this->data['Trainingstatistic']['weight'] = $this->Unitcalc->check_weight($this->data['Trainingstatistic']['weight'], 'show', 'single' );
+                          $this->data['trainingstatistic']['weight'] = $this->Unitcalc->check_weight($this->data['trainingstatistic']['weight'], 'show', 'single' );
                      } 
             }
 
             $this->set('unit', $unit);
             $this->set('UserID', $this->User->id);
             $this->set('statusbox', $statusbox);
-            $this->set('data', $this->data['Trainingstatistic']);
+            $this->set('data', $this->data['trainingstatistic']);
    }
 
    // how fit am I?
@@ -591,26 +591,26 @@ class TrainingstatisticsController extends AppController {
             $this->compdata['Competition']['competitiondate']['year'] = date('Y', time());
 
             $season = $this->Unitcalc->get_season( $results, $this->compdata );
-            if ( empty( $this->data['Trainingstatistic'] ) )
+            if ( empty( $this->data['trainingstatistic'] ) )
             {
                $start = $season['start'];
                $end   = $season['end'];
                
                $end = date( 'Y-m-d', time() );
-               $this->data['Trainingstatistic']['fromdate'] = $start;
-               $this->data['Trainingstatistic']['todate'] = $end;
+               $this->data['trainingstatistic']['fromdate'] = $start;
+               $this->data['trainingstatistic']['todate'] = $end;
                $statusbox = 'statusbox ok';
             } else
             {
-               $start = $this->data['Trainingstatistic']['fromdate'];
-               $end   = $this->data['Trainingstatistic']['todate'];
+               $start = $this->data['trainingstatistic']['fromdate'];
+               $end   = $this->data['trainingstatistic']['todate'];
                $start = $start['year'] . '-' . $start['month'] . '-' . $start['day'];
                $end = $end['year'] . '-' . $end['month'] . '-' . $end['day'];
             }
 
-            if ( empty( $this->data['Trainingstatistic']['sportstype'] ) ) 
-                    $this->data['Trainingstatistic']['sportstype'] = '';
-            $sportstype = $this->data['Trainingstatistic']['sportstype'];
+            if ( empty( $this->data['trainingstatistic']['sportstype'] ) ) 
+                    $this->data['trainingstatistic']['sportstype'] = '';
+            $sportstype = $this->data['trainingstatistic']['sportstype'];
 
             $this->set('start', $start);
             $this->set('end', $end);
@@ -665,7 +665,7 @@ class TrainingstatisticsController extends AppController {
             // go through all trainings in trainingsstatistics
             for ( $i = 0; $i < count( $trainingdata ); $i++ )
             {
-                  $dt = $trainingdata[$i]['Trainingstatistics'];
+                  $dt = $trainingdata[$i]['trainingstatistics'];
                   $date_string = split( ' ', $dt['date'] );
                   $day = $date_string[0];
 
@@ -682,10 +682,7 @@ class TrainingstatisticsController extends AppController {
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
                 "athlete_id = $session_userid AND ";
-            //  "user_id = $session_userid AND ";
             if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND ";
-            //if ( $sportstype ) $sql .= "type = '" . $sportstype . "' AND ";
-            //$sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
             $sql .= "( week BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
                         
             $scheduled_trainingdata = $this->Trainingstatistic->query( $sql );
@@ -788,39 +785,39 @@ class TrainingstatisticsController extends AppController {
 
             $season = $this->Unitcalc->get_season( $results, $this->compdata );
 
-            if ( empty( $this->data['Trainingstatistic'] ) )
+            if ( empty( $this->data['trainingstatistic'] ) )
             {
                $start = $season['start'];
                $end   = $season['end'];
                $end = date( 'Y-m-d', time() );
                
-               $this->data['Trainingstatistic']['fromdate'] = $start;
-               $this->data['Trainingstatistic']['todate'] = $end;
+               $this->data['trainingstatistic']['fromdate'] = $start;
+               $this->data['trainingstatistic']['todate'] = $end;
             } else
             {
-               $start = $this->data['Trainingstatistic']['fromdate'];
-               $end   = $this->data['Trainingstatistic']['todate'];
+               $start = $this->data['trainingstatistic']['fromdate'];
+               $end   = $this->data['trainingstatistic']['todate'];
                $start = $start['year'] . '-' . $start['month'] . '-' . $start['day'];
                $end = $end['year'] . '-' . $end['month'] . '-' . $end['day'];
             }
 
-            if ( empty( $this->data['Trainingstatistic']['sportstype'] ) ) 
-                  $this->data['Trainingstatistic']['sportstype'] = '';
+            if ( empty( $this->data['trainingstatistic']['sportstype'] ) ) 
+                  $this->data['trainingstatistic']['sportstype'] = '';
 
             // select all test-workouts grouped by sportstype
-            $sql = "SELECT name, distance, sportstype, count(*) as ccount FROM Trainingstatistics WHERE testworkout = 1 " .
+            $sql = "SELECT name, distance, sportstype, count(*) as ccount FROM trainingstatistics WHERE testworkout = 1 " .
                  "AND user_id = $session_userid AND name != '' AND ";
             $sql .= "( date BETWEEN '" . $start . "' AND '" . $end . "' ) GROUP BY name, distance, sportstype HAVING ccount > 1 ORDER BY name, distance";
             $testworkoutsfilter = $this->Trainingstatistic->query( $sql );
 
-            if ( !empty( $this->data['Trainingstatistic']['search'] ) ) 
-                $searchfilter = $this->data['Trainingstatistic']['search'];
+            if ( !empty( $this->data['trainingstatistic']['search'] ) ) 
+                $searchfilter = $this->data['trainingstatistic']['search'];
             else 
                 $searchfilter = '';
 
             $this->set('start', $start);
             $this->set('end', $end);
-            $this->set('sportstype', $this->data['Trainingstatistic']['sportstype']);
+            $this->set('sportstype', $this->data['trainingstatistic']['sportstype']);
             $this->set('searchfilter', $searchfilter);
             $this->set('testworkoutsfilter', $testworkoutsfilter);
             $this->set('length_unit', $unit['length']);
@@ -849,7 +846,7 @@ class TrainingstatisticsController extends AppController {
             $start = $this->params['named']['start'];
             $end = $this->params['named']['end'];
 
-            $this->data['Trainingstatistic']['sportstype'] = $sportstype;
+            $this->data['trainingstatistic']['sportstype'] = $sportstype;
 
             $startday = split( '-', $start );
             $endday = split( '-', $end );
@@ -982,7 +979,7 @@ class TrainingstatisticsController extends AppController {
             $end   = $season['end'];
             $end = date( 'Y-m-d', time() );
 
-            $sportstype = $this->data['Trainingstatistic']['sportstype'];
+            $sportstype = $this->data['trainingstatistic']['sportstype'];
 
             $sql = "SELECT max(week) as maxdate FROM scheduledtrainings WHERE " . 
                 "athlete_id = $session_userid AND ";
@@ -1126,17 +1123,17 @@ class TrainingstatisticsController extends AppController {
 
             $season = $this->Unitcalc->get_season( $results, $this->compdata );
 
-            if ( empty( $this->data['Trainingstatistic'] ) )
+            if ( empty( $this->data['trainingstatistic'] ) )
             {
                $start = $season['start'];
                //$end   = $season['end'];
                $end = date( 'Y-m-d', time() ); 
-               $this->data['Trainingstatistic']['fromdate'] = $start;
-               $this->data['Trainingstatistic']['todate'] = $end;
+               $this->data['trainingstatistic']['fromdate'] = $start;
+               $this->data['trainingstatistic']['todate'] = $end;
             } else
             {
-               $start = $this->data['Trainingstatistic']['fromdate'];
-               $end   = $this->data['Trainingstatistic']['todate'];
+               $start = $this->data['trainingstatistic']['fromdate'];
+               $end   = $this->data['trainingstatistic']['todate'];
                $start = $start['year'] . '-' . $start['month'] . '-' . $start['day'];
                $end = $end['year'] . '-' . $end['month'] . '-' . $end['day'];
             }
@@ -1275,8 +1272,8 @@ class TrainingstatisticsController extends AppController {
    {
             $this->checkSession();
 
-            if ( $this->data['Trainingstatistic']['sportstype'] ) 
-                $post_sportstype = $this->data['Trainingstatistic']['sportstype'];
+            if ( $this->data['trainingstatistic']['sportstype'] ) 
+                $post_sportstype = $this->data['trainingstatistic']['sportstype'];
             else 
                 $post_sportstype = '';
 
@@ -1300,17 +1297,17 @@ class TrainingstatisticsController extends AppController {
 
             $season = $this->Unitcalc->get_season( $results, $this->compdata );
 
-            if ( empty( $this->data['Trainingstatistic'] ) )
+            if ( empty( $this->data['trainingstatistic'] ) )
             {
                $start = $season['start'];
                //$end   = $season['end'];
                $end = date( 'Y-m-d', time() ); 
-               $this->data['Trainingstatistic']['fromdate'] = $start;
-               $this->data['Trainingstatistic']['todate'] = $end;
+               $this->data['trainingstatistic']['fromdate'] = $start;
+               $this->data['trainingstatistic']['todate'] = $end;
             } else
             {
-               $start = $this->data['Trainingstatistic']['fromdate']; 
-               $end   = $this->data['Trainingstatistic']['todate'];
+               $start = $this->data['trainingstatistic']['fromdate']; 
+               $end   = $this->data['trainingstatistic']['todate'];
                $start = $start['year'] . '-' . $start['month'] . '-' . $start['day'];
                $end = $end['year'] . '-' . $end['month'] . '-' . $end['day'];
             }
