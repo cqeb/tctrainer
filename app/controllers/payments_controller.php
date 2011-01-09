@@ -1,3 +1,4 @@
+<?php
 
 /**
 do the payment with PAYPAL
@@ -36,7 +37,7 @@ class PaymentsController extends AppController {
             $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
             $this->set('pay_member', $results['User']['level']);
             $this->set('currency', $currency);
-            $this->set('statusbox', 'statusbox_none');
+            $this->set('statusbox', 'statusbox');
    }
 
    function unsubscribe_triplans()
@@ -53,7 +54,7 @@ class PaymentsController extends AppController {
             $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
             $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
             $this->set('pay_member', $results['User']['level']);
-            $statusbox = 'statusbox_none';
+            $statusbox = 'statusbox';
 
             if (!empty($this->data))
             {

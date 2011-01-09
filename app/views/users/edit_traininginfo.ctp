@@ -13,8 +13,6 @@
                    </div><br />
                    <?php } ?>
 
-                   <!--<h2><?php __('Training information'); ?></h2>-->
-
 <?php
 echo $form->hidden('id');
 echo $form->hidden('birthday');
@@ -193,7 +191,7 @@ echo $form->input('rookie',
 $tos_link = '<a href="/blog/';
 if ( $locale == 'deu' ) $tos_link .= 'de/'; else $tos_link .= 'en/';
 $tos_link .= 'terms-of-service-2/" target="_blank">' .
-	__('Read our terms and conditions.',true) . '</a><br />';
+	__('Read our terms and conditions.',true) . '</a><br /><br />';
 
 echo $form->input('tos',
                   array(

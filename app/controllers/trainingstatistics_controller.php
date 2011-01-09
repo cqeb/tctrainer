@@ -45,7 +45,7 @@ class TrainingstatisticsController extends AppController {
   {
 	    $this->pageTitle = __('Import workouts',true);
 	    $this->checkSession();
-	    $statusbox = 'statusbox_none';
+	    $statusbox = 'statusbox';
 	
 	    $newimportfile = '';
 	    $newimportfilearray[] = '';

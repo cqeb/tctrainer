@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-01-09 12:06+0100\n"
-"PO-Revision-Date: 2011-01-09 12:07+0100\n"
+"PO-Revision-Date: 2011-01-09 13:03+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1076,11 +1076,11 @@ msgstr "Wähle einen flachen Kurs. Nachdem du aufgewärmt bist beschleunige, bis
 
 #: \core\workouts\bikeworkout.class.php:142
 msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes."
-msgstr "Wähle einen flachen Kurs, und fahre mit einer Geschwindigkeit, die du auch bei einem Wettkampf fahren würdest. Beschleunige gleich von Anfang an, und nutze den \"Zwischenzeit\"-Knopf deiner Pulsur, um den durchschnittlichen Puls der letzten 20 Minuten der Trainingseinheit zu ermitteln."
+msgstr "Wähle einen flachen Kurs, und fahre mit einer Geschwindigkeit, die du auch bei einem Wettkampf fahren würdest. Beschleunige gleich von Anfang an, und nutze den \"Zwischenzeit\"-Knopf deiner Pulsuhr, um den durchschnittlichen Puls der letzten 20 Minuten der Trainingseinheit zu ermitteln."
 
 #: \core\workouts\bikeworkout.class.php:145
 msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes."
-msgstr "Wähle einen flachen Kurs, und fahre mit einer Geschwindigkeit, die du auch bei einem Wettkampf fahren würdest. Beschleunige gleich von Anfang an, und nutze den \"Zwischenzeit\"-Knopf deiner Pulsur, um den durchschnittlichen Puls der letzten 50 Minuten der Trainingseinheit zu ermitteln."
+msgstr "Wähle einen flachen Kurs, und fahre mit einer Geschwindigkeit, die du auch bei einem Wettkampf fahren würdest. Beschleunige gleich von Anfang an, und nutze den \"Zwischenzeit\"-Knopf deiner Pulsuhr, um den durchschnittlichen Puls der letzten 50 Minuten der Trainingseinheit zu ermitteln."
 
 #: \core\workouts\runworkout.class.php:47
 msgid "Speedups"
