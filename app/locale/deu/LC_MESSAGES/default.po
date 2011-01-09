@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-01-09 00:12+0100\n"
-"PO-Revision-Date: 2011-01-09 00:22+0100\n"
+"PO-Revision-Date: 2011-01-09 01:17+0100\n"
 "Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1024,7 +1024,7 @@ msgstr "Ein Ausdauertraining in Zone 2."
 
 #: \core\workouts\bikeworkout.class.php:106
 msgid "An intensive, aerobic workout. Ride a course with small hills, which take you into Zone 3 frequently."
-msgstr "Ein intensives, aerobes Workauf. Wähle einen Kurs mit einigen kleinen Hügeln, die dich in Zone 3 bringen."
+msgstr "Ein intensives, aerobes Workout. Wähle einen Kurs mit einigen kleinen Hügeln, die dich in Zone 3 bringen."
 
 #: \core\workouts\bikeworkout.class.php:109
 msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over one minute, and hold as long as possible. Recover for one minute, and repeat several times."
