@@ -39,7 +39,7 @@ echo $form->input('sportstype',
 
 for ( $i = 0; $i < count( $testworkoutsfilter ); $i++ )
 {
-    $dt = $testworkoutsfilter[$i]['Trainingstatistics'];
+    $dt = $testworkoutsfilter[$i]['trainingstatistics'];
     $key = $dt['name'] . '|||' . $dt['distance'];
     $distance = $unitcalc->check_distance( $dt['distance'] );
     $ccount = $testworkoutsfilter[$i][0]['ccount'];

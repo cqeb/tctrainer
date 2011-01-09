@@ -67,24 +67,24 @@ if ( $export == true )
 
     for ( $i = 0; $i < count( $trainings ); $i++ )
     {
-        $dt = $trainings[$i]['Trainingstatistics'];
+        $dt = $trainings[$i]['trainingstatistics'];
 
   			echo '<tr>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_date($dt['date'], 'show', 'single').'</td>';
-        echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
   			echo '   <td class="tableTdContent">'.$dt['sportstype'].'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->seconds_to_time($dt['duration']).'</td>';
-        echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single').'</td>';
+        	echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single').'</td>';
   			echo '   <td class="tableTdContent">'.$dt['avg_pulse'].'</td>';
   			echo '   <td class="tableTdContent">'.$yesno[$dt['testworkout']].'</td>';
   			echo '   <td class="tableTdContent">'.$yesno[$dt['competition']].'</td>';
-        echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
+        	echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
   			echo '   <td class="tableTdContent">'.$dt['location'].'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_weight($dt['weight'], 'show', 'single').'</td>';
-        echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
   			echo '   <td class="tableTdContent">'.$dt['trimp'].'</td>';
-        echo '   <td class="tableTdContent">'.$dt['avg_speed'].'</td>';
-        echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['avg_speed'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
   			echo '</tr>';
     }
 ?>
@@ -126,10 +126,7 @@ echo $form->input('sportstype',
                                  '' => __('All', true),
                                  'RUN' => __('Run', true),
                                  'BIKE' => __('Bike', true),
-                                 //'MTB' => __('Mountain-Bike', true),
                                  'SWIM' => __('Swim', true)
-                                 //'STRENGTH' => __('Strength', true),
-                                 //'MISC' => __('Misc', true)
                                  )));
 
 echo $form->input('fromdate',
@@ -141,7 +138,6 @@ echo $form->input('fromdate',
                     'label' => __('From', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
-                    //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
 
 echo $form->input('todate',
@@ -153,7 +149,6 @@ echo $form->input('todate',
                     'label' => __('To', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
-                    //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
                   
 /** not finished **/

@@ -581,7 +581,6 @@ class UnitcalcComponent extends Object {
 
                $season['start'] = $seasonstartyear . '-' . $seasonstartmonth . '-01';
                $season['end']   = $seasonendyear . '-' . $seasonendmonth . '-01';
-
                return $season;
    }
 

@@ -81,7 +81,7 @@ __('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . '- http://tri
 <a target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
 <a target="_blank" href="http://twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
 
-<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/Trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
+<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
 </nowrap>
 
     </td>

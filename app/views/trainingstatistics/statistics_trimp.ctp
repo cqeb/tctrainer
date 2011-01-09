@@ -29,10 +29,7 @@ echo $form->input('sportstype',
                                  '' => __('All', true),
                                  'RUN' => __('Run', true),
                                  'BIKE' => __('Bike', true),
-                                 //'MTB' => __('Mountain-Bike', true),
                                  'SWIM' => __('Swim', true)
-                                 //'STRENGTH' => __('Strength', true),
-                                 //'MISC' => __('Misc', true)
                                  )));
 
 echo $form->input('fromdate',
@@ -44,7 +41,6 @@ echo $form->input('fromdate',
                   'label' => __('From', true),
                   'minYear' => date('Y',time())-5,
                   'maxYear' => date('Y',time())
-                  //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
 
 echo $form->input('todate',
@@ -56,7 +52,6 @@ echo $form->input('todate',
                   'label' => __('To', true),
                   'minYear' => date('Y',time())-5,
                   'maxYear' => date('Y',time())+1
-                  //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
 
 /** not finished **/

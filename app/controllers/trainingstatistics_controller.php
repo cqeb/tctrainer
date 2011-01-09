@@ -286,7 +286,7 @@ class TrainingstatisticsController extends AppController {
 		
 		      $avg_speed = round( ( $importdistance / ( $importduration / 3600 ) ), 2); 
 		
-		      $sql = "INSERT INTO Trainingstatistics (id, user_id, name, date, sportstype, distance, 
+		      $sql = "INSERT INTO trainingstatistics (id, user_id, name, date, sportstype, distance, 
 		        duration, avg_pulse, avg_speed, trimp, kcal, location, weight, comment, testworkout, 
 		        competition, workout_link, created, modified) VALUES (" .
 		        "null, " . 
@@ -882,7 +882,7 @@ class TrainingstatisticsController extends AppController {
 
             for ( $i = 0; $i < count( $trainings ); $i++ )
             {
-                  $dt = $trainings[$i]['Trainingstatistics'];
+                  $dt = $trainings[$i]['trainingstatistics'];
                   // find out what the maximum pulse is - for the height of the graph
                   if ( $dt['avg_pulse'] > $pulse['max'] ) $pulse['max'] = $dt['avg_pulse'];
                   if ( $dt['avg_pulse'] < $pulse['min'] || $pulse['min'] == 0 ) $pulse['min'] = $dt['avg_pulse'];
@@ -896,7 +896,7 @@ class TrainingstatisticsController extends AppController {
             {
                   // we make all entries of the testworkouts relative to each other 
                   // and transform them to minutes per miles/km
-                  $dt = $trainings[$i]['Trainingstatistics'];
+                  $dt = $trainings[$i]['trainingstatistics'];
 
                   // calculate average pulse minus total average pulse
                   $diff_pulse = ( $dt['avg_pulse'] - $total_avg_pulse ); // 190 - 160 = 30 / basic value
@@ -909,20 +909,6 @@ class TrainingstatisticsController extends AppController {
                   $dt['distanceperunit'] = round( $distanceperunit_interim, 2);
                   if ( $distanceperunit_interim > $max_perunit ) $max_perunit = $distanceperunit_interim;
                   // depends on minutes per km / mi
-/**
-                  $dt = $trainings[$i]['Trainingstatistics'];
-                  // calculate average pulse minus total average pulse
-                  $diff_pulse = ( $dt['avg_pulse'] - $total_avg_pulse ); // 190 - 160 = 30 / basic value
-                  $change_value = ( $diff_pulse / $dt['avg_pulse'] ) + 1;
-                  $trainings[$i]['Trainingstatistics']['old_duration'] = $dt['duration'];
-                  $duration_interim = ( $dt['duration'] * $change_value );
-                  $trainings[$i]['Trainingstatistics']['duration'] = $newduration = round( $duration_interim, 0 );
-                  $correct_distance = $this->Unitcalc->check_distance( $dt['distance'] );
-                  $distanceperunit_interim =  $newduration / $correct_distance['amount'] / 60;
-                  $trainings[$i]['Trainingstatistics']['distanceperunit'] = round( $distanceperunit_interim, 2);
-                  if ( $distanceperunit_interim > $max_perunit ) $max_perunit = $distanceperunit_interim;
-                  // depends on minutes per km / mi
-**/
                   $newdate = split( ' ', $dt['date'] );
                   $newdate2 = $newdate[0];
                   // date, distance, duration, avg_pulse
@@ -1009,7 +995,7 @@ class TrainingstatisticsController extends AppController {
             // go through all trainings of period defined
             for ( $i = 0; $i < count( $trainings ); $i++ )
             {
-                  $dt = $trainings[$i]['Trainingstatistics'];
+                  $dt = $trainings[$i]['trainingstatistics'];
                   $sportstype_set = $dt['sportstype'];
                   // reset array per sportstype
                   if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
@@ -1300,7 +1286,6 @@ class TrainingstatisticsController extends AppController {
             if ( empty( $this->data['trainingstatistic'] ) )
             {
                $start = $season['start'];
-               //$end   = $season['end'];
                $end = date( 'Y-m-d', time() ); 
                $this->data['trainingstatistic']['fromdate'] = $start;
                $this->data['trainingstatistic']['todate'] = $end;
@@ -1325,7 +1310,7 @@ class TrainingstatisticsController extends AppController {
             // collect them, accumulate per sportstype
             for ( $i = 0; $i < count( $trainings ); $i++ )
             {
-                  $dt = $trainings[$i]['Trainingstatistics'];
+                  $dt = $trainings[$i]['trainingstatistics'];
                   $sportstype = strtoupper($dt['sportstype']);
                   if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
                   {

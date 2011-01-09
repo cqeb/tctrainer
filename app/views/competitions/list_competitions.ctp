@@ -35,8 +35,8 @@
                    <?php 
                    }
                    
-                   if ( isset( $checkcompetition[0]['Competitions']['id'] ) ) 
-                        $next_comp_id = $checkcompetition[0]['Competitions']['id'];
+                   if ( isset( $checkcompetition[0]['competitions']['id'] ) ) 
+                        $next_comp_id = $checkcompetition[0]['competitions']['id'];
                    else
                         $next_comp_id = '';
                    
@@ -60,7 +60,7 @@
                         <td><?php echo $html->link($unitcalc->check_date($competition['Competition']['competitiondate']), array('action' => 'edit_competition', 'id' => $competition['Competition']['id']),null); $cday = date('D', strtotime($competition['Competition']['competitiondate'])); echo ", " . __($cday, true); ?></td>
                         <td><?php echo $html->link(__($competition['Competition']['sportstype'], true), array('action' => 'edit_competition', 'id' => $competition['Competition']['id']),null) ?></td>
                         <td><?php echo $html->link($competition['Competition']['name'], array('action' => 'edit_competition', 'id' => $competition['Competition']['id']),null) ?></td>
-                        <td><a href="/trainer/Competitions/delete/<?php echo $competition['Competition']['id']; ?>" onClick="return confirm('<?php __('Are you sure?'); ?>');"><img alt="<?php __('Are you sure?'); ?>" width="20" src="/trainer/img/icon_delete.png" /></a></td>
+                        <td><a href="/trainer/competitions/delete/<?php echo $competition['Competition']['id']; ?>" onClick="return confirm('<?php __('Are you sure?'); ?>');"><img alt="<?php __('Are you sure?'); ?>" width="20" src="/trainer/img/icon_delete.png" /></a></td>
                    </tr>
                    <?php endforeach; ?>
                    </table>
