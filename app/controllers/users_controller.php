@@ -170,7 +170,7 @@ class UsersController extends AppController {
 				}
 			}
 		}
-    $this->layout = 'default_trainer';
+    	$this->layout = 'default_trainer';
 
 		$this->set('statusbox', $statusbox);
 		$this->set('status', $status);
@@ -216,12 +216,12 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Your new password is sent to your e-mail.',true));
 			} else
 			{
-			  $statusbox = 'statusbox error';
-        $flash_message = __('Something is wrong - sorry.', true) . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support.', true) . '</a>';
+			  	$statusbox = 'statusbox error';
+        		$flash_message = __('Something is wrong - sorry.', true) . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support.', true) . '</a>';
 				$this->Session->setFlash($flash_message);
 			}
 		}
-    $this->set('statusbox',$statusbox);
+    	$this->set('statusbox',$statusbox);
 	}
 
 	/**
@@ -238,7 +238,7 @@ class UsersController extends AppController {
     
     $this->pageTitle = __('Create your account', true);
     $success = false;
-    $statusbox = 'statusbox_none';
+    $statusbox = 'statusbox';
     //$save_fails = 'false';
     
     if (empty($this->data))
@@ -291,14 +291,14 @@ class UsersController extends AppController {
       }
 **/
 
-      // no chance - you have to get the newsletter
-      $this->data['User']['newsletter'] = "1";
-      // we do not ask for "where do you know us from?" - for Clemens' sake :)
-      $this->data['User']['dayofheaviesttraining'] = 'FRI';
+        // no chance - you have to get the newsletter
+        $this->data['User']['newsletter'] = "1";
+        // we do not ask for "where do you know us from?" - for Clemens' sake :)
+        $this->data['User']['dayofheaviesttraining'] = 'FRI';
 
 		// locate your country automatically
 		$countries = $this->Unitcalc->get_countries();
-
+	
 		/*
 		https://github.com/fiorix/freegeoip/blob/master/README.rst
 		http://freegeoip.net/json/74.200.247.59
@@ -312,7 +312,7 @@ class UsersController extends AppController {
 			$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
 			
 		$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
-
+	
 		if ( isset( $yourlocation->country_code ) && isset( $countries[$yourlocation->country_code]) && strlen( $yourlocation->country_code ) > 0 )
 		{
 				$this->data['User']['country'] = $yourlocation->country_code;
@@ -332,8 +332,8 @@ class UsersController extends AppController {
       
       if ( $this->data['User']['password'] && strlen($this->data['User']['password']) > 3 ) 
       {
-        $password_unenc = ($this->data['User']['password']);
-        $this->data['User']['password'] = md5( $password_unenc );
+	        $password_unenc = ($this->data['User']['password']);
+	        $this->data['User']['password'] = md5( $password_unenc );
       }
       
 	  
@@ -378,7 +378,7 @@ class UsersController extends AppController {
       		$this->data['User']['bikelactatethreshold'] = round ( $this->data['User']['lactatethreshold'] * 0.96 );
       		$this->data['User']['maximumheartrate'] = round ( $this->data['User']['lactatethreshold'] / 0.85 );
 	  }
-	  //pr($this->data);
+
       if ( $this->User->save( $this->data, array(
            'validate' => true,
            'fieldList' => array(
@@ -433,12 +433,12 @@ class UsersController extends AppController {
  
 /**
 
-  function add_step1($id = null)
+  	function add_step1($id = null)
 	{
-    die();
+    	die();
     
 		$this->pageTitle = __('Registration - Step 1/2',true);
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		if (empty($this->data))
 		{ } else
@@ -513,8 +513,9 @@ class UsersController extends AppController {
 		$this->set('statusbox', $statusbox);
 	}
 
-	function add_step2($id = null) {
-    die();
+	function add_step2($id = null) 
+    {
+    	die();
 
 		$this->pageTitle = __('Registration - Step 2/2',true);
 		$statusbox = 'statusbox ok';
@@ -837,12 +838,12 @@ class UsersController extends AppController {
 		$this->checkSession();
 
 		$this->pageTitle = __('Change profile',true);
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
+    	$this->User->id = $session_userid;
     
-    $countries = $this->Unitcalc->get_countries();
+    	$countries = $this->Unitcalc->get_countries();
     
 		if (empty($this->data))
 		{
@@ -853,53 +854,98 @@ class UsersController extends AppController {
 		{
 
 			$this->set('UserID', $this->User->id);
-
+	
 			if ($this->User->save( $this->data, array(
-      'validate' => true,
-      'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'birthday',
-      /**'newsletter', 'youknowus',**/
-      'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
-      {
-          // we have to change all session info because of email change
-          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
-          {
-                $new_email = $this->data['User']['email'];
-                $this->Session->write( 'session_useremail', $new_email );
-                if ( $this->Cookie->read('email') )
-                {
-                      $cookie = array();
-                      $cookie['email'] = $new_email;
-                      $cookie['userid'] = $session_userid;
-                      
-                      $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
-                }
-           }
-      	   $statusbox = 'statusbox ok';
-      	   $this->Session->setFlash(__('User profile saved.',true));
-
-      } else
-      {
-      	   $statusbox = 'statusbox error';
-      	   $this->Session->setFlash(__('Some errors occured.',true));
-      }
+		      'validate' => true,
+		      'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'birthday',
+		      'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
+		      {
+		          // we have to change all session info because of email change
+		          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
+		          {
+		                $new_email = $this->data['User']['email'];
+		                $this->Session->write( 'session_useremail', $new_email );
+		                if ( $this->Cookie->read('email') )
+		                {
+		                      $cookie = array();
+		                      $cookie['email'] = $new_email;
+		                      $cookie['userid'] = $session_userid;
+		                      
+		                      $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+		                }
+		           }
+		      	   $statusbox = 'statusbox ok';
+		      	   $this->Session->setFlash(__('User profile saved.',true));
+		
+		      } else
+		      {
+		      	   $statusbox = 'statusbox error';
+		      	   $this->Session->setFlash(__('Some errors occured.',true));
+		      }
 		}
-    $this->set('countries', $countries);
+    	$this->set('countries', $countries);
 		$this->set('statusbox', $statusbox);
 	}
 
-	function edit_traininginfo() {
+	function edit_address()
+	{
+		$this->checkSession();
+
+		$this->pageTitle = __('Change address',true);
+		$statusbox = 'statusbox';
+
+		$session_userid = $this->Session->read('session_userid');
+    	$this->User->id = $session_userid;
+    
+    	$countries = $this->Unitcalc->get_countries();
+    
+		if (empty($this->data))
+		{
+			$this->data = $this->User->read();
+			$this->set('UserID', $this->User->id);
+
+		} else
+		{
+
+			$this->set('UserID', $this->User->id);
+	
+			if ($this->User->save( $this->data, array(
+		      'validate' => true,
+		      'fieldList' => array( 'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
+		      {
+		      	   	//$statusbox = 'statusbox ok';
+		      	   	//$this->Session->setFlash(__('User profile saved.',true));
+		      	   	if ( $this->referer() ) 
+				   		$this->redirect($this->referer());
+	    			else 
+	        			$this->redirect(array('controller'=>'payments','action'=>'subscribe_triplans'));
+		      } else
+		      {
+		      	   $statusbox = 'statusbox error';
+		      	   $this->Session->setFlash(__('Some errors occured.',true));
+		      }
+		}
+    	$this->set('countries', $countries);
+		$this->set('statusbox', $statusbox);
+	}
+
+	function edit_traininginfo() 
+	{
+
 		$this->pageTitle = __('Change training info',true);
 
 		$this->checkSession();
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 		$this->User->id = $session_userid = $this->Session->read('session_userid');
 		$this->set('unitmetric', $this->Unitcalc->get_unit_metric() );
 
-		if (empty($this->data))	{
+		if (empty($this->data))	
+		{
 			$this->data = $this->User->read();
 			$this->set('UserID', $this->User->id);
 			$this->set('unit', $this->data['User']['unit']);
-		} else {
+		} else 
+		{
 			$this->set('UserID', $this->User->id);
 			if ($this->User->save( $this->data, array(
 		        'validate' => true,
@@ -918,7 +964,8 @@ class UsersController extends AppController {
 	        	$this->Provider->athlete->setTrainingTime(
 	        		$this->data['User']['weeklyhours'] * 60
 	        	);
-	        } else {
+	        } else 
+	        {
 	        	$this->Session->setFlash(__('Some errors occured.', true));
 	        	$statusbox = 'statusbox error';
 	        }
@@ -933,7 +980,7 @@ class UsersController extends AppController {
 		$this->checkSession();
 		$this->js_addon = '';
     
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 		$targetweighterror = '';
     	$additional_message = '';
     
@@ -1105,10 +1152,10 @@ class UsersController extends AppController {
 	{
 		$this->pageTitle = __('Change profile - images',true);
 		$this->checkSession();
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
+    	$this->User->id = $session_userid;
 
 		$this->set('unitmetric', $this->Unitcalc->get_unit_metric() );
 
@@ -1184,7 +1231,7 @@ class UsersController extends AppController {
 		$this->pageTitle = __('Change profile - metric',true);
 		$this->checkSession();
 		//$this->js_addon = '';
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
     $this->User->id = $session_userid;
@@ -1224,7 +1271,7 @@ class UsersController extends AppController {
 		$this->pageTitle = __('Change profile - password', true);
 		$this->checkSession();
 		//$this->js_addon = '';
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
     	$this->User->id = $session_userid;

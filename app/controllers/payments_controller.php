@@ -90,25 +90,22 @@ class PaymentsController extends AppController {
             shows the chosen paymentplan by the user
             **/
 
-            $this->layout = 'ajaxrequests';
+            //$this->layout = 'ajaxrequests';
             $this->checkSession();
             //$this->js_addon = '';
             $error = '';
             $tid = '';
 
             $results['User'] = $this->Session->read('userobject');
-            //pr($results['User']);
-            //pr($this->Session->read('userobject'));
             $session_userid = $results['User']['id'];
 
             // debugging paypal
             $testing = 'sandbox.';
-            //$testing = '';
+            $testing = '';
 
             $timeinterval = $this->params['named']['t'];
             if ( !$timeinterval ) $timeinterval = 1;
 
-            // TODO use final prices // diffentiate between USD EUR?
             if ( $_SERVER['HTTP_HOST'] == 'localhost' )
             {
             	$price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
@@ -152,9 +149,9 @@ class PaymentsController extends AppController {
             if ( $days_to_end > 90 )
                $error = 'trial';
 
-            //$this->transaction_id = $this->params['named']['transaction_id'];
-            //$this->loadModel('Transaction');
-            //$transactions = $this->Transactionhandler->handle_transaction( $this->Transaction, $this->transaction_id, 'read');
+            $this->loadModel('User');
+			$this->User->id = $session_userid;
+			$this->data = $this->User->read();
 
             if ( $error == '' )
             {
@@ -174,6 +171,7 @@ class PaymentsController extends AppController {
                $this->set('tid', $tid);
             }
 
+			$countries = $this->Unitcalc->get_countries();
             $this->set('timeinterval', $timeinterval);
             $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
             $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
@@ -186,6 +184,7 @@ class PaymentsController extends AppController {
             $this->set('price', $price_array[$timeinterval] );
             $this->set('days_to_end', $results['User']['days_to_end'] );
             $this->set('error', $error);
+			$this->set('countries', $countries);
             //$this->set('invoice', $invoice);
    }
 

@@ -108,32 +108,32 @@ $price12pm['USD'] = '11.66';
 ?>
 <tr>
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
-    <b>1 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
+    <b>1 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price1m[$currency]; ?> <?php echo $currency; ?>
     </a>
     </td>
 </tr>
 <tr class="odd">
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
-    <b>3 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
+    <b>3 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price3m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price3pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>
 </tr>
 <tr>
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:6">
-    <b>6 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:6">
+    <b>6 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price6m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price6pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>
 </tr>
 <tr class="odd">
     <td colspan="3">
-    <a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
-    <b>12 <?php __('-month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
+    <b>12 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price12m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price12pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
     </a>
     </td>

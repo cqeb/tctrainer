@@ -38,7 +38,7 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+if ( isset( $_SERVER['HTTP_HOST'] ) && $_SERVER['HTTP_HOST'] == 'localhost' ) 
 	Configure::write('debug', 2);
 else 
 	Configure::write('debug', 0);

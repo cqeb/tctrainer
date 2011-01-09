@@ -41,7 +41,7 @@
         <li><a href="/trainer/payments/subscribe_triplans"><b><?php __('Become PREMIUM'); ?></b></a></li>
         <li>&nbsp;</li>
 		    <li><?php echo $html->link(__('Show payments',true),array('controller' => 'payments', 'action' => 'show_payments'))?></li>
-		    <li><?php echo $html->link(__('Cancel subscription' . ' :(',true),array('controller' => 'payments', 'action' => 'unsubscribe_triplans'))?></li>
+		    <li><?php echo $html->link(__('Cancel subscription :(',true),array('controller' => 'payments', 'action' => 'unsubscribe_triplans'))?></li>
 <?php } ?>
 <!--
         <li><?php echo $html->link(__('Prices & Register',true),array('controller' => 'users', 'action' => 'add_step1'))?></li>
