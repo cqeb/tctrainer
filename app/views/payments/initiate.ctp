@@ -141,9 +141,6 @@ echo $form->submit(__('Save', true));
       $this->js_addon = <<<EOE
 EOE;
 
-?>
-
-<?php
 } elseif ( $error == 'trial' )
 {
 ?>
@@ -162,6 +159,7 @@ EOE;
 			if ( $userobject['advanced_features'] )
 			{
 ?>
+
             <form target="paypal" action="https://www.<?php echo $testing; ?>paypal.com/cgi-bin/webscr" method="post">
             <input type="hidden" name="cmd" value="_xclick-subscriptions" />
 
@@ -192,17 +190,21 @@ if ( $days_to_end > 0 )
 }
 ?>
             <input type="hidden" name="no_note" value="1" />
-            <input type="hidden" name="notify_url" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/notify/" />
-            <input type="hidden" name="return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s" />
-            <input type="hidden" name="cancel_return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c">
-            <!--<input type="hidden" name="business" value="payment@tricoretraining.com" />-->
-            <input type="hidden" name="business" value="km.schremser@gentics.com" />
+            
+            <input type="hidden" name="notify_url" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/notify/lang:<?php echo $locale; ?>/" />
+            <input type="hidden" name="return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s/lang:<?php echo $locale; ?>/" />
+            <input type="hidden" name="cancel_return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c/lang:<?php echo $locale; ?>/">
+            
+            <input type="hidden" name="business" value="<?php echo Configure::read('App.paymentemail'); ?>" />
+            
             <!-- recurring payment -->
             <input type="hidden" name="src" value="1" />
+            
             <!-- recurring times -->
             <input type="hidden" name="srt" value="" />
             <input type="hidden" name="sra" value="1" />
 
+			<!-- transaction-id -->
             <input type="hidden" name="custom" value="<?php echo $tid; ?>" />
 
             <input type="image" src="https://www.<?php echo $testing; ?>paypal.com/en_US/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="">
@@ -213,10 +215,10 @@ if ( $days_to_end > 0 )
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
             <br /><br />
             For Debugging (only localhost):<br />
-            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/notify/?cmd=_notify-validate&mc_gross=0.10&protection_eligibility=Ineligible&address_status=unconfirmed&payer_id=JA6U2C75C2NV8&address_street=Gonzagagasse+11%2F25%0D%0AGentics+Software+GmbH&payment_date=07%3A19%3A28+May+23%2C+2010+PDT&payment_status=Completed&charset=windows-1252&address_zip=1010&first_name=Klaus&mc_fee=0.10&address_country_code=AT&address_name=Klaus+Schremser&notify_version=2.9&subscr_id=I-FVYX869EU1PR&custom=<?php echo $tid; ?>&payer_status=unverified&business=payment%40tricoretraining.com&address_country=Austria&address_city=Wien&verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AYXfIKa-SWz.qrl3zxkPiKa8M3t5&payer_email=km.schremser%40gentics.com&txn_id=4K020743F0083711A&payment_type=instant&last_name=Schremser&address_state=&receiver_email=payment%40tricoretraining.com&payment_fee=&receiver_id=TGHR6X4FUYYZW&txn_type=subscr_payment&item_name=TriCoreTrainingsplan-1m&mc_currency=EUR&item_number=tctplan-1m&residence_country=AT&transaction_subject=&payment_gross=&testing=true">notify (payment completed)</a><br />
-            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/notify/?cmd=_notify-validatetxn_type=subscr_signup&subscr_id=I-FVYX869EU1PR&last_name=Schremser&residence_country=AT&mc_currency=EUR&item_name=TriCoreTrainingsplan-1m&business=payment%40tricoretraining.com&recurring=1&address_street=Gonzagagasse+11%2F25%0D%0AGentics+Software+GmbH&verify_sign=AiPC9BjkCyDFQXbSkoZcgqH3hpacAD7Sj3NHPfbwgOXOeeS0LcYP5Tap&payer_status=unverified&payer_email=km.schremser%40gentics.com&address_status=unconfirmed&first_name=Klaus&receiver_email=payment%40tricoretraining.com&address_country_code=AT&payer_id=JA6U2C75C2NV8&address_city=Wien&reattempt=1&item_number=tctplan-1m&address_state=&subscr_date=07%3A19%3A26+May+23%2C+2010+PDT&address_zip=1010&custom=<?php echo $tid; ?>&charset=windows-1252&notify_version=2.9&period3=1+M&address_country=Austria&mc_amount3=0.10&address_name=Klaus+Schremser&testing=true">notify (no payment)</a><br />
-            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s">click to success</a><br />
-            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c">click to cancel</a><br />
+            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/notify/lang:<?php echo $locale; ?>/?cmd=_notify-validate&mc_gross=0.10&protection_eligibility=Ineligible&address_status=unconfirmed&payer_id=JA6U2C75C2NV8&address_street=Gonzagagasse+11%2F25%0D%0AGentics+Software+GmbH&payment_date=07%3A19%3A28+May+23%2C+2010+PDT&payment_status=Completed&charset=windows-1252&address_zip=1010&first_name=Klaus&mc_fee=0.10&address_country_code=AT&address_name=Klaus+Schremser&notify_version=2.9&subscr_id=I-FVYX869EU1PR&custom=<?php echo $tid; ?>&payer_status=unverified&business=payment%40tricoretraining.com&address_country=Austria&address_city=Wien&verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AYXfIKa-SWz.qrl3zxkPiKa8M3t5&payer_email=km.schremser%40gentics.com&txn_id=4K020743F0083711A&payment_type=instant&last_name=Schremser&address_state=&receiver_email=payment%40tricoretraining.com&payment_fee=&receiver_id=TGHR6X4FUYYZW&txn_type=subscr_payment&item_name=TriCoreTrainingsplan-1m&mc_currency=EUR&item_number=tctplan-1m&residence_country=AT&transaction_subject=&payment_gross=&testing=true">notify (payment completed)</a><br />
+            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/notify/lang:<?php echo $locale; ?>/?cmd=_notify-validatetxn_type=subscr_signup&subscr_id=I-FVYX869EU1PR&last_name=Schremser&residence_country=AT&mc_currency=EUR&item_name=TriCoreTrainingsplan-1m&business=payment%40tricoretraining.com&recurring=1&address_street=Gonzagagasse+11%2F25%0D%0AGentics+Software+GmbH&verify_sign=AiPC9BjkCyDFQXbSkoZcgqH3hpacAD7Sj3NHPfbwgOXOeeS0LcYP5Tap&payer_status=unverified&payer_email=km.schremser%40gentics.com&address_status=unconfirmed&first_name=Klaus&receiver_email=payment%40tricoretraining.com&address_country_code=AT&payer_id=JA6U2C75C2NV8&address_city=Wien&reattempt=1&item_number=tctplan-1m&address_state=&subscr_date=07%3A19%3A26+May+23%2C+2010+PDT&address_zip=1010&custom=<?php echo $tid; ?>&charset=windows-1252&notify_version=2.9&period3=1+M&address_country=Austria&mc_amount3=0.10&address_name=Klaus+Schremser&testing=true">notify (no payment)</a><br />
+            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s/lang:<?php echo $locale; ?>/">click to success</a><br />
+            TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c/lang:<?php echo $locale; ?>/">click to cancel</a><br />
 <?php } ?>
 <?php 
 }

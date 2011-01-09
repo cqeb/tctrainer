@@ -43,11 +43,7 @@ class PaymentsController extends AppController {
    function unsubscribe_triplans()
    {
             $this->checkSession();
-            //$this->js_addon = '';
 
-            //$this->loadModel('User');
-            //$session_userid = $this->Session->read('session_userid');
-            //$results = $this->User->findById($session_userid);
             $results['User'] = $this->Session->read('userobject');
             $session_userid = $results['User']['id'];
 
@@ -84,15 +80,13 @@ class PaymentsController extends AppController {
             $this->set('statusbox', $statusbox);
    }
 
+/**
+shows the chosen paymentplan by the user
+**/
+
    function initiate()
    {
-            /**
-            shows the chosen paymentplan by the user
-            **/
 
-            //$this->layout = 'ajaxrequests';
-            $this->checkSession();
-            //$this->js_addon = '';
             $error = '';
             $tid = '';
 
@@ -100,13 +94,13 @@ class PaymentsController extends AppController {
             $session_userid = $results['User']['id'];
 
             // debugging paypal
-            $testing = 'sandbox.';
+            //$testing = 'sandbox.';
             $testing = '';
 
             $timeinterval = $this->params['named']['t'];
             if ( !$timeinterval ) $timeinterval = 1;
 
-            if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+            if ( $_SERVER['HTTP_HOST'] == 'localhost' || $results['User']['advanced_features'] )
             {
             	$price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
             } else
@@ -185,17 +179,28 @@ class PaymentsController extends AppController {
             $this->set('days_to_end', $results['User']['days_to_end'] );
             $this->set('error', $error);
 			$this->set('countries', $countries);
+			$this->set('userobject', $results['User']);
             //$this->set('invoice', $invoice);
    }
 
+    /**
+    we get a remote request from PAYPAL-service and have to handle it
+    **/
+
    function notify()
    {
-            /**
-            we get a remote request from PAYPAL-service and have to handle it
-            **/
+			// don't check session because paypal is not logged in
+			if ( isset( $this->params['named']['lang'] ) )
+			{
+					$this->code = $this->params['named']['lang']; 				
+			} else
+			{
+					$this->code = 'eng';
+			}	 
+			$this->Session->write('Config.language', $this->code);
 
-            // checkSession - won't work with paypal request
-            //$this->checkSession();
+            $this->checkSession();
+
             $this->set('js_addon','');
             $error = '';
             $logurl = '';
@@ -353,6 +358,16 @@ class PaymentsController extends AppController {
 
    function show_payments()
    {
+			// don't check session because paypal is not logged in
+			if ( isset( $this->params['named']['lang'] ) )
+			{
+					$this->code = $this->params['named']['lang']; 				
+			} else
+			{
+					$this->code = 'eng';
+			}	 
+			$this->Session->write('Config.language', $this->code);
+
             $this->checkSession();
             $this->set('js_addon','');
             $error = '';
@@ -398,19 +413,7 @@ class PaymentsController extends AppController {
 
             $this->Payment->id = $id;
             $this->data = $this->Payment->read();
-
-            //$session_userid = $this->Session->read('session_userid');
-            // check if user-session is valid
-            /**
-            $results_user = $this->User->findById($session_userid);
-            
-            if ( !is_array( $results_user ) )
-            {
-               $error = __('Your user-session is corrupted. Sorry. Please contact us, we will fix it - promised! support@tricoretraining.com',true);
-               $show_invoice = 'no';
-            }
-            **/
-            
+           
             $this->set('error', '');
 
             $this->set('show_invoice', $show_invoice);
@@ -419,8 +422,6 @@ class PaymentsController extends AppController {
 
    function _sendInvoice($pay, $mailtype)
    {
-            //$this->layout = 'newsletter';
-
             $User = $this->User->read( null, $pay['pay_userid']);
 
             $this->set('user', $User);
@@ -442,9 +443,9 @@ class PaymentsController extends AppController {
             $this->Email->to = $User['User']['email'];
 
             if ( $mailtype == 'invoice' )
-                           $this->Email->subject = __('TriCoreTraining (TCT) Invoice',true);
+                           $this->Email->subject = __('TriCoreTraining Invoice',true);
             else
-                           $this->Email->subject = __('TriCoreTraining (TCT) Subscription Info',true);
+                           $this->Email->subject = __('TriCoreTraining Subscription Info',true);
 
             $this->Email->replyTo = Configure::read('App.mailFrom');
             $this->Email->from = Configure::read('App.mailFrom');

@@ -31,13 +31,16 @@
  * its action called 'display', and we pass a param to select the view file
  * to use (in this case, /app/views/pages/home.ctp)...
  */
-	Router::connect('/', array('controller' => 'starts', 'action' => 'index', 'home'));
+Router::connect('/', array('controller' => 'starts', 'action' => 'index', 'home'));
 /**
  * ...and connect the rest of 'Pages' controller's urls.
  */
-	//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+//Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-  // kms
-  Router::parseExtensions('rss');
-
+/**
+ * 
+ */
+// does not work
+Router::connect('/de', array('controller' => 'users', 'action' => 'change_language', 'deu'));
+ 
 ?>

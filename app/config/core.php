@@ -124,7 +124,10 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
     Configure::write('App.mailPassword', '');
 
 }
-
+	
+// Paypal payment email
+Configure::write('App.paymentemail', 'km.schremser@gentics.com');
+	
 /**
  * Uncomment the define below to use CakePHP admin routes.
  *

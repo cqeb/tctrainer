@@ -21,7 +21,6 @@
                    <br />
 
 <table summary="<?php __('All possible subscriptions'); ?>">
-<!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->
 <colgroup>
           <col class="colA">
           <col class="colB">
@@ -29,62 +28,7 @@
 </colgroup>
 <thead>
 <tr>
-    <th colspan="3" class="table-head"><?php __('SUBSCRIPTIONS'); ?></th>
-</tr>
-<tr>
-    <th><?php __('Features'); ?></th>
-    <th style="width:25%"><?php __('Premium'); ?></th>
-    <th style="width:25%"><?php __('Free'); ?></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-    <td><?php __('Magazine'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr>
-    <td><?php __('Community'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr class="odd">
-    <td><?php __('Change profile'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr>
-    <td><?php __('Training logbook'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr class="odd">
-    <td><?php __('Define competitions'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr>
-    <td><?php __('Training statistics'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr class="odd">
-    <td><?php __('Training schedule'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center"><b><?php __('No'); ?></b></td>
-</tr>
-<!--
-<tfoot>
-<tr class="total">
-    <td colspan="3">&nbsp;</td>
-</tr>
-</tfoot>
--->
-<tr>
-    <td colspan="3">&nbsp;</td>
-</tr>
-<tr>
-    <td colspan="3"><h2><?php __('Click to subscribe to a PREMIUM membership'); ?></h2></td>
+    <th colspan="3"><h2><?php __('Click to subscribe to a PREMIUM membership'); ?></h2></th>
 </tr>
 <?php
 $price1m['EUR'] = '9.90';
@@ -139,6 +83,61 @@ $price12pm['USD'] = '11.66';
     </td>
 </tr>
 </tbody>
+</table>
+
+<table summary="<?php __('All possible subscriptions'); ?>">
+<!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->
+<colgroup>
+          <col class="colA">
+          <col class="colB">
+          <col class="colC">
+</colgroup>
+<thead>
+<tr>
+    <th colspan="3" class="table-head"><?php __('SUBSCRIPTIONS'); ?></th>
+</tr>
+<tr>
+    <th><?php __('Features'); ?></th>
+    <th style="width:25%"><?php __('Premium'); ?></th>
+    <th style="width:25%"><?php __('Free'); ?></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+    <td><?php __('Magazine'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr>
+    <td><?php __('Community'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr class="odd">
+    <td><?php __('Change profile'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr>
+    <td><?php __('Training logbook'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr class="odd">
+    <td><?php __('Define competitions'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr>
+    <td><?php __('Training statistics'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center">X</td>
+</tr>
+<tr class="odd">
+    <td><?php __('Training schedule'); ?></td>
+    <td style="text-align:center">X</td>
+    <td style="text-align:center"><b><?php __('No'); ?></b></td>
+</tr>
 </table>
 
 <img alt="<?php __('PAYPAL - secure payment solutions'); ?>" src="<?php echo Configure::read('App.serverUrl'); ?>/img/paypal_logo.gif" />

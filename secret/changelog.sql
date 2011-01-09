@@ -79,3 +79,8 @@ ALTER TABLE `users` CHANGE `payed_to` `paid_to` DATE NOT NULL;
 # comment all non-sql strings!!
 #2011-01-09 KMS
 DROP TABLE IF EXISTS `trainingplans`;
+
+#2011-01-09 KMS
+ALTER TABLE  `payments` CHANGE  `payed_from`  `paid_from` DATE NULL DEFAULT NULL;
+ALTER TABLE  `payments` CHANGE  `payed_to`  `paid_to` DATE NULL DEFAULT NULL;
+

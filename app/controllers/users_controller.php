@@ -1506,7 +1506,11 @@ class UsersController extends AppController {
 
 	function change_language()
 	{
-		$this->code = $this->params['named']['code'];
+
+		if ( isset( $this->params['named']['code'] ) ) 
+			$this->code = $this->params['named']['code'];
+		else
+			$this->code = 'eng';
 
 	    if ( $this->Session->read('session_userid') )
 	    {

@@ -32,13 +32,6 @@
                     
                    <table summary="<?php __('TriCoreTraining.com Invoice'); ?>">
                    <caption><?php __('TriCoreTraining.com Invoice') ?> <?php __('No.'); ?> <?php echo $data['invoice']; ?></caption>
-                   <!--
-                   <colgroup>
-                              <col class="colA">
-                              <col class="colB">
-                              <col class="colC">
-                   </colgroup>
-                   -->
                    <thead>
                    <tr>
                         <th colspan="3" class="table-head"><?php __('TriCoreTraining-Plan'); ?></th>
@@ -49,39 +42,28 @@
                         <th class="currency"><?php __('Price'); ?></th>
                    </tr>
                    </thead>
-                   <tfoot>
-                   <!--
-                   <tr>
-                        <th><?php __('Subtotal'); ?></th>
-                        <td></td>
-                        <th class="currency"><?php echo $currency . ' ' . $price; ?></th>
+                   <tbody>
+                   <tr class="odd">
+                        <td><?php __('Trainingplan'); ?></td>
+                        <td>
+                        <?php echo $data['timeinterval']; ?> <?php __('month(s)'); ?><br />
+                        <?php __('From'); ?> <?php echo $data['paid_from']; ?> <?php __('to'); ?> <?php echo $data['paid_to']; ?></td>
+                        <td class="currency"><?php echo $data['currency'] . ' ' . sprintf('%.2f', $data['price']); ?></td>
                    </tr>
-                   -->
+                   <tr>
+                        <td></td>
+                        <td><?php __('We are not allowed to charge VAT as an association.'); ?></td>
+                   </tr>
+                   </tbody>
                    <tr class="total">
                         <th><?php __('Total'); ?></th>
                         <td></td>
                         <th class="currency"><?php echo $data['currency'] . ' ' . $data['price']; ?></th>
                    </tr>
-                   </tfoot>
-                   <tbody>
-                   <tr class="odd">
-                        <th><?php __('Trainingplan'); ?></th>
-                        <td>
-                        <?php echo $data['timeinterval']; ?> <?php __('month(s)'); ?><br />
-                        <?php __('From'); ?> <?php echo $data['paid_from']; ?> <?php __('to'); ?> <?php echo $data['paid_to']; ?></td>
-                        <td class="currency"><?php echo $data['currency'] . ' ' . $data['price']; ?></td>
-                   </tr>
-                   <tr>
-                        <th></th>
-                        <td><?php __('We are not allowed to charge VAT as an association.'); ?></td>
-                   </tr>
-                   </tbody>
                    </table>
                     
                    <?php echo $html->link(__('Back to list of payments',true),array('controller' => 'payments', 'action' => 'show_payments'))?>
-                    
                    <br /><br />
-                    
                    </div>
     
                    </fieldset>
