@@ -6,7 +6,7 @@
 <?php } ?>
 
 <?php if ( $this->name == 'Competitions' ) { ?>
-		    <li><?php echo $html->link(__('List competitions',true),array('controller' => 'competitions', 'action' => 'list_competitions','id',$session_userid))?></li>
+		    <li><?php echo $html->link(__('List competitions',true),array('controller' => 'competitions', 'action' => 'list_competitions'))?></li>
 		    <li><?php echo $html->link(__('Add competition',true),array('controller' => 'competitions', 'action' => 'edit_competition'))?></li>
 <?php } ?>
 <?php if ( $this->name == 'Trainingplans' ) { ?>

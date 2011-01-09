@@ -9,18 +9,11 @@ class TrainingplansController extends AppController {
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc');
 	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Provider');
 
-	var $paginate = array(
-       'Trainingplan' => array(
-                'limit' => 15
-	)
-	);
-
 	function beforeFilter()
 	{
 		parent::beforeFilter();
 		$this->layout = 'trainingplans';
 		$this->checkSession();
-
 	}
 
 	// view your training plan

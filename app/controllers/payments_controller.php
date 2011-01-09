@@ -1,4 +1,3 @@
-<?php
 
 /**
 do the payment with PAYPAL
@@ -380,19 +379,11 @@ class PaymentsController extends AppController {
                   'order' => array('Payment.invoice' => 'desc')
             );
 
-            $payments = $this->paginate('Payment');
+			$payments = $this->paginate('Payment');
+					
             $this->set('payments', $payments);
    }
 
-   /**
-   function delete( $id )
-   {
-            $this->Payment->delete($id);
-            $this->Session->setFlash(__('Payment with ID:',true) . ' ' . $id . ' ' . __('deleted',true) . '.');
-            $this->redirect(array('action'=>'show_payments'));
-   }
-   **/
-    
    function show_invoice($id = null)
    {
             $this->checkSession();
