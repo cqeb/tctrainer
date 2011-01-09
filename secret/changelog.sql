@@ -1,14 +1,14 @@
-DROP TABLE `athletes`;
+DROP TABLE IF EXISTS `athletes`;
 
 #2010-08-21 KMS
-DROP TABLE `cmspages`;
-DROP TABLE `cmspagespagestatuses`;
-DROP TABLE `cmspagespagetypes`;
+DROP TABLE IF EXISTS `cmspages`;
+DROP TABLE IF EXISTS `cmspagespagestatuses`;
+DROP TABLE IF EXISTS `cmspagespagetypes`;
 RENAME TABLE `trainingsplans`  TO `trainingplans`;
  
 #2010-09-09 KMS
 ALTER TABLE `trainingstatistics` CHANGE `distancetime` `duration` INT( 11 ) NULL DEFAULT NULL;
-DROP TABLE `trainingplans`;
+DROP TABLE IF EXISTS `trainingplans`;
 
 #2010-09-10 CP
 ALTER TABLE  `scheduledtrainings` ADD  `trimp` INT NOT NULL AFTER  `duration`;
@@ -17,12 +17,12 @@ ALTER TABLE  `scheduledtrainings` ADD  `trimp` INT NOT NULL AFTER  `duration`;
 ALTER TABLE `trainingstatistics` CHANGE `trimps` `trimp` INT( 11 ) NOT NULL;
 
 #2010-09-19 KMS
-CREATE TABLE starts (id int);
-CREATE TABLE trainingplans (id int);
+CREATE TABLE IF EXISTS starts (id int);
+CREATE TABLE IF EXISTS trainingplans (id int);
 
 #2010-09-22 CP
-ALTER TABLE  `mesocyclephases` ADD  `usertime` INT NOT NULL AFTER  `time`;
-ALTER TABLE  `mesocyclephases` ADD  `ratio` VARCHAR( 20 ) NOT NULL AFTER  `usertime`;
+ALTER TABLE `mesocyclephases` ADD  `usertime` INT NOT NULL AFTER  `time`;
+ALTER TABLE `mesocyclephases` ADD  `ratio` VARCHAR( 20 ) NOT NULL AFTER  `usertime`;
 
 #2010-11-13 KMS
 ALTER TABLE `trainingstatistics` CHANGE `date` `date` DATE NULL DEFAULT NULL;
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `triswimworkouttypesequence` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #2011-01-06 KMS
-DROP TABLE  `starts`;
+DROP TABLE IF EXISTS `starts`;
 
 #2011-01-07 KMS
 ALTER TABLE `users` CHANGE `payed_from` `paid_from` DATE NOT NULL;
@@ -78,4 +78,4 @@ ALTER TABLE `users` CHANGE `payed_to` `paid_to` DATE NOT NULL;
 
 # comment all non-sql strings!!
 #2011-01-09 KMS
-DROP TABLE  `trainingplans`;
+DROP TABLE IF EXISTS `trainingplans`;
