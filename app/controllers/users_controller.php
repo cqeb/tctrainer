@@ -178,7 +178,7 @@ class UsersController extends AppController {
 
 	function password_reset()
 	{
-    $statusbox = 'statusbox';
+    	$statusbox = 'statusbox';
 		$this->pageTitle = __('Password reset',true);
 
 		//$this->email = base64_decode($this->params['named']['email']);
@@ -1448,7 +1448,7 @@ class UsersController extends AppController {
 
 	function _sendPasswordForgotten($id, $randompassword = null)
 	{
-	  //$this->layout = 'newsletter';
+	  	//$this->layout = 'newsletter';
     
 		if ( $randompassword )
 		{
@@ -1462,7 +1462,6 @@ class UsersController extends AppController {
 		$User = $this->User->read(null,$id);
 
 		$this->loadModel('Transaction');
-
 		$tid = $this->Transactionhandler->handle_transaction( $this->Transaction, '', 'create', 'forgotten_userid', $User['User']['id'] );
 		$this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'forgotten_email', $User['User']['email'] );
 
@@ -1470,7 +1469,7 @@ class UsersController extends AppController {
 		//$encoded_id    = base64_encode($User['User']['id']);
 
 		$this->Email->to = $User['User']['email'];
-		$this->Email->subject = __('TriCoreTraining - password forgotten',true);
+		$this->Email->subject = __('TriCoreTraining - password reset',true);
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 

@@ -192,13 +192,9 @@ if ( $days_to_end > 0 )
 }
 ?>
             <input type="hidden" name="no_note" value="1" />
-            <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-              <input type="hidden" name="notify_url" value="http://www.schremser.com/test/paypal.php" />
-            <?php } else { ?>              
-              <input type="hidden" name="notify_url" value="<?php echo Configure::read('App.serverUrl'); ?>/payments/success/i:n/tid:<?php echo $tid; ?>" />
-            <?php } ?>
-            <input type="hidden" name="return" value="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s" />
-            <input type="hidden" name="cancel_return" value="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c">
+            <input type="hidden" name="notify_url" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/notify/" />
+            <input type="hidden" name="return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s" />
+            <input type="hidden" name="cancel_return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c">
             <!--<input type="hidden" name="business" value="payment@tricoretraining.com" />-->
             <input type="hidden" name="business" value="km.schremser@gentics.com" />
             <!-- recurring payment -->
