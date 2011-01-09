@@ -110,7 +110,7 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
       Configure::write('App.serverUrl', '/trainer');
       // Domain with protocol and NO trailing slash
       Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
-      Configure::write('App.uploadDir', '/var/www/trainer/app/webroot/files/');
+      Configure::write('App.uploadDir', '/var/www/vhosts/www.tricoretraining.com/trainer/app/webroot/files/');
 
     /**
      * mail sending options
