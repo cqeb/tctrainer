@@ -295,6 +295,7 @@ abstract class WorkoutProvider {
 			$sql = "SELECT s.type, count(*) c FROM scheduledtrainings s
 				INNER JOIN mesocyclephases m ON s.week = m.date 
 				WHERE s.sport = '{$this->SPORT}'
+				AND s.athlete_id = " . $this->athlete->getId() . "
 				AND m.phase != 'PREP'
 				AND m.phase != 'TRANS'
 				AND s.week >= date_sub('$lastWeek', INTERVAL 4 WEEK)
