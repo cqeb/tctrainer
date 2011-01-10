@@ -12,7 +12,7 @@
                    </div><br />
                    <?php } ?>
                    
-                   <a href="/trainer/competitions/edit_competition"><button value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button></a>
+                   <a href="/trainer/competitions/edit_competition"><button onClick="javascript:top.location.href='/trainer/competitions/edit_competition'" value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button></a>
 
                    <br /><br />
 

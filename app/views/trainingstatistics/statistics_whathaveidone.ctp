@@ -11,7 +11,7 @@ if ( $export == true )
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TriCoreTraining.com Trainingstatistics</title>
+    <title>TriCoreTraining <?php __('Statistics'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
 
     <style type="text/css">
@@ -84,7 +84,6 @@ if ( $export == true )
 } else
 {
 ?>
-
                    <h1><?php __('Statistics'); echo " " . $post_sportstype; ?></h1>
 
                    <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_whathaveidone')); ?>
@@ -97,7 +96,8 @@ if ( $export == true )
                    </div><br />
                    <?php } ?>
 
-                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/tag/statistics/"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <?php __('These statistics show you what and how much you have achieved in a certain period of time.'); ?> 
+                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
                    <div>

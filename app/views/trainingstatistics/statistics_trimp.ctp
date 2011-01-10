@@ -12,7 +12,8 @@
                    <br />
                    <?php } ?>
 
-                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/tag/statistics/"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <?php __('These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 45 days).'); ?> 
+                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
                    <div>

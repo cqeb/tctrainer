@@ -1,4 +1,7 @@
+<?php
+            $this->addScript('tiptip', $javascript->link('jquery.tipTip.minified.js'));
 
+?>
                    <h1><?php __('Settings'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
@@ -105,10 +108,16 @@ echo $form->input('publictrainings', array('label' => __('Publish your trainings
 
 <div class="statusbox error" id="errorlth"></div>
 <?php
+
+$help_lth = ' <a class="tiptip" title="' .
+__('How to define your lactate threshold? 1. Do your test-workouts to define your lactate threshold. 2. Do a lactate threshold test with your doctor. 3. Take 85% of your maximum heart rate (this is just an approximation). Read more in our blog.', true) . 
+'" href="#"><span style="background-color:lightblue;padding:5px;">?</span></a>';
+//<!--/blog/en/how-do-i-find-out-my-lactate-thresholds/-->
+
 echo $form->input('lactatethreshold',
                    array(
                    'before' => '',
-                   'after' => ' <a href="/blog/en/how-do-i-find-out-my-lactate-thresholds/" target="_blank">[?]</a>',
+                   'after' => $help_lth,
                    'between' => '',
                    'class' => 'required',
                    'maxLength' => 255,
@@ -127,7 +136,7 @@ echo $form->input('lactatethreshold',
 echo $form->input('bikelactatethreshold',
                    array(
                    'before' => '',
-                   'after' => ' <a href="/blog/en/how-do-i-find-out-my-lactate-thresholds/" target="_blank">[?]</a>',
+                   'after' => $help_lth,
                    'between' => '',
                    'class' => 'required',
                    'maxLength' => 255,
@@ -448,6 +457,9 @@ $this->js_addon .= <<<EOH
 
         // facebox box
         \$('a[rel*=facebox]').facebox();
+		
+		\$('.tiptip').tipTip();
+		\$('.tiptip2').tipTip({maxWidth: "auto", edgeOffset: 10});
 
 });
 

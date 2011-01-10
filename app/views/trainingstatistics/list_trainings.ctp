@@ -16,17 +16,12 @@ __('SWIM workout', true);
                    </div><br />
                    <?php } ?>
 
-                   <a href="/trainer/trainingstatistics/edit_training"><button value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/edit_training"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
                    
                    <?php if ( $userobject['advanced_features'] ) { ?>
-                   <a href="/trainer/trainingstatistics/import_workout"><button value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/import_workout"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
                    <?php } ?>
 
-                   <!--
-                   <?php echo $html->link(__("Add workout",true), array('action' => 'edit_training'),null) ?>
-                   | 
-                   <?php echo $html->link(__("Import workout",true), array('action' => 'import_workout'),null) ?>
-                   -->
                    <br /><br />
 
 <table>

@@ -18,13 +18,13 @@ class StartsController extends AppController {
 	function index()
 	{
 
-      if ( $this->Session->read('session_userid') )
+      	if ( $this->Session->read('session_userid') )
             $this->redirect('/trainingplans/view');
       
-      $this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
+      	$this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
 
-      if ( isset( $this->params['named'] ) ) 
-      {
+      	if ( isset( $this->params['named'] ) ) 
+      	{
           if ( isset( $this->params['named']['distance'] ) ) $distance = $this->params['named']['distance'];
           else $distance = '';
           if ( isset( $this->params['named']['distance_unit'] ) ) $distance_unit = $this->params['named']['distance_unit'];
@@ -38,7 +38,7 @@ class StartsController extends AppController {
           $this->set('distance_unit', $distance_unit);
           $this->set('duration', $duration);
           $this->set('stype', $stype);
-      }      
+      	}      
 	}
   
   function error404()

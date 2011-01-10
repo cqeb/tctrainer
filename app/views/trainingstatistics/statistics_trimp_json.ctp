@@ -16,18 +16,20 @@ if ( $graphtype == 'chronic' )
 ?>
 {
 "elements":[
-/*{
+<?php if ( $userobject['advanced_features'] ) { ?>{
  "type":"area",
  "fill-alpha": 0.4,
  "width": 2,
  "dot-size": 4,
  "halo-size": 2,
- "colour": "#FF6200",
- "fill": "#FFEC8A",     
+ "colour": "#06FF02",
+ "fill": "#CCFFCF",     
+// "colour": "#FF6200",
+// "fill": "#FFEC8A",     
  "text":"<?php __('TRIMP planned'); ?>",
  "on-show":  {"type": "shrink-in", "cascade":1, "delay":0.5},
  "values":[<?php for ( $i = $day_back; $i < ( count($trimp_tl_planned) ); $i++ ) { echo "{ \"value\": "; echo round($trimp_tl_planned[$i]); echo ",\"colour\": \"#D02020\", \"tip\": \"" . __('TRIMP planned', true) . "\n"; echo round($trimp_tl_planned[$i]) . "\"}"; if ( $i < ( count( $trimp_tl_planned ) - 1 ) ) echo ","; } ?>]
-},*/
+},<?php } ?>
 {
  "type":"area",
  "fill-alpha": 0.4,
@@ -38,7 +40,7 @@ if ( $graphtype == 'chronic' )
 // "fill": "#CCFFCF",     
  "colour": "#f1ad28",
  "fill": "#fffccf",     
- "text":"<?php __('Acute Training Load'); ?>",
+ "text":"<?php __('TRIMP trained'); ?>",
  "on-show": {"type": "shrink-in", "cascade":1, "delay":0.5},
  "values":[<?php for ( $i = $day_back; $i < ( count($trimp_tl_done) ); $i++ ) { echo "{ \"value\": "; echo round($trimp_tl_done[$i]); echo ",\"colour\": \"#D02020\", \"tip\": \"" . __('TRIMP real', true) . "\n" . round($trimp_tl_done[$i]) . "\"}"; if ( $i < ( count( $trimp_tl_done ) - 1 ) ) echo ","; } ?>]
 }

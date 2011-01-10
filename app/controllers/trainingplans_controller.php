@@ -62,9 +62,9 @@ class TrainingplansController extends AppController {
 		if ($schedule && count($schedule->getRaces()) == 0) {
 			$this->set('info', '<div class="statusbox"><p>' . 
 			__("You might want to add some competitions to refine your training plan.", true) . 
-			"</p><a href=\"/trainer/competitions/list_competitions/\"><button>
-			" . __("Add competition", true) . "
-			</button></a>
+			'</p><a href="/trainer/competitions/list_competitions/"><button onClick="javascript:document.location=\'/trainer/competitions/list_competitions\'">' .
+			__("Add competition", true) . 
+			"</button></a>
 			</div>");
 		} else {
 			$this->set('info', '<script type="text/javascript">jQuery(".box.info").hide();</script>');

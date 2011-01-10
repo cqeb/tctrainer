@@ -661,7 +661,6 @@ class TrainingstatisticsController extends AppController {
 
             $trainingdata = $this->Trainingstatistic->query( $sql );
 
-            //pr($trainingdata);
             // go through all trainings in trainingsstatistics
             for ( $i = 0; $i < count( $trainingdata ); $i++ )
             {
@@ -1142,7 +1141,7 @@ class TrainingstatisticsController extends AppController {
           $this->checkSession();
 
           $this->layout = "ajaxrequests";
-     	    $this->RequestHandler->setContent('js', null);
+     	  $this->RequestHandler->setContent('js', null);
           Configure::write('debug', 1);
 
           $this->set('js_addon','');
@@ -1192,10 +1191,15 @@ class TrainingstatisticsController extends AppController {
                   $diff_week = round( $diff_time / ( 86400 * 7 ) );
                   // diff between last weight entry and target weight
                   $diff_weight = $targetweight - $train_array['avgweight'];
+                  $diff_weight_show = $this->Unitcalc->check_weight( $diff_weight, 'show', 'single' );
+				  
                   // how much do you have to loose to reach your weight goal
                   $diff_per_week = ($diff_weight / $diff_week);
-  
+				  $diff_per_week_show = $this->Unitcalc->check_weight( $diff_per_week, 'show', 'single' );
+				  
                   $lastweight = $train_array['avgweight'];
+				  $lastweight_show = $this->Unitcalc->check_weight( $lastweight, 'show', 'single' );
+				  
                   $lastweightdate = $train_array['weekday'];
             }
                
@@ -1204,22 +1208,24 @@ class TrainingstatisticsController extends AppController {
                 $nweek[$i] = date('W', $week_ts);
                 $nyear[$i] = date('o', $week_ts);
                 $week_ts += (86400*7);
-                //echo $nyear[$i] . '-' . $nweek[$i] . '<br />';
                 $weeks[$i] = $nyear[$i]. $nweek[$i]; 
             }
   
+  			$maxweight = 0;
             for ( $i = 0; $i < count( $trainings ); $i++ )
             {
                  $week = $trainings[$i][0]['week'];
                  $train[$week]['avgweight'] = $trainings[$i][0]['avgweight'];
+				 if ( $train[$week]['avgweight'] > $maxweight ) $maxweight = $this->Unitcalc->check_weight( $train[$week]['avgweight'], 'show', 'single' );
             }
-  
+          	$targetweight_show = $this->Unitcalc->check_weight( $results['User']['targetweight'], 'show', 'single' );
+			if ( $targetweight_show > $maxweight ) $maxweight = $targetweight_show;
+			  
             $avg_weight_lastweek = 'null'; 
             // go through all weeks - in case you have weeks without trainings you have to set them to 0
             for( $i = 0; $i < ( $weeks_between_dates ); $i++ )
             {
                  $yearweek = $nyear[$i] . '' . $nweek[$i]; 
-                 //echo $yearweek . '<br />';
                  if ( $i > ( $weeks_between_dates - $diff_week ) ) 
                  {
                      $train[$yearweek]['avgweight'] = 'null';
@@ -1230,20 +1236,28 @@ class TrainingstatisticsController extends AppController {
                         $train[$yearweek]['avgweight'] = $avg_weight_lastweek;
                     } else
                     {
-                        $avg_weight_lastweek = $train[$yearweek]['avgweight'];
+                        $avg_weight_lastweek = $this->Unitcalc->check_weight( $train[$yearweek]['avgweight'], 'show', 'single' );
+						$train[$yearweek]['avgweight'] = $this->Unitcalc->check_weight( $train[$yearweek]['avgweight'], 'show', 'single' );
                     }
                   }
             }
             ksort($train);
           
+			if ( $maxweight == 0 ) $maxweight = $this->Unitcalc->check_weight( '150', 'show', 'single' );
+			$maxweight = round( $maxweight ) + 10; 
+			$minweight = round( $this->Unitcalc->check_weight( '40', 'show', 'single' ) );
+			
             $this->set('start', $start);
             $this->set('end', $end);
             if ( isset( $diff_week ) ) $this->set('diffweek', $diff_week);
-            if ( isset( $diff_weight ) ) $this->set('diffweight', $diff_weight);
-            if ( isset( $diff_per_week ) ) $this->set('diff_per_week', $diff_per_week);
-            if ( isset( $lastweight ) ) $this->set('lastweight', $lastweight);
-            if ( isset( $targetweight ) ) $this->set('targetweight', $targetweight);
+            if ( isset( $diff_weight_show ) ) $this->set('diffweight', $diff_weight_show);
+            if ( isset( $diff_per_week_show ) ) $this->set('diff_per_week', $diff_per_week_show);
+            if ( isset( $lastweight_show ) ) $this->set('lastweight', $lastweight_show);
+            if ( isset( $targetweight_show ) ) $this->set('targetweight', $targetweight_show);
             $this->set('maxweeks', $weeks_between_dates);
+			$this->set('minweight', $minweight);
+			$this->set('maxweight', $maxweight);
+			$this->set('step', 5);
             $this->set('weeks', $weeks);
             $this->set('trainings2', $train);
             $this->set('weight_unit', $unit['weight']);

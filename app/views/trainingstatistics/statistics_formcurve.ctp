@@ -12,7 +12,8 @@
                    <br />
                    <?php } ?>
                    
-                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/tag/statistics/"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <?php __('You want to know whether you became faster? This statistic shows you based on your test-workouts your current speed.'); ?> 
+                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/how-can-i-test-if-i-became-faster/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
                    <div>

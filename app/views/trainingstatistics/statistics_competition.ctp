@@ -22,7 +22,8 @@
                    </div><br />
                    <?php } ?>
 
-                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/tag/statistics/"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <?php __('This statistic shows you whether you can finish your next competition. The signal light leads you the way.'); ?> 
+                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/do-i-have-trained-enough-for-my-competition/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
                    <div>

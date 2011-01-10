@@ -6,8 +6,8 @@
  * application-wide controller-related methods here.
  *
  * @copyright		Copyright 2007-2008, 3HN Deisngs.
-* @author			Baz L
-* @link			http://www.WebDevelopment2.com/
+ * @author			Baz L
+ * @link			http://www.WebDevelopment2.com/
  */
 
 /**
@@ -22,14 +22,27 @@ class AppController extends Controller {
 	   	function beforeFilter()
      	{
 
-            if ( $this->Session->read('Config.language') )
+			// if user is from AUT or GER - change language to German
+			$language = $this->Session->read('Config.language');
+	        if ( !isset( $language ) )
+			{
+				if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+				else
+					$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
+					
+				$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+			
+				if ( isset( $yourlocation->country_code ) && ( $yourlocation->country_code == 'DE' || $yourlocation->country_code == 'AT' ) )
+				{
+                		Configure::write('Config.language','deu');
+				} else
+                		Configure::write('Config.language','eng');
+			} else	
                 Configure::write('Config.language',$this->Session->read('Config.language'));
-            else
-                Configure::write('Config.language','eng');
 
-            $locale = Configure::read('Config.language');
+          	$locale = Configure::read('Config.language');
 
-            //echo VIEWS . $locale . DS . $this->viewPath;
             if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath))
             {
                //echo VIEWS . $locale . DS . $this->viewPath;
@@ -41,7 +54,7 @@ class AppController extends Controller {
             {
                // set debug level
                Configure::write('debug', 0);
-               // TODO do we need to optimize CACHE-settings in header?
+               // TODO (B) do we need to optimize CACHE-settings in header?
                $this->header('Pragma: no-cache');
                $this->header('Cache-control: no-cache');
                $this->header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -127,21 +140,21 @@ class AppController extends Controller {
 
             if ( $session_useremail && $session_userid )
             {
-                		    // if $username is not empty,
-                		    // check to make sure it's correct
-                		    $this->loadModel('User');
-                		    $results = $this->User->findByEmail( $session_useremail );
-                        //print_r($results); echo "test";                        
-                		    // if not correct, send to login page
+            		    // if $username is not empty,
+            		    // check to make sure it's correct
+            		    $this->loadModel('User');
+            		    $results = $this->User->findByEmail( $session_useremail );
+
+            		    // if not correct, send to login page
                         if ( ( !$results || $results['User']['id'] != $session_userid ) )
                         {
-                			       $this->Session->delete('session_useremail');
-                             $this->Session->delete('session_userid');
-                             $this->Cookie->del('tct_auth');
-                			       $this->Session->setFlash(__('Incorrect session data. Sorry.',true));
-                			       $this->redirect('/users/login');
-                			       exit();
-		                    } else
+	        			        $this->Session->delete('session_useremail');
+                             	$this->Session->delete('session_userid');
+                             	$this->Cookie->del('tct_auth');
+                			    $this->Session->setFlash(__('Incorrect session data. Sorry.',true));
+                			    $this->redirect('/users/login');
+                			    exit();
+		                } else
                         {  
                              $this->Session->write('session_userid', $results['User']['id']);
                              $this->Session->write('session_useremail', $results['User']['email']);
@@ -151,7 +164,7 @@ class AppController extends Controller {
                         }
 	          }
 
-            $this->set('session_userid', $session_userid);
+            	$this->set('session_userid', $session_userid);
 
 	  }
 

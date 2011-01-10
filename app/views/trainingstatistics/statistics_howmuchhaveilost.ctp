@@ -11,7 +11,8 @@
                    </div><br />
                    <?php } ?>
                    
-                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/tag/statistics/"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <?php __('This statistics shows you your weight-history and the way to your weight targets.'); ?>
+                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
                    <div>
