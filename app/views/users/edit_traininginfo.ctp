@@ -1,16 +1,20 @@
-                   <h1><?php __('Settings'); ?></h1>
 
-                   <?php echo $this->element('js_error'); ?>
+<h1><?php __('Settings'); ?></h1>
 
-                   <?php echo $form->create('User', array('action' => 'edit_traininginfo', 'type' => 'file')); ?>
-                   <fieldset>
-                   <legend><?php __('Fill in your training information'); ?></legend>
+<?php echo $this->element('js_error'); ?>
 
-                   <?php if ($session->check('Message.flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
-                   </div><br />
-                   <?php } ?>
+<?php 
+echo $form->create('User', 
+	array('action' => 'edit_traininginfo', 'type' => 'file'));
+?>
+<fieldset>
+<legend><?php __('Fill in your training information'); ?></legend>
+
+<?php if ($session->check('Message.flash')) { ?>
+<div class="<?php echo $statusbox; ?>">
+<?php $session->flash(); ?>
+</div><br />
+<?php } ?>
 
 <?php
 echo $form->hidden('id');
@@ -27,7 +31,7 @@ echo $form->input('typeofsport',
                   'after' => '',
                   'between' => '',
                   'options' => $sporttype_array
-                  ));
+));
 
 echo $form->input('weeklyhours',
      array(
@@ -48,56 +52,6 @@ echo $form->input('weeklyhours',
 
 ?>
 <span id="weeklyhours"></span>
-<?php
-
-/**
-echo $form->input('dayofheaviesttraining',
-                  array(
-                  'legend' => false,
-                  'label' => __('Day of heaviest training', true),
-                  'class' => 'required',
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'options' => array(
-                                 'MON' => __('Monday', true),
-                                 'TUE' => __('Tuesday', true),
-                                 'WED' => __('Wednesday', true),
-                                 'THU' => __('Thursday', true),
-                                 'FRI' => __('Friday', true),
-                                 'SAT' => __('Saturday', true),
-                                 'SUN' => __('Sunday', true)
-                                 )));
-
-echo $form->input('coldestmonth',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'class' => 'required',
-                  'label' => __('Coldest month', true),
-                  'options' => array(
-                            '1' => __('January',true),
-                            '2' => __('February',true),
-                            '3' => __('March',true),
-                            '4' => __('April',true),
-                            '5' => __('May',true),
-                            '6' => __('June',true),
-                            '7' => __('July',true),
-                            '8' => __('August',true),
-                            '9' => __('September',true),
-                            '10' => __('October',true),
-                            '11' => __('November',true),
-                            '12' => __('December',true)
-                  )));
-
-// TODO (B)
-// authentification missing
-echo $form->input('publicprofile', array('label' => __('Make your profile public?', true), 'type' => 'checkbox'));
-echo $form->input('publictrainings', array('label' => __('Publish your trainings automatically to Twitter or Facebook', true), 'type' => 'checkbox'));
-
-**/
-?>
 
 <br />
 <a name="zones"></a><h3><?php __('Zones'); ?></h3>
@@ -108,7 +62,7 @@ echo $form->input('publictrainings', array('label' => __('Publish your trainings
 if ( $locale == 'deu' ) $language = 'de';
 else $language = 'en';
  
-$help_lth = ' <a class="tiptip" title="' .
+$help_lth = ' <a class="help" title="' .
 __('How to define your lactate threshold?', true) .
 '<br />' . 
 __('1. Do your test-workouts to define your lactate threshold.', true) .
@@ -118,7 +72,7 @@ __('2. Do a lactate threshold test with your doctor.', true) .
 __('3. Take 85% of your maximum heart rate for run lactate threshold and 82% for bike lactate threshold (this is just an approximation).', true) . 
 '<br />' . 
 __('Read more in our blog.', true) . 
-'" href="/blog/' . $language . '/how-do-i-find-out-my-lactate-thresholds/"><span class="helptip">?</span></a>';
+'" href="/blog/' . $language . '/how-do-i-find-out-my-lactate-thresholds/">?</a>';
 
 echo $form->input('lactatethreshold',
                    array(
@@ -179,14 +133,10 @@ Zone 5c More than 106% of LTHR
 */
 ?>
 
-<!--<a href="#zones" onClick="javascript:check_mhr();check_lth();return false;"><?php __('Calculate lactate threshold for zones'); ?></a>-->
 <br />
 <div id="zones"></div>
-
+<br />
 <?php
-
-echo '<br />';
-
 echo $form->input('rookie',
                   array(
                   'before' => __('Are you a beginner in sports?', true),
@@ -464,8 +414,7 @@ $this->js_addon .= <<<EOH
         // facebox box
         \$('a[rel*=facebox]').facebox();
 		
-		\$('.tiptip').tipTip();
-		\$('.tiptip2').tipTip({maxWidth: "auto", edgeOffset: 10});
+		\$('.help').tipTip();
 
 });
 

@@ -654,7 +654,19 @@ iframe#facebook {
 	font-size: 14px;
 }
 
-.helptip {
-	background-color: lightblue;
-	padding: 5px;
+.help {
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	background-color: #67c5f8;
+	font-size: 16px;
+	font-weight: bold;
+	color: white;
+	text-shadow: 1px 1px 1px #238cc5;
+	padding: 2px 6px;
+	border: 1px solid #238cc5;
+	border-top-color: #c1e9ff;
+	border-left-color: #c1e9ff;
+	margin-left: 5px;
+	cursor: help;
 }
