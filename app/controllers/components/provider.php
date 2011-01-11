@@ -52,7 +52,7 @@ class ProviderComponent extends Object {
 		if (!$this->athlete->isValid()) {
 			return '<div class="statusbox error"><p>' .
 				__("Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions.", true) . 
-				'</p><a href="/trainer/payments/subscribe_triplans"><button>' .
+				'</p><a href="/trainer/payments/subscribe_triplans"><button onClick="javascript:document.location=\'/trainer/payments/subscribe_triplans\'">' .
 				__('Become PREMIUM', true) . 
 				'</button></a></div>' . 
 				"<script type=\"text/javascript\">

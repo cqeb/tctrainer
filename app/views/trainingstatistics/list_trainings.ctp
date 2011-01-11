@@ -16,17 +16,12 @@ __('SWIM workout', true);
                    </div><br />
                    <?php } ?>
 
-                   <a href="/trainer/trainingstatistics/edit_training"><button value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/edit_training"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
                    
                    <?php if ( $userobject['advanced_features'] ) { ?>
-                   <a href="/trainer/trainingstatistics/import_workout"><button value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/import_workout"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
                    <?php } ?>
 
-                   <!--
-                   <?php echo $html->link(__("Add workout",true), array('action' => 'edit_training'),null) ?>
-                   | 
-                   <?php echo $html->link(__("Import workout",true), array('action' => 'import_workout'),null) ?>
-                   -->
                    <br /><br />
 
 <table>
@@ -81,7 +76,7 @@ __('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . '- http://tri
 <a target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
 <a target="_blank" href="http://twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
 
-<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/Trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
+<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
 </nowrap>
 
     </td>

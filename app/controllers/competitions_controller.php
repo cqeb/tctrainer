@@ -56,12 +56,14 @@ list all competitions with paging
             }
 
             $this->paginate = array(
-
+                  'conditions' => array('Competition.user_id = ' => $session_userid),
                   'limit' => 15,
                   'order' => array('Competition.competitiondate' => 'desc')
             );
 
-            $this->set('competitions', $this->paginate('Competition'));
+            $competitions = $this->paginate('Competition');
+			
+            $this->set('competitions', $competitions);
             $this->set('checkcompetition', $checkcompetition);
             $this->set('statusbox', $statusbox);
             $this->set('create_dummy', $create_dummy);

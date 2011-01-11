@@ -73,9 +73,9 @@ for ( $i = 0; $i < $maxweeks; $i++ )
 		"stroke":1,
 		"colour":"#c6d9fd",
 		"grid-colour":"#dddddd",
-		"min":40,
-		"max":150,
-		"steps":5
+		"min":<?php echo $minweight; ?>,
+		"max":<?php echo $maxweight; ?>,
+		"steps":<?php echo $step; ?>
 	},
 	"x_axis":{
 		"offset":false,

@@ -12,7 +12,8 @@
                    <br />
                    <?php } ?>
 
-                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/tag/statistics/"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <?php __('These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 45 days).'); ?> 
+                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
                    <div>
@@ -29,10 +30,7 @@ echo $form->input('sportstype',
                                  '' => __('All', true),
                                  'RUN' => __('Run', true),
                                  'BIKE' => __('Bike', true),
-                                 //'MTB' => __('Mountain-Bike', true),
                                  'SWIM' => __('Swim', true)
-                                 //'STRENGTH' => __('Strength', true),
-                                 //'MISC' => __('Misc', true)
                                  )));
 
 echo $form->input('fromdate',
@@ -44,7 +42,6 @@ echo $form->input('fromdate',
                   'label' => __('From', true),
                   'minYear' => date('Y',time())-5,
                   'maxYear' => date('Y',time())
-                  //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
 
 echo $form->input('todate',
@@ -56,7 +53,6 @@ echo $form->input('todate',
                   'label' => __('To', true),
                   'minYear' => date('Y',time())-5,
                   'maxYear' => date('Y',time())+1
-                  //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
 
 /** not finished **/
@@ -107,13 +103,14 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl . 'stype:' . $sportstype
 
 <div id="my_chart2"></div>
 
-<?php if ( $userobject['advanced_features'] ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
 <?php
 
-      $this->js_addon = <<<EOE
-EOE;
+      $this->js_addon = '';
 
 ?>

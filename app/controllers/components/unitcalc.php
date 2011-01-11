@@ -403,7 +403,6 @@ class UnitcalcComponent extends Object {
 					  {
 					  		$return = 0;
 					  }
-                      //$return = $date;
                       break;
                }
 
@@ -423,14 +422,6 @@ class UnitcalcComponent extends Object {
            $minutes = $duration_total;
            //echo $sport;
            $this->threshold = $lth;
-
-           // fill with data from zones
-           // copied the functions from athletes-class to unitcalc-component
-           /**
-           $athlete_object = new Athlete;
-           $athlete_object->id = $session_userid;
-           $calculatedTRIMP = $athlete_object->calcTRIMP($this->data['Trainingstatistic']['sportstype'], $this->data['Trainingstatistic']['duration']/60, $this->data['Trainingstatistic']['avg_pulse']);
-           **/
 
            $zones = $this->getZones($sport);
            if ($avgHR < $zones[1])
@@ -574,6 +565,9 @@ class UnitcalcComponent extends Object {
                   $sentdata['Competition']['competitiondate']['year'] = date('Y', time());
                }
 
+			   if ( $userdata['User']['coldestmonth'] < 10 )
+			   		$userdata['User']['coldestmonth'] = '0' . $userdata['User']['coldestmonth'];
+					
                $seasonstartmonth = $seasonendmonth = $userdata['User']['coldestmonth'];
                $compmonth = $sentdata['Competition']['competitiondate']['month'];
                $compyear = $sentdata['Competition']['competitiondate']['year'];

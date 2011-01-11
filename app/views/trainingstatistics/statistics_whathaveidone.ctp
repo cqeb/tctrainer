@@ -11,7 +11,7 @@ if ( $export == true )
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>TriCoreTraining.com Trainingstatistics</title>
+    <title>TriCoreTraining <?php __('Statistics'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
 
     <style type="text/css">
@@ -30,18 +30,6 @@ if ( $export == true )
 </head>
 <body>
 <table>
-<!--
-<tr>
-		<td colspan="12"><b><?php __('Export of statistics'); ?><b></td>
-</tr>
-<tr>
-		<td><b><?php __('Date'); ?>:</b></td>
-		<td colspan="11"><?php echo date("F j, Y, g:i a"); ?></td>
-</tr>
-<tr>
-		<td colspan="12"></td>
-</tr>
--->
 <tr id="titles">
 		<td class="tableTd"><?php __('Date'); ?></td>
     	<td class="tableTd"><?php __('Sport'); ?></td>
@@ -67,24 +55,24 @@ if ( $export == true )
 
     for ( $i = 0; $i < count( $trainings ); $i++ )
     {
-        $dt = $trainings[$i]['Trainingstatistics'];
+        $dt = $trainings[$i]['trainingstatistics'];
 
   			echo '<tr>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_date($dt['date'], 'show', 'single').'</td>';
-        echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
   			echo '   <td class="tableTdContent">'.$dt['sportstype'].'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->seconds_to_time($dt['duration']).'</td>';
-        echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single').'</td>';
+        	echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single').'</td>';
   			echo '   <td class="tableTdContent">'.$dt['avg_pulse'].'</td>';
   			echo '   <td class="tableTdContent">'.$yesno[$dt['testworkout']].'</td>';
   			echo '   <td class="tableTdContent">'.$yesno[$dt['competition']].'</td>';
-        echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
+        	echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
   			echo '   <td class="tableTdContent">'.$dt['location'].'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_weight($dt['weight'], 'show', 'single').'</td>';
-        echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
   			echo '   <td class="tableTdContent">'.$dt['trimp'].'</td>';
-        echo '   <td class="tableTdContent">'.$dt['avg_speed'].'</td>';
-        echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['avg_speed'].'</td>';
+        	echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
   			echo '</tr>';
     }
 ?>
@@ -96,7 +84,6 @@ if ( $export == true )
 } else
 {
 ?>
-
                    <h1><?php __('Statistics'); echo " " . $post_sportstype; ?></h1>
 
                    <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_whathaveidone')); ?>
@@ -109,7 +96,8 @@ if ( $export == true )
                    </div><br />
                    <?php } ?>
 
-                   <a href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/tag/statistics/"><?php __('Explanation on these graphs and statistics?'); ?></a>
+                   <?php __('These statistics show you what and how much you have achieved in a certain period of time.'); ?> 
+                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
                    <div>
@@ -126,10 +114,7 @@ echo $form->input('sportstype',
                                  '' => __('All', true),
                                  'RUN' => __('Run', true),
                                  'BIKE' => __('Bike', true),
-                                 //'MTB' => __('Mountain-Bike', true),
                                  'SWIM' => __('Swim', true)
-                                 //'STRENGTH' => __('Strength', true),
-                                 //'MISC' => __('Misc', true)
                                  )));
 
 echo $form->input('fromdate',
@@ -141,7 +126,6 @@ echo $form->input('fromdate',
                     'label' => __('From', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
-                    //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
 
 echo $form->input('todate',
@@ -153,7 +137,6 @@ echo $form->input('todate',
                     'label' => __('To', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
-                    //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
                   
 /** not finished **/
@@ -268,47 +251,8 @@ Debugging: (only localhost)<br />
 <?php } ?>
 
 <?php
-/**
-<br /><br />
 
-<h2><?php __('TRIMP Statistics'); ?></h2>
-
-<?php
-
-$jsonurl = Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-
-echo $ofc->createflash('my_chart3','680','400',$jsonurl.'type:trimp/start:' . $start . '/end:' . $end);
-
-?>
-
-<div id="my_chart3"></div>
-?>
-<br /><br />
-
-<h2><?php __('Chart Weight'); ?></h2>
-
-<?php
-
-if ( count( $trainings ) > 0 ) 
-{
-    
-$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-echo $ofc->createflash('my_chart4','680','400',$jsonurl.'type:weight/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
-
-} else
-{
-  __('No Chart data.');
-}
-
-?>
-
-<div id="my_chart4"></div>
-
-<?php
-**/
-
-      $this->js_addon = <<<EOE
-EOE;
+      $this->js_addon = '';
 
 }
 

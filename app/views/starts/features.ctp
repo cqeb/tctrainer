@@ -143,7 +143,7 @@ __('Signup FREE and get training plans for triathlon, biking and running for 1 m
 
 ?>
 <br /><br />
-<a href="/trainer/users/register"><button value="<?php __('Signup FREE'); ?>"><?php __('Signup FREE'); ?></button></a>
+<a href="/trainer/users/register"><button onClick="javascript:top.location.href='/trainer/users/register' value="<?php __('Signup FREE'); ?>"><?php __('Signup FREE'); ?></button></a>
 
 <!--
 

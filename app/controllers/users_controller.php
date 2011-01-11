@@ -50,8 +50,7 @@ class UsersController extends AppController {
 			{
 		      $this->User->set( $this->data );
 		
-		      if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
-		      { }
+		      $this->User->saveAll($this->data, array('validate' => 'only')); 
 
       		// check submitted email address against database
 			$results = $this->User->findByEmail($this->data['User']['email']);
@@ -70,7 +69,7 @@ class UsersController extends AppController {
 						$cookie['email'] = $results['User']['email'];
 						$cookie['userid'] = $results['User']['id'];
 
-						Configure::write('Session.timeout', $session_timeout);
+						//Configure::write('Session.timeout', $session_timeout);
 						$this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
 					}
 
@@ -136,15 +135,7 @@ class UsersController extends AppController {
 		if ( $this->data )
 		{
         $this->User->set( $this->data );
-        if ($this->User->saveAll($this->data, array('validate' => 'only'))) {
-        } else {
-        }
-        /**
-        if ( !$this->User->validates( array( 'fieldList' => array( 'email' ) ) ) )
-        {
-            pr($this->User->invalidFields( array( 'fieldList' => array( 'email' ) ) ));
-        }
-        **/
+        if ($this->User->saveAll($this->data, array('validate' => 'only'))) {} 
 
 			// deactivate this if you're working offline
 			// captcha checks for your correct entry
@@ -171,7 +162,7 @@ class UsersController extends AppController {
 				}
 			}
 		}
-    $this->layout = 'default_trainer';
+    	$this->layout = 'default_trainer';
 
 		$this->set('statusbox', $statusbox);
 		$this->set('status', $status);
@@ -179,7 +170,7 @@ class UsersController extends AppController {
 
 	function password_reset()
 	{
-    $statusbox = 'statusbox';
+    	$statusbox = 'statusbox';
 		$this->pageTitle = __('Password reset',true);
 
 		//$this->email = base64_decode($this->params['named']['email']);
@@ -217,12 +208,12 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Your new password is sent to your e-mail.',true));
 			} else
 			{
-			  $statusbox = 'statusbox error';
-        $flash_message = __('Something is wrong - sorry.', true) . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support.', true) . '</a>';
+			  	$statusbox = 'statusbox error';
+        		$flash_message = __('Something is wrong - sorry.', true) . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support.', true) . '</a>';
 				$this->Session->setFlash($flash_message);
 			}
 		}
-    $this->set('statusbox',$statusbox);
+    	$this->set('statusbox',$statusbox);
 	}
 
 	/**
@@ -239,7 +230,7 @@ class UsersController extends AppController {
     
     $this->pageTitle = __('Create your account', true);
     $success = false;
-    $statusbox = 'statusbox_none';
+    $statusbox = 'statusbox';
     //$save_fails = 'false';
     
     if (empty($this->data))
@@ -278,25 +269,35 @@ class UsersController extends AppController {
         $this->data['User']['emailcheck'] = "1";
       }
 
-/**
-      // check if password + password-approve field are equal
-      if ( $this->data['User']['password'] == $this->data['User']['passwordapprove'] )
-      {
-           $this->data['User']['passwordcheck'] = "1";
-           $save_pw = $this->data['User']['password'];
-           $this->data['User']['password'] = md5($this->data['User']['password']);
-           
-      } else
-      {
-           $this->data['User']['passwordcheck'] = "0";
-      }
-**/
+        // no chance - you have to get the newsletter
+        $this->data['User']['newsletter'] = "1";
+        // we do not ask for "where do you know us from?" - for Clemens' sake :)
+        $this->data['User']['dayofheaviesttraining'] = 'FRI';
 
-      // no chance - you have to get the newsletter
-      $this->data['User']['newsletter'] = "1";
-      // we do not ask for "where do you know us from?" - for Clemens' sake :)
-      $this->data['User']['dayofheaviesttraining'] = 'FRI';
-
+		// locate your country automatically
+		$countries = $this->Unitcalc->get_countries();
+	
+		/*
+		https://github.com/fiorix/freegeoip/blob/master/README.rst
+		http://freegeoip.net/json/74.200.247.59
+		http://freegeoip.net/csv/74.200.247.59
+		http://freegeoip.net/xml/74.200.247.59
+		*/
+		
+		if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+			$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+		else
+			$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
+			
+		$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+	
+		if ( isset( $yourlocation->country_code ) && isset( $countries[$yourlocation->country_code]) && strlen( $yourlocation->country_code ) > 0 )
+		{
+				$this->data['User']['country'] = $yourlocation->country_code;
+				//$this->data['User']['city'] = $yourlocation->city;
+		} else
+				$this->data['User']['country'] = 'DE';
+		
       // yet not implemented
       $this->data['User']['coldestmonth'] = $this->Unitcalc->coldestmonth_for_country('DE');
       $this->data['User']['unit'] = $this->Unitcalc->unit_for_country('DE', 'unit');
@@ -307,18 +308,10 @@ class UsersController extends AppController {
       $this->data['User']['publicprofile'] = "0";
       $this->data['User']['publictrainings'] = "0";
       
-      /**
-      if ($this->User->save($this->data, array(
-               'validate' => 'only',
-               'fieldList' => array( 
-                  $check_array
-               )))) { }     
-      **/
-      
       if ( $this->data['User']['password'] && strlen($this->data['User']['password']) > 3 ) 
       {
-        $password_unenc = ($this->data['User']['password']);
-        $this->data['User']['password'] = md5( $password_unenc );
+	        $password_unenc = ($this->data['User']['password']);
+	        $this->data['User']['password'] = md5( $password_unenc );
       }
       
 	  
@@ -363,7 +356,7 @@ class UsersController extends AppController {
       		$this->data['User']['bikelactatethreshold'] = round ( $this->data['User']['lactatethreshold'] * 0.96 );
       		$this->data['User']['maximumheartrate'] = round ( $this->data['User']['lactatethreshold'] / 0.85 );
 	  }
-	  //pr($this->data);
+
       if ( $this->User->save( $this->data, array(
            'validate' => true,
            'fieldList' => array(
@@ -375,6 +368,7 @@ class UsersController extends AppController {
                'maximumheartrate',
                'typeofsport', 
                'tos',
+               'country',
                'passwordcheck', 'emailcheck', 
                'paid_from', 'paid_to',
                'rookie', 'weeklyhours',
@@ -417,12 +411,12 @@ class UsersController extends AppController {
  
 /**
 
-  function add_step1($id = null)
+  	function add_step1($id = null)
 	{
-    die();
+    	die();
     
 		$this->pageTitle = __('Registration - Step 1/2',true);
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		if (empty($this->data))
 		{ } else
@@ -497,8 +491,9 @@ class UsersController extends AppController {
 		$this->set('statusbox', $statusbox);
 	}
 
-	function add_step2($id = null) {
-    die();
+	function add_step2($id = null) 
+    {
+    	die();
 
 		$this->pageTitle = __('Registration - Step 2/2',true);
 		$statusbox = 'statusbox ok';
@@ -821,12 +816,12 @@ class UsersController extends AppController {
 		$this->checkSession();
 
 		$this->pageTitle = __('Change profile',true);
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
+    	$this->User->id = $session_userid;
     
-    $countries = $this->Unitcalc->get_countries();
+    	$countries = $this->Unitcalc->get_countries();
     
 		if (empty($this->data))
 		{
@@ -837,53 +832,98 @@ class UsersController extends AppController {
 		{
 
 			$this->set('UserID', $this->User->id);
-
+	
 			if ($this->User->save( $this->data, array(
-      'validate' => true,
-      'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'birthday',
-      /**'newsletter', 'youknowus',**/
-      'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
-      {
-          // we have to change all session info because of email change
-          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
-          {
-                $new_email = $this->data['User']['email'];
-                $this->Session->write( 'session_useremail', $new_email );
-                if ( $this->Cookie->read('email') )
-                {
-                      $cookie = array();
-                      $cookie['email'] = $new_email;
-                      $cookie['userid'] = $session_userid;
-                      
-                      $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
-                }
-           }
-      	   $statusbox = 'statusbox ok';
-      	   $this->Session->setFlash(__('User profile saved.',true));
-
-      } else
-      {
-      	   $statusbox = 'statusbox error';
-      	   $this->Session->setFlash(__('Some errors occured.',true));
-      }
+		      'validate' => true,
+		      'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'birthday',
+		      'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
+		      {
+		          // we have to change all session info because of email change
+		          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
+		          {
+		                $new_email = $this->data['User']['email'];
+		                $this->Session->write( 'session_useremail', $new_email );
+		                if ( $this->Cookie->read('email') )
+		                {
+		                      $cookie = array();
+		                      $cookie['email'] = $new_email;
+		                      $cookie['userid'] = $session_userid;
+		                      
+		                      $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+		                }
+		           }
+		      	   $statusbox = 'statusbox ok';
+		      	   $this->Session->setFlash(__('User profile saved.',true));
+		
+		      } else
+		      {
+		      	   $statusbox = 'statusbox error';
+		      	   $this->Session->setFlash(__('Some errors occured.',true));
+		      }
 		}
-    $this->set('countries', $countries);
+    	$this->set('countries', $countries);
 		$this->set('statusbox', $statusbox);
 	}
 
-	function edit_traininginfo() {
+	function edit_address()
+	{
+		$this->checkSession();
+
+		$this->pageTitle = __('Change address',true);
+		$statusbox = 'statusbox';
+
+		$session_userid = $this->Session->read('session_userid');
+    	$this->User->id = $session_userid;
+    
+    	$countries = $this->Unitcalc->get_countries();
+    
+		if (empty($this->data))
+		{
+			$this->data = $this->User->read();
+			$this->set('UserID', $this->User->id);
+
+		} else
+		{
+
+			$this->set('UserID', $this->User->id);
+	
+			if ($this->User->save( $this->data, array(
+		      'validate' => true,
+		      'fieldList' => array( 'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
+		      {
+		      	   	//$statusbox = 'statusbox ok';
+		      	   	//$this->Session->setFlash(__('User profile saved.',true));
+		      	   	if ( $this->referer() ) 
+				   		$this->redirect($this->referer());
+	    			else 
+	        			$this->redirect(array('controller'=>'payments','action'=>'subscribe_triplans'));
+		      } else
+		      {
+		      	   $statusbox = 'statusbox error';
+		      	   $this->Session->setFlash(__('Some errors occured.',true));
+		      }
+		}
+    	$this->set('countries', $countries);
+		$this->set('statusbox', $statusbox);
+	}
+
+	function edit_traininginfo() 
+	{
+
 		$this->pageTitle = __('Change training info',true);
 
 		$this->checkSession();
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 		$this->User->id = $session_userid = $this->Session->read('session_userid');
 		$this->set('unitmetric', $this->Unitcalc->get_unit_metric() );
 
-		if (empty($this->data))	{
+		if (empty($this->data))	
+		{
 			$this->data = $this->User->read();
 			$this->set('UserID', $this->User->id);
 			$this->set('unit', $this->data['User']['unit']);
-		} else {
+		} else 
+		{
 			$this->set('UserID', $this->User->id);
 			if ($this->User->save( $this->data, array(
 		        'validate' => true,
@@ -902,7 +942,8 @@ class UsersController extends AppController {
 	        	$this->Provider->athlete->setTrainingTime(
 	        		$this->data['User']['weeklyhours'] * 60
 	        	);
-	        } else {
+	        } else 
+	        {
 	        	$this->Session->setFlash(__('Some errors occured.', true));
 	        	$statusbox = 'statusbox error';
 	        }
@@ -917,7 +958,7 @@ class UsersController extends AppController {
 		$this->checkSession();
 		$this->js_addon = '';
     
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 		$targetweighterror = '';
     	$additional_message = '';
     
@@ -1032,15 +1073,6 @@ class UsersController extends AppController {
 	  					   }
 					   }
   				}
-          /**
-          if ( isset( $weight_per_month ) && !isset( $targetweighterror ) )
-          {
-              $additional_message = 
-                    __('You have to loose', true) . 
-                    ' ' . $weight_per_month . ' ' . $weight_unit . ' ' . 
-                    __('per month to reach your weight goal', true);
-          }
-          **/
   			}
   
   			if ( $this->User->save( $this->data, 
@@ -1061,7 +1093,6 @@ class UsersController extends AppController {
                       $this->data['User']['weight'] = round($this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['weight'] ), 'show', 'single' ), 1);
                  if ( isset( $this->data['User']['targetweight'] ) )
                  	    $this->data['User']['targetweight'] = round($this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' ), 1);
-                 //$this->redirect(array('action' => 'edit_weight', $this->User->id));
            
            } else
            {
@@ -1073,6 +1104,7 @@ class UsersController extends AppController {
                  if ( isset( $this->data['User']['targetweight'] ) )
                    	  $this->data['User']['targetweight'] = $this->Unitcalc->check_weight( $this->Unitcalc->check_decimal( $this->data['User']['targetweight'] ), 'show', 'single' );
                  $statusbox = 'statusbox error';
+
                  if ( $targetweighterror )
                     $this->Session->setFlash(__($targetweighterror,true));
                  else
@@ -1080,7 +1112,7 @@ class UsersController extends AppController {
            }
 		}
 
-    $this->set('unit', $this->Unitcalc->get_unit_metric());
+    	$this->set('unit', $this->Unitcalc->get_unit_metric());
 		$this->set('statusbox', $statusbox);
 		$this->set('targetweighterror', $targetweighterror);
 	}
@@ -1089,10 +1121,10 @@ class UsersController extends AppController {
 	{
 		$this->pageTitle = __('Change profile - images',true);
 		$this->checkSession();
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
+    	$this->User->id = $session_userid;
 
 		$this->set('unitmetric', $this->Unitcalc->get_unit_metric() );
 
@@ -1168,10 +1200,10 @@ class UsersController extends AppController {
 		$this->pageTitle = __('Change profile - metric',true);
 		$this->checkSession();
 		//$this->js_addon = '';
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
-    $this->User->id = $session_userid;
+    	$this->User->id = $session_userid;
 
 		if (empty($this->data))
 		{
@@ -1208,7 +1240,7 @@ class UsersController extends AppController {
 		$this->pageTitle = __('Change profile - password', true);
 		$this->checkSession();
 		//$this->js_addon = '';
-		$statusbox = 'statusbox_none';
+		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
     	$this->User->id = $session_userid;
@@ -1306,34 +1338,31 @@ class UsersController extends AppController {
      {
       if ( in_array( $file['type'], $type_accepted_files ) )
       {
-        if ( $file['size'] < $filesize_accepted_files )
-        {
-          $new_name = $addthis . '_' . $userid . '_' . $file['name'];
-          $destination .= $new_name;
-          $weburl .= $new_name;
+	        if ( $file['size'] < $filesize_accepted_files )
+	        {
+		          $new_name = $addthis . '_' . $userid . '_' . $file['name'];
+		          $destination .= $new_name;
+          		  $weburl .= $new_name;
 
-          if ( move_uploaded_file( $file['tmp_name'], $destination ) )
-          {
-            //unlink($file['tmp_name']);
-            $return['destination'] = $weburl;
-            $return['error'] = '';
-            return $return;
-          }
-        } else
-            $return['error'] = 'filesize_not_accepted';
-       
-       
-       
-     } else
+		          if ( move_uploaded_file( $file['tmp_name'], $destination ) )
+		          {
+		            //unlink($file['tmp_name']);
+		            $return['destination'] = $weburl;
+		            $return['error'] = '';
+		            return $return;
+		          }
+
+	        } else
+	            $return['error'] = 'filesize_not_accepted';
+
+     	} else
 			$return['error'] = 'type_not_accepted';
 		}
 		return $return;
-		//$extension = substr($value[0]['name'] , strrpos($value[0]['name'] , '.') +1);
 	}
 
 	function _sendNewUserMail($id)
 	{
-    //$this->layout = 'newsletter';
 
 		$User = $this->User->read(null, $id);
 		$this->loadModel('Transaction');
@@ -1352,7 +1381,7 @@ class UsersController extends AppController {
 
 		$this->Email->to = $User['User']['email'];
 		//$this->Email->bcc = array('secret@example.com');
-		$this->Email->subject = __('TriCoreTraining registration',true);
+		$this->Email->subject = __('TriCoreTraining signup',true);
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 
@@ -1385,29 +1414,25 @@ class UsersController extends AppController {
 
 	function _sendPasswordForgotten($id, $randompassword = null)
 	{
-	  //$this->layout = 'newsletter';
     
 		if ( $randompassword )
 		{
 			$this->template = 'passwordreset';
 			$this->set('randompassword',$randompassword);
-		} else
-		{
+			$subject = __('TriCoreTraining - password reset',true);
+		} else {
 			$this->template = 'passwordforgotten';
+			$subject = __('TriCoreTraining - password forgotten',true);
 		}
 
 		$User = $this->User->read(null,$id);
 
 		$this->loadModel('Transaction');
-
 		$tid = $this->Transactionhandler->handle_transaction( $this->Transaction, '', 'create', 'forgotten_userid', $User['User']['id'] );
 		$this->Transactionhandler->handle_transaction( $this->Transaction, $tid, 'add', 'forgotten_email', $User['User']['email'] );
 
-		//$encoded_email = base64_encode($User['User']['email']);
-		//$encoded_id    = base64_encode($User['User']['id']);
-
 		$this->Email->to = $User['User']['email'];
-		$this->Email->subject = __('TriCoreTraining - password forgotten',true);
+		$this->Email->subject = $subject;
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 
@@ -1444,7 +1469,11 @@ class UsersController extends AppController {
 
 	function change_language()
 	{
-		$this->code = $this->params['named']['code'];
+
+		if ( isset( $this->params['named']['code'] ) ) 
+			$this->code = $this->params['named']['code'];
+		else
+			$this->code = 'eng';
 
 	    if ( $this->Session->read('session_userid') )
 	    {
@@ -1473,6 +1502,9 @@ class UsersController extends AppController {
 
 	function check_notifications()
 	{
+		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.46.255.219' ) die('No access!');
+		$debug = true;
+		
 	    $this->layout = 'plain';
 	    // Sun = 0
 	    $check_on_day = 0;
@@ -1480,11 +1512,13 @@ class UsersController extends AppController {
 		$sql = "SELECT * FROM users";
 		$results = $this->User->query($sql);
 
+		$output = '';
+		
 		for ( $i = 0; $i < count( $results ); $i++ )
 		{
 			$user = $results[$i]['users'];
 
-      		echo $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . '<br /><br />';
+      		if ( $debug == true ) echo "<br />\n" . $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . "<br />\n";
       
 			// check last training - if older than 10 days - reminder!
 			if ( $user['deactivated'] == 0 && $user['activated'] == 1 && ( date('w', time()) == $check_on_day ) && $user['notifications'] != 1 ) 
@@ -1497,13 +1531,14 @@ class UsersController extends AppController {
 			{
 				// if freemember remind him/her of premiumservice
 				$paid_to = strtotime( $user['paid_to'] );
-        		//echo $user['paid_to'] . ' ' . date('w', time()) . '<br /><br />';
+
 				// from 1 week to end remind user of premium service
 				if ( ( time() > ( $paid_to - ( 86400 * 7 ) ) ) && ( date('w', time()) == $check_on_day ) ) 
 				{
 					$mailsubject = __('My TriCoreTraining coach for the costs of a coffee a week.', true);
 					$mailtemplate = 'premiumreminder';
 					$this->_sendMail( $user, $mailsubject, $mailtemplate, '', $user['yourlanguage'] );
+					if ( $debug == true ) echo "premiumreminder<br />\n";
 				}
 			}
 
@@ -1513,7 +1548,7 @@ class UsersController extends AppController {
 
 		// delete old transactions
 		$this->Transactionhandler->_delete_old_transactions( $this->Transaction );
-
+		$this->set('output', $output);
 
 	}
 
@@ -1522,13 +1557,16 @@ class UsersController extends AppController {
    */
 	function _check_lasttraining( $user )
 	{
-	  $last_workout_limit = 10; // 10 days 
+		$debug = true;
+	  	$last_workout_limit = 10; // 10 days 
 	  
 		$userid = $user['id'];
 		$this->loadModel('Trainingstatistic');
 
 		$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
+		
 		$results = $this->Trainingstatistic->query($sql);
+		if ( $debug == true ) echo $sql . "<br />\n";
 
 		$last_training = strtotime($results[0][0]['ldate']);
 		$diff_time = time() - ( 86400 * $last_workout_limit );
@@ -1538,219 +1576,217 @@ class UsersController extends AppController {
 			$mailsubject = __('TriCoreTraining - track you workout - reminder', true);
 			$mailtemplate = 'trainingreminder';
 			$this->_sendMail( $user, $mailsubject, $mailtemplate, '', $user['yourlanguage'] );
+			if ( $debug == true ) echo "reminder sent.<br />\n";
 		}
 	}
 
 	function _check_more( $user )
 	{
-      $u = $user;
-      $text_for_mail = '';
-   
-      // check if profile is complete from technical point of view
-      $wrong_attributes = "";
-      $check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
-        'password', 'passwordcheck', 'lactatethreshold', 'bikelactatethreshold', 'typeofsport',
-        'coldestmonth', 'unit', 'unitdate', 'weeklyhours',
-        'dayofheaviesttraining', 'yourlanguage', 'level' );
+		
+		$debug = true;
+		
+		  $u = $user;
+		  $text_for_mail = '';
+		   
+		  // check if profile is complete from technical point of view
+		  $wrong_attributes = "";
+		  $check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
+		    'password', 'passwordcheck', 'lactatethreshold', 'bikelactatethreshold', 'typeofsport',
+		    'coldestmonth', 'unit', 'unitdate', 'weeklyhours',
+		    'dayofheaviesttraining', 'yourlanguage', 'level' );
+		
+		  foreach ( $check_attributes as $key => $value )
+		  {
+		        if ( $u[$value] == '' ) $wrong_attributes .= $value . '=' . $u[$value] . " <br />\n";
+		  }
+		  
+		  if ( $wrong_attributes != '' ) 
+		  {
+		        $to_user['email'] = 'support@tricoretraining.com';
+		        $to_user['name'] = 'Admin';
+		        
+		        $mailsubject = 'Funky TCT user - plz check';
+		        $mailtemplate = 'standardmail';
+		        $mailcontent = 'These attributes are not set at the user profile: ' . "\n\n<br /><br />" .  
+		            'ID=' . $u['id'] . " <br />\n" . 
+		            'firstname=' . $u['firstname'] . " <br />\n" . 
+		            'lastname=' . $u['lastname'] . " <br />\n" .
+		            $wrong_attributes;
+		        $this->_sendMail( $u, $mailsubject, $mailtemplate, $mailcontent, 'eng', $to_user );
+		        if ( $debug == true ) echo $u['id'] . " is not correct<br />\n";
+		  } 
 
-      foreach ( $check_attributes as $key => $value )
-      {
-            //echo "check " . $value . "<br />";
-            //echo $u[$value] . '<br />';
-            if ( $u[$value] == '' ) $wrong_attributes .= $value . '=' . $u[$value] . " <br />\n";
-      }
-      
-      if ( $wrong_attributes != '' ) 
-      {
-            $to_user['email'] = 'support@tricoretraining.com';
-            $to_user['name'] = 'Admin';
-            
-            $mailsubject = 'Funky TCT user - plz check';
-            $mailtemplate = 'standardmail';
-            //echo $u['email'] . "<br />";
-            //echo $wrong_attributes . '<br />';
-            $mailcontent = 'These attributes are not set at the user profile: ' . "\n\n<br /><br />" .  
-                'ID=' . $u['id'] . " <br />\n" . 
-                'firstname=' . $u['firstname'] . " <br />\n" . 
-                'lastname=' . $u['lastname'] . " <br />\n" .
-                $wrong_attributes;
-            $this->_sendMail( $u, $mailsubject, $mailtemplate, $mailcontent, 'eng', $to_user );
-      } 
-      //else
-      // that's ok - kms
-      if ( $user['notifications'] != 1 ) 
-      {   
-          // check name + address
-          if ( !$u['firstname'] ) 
-            $text_for_mail .= '<li>' . __('Your firstname is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-             " " . '<a href="' . Configure::read('App.hostUrl') . 
-             Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
-             __('Change it.', true) . '</a>' . 
-            "</li>\n";
-    
-          if ( !$u['lastname'] ) 
-            $text_for_mail .= '<li>' . __('Your lastname is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
-             " " . '<a href="' . Configure::read('App.hostUrl') . 
-             Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
-             __('Change it.', true) . '</a>' . 
-             "</li>\n";
-          
-          if ( $u['level'] == 'paymember' && !$u['address'] ) 
-            $text_for_mail .= '<li>' . __('Your address is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-             " " . '<a href="' . Configure::read('App.hostUrl') . 
-             Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
-             __('Change it.', true) . '</a>' . 
-             "</li>\n";
-    
-          if ( $u['level'] == 'paymember' && !$u['zip'] ) 
-            $text_for_mail .= '<li>' . __('Your zip is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
-             " " . '<a href="' . Configure::read('App.hostUrl') . 
-             Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
-             __('Change it.', true) . '</a>' . 
-             "</li>\n";
-    
-          if ( $u['level'] == 'paymember' && !$u['city'] ) 
-            $text_for_mail .= '<li>' . __('Your city is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-             " " . '<a href="' . Configure::read('App.hostUrl') . 
-             Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
-             __('Change it.', true) . '</a>' . 
-             "</li>\n";
-    
-          if ( $u['level'] == 'paymember' && !$u['country'] ) 
-            $text_for_mail .= '<li>' . __('Your country is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-             " " . '<a href="' . Configure::read('App.hostUrl') . 
-             Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
-             __('Change it.', true) . '</a>' . 
-             "</li>\n";
-    
-          // check birthday
-          if ( !$u['birthday'] ) 
-            $text_for_mail .= '<li>' . __('Your birthday is missing! This is essentiell for calculations.', true) . "</li>\n";
-          
-          // check lactatethreshold
-          if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) {
-            $nothing = "";
-          } else {
-            $text_for_mail .= '<li>' . __('Your lactate threshold must be between 100 and 210.', true) . 
-              " " . '<a href="' . Configure::read('App.hostUrl') . 
-              Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
-          }
-
-          // check bike lactatethreshold
-          if ( $u['bikelactatethreshold'] > 100 && $u['bikelactatethreshold'] < 210 ) {
-            $nothing = "";
-          } else {
-            $text_for_mail .= '<li>' . __('Your bike lactate threshold must be between 100 and 210.', true) . 
-              " " . '<a href="' . Configure::read('App.hostUrl') . 
-              Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
-          }
-          
-          //echo $u['targetweight']; echo $u['targetweightdate'];
-          
-          // check for target weight
-          if ( $u['targetweight'] && $u['targetweightdate'] )
-          {
-              $nowts = time();
-              $futurets = strtotime( $u['targetweightdate'] );
-              
-              $diff_weight = ( $u['targetweight'] - $u['weight'] ) * (-1);
-              $divisor = ( $futurets - $nowts ) / 86400 / 30;
-
-              // weight you have to loose to achieve your weight target
-              $weight_per_month_check = $diff_weight / $divisor;
-
-              if ( $weight_per_month_check > 2 ) 
-              {
-                  $weight_unit_array = $this->Unitcalc->check_weight(2, 'show');
-                  $weight_unit = $weight_unit_array['unit'];
-
-                  $text_for_mail .= '<li>' . __('Your weight loss per month to achieve your weight goal must be', true) . ' ' . 
-                      round( $this->Unitcalc->check_weight($weight_per_month_check, 'show', 'single'), 1 ) .
-                      ' ' . $weight_unit . ' - ' . __("that's not healthy - set a new weight goal!", true) . ' ' . 
-                      " " . '<a href="' . Configure::read('App.hostUrl') . 
-                      Configure::read('App.serverUrl') . '/users/edit_weight" target="_blank">' . __('Change it.', true) . '</a>' .
-                      "</li>\n";
-              } 
-          }
-        
-          // TODO (B) hours per sport          
-          if ( !$u['weeklyhours'] ) 
-          {
-              // check per sport how many hours an user should train
-              //case ($u['sports'] )
-              //$text_for_mail .= '<li>' . __('You do not train enough for your sport. Please check the recommended training load for your type of sport.', true) . "</li>\n";
-              $text_for_mail .= '<li>' . __('You have not entered training hours per week for your sport.', true) . 
-              " " . '<a href="' . Configure::read('App.hostUrl') . 
-              Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
-              "</li>\n";
-          }
-    
-          // after 9 month of being rookie
-          $rookie_month = 9;
-
-          if ( ( ( strtotime( $u['created'] ) + 86400*30*$rookie_month ) < time() ) && $u['rookie'] == '1' )
-          {
-              $text_for_mail .= '<li>' . __("You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining since more than 9 months, maybe you should change that!", true) .
-              " " . '<a href="' . Configure::read('App.hostUrl') . 
-              Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
-              "</li>\n";
-          }   
-
-      } 
-
-      // check for recommendations
-      // TODO (B) not yet implemented
-/**
-      if ( !$u['recommendation'] )
-      { 
-          $text_for_mail .= __('Please recommend our service! Get a free trainingmonth.', true) . '[LINK].', true);
-          $text_for_mail .= '<br />';
-      }
-**/
-      
-      // check for medical limitations
-      if ( $u['tos'] == '0')
-      { 
-          $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
-          " " . '<a href="' . Configure::read('App.hostUrl') . 
-          Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
-          "</li>\n";
-      }
-
-      if ( 
-        ( ( strtotime( $u['created'] ) + (86400*5) ) < time() ) && 
-        ( ( strtotime( $u['created'] ) + (86400*25) ) > time() ) && 
-        $u['activated'] != '1' )
-      {
-          $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
-      }   
-
-      if ( ( strtotime( $u['paid_to'] ) < time() ) && $u['level'] != 'freemember' )
-      {
-          // set level = paymember
-          $this->User->id = $u['id'];
-          $this->User->savefield('level', 'freemember', false);
-          $text_for_mail .= '<li>' . __('Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please', true) . ' ' .
-            '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "</li>\n";
-      }
-
-      if ( $text_for_mail )
-      {
-          $mailsubject = __('TriCoreTraining informs you.', true);
-          $template = 'standardmail';
-          $content = __('This TriCoreTraining message comes to you because some information in your profile is missing.', true) . 
-          '<br />' . '<ol>' . $text_for_mail . '</ol>';
-          //echo $content . '<br /><br />';
-
-          $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
-      } 
-  
+		  if ( $user['notifications'] != 1 ) 
+		  {   
+		      // check name + address
+		      if ( !$u['firstname'] ) 
+		        $text_for_mail .= '<li>' . __('Your firstname is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+		         " " . '<a href="' . Configure::read('App.hostUrl') . 
+		         Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
+		         __('Change it.', true) . '</a>' . 
+		        "</li>\n";
+		
+		      if ( !$u['lastname'] ) 
+		        $text_for_mail .= '<li>' . __('Your lastname is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
+		         " " . '<a href="' . Configure::read('App.hostUrl') . 
+		         Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
+		         __('Change it.', true) . '</a>' . 
+		         "</li>\n";
+		      
+		      if ( $u['level'] == 'paymember' && !$u['address'] ) 
+		        $text_for_mail .= '<li>' . __('Your address is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+		         " " . '<a href="' . Configure::read('App.hostUrl') . 
+		         Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
+		         __('Change it.', true) . '</a>' . 
+		         "</li>\n";
+		
+		      if ( $u['level'] == 'paymember' && !$u['zip'] ) 
+		        $text_for_mail .= '<li>' . __('Your zip is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
+		         " " . '<a href="' . Configure::read('App.hostUrl') . 
+		         Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
+		         __('Change it.', true) . '</a>' . 
+		         "</li>\n";
+		
+		      if ( $u['level'] == 'paymember' && !$u['city'] ) 
+		        $text_for_mail .= '<li>' . __('Your city is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+		         " " . '<a href="' . Configure::read('App.hostUrl') . 
+		         Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
+		         __('Change it.', true) . '</a>' . 
+		         "</li>\n";
+		
+		      if ( $u['level'] == 'paymember' && !$u['country'] ) 
+		        $text_for_mail .= '<li>' . __('Your country is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+		         " " . '<a href="' . Configure::read('App.hostUrl') . 
+		         Configure::read('App.serverUrl') . '/users/edit_userinfo" target="_blank">&raquo; ' . 
+		         __('Change it.', true) . '</a>' . 
+		         "</li>\n";
+		
+		      // check birthday
+		      if ( !$u['birthday'] ) 
+		        $text_for_mail .= '<li>' . __('Your birthday is missing! This is essentiell for calculations.', true) . "</li>\n";
+		      
+		      // check lactatethreshold
+		      if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) {
+		        $nothing = "";
+		      } else {
+		        $text_for_mail .= '<li>' . __('Your lactate threshold must be between 100 and 210.', true) . 
+		          " " . '<a href="' . Configure::read('App.hostUrl') . 
+		          Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
+		      }
+		
+		      // check bike lactatethreshold
+		      if ( $u['bikelactatethreshold'] > 100 && $u['bikelactatethreshold'] < 210 ) {
+		        $nothing = "";
+		      } else {
+		        $text_for_mail .= '<li>' . __('Your bike lactate threshold must be between 100 and 210.', true) . 
+		          " " . '<a href="' . Configure::read('App.hostUrl') . 
+		          Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
+		      }
+		      		      
+		      // check for target weight
+		      if ( $u['targetweight'] && $u['targetweightdate'] )
+		      {
+		          $nowts = time();
+		          $futurets = strtotime( $u['targetweightdate'] );
+		          
+		          $diff_weight = ( $u['targetweight'] - $u['weight'] ) * (-1);
+		          $divisor = ( $futurets - $nowts ) / 86400 / 30;
+		
+		          // weight you have to loose to achieve your weight target
+		          $weight_per_month_check = $diff_weight / $divisor;
+		
+		          if ( $weight_per_month_check > 2 ) 
+		          {
+		              $weight_unit_array = $this->Unitcalc->check_weight(2, 'show');
+		              $weight_unit = $weight_unit_array['unit'];
+		
+		              $text_for_mail .= '<li>' . __('Your weight loss per month to achieve your weight goal must be', true) . ' ' . 
+		                  round( $this->Unitcalc->check_weight($weight_per_month_check, 'show', 'single'), 1 ) .
+		                  ' ' . $weight_unit . ' - ' . __("that's not healthy - set a new weight goal!", true) . ' ' . 
+		                  " " . '<a href="' . Configure::read('App.hostUrl') . 
+		                  Configure::read('App.serverUrl') . '/users/edit_weight" target="_blank">' . __('Change it.', true) . '</a>' .
+		                  "</li>\n";
+		          } 
+		      }
+		    
+		      // TODO (B) hours per sport          
+		      if ( !$u['weeklyhours'] ) 
+		      {
+		          // check per sport how many hours an user should train
+		          //case ($u['sports'] )
+		          //$text_for_mail .= '<li>' . __('You do not train enough for your sport. Please check the recommended training load for your type of sport.', true) . "</li>\n";
+		          $text_for_mail .= '<li>' . __('You have not entered training hours per week for your sport.', true) . 
+		          " " . '<a href="' . Configure::read('App.hostUrl') . 
+		          Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
+		          "</li>\n";
+		      }
+		
+		      // after 9 month of being rookie
+		      $rookie_month = 9;
+		
+		      if ( ( ( strtotime( $u['created'] ) + 86400*30*$rookie_month ) < time() ) && $u['rookie'] == '1' )
+		      {
+		          $text_for_mail .= '<li>' . __("You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining since more than 9 months, maybe you should change that!", true) .
+		          " " . '<a href="' . Configure::read('App.hostUrl') . 
+		          Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
+		          "</li>\n";
+		      }   
+		  } 
+		
+		  // check for recommendations
+		  // TODO (B) not yet implemented
+			/**
+		      if ( !$u['recommendation'] )
+		      { 
+		          $text_for_mail .= __('Please recommend our service! Get a free trainingmonth.', true) . '[LINK].', true);
+		          $text_for_mail .= '<br />';
+		      }
+			**/
+		  
+		  // check for medical limitations
+		  if ( $u['tos'] == '0')
+		  { 
+		      $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
+		      " " . '<a href="' . Configure::read('App.hostUrl') . 
+		      Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
+		      "</li>\n";
+		  }
+		
+		  if ( 
+		    ( ( strtotime( $u['created'] ) + (86400*5) ) < time() ) && 
+		    ( ( strtotime( $u['created'] ) + (86400*25) ) > time() ) && 
+		    $u['activated'] != '1' )
+		  {
+		      $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
+		  }   
+		
+		  if ( ( strtotime( $u['paid_to'] ) < time() ) && $u['level'] != 'freemember' )
+		  {
+		      // set level = paymember
+		      $this->User->id = $u['id'];
+		      $this->User->savefield('level', 'freemember', false);
+		      $text_for_mail .= '<li>' . __('Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please', true) . ' ' .
+		        '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "</li>\n";
+		  }
+		
+		  if ( $text_for_mail )
+		  {
+		      $mailsubject = __('TriCoreTraining informs you.', true);
+		      $template = 'standardmail';
+		      $content = __('This TriCoreTraining message comes to you because some information in your profile is missing.', true) . 
+		      '<br />' . '<ol>' . $text_for_mail . '</ol>';
+		
+		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
+		  } 
+		  
 	}
 
 	function _sendMail($user, $subject, $template, $content = '', $language = 'eng', $to_user = '' )
 	{
+		$debug = true;
 	  	if ( $language ) Configure::write('Config.language',$language);
-    
+    	if ( $debug == true ) echo "language: $language<br />\n";
+    	
     	if ( isset( $user['User'] ) ) $user = $user['User'];
     
 	    if ( !isset($to_user['email']) ) $to_user['email'] = $user['email'];
