@@ -36,16 +36,6 @@ class MesoCycleProvider {
 		$this->DB = $DB;
 		$this->athlete = $athlete;
 		
-		// the first three letters should identify the sports type
-		$sportId = substr($athlete->getSport(), 0, 3);
-		if ($sportId == 'TRI') {
-			$defaultRatio = RATIO_TRIATHLON;
-		} elseif ($sportId == 'DUA') {
-			$defaultRatio = RATIO_DUATHLON;
-		} else {
-			$defaultRatio = '100';
-		}
-		
 		// initialize the provider from the database
 		$res = $this->DB->query("SELECT date, phase, time, usertime, ratio, recovery 
 			FROM mesocyclephases 
@@ -57,7 +47,7 @@ class MesoCycleProvider {
 				// normalize ratio
 				$ratio = $data["ratio"];
 				if ($ratio == '') {
-					$ratio = $defaultRatio;
+					$ratio = $this->getDefaultRatio();
 				}
 				
 				$this->phaseTable[$data["date"]] = array(
@@ -75,6 +65,21 @@ class MesoCycleProvider {
 			// if there is no existing mesocycle create one
 			$this->generate($week);
 			$this->store();
+		}
+	}
+	
+	/**
+	 * will return the default ratio string for the current athlete
+	 * @return String default ratio like 20,40,40 for triathlon
+	 */
+	private function getDefaultRatio() {
+		$sportId = substr($this->athlete->getSport(), 0, 3);
+		if ($sportId == 'TRI') {
+			return RATIO_TRIATHLON;
+		} elseif ($sportId == 'DUA') {
+			return RATIO_DUATHLON;
+		} else {
+			return '100';
 		}
 	}
 	
@@ -109,19 +114,14 @@ class MesoCycleProvider {
 		//unset($this->firstKey);
 		while (list($k,$phase) = each($phaseTable)) {
 			$newPhaseTable[$mon->format("Y-m-d")] = $phase;
+			$newPhaseTable[$mon->format("Y-m-d")]['ratio'] = $this->getDefaultRatio();
 			if (!$this->firstKey) {
 				$this->firstKey = $mon->format("Y-m-d");
 			}
 			$mon->add($week);
 		}
 		
-		// now check if there is another A race past to this one
-		// TODO revamp this part - its broken and causes infinite loops, if there is no upcoming a race
-/*		if ($this->athlete->getSchedule()->getNextARace($mon->add($week))) {
-			$anotherPhaseTable = $this->generate($mon, true);
-			$newPhaseTable = array_merge($newPhaseTable, $anotherPhaseTable); 
-		}
-		$this->phaseTable = $newPhaseTable;*/
+		// TODO now is the time to check if there is another A race past to this one
 		$this->phaseTable = $newPhaseTable;
 		return $this->phaseTable;
 	}

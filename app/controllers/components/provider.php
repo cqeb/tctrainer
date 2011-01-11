@@ -45,7 +45,7 @@ class ProviderComponent extends Object {
 	 */
 	public function getPlan() {
 		// cut preview time to a maximum of 3 weeks
-		if (intval($_GET['o']) > 3 && !$this->athlete->isAdvancedFeatures()) {
+		if (array_key_exists('o', $_GET) && intval($_GET['o']) > 3 && !$this->athlete->isAdvancedFeatures()) {
 			$_GET['o'] == 3;
 		}
 		
@@ -273,6 +273,8 @@ class ProviderComponent extends Object {
 		$this->DB->query("DELETE FROM trirunworkouttypesequence WHERE week >= $date 
 			AND athlete_id = " . $this->athlete->getId());
 		$this->DB->query("DELETE FROM tribikeworkouttypesequence WHERE week >= $date 
+			AND athlete_id = " . $this->athlete->getId());
+		$this->DB->query("DELETE FROM triswimworkouttypesequence WHERE week >= $date 
 			AND athlete_id = " . $this->athlete->getId());
 		return true;
 	}
