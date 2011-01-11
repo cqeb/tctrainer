@@ -223,3 +223,7 @@ a.reset {
 	text-shadow: 1px 1px 1px #fff;
 	vertical-align: 2px;
 }
+
+#plan {
+	width: 430px;	
+}
