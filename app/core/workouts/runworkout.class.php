@@ -128,10 +128,12 @@ class RunWorkout extends Workout {
 				return __('Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous.', true);				
 				break;
 			case Workout::TEST_SHORT:
-				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 20 minutes.', true);
+				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the "Lap"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your run lactate threshold in your training info settings.', true) .
+					' <button onclick="document.location.href=\'/trainer/users/edit_traininginfo\'">' . __('Edit training info', true) . '</button>';
 				break;
 			case Workout::TEST_LONG:
-				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 50 minutes.', true);
+				return __('Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the "Lap"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your run lactate threshold in your training info settings.', true) .
+					' <button onclick="document.location.href=\'/trainer/users/edit_traininginfo\'">' . __('Edit training info', true) . '</button>';
 				break;
 			default:
 				return 'UNKNOWN';

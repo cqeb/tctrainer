@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-10 22:57+0100\n"
+"POT-Creation-Date: 2011-01-11 21:42+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -127,7 +127,7 @@ msgstr ""
 #: \views\trainingstatistics\statistics_competition.ctp:42
 #: \views\trainingstatistics\statistics_trimp.ctp:32
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:116
-#: \views\users\edit_traininginfo.ctp:277
+#: \views\users\edit_traininginfo.ctp:219
 msgid "Bike"
 msgstr ""
 
@@ -137,7 +137,7 @@ msgstr ""
 #: \views\trainingstatistics\statistics_competition.ctp:41
 #: \views\trainingstatistics\statistics_trimp.ctp:31
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:115
-#: \views\users\edit_traininginfo.ctp:269
+#: \views\users\edit_traininginfo.ctp:211
 msgid "Run"
 msgstr ""
 
@@ -146,7 +146,7 @@ msgid "You might want to add some competitions to refine your training plan."
 msgstr ""
 
 #: \controllers\trainingplans_controller.php:66
-#: \views\competitions\list_competitions.ctp:15;15
+#: \views\competitions\list_competitions.ctp:13;13
 #: \views\elements\subnavigation_all.ctp:10
 msgid "Add competition"
 msgstr ""
@@ -163,7 +163,7 @@ msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:155;160
 #: \views\competitions\edit_competition.ctp:37
-#: \views\competitions\list_competitions.ctp:22
+#: \views\competitions\list_competitions.ctp:19
 #: \views\trainingstatistics\edit_training.ctp:34
 #: \views\trainingstatistics\import_workout.ctp:65
 #: \views\trainingstatistics\list_trainings.ctp:29
@@ -177,13 +177,13 @@ msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:172
 #: \views\competitions\edit_competition.ctp:67
-#: \views\competitions\list_competitions.ctp:23
+#: \views\competitions\list_competitions.ctp:20
 #: \views\trainingstatistics\edit_training.ctp:46
 #: \views\trainingstatistics\import_workout.ctp:67
 #: \views\trainingstatistics\list_trainings.ctp:30
 #: \views\trainingstatistics\statistics_trimp.ctp:25
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:35;166
-#: \views\users\edit_traininginfo.ctp:29
+#: \views\users\edit_traininginfo.ctp:28
 msgid "Sport"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 #: \views\payments\subscribe_triplans.ctp:139
 #: \views\starts\features.ctp:70
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:7
-#: \views\users\edit_traininginfo.ctp:196;217
+#: \views\users\edit_traininginfo.ctp:138;159
 #: \views\users\edit_userinfo.ctp:145
 #: \views\users\register.ctp:185
 msgid "No"
@@ -234,7 +234,7 @@ msgstr ""
 #: \controllers\trainingstatistics_controller.php:319
 #: \views\competitions\edit_competition.ctp:97
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:6
-#: \views\users\edit_traininginfo.ctp:195;216
+#: \views\users\edit_traininginfo.ctp:137;158
 #: \views\users\edit_userinfo.ctp:144
 #: \views\users\register.ctp:184
 msgid "Yes"
@@ -1075,11 +1075,17 @@ msgid "Pick a flat course. After warming up establish Zone 5, and stay there whi
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:142
-msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes."
+msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your bike lactate threshold in your training info settings."
 msgstr ""
 
-#: \core\workouts\bikeworkout.class.php:145
-msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes."
+#: \core\workouts\bikeworkout.class.php:143;147
+#: \core\workouts\runworkout.class.php:132;136
+#: \views\elements\subnavigation_all.ctp:28
+msgid "Edit training info"
+msgstr ""
+
+#: \core\workouts\bikeworkout.class.php:146
+msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your bike lactate threshold in your training info settings."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:47
@@ -1151,11 +1157,11 @@ msgid "Pick a flat course. After warming up establish Zone 5, and keep running w
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:131
-msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes."
+msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your run lactate threshold in your training info settings."
 msgstr ""
 
-#: \core\workouts\runworkout.class.php:134
-msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes."
+#: \core\workouts\runworkout.class.php:135
+msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your run lactate threshold in your training info settings."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:41
@@ -1260,7 +1266,7 @@ msgid "Test"
 msgstr ""
 
 #: \views\competitions\edit_competition.ctp:8
-#: \views\competitions\list_competitions.ctp:2
+#: \views\competitions\list_competitions.ctp:1
 #: \views\elements\topnavigation_private.ctp:26
 msgid "Competitions"
 msgstr ""
@@ -1294,7 +1300,7 @@ msgid "You should only define 3 important competitions per year!"
 msgstr ""
 
 #: \views\competitions\edit_competition.ctp:90
-#: \views\competitions\list_competitions.ctp:59
+#: \views\competitions\list_competitions.ctp:53
 msgid "Important"
 msgstr ""
 
@@ -1327,37 +1333,41 @@ msgstr ""
 #: \views\users\edit_images.ctp:95
 #: \views\users\edit_metric.ctp:60
 #: \views\users\edit_password.ctp:65
-#: \views\users\edit_traininginfo.ctp:227
+#: \views\users\edit_traininginfo.ctp:169
 #: \views\users\edit_userinfo.ctp:213
 #: \views\users\edit_weight.ctp:104
 msgid "Save"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:7
+#: \views\competitions\list_competitions.ctp:6
 msgid "Manage your competitions!"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:21
+#: \views\competitions\list_competitions.ctp:18
 msgid "Prio"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:24
+#: \views\competitions\list_competitions.ctp:21
 #: \views\trainingstatistics\import_workout.ctp:66
 msgid "Name"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:33
+#: \views\competitions\list_competitions.ctp:29
 msgid "No competitions defined."
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:53
+#: \views\competitions\list_competitions.ctp:47
 msgid "Your next competition ..."
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:63;63
+#: \views\competitions\list_competitions.ctp:57
 #: \views\trainingstatistics\list_trainings.ctp:79
 #: \views\users\edit_images.ctp:34;56
 msgid "Are you sure?"
+msgstr ""
+
+#: \views\competitions\list_competitions.ctp:57;57
+msgid "Delete this competition"
 msgstr ""
 
 #: \views\elements\footer.ctp:3
@@ -1518,10 +1528,6 @@ msgstr ""
 msgid "What have I achieved?"
 msgstr ""
 
-#: \views\elements\subnavigation_all.ctp:28
-msgid "Edit training info"
-msgstr ""
-
 #: \views\elements\subnavigation_all.ctp:29
 msgid "Edit weight goals"
 msgstr ""
@@ -1564,7 +1570,7 @@ msgstr ""
 #: \views\users\edit_images.ctp:2
 #: \views\users\edit_metric.ctp:2
 #: \views\users\edit_password.ctp:2
-#: \views\users\edit_traininginfo.ctp:5
+#: \views\users\edit_traininginfo.ctp:1
 #: \views\users\edit_userinfo.ctp:2
 #: \views\users\edit_weight.ctp:2
 msgid "Settings"
@@ -1676,7 +1682,7 @@ msgstr ""
 #: \views\elements\email\text\passwordreset.ctp:2
 #: \views\elements\email\text\standardmail.ctp:4
 #: \views\elements\email\text\trainingreminder.ctp:2
-#: \views\layouts\default_trainer.ctp:76
+#: \views\layouts\default_trainer.ctp:75
 msgid "Aloha"
 msgstr ""
 
@@ -2071,7 +2077,7 @@ msgid "By clicking the SUBSCRIBE button you also accept these terms and conditio
 msgstr ""
 
 #: \views\payments\initiate.ctp:33
-#: \views\users\edit_traininginfo.ctp:203
+#: \views\users\edit_traininginfo.ctp:145
 #: \views\users\register.ctp:209
 msgid "Read our terms and conditions."
 msgstr ""
@@ -2828,7 +2834,7 @@ msgid "Duration Statistics"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:60
-#: \views\users\edit_traininginfo.ctp:372
+#: \views\users\edit_traininginfo.ctp:314
 #: \views\users\register.ctp:264
 msgid "hours"
 msgstr ""
@@ -2951,101 +2957,97 @@ msgstr ""
 msgid "Passwords do not match!"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:11
+#: \views\users\edit_traininginfo.ctp:10
 msgid "Fill in your training information"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:45;48
+#: \views\users\edit_traininginfo.ctp:44;47
 msgid "Enter your weekly training hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:46
+#: \views\users\edit_traininginfo.ctp:45
 msgid "Must be at least 0 hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:47
+#: \views\users\edit_traininginfo.ctp:46
 msgid "Must be lower than 60 hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:50
+#: \views\users\edit_traininginfo.ctp:49
 msgid "Weekly hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:107
+#: \views\users\edit_traininginfo.ctp:55
 msgid "Zones"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:113
-msgid "How to define your lactate threshold? 1. Do your test-workouts to define your lactate threshold. 2. Do a lactate threshold test with your doctor. 3. Take 85% of your maximum heart rate (this is just an approximation). Read more in our blog."
+#: \views\users\edit_traininginfo.ctp:61
+msgid "Find your current lactate threshold value by performing the test workouts from your training schedule for each particular sport."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:125;128
+#: \views\users\edit_traininginfo.ctp:71;74
 msgid "Enter your current run lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:126;145
+#: \views\users\edit_traininginfo.ctp:72;91
 msgid "Must be at least 120"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:127;146
+#: \views\users\edit_traininginfo.ctp:73;92
 msgid "Must be lower than 220"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:131
+#: \views\users\edit_traininginfo.ctp:77
 msgid "Run lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:144;147
+#: \views\users\edit_traininginfo.ctp:90;93
 msgid "Enter your current bike lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:149
+#: \views\users\edit_traininginfo.ctp:95
 msgid "Bike lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:176
-msgid "Calculate lactate threshold for zones"
-msgstr ""
-
-#: \views\users\edit_traininginfo.ctp:186
+#: \views\users\edit_traininginfo.ctp:128
 #: \views\users\register.ctp:175
 msgid "Are you a beginner in sports?"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:207
+#: \views\users\edit_traininginfo.ctp:149
 msgid "You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:256
+#: \views\users\edit_traininginfo.ctp:198
 msgid "Set these zones in your heart rate monitor!"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:261
+#: \views\users\edit_traininginfo.ctp:203
 msgid "Type"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:262;263;264;265;266
+#: \views\users\edit_traininginfo.ctp:204;205;206;207;208
 msgid "Zone"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:299
+#: \views\users\edit_traininginfo.ctp:241
 msgid "Your maximum heart rate is not valid! Should be between 220 and 120."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:335
+#: \views\users\edit_traininginfo.ctp:277
 msgid "Your lactate threshold is not valid! Should be between 220 and 120."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:349
+#: \views\users\edit_traininginfo.ctp:291
 msgid "Your bike lactate threshold is not valid! Should be between 220 and 120."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:371
+#: \views\users\edit_traininginfo.ctp:313
 #: \views\users\register.ctp:263
 msgid "Weekly training load varies between"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:372
+#: \views\users\edit_traininginfo.ctp:314
 #: \views\users\register.ctp:264
 msgid "and"
 msgstr ""

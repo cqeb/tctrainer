@@ -57,11 +57,6 @@ echo $form->input('weeklyhours',
 <div class="statusbox error" id="errorlth"></div>
 <?php
 
-$help_lth = ' <a class="tiptip" title="' .
-__('How to define your lactate threshold? 1. Do your test-workouts to define your lactate threshold. 2. Do a lactate threshold test with your doctor. 3. Take 85% of your maximum heart rate (this is just an approximation). Read more in our blog.', true) . 
-'" href="#"><span style="background-color:lightblue;padding:5px;">?</span></a>';
-//<!--/blog/en/how-do-i-find-out-my-lactate-thresholds/-->
-
 $help_lth = '<span class="help" title="' . 
 	__('Find your current lactate threshold value by performing the test workouts from your training schedule for each particular sport.', true) .
 	'">?</span>';
