@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-09 17:40+0100\n"
-"PO-Revision-Date: 2011-01-09 17:43+0100\n"
+"POT-Creation-Date: 2011-01-11 22:43+0100\n"
+"PO-Revision-Date: 2011-01-11 22:46+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -14,12 +14,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: \app_controller.php:141
+#: \app_controller.php:158
 msgid "Incorrect session data. Sorry."
 msgstr ""
 
 #: \controllers\competitions_controller.php:106
-#: \controllers\trainingstatistics_controller.php:456;1478
+#: \controllers\trainingstatistics_controller.php:456;1474
 msgid "Sorry. This is not your entry!"
 msgstr ""
 
@@ -39,60 +39,60 @@ msgstr ""
 msgid "The competition has been deleted."
 msgstr ""
 
-#: \controllers\payments_controller.php:67
+#: \controllers\payments_controller.php:63
 msgid "Registered cancellation request."
 msgstr ""
 
-#: \controllers\payments_controller.php:218
+#: \controllers\payments_controller.php:223
 msgid "No Transaction-ID defined - something is wrong - sorry."
 msgstr ""
 
-#: \controllers\payments_controller.php:218
+#: \controllers\payments_controller.php:223
 msgid "Contact our support"
 msgstr ""
 
-#: \controllers\payments_controller.php:231
+#: \controllers\payments_controller.php:236
 msgid "UserID"
 msgstr ""
 
 # UserID was not found in database
-#: \controllers\payments_controller.php:231
+#: \controllers\payments_controller.php:236
 msgid "was not found in database"
 msgstr ""
 
-#: \controllers\payments_controller.php:240
+#: \controllers\payments_controller.php:245
 msgid "Your payment is not completed yet"
 msgstr ""
 
-#: \controllers\payments_controller.php:265
+#: \controllers\payments_controller.php:270
 msgid "Verification by PAYPAL failed"
 msgstr ""
 
-#: \controllers\payments_controller.php:307;334
+#: \controllers\payments_controller.php:312;339
 msgid "Received notification"
 msgstr ""
 
-#: \controllers\payments_controller.php:307
+#: \controllers\payments_controller.php:312
 msgid "Invoice sent"
 msgstr ""
 
-#: \controllers\payments_controller.php:307;334
+#: \controllers\payments_controller.php:312;339
 msgid "Thank you"
 msgstr ""
 
-#: \controllers\payments_controller.php:311
+#: \controllers\payments_controller.php:316
 msgid "Saving of payment status failed"
 msgstr ""
 
-#: \controllers\payments_controller.php:334
+#: \controllers\payments_controller.php:339
 msgid "No invoice"
 msgstr ""
 
-#: \controllers\payments_controller.php:365
+#: \controllers\payments_controller.php:380
 msgid "Thank you for subscribing for a membership. You receive your invoice as soon as your subscription period starts. "
 msgstr ""
 
-#: \controllers\payments_controller.php:369
+#: \controllers\payments_controller.php:384
 msgid ""
 "You canceled the payment transaction. If this was not intended, do the payment process again. If something else\n"
 "               is not ok for you"
@@ -100,17 +100,17 @@ msgstr ""
 
 # You canceled the payment transaction. If this was not intended, do the payment process again. If something else
 #                is not ok for you "contact our support"
-#: \controllers\payments_controller.php:370
-#: \controllers\users_controller.php:807
+#: \controllers\payments_controller.php:385
+#: \controllers\users_controller.php:791
 msgid "contact our support"
 msgstr ""
 
-#: \controllers\payments_controller.php:445
-msgid "TriCoreTraining (TCT) Invoice"
+#: \controllers\payments_controller.php:446
+msgid "TriCoreTraining Invoice"
 msgstr ""
 
-#: \controllers\payments_controller.php:447
-msgid "TriCoreTraining (TCT) Subscription Info"
+#: \controllers\payments_controller.php:448
+msgid "TriCoreTraining Subscription Info"
 msgstr ""
 
 #: \controllers\starts_controller.php:24
@@ -118,30 +118,30 @@ msgid "the interactive, online training plan service for run, bike and triathlon
 msgstr ""
 
 #: \controllers\trainingplans_controller.php:42
-#: \controllers\components\unitcalc.php:664;668;672;676
+#: \controllers\components\unitcalc.php:658;662;666;670
 #: \views\trainingstatistics\edit_training.ctp:54
-#: \views\trainingstatistics\statistics_competition.ctp:43
+#: \views\trainingstatistics\statistics_competition.ctp:44
 #: \views\trainingstatistics\statistics_trimp.ctp:33
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:130
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:117
 msgid "Swim"
 msgstr ""
 
 #: \controllers\trainingplans_controller.php:42;45;51
-#: \controllers\components\unitcalc.php:665;669;673;677;688;692
-#: \views\trainingstatistics\statistics_competition.ctp:41
-#: \views\trainingstatistics\statistics_trimp.ctp:31
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:128
-#: \views\users\edit_traininginfo.ctp:268
+#: \controllers\components\unitcalc.php:659;663;667;671;682;686
+#: \views\trainingstatistics\statistics_competition.ctp:42
+#: \views\trainingstatistics\statistics_trimp.ctp:32
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:116
+#: \views\users\edit_traininginfo.ctp:283
 msgid "Bike"
 msgstr ""
 
 #: \controllers\trainingplans_controller.php:42;45;48
-#: \controllers\components\unitcalc.php:666;670;674;678;680;681;682;683;684;687;689;691;693
+#: \controllers\components\unitcalc.php:660;664;668;672;674;675;676;677;678;681;683;685;687
 #: \views\trainingstatistics\edit_training.ctp:52
-#: \views\trainingstatistics\statistics_competition.ctp:40
-#: \views\trainingstatistics\statistics_trimp.ctp:30
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:127
-#: \views\users\edit_traininginfo.ctp:260
+#: \views\trainingstatistics\statistics_competition.ctp:41
+#: \views\trainingstatistics\statistics_trimp.ctp:31
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:115
+#: \views\users\edit_traininginfo.ctp:275
 msgid "Run"
 msgstr ""
 
@@ -150,7 +150,7 @@ msgid "You might want to add some competitions to refine your training plan."
 msgstr ""
 
 #: \controllers\trainingplans_controller.php:66
-#: \views\competitions\list_competitions.ctp:15;15
+#: \views\competitions\list_competitions.ctp:13;13
 #: \views\elements\subnavigation_all.ctp:10
 msgid "Add competition"
 msgstr ""
@@ -167,11 +167,11 @@ msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:155;160
 #: \views\competitions\edit_competition.ctp:37
-#: \views\competitions\list_competitions.ctp:22
+#: \views\competitions\list_competitions.ctp:19
 #: \views\trainingstatistics\edit_training.ctp:34
 #: \views\trainingstatistics\import_workout.ctp:65
-#: \views\trainingstatistics\list_trainings.ctp:34
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:38;46
+#: \views\trainingstatistics\list_trainings.ctp:29
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:34
 msgid "Date"
 msgstr ""
 
@@ -181,28 +181,28 @@ msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:172
 #: \views\competitions\edit_competition.ctp:67
-#: \views\competitions\list_competitions.ctp:23
+#: \views\competitions\list_competitions.ctp:20
 #: \views\trainingstatistics\edit_training.ctp:46
 #: \views\trainingstatistics\import_workout.ctp:67
-#: \views\trainingstatistics\list_trainings.ctp:35
-#: \views\trainingstatistics\statistics_trimp.ctp:24
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:47;183
-#: \views\users\edit_traininginfo.ctp:26
+#: \views\trainingstatistics\list_trainings.ctp:30
+#: \views\trainingstatistics\statistics_trimp.ctp:25
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:35;166
+#: \views\users\edit_traininginfo.ctp:25
 msgid "Sport"
 msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:183
 #: \views\trainingstatistics\import_workout.ctp:68
-#: \views\trainingstatistics\list_trainings.ctp:36
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:48
+#: \views\trainingstatistics\list_trainings.ctp:31
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:36
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:12;18
 msgid "Distance"
 msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:196;201
 #: \views\trainingstatistics\import_workout.ctp:69
-#: \views\trainingstatistics\list_trainings.ctp:37
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:49;185
+#: \views\trainingstatistics\list_trainings.ctp:32
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:37;168
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:60;66
 msgid "Duration"
 msgstr ""
@@ -215,7 +215,7 @@ msgstr ""
 #: \controllers\trainingstatistics_controller.php:245
 #: \views\trainingstatistics\edit_training.ctp:165
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:50
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:57
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:45
 #: \views\users\edit_weight.ctp:53
 msgid "Weight"
 msgstr ""
@@ -226,10 +226,10 @@ msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:318
 #: \views\competitions\edit_competition.ctp:98
-#: \views\payments\subscribe_triplans.ctp:74
+#: \views\payments\subscribe_triplans.ctp:139
 #: \views\starts\features.ctp:70
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:7
-#: \views\users\edit_traininginfo.ctp:187;208
+#: \views\users\edit_traininginfo.ctp:202;223
 #: \views\users\edit_userinfo.ctp:145
 #: \views\users\register.ctp:185
 msgid "No"
@@ -238,7 +238,7 @@ msgstr ""
 #: \controllers\trainingstatistics_controller.php:319
 #: \views\competitions\edit_competition.ctp:97
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:6
-#: \views\users\edit_traininginfo.ctp:186;207
+#: \views\users\edit_traininginfo.ctp:201;222
 #: \views\users\edit_userinfo.ctp:144
 #: \views\users\register.ctp:184
 msgid "Yes"
@@ -265,11 +265,11 @@ msgid "Training saved."
 msgstr ""
 
 #: \controllers\trainingstatistics_controller.php:554
-#: \controllers\users_controller.php:422;1142
+#: \controllers\users_controller.php:406;1117
 msgid "Some errors occured"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:1487
+#: \controllers\trainingstatistics_controller.php:1483
 msgid "Workout deleted."
 msgstr ""
 
@@ -278,324 +278,328 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: \controllers\users_controller.php:93
+#: \controllers\users_controller.php:98
 msgid "Not activated yet. Please follow the activation link in the welcome mail."
 msgstr ""
 
-#: \controllers\users_controller.php:99
+#: \controllers\users_controller.php:104
 msgid "Wrong or non-existing e-mail or password. Please try again."
 msgstr ""
 
-#: \controllers\users_controller.php:109
+#: \controllers\users_controller.php:114
 #: \views\users\login.ctp:17
 msgid "Logout"
 msgstr ""
 
-#: \controllers\users_controller.php:124
+#: \controllers\users_controller.php:130
 msgid "You're logged out. Bye."
 msgstr ""
 
-#: \controllers\users_controller.php:130
+#: \controllers\users_controller.php:136
 #: \views\users\password_forgotten.ctp:2
 #: \views\users\password_reset.ctp:2
 msgid "Password forgotten"
 msgstr ""
 
-#: \controllers\users_controller.php:153
+#: \controllers\users_controller.php:151
 msgid "Sorry Captcha not correct!"
 msgstr ""
 
-#: \controllers\users_controller.php:163
+#: \controllers\users_controller.php:161
 msgid "E-mail was not found in database!"
 msgstr ""
 
-#: \controllers\users_controller.php:169
+#: \controllers\users_controller.php:167
 msgid "Click link in e-mail to reset password!"
 msgstr ""
 
-#: \controllers\users_controller.php:182
+#: \controllers\users_controller.php:180
 msgid "Password reset"
 msgstr ""
 
-#: \controllers\users_controller.php:216
+#: \controllers\users_controller.php:214
 msgid "Your new password is sent to your e-mail."
 msgstr ""
 
-#: \controllers\users_controller.php:220
+#: \controllers\users_controller.php:218
 msgid "Something is wrong - sorry."
 msgstr ""
 
-#: \controllers\users_controller.php:220
+#: \controllers\users_controller.php:218
 msgid "Contact our support."
 msgstr ""
 
-#: \controllers\users_controller.php:239
+#: \controllers\users_controller.php:237
 #: \views\users\register.ctp:1
 msgid "Create your account"
 msgstr ""
 
-#: \controllers\users_controller.php:413
+#: \controllers\users_controller.php:397
 #: \views\users\register_finish.ctp:2
 msgid "Registration finished"
 msgstr ""
 
-#: \controllers\users_controller.php:589
+#: \controllers\users_controller.php:573
 msgid "Registration - Finished"
 msgstr ""
 
-#: \controllers\users_controller.php:608
+#: \controllers\users_controller.php:592
 msgid "Sorry. Something is wrong. Don't hack other accounts!"
 msgstr ""
 
-#: \controllers\users_controller.php:714
+#: \controllers\users_controller.php:698
 msgid "Sorry, your e-mail is not correct!"
 msgstr ""
 
-#: \controllers\users_controller.php:731
+#: \controllers\users_controller.php:715
 msgid "Sorry, your e-mail is already registered!"
 msgstr ""
 
-#: \controllers\users_controller.php:747
+#: \controllers\users_controller.php:731
 msgid "E-mail is not registered!"
 msgstr ""
 
-#: \controllers\users_controller.php:754
+#: \controllers\users_controller.php:738
 msgid "E-mail changed!"
 msgstr ""
 
-#: \controllers\users_controller.php:767
+#: \controllers\users_controller.php:751
 msgid "Registration - Activation"
 msgstr ""
 
-#: \controllers\users_controller.php:788
+#: \controllers\users_controller.php:772
 msgid "You will receive regularly training schedules from TriCoreTraining.com. Start your sports career."
 msgstr ""
 
-#: \controllers\users_controller.php:807
+#: \controllers\users_controller.php:791
 msgid "Something went wrong - sorry. Maybe you're already activated?"
 msgstr ""
 
-#: \controllers\users_controller.php:807
+#: \controllers\users_controller.php:791
 msgid "If not"
 msgstr ""
 
 # BMI = Body Mass Index (indicator for body weight)
-#: \controllers\users_controller.php:825
+#: \controllers\users_controller.php:809
 msgid "Your BMI is"
 msgstr ""
 
 # BMI = Body Mass Index (indicator for body weight)
-#: \controllers\users_controller.php:825
+#: \controllers\users_controller.php:809
 msgid "Your BMI-check says:"
 msgstr ""
 
 # BMI = Body Mass Index (indicator for body weight)
-#: \controllers\users_controller.php:829
+#: \controllers\users_controller.php:813
 msgid "Please check your height and weight again - we got an incorrect BMI"
 msgstr ""
 
-#: \controllers\users_controller.php:829
+#: \controllers\users_controller.php:813
 msgid "thank you"
 msgstr ""
 
-#: \controllers\users_controller.php:840
-#: \views\payments\subscribe_triplans.ctp:52
+#: \controllers\users_controller.php:824
+#: \views\payments\subscribe_triplans.ctp:117
 msgid "Change profile"
 msgstr ""
 
-#: \controllers\users_controller.php:878
+#: \controllers\users_controller.php:862
 msgid "User profile saved."
 msgstr ""
 
-#: \controllers\users_controller.php:883;925;969;1207;1263;1323
+#: \controllers\users_controller.php:867;909;953;1182;1238;1298
 msgid "Some errors occured."
 msgstr ""
 
-#: \controllers\users_controller.php:894
+#: \controllers\users_controller.php:878
 msgid "Change address"
 msgstr ""
 
-#: \controllers\users_controller.php:935
+#: \controllers\users_controller.php:919
 msgid "Change training info"
 msgstr ""
 
-#: \controllers\users_controller.php:962
+#: \controllers\users_controller.php:946
 msgid "Traininginfo saved."
 msgstr ""
 
-#: \controllers\users_controller.php:979
+#: \controllers\users_controller.php:963
 msgid "Change weight management"
 msgstr ""
 
-#: \controllers\users_controller.php:1024
+#: \controllers\users_controller.php:1008
 msgid "Your target weight date is in the past and must be in the future!"
 msgstr ""
 
-#: \controllers\users_controller.php:1030
+#: \controllers\users_controller.php:1014
 msgid "This system won't work if you want to gain weight!"
 msgstr ""
 
 # You have to loose 2 kilogramms per month.
-#: \controllers\users_controller.php:1049
+#: \controllers\users_controller.php:1033
 msgid "You have to loose"
 msgstr ""
 
-#: \controllers\users_controller.php:1050
+#: \controllers\users_controller.php:1034
 msgid "per month to achieve your goal."
 msgstr ""
 
 # You should at maximum loose 2 kilogramms per month.
-#: \controllers\users_controller.php:1055
+#: \controllers\users_controller.php:1039
 msgid "You should at maximum loose"
 msgstr ""
 
 # You should at maximum loose 2 kilogramms per month.
-#: \controllers\users_controller.php:1057
+#: \controllers\users_controller.php:1041
 msgid "per month."
 msgstr ""
 
-#: \controllers\users_controller.php:1092
+#: \controllers\users_controller.php:1076
 msgid "Your target weight is not ok. Your goals would bring your BMI to a critical"
 msgstr ""
 
-#: \controllers\users_controller.php:1117
+#: \controllers\users_controller.php:1092
 msgid "Your settings are saved."
 msgstr ""
 
-#: \controllers\users_controller.php:1153
+#: \controllers\users_controller.php:1128
 msgid "Change profile - images"
 msgstr ""
 
-#: \controllers\users_controller.php:1203
+#: \controllers\users_controller.php:1178
 msgid "Image(s) saved."
 msgstr ""
 
-#: \controllers\users_controller.php:1225
+#: \controllers\users_controller.php:1200
 msgid "Image deleted."
 msgstr ""
 
-#: \controllers\users_controller.php:1231
+#: \controllers\users_controller.php:1206
 msgid "Change profile - metric"
 msgstr ""
 
-#: \controllers\users_controller.php:1256
+#: \controllers\users_controller.php:1231
 msgid "Metric information saved."
 msgstr ""
 
-#: \controllers\users_controller.php:1271
+#: \controllers\users_controller.php:1246
 msgid "Change profile - password"
 msgstr ""
 
-#: \controllers\users_controller.php:1299
+#: \controllers\users_controller.php:1274
 msgid "No passwords entered or passwords do not match!"
 msgstr ""
 
-#: \controllers\users_controller.php:1311
+#: \controllers\users_controller.php:1286
 msgid "New password saved."
 msgstr ""
 
-#: \controllers\users_controller.php:1418
+#: \controllers\users_controller.php:1390
 msgid "TriCoreTraining signup"
 msgstr ""
 
-#: \controllers\users_controller.php:1472
+#: \controllers\users_controller.php:1428
 msgid "TriCoreTraining - password reset"
 msgstr ""
 
-#: \controllers\users_controller.php:1518
+#: \controllers\users_controller.php:1431
+msgid "TriCoreTraining - password forgotten"
+msgstr ""
+
+#: \controllers\users_controller.php:1491
 msgid "Language changed."
 msgstr ""
 
-#: \controllers\users_controller.php:1571
+#: \controllers\users_controller.php:1544
 msgid "My TriCoreTraining coach for the costs of a coffee a week."
 msgstr ""
 
-#: \controllers\users_controller.php:1609
+#: \controllers\users_controller.php:1582
 msgid "TriCoreTraining - track you workout - reminder"
 msgstr ""
 
-#: \controllers\users_controller.php:1656
+#: \controllers\users_controller.php:1629
 msgid "Your firstname is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1656;1663;1670;1677;1684;1691
+#: \controllers\users_controller.php:1629;1636;1643;1650;1657;1664
 msgid "Please add it to your profile."
 msgstr ""
 
-#: \controllers\users_controller.php:1659;1666;1673;1680;1687;1694;1707;1716;1740;1753;1764;1784
+#: \controllers\users_controller.php:1632;1639;1646;1653;1660;1667;1680;1689;1713;1726;1737;1757
 msgid "Change it."
 msgstr ""
 
-#: \controllers\users_controller.php:1663
+#: \controllers\users_controller.php:1636
 msgid "Your lastname is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1670
+#: \controllers\users_controller.php:1643
 msgid "Your address is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1677
+#: \controllers\users_controller.php:1650
 msgid "Your zip is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1684
+#: \controllers\users_controller.php:1657
 msgid "Your city is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1691
+#: \controllers\users_controller.php:1664
 msgid "Your country is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1699
+#: \controllers\users_controller.php:1672
 msgid "Your birthday is missing! This is essentiell for calculations."
 msgstr ""
 
-#: \controllers\users_controller.php:1705
+#: \controllers\users_controller.php:1678
 msgid "Your lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: \controllers\users_controller.php:1714
+#: \controllers\users_controller.php:1687
 msgid "Your bike lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: \controllers\users_controller.php:1736
+#: \controllers\users_controller.php:1709
 msgid "Your weight loss per month to achieve your weight goal must be"
 msgstr ""
 
-#: \controllers\users_controller.php:1738
+#: \controllers\users_controller.php:1711
 msgid "that's not healthy - set a new weight goal!"
 msgstr ""
 
-#: \controllers\users_controller.php:1751
+#: \controllers\users_controller.php:1724
 msgid "You have not entered training hours per week for your sport."
 msgstr ""
 
-#: \controllers\users_controller.php:1762
+#: \controllers\users_controller.php:1735
 msgid "You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining since more than 9 months, maybe you should change that!"
 msgstr ""
 
-#: \controllers\users_controller.php:1782
+#: \controllers\users_controller.php:1755
 msgid "You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!"
 msgstr ""
 
-#: \controllers\users_controller.php:1793
+#: \controllers\users_controller.php:1766
 msgid "Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks."
 msgstr ""
 
-#: \controllers\users_controller.php:1801
+#: \controllers\users_controller.php:1774
 msgid "Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please"
 msgstr ""
 
 # Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please "subscribe"
-#: \controllers\users_controller.php:1802
+#: \controllers\users_controller.php:1775
 msgid "subscribe"
 msgstr ""
 
-#: \controllers\users_controller.php:1807
+#: \controllers\users_controller.php:1780
 msgid "TriCoreTraining informs you."
 msgstr ""
 
-#: \controllers\users_controller.php:1809
+#: \controllers\users_controller.php:1782
 msgid "This TriCoreTraining message comes to you because some information in your profile is missing."
 msgstr ""
 
@@ -639,316 +643,316 @@ msgstr ""
 msgid "critical (too high)"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:663
+#: \controllers\components\unitcalc.php:657
 msgid "Ironman"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:667
+#: \controllers\components\unitcalc.php:661
 msgid "Half-Ironman"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:671
+#: \controllers\components\unitcalc.php:665
 msgid "Olympic Distance"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:675
+#: \controllers\components\unitcalc.php:669
 msgid "Sprint Distance"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:680
+#: \controllers\components\unitcalc.php:674
 msgid "Ultrarun"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:681
+#: \controllers\components\unitcalc.php:675
 msgid "Marathon"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:682
+#: \controllers\components\unitcalc.php:676
 msgid "Half-Marathon"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:683;684
+#: \controllers\components\unitcalc.php:677;678
 msgid "Race"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:686;690
+#: \controllers\components\unitcalc.php:680;684
 msgid "Duathlon"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:695;696;697;698
+#: \controllers\components\unitcalc.php:689;690;691;692
 msgid "Races"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:727
+#: \controllers\components\unitcalc.php:721
 msgid "TRIATHLON IRONMAN"
 msgstr "Ironman Triathlon"
 
-#: \controllers\components\unitcalc.php:728
+#: \controllers\components\unitcalc.php:722
 msgid "TRIATHLON HALFIRONMAN"
 msgstr "Halfironman Triathlon"
 
-#: \controllers\components\unitcalc.php:729
+#: \controllers\components\unitcalc.php:723
 msgid "TRIATHLON OLYMPIC"
 msgstr "Olympic Triathlon"
 
-#: \controllers\components\unitcalc.php:730
+#: \controllers\components\unitcalc.php:724
 msgid "TRIATHLON SPRINT"
 msgstr "Sprint Triathlon"
 
-#: \controllers\components\unitcalc.php:731
+#: \controllers\components\unitcalc.php:725
 msgid "RUN ULTRA"
 msgstr "Ultra Marathon"
 
-#: \controllers\components\unitcalc.php:732
+#: \controllers\components\unitcalc.php:726
 msgid "RUN MARATHON"
 msgstr "Marathon"
 
-#: \controllers\components\unitcalc.php:733
+#: \controllers\components\unitcalc.php:727
 msgid "RUN HALFMARATHON"
 msgstr "Halfmarathon"
 
-#: \controllers\components\unitcalc.php:734
+#: \controllers\components\unitcalc.php:728
 msgid "RUN 10K"
 msgstr "10k Run"
 
-#: \controllers\components\unitcalc.php:735
+#: \controllers\components\unitcalc.php:729
 msgid "RUN 5K"
 msgstr "5k Run"
 
-#: \controllers\components\unitcalc.php:736
+#: \controllers\components\unitcalc.php:730
 msgid "DUATHLON MIDDLE"
 msgstr "Middle-Length Duathlon"
 
-#: \controllers\components\unitcalc.php:737
+#: \controllers\components\unitcalc.php:731
 msgid "DUATHLON SHORT"
 msgstr "Short Duathlon"
 
-#: \controllers\components\unitcalc.php:738
+#: \controllers\components\unitcalc.php:732
 msgid "BIKE ULTRA"
 msgstr "Ultra Bike Marathon"
 
-#: \controllers\components\unitcalc.php:739
+#: \controllers\components\unitcalc.php:733
 msgid "BIKE LONG"
 msgstr "Long Bike Marathon"
 
-#: \controllers\components\unitcalc.php:740
+#: \controllers\components\unitcalc.php:734
 msgid "BIKE MIDDLE"
 msgstr "Bike Marathon"
 
-#: \controllers\components\unitcalc.php:741
+#: \controllers\components\unitcalc.php:735
 msgid "BIKE SHORT"
 msgstr "Short Bike Race"
 
-#: \controllers\components\unitcalc.php:749
+#: \controllers\components\unitcalc.php:743
 msgid "Germany"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:750
+#: \controllers\components\unitcalc.php:744
 #: \views\elements\email\newsletter_text_footer.ctp:6
 msgid "Austria"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:751
+#: \controllers\components\unitcalc.php:745
 msgid "Australia"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:752
+#: \controllers\components\unitcalc.php:746
 msgid "Canada"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:753
+#: \controllers\components\unitcalc.php:747
 msgid "France"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:754
+#: \controllers\components\unitcalc.php:748
 msgid "United Kingdom"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:755
+#: \controllers\components\unitcalc.php:749
 msgid "United States of America"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:757
+#: \controllers\components\unitcalc.php:751
 msgid "Andorry"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:758
+#: \controllers\components\unitcalc.php:752
 msgid "Argentina"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:759
+#: \controllers\components\unitcalc.php:753
 msgid "Belgium"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:760
+#: \controllers\components\unitcalc.php:754
 msgid "Bosnia"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:761
+#: \controllers\components\unitcalc.php:755
 msgid "Brazil"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:762
+#: \controllers\components\unitcalc.php:756
 msgid "Bulgaria"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:763
+#: \controllers\components\unitcalc.php:757
 msgid "China"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:764
+#: \controllers\components\unitcalc.php:758
 msgid "Croatia"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:765
+#: \controllers\components\unitcalc.php:759
 msgid "Cyprus"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:766
+#: \controllers\components\unitcalc.php:760
 msgid "Czech Republic"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:767
+#: \controllers\components\unitcalc.php:761
 msgid "Denmark"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:768
+#: \controllers\components\unitcalc.php:762
 msgid "Estonia"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:769
+#: \controllers\components\unitcalc.php:763
 msgid "Finland"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:770
+#: \controllers\components\unitcalc.php:764
 msgid "Greece"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:771
+#: \controllers\components\unitcalc.php:765
 msgid "Guatemala"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:772
+#: \controllers\components\unitcalc.php:766
 msgid "Hong Kong"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:773
+#: \controllers\components\unitcalc.php:767
 msgid "Hungary"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:774
+#: \controllers\components\unitcalc.php:768
 msgid "India"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:775
+#: \controllers\components\unitcalc.php:769
 msgid "Ireland"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:776
+#: \controllers\components\unitcalc.php:770
 msgid "Israel"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:777
+#: \controllers\components\unitcalc.php:771
 msgid "Italy"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:778
+#: \controllers\components\unitcalc.php:772
 msgid "Japan"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:779
+#: \controllers\components\unitcalc.php:773
 msgid "Jemen"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:780
+#: \controllers\components\unitcalc.php:774
 msgid "Latvia"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:781
+#: \controllers\components\unitcalc.php:775
 msgid "Liechtenstein"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:782
+#: \controllers\components\unitcalc.php:776
 msgid "Lithuania"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:783
+#: \controllers\components\unitcalc.php:777
 msgid "Luxembourg"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:784
+#: \controllers\components\unitcalc.php:778
 msgid "Malta"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:785
+#: \controllers\components\unitcalc.php:779
 msgid "Netherlands"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:786
+#: \controllers\components\unitcalc.php:780
 msgid "New Zealand"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:787
+#: \controllers\components\unitcalc.php:781
 msgid "Norway"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:788
+#: \controllers\components\unitcalc.php:782
 msgid "Peru"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:789
+#: \controllers\components\unitcalc.php:783
 msgid "Poland"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:790
+#: \controllers\components\unitcalc.php:784
 msgid "Portugal"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:791
+#: \controllers\components\unitcalc.php:785
 msgid "Russian Federation"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:792
+#: \controllers\components\unitcalc.php:786
 msgid "Romania"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:793
+#: \controllers\components\unitcalc.php:787
 msgid "Slovakia"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:794
+#: \controllers\components\unitcalc.php:788
 msgid "Slovenia"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:795
+#: \controllers\components\unitcalc.php:789
 msgid "Switzerland"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:796
+#: \controllers\components\unitcalc.php:790
 msgid "South Africa"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:797
+#: \controllers\components\unitcalc.php:791
 msgid "Spain"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:798
+#: \controllers\components\unitcalc.php:792
 msgid "Sweden"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:799
+#: \controllers\components\unitcalc.php:793
 msgid "Taiwan"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:800
+#: \controllers\components\unitcalc.php:794
 msgid "Turkey"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:801
+#: \controllers\components\unitcalc.php:795
 msgid "Ukraine"
 msgstr ""
 
-#: \controllers\components\unitcalc.php:802
+#: \controllers\components\unitcalc.php:796
 msgid "Other"
 msgstr ""
 
@@ -1272,7 +1276,7 @@ msgid "Test"
 msgstr ""
 
 #: \views\competitions\edit_competition.ctp:8
-#: \views\competitions\list_competitions.ctp:2
+#: \views\competitions\list_competitions.ctp:1
 #: \views\elements\topnavigation_private.ctp:26
 msgid "Competitions"
 msgstr ""
@@ -1306,13 +1310,13 @@ msgid "You should only define 3 important competitions per year!"
 msgstr ""
 
 #: \views\competitions\edit_competition.ctp:90
-#: \views\competitions\list_competitions.ctp:59
+#: \views\competitions\list_competitions.ctp:53
 msgid "Important"
 msgstr ""
 
 #: \views\competitions\edit_competition.ctp:109
 #: \views\trainingstatistics\edit_training.ctp:269
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:59
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:47
 msgid "Location"
 msgstr ""
 
@@ -1343,37 +1347,41 @@ msgstr ""
 #: \views\users\edit_images.ctp:95
 #: \views\users\edit_metric.ctp:60
 #: \views\users\edit_password.ctp:65
-#: \views\users\edit_traininginfo.ctp:218
+#: \views\users\edit_traininginfo.ctp:233
 #: \views\users\edit_userinfo.ctp:213
 #: \views\users\edit_weight.ctp:104
 msgid "Save"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:7
+#: \views\competitions\list_competitions.ctp:6
 msgid "Manage your competitions!"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:21
+#: \views\competitions\list_competitions.ctp:18
 msgid "Prio"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:24
+#: \views\competitions\list_competitions.ctp:21
 #: \views\trainingstatistics\import_workout.ctp:66
 msgid "Name"
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:33
+#: \views\competitions\list_competitions.ctp:29
 msgid "No competitions defined."
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:53
+#: \views\competitions\list_competitions.ctp:47
 msgid "Your next competition ..."
 msgstr ""
 
-#: \views\competitions\list_competitions.ctp:63;63
-#: \views\trainingstatistics\list_trainings.ctp:84
+#: \views\competitions\list_competitions.ctp:57
+#: \views\trainingstatistics\list_trainings.ctp:79
 #: \views\users\edit_images.ctp:34;56
 msgid "Are you sure?"
+msgstr ""
+
+#: \views\competitions\list_competitions.ctp:57;57
+msgid "Delete this competition"
 msgstr ""
 
 #: \views\elements\footer.ctp:3
@@ -1410,7 +1418,7 @@ msgid "Updates"
 msgstr ""
 
 #: \views\elements\footer.ctp:20
-#: \views\payments\subscribe_triplans.ctp:42
+#: \views\payments\subscribe_triplans.ctp:107
 #: \views\starts\features.ctp:38
 msgid "Magazine"
 msgstr ""
@@ -1476,7 +1484,7 @@ msgid "Fill my database"
 msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:4
-#: \views\elements\topprofile.ctp:9
+#: \views\elements\topprofile.ctp:3
 msgid "Home"
 msgstr ""
 
@@ -1504,13 +1512,13 @@ msgstr ""
 #: \views\trainingstatistics\statistics_formcurve.ctp:2
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:2
 #: \views\trainingstatistics\statistics_trimp.ctp:2
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:100
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:14;87
 msgid "Statistics"
 msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:19
 #: \views\trainingstatistics\statistics_trimp.ctp:6
-#: \views\trainingstatistics\statistics_trimp_json.ctp:48
+#: \views\trainingstatistics\statistics_trimp_json.ctp:50
 msgid "How fit am I?"
 msgstr ""
 
@@ -1531,7 +1539,7 @@ msgid "How much have I lost?"
 msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:23
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:104
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:91
 msgid "What have I achieved?"
 msgstr ""
 
@@ -1544,7 +1552,6 @@ msgid "Edit weight goals"
 msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:30
-#: \views\elements\topprofile.ctp:12
 msgid "Edit profile"
 msgstr ""
 
@@ -1582,15 +1589,15 @@ msgstr ""
 #: \views\users\edit_images.ctp:2
 #: \views\users\edit_metric.ctp:2
 #: \views\users\edit_password.ctp:2
-#: \views\users\edit_traininginfo.ctp:2
+#: \views\users\edit_traininginfo.ctp:1
 #: \views\users\edit_userinfo.ctp:2
 #: \views\users\edit_weight.ctp:2
 msgid "Settings"
 msgstr ""
 
-#: \views\elements\topnavigation_private.ctp:33
+#: \views\elements\topnavigation_private.ctp:32
 #: \views\elements\topnavigation_public.ctp:27
-#: \views\elements\topprofile.ctp:21
+#: \views\elements\topprofile.ctp:14
 #: \views\starts\features.ctp:38
 msgid "Blog"
 msgstr ""
@@ -1604,19 +1611,15 @@ msgstr ""
 msgid "Features & Prices"
 msgstr ""
 
-#: \views\elements\topprofile.ctp:5
-msgid "Sign in"
-msgstr ""
-
-#: \views\elements\topprofile.ctp:17
+#: \views\elements\topprofile.ctp:10
 msgid "Sign out"
 msgstr ""
 
-#: \views\elements\topprofile.ctp:24
+#: \views\elements\topprofile.ctp:19
 msgid "English"
 msgstr ""
 
-#: \views\elements\topprofile.ctp:27
+#: \views\elements\topprofile.ctp:22
 msgid "Deutsch"
 msgstr ""
 
@@ -1698,7 +1701,7 @@ msgstr ""
 #: \views\elements\email\text\passwordreset.ctp:2
 #: \views\elements\email\text\standardmail.ctp:4
 #: \views\elements\email\text\trainingreminder.ctp:2
-#: \views\layouts\default_trainer.ctp:76
+#: \views\layouts\default_trainer.ctp:75
 msgid "Aloha"
 msgstr ""
 
@@ -1728,7 +1731,7 @@ msgstr ""
 #: \views\elements\email\text\invoiceinfomail.ctp:8;9
 #: \views\elements\email\text\invoicemail.ctp:13;14
 #: \views\payments\initiate.ctp:18;22
-#: \views\payments\show_invoice.ctp:71
+#: \views\payments\show_invoice.ctp:50
 #: \views\payments\subscribe_triplans.ctp:17
 #: \views\payments\unsubscribe_triplans.ctp:17
 #: \views\users\register_finish.ctp:26
@@ -1801,39 +1804,39 @@ msgstr ""
 
 #: \views\elements\email\html\invoicemail.ctp:39
 #: \views\elements\email\text\invoicemail.ctp:8
-#: \views\payments\show_invoice.ctp:47
+#: \views\payments\show_invoice.ctp:40
 msgid "Product"
 msgstr ""
 
 #: \views\elements\email\html\invoicemail.ctp:40
 #: \views\elements\email\text\invoicemail.ctp:8
-#: \views\payments\show_invoice.ctp:48
+#: \views\payments\show_invoice.ctp:41
 msgid "Interval"
 msgstr ""
 
 #: \views\elements\email\html\invoicemail.ctp:41
 #: \views\elements\email\text\invoicemail.ctp:8
-#: \views\payments\show_invoice.ctp:49
+#: \views\payments\show_invoice.ctp:42
 #: \views\payments\show_payments.ctp:25
 msgid "Price"
 msgstr ""
 
 #: \views\elements\email\html\invoicemail.ctp:46
 #: \views\elements\email\text\invoicemail.ctp:9
-#: \views\payments\show_invoice.ctp:61
+#: \views\payments\show_invoice.ctp:59
 msgid "Total"
 msgstr ""
 
 #: \views\elements\email\html\invoicemail.ctp:53
 #: \views\elements\email\text\invoicemail.ctp:11
-#: \views\payments\show_invoice.ctp:68
+#: \views\payments\show_invoice.ctp:47
 msgid "Trainingplan"
 msgstr ""
 
 #: \views\elements\email\html\invoicemail.ctp:54
 #: \views\elements\email\text\invoicemail.ctp:11
-#: \views\payments\show_invoice.ctp:70
-#: \views\payments\subscribe_triplans.ctp:112;120;128;136
+#: \views\payments\show_invoice.ctp:49
+#: \views\payments\subscribe_triplans.ctp:56;64;72;80
 msgid "month(s)"
 msgstr ""
 
@@ -1973,22 +1976,22 @@ msgstr ""
 
 # WOW! :)
 #: \views\layouts\trainer_start.ctp:9
-#: \views\trainingstatistics\list_trainings.ctp:68
+#: \views\trainingstatistics\list_trainings.ctp:63
 msgid "WOW"
 msgstr ""
 
 #: \views\layouts\trainer_start.ctp:10
-#: \views\trainingstatistics\list_trainings.ctp:69
+#: \views\trainingstatistics\list_trainings.ctp:64
 msgid "in"
 msgstr ""
 
 #: \views\layouts\trainer_start.ctp:10
-#: \views\trainingstatistics\list_trainings.ctp:69
+#: \views\trainingstatistics\list_trainings.ctp:64
 msgid "hour(s)"
 msgstr ""
 
 #: \views\layouts\trainer_start.ctp:10
-#: \views\trainingstatistics\list_trainings.ctp:69
+#: \views\trainingstatistics\list_trainings.ctp:64
 msgid "great online coach"
 msgstr ""
 
@@ -2098,7 +2101,7 @@ msgid "By clicking the SUBSCRIBE button you also accept these terms and conditio
 msgstr ""
 
 #: \views\payments\initiate.ctp:33
-#: \views\users\edit_traininginfo.ctp:194
+#: \views\users\edit_traininginfo.ctp:209
 #: \views\users\register.ctp:209
 msgid "Read our terms and conditions."
 msgstr ""
@@ -2140,11 +2143,11 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: \views\payments\initiate.ctp:152
+#: \views\payments\initiate.ctp:149
 msgid "You can just buy a new subscription if your subscription-period is less than 90 days. Sorry."
 msgstr ""
 
-#: \views\payments\initiate.ctp:159
+#: \views\payments\initiate.ctp:156
 msgid "Unfortunately our PAYPAL account is not activated right now. Until end of January 2011 we will activate it."
 msgstr ""
 
@@ -2164,27 +2167,23 @@ msgstr ""
 msgid "TriCoreTraining.com Invoice"
 msgstr ""
 
-#: \views\payments\show_invoice.ctp:44
+#: \views\payments\show_invoice.ctp:37
 msgid "TriCoreTraining-Plan"
 msgstr ""
 
-#: \views\payments\show_invoice.ctp:55
-msgid "Subtotal"
-msgstr ""
-
-#: \views\payments\show_invoice.ctp:71
-#: \views\trainingstatistics\statistics_formcurve.ctp:67
-#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:26
-#: \views\trainingstatistics\statistics_trimp.ctp:44
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:141
+#: \views\payments\show_invoice.ctp:50
+#: \views\trainingstatistics\statistics_formcurve.ctp:68
+#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:27
+#: \views\trainingstatistics\statistics_trimp.ctp:42
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:126
 msgid "From"
 msgstr ""
 
-#: \views\payments\show_invoice.ctp:76
+#: \views\payments\show_invoice.ctp:55
 msgid "We are not allowed to charge VAT as an association."
 msgstr ""
 
-#: \views\payments\show_invoice.ctp:81
+#: \views\payments\show_invoice.ctp:65
 msgid "Back to list of payments"
 msgstr ""
 
@@ -2246,81 +2245,81 @@ msgstr ""
 msgid "PREMIUM member"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:23
+#: \views\payments\subscribe_triplans.ctp:23;88
 #: \views\starts\features.ctp:17
 msgid "All possible subscriptions"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:24;32
+#: \views\payments\subscribe_triplans.ctp:31
+msgid "Click to subscribe to a PREMIUM membership"
+msgstr ""
+
+#: \views\payments\subscribe_triplans.ctp:56;64;72;80
+#: \views\starts\features.ctp:108;116;124;132
+msgid "TriCoreTraining.com plans"
+msgstr ""
+
+#: \views\payments\subscribe_triplans.ctp:57;65;73;81
+#: \views\starts\features.ctp:109;117;125;133
+msgid "for ONLY"
+msgstr ""
+
+#: \views\payments\subscribe_triplans.ctp:65;73;81
+#: \views\starts\features.ctp:117;125;133
+msgid "per month"
+msgstr ""
+
+#: \views\payments\subscribe_triplans.ctp:89;97
 #: \views\starts\features.ctp:18;27
 msgid "SUBSCRIPTIONS"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:35
+#: \views\payments\subscribe_triplans.ctp:100
 #: \views\starts\features.ctp:31
 msgid "Features"
 msgstr ""
 
 # name of column
-#: \views\payments\subscribe_triplans.ctp:36
+#: \views\payments\subscribe_triplans.ctp:101
 #: \views\starts\features.ctp:32
 msgid "Premium"
 msgstr ""
 
 # name of column
-#: \views\payments\subscribe_triplans.ctp:37
+#: \views\payments\subscribe_triplans.ctp:102
 #: \views\starts\features.ctp:33
 msgid "Free"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:47
+#: \views\payments\subscribe_triplans.ctp:112
 #: \views\starts\features.ctp:43
 msgid "Community"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:57
+#: \views\payments\subscribe_triplans.ctp:122
 #: \views\starts\features.ctp:53
 msgid "Training logbook"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:62
+#: \views\payments\subscribe_triplans.ctp:127
 #: \views\starts\features.ctp:58
 msgid "Define competitions"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:67
+#: \views\payments\subscribe_triplans.ctp:132
 msgid "Training statistics"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:72
+#: \views\payments\subscribe_triplans.ctp:137
 msgid "Training schedule"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:87
-msgid "Click to subscribe to a PREMIUM membership"
-msgstr ""
-
-#: \views\payments\subscribe_triplans.ctp:112;120;128;136
-#: \views\starts\features.ctp:108;116;124;132
-msgid "TriCoreTraining.com plans"
-msgstr ""
-
-#: \views\payments\subscribe_triplans.ctp:113;121;129;137
-#: \views\starts\features.ctp:109;117;125;133
-msgid "for ONLY"
-msgstr ""
-
-#: \views\payments\subscribe_triplans.ctp:121;129;137
-#: \views\starts\features.ctp:117;125;133
-msgid "per month"
-msgstr ""
-
-#: \views\payments\subscribe_triplans.ctp:144
+#: \views\payments\subscribe_triplans.ctp:143
 #: \views\starts\features.ctp:150
 msgid "PAYPAL - secure payment solutions"
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:146
+#: \views\payments\subscribe_triplans.ctp:145
 #: \views\starts\features.ctp:152
 msgid ""
 "What is PAYPAL? It is a reputable and well-known payment solution provider (owned by e-Bay) and provides creditcard/payment\n"
@@ -2328,7 +2327,7 @@ msgid ""
 "and provide these confidential data only to PAYPAL and NOT to us (we only receive your payment)."
 msgstr ""
 
-#: \views\payments\subscribe_triplans.ctp:150
+#: \views\payments\subscribe_triplans.ctp:149
 #: \views\starts\features.ctp:156
 msgid "Your trial period will be added if you subscribe to a PREMIUM membership."
 msgstr ""
@@ -2454,12 +2453,12 @@ msgid "Must be lower than"
 msgstr ""
 
 #: \views\trainingstatistics\edit_training.ctp:109
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:52
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:40
 msgid "Competition"
 msgstr ""
 
 #: \views\trainingstatistics\edit_training.ctp:114
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:54
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:42
 msgid "Testworkout"
 msgstr ""
 
@@ -2491,24 +2490,24 @@ msgstr ""
 
 # average speed
 #: \views\trainingstatistics\edit_training.ctp:177
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:63
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:51
 msgid "AVG Speed"
 msgstr ""
 
 # TRaining IMPulse - indicator for trainings
 #: \views\trainingstatistics\edit_training.ctp:184
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:62;186
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:50;169
 msgid "TRIMP"
 msgstr ""
 
 # Calories burnt
 #: \views\trainingstatistics\edit_training.ctp:191
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:64
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:52
 msgid "Burnt"
 msgstr ""
 
 #: \views\trainingstatistics\edit_training.ctp:200
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:56
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:44
 msgid "Comment"
 msgstr ""
 
@@ -2624,64 +2623,60 @@ msgstr "swim workout"
 msgid "What you have already trained!"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:19;19;26
+#: \views\trainingstatistics\list_trainings.ctp:19;19
 msgid "Add workout"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:28
-msgid "Import workout"
-msgstr ""
-
-#: \views\trainingstatistics\list_trainings.ctp:38
+#: \views\trainingstatistics\list_trainings.ctp:33
 msgid "Action"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:46
+#: \views\trainingstatistics\list_trainings.ctp:41
 msgid "No workouts available."
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:78
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:60
+#: \views\trainingstatistics\list_trainings.ctp:73
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:48
 msgid "Link to workout"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:81
+#: \views\trainingstatistics\list_trainings.ctp:76
 msgid "Post to Facebook"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:82
+#: \views\trainingstatistics\list_trainings.ctp:77
 msgid "Post to Twitter"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:84
+#: \views\trainingstatistics\list_trainings.ctp:79
 msgid "Delete workout"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:102
+#: \views\trainingstatistics\list_trainings.ctp:97
 msgid "Mon"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:103
+#: \views\trainingstatistics\list_trainings.ctp:98
 msgid "Tue"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:104
+#: \views\trainingstatistics\list_trainings.ctp:99
 msgid "Wed"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:105
+#: \views\trainingstatistics\list_trainings.ctp:100
 msgid "Thu"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:106
+#: \views\trainingstatistics\list_trainings.ctp:101
 msgid "Fri"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:107
+#: \views\trainingstatistics\list_trainings.ctp:102
 msgid "Sat"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:108
+#: \views\trainingstatistics\list_trainings.ctp:103
 msgid "Sun"
 msgstr ""
 
@@ -2691,107 +2686,119 @@ msgid "What have I done?"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_competition.ctp:25
-#: \views\trainingstatistics\statistics_formcurve.ctp:15
-#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:14
-#: \views\trainingstatistics\statistics_trimp.ctp:15
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:112
-msgid "Explanation on these graphs and statistics?"
+msgid "This statistic shows you whether you can finish your next competition. The signal light leads you the way."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:34
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:121
+#: \views\trainingstatistics\statistics_competition.ctp:26
+#: \views\trainingstatistics\statistics_formcurve.ctp:16
+#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:15
+#: \views\trainingstatistics\statistics_trimp.ctp:16
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:100
+msgid "Explanation on these statistics in our blog?"
+msgstr ""
+
+#: \views\trainingstatistics\statistics_competition.ctp:35
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:109
 msgid "Type of Training"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:39
-#: \views\trainingstatistics\statistics_trimp.ctp:29
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:126
+#: \views\trainingstatistics\statistics_competition.ctp:40
+#: \views\trainingstatistics\statistics_trimp.ctp:30
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:114
 msgid "All"
 msgstr ""
 
 # Button - Display statistics
-#: \views\trainingstatistics\statistics_competition.ctp:53
-#: \views\trainingstatistics\statistics_formcurve.ctp:89
-#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:48
-#: \views\trainingstatistics\statistics_trimp.ctp:67
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:163
+#: \views\trainingstatistics\statistics_competition.ctp:54
+#: \views\trainingstatistics\statistics_formcurve.ctp:90
+#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:49
+#: \views\trainingstatistics\statistics_trimp.ctp:63
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:146
 msgid "Display"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:70
+#: \views\trainingstatistics\statistics_competition.ctp:71
 msgid "No training information available. Start training and then come back!"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:85
+#: \views\trainingstatistics\statistics_competition.ctp:86
 msgid "In this season you should have reached training impulse (TRIMP): "
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:86
+#: \views\trainingstatistics\statistics_competition.ctp:87
 msgid "In this season you already reached this training impulse (TRIMP): "
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:87
+#: \views\trainingstatistics\statistics_competition.ctp:88
 msgid "Percentage: "
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:90
+#: \views\trainingstatistics\statistics_competition.ctp:91
 msgid "Green"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:92;99;106
+#: \views\trainingstatistics\statistics_competition.ctp:93;100;107
 msgid "means"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:94
+#: \views\trainingstatistics\statistics_competition.ctp:95
 msgid "you reach your goal."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:97
+#: \views\trainingstatistics\statistics_competition.ctp:98
 msgid "Orange"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:101
+#: \views\trainingstatistics\statistics_competition.ctp:102
 msgid "you are currently under- or overperforming."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:104
+#: \views\trainingstatistics\statistics_competition.ctp:105
 msgid "Red"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_competition.ctp:108
+#: \views\trainingstatistics\statistics_competition.ctp:109
 msgid "you didn't do enough or too much. You can't finish your competition."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:49
+#: \views\trainingstatistics\statistics_formcurve.ctp:15
+msgid "You want to know whether you became faster? This statistic shows you based on your test-workouts your current speed."
+msgstr ""
+
+#: \views\trainingstatistics\statistics_formcurve.ctp:50
 msgid "No workouts"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:54
+#: \views\trainingstatistics\statistics_formcurve.ctp:55
 msgid "Choose workout"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:79
-#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:38
-#: \views\trainingstatistics\statistics_trimp.ctp:56
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:153
+#: \views\trainingstatistics\statistics_formcurve.ctp:80
+#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:39
+#: \views\trainingstatistics\statistics_trimp.ctp:53
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:137
 msgid "To"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:103
+#: \views\trainingstatistics\statistics_formcurve.ctp:104
 #: \views\trainingstatistics\statistics_formcurve_json.ctp:9
 msgid "Formcurve"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:128
+#: \views\trainingstatistics\statistics_formcurve.ctp:129
 msgid "Sorry, no graph available - choose a testworkout please."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:58
+#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:14
+msgid "This statistics shows you your weight-history and the way to your weight targets."
+msgstr ""
+
+#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:59
 msgid "Weight Statistics"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:70
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:230;257
+#: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:71
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:213;240
 msgid "No Chart data."
 msgstr ""
 
@@ -2803,68 +2810,71 @@ msgstr ""
 msgid "Average weight"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_trimp.ctp:78
+#: \views\trainingstatistics\statistics_trimp.ctp:15
+msgid "These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 45 days)."
+msgstr ""
+
+#: \views\trainingstatistics\statistics_trimp.ctp:74
 msgid "Grade of fatigue (Acute Training Load)"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_trimp.ctp:98
+#: \views\trainingstatistics\statistics_trimp.ctp:94
 msgid "Grade of fitness (Chronic Training Load)"
 msgstr ""
 
 # TRaining IMPulse - indicator
-#: \views\trainingstatistics\statistics_trimp_json.ctp:27;29
+#: \views\trainingstatistics\statistics_trimp_json.ctp:29;31
 msgid "TRIMP planned"
 msgstr ""
 
-# term sports science
-#: \views\trainingstatistics\statistics_trimp_json.ctp:41
-msgid "Acute Training Load"
+#: \views\trainingstatistics\statistics_trimp_json.ctp:43
+msgid "TRIMP trained"
 msgstr ""
 
 # TRaining IMPulse - indicator
-#: \views\trainingstatistics\statistics_trimp_json.ctp:43
+#: \views\trainingstatistics\statistics_trimp_json.ctp:45
 msgid "TRIMP real"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:35
-msgid "Export of statistics"
-msgstr ""
-
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:50
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:38
 msgid "AVG heart rate"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:55
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:43
 msgid "Name of (Test-)Workout"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:167
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:99
+msgid "These statistics show you what and how much you have achieved in a certain period of time."
+msgstr ""
+
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:150
 msgid "Export"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:179
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:162
 msgid "Season Statistics"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:184
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:167
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:18;66
 msgid "Sum"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:207
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:190
 msgid "Points"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:218
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:201
 msgid "Distance Statistics"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:245
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:228
 msgid "Duration Statistics"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:60
-#: \views\users\edit_traininginfo.ctp:363
+#: \views\users\edit_traininginfo.ctp:378
 #: \views\users\register.ctp:264
 msgid "hours"
 msgstr ""
@@ -2987,97 +2997,117 @@ msgstr ""
 msgid "Passwords do not match!"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:8
+#: \views\users\edit_traininginfo.ctp:7
 msgid "Fill in your training information"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:42;45
+#: \views\users\edit_traininginfo.ctp:41;44
 msgid "Enter your weekly training hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:43
+#: \views\users\edit_traininginfo.ctp:42
 msgid "Must be at least 0 hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:44
+#: \views\users\edit_traininginfo.ctp:43
 msgid "Must be lower than 60 hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:47
+#: \views\users\edit_traininginfo.ctp:46
 msgid "Weekly hours"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:104
+#: \views\users\edit_traininginfo.ctp:103
 msgid "Zones"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:116;119
+#: \views\users\edit_traininginfo.ctp:112
+msgid "How to define your lactate threshold?"
+msgstr ""
+
+#: \views\users\edit_traininginfo.ctp:114
+msgid "1. Do your test-workouts to define your lactate threshold."
+msgstr ""
+
+#: \views\users\edit_traininginfo.ctp:116
+msgid "2. Do a lactate threshold test with your doctor."
+msgstr ""
+
+#: \views\users\edit_traininginfo.ctp:118
+msgid "3. Take 85% of your maximum heart rate for run lactate threshold and 82% for bike lactate threshold (this is just an approximation)."
+msgstr ""
+
+#: \views\users\edit_traininginfo.ctp:120
+msgid "Read more in our blog."
+msgstr ""
+
+#: \views\users\edit_traininginfo.ctp:131;134
 msgid "Enter your current run lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:117;136
+#: \views\users\edit_traininginfo.ctp:132;151
 msgid "Must be at least 120"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:118;137
+#: \views\users\edit_traininginfo.ctp:133;152
 msgid "Must be lower than 220"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:122
+#: \views\users\edit_traininginfo.ctp:137
 msgid "Run lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:135;138
+#: \views\users\edit_traininginfo.ctp:150;153
 msgid "Enter your current bike lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:140
+#: \views\users\edit_traininginfo.ctp:155
 msgid "Bike lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:167
+#: \views\users\edit_traininginfo.ctp:182
 msgid "Calculate lactate threshold for zones"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:177
+#: \views\users\edit_traininginfo.ctp:192
 #: \views\users\register.ctp:175
 msgid "Are you a beginner in sports?"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:198
+#: \views\users\edit_traininginfo.ctp:213
 msgid "You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:247
+#: \views\users\edit_traininginfo.ctp:262
 msgid "Set these zones in your heart rate monitor!"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:252
+#: \views\users\edit_traininginfo.ctp:267
 msgid "Type"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:253;254;255;256;257
+#: \views\users\edit_traininginfo.ctp:268;269;270;271;272
 msgid "Zone"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:290
+#: \views\users\edit_traininginfo.ctp:305
 msgid "Your maximum heart rate is not valid! Should be between 220 and 120."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:326
+#: \views\users\edit_traininginfo.ctp:341
 msgid "Your lactate threshold is not valid! Should be between 220 and 120."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:340
+#: \views\users\edit_traininginfo.ctp:355
 msgid "Your bike lactate threshold is not valid! Should be between 220 and 120."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:362
+#: \views\users\edit_traininginfo.ctp:377
 #: \views\users\register.ctp:263
 msgid "Weekly training load varies between"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:363
+#: \views\users\edit_traininginfo.ctp:378
 #: \views\users\register.ctp:264
 msgid "and"
 msgstr ""

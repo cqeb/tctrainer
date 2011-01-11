@@ -118,9 +118,11 @@ class AppController extends Controller {
                       {
                            // to be sure
                            $this->Cookie->del('tct_auth');
+                           $this->Cookie->del('tct_auth_blog');
+						   
                            $this->Session->setFlash("Sorry, your session has expired or you're not logged in.");
                            $this->redirect('/users/login');
-		                       exit();
+		                   exit();
                       } else
                       {
                            $session_useremail = $cookie['email'];
@@ -134,6 +136,7 @@ class AppController extends Controller {
                           if ( ( $cookie['email'] != $session_useremail ) || ( $cookie['userid']  != $session_userid ) )
                           {
                              $this->Cookie->del('tct_auth');
+                             $this->Cookie->del('tct_auth_blog');
                           }
                        }
             }
@@ -151,6 +154,7 @@ class AppController extends Controller {
 	        			        $this->Session->delete('session_useremail');
                              	$this->Session->delete('session_userid');
                              	$this->Cookie->del('tct_auth');
+                             	$this->Cookie->del('tct_auth_blog');
                 			    $this->Session->setFlash(__('Incorrect session data. Sorry.',true));
                 			    $this->redirect('/users/login');
                 			    exit();

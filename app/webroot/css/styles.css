@@ -176,7 +176,7 @@ td.nobg {
 	text-transform: uppercase;
 	height: 33px;
 	display: block;
-	padding: 17px 20px 0px 20px;
+	padding: 17px 12px 0px 12px;
 	font-weight: bold;
 }
 
@@ -652,4 +652,9 @@ iframe#facebook {
  */
 #tiptip_content {
 	font-size: 14px;
+}
+
+.helptip {
+	background-color: lightblue;
+	padding: 5px;
 }

@@ -105,10 +105,20 @@ echo $form->input('publictrainings', array('label' => __('Publish your trainings
 <div class="statusbox error" id="errorlth"></div>
 <?php
 
+if ( $locale == 'deu' ) $language = 'de';
+else $language = 'en';
+ 
 $help_lth = ' <a class="tiptip" title="' .
-__('How to define your lactate threshold? 1. Do your test-workouts to define your lactate threshold. 2. Do a lactate threshold test with your doctor. 3. Take 85% of your maximum heart rate (this is just an approximation). Read more in our blog.', true) . 
-'" href="#"><span style="background-color:lightblue;padding:5px;">?</span></a>';
-//<!--/blog/en/how-do-i-find-out-my-lactate-thresholds/-->
+__('How to define your lactate threshold?', true) .
+'<br />' . 
+__('1. Do your test-workouts to define your lactate threshold.', true) .
+'<br />' . 
+__('2. Do a lactate threshold test with your doctor.', true) . 
+'<br />' . 
+__('3. Take 85% of your maximum heart rate for run lactate threshold and 82% for bike lactate threshold (this is just an approximation).', true) . 
+'<br />' . 
+__('Read more in our blog.', true) . 
+'" href="/blog/' . $language . '/how-do-i-find-out-my-lactate-thresholds/"><span class="helptip">?</span></a>';
 
 echo $form->input('lactatethreshold',
                    array(

@@ -61,16 +61,21 @@ class UsersController extends AppController {
 				// has user activated his profile and do WE not have deactivated user
 				if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
 				{
+					$cookie = array();
+					$cookie['email'] = $results['User']['email'];
+					$cookie['userid'] = $results['User']['id'];
+					
 					// if you want to stay logged in, we have to write a cookie
 					if ( $this->data['User']['remember_me'] )
 					{
-						$session_timeout = 60*60*24*365;
-						$cookie = array();
-						$cookie['email'] = $results['User']['email'];
-						$cookie['userid'] = $results['User']['id'];
+						//$session_timeout = 60*60*24*365;
 
 						//Configure::write('Session.timeout', $session_timeout);
 						$this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+					} else
+					{
+						//$session_timeout = 60*60*1;
+						$this->Cookie->write('tct_auth_blog', $cookie, true, '+1 hour');
 					}
 
 					// set "user" session equal to email address
@@ -112,6 +117,7 @@ class UsersController extends AppController {
 		$this->Session->del('session_useremail');
 		$this->Session->del('session_userid');
 		$this->Cookie->del('tct_auth');
+		$this->Cookie->del('tct_auth_blog');
 
 		$this->set('session_userid', '');
 		$this->set('session_useremail', '');

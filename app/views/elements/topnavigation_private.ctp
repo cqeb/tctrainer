@@ -16,9 +16,9 @@ else $users_class = 'main';
 
 ?>
 <ul>
-	<li>
+  <li>
 		<?php echo $html->link(__('Training Schedule',true),array('controller' => 'trainingplans', 'action' => 'view'), array('class' => $trainingplans_class ))?>
-	</li>
+  </li>
   <li>
     <?php echo $html->link(__('Logbook',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'), array('class' => $trainingstatistics_class))?>
   </li>
@@ -28,11 +28,9 @@ else $users_class = 'main';
   <li>
     <?php echo $html->link(__('Settings',true),array('controller' => 'users', 'action' => 'edit_userinfo'), array('class' => $users_class))?>
   </li>
-	<!--
-	<li>
-		<a class="<?php echo $magazine_class; ?>" href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Blog'); ?></a>
-	</li>
-  -->
+  <li>
+	    <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Blog'); ?></a>
+  </li>
   <li>
     <a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img width="30" alt="TriCoreTraining.com Facebook Page" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" /></a>
   </li>
