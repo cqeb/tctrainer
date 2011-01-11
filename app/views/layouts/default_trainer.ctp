@@ -1,34 +1,33 @@
 <!DOCTYPE html>
 <html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
-    <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-    <?php
-    $url = Configure::read('App.serverUrl');
+<title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
+<?php
+$url = Configure::read('App.serverUrl');
     echo $html->charset();
     ?>
-    <?php echo $html->meta('icon'); ?>
+<?php echo $html->meta('icon'); ?>
 
-    <?php echo $this->element('metanavigation'); ?>
+<?php echo $this->element('metanavigation'); ?>
 
-    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
+<link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
 
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
-    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <!--script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script-->
-    <!--script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script-->
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
 
-    <?php echo $scripts_for_layout; ?>
+<?php echo $scripts_for_layout; ?>
 
 </head>
 <body>

@@ -1,7 +1,3 @@
-<?php
-            $this->addScript('tiptip', $javascript->link('jquery.tipTip.minified.js'));
-
-?>
                    <h1><?php __('Settings'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
