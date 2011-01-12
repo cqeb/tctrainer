@@ -1125,7 +1125,7 @@ class TrainingstatisticsController extends AppController {
 
             // select trainingsdata
             $sql = "SELECT * FROM trainingstatistics WHERE user_id = $session_userid AND date BETWEEN '" .
-                $start . "' AND '" . $end . "'";
+                $start . "' AND '" . $end . "' AND weight > 0";
             $trainings = $this->Trainingstatistic->query( $sql );
 
             $this->set('start', $start);

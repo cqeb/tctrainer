@@ -68,6 +68,7 @@ echo $ofc->createflash('my_chart4','680','400',$jsonurl.'type:weight/start:' . $
 
 } else
 {
+  $jsonurl = '#';
   __('No Chart data.');
 }
 

@@ -43,69 +43,71 @@ class UsersController extends AppController {
 
 	    } else
 	    {
-		  $this->pageTitle = __('Login', true);
-		  $this->set('error', false);
+		  	$this->pageTitle = __('Login', true);
+		  	$this->set('error', false);
 
 			if ($this->data)
 			{
-		      $this->User->set( $this->data );
+		        $this->User->set( $this->data );
 		
-		      $this->User->saveAll($this->data, array('validate' => 'only')); 
+		        $this->User->saveAll($this->data, array('validate' => 'only')); 
 
-      		// check submitted email address against database
-			$results = $this->User->findByEmail($this->data['User']['email']);
-
-			// is password valid?
-			if ( $results && ($results['User']['password'] == md5($this->data['User']['password'])) )
-			{
-				// has user activated his profile and do WE not have deactivated user
-				if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
+	      		// check submitted email address against database
+				$results = $this->User->findByEmail($this->data['User']['email']);
+	
+				// is password valid?
+				if ( $results && ($results['User']['password'] == md5($this->data['User']['password'])) )
 				{
-					$cookie = array();
-					$cookie['email'] = $results['User']['email'];
-					$cookie['userid'] = $results['User']['id'];
-					
-					// if you want to stay logged in, we have to write a cookie
-					if ( $this->data['User']['remember_me'] )
+					// has user activated his profile and do WE not have deactivated user
+					if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
 					{
-						//$session_timeout = 60*60*24*365;
-
-						//Configure::write('Session.timeout', $session_timeout);
-						$this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+						$cookie = array();
+						$cookie['email'] = $results['User']['email'];
+						$cookie['userid'] = $results['User']['id'];
+						$cookie['firstname'] = $results['User']['firstname'];
+						
+						// if you want to stay logged in, we have to write a cookie
+						if ( $this->data['User']['remember_me'] )
+						{
+							//$session_timeout = 60*60*24*365;
+	
+							//Configure::write('Session.timeout', $session_timeout);
+							$this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+							
+						} else
+						{
+							//$session_timeout = 60*60*1;
+							$this->Cookie->write('tct_auth_blog', $cookie, true, '+1 hour');
+						}
+	
+						// set "user" session equal to email address
+						// user might have a different session from other login
+						$this->Session->write('session_useremail', $results['User']['email']);
+						$this->Session->write('session_userid', $results['User']['id']);
+						$this->set('session_userid', $results['User']['id']);
+	
+						// set "last_login" session equal to users last login time
+						$results['User']['last_login'] = date("Y-m-d H:i:s");
+						$this->Session->write('last_login', $results['User']['last_login']);
+	
+						// save last_login date
+						//$this->User->save($results);
+						//$this->Session->setFlash(__('Logged in. Welcome.', true));
+						$this->redirect('/trainingplans/view');
 					} else
 					{
-						//$session_timeout = 60*60*1;
-						$this->Cookie->write('tct_auth_blog', $cookie, true, '+1 hour');
+						// login data is wrong, redirect to login page
+						$this->Session->setFlash(__('Not activated yet. Please follow the activation link in the welcome mail.',true));
+						$this->redirect('/users/login');
 					}
-
-					// set "user" session equal to email address
-					// user might have a different session from other login
-					$this->Session->write('session_useremail', $results['User']['email']);
-					$this->Session->write('session_userid', $results['User']['id']);
-					$this->set('session_userid', $results['User']['id']);
-
-					// set "last_login" session equal to users last login time
-					$results['User']['last_login'] = date("Y-m-d H:i:s");
-					$this->Session->write('last_login', $results['User']['last_login']);
-
-					// save last_login date
-					//$this->User->save($results);
-					//$this->Session->setFlash(__('Logged in. Welcome.', true));
-					$this->redirect('/trainingplans/view');
 				} else
 				{
 					// login data is wrong, redirect to login page
-					$this->Session->setFlash(__('Not activated yet. Please follow the activation link in the welcome mail.',true));
-					$this->redirect('/users/login');
+					$this->Session->setFlash(__('Wrong or non-existing e-mail or password. Please try again.', true));
+	        		// You must not redirect otherwise you won't see errors
+					//$this->redirect('/users/login');
 				}
-			} else
-			{
-				// login data is wrong, redirect to login page
-				$this->Session->setFlash(__('Wrong or non-existing e-mail or password. Please try again.', true));
-        		// You must not redirect otherwise you won't see errors
-				//$this->redirect('/users/login');
 			}
-		}
 		}
 	}
 
