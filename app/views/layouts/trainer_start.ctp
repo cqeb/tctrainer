@@ -6,8 +6,9 @@
 if ( isset( $distance ) && $distance != '' ) 
 {
   // facebook text
-  $title = __('WOW', true) . ' - ' . $distance . ' ' . $distance_unit . ' ' . __($stype . ' workout', true) . ' ' . 
-  __('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . '- http://tricoretraining.com - ' . __('great online coach', true); 
+  $title =
+__('I did a', true) . ' ' . $distance . ' ' . $distance_unit . ' ' . __($stype . ' workout', true) . ' ' . 
+__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 'http://tricoretraining.com'; 
   echo $title;
 } else
 {

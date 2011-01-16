@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-15 23:36+0100\n"
+"POT-Creation-Date: 2011-01-16 21:20+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -20,7 +20,7 @@ msgid "Incorrect session data. Sorry."
 msgstr ""
 
 #: \controllers\competitions_controller.php:106
-#: \controllers\trainingstatistics_controller.php:456;1474
+#: \controllers\trainingstatistics_controller.php:460;1614
 msgid "Sorry. This is not your entry!"
 msgstr ""
 
@@ -118,7 +118,7 @@ msgstr ""
 #: \views\trainingstatistics\edit_training.ctp:54
 #: \views\trainingstatistics\statistics_competition.ctp:44
 #: \views\trainingstatistics\statistics_trimp.ctp:33
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:117
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:121
 msgid "Swim"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr ""
 #: \controllers\components\unitcalc.php:659;663;667;671;682;686
 #: \views\trainingstatistics\statistics_competition.ctp:42
 #: \views\trainingstatistics\statistics_trimp.ctp:32
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:116
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:120
 #: \views\users\edit_traininginfo.ctp:233
 msgid "Bike"
 msgstr ""
@@ -136,7 +136,7 @@ msgstr ""
 #: \views\trainingstatistics\edit_training.ctp:52
 #: \views\trainingstatistics\statistics_competition.ctp:41
 #: \views\trainingstatistics\statistics_trimp.ctp:31
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:115
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:119
 #: \views\users\edit_traininginfo.ctp:225
 msgid "Run"
 msgstr ""
@@ -161,7 +161,7 @@ msgstr ""
 msgid "No import data found!"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:155;160
+#: \controllers\trainingstatistics_controller.php:157;162
 #: \views\competitions\edit_competition.ctp:37
 #: \views\competitions\list_competitions.ctp:19
 #: \views\trainingstatistics\edit_training.ctp:34
@@ -171,101 +171,101 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:155;160;172;183;196;201;210;245
+#: \controllers\trainingstatistics_controller.php:157;162;174;185;198;203;212;249
 msgid "is not valid!"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:172
+#: \controllers\trainingstatistics_controller.php:174
 #: \views\competitions\edit_competition.ctp:67
 #: \views\competitions\list_competitions.ctp:20
 #: \views\trainingstatistics\edit_training.ctp:46
 #: \views\trainingstatistics\import_workout.ctp:67
 #: \views\trainingstatistics\list_trainings.ctp:30
 #: \views\trainingstatistics\statistics_trimp.ctp:25
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:35;166
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:35;170
 #: \views\users\edit_traininginfo.ctp:29
 msgid "Sport"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:183
+#: \controllers\trainingstatistics_controller.php:185
 #: \views\trainingstatistics\import_workout.ctp:68
 #: \views\trainingstatistics\list_trainings.ctp:31
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:36
-#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:12;18
+#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:17
 msgid "Distance"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:196;201
+#: \controllers\trainingstatistics_controller.php:198;203
 #: \views\trainingstatistics\import_workout.ctp:69
 #: \views\trainingstatistics\list_trainings.ctp:32
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:37;168
-#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:60;66
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:37;172
+#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:69
 msgid "Duration"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:210
-#: \views\trainingstatistics\edit_training.ctp:102
+#: \controllers\trainingstatistics_controller.php:212
+#: \views\trainingstatistics\edit_training.ctp:106
 msgid "Avg. heart rate"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:245
-#: \views\trainingstatistics\edit_training.ctp:165
-#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:50
+#: \controllers\trainingstatistics_controller.php:249
+#: \views\trainingstatistics\edit_training.ctp:174
+#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:55
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:45
 #: \views\users\edit_weight.ctp:53
 msgid "Weight"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:256
+#: \controllers\trainingstatistics_controller.php:260
 msgid "Workout already existing!"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:318
+#: \controllers\trainingstatistics_controller.php:322
 #: \views\competitions\edit_competition.ctp:98
 #: \views\payments\subscribe_triplans.ctp:139
 #: \views\starts\features.ctp:70
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:7
-#: \views\users\edit_traininginfo.ctp:152;173
+#: \views\users\edit_traininginfo.ctp:155;176
 #: \views\users\edit_userinfo.ctp:145
-#: \views\users\register.ctp:185
+#: \views\users\register.ctp:187
 msgid "No"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:319
+#: \controllers\trainingstatistics_controller.php:323
 #: \views\competitions\edit_competition.ctp:97
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:6
-#: \views\users\edit_traininginfo.ctp:151;172
+#: \views\users\edit_traininginfo.ctp:154;175
 #: \views\users\edit_userinfo.ctp:144
-#: \views\users\register.ctp:184
+#: \views\users\register.ctp:186
 msgid "Yes"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:329
+#: \controllers\trainingstatistics_controller.php:333
 msgid "ok"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:335
+#: \controllers\trainingstatistics_controller.php:339
 msgid "Error"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:336
+#: \controllers\trainingstatistics_controller.php:340
 msgid "not ok"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:345
+#: \controllers\trainingstatistics_controller.php:349
 msgid "Import of workouts finished!"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:548
+#: \controllers\trainingstatistics_controller.php:586
 msgid "Training saved."
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:554
+#: \controllers\trainingstatistics_controller.php:592
 #: \controllers\users_controller.php:408;1119
 msgid "Some errors occured"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:1483
+#: \controllers\trainingstatistics_controller.php:1623
 msgid "Workout deleted."
 msgstr ""
 
@@ -603,7 +603,8 @@ msgid "Become PREMIUM"
 msgstr ""
 
 #: \controllers\components\provider.php:120
-#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:16;64
+#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:28;58
+#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:20;72
 msgid "Week"
 msgstr ""
 
@@ -1305,7 +1306,7 @@ msgid "Important"
 msgstr ""
 
 #: \views\competitions\edit_competition.ctp:109
-#: \views\trainingstatistics\edit_training.ctp:269
+#: \views\trainingstatistics\edit_training.ctp:278
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:47
 msgid "Location"
 msgstr ""
@@ -1328,7 +1329,7 @@ msgstr ""
 
 #: \views\competitions\edit_competition.ctp:224
 #: \views\payments\initiate.ctp:128
-#: \views\trainingstatistics\edit_training.ctp:400
+#: \views\trainingstatistics\edit_training.ctp:409
 #: \views\users\edit_address.ctp:84
 #: \views\users\edit_images.ctp:95
 #: \views\users\edit_metric.ctp:60
@@ -1361,7 +1362,7 @@ msgid "Your next competition ..."
 msgstr ""
 
 #: \views\competitions\list_competitions.ctp:57
-#: \views\trainingstatistics\list_trainings.ctp:79
+#: \views\trainingstatistics\list_trainings.ctp:76
 #: \views\users\edit_images.ctp:34;56
 msgid "Are you sure?"
 msgstr ""
@@ -1494,22 +1495,22 @@ msgstr ""
 #: \views\elements\subnavigation_all.ctp:18
 #: \views\starts\features.ctp:63
 #: \views\trainingstatistics\statistics_competition.ctp:13
-#: \views\trainingstatistics\statistics_formcurve.ctp:2
+#: \views\trainingstatistics\statistics_formcurve.ctp:6
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:2
 #: \views\trainingstatistics\statistics_trimp.ctp:2
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:14;87
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:14;91
 msgid "Statistics"
 msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:19
 #: \views\trainingstatistics\statistics_trimp.ctp:6
-#: \views\trainingstatistics\statistics_trimp_json.ctp:50
+#: \views\trainingstatistics\statistics_trimp_json.ctp:62
 msgid "How fit am I?"
 msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:20
-#: \views\trainingstatistics\statistics_formcurve.ctp:6
-#: \views\trainingstatistics\statistics_formcurve_json.ctp:28
+#: \views\trainingstatistics\statistics_formcurve.ctp:10
+#: \views\trainingstatistics\statistics_formcurve_json.ctp:30
 msgid "How fast am I?"
 msgstr ""
 
@@ -1519,12 +1520,12 @@ msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:22
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:6
-#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:69
+#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:74
 msgid "How much have I lost?"
 msgstr ""
 
 #: \views\elements\subnavigation_all.ctp:23
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:91
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:95
 msgid "What have I achieved?"
 msgstr ""
 
@@ -1951,71 +1952,71 @@ msgstr ""
 msgid "don't be lazy. Train and track your trainings!"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:9
-#: \views\trainingstatistics\list_trainings.ctp:63
-msgid "WOW"
+#: \views\layouts\trainer_start.ctp:10
+#: \views\trainingstatistics\list_trainings.ctp:61
+msgid "I did a"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:10
-#: \views\trainingstatistics\list_trainings.ctp:64
+#: \views\layouts\trainer_start.ctp:11
+#: \views\trainingstatistics\list_trainings.ctp:62
 msgid "in"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:10
-#: \views\trainingstatistics\list_trainings.ctp:64
+#: \views\layouts\trainer_start.ctp:11
+#: \views\trainingstatistics\list_trainings.ctp:62
 msgid "hour(s)"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:10
-#: \views\trainingstatistics\list_trainings.ctp:64
-msgid "great online coach"
-msgstr ""
-
-#: \views\layouts\trainer_start.ctp:91
-msgid "Gain speed, loose weight!"
+#: \views\layouts\trainer_start.ctp:11
+#: \views\trainingstatistics\list_trainings.ctp:62
+msgid "with"
 msgstr ""
 
 #: \views\layouts\trainer_start.ctp:92
+msgid "Gain speed, loose weight!"
+msgstr ""
+
+#: \views\layouts\trainer_start.ctp:93
 msgid "TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:93
+#: \views\layouts\trainer_start.ctp:94
 msgid "Sign up now"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:93
+#: \views\layouts\trainer_start.ctp:94
 msgid "it´s free!"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:111
+#: \views\layouts\trainer_start.ctp:112
 msgid "You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:114
+#: \views\layouts\trainer_start.ctp:115
 msgid "You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:121;121
+#: \views\layouts\trainer_start.ctp:122;122
 msgid "Track your trainings"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:122
+#: \views\layouts\trainer_start.ctp:123
 msgid "Log your trainings, manage your competitions, and also keep track of your weight."
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:125;125
+#: \views\layouts\trainer_start.ctp:126;126
 msgid "Analyze your workouts"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:126
+#: \views\layouts\trainer_start.ctp:127
 msgid "Use detailed statistics to assess yor fitness and gain even more from your workouts."
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:129;129
+#: \views\layouts\trainer_start.ctp:130;130
 msgid "Get individual training plans"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:130
+#: \views\layouts\trainer_start.ctp:131
 msgid "Receive individual training plans based on your workouts and upcoming competitions."
 msgstr ""
 
@@ -2077,8 +2078,8 @@ msgid "By clicking the SUBSCRIBE button you also accept these terms and conditio
 msgstr ""
 
 #: \views\payments\initiate.ctp:33
-#: \views\users\edit_traininginfo.ctp:159
-#: \views\users\register.ctp:209
+#: \views\users\edit_traininginfo.ctp:162
+#: \views\users\register.ctp:195
 msgid "Read our terms and conditions."
 msgstr ""
 
@@ -2106,14 +2107,14 @@ msgid "ZIP"
 msgstr ""
 
 #: \views\payments\initiate.ctp:95
-#: \views\trainingstatistics\edit_training.ctp:269
+#: \views\trainingstatistics\edit_training.ctp:278
 #: \views\users\edit_address.ctp:51
 #: \views\users\edit_userinfo.ctp:180
 msgid "City"
 msgstr ""
 
 #: \views\payments\initiate.ctp:101
-#: \views\trainingstatistics\edit_training.ctp:269
+#: \views\trainingstatistics\edit_training.ctp:278
 #: \views\users\edit_address.ctp:57
 #: \views\users\edit_userinfo.ctp:186
 msgid "Country"
@@ -2148,10 +2149,10 @@ msgid "TriCoreTraining-Plan"
 msgstr ""
 
 #: \views\payments\show_invoice.ctp:50
-#: \views\trainingstatistics\statistics_formcurve.ctp:68
+#: \views\trainingstatistics\statistics_formcurve.ctp:53
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:27
 #: \views\trainingstatistics\statistics_trimp.ctp:42
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:126
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:130
 msgid "From"
 msgstr ""
 
@@ -2405,140 +2406,143 @@ msgstr ""
 msgid "Duration (HH:MM:SS)"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:97;98
+#: \views\trainingstatistics\edit_training.ctp:90
+msgid "This is a pulse-oriented training! Use your heart rate monitor to track your pulse. If you don't enter an average heart rate, we have to approximate."
+msgstr ""
+
+#: \views\trainingstatistics\edit_training.ctp:101;102
 msgid "Enter an average heart rate for your workout"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:99
+#: \views\trainingstatistics\edit_training.ctp:103
 msgid "Must be greater than"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:100;162
+#: \views\trainingstatistics\edit_training.ctp:104;171
 #: \views\users\edit_weight.ctp:32;50;65
 msgid "Must be lower than"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:109
+#: \views\trainingstatistics\edit_training.ctp:113
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:40
 msgid "Competition"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:114
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:42
-msgid "Testworkout"
+#: \views\trainingstatistics\edit_training.ctp:124
+msgid "Enter a name for the workout (route) to display it in your form curve."
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:126
-msgid "Enter name for your (test-)workout route"
+#: \views\trainingstatistics\edit_training.ctp:135
+msgid "Enter name for your workout route"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:128
-msgid "Name for (test-) workout route"
+#: \views\trainingstatistics\edit_training.ctp:137
+msgid "Name for workout"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:138
+#: \views\trainingstatistics\edit_training.ctp:147
 msgid "Optional data"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:140
+#: \views\trainingstatistics\edit_training.ctp:149
 msgid "Show advanced functions"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:160;163
+#: \views\trainingstatistics\edit_training.ctp:169;172
 #: \views\users\edit_weight.ctp:48;51
 msgid "Enter your current weight"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:161
+#: \views\trainingstatistics\edit_training.ctp:170
 #: \views\users\edit_weight.ctp:31;49;64
 msgid "Must be at least"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:177
+#: \views\trainingstatistics\edit_training.ctp:186
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:51
 msgid "AVG Speed"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:184
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:50;169
+#: \views\trainingstatistics\edit_training.ctp:193
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:50;173
 msgid "TRIMP"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:191
+#: \views\trainingstatistics\edit_training.ctp:200
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:52
 msgid "Burnt"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:200
+#: \views\trainingstatistics\edit_training.ctp:209
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:44
 msgid "Comment"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:293
+#: \views\trainingstatistics\edit_training.ctp:302
 msgid "Link workout"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:298
+#: \views\trainingstatistics\edit_training.ctp:307
 msgid "Visualize your run workouts on runmap.net!"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:299
+#: \views\trainingstatistics\edit_training.ctp:308
 msgid "Visualize your bike workouts on bikemap.net!"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:305
+#: \views\trainingstatistics\edit_training.ctp:314
 msgid "Temperature"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:308
+#: \views\trainingstatistics\edit_training.ctp:317
 msgid "Weather"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:317
+#: \views\trainingstatistics\edit_training.ctp:326
 msgid "warm"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:318
+#: \views\trainingstatistics\edit_training.ctp:327
 msgid "cold"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:329
+#: \views\trainingstatistics\edit_training.ctp:338
 msgid "sunny"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:330
+#: \views\trainingstatistics\edit_training.ctp:339
 msgid "windy"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:331
+#: \views\trainingstatistics\edit_training.ctp:340
 msgid "rain"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:343
+#: \views\trainingstatistics\edit_training.ctp:352
 msgid "Route"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:346
+#: \views\trainingstatistics\edit_training.ctp:355
 msgid "Feeling"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:355
+#: \views\trainingstatistics\edit_training.ctp:364
 msgid "flat"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:356
+#: \views\trainingstatistics\edit_training.ctp:365
 msgid "hilly"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:357
+#: \views\trainingstatistics\edit_training.ctp:366
 msgid "mountainous"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:368
+#: \views\trainingstatistics\edit_training.ctp:377
 msgid "well"
 msgstr ""
 
-#: \views\trainingstatistics\edit_training.ctp:369
+#: \views\trainingstatistics\edit_training.ctp:378
 msgid "bad"
 msgstr ""
 
@@ -2598,53 +2602,53 @@ msgstr ""
 msgid "No workouts available."
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:73
+#: \views\trainingstatistics\list_trainings.ctp:70
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:48
 msgid "Link to workout"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:76
+#: \views\trainingstatistics\list_trainings.ctp:73
 msgid "Post to Facebook"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:77
+#: \views\trainingstatistics\list_trainings.ctp:74
 msgid "Post to Twitter"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:79
+#: \views\trainingstatistics\list_trainings.ctp:76
 msgid "Delete workout"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:97
+#: \views\trainingstatistics\list_trainings.ctp:94
 msgid "Mon"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:98
+#: \views\trainingstatistics\list_trainings.ctp:95
 msgid "Tue"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:99
+#: \views\trainingstatistics\list_trainings.ctp:96
 msgid "Wed"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:100
+#: \views\trainingstatistics\list_trainings.ctp:97
 msgid "Thu"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:101
+#: \views\trainingstatistics\list_trainings.ctp:98
 msgid "Fri"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:102
+#: \views\trainingstatistics\list_trainings.ctp:99
 msgid "Sat"
 msgstr ""
 
-#: \views\trainingstatistics\list_trainings.ctp:103
+#: \views\trainingstatistics\list_trainings.ctp:100
 msgid "Sun"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_competition.ctp:17
-#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:23;71
+#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:26;84
 msgid "What have I done?"
 msgstr ""
 
@@ -2653,29 +2657,29 @@ msgid "This statistic shows you whether you can finish your next competition. Th
 msgstr ""
 
 #: \views\trainingstatistics\statistics_competition.ctp:26
-#: \views\trainingstatistics\statistics_formcurve.ctp:16
+#: \views\trainingstatistics\statistics_formcurve.ctp:20
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:15
 #: \views\trainingstatistics\statistics_trimp.ctp:16
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:100
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:104
 msgid "Explanation on these statistics in our blog?"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_competition.ctp:35
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:109
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:113
 msgid "Type of Training"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_competition.ctp:40
 #: \views\trainingstatistics\statistics_trimp.ctp:30
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:114
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:118
 msgid "All"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_competition.ctp:54
-#: \views\trainingstatistics\statistics_formcurve.ctp:90
+#: \views\trainingstatistics\statistics_formcurve.ctp:75
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:49
 #: \views\trainingstatistics\statistics_trimp.ctp:63
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:146
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:150
 msgid "Display"
 msgstr ""
 
@@ -2723,31 +2727,31 @@ msgstr ""
 msgid "you didn't do enough or too much. You can't finish your competition."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:15
+#: \views\trainingstatistics\statistics_formcurve.ctp:19
 msgid "You want to know whether you became faster? This statistic shows you based on your test-workouts your current speed."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:50
+#: \views\trainingstatistics\statistics_formcurve.ctp:35
 msgid "No workouts"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:55
+#: \views\trainingstatistics\statistics_formcurve.ctp:40
 msgid "Choose workout"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:80
+#: \views\trainingstatistics\statistics_formcurve.ctp:65
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:39
 #: \views\trainingstatistics\statistics_trimp.ctp:53
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:137
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:141
 msgid "To"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:104
-#: \views\trainingstatistics\statistics_formcurve_json.ctp:9
+#: \views\trainingstatistics\statistics_formcurve.ctp:88
+#: \views\trainingstatistics\statistics_formcurve_json.ctp:7
 msgid "Formcurve"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_formcurve.ctp:129
+#: \views\trainingstatistics\statistics_formcurve.ctp:113
 msgid "Sorry, no graph available - choose a testworkout please."
 msgstr ""
 
@@ -2760,40 +2764,41 @@ msgid "Weight Statistics"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_howmuchhaveilost.ctp:72
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:213;240
+#: \views\trainingstatistics\statistics_trimp.ctp:119
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:217;244
 msgid "No Chart data."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:21
+#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:25
 msgid "Weight planned"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:52
+#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:28
+msgid "Average weight planned"
+msgstr ""
+
+#: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:58
 msgid "Average weight"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_trimp.ctp:15
-msgid "These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 45 days)."
+msgid "These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 42 days)."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_trimp.ctp:74
-msgid "Grade of fatigue (Acute Training Load)"
-msgstr ""
-
-#: \views\trainingstatistics\statistics_trimp.ctp:94
+#: \views\trainingstatistics\statistics_trimp.ctp:76
 msgid "Grade of fitness (Chronic Training Load)"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_trimp_json.ctp:29;31
+#: \views\trainingstatistics\statistics_trimp.ctp:96
+msgid "Grade of fatigue (Acute Training Load)"
+msgstr ""
+
+#: \views\trainingstatistics\statistics_trimp_json.ctp:24;27
 msgid "TRIMP planned"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_trimp_json.ctp:43
+#: \views\trainingstatistics\statistics_trimp_json.ctp:46;49
 msgid "TRIMP trained"
-msgstr ""
-
-#: \views\trainingstatistics\statistics_trimp_json.ctp:45
-msgid "TRIMP real"
 msgstr ""
 
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:38
@@ -2804,38 +2809,37 @@ msgstr ""
 msgid "Name of (Test-)Workout"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:99
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:103
 msgid "These statistics show you what and how much you have achieved in a certain period of time."
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:150
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:154
 msgid "Export"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:162
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:166
 msgid "Season Statistics"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:167
-#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:18;66
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:171
 msgid "Sum"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:190
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:194
 msgid "Points"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:201
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:205
 msgid "Distance Statistics"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:228
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:232
 msgid "Duration Statistics"
 msgstr ""
 
-#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:60
+#: \views\trainingstatistics\statistics_whathaveidone_json.ctp:69
 #: \views\users\edit_traininginfo.ctp:328
-#: \views\users\register.ctp:264
+#: \views\users\register.ctp:239
 msgid "hours"
 msgstr ""
 
@@ -2994,43 +2998,44 @@ msgid "2. Do a lactate threshold test with your doctor."
 msgstr ""
 
 #: \views\users\edit_traininginfo.ctp:72
-msgid "3. Take 85% of your maximum heart rate for run lactate threshold and 82% for bike lactate threshold (this is just an approximation)."
-msgstr ""
-
-#: \views\users\edit_traininginfo.ctp:74
 msgid "Read more in our blog."
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:85;88
+#: \views\users\edit_traininginfo.ctp:83;86
 msgid "Enter your current run lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:86;105
+#: \views\users\edit_traininginfo.ctp:84;103
 msgid "Must be at least 120"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:87;106
+#: \views\users\edit_traininginfo.ctp:85;104
 msgid "Must be lower than 220"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:91
+#: \views\users\edit_traininginfo.ctp:89
 msgid "Run lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:104;107
+#: \views\users\edit_traininginfo.ctp:102;105
 msgid "Enter your current bike lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:109
+#: \views\users\edit_traininginfo.ctp:107
 msgid "Bike lactate threshold"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:142
-#: \views\users\register.ctp:175
-msgid "Are you a beginner in sports?"
+#: \views\users\edit_traininginfo.ctp:140
+#: \views\users\register.ctp:173
+msgid "You're training for competitions and do regular sports for the first time?"
 msgstr ""
 
-#: \views\users\edit_traininginfo.ctp:163
+#: \views\users\edit_traininginfo.ctp:145
+#: \views\users\register.ctp:178
+msgid "Beginner in structured training?"
+msgstr ""
+
+#: \views\users\edit_traininginfo.ctp:166
 msgid "You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!"
 msgstr ""
 
@@ -3059,12 +3064,12 @@ msgid "Your bike lactate threshold is not valid! Should be between 220 and 120."
 msgstr ""
 
 #: \views\users\edit_traininginfo.ctp:327
-#: \views\users\register.ctp:263
+#: \views\users\register.ctp:238
 msgid "Weekly training load varies between"
 msgstr ""
 
 #: \views\users\edit_traininginfo.ctp:328
-#: \views\users\register.ctp:264
+#: \views\users\register.ctp:239
 msgid "and"
 msgstr ""
 
@@ -3264,19 +3269,19 @@ msgstr ""
 msgid "pick yours"
 msgstr ""
 
-#: \views\users\register.ctp:208
+#: \views\users\register.ctp:194
 msgid "You hereby confirm that you've read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!"
 msgstr ""
 
-#: \views\users\register.ctp:217
+#: \views\users\register.ctp:203
 msgid "I agree"
 msgstr ""
 
-#: \views\users\register.ctp:219
+#: \views\users\register.ctp:205
 msgid "You HAVE TO agree to our terms and conditions! That's the way you protect our rights :)."
 msgstr ""
 
-#: \views\users\register.ctp:243
+#: \views\users\register.ctp:218
 msgid "Register"
 msgstr ""
 

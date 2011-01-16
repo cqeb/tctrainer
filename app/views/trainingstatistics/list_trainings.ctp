@@ -57,14 +57,11 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
 $facebookurl = "http://www.facebook.com/sharer.php?u=http://tricoretraining.com"; 
 $facebookurl .= '/trainer/starts/index/distance:'.$distance['amount'].'/distance_unit:'. $distance['unit'] .'/duration:' . $duration . '/stype:' . $stype;
 
-$twitterurl = 
-urldecode(
-substr( 
-__('WOW', true) . ' - ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . __($stype . ' workout', true) . ' ' . 
-__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . '- http://tricoretraining.com - ' . __('great online coach', true) 
-, 0, 140 
-)
-); 
+$twittertext =
+__('I did a', true) . ' ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . __($stype . ' workout', true) . ' ' . 
+__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 'http://tricoretraining.com'; 
+
+$twitterurl = urldecode( substr( $twittertext, 0, 140 ) ); 
 
 ?>
     

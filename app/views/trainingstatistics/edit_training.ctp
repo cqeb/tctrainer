@@ -86,10 +86,14 @@ echo $form->input('duration',
                   'label' => __('Duration (HH:MM:SS)', true)
 ));
 
+$help_avg_pulse = '<a class="help" title="' . 
+	__("This is a pulse-oriented training! Use your heart rate monitor to track your pulse. If you don't enter an average heart rate, we have to approximate.", true) .
+	'" href="#">?</a>';
+	
 echo $form->input('avg_pulse',
                   array(
                   'before' => '',
-                  'after' => '',
+                  'after' => $help_avg_pulse,
                   'between' => '',
                   'maxLength' => 255,
                   'class' => 'required',
@@ -110,22 +114,27 @@ echo $form->input('competition', array(
                 'type' => 'checkbox')
                 );
 }
+/*
 echo $form->input('testworkout', array(
                 'label' => __('Testworkout',true), 
                 'type' => 'checkbox')
                 );
+*/
 
+$help_name = '<a class="help" title="' . __('Enter a name for the workout (route) to display it in your form curve.', true) .
+	'" href="#">?</a>';
+	
 echo $form->input('name',
                   array(
                   'before' => '',
-                  'after' => '',
+                  'after' => $help_name,
                   'between' => '',
                   'maxLength' => 255,
                   'class' => 'required',
                   'error' => array(
-                      'notempty' => __('Enter name for your (test-)workout route', true)
+                      'notempty' => __('Enter name for your workout route', true)
                   ),
-                  'label' => __('Name for (test-) workout route', true)
+                  'label' => __('Name for workout', true)
 ));
 
 ?>
@@ -434,6 +443,9 @@ if ( !isset ( $data ) || count($data) < 2 )
       $this->js_addon .= "$('#layer_hidden').hide();";
         
       $this->js_addon .= <<<EOE
+      
+      \$('.help').tipTip();
+      
 });
 </script>
 EOE;

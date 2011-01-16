@@ -1,80 +1,102 @@
 <?php
 
-$intervaldays = 10;
-
 if ( $graphtype == 'chronic' )
 {
        $gtitle = 'CTL';
-       $day_back = 45;
-       $step = round( $max_unit / 10 );
+       $day_back = 42;
+
 } elseif ( $graphtype == 'acute' )
 {
        $gtitle = 'ATL';
        $day_back = 7;
-       $step = round( $max_unit / 10 );
 }
-?>
-{
-"elements":[
+?>{
+"elements":
+[
 <?php if ( $userobject['advanced_features'] ) { ?>{
- "type":"area",
- "fill-alpha": 0.4,
- "width": 2,
- "dot-size": 4,
- "halo-size": 2,
- "colour": "#06FF02",
- "fill": "#CCFFCF",     
-// "colour": "#FF6200",
-// "fill": "#FFEC8A",     
- "text":"<?php __('TRIMP planned'); ?>",
- "on-show":  {"type": "shrink-in", "cascade":1, "delay":0.5},
- "values":[<?php for ( $i = $day_back; $i < ( count($trimp_tl_planned) ); $i++ ) { echo "{ \"value\": "; echo round($trimp_tl_planned[$i]); echo ",\"colour\": \"#D02020\", \"tip\": \"" . __('TRIMP planned', true) . "\n"; echo round($trimp_tl_planned[$i]) . "\"}"; if ( $i < ( count( $trimp_tl_planned ) - 1 ) ) echo ","; } ?>]
-},<?php } ?>
+		"type":"area",
+		"fill-alpha":0.4,
+		"width":2,
+		"dot-size":4,
+		"halo-size":2,
+		"colour":"#06FF02",
+		"fill":"#CCFFCF",     
+		"text":"<?php __('TRIMP planned'); ?>",
+		"on-show": {"type": "shrink-in", "cascade":1, "delay":0.5},
+	    "dot-style":{
+	      	"tip":"<?php __('TRIMP planned'); ?> #val#<br>#x_label#"
+	    },
+		"values":[<?php 
+for ( $i = $day_back; $i < ( count($trimp_tl_planned) ); $i++ ) 
 {
- "type":"area",
- "fill-alpha": 0.4,
- "width": 2,
- "dot-size": 4,
- "halo-size": 2,
-// "colour": "#06FF02",
-// "fill": "#CCFFCF",     
- "colour": "#f1ad28",
- "fill": "#fffccf",     
- "text":"<?php __('TRIMP trained'); ?>",
- "on-show": {"type": "shrink-in", "cascade":1, "delay":0.5},
- "values":[<?php for ( $i = $day_back; $i < ( count($trimp_tl_done) ); $i++ ) { echo "{ \"value\": "; echo round($trimp_tl_done[$i]); echo ",\"colour\": \"#D02020\", \"tip\": \"" . __('TRIMP real', true) . "\n" . round($trimp_tl_done[$i]) . "\"}"; if ( $i < ( count( $trimp_tl_done ) - 1 ) ) echo ","; } ?>]
-}
-	],
-  "bg_colour": "#ffffff",
-	"title":{
-		"text":"<?php __('How fit am I?'); ?>",
-		"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
+	 echo round($trimp_tl_planned[$i]); 
+	 if ( $i < ( count( $trimp_tl_planned ) - 1) ) echo ","; 
+} 
+?>]
 	},
-  "y_axis": {
-    "colour": "#aaaaaa",
-    "grid-colour": "#eeeeee",
-    "stroke": 1,
-    "tick-length": 5,
-    "min": 0,
-    "max":<?php echo $max_unit; ?>,
-    "steps":<?php echo $step; ?>
-  },
-  "tooltip": {
-    "stroke": 1,
-    "colour": "#000000",
-    "background": "#fffbca"
-  },	
+<?php } ?>
+{
+		"type":"area",
+		"fill-alpha":0.4,
+		"width":2,
+		"dot-size":4,
+		"halo-size":2,
+		"colour":"#F1AD28",
+		"fill":"#FFFCCF",     
+		"text":"<?php __('TRIMP trained'); ?>",
+      	"on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
+	    "dot-style":{
+	      	"tip":"<?php __('TRIMP trained'); ?> #val#<br>#x_label#"
+	    },
+		"values":[<?php 
+for ( $i = $day_back; $i < ( count($trimp_tl_done) ); $i++ ) 
+{
+	 echo round($trimp_tl_done[$i]); 
+
+	 if ( $i < ( count( $trimp_tl_done ) - 1 ) ) echo ","; 
+} 
+?>]
+	}],
+	
+	"title":{
+			"text":"<?php __('How fit am I?'); ?>",
+			"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
+	},
+	"y_axis": {
+	    "colour":"#AAAAAA",
+	    "grid-colour":"#DDDDDD",
+	    "stroke":1,
+	    "min":0,
+	    "max":<?php echo $max_unit; ?>,
+	    "steps":10
+	},
 	"x_axis":{
-    "colour": "#aaaaaa",
-    "grid-colour": "#eeeeee",
-    "stroke": 1,
-    "tick-height": 4,
+		"offset":true,
+	    "colour":"#AAAAAA",
+		"grid-visible": false,
+	    "stroke":1,
 		"labels":{
-      "rotate": "vertical",
-			"labels":[<?php for ( $i = $day_back; $i < ( count($trimp_dates) ); $i++ ) { if ( $i%$intervaldays == 0 ) { $sday = date('D', strtotime($trimp_dates[$i])); echo "\"" . __($sday, true) . " "; echo $unitcalc->check_date($trimp_dates[$i],'show') . "\""; } else echo "\"\""; if ( $i < ( count( $trimp_dates ) - 1 ) ) echo ","; } ?> ]
-			}
-		},
-	"bg_colour":"#ffffff"
+	      		"rotate":"vertical",
+	    		"steps":20,
+				"labels":[<?php 
+				
+$j = 0;
+for ( $i = $day_back; $i < ( count($trimp_dates) ); $i++ ) 
+{
+	$sday = date('D', strtotime($trimp_dates[$i])); 
+	//echo "\"" . __($sday, true) . " "; 
+	if ( $i%20 == 0 ) echo '"' . $unitcalc->check_date($trimp_dates[$i],'show') . '"';
+	else echo '""'; 
+	
+	if ( $i < ( count( $trimp_dates ) - 1 ) ) echo ",";
+	$j++; 
+} 
+
+?> ]
+		}
+	},
+	
+	"bg_colour":"#FFFFFF"
 }
 
 <?php

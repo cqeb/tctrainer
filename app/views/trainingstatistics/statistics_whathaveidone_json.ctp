@@ -1,46 +1,52 @@
 <?php
 
+$intervaldays = round( $maxweeks / 10 );
+
 if ( $stype == 'distance' )
 {
 
-?>
-{
-	"elements":[
-		{
-			"type":"line",
-			"colour":"#ffae00",
-			"text":"<?php __('Distance'); ?> (<?php echo $length_unit; ?>)",
-			"font-size": 12,
-			"dot-style": {
-				"type":"solid-dot", "colour":"#a44a80", "dot-size": 3,
-				"tip":"#val# <?php echo $length_unit; ?><br><?php __('Week'); ?> #x_label#" },
-			"on-show":	{"type": "shrink-in", "cascade":1, "delay":0.5},
-			"tip":"<?php __('Sum'); echo ' '; __('Distance'); ?>: #val#",
-			"values":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { $w = $weeks[$i]; echo $trainings2[$w]['sumdistance']; if ( $i != ($maxweeks-1) ) echo ","; } ?>]
-		}
-	],
-	"title":{
+?>{
+"elements":[{
+      "type":"area",
+      "fill-alpha":0.4,
+      "width":2,
+      "dot-size":4,
+      "halo-size":2,
+ 	  "colour":"#F1AD28",
+	  "fill":"#FFFCCF",
+	  "text":"<?php __('Distance'); ?> (<?php echo $length_unit; ?>)",
+      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
+      "dot-style":{
+			"tip":"#val# <?php echo $length_unit; ?><br><?php __('Week'); ?> #x_label#" 
+      },
+	  "values":[<?php for ( $i = 0; $i <= $maxweeks; $i++ ) { $w = $weeks[$i]; echo $trainings2[$w]['sumdistance']; if ( $i != ($maxweeks) ) echo ","; } ?>]
+}],
+	
+"title":{
 		"text":"<?php __('What have I done?'); ?>",
 		"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
-	},
-	"y_axis":{
+},
+
+"y_axis":{
 		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
+	    "colour":"#AAAAAA",
+		"grid-colour":"#DDDDDD",
 		"min":0,
 		"max":<?php echo $maxdistance; ?>,
-		"steps":30
-	},
-	"x_axis":{
-		"offset":false,
+		"steps":<?php echo round( $maxdistance / 10); ?>
+},
+
+"x_axis":{
+		"offset":true,
 		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
+	    "colour": "#AAAAAA",
+		"grid-visible":false,
 		"labels":{
-      "rotate": "vertical",
-			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
-			}
-		},
+      		"rotate": "vertical",
+	      	"steps": <?php echo round( count( $weeks ) / 8 ); ?>,
+			"labels":[<?php for ( $i = 0; $i <= $maxweeks; $i++ ) { echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; if ( $i != ($maxweeks) ) echo ","; } ?> ]
+		}
+	},
 	"bg_colour":"#ffffff"
 }
 
@@ -51,101 +57,64 @@ if ( $stype == 'distance' )
 if ( $stype == 'duration' )
 {
 
-?>
+?>{
+"elements":[{
+      "type":"area",
+      "fill-alpha":0.4,
+      "width":2,
+      "dot-size":4,
+      "halo-size":2,
+ 	  "colour":"#F1AD28",
+	  "fill":"#FFFCCF",     
+	  "text":"<?php __('Duration'); echo ' ('; __('hours'); echo ')'; ?>",
+      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
+      "dot-style":{
+			"tip":"#val# h<br><?php __('Week'); ?> #x_label#"  
+      },
+	  "values":[<?php 
+for ( $i = 0; $i <= $maxweeks; $i++ ) 
 {
-	"elements":[
-		{
-			"type":"line",
-			"colour":"#ffae00",
-			"text":"<?php __('Duration'); echo ' ('; __('hours'); echo ')'; ?>",
-			"font-size":12,
-			"dot-style": {
-				"type":"solid-dot", "colour":"#a44a80", "dot-size": 3,
-				"tip":"#val# h<br><?php __('Week'); ?> #x_label#" },
-			"on-show":	{"type": "shrink-in", "cascade":1, "delay":0.5},
-			"tip":"<?php __('Sum'); echo ' '; __('Duration'); ?>: #val#",
-			"values":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { $w = $weeks[$i]; echo round($trainings2[$w]['sumduration']); if ( $i != ($maxweeks-1) ) echo ","; } ?>]
-		}
-	],
+	 $w = $weeks[$i]; 
+	 echo round($trainings2[$w]['sumduration'], 1); 
+	 if ( $i != ($maxweeks) ) echo ","; 
+} 
+?>]
+}],
 	"title":{
 		"text":"<?php __('What have I done?'); ?>",
 		"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
 	},
 	"y_axis":{
 		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
+	    "colour":"#AAAAAA",
+		"grid-colour":"#DDDDDD",
 		"min":0,
 		"max":<?php echo $maxduration; ?>,
-		"steps":<?php echo round($maxduration/20); ?>
+		"steps":<?php echo round($maxduration/10); ?>
 	},
 	"x_axis":{
-		"offset":false,
+		"offset":true,
 		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
+	    "colour":"#AAAAAA",
+		"grid-visible":false,
 		"labels":{
-      "rotate": "vertical",
-			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
-			}
-		},
-	"bg_colour":"#ffffff"
-}
-
-<?php
-
-}
-
-/**
-
-if ( $stype == 'weight' )
+	      	"rotate":"vertical",
+	      	"steps":<?php echo round( count( $weeks ) / 8 ); ?>,
+			"labels":[<?php 
+for ( $i = 0; $i <= $maxweeks; $i++ ) 
 {
-
-?>
-{
-	"elements":[
-		{
-			"type":"line",
-			"colour":"#ffae00",
-			"text":"<?php __('Weight (kg/lbs)'); ?>",
-			"font-size":12,
-			"dot-style": {
-				"type":"solid-dot", "colour":"#a44a80", "dot-size": 3,
-				"tip":"#val#<br>#x_label#" },
-			"on-show":	{"type": "shrink-in", "cascade":1, "delay":0.5},
-			"tip":"<?php __('Sum'); echo ' '; __('Weight'); ?>: #val#",
-			"values":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { $w = $weeks[$i]; echo $trainings2[$w]['sumweight']; if ( $i != ($maxweeks-1) ) echo ","; } ?>]
+	 echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; 
+	 if ( $i != ($maxweeks) ) echo ","; 
+} 
+?> ]
 		}
-	],
-	"title":{
-		"text":"<?php __('What have I done?'); ?>",
-		"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
 	},
-	"y_axis":{
-		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
-		"min":0,
-		"max":150,
-		"steps":5
-	},
-	"x_axis":{
-		"offset":false,
-		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
-		"labels":{
-    "rotate": "vertical",
-			"labels":[<?php for ( $i = 0; $i < $maxweeks; $i++ ) { echo "\"" . $weeks[$i] . "\""; if ( $i != ($maxweeks-1) ) echo ","; } ?> ]
-			}
-		},
 	"bg_colour":"#ffffff"
 }
 
 <?php
 
 }
-**/
 
 $this->js_addon = '';
 

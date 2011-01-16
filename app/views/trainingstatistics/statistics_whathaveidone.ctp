@@ -39,7 +39,7 @@ if ( $export == true )
 <?php if ( $userobject['advanced_features'] ) { ?>
 		<td class="tableTd"><?php __('Competition'); ?></td>
 <?php } ?>
-		<td class="tableTd"><?php __('Testworkout'); ?></td>
+<?php /*		<td class="tableTd"><?php __('Testworkout'); ?></td> */ ?>
 		<td class="tableTd"><?php __('Name of (Test-)Workout'); ?></td>
     	<td class="tableTd"><?php __('Comment'); ?></td>
 		<td class="tableTd"><?php __('Weight'); ?></td>
@@ -66,7 +66,7 @@ if ( $export == true )
   		if ( $userobject['advanced_features'] ) {
   			echo '   <td class="tableTdContent">'.$yesno[$dt['competition']].'</td>';
 		}
-  			echo '   <td class="tableTdContent">'.$yesno[$dt['testworkout']].'</td>';
+  			//echo '   <td class="tableTdContent">'.$yesno[$dt['testworkout']].'</td>';
         	echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
         	echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_weight($dt['weight'], 'show', 'single').'</td>';
@@ -183,7 +183,7 @@ for ( $j = 0; $j < count( $sumdata['collected_sportstypes'] ); $j++ )
     <td><?php $sport = $sumdata['collected_sportstypes'][$j]; __($sport); ?></td>
     
     <td style="text-align:right;">
-    <?php $distance = $unitcalc->check_distance($sumdata['distance'][$sportstype]); echo $distance['amount'] . ' ' . $distance['unit']; ?>
+    <?php $distance = $unitcalc->check_distance($sumdata['distance'][$sportstype]); echo round( $distance['amount'], 1 ) . ' ' . $distance['unit']; ?>
     </td>
     
     <td style="text-align:right;">

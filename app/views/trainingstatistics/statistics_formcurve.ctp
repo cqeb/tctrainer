@@ -1,4 +1,8 @@
+<?php
 
+$searchfilter = base64_encode( $searchfilter );
+
+?>
                    <h1><?php __('Statistics'); ?></h1>
 
                    <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_formcurve')); ?>
@@ -18,25 +22,6 @@
 
                    <div>
 <?php
-
-/**
-echo $form->input('sportstype',
-                  array(
-                  'legend' => false,
-                  'label' => __('Type of Training', true),
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'options' => array(
-                                 'RUN' => __('Run', true),
-                                 'BIKE' => __('Bike', true),
-                                 'MTB' => __('Mountain-Bike', true),
-                                 'SWIM' => __('Swim', true),
-                                 'STRENGTH' => __('Strength', true),
-                                 'MISC' => __('Misc', true)
-                                 )));
-
-**/
 
 for ( $i = 0; $i < count( $testworkoutsfilter ); $i++ )
 {
@@ -88,7 +73,6 @@ echo $form->hidden('id');
 echo $form->hidden('user_id');
 
 echo $form->submit(__('Display',true), array('name' => 'display'));
-//echo $form->submit('Detailled export (Excel)', array('name' => 'excel'));
 
 ?>
                    </div>

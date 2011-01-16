@@ -40,9 +40,10 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <b>Debugging (only localhost)</b>
 <br /><br />
 <ul>
-        <li><a href="<?php echo Configure::read('App.serverUrl'); ?>/app/webroot/flash.php">(<?php __('Graphs'); ?>)</a></li>
-        <li><a href="/phpmyadmin/">(<?php __('PHPMyAdmin'); ?>)</a></li>
-        <li><a href="/trainer/starts/fill_my_database">(<?php __('Fill my database'); ?>)</a></li>
+        <li><a target="_blank" href="<?php echo Configure::read('App.serverUrl'); ?>/app/webroot/flash.php"><?php __('Graphs'); ?></a></li>
+        <li><a target="_blank" href="/phpmyadmin/"><?php __('PHPMyAdmin'); ?></a></li>
+        <li><a target="_blank" href="/trainer/starts/fill_my_database"><?php __('Fill my database'); ?></a></li>
+        <li><a target="_blank" href="/trainer/trainingplans/get?debug=1">DEBUG Trainingplan</a></li>
 </ul>
 <?php } ?>
 

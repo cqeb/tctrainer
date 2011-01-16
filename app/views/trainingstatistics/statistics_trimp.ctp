@@ -12,7 +12,7 @@
                    <br />
                    <?php } ?>
 
-                   <?php __('These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 45 days).'); ?> 
+                   <?php __('These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 42 days).'); ?> 
                    <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
@@ -69,7 +69,29 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 
       echo $form->end();
 
+if ( count( $trainingdata ) > 0 )
+{
 ?>
+
+<h2><?php __('Grade of fitness (Chronic Training Load)'); ?></h2>
+
+<?php
+
+$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/';
+
+echo $ofc->createflash('my_chart2','680','400',$jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:chronic');
+
+?>
+
+<div id="my_chart2"></div>
+
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
+<a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<?php } ?>
+
+<br /><br />
 
 <h2><?php __('Grade of fatigue (Acute Training Load)'); ?></h2>
 
@@ -89,25 +111,15 @@ Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
-<br /><br />
+<?php 
 
-<h2><?php __('Grade of fitness (Chronic Training Load)'); ?></h2>
+} else
+{
 
-<?php
-
-$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/';
-
-echo $ofc->createflash('my_chart2','680','400',$jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:chronic');
+  __('No Chart data.');
+}
 
 ?>
-
-<div id="my_chart2"></div>
-
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-<br /><br />
-Debugging: (only localhost)<br />
-<a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
-<?php } ?>
 
 <?php
 

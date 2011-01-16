@@ -124,7 +124,6 @@ echo $form->hidden('bikelactatethreshold');
 echo $form->hidden('weeklyhours');
 
 /*
-
 echo $form->input('lactatethreshold',
      array(
      'class' => 'medium',
@@ -170,40 +169,27 @@ echo $form->input('weeklyhours',
 
 <?php
 
+$help_rookie = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="help" title="' .
+__("You're training for competitions and do regular sports for the first time?", true) .
+'" href="#">?</a>';
+
 echo $form->input('rookie',
                   array(
-                  'before' => __('Are you a beginner in sports?', true),
-                  'after' => '',
+                  'before' => __('Beginner in structured training?', true),
+                  'after' => $help_rookie,
                   'between' => '',
                   'class' => 'required',
                   'label' => '',
                   'legend' => false,
                   'type' => 'checkbox',
-                  //'multiple' => false,
                   'options' => array(
                             '1' => __('Yes',true),
                             '0' => __('No',true)
                   )
 ));
 
-/**
-echo $form->input('rookie',
-     array(
-     'type' => 'checkbox',
-     'label' => __('Beginner', true) . '?'
-));
-
-**/
-
 ?>
 <br />
-
-<!--
-<div class="messagebox" style="overflow:auto; width: 420px; height: 100px;">
-<?php echo $this->element('tos'); ?>
-<br />
-</div>
--->
 
 <b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!"); ?></b>  
 <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
@@ -219,17 +205,6 @@ echo $form->input('tos',
           'notempty' => __("You HAVE TO agree to our terms and conditions! That's the way you protect our rights :).", true)
      )
 ));
-
-/**
-if ( isset( $tos_warning ) && $tos_warning == 'true' )
-{
-?>
-<div class="error-message">
-<?php __("You HAVE TO agree to our terms and conditions! That's the way you protect our rights :)."); ?>
-</div>
-<?php
-}
-**/
 
 // calculate FREE training period
 $paid_from = date( "Y-m-d", time() );
@@ -350,6 +325,7 @@ EOE;
 		}
 	});
   
+	\$('.help').tipTip();
 });
 </script>
 EOF;

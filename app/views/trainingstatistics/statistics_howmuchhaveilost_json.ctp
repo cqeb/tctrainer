@@ -1,5 +1,7 @@
 <?php
 
+$intervaldays = 4;
+
 if ( $stype == 'weight' )
 {
 
@@ -12,16 +14,19 @@ if ( isset( $diff_per_week ) )
 ?>
 {
       "type":"area",
-      "fill-alpha": 0.4,
-      "width": 2,
-      "dot-size": 4,
-      "halo-size": 2,
+      "fill-alpha":0.4,
+      "width":2,
+      "dot-size":4,
+      "halo-size":2,
+	  "colour":"#f1ad28",
+	  "fill":"#fffccf",     
       "colour":"#00EE00",
-      "fill": "#CCFF99",     
+      "fill":"#CCFF99",     
       "text":"<?php __('Weight planned'); echo ' (' . $weight_unit . ')'; ?>",
-      "on-show":  {"type": "shrink-in", "cascade":1, "delay":0.5},
-      "dot-style": {
-        "tip":"#val# <?php echo $weight_unit; ?>" },
+      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
+      "dot-style":{
+      	"tip":"<?php __('Average weight planned'); ?> #val# <?php echo $weight_unit; ?><br><?php __('Week'); ?> #x_label#"
+      },
       "values":[<?php 
 $j = 0; 
 for ( $i = 0; $i < count($weeks); $i++ ) 
@@ -41,23 +46,23 @@ for ( $i = 0; $i < count($weeks); $i++ )
 <?php } ?>
 {
       "type":"area",
-      "fill-alpha": 0.4,
-      "width": 2,
-      "dot-size": 4,
-      "halo-size": 2,
+      "fill-alpha":0.4,
+      "width":2,
+      "dot-size":4,
+      "halo-size":2,
       "colour":"#FFAE00",
-      "fill": "#FFFCCF",     
+      "fill":"#FFFCCF",     
       "text":"<?php __('Weight'); echo ' (' . $weight_unit . ')'; ?>",
-      "on-show":  {"type": "shrink-in", "cascade":1, "delay":0.5},
-      "tip":"<?php __('Average weight'); ?> #val#",
-      "dot-style": {
-        "tip":"#val# <?php echo $weight_unit; ?>" },
-			"values":[<?php 
+      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
+      "dot-style":{
+      	"tip":"<?php __('Average weight'); ?> #val# <?php echo $weight_unit; ?><br><?php __('Week'); ?> #x_label#"
+      },
+ 	  "values":[<?php 
 for ( $i = 0; $i < $maxweeks; $i++ ) 
 {
     $w = $weeks[$i];
     if ( $trainings2[$w]['avgweight'] > 0 ) 
-        echo $trainings2[$w]['avgweight']; 
+        echo round($trainings2[$w]['avgweight']); 
     else 
         echo "null"; 
     if ( $i != ($maxweeks-1) ) echo ","; 
@@ -71,23 +76,24 @@ for ( $i = 0; $i < $maxweeks; $i++ )
 	},
 	"y_axis":{
 		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
+	    "colour":"#AAAAAA",
+		"grid-colour":"#DDDDDD",
 		"min":<?php echo $minweight; ?>,
 		"max":<?php echo $maxweight; ?>,
-		"steps":<?php echo $step; ?>
+		"steps":10
 	},
 	"x_axis":{
-		"offset":false,
+		"offset":true,
 		"stroke":1,
-		"colour":"#c6d9fd",
-		"grid-colour":"#dddddd",
+	    "colour": "#AAAAAA",
+		"grid-visible": false,
 		"labels":{
-    "rotate": "vertical",
+	    	"rotate":"vertical",
+	    	"steps":<?php echo round(count($weeks)/10); ?>,
 			"labels":[<?php 
 for ( $i = 0; $i < $maxweeks; $i++ ) 
 {
-    echo "\"" . substr( $weeks[$i], 0, 4 ) . '-' . substr( $weeks[$i], 4, 2 ) . "\""; 
+    echo "\"" . substr( $weeks[$i], 0, 4 ) . '-' . substr( $weeks[$i], 4, 2 ) . "\"";
     if ( $i != ($maxweeks-1) ) echo ","; 
 } 
 ?> ]

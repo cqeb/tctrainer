@@ -69,8 +69,6 @@ __('1. Do your test-workouts to define your lactate threshold.', true) .
 '<br />' . 
 __('2. Do a lactate threshold test with your doctor.', true) . 
 '<br />' . 
-__('3. Take 85% of your maximum heart rate for run lactate threshold and 82% for bike lactate threshold (this is just an approximation).', true) . 
-'<br />' . 
 __('Read more in our blog.', true) . 
 '" href="/blog/' . $language . '/how-do-i-find-out-my-lactate-thresholds/">?</a>';
 
@@ -137,10 +135,15 @@ Zone 5c More than 106% of LTHR
 <div id="zones"></div>
 <br />
 <?php
+
+$help_rookie = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="help" title="' .
+__("You're training for competitions and do regular sports for the first time?", true) .
+'" href="#">?</a>';
+
 echo $form->input('rookie',
                   array(
-                  'before' => __('Are you a beginner in sports?', true),
-                  'after' => '',
+                  'before' => __('Beginner in structured training?', true),
+                  'after' => $help_rookie,
                   'between' => '',
                   'class' => 'required',
                   'label' => '',
@@ -156,11 +159,11 @@ echo $form->input('rookie',
 $tos_link = '<a href="/blog/';
 if ( $locale == 'deu' ) $tos_link .= 'de/'; else $tos_link .= 'en/';
 $tos_link .= 'terms-of-service-2/" target="_blank">' .
-	__('Read our terms and conditions.',true) . '</a><br /><br />';
+	__('Read our terms and conditions.',true) . '</a>';
 
 echo $form->input('tos',
                   array(
-                  'before' => $tos_link . __("You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true),
+                  'before' => __("You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true) . '<br />' . $tos_link,
                   'after' => '',
                   'between' => '',
                   'legend' => false,
@@ -175,9 +178,6 @@ echo $form->input('tos',
 ));
 
 echo '<br /><br />';
-?>
-
-<?php
 echo '<br /><br />';
 
 echo $form->submit(__('Save',true));
