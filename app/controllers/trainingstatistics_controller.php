@@ -505,13 +505,13 @@ class TrainingstatisticsController extends AppController {
 						
 					    $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
 					 }
-					 
+					 					 
 					 if ( $this->data['Trainingstatistic']['avg_pulse'] < 1 )
 					 {
 					 		if ( $this->data['Trainingstatistic']['sportstype'] == 'SWIM' ) $factor = 0.85;
 							else $factor = 0.89;
 							
-					 		$this->data['Trainingstatistic']['avg_pulse'] = $results['User']['lactatethreshold'] * $factor;
+					 		$this->data['Trainingstatistic']['avg_pulse'] = round ( $results['User']['lactatethreshold'] * $factor );
 					 }
 					 
                      /*
@@ -568,8 +568,10 @@ class TrainingstatisticsController extends AppController {
 					 $tdate = $tdate['year'] . '-' . $tdate['month'] . '-' . $tdate['day'];
 					 
                      if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] > 0 && ( strtotime( $tdate ) > ( time() - ( 86400 * 7 ) ) ) )
-                     { 
+                     {
+					      $this->data['Trainingstatistic']['weight'] = str_replace( ',', '.', $this->data['Trainingstatistic']['weight'] );
 					      $saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
+						  //echo $saveweight . "<br>";
 					      //$saveweight = $this->data['Trainingstatistic']['weight'];
                           //$saveweight = str_replace( ',', '.', $saveweight );
                      } else
