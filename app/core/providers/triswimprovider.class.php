@@ -55,16 +55,6 @@ class TriSwimProvider extends WorkoutProvider {
 		$distance = Race::getDistanceClass($raceType);
 		switch($trainingType) {
 			case "E1":
-				switch($distance) {
-					case "SPRINT":
-					case "SHORT";
-						$d = 30;
-						break;
-					default:
-						$d = 45;
-						break;
-				}
-				break;
 			case "E2":
 			case "E3":
 			case "F1":
@@ -87,7 +77,7 @@ class TriSwimProvider extends WorkoutProvider {
 						$d = 60;
 						break;
 					case "LONG":
-						$d = 80;
+						$d = 90;
 						break;
 				}
 				break;

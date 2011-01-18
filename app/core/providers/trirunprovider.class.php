@@ -69,10 +69,13 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
-					default:
-						$d = 50;
+						$d = 40;
+						break;
+					case "MIDDLE":
+						$d = 60;
+						break;
+					case "LONG":
+						$d = 75;
 						break;
 				}
 				break;
@@ -83,8 +86,8 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 45;
 						break;
 					case "SHORT";
-					$d = 60;
-					break;
+						$d = 60;
+						break;
 					case "MIDDLE":
 						$d = 75;
 						break;
@@ -99,13 +102,13 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
+						$d = 40;
+						break;
 					case "MIDDLE":
-						$d = 50;
+						$d = 65;
 						break;
 					case "LONG":
-						$d = 60;
+						$d = 90;
 						break;
 				}
 				break;
@@ -116,8 +119,8 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
+						$d = 45;
+						break;
 					case "MIDDLE":
 						$d = 60;
 						break;
@@ -132,11 +135,13 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
+						$d = 40;
+						break;
 					case "MIDDLE":
-					case "LONG":
 						$d = 60;
+						break;
+					case "LONG":
+						$d = 80;
 						break;
 				}
 				break;
@@ -146,24 +151,8 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 45;
-					break;
-					case "MIDDLE":
-						$d = 50;
+						$d = 45;
 						break;
-					case "LONG":
-						$d = 60;
-						break;
-				}
-				break;
-			case "M1":
-				switch($distance) {
-					case "SPRINT":
-						$d = 30;
-						break;
-					case "SHORT";
-					$d = 45;
-					break;
 					case "MIDDLE":
 						$d = 60;
 						break;
@@ -172,6 +161,7 @@ class TriRunProvider extends WorkoutProvider {
 						break;
 				}
 				break;
+			case "M1":
 			case "M2":
 			case "M3":
 			case "M4":
@@ -180,13 +170,13 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 45;
-					break;
+						$d = 45;
+						break;
 					case "MIDDLE":
-						$d = 60;
+						$d = 65;
 						break;
 					case "LONG":
-						$d = 80;
+						$d = 90;
 						break;
 				}
 				break;
@@ -196,13 +186,13 @@ class TriRunProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
+						$d = 40;
+						break;
 					case "MIDDLE":
-						$d = 50;
+						$d = 60;
 						break;
 					case "LONG":
-						$d = 60;
+						$d = 80;
 						break;
 				}
 				break;

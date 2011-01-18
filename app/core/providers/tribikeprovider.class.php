@@ -67,10 +67,13 @@ class TriBikeProvider extends WorkoutProvider {
 						$d = 40;
 						break;
 					case "SHORT";
-						$d = 50;
-						break;
-					default:
 						$d = 60;
+						break;
+					case "MIDDLE":
+						$d = 75;
+						break;
+					case "LONG":
+						$d = 90;
 						break;
 				}
 				break;
@@ -82,8 +85,11 @@ class TriBikeProvider extends WorkoutProvider {
 					case "SHORT";
 						$d = 110;
 						break;
-					default:
-						$d = 120;
+					case "MIDDLE":
+						$d = 140;
+						break;
+					case "LONG":
+						$d = 180;
 						break;
 				}
 				break;
@@ -99,7 +105,7 @@ class TriBikeProvider extends WorkoutProvider {
 						$d = 80;
 						break;
 					case "LONG":
-						$d = 100;
+						$d = 120;
 						break;
 				}
 				break;
@@ -116,32 +122,17 @@ class TriBikeProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 40;
-					break;
+						$d = 40;
+						break;
 					case "MIDDLE":
-						$d = 50;
+						$d = 70;
 						break;
 					case "LONG":
-						$d = 70;
+						$d = 100;
 						break;
 				}
 				break;
 			case "M1":
-				switch($distance) {
-					case "SPRINT":
-						$d = 30;
-						break;
-					case "SHORT";
-					$d = 45;
-					break;
-					case "MIDDLE":
-						$d = 60;
-						break;
-					case "LONG":
-						$d = 80;
-						break;
-				}
-				break;
 			case "M2":
 			case "M3":
 			case "M4":
@@ -151,13 +142,13 @@ class TriBikeProvider extends WorkoutProvider {
 						$d = 30;
 						break;
 					case "SHORT";
-					$d = 45;
-					break;
+						$d = 50;
+						break;
 					case "MIDDLE":
-						$d = 60;
+						$d = 80;
 						break;
 					case "LONG":
-						$d = 80;
+						$d = 120;
 						break;
 				}
 				break;
