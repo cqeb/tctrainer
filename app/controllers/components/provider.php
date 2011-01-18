@@ -117,6 +117,9 @@ class ProviderComponent extends Object {
 		
 		$workouts = array_merge($swimWorkouts, $bikeWorkouts, $runWorkouts);
 
+		// sort those workouts by trimp
+		uasort($workouts, 'ProviderComponent::sortWorkouts');
+		
 		$html = "<h1>" . __("Week", true) . " " . 
 			$this->Unitcalc->check_date($genWeek->format("Y-m-d")) . 
 			' <span class="phase ' . strtolower($phase["phase"]) . '">' . 
@@ -126,6 +129,32 @@ class ProviderComponent extends Object {
 		// also attach time and workout settings
 		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->athlete->getId()); 
 		return $html;
+	}
+	
+	/**
+	 * this will sort workouts by their trimp value
+	 * meant to be used with uasort
+	 * @param Workout $a
+	 * @param Workout $b
+	 */
+	public static function sortWorkouts(Workout $a, Workout $b) {
+		// lsd workouts have highest pri
+		if ($a->isLsd() && $b->isLsd()) {
+			return 0;
+		} else if ($a->isLsd() && !$b->isLsd()) {
+			return -1;
+		} else if (!$a->isLsd() && $b->isLsd()) {
+			return 1;
+		}
+		
+		// no special attention paid to test workouts here
+		// because you don't absolutely HAVE to do them
+		
+		// ... then just compare by trimp values
+		if ($a->getTRIMP() == $b->getTRIMP()) {
+        	return 0;
+    	}
+    	return ($a->getTRIMP() < $b->getTRIMP()) ? 1 : -1;
 	}
 	
 	private function getJSWorkoutSettings($date, $userId) {
