@@ -285,11 +285,11 @@ class MesoCyclePhaseTableProvider {
 	 * @return boolean true if it is a recovery week
 	 */
 	protected function isRecoveryWeek($recoveryCycle, $phase, &$recoveryCounter) {
-		// race weeks never can have recovery weeks
-		if ($phase == "RACE") {
+		// prep and race weeks never can have recovery weeks
+		// as researched from joe friel training bible time table p. 119
+		if ($phase == "PREP" || $phase == "RACE") {
 			return false;
-		}
-		
+		}		
 		// if the counter matches the recovery cycle it's a recovery week
 		// reset recovery counter
 		if ($recoveryCounter == $recoveryCycle) {
