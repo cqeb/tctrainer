@@ -87,7 +87,6 @@ class MesoCycleProvider {
 	 * generate a new mesocycle based on the athlete's races starting from the provided date
 	 * @param DateTime $startDate date to generate mesocycle from
 	 * @param int $trainingTime basic time frame reserved for training
-	 * @param boolean $postA if set to true this means that another A race has been planned before in this season
 	 * @return array phase table
 	 */
 	public function generate(DateTime $startDate) {
@@ -97,14 +96,14 @@ class MesoCycleProvider {
 		if (!$aRace) {
 			throw new Exception("Unable to generate Mesocycles without an A-Race");
 		}
-		
+	
 		$phaseTable = MesoCyclePhaseTableProvider::getPhaseTable(
 			$this->athlete, 
 			DateTimeHelper::diffWeeks(
 				$mon, 
 				$aRace->getDate()
 			),
-			$postA
+			$startDate
 		);
 		
 		// now replace the phase table keys by the appropriate week start days

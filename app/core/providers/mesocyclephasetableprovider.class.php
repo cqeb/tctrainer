@@ -111,10 +111,17 @@ class MesoCyclePhaseTableProvider {
 	 * generates am array of mesocycle phases for the athlete
 	 * @param Athlete $athlete
 	 * @param int $weeks
-	 * @param boolean $postA if set to true this means that another A race has been planned before in this season
+	 * @param DateTime startdate for plan
 	 * @return array of mesocycle phases, like array(0 => "RACE", 1 => "PEAK", 2 => "BUILD3", ...)
 	 */
-	public static function getPhaseTable(Athlete $athlete, $weeks, $postA) {
+	public static function getPhaseTable(Athlete $athlete, $weeks, DateTime $startDate) {
+		// will contain type of sport if we're right after an A-Race
+		if ($aRaceType = $athlete->getSchedule()->checkPreGenerateARace($startDate)) {
+			$postA = true;
+		} else {
+			$postA = false;
+		}
+		
 		// as the table counter starts with 0 we have to reduce the weeks index by one
 		if ($postA) {
 			$baseTable = MesoCyclePhaseTableProvider::$ADVANCED_POST_A_TABLE;
@@ -147,10 +154,13 @@ class MesoCyclePhaseTableProvider {
 			}
 		}		
 		
+		// add recovery weeks
+		MesoCyclePhaseTableProvider::addRecoveryWeeks($table, $athlete);
+		
 		// the table phases are now assigned correctly
 		// now add training times to the table
 		MesoCyclePhaseTableProvider::addTrainingTimes($table, 
-			$athlete->getTrainingTime(), $athlete->getRecoveryCycle());
+			$athlete->getTrainingTime(), $aRaceType);
 		
 		return $table;
 	}
@@ -171,10 +181,11 @@ class MesoCyclePhaseTableProvider {
 			return;
 		}
 		
+		$weeks = array_keys($table);
 		// now add training times
 		self::addTrainingTimes($table, 
 			$athlete->getTrainingTime(), 
-			$athlete->getRecoveryCycle());
+			$athlete->getSchedule()->checkPreGenerateARace(new DateTime($weeks[0])));
 
 		// speichern
 		self::update($DB, $athlete, $table);
@@ -206,7 +217,7 @@ class MesoCyclePhaseTableProvider {
 	 */
 	protected function load($DB, $athlete) {
 		$start = DateTimeHelper::getWeekStartDay(new DateTime());
-		$res = $DB->query("SELECT date, phase FROM mesocyclephases
+		$res = $DB->query("SELECT date, phase, recovery FROM mesocyclephases
 			WHERE athlete_id = " . $athlete->getId() . " 
 			AND date >= '" . $start->format("Y-m-d"). "'");
 		
@@ -218,37 +229,68 @@ class MesoCyclePhaseTableProvider {
 		$table = array();
 		while (list($k,$week) = each($res)) {
 			$table[$week["date"]]["phase"] = $week["phase"];
+			$table[$week["date"]]["recovery"] = $week["recovery"];
 		}
 		return $table;		
 	}
 	
 	/**
-	 * adds training times to the table
+	 * add recovery weeks to the phase table
+	 * @param array $table containing training phases
+	 * @param Athlete $athlete
+	 * @param String sport type of race, if there was an a race immediately before
+	 * 		generating this mesocycletable
+	 */
+	protected function addRecoveryWeeks(&$table, Athlete $athlete) {
+		reset($table);
+		
+		// recovery determination counter
+		$recoveryCounter = 1;
+		
+		while (list($week, $data) = each($table)) {
+			// determine if it is a recovery week
+			$recoveryWeek = MesoCyclePhaseTableProvider::isRecoveryWeek(
+				$athlete->getRecoveryCycle(),
+				$table[$week]["phase"], 
+				$recoveryCounter
+			);
+			$table[$week]["recovery"] = $recoveryWeek;
+		}
+	}
+	
+	/**
+	 * adds training times and recovery weeks to the table
 	 * @param array $table containing training phases
 	 * @param int $baseTime basic time reserverd for training
 	 * @return unknown_type
 	 */
-	protected function addTrainingTimes(&$table, $baseTime, $recoveryCycle) {
+	protected function addTrainingTimes(&$table, $baseTime, $aRaceType) {
 		reset($table);
 		$oldPhase = false;
-		// count the weeks for recovery determination
-		$recoveryCounter = 1;
+
+		// if there was an A-Race last week, recovery will be forced
+		// by scaling down time
+		if ($aRaceType) {
+			$aType = Race::getDistanceClass($aRaceType);
+			if ($aType == 'LONG') {
+				$forceRecovery = 2;
+			} else {
+				$forceRecovery = 1;				
+			}
+		} else {
+			$forceRecovery = 0;
+		}
 
 		// step through each of the weeks and add the time
 		while (list($week, $data) = each($table)) {
 			$phase = $table[$week]["phase"];
-			
-			// determine if it is a recovery week
-			$recoveryWeek = MesoCyclePhaseTableProvider::
-				isRecoveryWeek($recoveryCycle, $phase, $recoveryCounter);
-			$table[$week]["recovery"] = $recoveryWeek;
 				
 			if ($phase != $oldPhase) {
 				$weeks = MesoCyclePhaseTableProvider::resetPhaseCounter();
 			} else {
 				if (($phase == "BASE1" || $phase == "BASE2" || $phase == "BASE3" || 
 					$phase == "BUILD1" || $phase == "BUILD2") &&
-					!$recoveryWeek) {
+					!$table[$week]["recovery"]) {
 					// only base and build phases need to be counted
 					$weeks[$phase]++;
 				}
@@ -258,7 +300,7 @@ class MesoCyclePhaseTableProvider {
 			// determine lookup keys
 			$phaseKey = $phase;
 			$factorKey = $weeks[$phase]; 
-			if ($recoveryWeek) {
+			if ($table[$week]["recovery"]) {
 				$phaseKey .= "_RECOVERY";
 				$factorKey = 0;
 			}
@@ -271,8 +313,20 @@ class MesoCyclePhaseTableProvider {
 				$factor = MesoCyclePhaseTableProvider::
 					$TRAINING_TIME_FACTORS[$phaseKey][count(MesoCyclePhaseTableProvider::$TRAINING_TIME_FACTORS[$phaseKey]) - 1];
 			}	
-			// finally calculate the time for the given week
+			// calculate the time for the given week
 			$table[$week]["time"] = intval(round($factor * $baseTime, -1));
+			
+			// if there are forced recovery weeks left to be applied
+			// we will downscale training time to a minimum
+			if ($forceRecovery == 2) {
+				// this is a post-long-distance-recovery week
+				// so keep it VERY short
+				$table[$week]["time"] = 90;
+				$forceRecovery = 1;
+			} else if ($forceRecovery == 1) {
+				$table[$week]["time"] = intval($table[$week]["time"] * 0.5);
+				$forceRecovery = 0;
+			}
 		}
 	}
 	
@@ -281,7 +335,7 @@ class MesoCyclePhaseTableProvider {
 	 * raise the counter of non-recovery weeks if applicable
 	 * @param int $recoveryCycle the recovery cycle
 	 * @param string $phase the phase
-	 * @param int $ocunter the non-recovery week counter
+	 * @param int $recoveryCounter the recovery week counter
 	 * @return boolean true if it is a recovery week
 	 */
 	protected function isRecoveryWeek($recoveryCycle, $phase, &$recoveryCounter) {
@@ -289,7 +343,8 @@ class MesoCyclePhaseTableProvider {
 		// as researched from joe friel training bible time table p. 119
 		if ($phase == "PREP" || $phase == "RACE") {
 			return false;
-		}		
+		}
+		
 		// if the counter matches the recovery cycle it's a recovery week
 		// reset recovery counter
 		if ($recoveryCounter == $recoveryCycle) {

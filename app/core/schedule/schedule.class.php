@@ -11,11 +11,16 @@ class Schedule {
 	
 	protected $DB;
 	
+	protected $athleteId;
+	
+	protected $preGenerateARaceCache = array();
+	
 	/**
 	 * initialize the schedule for an athlete
 	 * @param int athlete's id
 	 */
 	public function __construct($DB, $athleteId) {
+		$this->athleteId = $athleteId;
 		$this->DB = $DB;
 		$races = $this->DB->query("SELECT id, name, sportstype, competitiondate, important
 			FROM competitions 
@@ -104,6 +109,38 @@ class Schedule {
 		$aRaceDate = clone $offset;
 		$aRaceDate->add(new DateInterval("P13W"));
 		return new Race(-1, "RUN HALFMARATHON", $aRaceDate, false, "Dummy");
+	}
+	
+	/**
+	 * will check for an a-race ONE week before the date provided
+	 * is meant to be used in the mesocycleprovider's generate()
+	 * function, because recovery weeks have to be added, if
+	 * there was a race right before
+	 * 
+	 * @param DateTime $date
+	 * @return String competition sports type (eg. TRIATHLON IRONMAN)
+	 * 		or false if none was found
+	 */
+	public function checkPreGenerateARace(DateTime $date) {
+		$d = $date->format('Y-m-d');
+		
+		// check cache first
+		if (array_key_exists($d, $this->preGenerateARaceCache)) {
+			return $this->preGenerateARaceCache[$d];
+		}
+		$r = $this->DB->query("SELECT sportstype FROM competitions 
+			WHERE user_id = {$this->athleteId} 
+			AND competitiondate < '$d'
+			AND competitiondate >= DATE_SUB('$d', INTERVAL 1 WEEK)
+			AND important = 1
+			LIMIT 1");
+		if (count($r) == 0) {
+			return false;
+		} else {
+			$this->preGenerateARaceCache[$d] = $r[0]["sportstype"];
+			return $r[0]["sportstype"];
+		}
+		
 	}
 }
 ?>

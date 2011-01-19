@@ -56,6 +56,11 @@ abstract class Workout {
 	protected $trimp;
 	
 	/**
+	 * athlete reference
+	 */
+	protected $athlete;
+	
+	/**
 	 * generate a new workout
 	 * @param Athlete $athlete athlete
 	 * @param $type of the workout
@@ -63,6 +68,7 @@ abstract class Workout {
 	 * @param $lsd flags this workout as an lsd workout
 	 */
 	public function __construct(Athlete $athlete, $type, $duration, $lsd=false) {
+		$this->athlete = $athlete;
 		$this->type = $type;
 		$this->duration = $duration;
 		$this->lsd = $lsd;
@@ -75,6 +81,12 @@ abstract class Workout {
 	
 	public function setDuration($duration) {
 		$this->duration = $duration;
+		// recalc trimp on this occasion
+		$this->trimp = $this->athlete->calcTRIMP(
+			$this->getSport(),
+			$duration,
+			$this->getAVGHR($this->athlete)
+		);
 	}
 	
 	public function getType() {

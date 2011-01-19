@@ -135,6 +135,9 @@ class Athlete {
 		if ($time > 1800) {
 			return false; // no can do.
 		}
+		if ($time < 60) {
+			$time = 60;
+		}
 		$this->trainingTime = $time;
 		MesoCyclePhaseTableProvider::recalcTimes($this->DB, $this);
 		
@@ -142,6 +145,7 @@ class Athlete {
 		// save training time to db
 		$this->DB->query("UPDATE users SET weeklyhours = $hrs
 			WHERE id = " . $this->id);
+		return true;
 	}
 	
 	/**
@@ -187,7 +191,7 @@ class Athlete {
 	 * @return int TRIMP point value for that training 
 	 */
 	public function calcTRIMP($sport, $minutes, $avgHR) {
-    	// if you change sth., please change it in unitcalc - component too
+		// if you change sth., please change it in unitcalc - component too
 		$zones = $this->getZones($sport);
 		if ($avgHR < $zones[1]) {
 			$factor = 1;
