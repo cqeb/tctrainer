@@ -122,8 +122,7 @@ class ProviderComponent extends Object {
 		
 		$html = "<h1>" . __("Week", true) . " " . 
 			$this->Unitcalc->check_date($genWeek->format("Y-m-d")) . 
-			' <span class="phase ' . strtolower($phase["phase"]) . '">' . 
-			$phase["phase"] . "</span></h1>";
+			"</h1>";
 		$html .= WorkoutRenderer::render($workouts);
 		
 		// also attach time and workout settings

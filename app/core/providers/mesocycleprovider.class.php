@@ -90,7 +90,7 @@ class MesoCycleProvider {
 	 * @param boolean $postA if set to true this means that another A race has been planned before in this season
 	 * @return array phase table
 	 */
-	public function generate(DateTime $startDate, $postA = false) {
+	public function generate(DateTime $startDate) {
 		$mon = DateTimeHelper::getWeekStartDay($startDate);
 		$aRace = $this->athlete->getSchedule()->getNextARace($startDate);
 		
