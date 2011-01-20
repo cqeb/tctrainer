@@ -60,6 +60,9 @@ class ProviderComponent extends Object {
 					$('#loader, #toggleDesc, #prev, #next').hide();
 				</script>";
 		}
+
+		// start benchmark timer		
+		$timerStart = microtime(true);
 		
 		$genWeek = DateTimeHelper::getWeekStartDay(new DateTime());
 
@@ -68,6 +71,7 @@ class ProviderComponent extends Object {
 			$genWeek->add(new DateInterval("P" . $offset . "D"));
 		}
 		
+		// generate mesocycle
 		$mcp = new MesoCycleProvider($this->DB, $this->athlete, clone $genWeek);
 		$time = $mcp->getTrainingTime($genWeek);
 
@@ -127,6 +131,10 @@ class ProviderComponent extends Object {
 		
 		// also attach time and workout settings
 		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->athlete->getId()); 
+		
+		// add generate time
+		$benchmarkTime = microtime(true) - $timerStart;
+		$html .= "\n<!-- generated in {$benchmarkTime}ms -->\n";
 		return $html;
 	}
 	
