@@ -134,7 +134,7 @@ class ProviderComponent extends Object {
 		
 		// add generate time
 		$benchmarkTime = microtime(true) - $timerStart;
-		$html .= "\n<!-- generated in {$benchmarkTime}ms -->\n";
+		$html .= "\n<!-- generated in {$benchmarkTime}s -->\n";
 		return $html;
 	}
 	
