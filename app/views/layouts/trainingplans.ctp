@@ -69,11 +69,13 @@
 		<!-- /Right column -->
 		
       	<!-- Training hour distribution -->
-		    <div class="grid_2 avgweekly">
+		<div class="grid_2 avgweekly">
       		<div class="box last">
       			<label for="avg"><?php __('Training Hours'); ?></label>
+      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#avg').focus()" title="<?php __('Edit');?>">
       			<input type="text" name="avg" id="avg" title="<?php __('These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected.'); ?>"/>
       			<label for="week"><?php __('This Week'); ?></label>
+      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#week').focus()" title="<?php __('Edit');?>">
       			<input type="text" name="week" id="week" title="<?php __('This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week.'); ?>"/>
       			<a href="javascript:TrainingPlanner.resetWeeklyHours();" class="reset"><?php __('reset'); ?></a>
       		</div>
@@ -81,7 +83,7 @@
       	
       	<div class="grid_4 distribution">
       		<div class="box last">
-	      		<label><?php __('Workout Balance'); ?></label>
+	      		<label><?php __('Workout Balance'); ?> <a href="javascript:TrainingPlanner.resetWorkoutBalance();" class="reset"><?php __('reset'); ?></a></label>
       			<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>"></div>
       		</div>
       	</div>
@@ -99,7 +101,7 @@
 $(document).ready(function() {
  	TrainingPlanner.init('<?php echo $url; ?>', <?php echo ($weeklyhours * 60); ?>, '<?php echo $usersport; ?>', '<?php echo $advancedFeatures;?>');
  	jQuery('#slider').tipTip({ defaultPosition: 'top', maxWidth : "270px" });
- 	jQuery('#avg').tipTip({ defaultPosition: 'top' });
+ 	jQuery('#avg, .edit').tipTip({ defaultPosition: 'top' });
  	jQuery('#week').tipTip();
  	
  	jQuery('body').append(ZoneGuide.getTable(<?php echo $rlth; ?>, <?php echo $blth; ?>, {

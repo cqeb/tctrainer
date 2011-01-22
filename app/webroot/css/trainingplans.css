@@ -25,6 +25,12 @@
 	text-align: center;
 	text-shadow: white 1px 1px 1px;
 }
+.avgweekly img.edit {
+	cursor: pointer;
+	position: absolute;
+	margin-left: -9px;
+	padding-top: 9px; 	
+}
 
 .ui-slider-range.ui-widget-header {
 	background: white;
@@ -203,8 +209,11 @@ table.workouts td.sport, table.workouts td.duration, table.workouts td.trimp {
 
 a.reset {
 	position: relative;
-	top: 5px;
 	display: none;
+}
+
+.avgweekly a.reset {
+	top: 5px;
 }
 
 #toggleDesc {
@@ -261,6 +270,9 @@ a.reset {
 	background: white;
 	font-size: 12px;
 	display: none;
+	box-shadow: 6px 6px 5px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 6px 6px 5px rgba(0,0,0,0.2);
+	-moz-box-shadow: 6px 6px 5px rgba(0,0,0,0.2);
 }
 
 #zoneguide table {

@@ -12,9 +12,14 @@ TrainingPlanner = {
 	n : null,
 	// array of sports
 	sports : null,
-	
 	// old value for weekly minutes
 	oldWeek : -1,
+	// true, if the user is training for triathlon
+	tri : false,
+	// default workout time ratios
+	ratioTriathlon : [20,60],
+	ratioDuathlon : [40],
+
 
 	/**
 	 * initialize the training planner
@@ -26,6 +31,10 @@ TrainingPlanner = {
 		var that = this;
 		this.url = url;
 		this.sports = usersport.split(',');
+		if (this.sports.length == 3) {
+			this.tri = true;
+		}
+		
 		this.advancedFeatures = advancedFeatures;
 		
 		this.initDescriptionToggler();
@@ -132,11 +141,12 @@ TrainingPlanner = {
 	 * initializes the sport time distributor
 	 */
 	initDistributor : function () {
+		var d = jQuery(".distribution .box");
 		if (this.sports.length == 1) {
+			d.hide();
 			return;
 		}
 		
-		var d = jQuery(".distribution .box");
 		var last = '';
 		for (var i=0; i<this.sports.length; i++) {
 			if (i == (this.sports.length - 1)) {
@@ -228,6 +238,7 @@ TrainingPlanner = {
 				$('#week').val(TimeParser.format(workoutSettings.time));
 			}
 
+			// update ratios
 			if (that.sports.length == 2) {
 				// update the slider
 				that.slider.slider("option", "value", workoutSettings.ratio[0]);
@@ -245,6 +256,7 @@ TrainingPlanner = {
 			
 			// unlock the training pager
 			that.unlock();
+			that.checkBalance();
 		});
 	},
 
@@ -274,13 +286,22 @@ TrainingPlanner = {
 		TimeParser.parse($('#week').val());
 		var week = TimeParser.mins;
 		var slider = $("#slider");
-		var val1 = slider.slider("values", 0);
-		var val2 = slider.slider("values", 1);
+		var val1 = 0;
+		var val2 = 0;
+		var ratio = null;
+		if (this.sports.length == 3) {
+			val1 = slider.slider("values", 0);
+			val2 = slider.slider("values", 1);
+			ratio = val1 + "," + (val2-val1) + "," + (100-val2);
+		} else if (this.sports.length == 2) {
+			val1 = slider.slider("value");
+			ratio = val1 + "," + (100-val1);
+		}
 		
 		$.post(this.url + '/trainingplans/save_workout_settings', {
 			time : avg,
 			usertime : week,
-			ratio : val1 + "," + (val2-val1) + "," + (100-val2),
+			ratio : ratio,
 			date : workoutSettings.date
 		}, function (data) {
 			if (data == "ok") {
@@ -325,10 +346,8 @@ TrainingPlanner = {
 		if (this.sports.length == 1) {
 			return;
 		}
-		var tri = (this.sports.length == 3);
-		
 		var val1 = this.slider.slider("values", 0);
-		if (tri) {
+		if (this.tri) {
 			var val2 = this.slider.slider("values", 1);
 		}
 
@@ -337,7 +356,7 @@ TrainingPlanner = {
 
 		// split mins according to the slider
 		var mins1 = parseInt(val1 * minsPercent);
-		if (tri) {
+		if (this.tri) {
 			var mins2 = parseInt((val2 - val1) * minsPercent);
 		} else {
 			var mins2 = parseInt((100 - val1) * minsPercent);
@@ -349,21 +368,64 @@ TrainingPlanner = {
 
 		// update percentage values
 		$('#p1').text(val1 + "%");
-		if (tri) {
+		if (this.tri) {
 			$('#p2').text((val2 - val1) + "%");
 		} else {
 			$('#p2').text((100 - val1) + "%");
 		}
 
-		if (tri) {
+		if (this.tri) {
 			var mins3 = parseInt((100 - val2) * minsPercent);
 			$('#time3').text(TimeParser.format(mins3)); 
 			$('#p3').text((100 - val2) + "%");
 		}
+		
+		this.checkBalance();
 	},
 	
 	resetWeeklyHours : function () {
 		$('#week').val(TimeParser.format(workoutSettings.time));
 		this.weekUpdated(true);
+	},
+	
+	/**
+	 * check if the workout balance is set to default values
+	 * if not, the reset switch will be enabled
+	 */
+	checkBalance : function () {
+		if (this.sports.length == 1) {
+			return; // just one sport - do nothing.
+		}
+		var val0 = this.slider.slider("values", 0);
+		if (this.tri) {
+			var val1 = this.slider.slider("values", 1);
+			if (val0 != this.ratioTriathlon[0] || val1 != this.ratioTriathlon[1]) {
+				jQuery('.distribution .reset').fadeIn();
+			} else {
+				jQuery('.distribution .reset').fadeOut();
+			}
+		} else if (this.sports.length == 2) {
+			if (val0 != this.ratioDuathlon[0]) {
+				jQuery('.distribution .reset').fadeIn();
+			} else {
+				jQuery('.distribution .reset').fadeOut();
+			}
+		}
+	},
+	
+	/**
+	 * will reset the workout balance to default settings
+	 */
+	resetWorkoutBalance : function () {
+		if (this.sports.length == 1) {
+			return; // just one sport - do nothing.
+		}
+		if (this.tri) {
+			this.slider.slider("option", "values", this.ratioTriathlon);
+		} else {
+			this.slider.slider("option", "value", this.ratioDuathlon[0]);
+		}
+		this.balanceUpdated();
+		this.saveWorkoutSettings();
 	}
 };
