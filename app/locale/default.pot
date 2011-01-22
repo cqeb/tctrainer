@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-16 21:20+0100\n"
+"POT-Creation-Date: 2011-01-22 15:23+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -20,7 +20,7 @@ msgid "Incorrect session data. Sorry."
 msgstr ""
 
 #: \controllers\competitions_controller.php:106
-#: \controllers\trainingstatistics_controller.php:460;1614
+#: \controllers\trainingstatistics_controller.php:460;1616
 msgid "Sorry. This is not your entry!"
 msgstr ""
 
@@ -124,6 +124,7 @@ msgstr ""
 
 #: \controllers\trainingplans_controller.php:42;45;51
 #: \controllers\components\unitcalc.php:659;663;667;671;682;686
+#: \views\layouts\trainingplans.ctp:109
 #: \views\trainingstatistics\statistics_competition.ctp:42
 #: \views\trainingstatistics\statistics_trimp.ctp:32
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:120
@@ -133,6 +134,7 @@ msgstr ""
 
 #: \controllers\trainingplans_controller.php:42;45;48
 #: \controllers\components\unitcalc.php:660;664;668;672;674;675;676;677;678;681;683;685;687
+#: \views\layouts\trainingplans.ctp:108
 #: \views\trainingstatistics\edit_training.ctp:52
 #: \views\trainingstatistics\statistics_competition.ctp:41
 #: \views\trainingstatistics\statistics_trimp.ctp:31
@@ -256,16 +258,16 @@ msgstr ""
 msgid "Import of workouts finished!"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:586
+#: \controllers\trainingstatistics_controller.php:588
 msgid "Training saved."
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:592
+#: \controllers\trainingstatistics_controller.php:594
 #: \controllers\users_controller.php:408;1119
 msgid "Some errors occured"
 msgstr ""
 
-#: \controllers\trainingstatistics_controller.php:1623
+#: \controllers\trainingstatistics_controller.php:1625
 msgid "Workout deleted."
 msgstr ""
 
@@ -602,7 +604,7 @@ msgstr ""
 msgid "Become PREMIUM"
 msgstr ""
 
-#: \controllers\components\provider.php:120
+#: \controllers\components\provider.php:127
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:28;58
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:20;72
 msgid "Week"
@@ -1044,7 +1046,7 @@ msgid "Do an endurance ride in Zone 2, but insert several ten-second sprints wit
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:118
-msgid "Pick a hilly course, and ride in Zones 1-5. The hills should take about five minutes to ascend. Do not stand up while climbing."
+msgid "Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about five minutes to ascend. Do not stand up while climbing."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:121
@@ -1126,7 +1128,7 @@ msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:107
-msgid "Pick a hilly course, and run in Zones 1-5. Do not ascend longer than five minutes."
+msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than five minutes."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:110
@@ -1174,7 +1176,7 @@ msgid "Buoyancy Drills"
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:47
-#: \core\workouts\workout.class.php:119
+#: \core\workouts\workout.class.php:131
 msgid "Speed"
 msgstr ""
 
@@ -1250,19 +1252,19 @@ msgstr ""
 msgid "Swim at race speed and do not recover. Stop after a maximum of thirty minutes."
 msgstr ""
 
-#: \core\workouts\workout.class.php:115
+#: \core\workouts\workout.class.php:127
 msgid "Endurance"
 msgstr ""
 
-#: \core\workouts\workout.class.php:122
+#: \core\workouts\workout.class.php:134
 msgid "Force"
 msgstr ""
 
-#: \core\workouts\workout.class.php:126
+#: \core\workouts\workout.class.php:138
 msgid "Tempo Hardness"
 msgstr ""
 
-#: \core\workouts\workout.class.php:129
+#: \core\workouts\workout.class.php:141
 msgid "Test"
 msgstr ""
 
@@ -2020,32 +2022,42 @@ msgstr ""
 msgid "Receive individual training plans based on your workouts and upcoming competitions."
 msgstr ""
 
-#: \views\layouts\trainingplans.ctp:73
+#: \views\layouts\trainingplans.ctp:74
 msgid "Training Hours"
 msgstr ""
 
-#: \views\layouts\trainingplans.ctp:74
+#: \views\layouts\trainingplans.ctp:75
 msgid "These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected."
 msgstr ""
 
-#: \views\layouts\trainingplans.ctp:75
+#: \views\layouts\trainingplans.ctp:76
 msgid "This Week"
 msgstr ""
 
-#: \views\layouts\trainingplans.ctp:76
+#: \views\layouts\trainingplans.ctp:77
 msgid "This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week."
 msgstr ""
 
-#: \views\layouts\trainingplans.ctp:77
+#: \views\layouts\trainingplans.ctp:78
 msgid "reset"
 msgstr ""
 
-#: \views\layouts\trainingplans.ctp:83
+#: \views\layouts\trainingplans.ctp:84
 msgid "Workout Balance"
 msgstr ""
 
-#: \views\layouts\trainingplans.ctp:84
+#: \views\layouts\trainingplans.ctp:85
 msgid "Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks."
+msgstr ""
+
+#: \views\layouts\trainingplans.ctp:106
+#: \views\users\edit_traininginfo.ctp:217
+msgid "Type"
+msgstr ""
+
+#: \views\layouts\trainingplans.ctp:107
+#: \views\users\edit_traininginfo.ctp:218;219;220;221;222
+msgid "Zone"
 msgstr ""
 
 #: \views\payments\initiate.ctp:1
@@ -3041,14 +3053,6 @@ msgstr ""
 
 #: \views\users\edit_traininginfo.ctp:212
 msgid "Set these zones in your heart rate monitor!"
-msgstr ""
-
-#: \views\users\edit_traininginfo.ctp:217
-msgid "Type"
-msgstr ""
-
-#: \views\users\edit_traininginfo.ctp:218;219;220;221;222
-msgid "Zone"
 msgstr ""
 
 #: \views\users\edit_traininginfo.ctp:255

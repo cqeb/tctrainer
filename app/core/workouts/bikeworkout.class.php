@@ -115,7 +115,7 @@ class BikeWorkout extends Workout {
 				return __('Do an endurance ride in Zone 2, but insert several ten-second sprints with maximum effort.', true);
 				break;
 			case Workout::F1:
-				return __('Pick a hilly course, and ride in Zones 1-5. The hills should take about five minutes to ascend. Do not stand up while climbing.', true);
+				return __('Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about five minutes to ascend. Do not stand up while climbing.', true);
 				break;
 			case Workout::F2:
 				return __('Pick a hilly course with several ascents that take more than 5 minutes to climb. Stay seated, and do not max out your pulse while climbing.', true);
