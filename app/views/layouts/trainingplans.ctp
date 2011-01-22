@@ -25,6 +25,7 @@
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/zoneguide.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
 
 <?php echo $scripts_for_layout; ?>
@@ -100,39 +101,34 @@ $(document).ready(function() {
  	jQuery('#slider').tipTip({ defaultPosition: 'top', maxWidth : "270px" });
  	jQuery('#avg').tipTip({ defaultPosition: 'top' });
  	jQuery('#week').tipTip();
+ 	
+ 	jQuery('body').append(ZoneGuide.getTable(<?php echo $rlth; ?>, <?php echo $blth; ?>, {
+ 		type : "<?php echo __('Type',true); ?>",
+ 		zone : "<?php echo __('Zone',true); ?>",
+ 		run : "<?php echo __('Run',true); ?>",
+ 		bike : "<?php echo __('Bike',true); ?>"
+ 	}));
 });
 
+// google analytics
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+try {
+var pageTracker = _gat._getTracker("UA-15268905-1");
+pageTracker._trackPageview();
+} catch(err) {}
+
+// get satisfaction
+var is_ssl = ("https:" == document.location.protocol);
+var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
+document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
+var feedback_widget_options = {};
+feedback_widget_options.display = "overlay";  
+feedback_widget_options.company = "tricoretraining";
+feedback_widget_options.placement = "left";
+feedback_widget_options.color = "#222";
+feedback_widget_options.style = "idea";
+var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
-
-<script type="text/javascript">
-	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-	</script>
-	
-	<script type="text/javascript">
-	try {
-	var pageTracker = _gat._getTracker("UA-15268905-1");
-	pageTracker._trackPageview();
-	} catch(err) {}
-
-	</script>
-
-<script type="text/javascript" charset="utf-8">
-  var is_ssl = ("https:" == document.location.protocol);
-  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  var feedback_widget_options = {};
-
-  feedback_widget_options.display = "overlay";  
-  feedback_widget_options.company = "tricoretraining";
-  feedback_widget_options.placement = "left";
-  feedback_widget_options.color = "#222";
-  feedback_widget_options.style = "idea";
-  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-</script>
-
 </body>
 </html>

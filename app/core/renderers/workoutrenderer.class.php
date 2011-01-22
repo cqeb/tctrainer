@@ -30,7 +30,7 @@ class WorkoutRenderer {
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
 </tr>
 <tr>
-	<td class=\"description\" colspan=\"4\">
+	<td class=\"description " . strtolower($w->getSport()) . "\" colspan=\"4\">
 		<div>
 			" . $w->getDescription() . "
 		</div>

@@ -104,7 +104,7 @@ class RunWorkout extends Workout {
 				return __('Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for five kilometers. Repeat up to six times.', true);
 				break;
 			case Workout::F1:
-				return __('Pick a hilly course, and run in Zones 1-5. Do not ascend longer than five minutes.', true);
+				return __('Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than five minutes.', true);
 				break;
 			case Workout::F2:
 				return __('Pick a hilly course with several ascents that take more than 5 minutes to climb. Your pulse may climb to Zone 5, but refrain from maxing out.', true);

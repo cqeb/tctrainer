@@ -212,8 +212,10 @@ TrainingPlanner = {
 
 		// request the plan
 		$.get(url, function (data) {
-			$('#plan').html(data);
-
+			$('#plan').html(that.addZoneInfo(data));
+			// now re-attach the zoneguide
+			ZoneGuide.attach();
+			
 			// adapt visibility of descriptions
 			if (!descriptionsVisible) {
 				jQuery('td.description div').hide();
@@ -246,6 +248,14 @@ TrainingPlanner = {
 		});
 	},
 
+	/**
+	 * will add zone markup to highlight individual
+	 * training zones
+	 */
+	addZoneInfo : function(html) {
+		return html.replace(/(Zone \d)/g, '<span class="zone">$1</span>');
+	},
+	
 	/**
 	 * persist user settings to database (training time & ratio)
 	 */

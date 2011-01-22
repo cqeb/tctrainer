@@ -224,7 +224,11 @@ class Athlete {
 	}
 	
 	public function getThreshold() {
-		return $this->treshold;
+		return $this->threshold;
+	}
+
+	public function getBikeThreshold() {
+		return $this->bikethreshold;
 	}
 	
 	public function getLevel() {
