@@ -109,7 +109,7 @@ $(document).ready(function() {
  		zone : "<?php echo __('Zone',true); ?>",
  		run : "<?php echo __('Run',true); ?>",
  		bike : "<?php echo __('Bike',true); ?>"
- 	}));
+ 	}, true));
 });
 
 // google analytics
