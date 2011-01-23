@@ -106,34 +106,34 @@ class BikeWorkout extends Workout {
 				return __('An intensive, aerobic workout. Ride a course with small hills, which take you into Zone 3 frequently.', true);
 				break;
 			case Workout::S1:
-				return __('Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over one minute, and hold as long as possible. Recover for one minute, and repeat several times.', true);
+				return __('Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times.', true);
 				break;
 			case Workout::S2:
 				return __('Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times.', true);
 				break;
 			case Workout::S3:
-				return __('Do an endurance ride in Zone 2, but insert several ten-second sprints with maximum effort.', true);
+				return __('Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort.', true);
 				break;
 			case Workout::F1:
-				return __('Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about five minutes to ascend. Do not stand up while climbing.', true);
+				return __('Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about 5 minutes to ascend. Do not stand up while climbing.', true);
 				break;
 			case Workout::F2:
 				return __('Pick a hilly course with several ascents that take more than 5 minutes to climb. Stay seated, and do not max out your pulse while climbing.', true);
 				break;
 			case Workout::F3:
-				return __('Warm up thoroughly. Pick a steep hill, which takes about one minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of eight times.', true);
+				return __('Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of 8 times.', true);
 				break;
 			case Workout::M1:
 				return __('Pick a flat course, and ride in Zone 3 with low cadence after warming up.', true);
 				break;
 			case Workout::M2:
-				return __('Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times.', true);
+				return __('Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times.', true);
 				break;
 			case Workout::M3:
-				return __('Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds.', true);
+				return __('Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds.', true);
 				break;
 			case Workout::M4:
-				return __('Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals.', true);
+				return __('Accelerate slowly after warming up. When Zone 4 is reached, take 2 minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals.', true);
 				break;
 			case Workout::M5:
 				return __('Pick a flat course. After warming up establish Zone 5, and stay there while maintaining low cadence. STOP immediately if you feel nauseous.', true);				

@@ -122,7 +122,7 @@ abstract class Workout {
 	 * Endurance, Speed skills, Force or Muscular Endurance
 	 */
 	public function getCategory() {
-		switch(substr($this->type, 0, 1)) {
+		switch($this->getShortCategory()) {
 			case 'E':
 				return __('Endurance', true);
 				break;
@@ -147,10 +147,39 @@ abstract class Workout {
 	}
 	
 	/**
-	 * retrieves the short version of a category, which may be E, S, F or M
+	 * retrieves the short version of a category, which may be E, S, F, T or M
 	 */
 	public function getShortCategory() {
 		return substr($this->type, 0, 1);
+	}
+	
+	/**
+	 * generate a short description suitable for a title tag
+	 * to generate tipTip tooltip from
+	 */
+	public function getCategoryDescription() {
+		switch($this->getShortCategory()) {
+			case 'E':
+				return __('Endurance allows you to maintain performance whilst resisting fatigue.', true);
+				break;
+			case 'S':
+				// Speed Skills
+				return __('Speed trainings will teach your body to move more quickly, while maintaining efficenciy.', true);
+				break;
+			case 'F':
+				return __('Force trainings teach you to apply maximum effort repeatedly.', true);
+				break;
+			case 'M': 
+				// Muscular Endurance
+				return __('Tempo Hardness allows your body to withstand high exertion for longer intervals without dropping performance.', true);
+				break;
+			case 'T':
+				return __('Test workouts will be used to determine your lactate threshold levels. This is very important, as your heart rate zones are derived from those values!', true);
+				break;
+			default:
+				return 'Unknown';
+				break;
+		}
 	}
 	
 	/**

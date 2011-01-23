@@ -25,7 +25,9 @@ class WorkoutRenderer {
 	<td class=\"sport\">" . __($w->getSport(), true) . "</td>
 	<td class=\"type " . $w->getShortCategory() . "\">
 		$star" . __($w->getTypeLabel(), true) . "<br />
-		<span class=\"category br\">" . __($w->getCategory(), true) . "</span>
+		<span class=\"category br\" title=\"" .
+			$w->getCategoryDescription() .		 
+			"\">" . __($w->getCategory(), true) . "</span>
 	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
 </tr>
