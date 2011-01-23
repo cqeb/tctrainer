@@ -192,43 +192,7 @@ zgi18n = {
 	bike : '" . __('Bike',true) . "'
 };";
 
-$this->js_addon .= <<<EOF
-function check_mhr(checkonly) 
-{
-                lth = parseInt( \$('#UserMaximumheartrate').val() );
-
-                if ( isNaN(lth) || lth > 220 || lth < 120 ) {
-                   \$('#errorlth').show();
-                   \$('#errorlth').html('
-EOF;
-
-$this->js_addon .= __('Your maximum heart rate is not valid! Should be between 220 and 120.',true);
-
 $this->js_addon .= <<<EOG
-');
-                } else
-                {
-                  lth = parseInt(lth * 0.85);
-                  \$('#errorlth').hide();
-                  \$('#errorblth').hide();
-
-                  if ( \$('#UserLactatethreshold').val() == '' )
-                        \$('#UserLactatethreshold').val(lth);
-
-                  if ( \$('#UserBikelactatethreshold').val() == '' )
-                        \$('#UserBikelactatethreshold').val(parseInt(lth*0.96));
-
-                  if ( checkonly == false )
-                  {
-                     jQuery('#zones').html(ZoneGuide.getTable(
-						jQuery('#UserLactatethreshold').val(),
-						jQuery('#UserBikelactatethreshold').val(),
-						zgi18n));
-                  }
-                }
-                return false;
-}
-
 /**
  * will check lactate threshold and bike lactate threshold values
  */
@@ -268,7 +232,7 @@ $this->js_addon .= <<<EOH
 
 function setwhrs(val) 
 {
-	  //alert(val);
+
 	  if ( val ) \$('#UserWeeklyhours').val(val);
       
       if ( \$('#UserWeeklyhours').val() != '' )
@@ -289,7 +253,6 @@ $this->js_addon .= <<<EOH
 
 \$(document).ready(function() {
         var lth = parseInt( \$('#UserLactatethreshold').val() );
-        //var mhr = parseInt( \$('#UserMaximumheartrate').val() );
         \$('#errorlth, #errorblth').hide();
 
         var zonestable = '';
@@ -303,7 +266,7 @@ $this->js_addon .= <<<EOH
 					zgi18n));
         }
 
-  /**
+  	/**
 	 * provide a basic number of weekly hours after
 	 * the user has selected a sport
 	 */
@@ -342,22 +305,6 @@ $this->js_addon .= <<<EOH
         \$('#UserWeeklyhours').blur(setwhrs());
         
         setwhrs();
-
-        // set lth with calculated value
-        \$('#UserMaximumheartrate').blur(function() {
-                if ( \$('#UserLactatethreshold').val() != '' )
-                {
-                  check_lth();
-                  // check only maximum heart rate for errors, do not regenerate zonestable
-                  check_mhr(true);
-                } else {
-                  if ( \$('#UserMaximumheartrate').val() ) {
-                     check_mhr();
-                  }
-                }
-                return false;
-        });
-
         jQuery('#UserLactatethreshold, #UserBikelactatethreshold')
 			.blur(function() {
 				if (jQuery(this).val() != '') {
