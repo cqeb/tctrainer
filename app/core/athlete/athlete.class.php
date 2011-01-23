@@ -89,11 +89,23 @@ class Athlete {
 	 * @param array $user user data from session
 	 */
 	public function __construct($DB, $user) {
-		if ($user["id"] == null) {
+		if (!$user["id"]) {
 			return false;
 		}
 		
+		// check if all data is available
+		if (!$user["id"]
+			|| !$user["weeklyhours"] 
+			|| !$user["lactatethreshold"] 
+			|| !$user["bikelactatethreshold"]
+			|| !$user["typeofsport"]
+			|| !$user['paid_to']
+			|| !$user['tos']) {
+			throw new Exception("Invalid user object provided when instantiating athlete");		
+		}
+		
 		$this->DB = $DB;
+		
 		
 		// initialize the athlete
 		$this->id = $user["id"];

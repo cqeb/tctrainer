@@ -7,7 +7,7 @@ class TrainingplansController extends AppController {
 	var $useTable = false;
 		
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc');
-	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Provider');
+	var $components = array('Email', 'Cookie', 'RequestHandler', 'Provider', 'Session');
 
 	function beforeFilter()
 	{
@@ -58,7 +58,7 @@ class TrainingplansController extends AppController {
 		$this->set('weeklyhours', $u['weeklyhours']);
 		
 		// fill the info section
-		$schedule = $this->Provider->athlete->getSchedule();
+		$schedule = $this->Provider->getAthlete()->getSchedule();
 		if ($schedule && count($schedule->getRaces()) == 0) {
 			$this->set('info', '<div class="statusbox"><p>' . 
 			__("You might want to add some competitions to refine your training plan.", true) . 
@@ -70,9 +70,9 @@ class TrainingplansController extends AppController {
 			$this->set('info', '<script type="text/javascript">jQuery(".box.info").hide();</script>');
 		}
 		
-		$this->set('advancedFeatures', $this->Provider->athlete->isAdvancedFeatures());
-		$this->set('rlth', $this->Provider->athlete->getThreshold());
-		$this->set('blth', $this->Provider->athlete->getBikeThreshold());
+		$this->set('advancedFeatures', $this->Provider->getAthlete()->isAdvancedFeatures());
+		$this->set('rlth', $this->Provider->getAthlete()->getThreshold());
+		$this->set('blth', $this->Provider->getAthlete()->getBikeThreshold());
 	}
 	
 	/**
@@ -92,7 +92,7 @@ class TrainingplansController extends AppController {
 	 */
 	function set_avg() {
 		$this->layout = 'plain';
-		if ($this->Provider->athlete->setTrainingTime($_POST["time"])) {
+		if ($this->Provider->getAthlete()->setTrainingTime($_POST["time"])) {
 			$this->set('res', 'ok');
 		} else {
 			$this->set('res', 'error');

@@ -26,8 +26,8 @@ require '../../app/core/renderers/workoutrenderer.class.php';
 class ProviderComponent extends Object {
 	public $components = array('Session', 'Unitcalc');
 	public $helpers = array('Session');
-	public $DB;
-	public $athlete;
+	private $DB;
+	private $athlete;
 	
 	/**
 	 * initializes the provider component
@@ -37,7 +37,16 @@ class ProviderComponent extends Object {
 	public function initialize($controller, $settings) {
 		// TODO omg change this!!!
 		$this->DB = new Database("root", "", "trainer", "localhost");
-		$this->athlete = new Athlete($this->DB, $this->Session->read('userobject'));
+	}
+	
+	/**
+	 * retrieve the athlete
+	 */
+	public function getAthlete() {
+		if (!$this->athlete) {		
+			$this->athlete = new Athlete($this->DB, $this->Session->read('userobject'));
+		}
+		return $this->athlete;
 	}
 	
 	/**
@@ -45,11 +54,11 @@ class ProviderComponent extends Object {
 	 */
 	public function getPlan() {
 		// cut preview time to a maximum of 3 weeks
-		if (array_key_exists('o', $_GET) && intval($_GET['o']) > 3 && !$this->athlete->isAdvancedFeatures()) {
+		if (array_key_exists('o', $_GET) && intval($_GET['o']) > 3 && !$this->getAthlete()->isAdvancedFeatures()) {
 			$_GET['o'] == 3;
 		}
 		
-		if (!$this->athlete->isValid()) {
+		if (!$this->getAthlete()->isValid()) {
 			return '<div class="statusbox error"><p>' .
 				__("Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions.", true) . 
 				'</p><button onclick="document.location=\'/trainer/payments/subscribe_triplans\'">' .
@@ -72,7 +81,7 @@ class ProviderComponent extends Object {
 		}
 		
 		// generate mesocycle
-		$mcp = new MesoCycleProvider($this->DB, $this->athlete, clone $genWeek);
+		$mcp = new MesoCycleProvider($this->DB, $this->getAthlete(), clone $genWeek);
 		$time = $mcp->getTrainingTime($genWeek);
 
 		// now generate workouts
@@ -82,36 +91,36 @@ class ProviderComponent extends Object {
 		$bikeWorkouts = array();
 		$runWorkouts = array();
 		
-		switch($this->getMultisportType($this->athlete->getSport())) {
+		switch($this->getMultisportType($this->getAthlete()->getSport())) {
 			case 'TRIATHLON':
-				$tsp = new TriSwimProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'SWIM'), $phase);
+				$tsp = new TriSwimProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'SWIM'), $phase);
 				$swimWorkouts = $tsp->generate($genWeek);
 				$tsp->save(); 
 				
-				$tbp = new TriBikeProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
+				$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
 				$bikeWorkouts = $tbp->generate($genWeek);
 				$tbp->save(false); 
 
-				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save(false);
 				break;
             case 'DUATHLON':
-            	$tbp = new TriBikeProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
+            	$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
 				$bikeWorkouts = $tbp->generate($genWeek);
 				$tbp->save();
 				
-				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save(false);
 				break;
 			case 'RUN':
-				$trp = new TriRunProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
 				$trp->save();
 				break;
 			case 'BIKE':
-            	$tbp = new TriBikeProvider($this->DB, $this->athlete, $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
+            	$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
 				$bikeWorkouts = $tbp->generate($genWeek);
 				$tbp->save();
 				break;
@@ -130,7 +139,7 @@ class ProviderComponent extends Object {
 		$html .= WorkoutRenderer::render($workouts);
 		
 		// also attach time and workout settings
-		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->athlete->getId()); 
+		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->getAthlete()->getId()); 
 		
 		// add generate time
 		$benchmarkTime = microtime(true) - $timerStart;
@@ -241,7 +250,7 @@ class ProviderComponent extends Object {
 		// check if earlier entry exists
 		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
 			WHERE competitiondate < '$date'
-			AND user_id = " . $this->athlete->getId());
+			AND user_id = " . $this->getAthlete()->getId());
 		if ($r[0]['c'] > 0) {
 			// there are earlier entries - do not purge
 			return false;
@@ -250,7 +259,7 @@ class ProviderComponent extends Object {
 		// select if same entry already exists and nothing important changed
 		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
 			WHERE competitiondate = '$date' AND sportstype = '$type'
-			AND user_id = " . $this->athlete->getId());
+			AND user_id = " . $this->getAthlete()->getId());
 		if ($r[0]['c'] > 0) {
 			// same entry exists - do not purge
 			return false;
@@ -260,7 +269,7 @@ class ProviderComponent extends Object {
 		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
 			WHERE competitiondate > NOW()
 			AND competitiondate < '$date'
-			AND user_id = " . $this->athlete->getId());
+			AND user_id = " . $this->getAthlete()->getId());
 		if ($r[0]['c'] > 0) {
 			// there is an earlier entry - do not purge
 			return false;
@@ -284,9 +293,9 @@ class ProviderComponent extends Object {
 			AND competitiondate < (
 				SELECT competitiondate FROM competitions
 				WHERE id = " . intval($id) . " 
-				AND user_id = " . $this->athlete->getId() . "
+				AND user_id = " . $this->getAthlete()->getId() . "
 			)
-			AND user_id = " . $this->athlete->getId());
+			AND user_id = " . $this->getAthlete()->getId());
 		if (array_key_exists('c', $r) && $r['c'] > 0) {
 			// there is an earlier entry - do not purge
 			return false;
@@ -303,15 +312,15 @@ class ProviderComponent extends Object {
 	private function purge() {
 		$date = DateTimeHelper::getWeekStartDay(new DateTime())->format("Y-m-d");
 		$this->DB->query("DELETE FROM mesocyclephases WHERE date >= $date 
-			AND athlete_id = " . $this->athlete->getId());
+			AND athlete_id = " . $this->getAthlete()->getId());
 		$this->DB->query("DELETE FROM scheduledtrainings WHERE week >= $date 
-			AND athlete_id = " . $this->athlete->getId());
+			AND athlete_id = " . $this->getAthlete()->getId());
 		$this->DB->query("DELETE FROM trirunworkouttypesequence WHERE week >= $date 
-			AND athlete_id = " . $this->athlete->getId());
+			AND athlete_id = " . $this->getAthlete()->getId());
 		$this->DB->query("DELETE FROM tribikeworkouttypesequence WHERE week >= $date 
-			AND athlete_id = " . $this->athlete->getId());
+			AND athlete_id = " . $this->getAthlete()->getId());
 		$this->DB->query("DELETE FROM triswimworkouttypesequence WHERE week >= $date 
-			AND athlete_id = " . $this->athlete->getId());
+			AND athlete_id = " . $this->getAthlete()->getId());
 		return true;
 	}
 	
@@ -371,7 +380,7 @@ class ProviderComponent extends Object {
 	 * training hours
 	 */
 	public function recalcTimes() {
-		MesoCyclePhaseTableProvider::recalcTimes($this->DB, $this->athlete);
+		MesoCyclePhaseTableProvider::recalcTimes($this->DB, $this->getAthlete());
 	}
 }
 
