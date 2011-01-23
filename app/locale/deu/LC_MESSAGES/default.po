@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-23 18:18+0100\n"
-"PO-Revision-Date: 2011-01-23 18:23+0100\n"
+"POT-Creation-Date: 2011-01-23 18:40+0100\n"
+"PO-Revision-Date: 2011-01-23 18:50+0100\n"
 "Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1036,44 +1036,44 @@ msgid "An intensive, aerobic workout. Ride a course with small hills, which take
 msgstr "Ein intensives, aerobes Workout. Wähle einen Kurs mit einigen kleinen Hügeln, die dich in Zone 3 bringen."
 
 #: \core\workouts\bikeworkout.class.php:109
-msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over one minute, and hold as long as possible. Recover for one minute, and repeat several times."
-msgstr "Fahre in Zone 2. Dann schalte in einen leichten Gang, und beschleunige deine Trittfrequenz bis ans Maximum (bevor Du im Sattel zu hüpfen anfängst) über eine Minute hinweg. Halte die hohe Frequenz möglichst lange, und erhole dich danach für eine Minute. Wiederhole diese Intervalle mehrmals."
+msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times."
+msgstr "Fahre in Zone 2. Dann schalte in einen leichten Gang, und beschleunige deine Trittfrequenz bis ans Maximum (bevor Du im Sattel zu hüpfen anfängst) über 1  Minute hinweg. Halte die hohe Frequenz möglichst lange, und erhole dich danach für 1  Minute. Wiederhole diese Intervalle mehrmals."
 
 #: \core\workouts\bikeworkout.class.php:112
 msgid "Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times."
 msgstr "Fahre in Zone 2. Dann schalte in einen leichten Gang, und tritt nur mehr mit einem Bein. Nimm den anderen Fuß dabei nicht vom Pedal (er ist wie ein blinder Passagier), und wechsle die Seite, wenn ein Fuß ermüdet. Wiederhole den Vorgang mehrmals."
 
 #: \core\workouts\bikeworkout.class.php:115
-msgid "Do an endurance ride in Zone 2, but insert several ten-second sprints with maximum effort."
-msgstr "Ein Ausdauertraining in Zone 2, bei der du mehrmals Sprints mit zehn Sekunden Dauer unter Maximalbelastung durchführst."
+msgid "Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort."
+msgstr "Ein Ausdauertraining in Zone 2, bei der du mehrmals Sprints mit 10 Sekunden Dauer unter Maximalbelastung durchführst."
 
 #: \core\workouts\bikeworkout.class.php:118
-msgid "Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about five minutes to ascend. Do not stand up while climbing."
-msgstr "Wähle einen hügeligen Kurs, der deine Herzfrequenz zwischen Zone 1 und Zone 5 wechseln lässt. Ein Anstieg sollte nicht länger als fünf Minuten dauern. Bleibe im Sattel, während Du bergauf fährst."
+msgid "Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about 5 minutes to ascend. Do not stand up while climbing."
+msgstr "Wähle einen hügeligen Kurs, der deine Herzfrequenz zwischen Zone 1 und Zone 5 wechseln lässt. Ein Anstieg sollte nicht länger als 5 Minuten dauern. Bleibe im Sattel, während Du bergauf fährst."
 
 #: \core\workouts\bikeworkout.class.php:121
 msgid "Pick a hilly course with several ascents that take more than 5 minutes to climb. Stay seated, and do not max out your pulse while climbing."
 msgstr "Wähle einen hügeligen Kurs mit mehreren Anstiegen, die länger als fünf Minuten sind. Bleib sitzen, während du bergauf fährst, und belaste Dich nicht maximal."
 
 #: \core\workouts\bikeworkout.class.php:124
-msgid "Warm up thoroughly. Pick a steep hill, which takes about one minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of eight times."
-msgstr "Wärme Dich gründlich auf. Dann wähle einen steilen Hügel, auf den Du etwa eine Minute lang bergauf fahren kannst. Fahre mit maximaler Belastung im Anstieg, und lass Dich dann langsam wieder in Richtung Tal rollen. Bleib im Sattel beim bergauf fahren, und wiederhole maximal acht Mal."
+msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of 8 times."
+msgstr "Wärme Dich gründlich auf. Dann wähle einen steilen Hügel, auf den Du etwa 1 Minute lang bergauf fahren kannst. Fahre mit maximaler Belastung im Anstieg, und lass Dich dann langsam wieder in Richtung Tal rollen. Bleib im Sattel beim bergauf fahren, und wiederhole maximal 8 Mal."
 
 #: \core\workouts\bikeworkout.class.php:127
 msgid "Pick a flat course, and ride in Zone 3 with low cadence after warming up."
 msgstr "Wähle einen flachen Kurs, und fahr in Zone 3 mit niedriger Trittfrequenz, nachdem du dich aufgewärmt hast."
 
 #: \core\workouts\bikeworkout.class.php:130
-msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times."
-msgstr "Wähle einen flachen Kurs und wärme Dich gut auf. Beschleunige bis zum oberen Ende der Zone 4, und halte diese Belastung maximal zehn Minuten lang (beginne mit fünf Minuten). Fahr mit niedriger Trittfrequenz. Erhole dich für zwei Minuten nach jedem Intervall, und wiederhole die Übung drei bis fünf Mal."
+msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times."
+msgstr "Wähle einen flachen Kurs und wärme Dich gut auf. Beschleunige bis zum oberen Ende der Zone 4, und halte diese Belastung maximal 10 Minuten lang (beginne mit 5 Minuten). Fahr mit niedriger Trittfrequenz. Erhole dich für 2 Minuten nach jedem Intervall, und wiederhole die Übung 3-5 Mal."
 
 #: \core\workouts\bikeworkout.class.php:133
-msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds."
-msgstr "Wärme dich gründlich auf. Wähle einen hügeligen Kurs, und beschleunige bis ans obere Ende von Zone 4. Behalte diese Geschwindigkeit maximal zehn Minuten lang bei (beginne mit fünf), und fahre mit einer niedrigen Trittfrequenz. Erhole dich zwei Minuten, und wiederhole das Intervall drei bis fünf Mal. Du kannst dieses Training auch auf einem Kurs mit starkem Gegenwind durchführen."
+msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
+msgstr "Wärme dich gründlich auf. Wähle einen hügeligen Kurs, und beschleunige bis ans obere Ende von Zone 4. Behalte diese Geschwindigkeit maximal 10 Minuten lang bei (beginne mit 5), und fahre mit einer niedrigen Trittfrequenz. Erhole dich 2 Minuten, und wiederhole das Intervall 3-5 Mal. Du kannst dieses Training auch auf einem Kurs mit starkem Gegenwind durchführen."
 
 #: \core\workouts\bikeworkout.class.php:136
-msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals."
-msgstr "Beschleunige langsam, nachdem du aufgewärmt bist. Wenn Du Zone 4 erreichst, beschleunige zwei Minuten lang weiter, bis du das untere Drittel von Zone 5 erreichst. Dann reduziere die Belastung über zwei Minuten hinweg, bis du die Untergrenze von Zone 4 erreichst. Wiederhole diesen Wechsel maximal 40 Minuten lang, und fahre dabei immer mit möglichst niedriger Trittfrequenz. Fahre bis zum Ende des Trainings in Zone 2."
+msgid "Accelerate slowly after warming up. When Zone 4 is reached, take 2 minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals."
+msgstr "Beschleunige langsam, nachdem du aufgewärmt bist. Wenn Du Zone 4 erreichst, beschleunige 2 Minuten lang weiter, bis du das untere Drittel von Zone 5 erreichst. Dann reduziere die Belastung über 2 Minuten hinweg, bis du die Untergrenze von Zone 4 erreichst. Wiederhole diesen Wechsel maximal 40 Minuten lang, und fahre dabei immer mit möglichst niedriger Trittfrequenz. Fahre bis zum Ende des Trainings in Zone 2."
 
 #: \core\workouts\bikeworkout.class.php:139
 msgid "Pick a flat course. After warming up establish Zone 5, and stay there while maintaining low cadence. STOP immediately if you feel nauseous."
@@ -1122,40 +1122,40 @@ msgid "An intensive, aerobic workout. Run a course with small hills, which take 
 msgstr "Ein intensives, aerobes Training, für das du am besten eine Strecke mit kleinen Hügeln wählst, auf denen du immer wieder in Zone 3 laufen musst."
 
 #: \core\workouts\runworkout.class.php:101
-msgid "Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat four to eight times during the run."
-msgstr "Unternimm einen Ausdauer-Lauf in Zone 2. Sprinte vier bis acht Mal für 20 Sekunden, nachdem du dich ordentlich warmgelaufen hast."
+msgid "Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat 4-8 times during the run."
+msgstr "Unternimm einen Ausdauer-Lauf in Zone 2. Sprinte 4-8 Mal für 20 Sekunden, nachdem du dich ordentlich warmgelaufen hast."
 
 #: \core\workouts\runworkout.class.php:104
-msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for five kilometers. Repeat up to six times."
-msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximl fünf Kilometer lang halten könntest. Wiederhole diese Beschleunigungen maximal sechs Mal."
+msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for 5 kilometers. Keep your pace for 2 minutes, then slow down to Zone 2. Repeat up to 6 times."
+msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximl 5 Kilometer lang halten könntest. Behalte diese Geschwindigkeit 2 Minuten lang bei. Laufe danach lockerer, bis dein Puls wieder Zone 2 erreicht. Wiederhole diese Beschleunigungen maximal 6 Mal."
 
 #: \core\workouts\runworkout.class.php:107
-msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than five minutes."
-msgstr "Wähle einen hügeligen Kurs, und laufe in Zone 1 bis Zone 5. Laufe keine Anstiege, die länger als fünf Minuten dauern."
+msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than 5 minutes."
+msgstr "Wähle einen hügeligen Kurs, und laufe in Zone 1 bis Zone 5. Laufe keine Anstiege, die länger als 5 Minuten dauern."
 
 #: \core\workouts\runworkout.class.php:110
 msgid "Pick a hilly course with several ascents that take more than 5 minutes to climb. Your pulse may climb to Zone 5, but refrain from maxing out."
 msgstr "Wähle einen hügeligen Kurs mit Anstiegen, die länger als 5 Minuten dauern. Dein Puls darf dabei Zone 5 erreichen. Vermeide es, dich maximal zu belasten."
 
 #: \core\workouts\runworkout.class.php:113
-msgid "Warm up thoroughly. Pick a steep hill, which takes about one minute to ascend. Run fast uphills, and jog down very easy (take up to 4mins to recover). Repeat to a maximum of eight times."
-msgstr "Wärme dich gründlich auf. Wähle einen steilen Hügel, für den Du eine Minute benötigst. Laufe schnell bergauf, und sehr entspannt wieder nach unten (du kannst dir bis zu vier Minuten Zeit lassen). Wiederhole maximal acht Mal."
+msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Run fast uphills, and jog down very easy (take up to 4mins to recover). Repeat to a maximum of 8 times."
+msgstr "Wärme dich gründlich auf. Wähle einen steilen Hügel, für den Du 1 Minute benötigst. Laufe schnell bergauf, und sehr entspannt wieder nach unten (du kannst dir bis zu 4 Minuten Zeit lassen). Wiederhole maximal 8 Mal."
 
 #: \core\workouts\runworkout.class.php:116
 msgid "Pick a flat course, and run in Zone 3 after warming up."
 msgstr "Wähle einen flachen Kurs und laufe in Zone 3, nachdem du dich aufgewärmt hast."
 
 #: \core\workouts\runworkout.class.php:119
-msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times."
-msgstr "Wähle einen flachen Kurs und wärme dich auf. Beschleunige bis zum oberen Ende der Zone 4. Behalte die Belastung für maximal zehn Minuten bei (beginne beim ersten Mal mit fünf), und erhole dich zwei Minuten nach jedem Intervall. Wiederhole drei bis fünf Mal."
+msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times."
+msgstr "Wähle einen flachen Kurs und wärme dich auf. Beschleunige bis zum oberen Ende der Zone 4. Behalte die Belastung für maximal 10 Minuten bei (beginne beim ersten Mal mit 5), und erhole dich 2 Minuten nach jedem Intervall. Wiederhole 3-5 Mal."
 
 #: \core\workouts\runworkout.class.php:122
-msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds."
-msgstr "Wärme dich gut auf und wähle eine Strecke mit kleinen Hügeln. Beschleunige, bis dein Puls die Obergrenze von Zone 4 erreicht, und behalte die Geschwindigkeit maximal zehn Minuten lang bei (beginne mit fünf). Erhole dich für zwei Minuten nach jedem Intervall, und wiederhole drei bis fünf Mal. Du kannst dieses Training auch auf einer Strecke mit starkem Gegenwind durchführen."
+msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
+msgstr "Wärme dich gut auf und wähle eine Strecke mit kleinen Hügeln. Beschleunige, bis dein Puls die Obergrenze von Zone 4 erreicht, und behalte die Geschwindigkeit maximal 10 Minuten lang bei (beginne mit 5). Erhole dich für 2 Minuten nach jedem Intervall, und wiederhole 3-5 Mal. Du kannst dieses Training auch auf einer Strecke mit starkem Gegenwind durchführen."
 
 #: \core\workouts\runworkout.class.php:125
-msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2."
-msgstr "Beschleunige langsam bis in Zone 4, nachdem du dich aufgewärmt hast. Danach beschleunige, bis du das untere Drittel der Zone 5 erreichst. Verringere die Belastung über zwei Minuten, bis du die Untergrenze von Zone 4 erreichst, und wiederhole den Wechsel maximal 30 Minuten. Beende dein Training danach in Zone 2."
+msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2."
+msgstr "Beschleunige langsam bis in Zone 4, nachdem du dich aufgewärmt hast. Danach beschleunige, bis du das untere Drittel der Zone 5 erreichst. Verringere die Belastung über 2 Minuten, bis du die Untergrenze von Zone 4 erreichst, und wiederhole den Wechsel maximal 30 Minuten. Beende dein Training danach in Zone 2."
 
 #: \core\workouts\runworkout.class.php:128
 msgid "Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous."
@@ -1211,8 +1211,8 @@ msgid "Do an easy recovery swim."
 msgstr "Ein lockeres Schwimmtraining zur Regeneration."
 
 #: \core\workouts\swimworkout.class.php:83
-msgid "Swim intervals of medium intensity, that take five to ten minutes, and recover for 30 to 60 seconds."
-msgstr "Schwimme Intervalle mit mittlerer Intensität, die drei bis fünf Minuten dauern. Erhole dich dazwischen für 30 bis 60 Sekunden."
+msgid "Swim intervals of medium intensity, that take 5-10 minutes, and recover for 30 to 60 seconds."
+msgstr "Schwimme Intervalle mit mittlerer Intensität, die 3-5 Minuten dauern. Erhole dich dazwischen für 30 bis 60 Sekunden."
 
 #: \core\workouts\swimworkout.class.php:86
 msgid "An intensive, aerobic workout. Swim intervals of medium effort which take 5 minutes, and recover for 30 seconds."
@@ -1227,8 +1227,8 @@ msgid "Use this workout to focus on your buoyancy and body position."
 msgstr "Nutze dieses Training, um an deiner Wasserlage zu arbeiten."
 
 #: \core\workouts\swimworkout.class.php:95
-msgid "Do fast repeats for one swimming lane lengths at maximum effort, and recover for one minute between intervals. Focus on technique, even when fatigue sets in. Repeat to a maximum of 300 meters/yards."
-msgstr "Schwimme mit hoher Frequenz und maximaler Belastung über eine Länge. Erhole dich danach für eine minute. Konzentriere dich dabei auf deine Schwimmtechnik, auch, wenn deine Arme bereits ermüden. Wiederhole über eine Distanz von maximal 300 metern."
+msgid "Do fast repeats for 1 swimming lane lengths at maximum effort, and recover for 1 minute between intervals. Focus on technique, even when fatigue sets in. Repeat to a maximum of 300 meters/yards."
+msgstr "Schwimme mit hoher Frequenz und maximaler Belastung über eine Länge. Erhole dich danach für 1 Minute. Konzentriere dich dabei auf deine Schwimmtechnik, auch, wenn deine Arme bereits ermüden. Wiederhole über eine Distanz von maximal 300 Metern."
 
 #: \core\workouts\swimworkout.class.php:98
 msgid "Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous."
@@ -1243,16 +1243,16 @@ msgid "Use this workout to focus on strength drills."
 msgstr "Konzentriere dich bei diesem Training auf deine Kraft."
 
 #: \core\workouts\swimworkout.class.php:107
-msgid "Swim intervals of 6 minutes or more at high intensity. Recover for up to two minutes. Try to swim your next race distance."
-msgstr "Schwimme Intervalle mit hoher Belastung, die 6 Minuten oder länger dauern. Erhole dich dazwischen für zwei Minuten. Versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
+msgid "Swim intervals of 6 minutes or more at high intensity. Recover for up to 2 minutes. Try to swim your next race distance."
+msgstr "Schwimme Intervalle mit hoher Belastung, die 6 Minuten oder länger dauern. Erhole dich dazwischen für 2 Minuten. Versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
 
 #: \core\workouts\swimworkout.class.php:110
-msgid "Swim intervals to a maximum of 5 minutes at high intensity. Recover for less than a minute, and try to cover your next race distance."
-msgstr "Schwimme Intervalle mit hoher Intensität, die maximal fünf Minuten dauern. Erhole dich kürzer als eine Minute, und versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
+msgid "Swim intervals to a maximum of 5 minutes at high intensity. Recover for less than 1 minute, and try to cover your next race distance."
+msgstr "Schwimme Intervalle mit hoher Intensität, die maximal 5 Minuten dauern. Erhole dich kürzer als 1 Minute, und versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
 
 #: \core\workouts\swimworkout.class.php:113
-msgid "Swim at race speed and do not recover. Stop after a maximum of thirty minutes."
-msgstr "Schwimme mit Wettkampfgeschwindigkeit, und mache keine Pausen für maximal 30 Minuten."
+msgid "Swim at race speed and do not recover. Stop after a maximum of 30 minutes."
+msgstr "Schwimme mit deiner Wettkampfgeschwindigkeit, und mache keine Pausen für maximal 30 Minuten."
 
 #: \core\workouts\workout.class.php:127
 msgid "Endurance"

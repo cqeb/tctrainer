@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-23 18:18+0100\n"
+"POT-Creation-Date: 2011-01-23 18:40+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -1035,7 +1035,7 @@ msgid "An intensive, aerobic workout. Ride a course with small hills, which take
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:109
-msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over one minute, and hold as long as possible. Recover for one minute, and repeat several times."
+msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:112
@@ -1043,11 +1043,11 @@ msgid "Ride in Zone 2. Shift to a light gear, and start exercising with just one
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:115
-msgid "Do an endurance ride in Zone 2, but insert several ten-second sprints with maximum effort."
+msgid "Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:118
-msgid "Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about five minutes to ascend. Do not stand up while climbing."
+msgid "Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about 5 minutes to ascend. Do not stand up while climbing."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:121
@@ -1055,7 +1055,7 @@ msgid "Pick a hilly course with several ascents that take more than 5 minutes to
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:124
-msgid "Warm up thoroughly. Pick a steep hill, which takes about one minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of eight times."
+msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of 8 times."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:127
@@ -1063,15 +1063,15 @@ msgid "Pick a flat course, and ride in Zone 3 with low cadence after warming up.
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:130
-msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times."
+msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:133
-msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of ten minutes (you may want to start with five), while pedaling with low cadence. Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds."
+msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:136
-msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals."
+msgid "Accelerate slowly after warming up. When Zone 4 is reached, take 2 minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:139
@@ -1121,15 +1121,15 @@ msgid "An intensive, aerobic workout. Run a course with small hills, which take 
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:101
-msgid "Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat four to eight times during the run."
+msgid "Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat 4-8 times during the run."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:104
-msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for five kilometers. Repeat up to six times."
+msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for 5 kilometers. Keep your pace for 2 minutes, then slow down to Zone 2. Repeat up to 6 times."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:107
-msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than five minutes."
+msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than 5 minutes."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:110
@@ -1137,7 +1137,7 @@ msgid "Pick a hilly course with several ascents that take more than 5 minutes to
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:113
-msgid "Warm up thoroughly. Pick a steep hill, which takes about one minute to ascend. Run fast uphills, and jog down very easy (take up to 4mins to recover). Repeat to a maximum of eight times."
+msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Run fast uphills, and jog down very easy (take up to 4mins to recover). Repeat to a maximum of 8 times."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:116
@@ -1145,15 +1145,15 @@ msgid "Pick a flat course, and run in Zone 3 after warming up."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:119
-msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times."
+msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:122
-msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of ten minutes (you may want to start with five). Recover for two minutes after each interval, and repeat three to five times. You can also pick a track with strong headwinds."
+msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:125
-msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another two minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2."
+msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2."
 msgstr ""
 
 #: \core\workouts\runworkout.class.php:128
@@ -1210,7 +1210,7 @@ msgid "Do an easy recovery swim."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:83
-msgid "Swim intervals of medium intensity, that take five to ten minutes, and recover for 30 to 60 seconds."
+msgid "Swim intervals of medium intensity, that take 5-10 minutes, and recover for 30 to 60 seconds."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:86
@@ -1226,7 +1226,7 @@ msgid "Use this workout to focus on your buoyancy and body position."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:95
-msgid "Do fast repeats for one swimming lane lengths at maximum effort, and recover for one minute between intervals. Focus on technique, even when fatigue sets in. Repeat to a maximum of 300 meters/yards."
+msgid "Do fast repeats for 1 swimming lane lengths at maximum effort, and recover for 1 minute between intervals. Focus on technique, even when fatigue sets in. Repeat to a maximum of 300 meters/yards."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:98
@@ -1242,15 +1242,15 @@ msgid "Use this workout to focus on strength drills."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:107
-msgid "Swim intervals of 6 minutes or more at high intensity. Recover for up to two minutes. Try to swim your next race distance."
+msgid "Swim intervals of 6 minutes or more at high intensity. Recover for up to 2 minutes. Try to swim your next race distance."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:110
-msgid "Swim intervals to a maximum of 5 minutes at high intensity. Recover for less than a minute, and try to cover your next race distance."
+msgid "Swim intervals to a maximum of 5 minutes at high intensity. Recover for less than 1 minute, and try to cover your next race distance."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:113
-msgid "Swim at race speed and do not recover. Stop after a maximum of thirty minutes."
+msgid "Swim at race speed and do not recover. Stop after a maximum of 30 minutes."
 msgstr ""
 
 #: \core\workouts\workout.class.php:127
