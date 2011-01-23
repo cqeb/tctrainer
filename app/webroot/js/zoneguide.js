@@ -35,7 +35,7 @@ ZoneGuide = {
 				'<img class="pointer" src="/trainer/img/zones/pointer.png"><table>' +
 				// header
 				'<tr>' +
-					'<th>' + i18n.type + '</th>' +
+					'<th>' + i18n.sport + '</th>' +
 					'<th>' + i18n.zone + ' 1</th>' +
 					'<th>' + i18n.zone + ' 2</th>' +
 					'<th>' + i18n.zone + ' 3</th>' +

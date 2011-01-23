@@ -105,7 +105,7 @@ $(document).ready(function() {
  	jQuery('#week').tipTip();
  	
  	jQuery('body').append(ZoneGuide.getTable(<?php echo $rlth; ?>, <?php echo $blth; ?>, {
- 		type : "<?php echo __('Type',true); ?>",
+ 		sport : "<?php echo __('Sport',true); ?>",
  		zone : "<?php echo __('Zone',true); ?>",
  		run : "<?php echo __('Run',true); ?>",
  		bike : "<?php echo __('Bike',true); ?>"
