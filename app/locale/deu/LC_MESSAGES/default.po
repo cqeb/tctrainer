@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-22 18:20+0100\n"
-"PO-Revision-Date: 2011-01-22 18:21+0100\n"
+"POT-Creation-Date: 2011-01-23 18:18+0100\n"
+"PO-Revision-Date: 2011-01-23 18:23+0100\n"
 "Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -129,7 +129,7 @@ msgstr "Schwimmen"
 #: \views\trainingstatistics\statistics_competition.ctp:42
 #: \views\trainingstatistics\statistics_trimp.ctp:32
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:120
-#: \views\users\edit_traininginfo.ctp:233
+#: \views\users\edit_traininginfo.ctp:192
 msgid "Bike"
 msgstr "Radfahren"
 
@@ -140,7 +140,7 @@ msgstr "Radfahren"
 #: \views\trainingstatistics\statistics_competition.ctp:41
 #: \views\trainingstatistics\statistics_trimp.ctp:31
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:119
-#: \views\users\edit_traininginfo.ctp:225
+#: \views\users\edit_traininginfo.ctp:191
 msgid "Run"
 msgstr "Laufen"
 
@@ -181,12 +181,13 @@ msgstr "ist nicht gültig!"
 #: \controllers\trainingstatistics_controller.php:174
 #: \views\competitions\edit_competition.ctp:67
 #: \views\competitions\list_competitions.ctp:20
+#: \views\layouts\trainingplans.ctp:108
 #: \views\trainingstatistics\edit_training.ctp:46
 #: \views\trainingstatistics\import_workout.ctp:67
 #: \views\trainingstatistics\list_trainings.ctp:30
 #: \views\trainingstatistics\statistics_trimp.ctp:25
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:35;170
-#: \views\users\edit_traininginfo.ctp:29
+#: \views\users\edit_traininginfo.ctp:30;189
 msgid "Sport"
 msgstr "Sport"
 
@@ -228,7 +229,7 @@ msgstr "Dieses Training existiert schon!"
 #: \views\payments\subscribe_triplans.ctp:139
 #: \views\starts\features.ctp:70
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:7
-#: \views\users\edit_traininginfo.ctp:155;176
+#: \views\users\edit_traininginfo.ctp:133;154
 #: \views\users\edit_userinfo.ctp:145
 #: \views\users\register.ctp:187
 msgid "No"
@@ -237,7 +238,7 @@ msgstr "Nein"
 #: \controllers\trainingstatistics_controller.php:323
 #: \views\competitions\edit_competition.ctp:97
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:6
-#: \views\users\edit_traininginfo.ctp:154;175
+#: \views\users\edit_traininginfo.ctp:132;153
 #: \views\users\edit_userinfo.ctp:144
 #: \views\users\register.ctp:186
 msgid "Yes"
@@ -595,17 +596,17 @@ msgstr "TriCoreTraining (TCT) informiert dich."
 msgid "This TriCoreTraining message comes to you because some information in your profile is missing."
 msgstr "Diese TriCoreTraining Nachricht wird dir zugesendet, weil einige Informationen in deinem Profil nicht korrekt sind oder fehlen."
 
-#: \controllers\components\provider.php:54
+#: \controllers\components\provider.php:63
 msgid "Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions."
 msgstr "Wir können dir im Moment leider keinen Trainingsplan erstellen, da deine PREMIUM Mitgliedschaft abgelaufen ist."
 
-#: \controllers\components\provider.php:56
+#: \controllers\components\provider.php:65
 #: \views\elements\rightbar.ctp:5
 #: \views\elements\subnavigation_all.ctp:26;39
 msgid "Become PREMIUM"
 msgstr "Werde PREMIUM"
 
-#: \controllers\components\provider.php:127
+#: \controllers\components\provider.php:136
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:28;58
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:20;72
 msgid "Week"
@@ -1269,6 +1270,26 @@ msgstr "Tempohärte"
 msgid "Test"
 msgstr "Test"
 
+#: \core\workouts\workout.class.php:163
+msgid "Endurance allows you to maintain performance whilst resisting fatigue."
+msgstr "Ausdauertrainings erlauben dir, deine Leistung in langen Trainings aufrecht zu erhalten, und die Ermüdung zu verzögern."
+
+#: \core\workouts\workout.class.php:167
+msgid "Speed trainings will teach your body to move more quickly, while maintaining efficenciy."
+msgstr "Geschwindigkeitstrainings schulen deine Feinmotorik und Effizienz bei schnellen Bewegungen."
+
+#: \core\workouts\workout.class.php:170
+msgid "Force trainings teach you to apply maximum effort repeatedly."
+msgstr "Krafttrainings verbessern deine Fähigkeit, wiederholten, maximalen Kraftanstrengungen zu wiederstehen."
+
+#: \core\workouts\workout.class.php:174
+msgid "Tempo Hardness allows your body to withstand high exertion for longer intervals without dropping performance."
+msgstr "Temprohärte ist die Fähigkeit deines Körpers, hohen Belastungen über längere Zeiträume zu wiederstehen, ohne dabei Leistung einbüßen zu müssen."
+
+#: \core\workouts\workout.class.php:177
+msgid "Test workouts will be used to determine your lactate threshold levels. This is very important, as your heart rate zones are derived from those values!"
+msgstr "Test-Trainings werden genutzt, um deine Laktatgrenzwerte zu ermitteln. Absolviere diese Trainings mit großer Sorgfalt, da die ermittelten Werte die Grundlage für Deine Herzfrequenzzonen darstellen!"
+
 #: \views\competitions\edit_competition.ctp:8
 #: \views\competitions\list_competitions.ctp:1
 #: \views\elements\topnavigation_private.ctp:26
@@ -1337,7 +1358,7 @@ msgstr "Zeit für Laufen (HH:MM:SS)"
 #: \views\users\edit_images.ctp:95
 #: \views\users\edit_metric.ctp:60
 #: \views\users\edit_password.ctp:65
-#: \views\users\edit_traininginfo.ctp:183
+#: \views\users\edit_traininginfo.ctp:161
 #: \views\users\edit_userinfo.ctp:213
 #: \views\users\edit_weight.ctp:104
 msgid "Save"
@@ -1574,7 +1595,7 @@ msgstr "Logbuch"
 #: \views\users\edit_images.ctp:2
 #: \views\users\edit_metric.ctp:2
 #: \views\users\edit_password.ctp:2
-#: \views\users\edit_traininginfo.ctp:2
+#: \views\users\edit_traininginfo.ctp:3
 #: \views\users\edit_userinfo.ctp:2
 #: \views\users\edit_weight.ctp:2
 msgid "Settings"
@@ -1686,7 +1707,7 @@ msgstr "Folge uns auf Twitter"
 #: \views\elements\email\text\passwordreset.ctp:2
 #: \views\elements\email\text\standardmail.ctp:4
 #: \views\elements\email\text\trainingreminder.ctp:2
-#: \views\layouts\default_trainer.ctp:75
+#: \views\layouts\default_trainer.ctp:74
 msgid "Aloha"
 msgstr "Aloha"
 
@@ -2055,13 +2076,8 @@ msgstr "Aufteilung der Trainings"
 msgid "Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks."
 msgstr "Hier kannst du die Aufteilung der Zeit zwischen den einzelnen Sportarten bestimmen. Ziehe die Regler, um das Verhältnis zu beeinflussen. Wenn du diese Einstellung änderst, werden alle zukünftigen Trainingswochen davon beeinflusst."
 
-#: \views\layouts\trainingplans.ctp:108
-#: \views\users\edit_traininginfo.ctp:217
-msgid "Type"
-msgstr "Typ"
-
 #: \views\layouts\trainingplans.ctp:109
-#: \views\users\edit_traininginfo.ctp:218;219;220;221;222
+#: \views\users\edit_traininginfo.ctp:190
 msgid "Zone"
 msgstr "Zone"
 
@@ -2095,7 +2111,7 @@ msgid "By clicking the SUBSCRIBE button you also accept these terms and conditio
 msgstr "Mit dem Klick auf den ABONNIEREN-Button akzeptierst du unsere allgemeinen Geschäftsbedingungen (AGB) - bitte lies diese sehr genau."
 
 #: \views\payments\initiate.ctp:33
-#: \views\users\edit_traininginfo.ctp:162
+#: \views\users\edit_traininginfo.ctp:140
 #: \views\users\register.ctp:195
 msgid "Read our terms and conditions."
 msgstr "Lies unsere AGBs."
@@ -2860,7 +2876,7 @@ msgid "Duration Statistics"
 msgstr "Zeit Statistiken"
 
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:69
-#: \views\users\edit_traininginfo.ctp:328
+#: \views\users\edit_traininginfo.ctp:245
 #: \views\users\register.ctp:239
 msgid "hours"
 msgstr "Stunden"
@@ -2983,106 +2999,98 @@ msgstr "Passwörter stimmen überein!"
 msgid "Passwords do not match!"
 msgstr "Passwörter stimmen nicht überein!"
 
-#: \views\users\edit_traininginfo.ctp:11
+#: \views\users\edit_traininginfo.ctp:12
 msgid "Fill in your training information"
 msgstr "Gib deine Trainingsinfo an"
 
-#: \views\users\edit_traininginfo.ctp:45;48
+#: \views\users\edit_traininginfo.ctp:46;49
 msgid "Enter your weekly training hours"
 msgstr "Gibt deine wöchentlich verfügbaren Trainingsstunden an"
 
-#: \views\users\edit_traininginfo.ctp:46
+#: \views\users\edit_traininginfo.ctp:47
 msgid "Must be at least 0 hours"
 msgstr "Müssen mehr als 0 Stunden sein"
 
-#: \views\users\edit_traininginfo.ctp:47
+#: \views\users\edit_traininginfo.ctp:48
 msgid "Must be lower than 60 hours"
 msgstr "Müssen weniger als 60 Stunden sein"
 
-#: \views\users\edit_traininginfo.ctp:50
+#: \views\users\edit_traininginfo.ctp:51
 msgid "Weekly hours"
 msgstr "Wöchentliche Stunden"
 
-#: \views\users\edit_traininginfo.ctp:57
+#: \views\users\edit_traininginfo.ctp:58
 msgid "Zones"
 msgstr "Zonen"
 
-#: \views\users\edit_traininginfo.ctp:66
+#: \views\users\edit_traininginfo.ctp:67
 msgid "How to define your lactate threshold?"
 msgstr "Wie man deinen Laktatgrenzwert definiert?"
 
-#: \views\users\edit_traininginfo.ctp:68
+#: \views\users\edit_traininginfo.ctp:69
 msgid "1. Do your test-workouts to define your lactate threshold."
 msgstr "1. Mach deine Test-Workouts, um deinen Laktatgrenzwert zu definieren."
 
-#: \views\users\edit_traininginfo.ctp:70
+#: \views\users\edit_traininginfo.ctp:71
 msgid "2. Do a lactate threshold test with your doctor."
 msgstr "2. Mach einen Laktatgrenzwert-Test bei deinem Arzt."
 
-#: \views\users\edit_traininginfo.ctp:72
+#: \views\users\edit_traininginfo.ctp:73
 msgid "Read more in our blog."
 msgstr "Lies mehr dazu in unserem Blog."
 
-#: \views\users\edit_traininginfo.ctp:83;86
+#: \views\users\edit_traininginfo.ctp:84;87
 msgid "Enter your current run lactate threshold"
 msgstr "Gib den aktuellen Lauf-Laktatgrenzwert an"
 
-#: \views\users\edit_traininginfo.ctp:84;103
+#: \views\users\edit_traininginfo.ctp:85;104
 msgid "Must be at least 120"
 msgstr "Muss mindestens 120 sein"
 
-#: \views\users\edit_traininginfo.ctp:85;104
+#: \views\users\edit_traininginfo.ctp:86;105
 msgid "Must be lower than 220"
 msgstr "Muss niedriger als 220 sein"
 
-#: \views\users\edit_traininginfo.ctp:89
+#: \views\users\edit_traininginfo.ctp:90
 msgid "Run lactate threshold"
 msgstr "Lauf - Laktatgrenzwert"
 
-#: \views\users\edit_traininginfo.ctp:102;105
+#: \views\users\edit_traininginfo.ctp:103;106
 msgid "Enter your current bike lactate threshold"
 msgstr "Gib den aktuellen Radfahr-Laktatgrenzwert an"
 
-#: \views\users\edit_traininginfo.ctp:107
+#: \views\users\edit_traininginfo.ctp:108
 msgid "Bike lactate threshold"
 msgstr "Radfahr - Laktatgrenzwert"
 
-#: \views\users\edit_traininginfo.ctp:140
+#: \views\users\edit_traininginfo.ctp:118
 #: \views\users\register.ctp:173
 msgid "You're training for competitions and do regular sports for the first time?"
 msgstr "Du trainierst zum ersten Mal für Wettkämpfe und machst regelmässig Sport?"
 
-#: \views\users\edit_traininginfo.ctp:145
+#: \views\users\edit_traininginfo.ctp:123
 #: \views\users\register.ctp:178
 msgid "Beginner in structured training?"
 msgstr "Anfänger in strukturiertem Training?"
 
-#: \views\users\edit_traininginfo.ctp:166
+#: \views\users\edit_traininginfo.ctp:144
 msgid "You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!"
 msgstr "Du stimmst unseren allgemeinen Geschäftsbedingungen zu und bestätigst, dass dein Gesundheitszustand für sportliches Training ausreicht. Falls nicht, dann MUSST du sofort mit deinem Arzt sprechen bevor du zu trainieren beginnst!"
 
-#: \views\users\edit_traininginfo.ctp:212
-msgid "Set these zones in your heart rate monitor!"
-msgstr "Stelle diese Zonen in deinem Pulsmesser ein!"
-
-#: \views\users\edit_traininginfo.ctp:255
-msgid "Your maximum heart rate is not valid! Should be between 220 and 120."
-msgstr "Deine maximale Herzfrequenz ist nicht gültig! Diese sollte zwischen 220 und 120 liegen."
-
-#: \views\users\edit_traininginfo.ctp:291
+#: \views\users\edit_traininginfo.ctp:207
 msgid "Your lactate threshold is not valid! Should be between 220 and 120."
 msgstr "Dein Lauf-Laktatgrenzwert ist nicht gültig! Dieser sollte zwischen 220 und 120 liegen."
 
-#: \views\users\edit_traininginfo.ctp:305
+#: \views\users\edit_traininginfo.ctp:219
 msgid "Your bike lactate threshold is not valid! Should be between 220 and 120."
 msgstr "Dein Radfahr-Laktatgrenzwert ist nicht gültig! Dieser sollte zwischen 220 und 120 liegen."
 
-#: \views\users\edit_traininginfo.ctp:327
+#: \views\users\edit_traininginfo.ctp:244
 #: \views\users\register.ctp:238
 msgid "Weekly training load varies between"
 msgstr "Die wöchentliche Trainingslast variiert zwischen"
 
-#: \views\users\edit_traininginfo.ctp:328
+#: \views\users\edit_traininginfo.ctp:245
 #: \views\users\register.ctp:239
 msgid "and"
 msgstr "und"
@@ -3314,6 +3322,17 @@ msgstr "Deine GRATIS Mitgliedschaft ist gültig von"
 #: \views\users\register_finish.ctp:35
 msgid "Activate"
 msgstr "Aktivieren"
+
+#~ msgid "Type"
+#~ msgstr "Typ"
+
+#~ msgid "Set these zones in your heart rate monitor!"
+#~ msgstr "Stelle diese Zonen in deinem Pulsmesser ein!"
+
+#~ msgid "Your maximum heart rate is not valid! Should be between 220 and 120."
+#~ msgstr ""
+#~ "Deine maximale Herzfrequenz ist nicht gültig! Diese sollte zwischen 220 "
+#~ "und 120 liegen."
 
 #~ msgid "WOW"
 #~ msgstr "WOW"

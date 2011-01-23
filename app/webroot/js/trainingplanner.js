@@ -256,7 +256,12 @@ TrainingPlanner = {
 			
 			// unlock the training pager
 			that.unlock();
+			
+			// check workout balance for changes
 			that.checkBalance();
+			
+			// finally apply tipTips
+			jQuery('#plan .category').tipTip();
 		});
 	},
 
