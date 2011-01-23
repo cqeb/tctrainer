@@ -19,7 +19,6 @@ $url = Configure::read('App.serverUrl');
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
 
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>

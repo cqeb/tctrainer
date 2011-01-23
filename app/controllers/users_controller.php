@@ -947,7 +947,7 @@ class UsersController extends AppController {
 	        	$statusbox = 'statusbox ok';
 	        	$this->Session->setFlash(__('Traininginfo saved.', true));
 	        	// recalculate time track by updating athlete
-	        	$this->Provider->athlete->setTrainingTime(
+	        	$this->Provider->getAthlete()->setTrainingTime(
 	        		$this->data['User']['weeklyhours'] * 60
 	        	);
 	        } else 

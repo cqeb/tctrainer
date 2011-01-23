@@ -1,3 +1,4 @@
+<script type="text/javascript" src="/trainer/js/zoneguide.js"></script>
 
 <h1><?php __('Settings'); ?></h1>
 
@@ -106,29 +107,6 @@ echo $form->input('bikelactatethreshold',
                    ),
                    'label' => __('Bike lactate threshold', true)
 ));
-/**
-
-http://www.trainingbible.com/joesblog/2009/11/quick-guide-to-setting-zones.html
-http://www.sport-fitness-advisor.com/anaerobicthreshold.html
-
-Run Zones
-Zone 1 Less than 85% of LTHR
-Zone 2 85% to 89% of LTHR
-Zone 3 90% to 94% of LTHR
-Zone 4 95% to 99% of LTHR
-Zone 5a 100% to 102% of LTHR
-Zone 5b 103% to 106% of LTHR
-Zone 5c More than 106% of LTHR
-
-Bike Zones
-Zone 1 Less than 81% of LTHR
-Zone 2 81% to 89% of LTHR
-Zone 3 90% to 93% of LTHR
-Zone 4 94% to 99% of LTHR
-Zone 5a 100% to 102% of LTHR
-Zone 5b 103% to 106% of LTHR
-Zone 5c More than 106% of LTHR
-*/
 ?>
 
 <br />
@@ -136,9 +114,9 @@ Zone 5c More than 106% of LTHR
 <br />
 <?php
 
-$help_rookie = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="help" title="' .
+$help_rookie = '&nbsp;&nbsp;&nbsp;&nbsp;<span class="help" title="' .
 __("You're training for competitions and do regular sports for the first time?", true) .
-'" href="#">?</a>';
+'">?</span>';
 
 echo $form->input('rookie',
                   array(
@@ -205,42 +183,14 @@ function finishAjax(id, response)
 
 EOE;
 
-$this->js_addon .= '
-function calculate_zones(lth) 
-{
-                   var zonestable = \'    \
-' . __('Set these zones in your heart rate monitor!', true) . '<br /><br />'; 
-
-$this->js_addon .= ' \
-<table border="1" width="100%">          \
-<tr>                                     \
-    <th>' . __('Type',true) . '</th>                        \
-    <th>' . __('Zone',true) . ' 1</th>                      \
-    <th>' . __('Zone',true) . ' 2</th>                      \
-    <th>' . __('Zone',true) . ' 3</th>                      \
-    <th>' . __('Zone',true) . ' 4</th>                      \
-    <th>' . __('Zone',true) . ' 5</th>                     \
-</tr>                                    \
-<tr>                                     \
-    <td>' . __('Run',true) . ' </td>                        \
-    <td> &lt; \' + parseInt( lth * 0.85 ) + \'</td>\
-    <td> &lt; \' + parseInt( lth * 0.89 ) + \'</td>\
-    <td> &lt; \' + parseInt( lth * 0.94 ) + \'</td>\
-    <td> &lt; \' + parseInt( lth * 0.99 ) + \'</td>\
-    <td> &gt; \' + parseInt( lth * 0.99 ) + \'</td>\
-</tr>                                    \
-<tr>                                     \
-    <td>' . __('Bike',true) . ' </td>                       \
-    <td> &lt; \' + parseInt( lth * 0.81 ) + \'</td>\
-    <td> &lt; \' + parseInt( lth * 0.89 ) + \'</td>\
-    <td> &lt; \' + parseInt( lth * 0.93 ) + \'</td>\
-    <td> &lt; \' + parseInt( lth * 0.99 ) + \'</td>\
-    <td> &gt; \' + parseInt( lth * 0.99 ) + \'</td>\
-</tr>                                    \
-</table>\';
-          return zonestable;
-}
-';
+$this->js_addon .= "
+// global i18n object for the ZoneGuide
+zgi18n = {
+	sport : '" . __('Sport',true) . "',
+	zone : '" . __('Zone',true) . "',
+	run : '" . __('Run',true) . "',
+	bike : '" . __('Bike',true) . "'
+};";
 
 $this->js_addon .= <<<EOF
 function check_mhr(checkonly) 
@@ -270,8 +220,10 @@ $this->js_addon .= <<<EOG
 
                   if ( checkonly == false )
                   {
-                     zonestable = calculate_zones( lth );
-                     \$('#zones').html(zonestable);
+                     jQuery('#zones').html(ZoneGuide.getTable(
+						jQuery('#UserLactatethreshold').val(),
+						jQuery('#UserBikelactatethreshold').val(),
+						zgi18n));
                   }
                 }
                 return false;
@@ -281,36 +233,37 @@ $this->js_addon .= <<<EOG
  * will check lactate threshold and bike lactate threshold values
  */
 function check_lth() {
-               var lth = parseInt( \$('#UserLactatethreshold').val() );
-               var blth = parseInt( \$('#UserBikelactatethreshold').val() );
+	var lth = parseInt( \$('#UserLactatethreshold').val() );
+    var blth = parseInt( \$('#UserBikelactatethreshold').val() );
 
-               if ( isNaN(lth) || lth > 220 || lth < 120 ) {
-                            \$('#errorlth').show();
-                            \$('#errorlth').html('
+    if ( isNaN(lth) || lth > 220 || lth < 120 ) {
+    	\$('#errorlth').show();
+        \$('#errorlth').html('
 EOG;
 $this->js_addon .= __('Your lactate threshold is not valid! Should be between 220 and 120.',true);
 $this->js_addon .= <<<EOH
 ');
-               } else {
-                            \$('#errorlth').hide();
-                            zonestable = calculate_zones( lth );
-                            \$('#zones').html(zonestable);
-               }
+    } else {
+    	\$('#errorlth').hide();
+    }
 
-			   // check bike lactate threshold
-               if ( isNaN(blth) || blth > 220 || blth < 120 ) {
-                            \$('#errorblth').show();
-                            \$('#errorblth').html('
+	// check bike lactate threshold
+    if ( isNaN(blth) || blth > 220 || blth < 120 ) {
+    	\$('#errorblth').show();
+        \$('#errorblth').html('
 EOH;
 $this->js_addon .= __('Your bike lactate threshold is not valid! Should be between 220 and 120.',true);
 $this->js_addon .= <<<EOH
 ');
-               } else {
-                            \$('#errorblth').hide();
-                            \$('#zones').html(zonestable);
-               }
+	} else {
+    	\$('#errorblth').hide();
+    }
 
-               return false;
+	jQuery('#zones').html(ZoneGuide.getTable(
+		jQuery('#UserLactatethreshold').val(),
+		jQuery('#UserBikelactatethreshold').val(),
+		zgi18n));
+	return false;
 }
 
 function setwhrs(val) 
@@ -344,8 +297,10 @@ $this->js_addon .= <<<EOH
         // display zones-table
         if ( lth != '' )
         {
-                zonestable = calculate_zones( lth );
-                \$('#zones').html(zonestable);
+                jQuery('#zones').html(ZoneGuide.getTable(
+					jQuery('#UserLactatethreshold').val(),
+					jQuery('#UserBikelactatethreshold').val(),
+					zgi18n));
         }
 
   /**
@@ -403,12 +358,12 @@ $this->js_addon .= <<<EOH
                 return false;
         });
 
-        \$('#UserLactatethreshold').blur(function() {
-                if ( \$('#UserLactatethreshold').val() != '' )
-                {
-                   check_lth();
-                }
-                return false;
+        jQuery('#UserLactatethreshold, #UserBikelactatethreshold')
+			.blur(function() {
+				if (jQuery(this).val() != '') {
+    	        	check_lth();
+        	    }
+            	return false;
   		});
 
         // facebox box

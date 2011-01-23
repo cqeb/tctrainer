@@ -25,14 +25,18 @@ ZoneGuide = {
 		 * 		run : "Run",
 		 * 		bike : "Bike"
 		 *  }
+		 * @param guideStyle enable guide style for use in trainingplan
 		 * @return html table
 		 */
-		getTable : function(rlth, blth, i18n) {
+		getTable : function(rlth, blth, i18n, guideStyle) {
 			this.rlth = rlth;
 			this.blth = blth;
 			
-			var html = '<div id="zoneguide">' +
-				'<img class="pointer" src="/trainer/img/zones/pointer.png"><table>' +
+			var html = '<div id="zoneguide">';
+			if (guideStyle) {
+				html += '<img class="pointer" src="/trainer/img/zones/pointer.png">';
+			}
+			html += '<table>' +
 				// header
 				'<tr>' +
 					'<th>' + i18n.sport + '</th>' +
