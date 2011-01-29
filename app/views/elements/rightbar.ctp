@@ -13,27 +13,24 @@
 <br /><br />
 
 <script type="text/javascript"><!--
-/* Sidebar - rechts 2 */
 google_ad_client = "ca-pub-1221279145141294";
-google_ad_slot = "5636489260";
-google_ad_width = 180;
-google_ad_height = 150;
+/* Content right 2 */
+google_ad_slot = "7321319812";
+google_ad_width = 200;
+google_ad_height = 200;
 //-->
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
 
-<!--
+<?php if ( isset( $userobject ) && $userobject['admin'] == '1' ) { ?>
 <br /><br />
-<div class="messagebox">
-<center>
-<a href="http://www.amazon.de/gp/product/B001NGOYMU?ie=UTF8&tag=trico-21&linkCode=as2&camp=1638&creative=6742&creativeASIN=B001NGOYMU" target="_blank"><img border="0" src="https://images-na.ssl-images-amazon.com/images/I/41WA91iWQBL._SL110_.jpg" alt="Heart rate monitor" /></a><img src="http://www.assoc-amazon.de/e/ir?t=trico-21&l=as2&o=3&a=B001NGOYMU" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />
-</center>
-<?php __('Still no heart rate monitor?'); ?>
-</div>  
--->
-   
+<ul>
+        <li><a href="/trainer/users/list_users"><?php __('Administrate users'); ?></a></li>
+</ul>
+<?php } ?>
+  
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 </div>
 <div class="box last">

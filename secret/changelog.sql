@@ -84,3 +84,5 @@ DROP TABLE IF EXISTS `trainingplans`;
 ALTER TABLE  `payments` CHANGE  `payed_from`  `paid_from` DATE NULL DEFAULT NULL;
 ALTER TABLE  `payments` CHANGE  `payed_to`  `paid_to` DATE NULL DEFAULT NULL;
 
+#2011-01-29 KMS
+ALTER TABLE `users` ADD `admin` BOOL NOT NULL AFTER `advanced_features`;

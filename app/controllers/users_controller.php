@@ -33,6 +33,87 @@ class UsersController extends AppController {
       $this->checkSession();
       $this->set('statusbox', 'statubox');    
 	}
+	
+	function list_users()
+	{
+  			$this->layout = 'default_trainer_2rows';
+      		$this->checkSession();
+            $statusbox = 'statusbox';
+
+            $session_userid = $this->Session->read('session_userid');
+            $userobject = $this->Session->read('userobject');
+            
+			if ( $userobject['admin'] != "1" )
+			{
+					// login data is wrong, redirect to login page
+					$this->Session->setFlash(__("Sorry. Don't fool around with our security.",true));
+					$this->redirect('/users/login');
+			}
+			
+            $this->paginate = array(
+                  'limit' => 40,
+                  'order' => array('User.id' => 'desc')
+            );
+
+            $users = $this->paginate('User');
+			
+            $this->set('users', $users);
+            $this->set('statusbox', $statusbox);
+	}
+
+	function edit_user($id = null, $setuser = null)
+	{
+      		$this->checkSession();
+			$setuser = $this->params['named']['setuser'];
+            $statusbox = 'statusbox';
+
+            $session_userid = $this->Session->read('session_userid');
+            $userobject = $this->Session->read('userobject');
+            
+			if ( $userobject['admin'] != "1" )
+			{
+					// login data is wrong, redirect to login page
+					$this->Session->setFlash(__("Sorry. Don't fool around with our security.",true));
+					$this->redirect('/users/login');
+			}
+
+			if ( isset( $id ) )
+				$this->User->id = $id;
+			elseif ( $this->data['User']['id'] )
+				$this->User->id = $this->data['User']['id'];
+
+			if (empty($this->data))
+			{
+				$this->data = $this->User->read();
+				
+				if ( isset( $setuser )  ) 
+				{
+					$user = $this->data['User'];
+					$this->Session->write('session_useremail', $user['email']);
+          			$this->Session->write('session_userid', $user['id']);
+			        $this->redirect('/trainingplans/view');
+				}
+				
+			} else
+			{
+				if ($this->User->save( $this->data, array(
+			      'validate' => true,
+			      'fieldList' => array( 'paid_from', 'paid_to', 'activated', 'deactivated', 
+			      'advanced_features', 'notifications', 'canceled' ) ) ) )
+			      {
+			      	   $statusbox = 'statusbox ok';
+			      	   $this->Session->setFlash(__('User profile saved.',true));
+			
+			      } else
+			      {
+			      	   $statusbox = 'statusbox error';
+			      	   $this->Session->setFlash(__('Some errors occured.',true));
+			      }
+				  $this->data = $this->User->read();
+			}
+			$this->set('user', $this->data['User']);
+			$this->set('statusbox', $statusbox);
+	}
 
 	function login()
 	{
@@ -1526,15 +1607,24 @@ class UsersController extends AppController {
 		{
 			$user = $results[$i]['users'];
 
-      		if ( $debug == true ) echo "<br />\n" . $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . "<br />\n";
+      		if ( $debug == true ) 
+			{
+      			echo "<br />\n" . $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . "(" . $user['email'] . ")<br />\n";
+				echo "notifications " . $user['notifications'] . "<br />\n";
+				echo "deactivated " . $user['deactivated']  . "<br />\n";
+				echo "activated " . $user['activated'] . "<br />\n";
+      		}
       
 			// check last training - if older than 10 days - reminder!
+			/*
 			if ( $user['deactivated'] == 0 && $user['activated'] == 1 && ( date('w', time()) == $check_on_day ) && $user['notifications'] != 1 ) 
 			         $this->_check_lasttraining( $user );
-
+			*/
+			
       		if ( date('w', time()) == $check_on_day )
-               $this->_check_more( $user );
+               $this->_advanced_checks( $user, $check_on_day, $debug );
               
+			/*
 			if ( $user['level'] == 'freemember' && $user['notifications'] != 1 )
 			{
 				// if freemember remind him/her of premiumservice
@@ -1549,12 +1639,13 @@ class UsersController extends AppController {
 					if ( $debug == true ) echo "premiumreminder<br />\n";
 				}
 			}
+			*/
 
 		}
 
-		$this->loadModel('Transaction');
 
 		// delete old transactions
+		$this->loadModel('Transaction');
 		$this->Transactionhandler->_delete_old_transactions( $this->Transaction );
 		$this->set('output', $output);
 
@@ -1563,7 +1654,8 @@ class UsersController extends AppController {
   /**
    * when did user last perform a workout?
    */
-	function _check_lasttraining( $user )
+/*
+ 	function _check_lasttraining( $user )
 	{
 		$debug = true;
 	  	$last_workout_limit = 10; // 10 days 
@@ -1587,16 +1679,20 @@ class UsersController extends AppController {
 			if ( $debug == true ) echo "reminder sent.<br />\n";
 		}
 	}
-
-	function _check_more( $user )
+*/
+	function _advanced_checks( $user, $check_on_day, $debug = false )
 	{
 		
-		$debug = true;
+	  	  $last_workout_limit = 10; // 10 days 
 		
 		  $u = $user;
-		  $text_for_mail = '';
+		  $text_for_mail = $text_for_mail_training = $text_for_mail_premium = '';
+		  $content = '';
 		   
-		  // check if profile is complete from technical point of view
+		  /**
+		   check if profile is complete from technical point of view
+		   * 
+		   **/
 		  $wrong_attributes = "";
 		  $check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
 		    'password', 'passwordcheck', 'lactatethreshold', 'bikelactatethreshold', 'typeofsport',
@@ -1624,8 +1720,41 @@ class UsersController extends AppController {
 		        if ( $debug == true ) echo $u['id'] . " is not correct<br />\n";
 		  } 
 
+		  /*
+		   * collect information about user for informing about update
+		   * 
+		  */
+		  
 		  if ( $user['notifications'] != 1 ) 
 		  {   
+
+			if ( $user['deactivated'] == 0 && $user['activated'] == 1 )
+			{ 
+				$userid = $user['id'];
+				$this->loadModel('Trainingstatistic');
+	
+				$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
+			
+				$results = $this->Trainingstatistic->query($sql);
+				if ( $debug == true ) echo $sql . "<br />\n";
+		
+				$last_training = strtotime($results[0][0]['ldate']);
+				$diff_time = time() - ( 86400 * $last_workout_limit );
+		
+				if ( $diff_time > $last_training )
+				{
+					$text_for_mail_training = __("don't be lazy. Do your training and track your workouts!", true) . "<br /><br />\n\n" . 
+						__('Go to', true) . ' <a href="' .
+	 					Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
+						'/trainingstatistics/list_trainings/" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - NOW!', true); 
+	 
+					//$mailsubject = __('TriCoreTraining - track you workout - reminder', true);
+					//$mailtemplate = 'trainingreminder';
+					//$this->_sendMail( $user, $mailsubject, $mailtemplate, '', $user['yourlanguage'] );
+					if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
+				}
+			}
+
 		      // check name + address
 		      if ( !$u['firstname'] ) 
 		        $text_for_mail .= '<li>' . __('Your firstname is missing!',true) . ' ' . __('Please add it to your profile.', true) .
@@ -1723,7 +1852,7 @@ class UsersController extends AppController {
 		          // check per sport how many hours an user should train
 		          //case ($u['sports'] )
 		          //$text_for_mail .= '<li>' . __('You do not train enough for your sport. Please check the recommended training load for your type of sport.', true) . "</li>\n";
-		          $text_for_mail .= '<li>' . __('You have not entered training hours per week for your sport.', true) . 
+		          $text_for_mail .= '<li>' . __('You have not entered your weekly training time.', true) . 
 		          " " . '<a href="' . Configure::read('App.hostUrl') . 
 		          Configure::read('App.serverUrl') . '/users/edit_traininginfo" target="_blank">' . __('Change it.', true) . '</a>' .
 		          "</li>\n";
@@ -1767,22 +1896,52 @@ class UsersController extends AppController {
 		  {
 		      $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
 		  }   
-		
+
+		  /*
+		  if ( $user['level'] == 'freemember' && $user['notifications'] != 1 )
+			{
+				// if freemember remind him/her of premiumservice
+				$paid_to = strtotime( $user['paid_to'] );
+
+				// from 1 week to end remind user of premium service
+				if ( ( time() > ( $paid_to - ( 86400 * 7 ) ) ) && ( date('w', time()) == $check_on_day ) ) 
+				{
+					$mailsubject = __('My TriCoreTraining coach for the costs of a coffee a week.', true);
+					$mailtemplate = 'premiumreminder';
+					$this->_sendMail( $user, $mailsubject, $mailtemplate, '', $user['yourlanguage'] );
+					if ( $debug == true ) echo "premiumreminder<br />\n";
+				}
+			}
+		  */
 		  if ( ( strtotime( $u['paid_to'] ) < time() ) && $u['level'] != 'freemember' )
 		  {
 		      // set level = paymember
 		      $this->User->id = $u['id'];
 		      $this->User->savefield('level', 'freemember', false);
-		      $text_for_mail .= '<li>' . __('Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please', true) . ' ' .
-		        '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "</li>\n";
+		      $text_for_mail_premium =  
+				__('Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please', true) . ' ' .
+				'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "\n";
+				'<br /><br />' . "\n\n" . __('Gain speed, loose weight');
 		  }
 		
-		  if ( $text_for_mail )
+		  if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
 		  {
-		      $mailsubject = __('TriCoreTraining informs you.', true);
+		      $mailsubject = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com with important news for YOU!', true);
 		      $template = 'standardmail';
-		      $content = __('This TriCoreTraining message comes to you because some information in your profile is missing.', true) . 
-		      '<br />' . '<ol>' . $text_for_mail . '</ol>';
+
+		      if ( $text_for_mail_training )
+		      {
+		      		$content = $text_for_mail_training;		
+		      }
+			  if ( $text_for_mail_premium )
+			  {
+			  		$content .= $text_for_mail_premium;
+			  }		      
+		      if ( $text_for_mail ) 
+		      {
+		      		$content .= __('There is something to update in your profile.', true) . 
+		      			"<br />\n" . '<ol>' . $text_for_mail . '</ol>';
+			  }
 		
 		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
 		  } 

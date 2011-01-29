@@ -10,11 +10,12 @@
  </table>
 
  <p><?php echo $mcontent; ?></p>
- <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); ?>"><?php __('Go to TriCoreTraining.com!'); ?></a></p>
                            
  <p><?php __('Yours, Clemens'); ?></p>
  <br />
 
+ <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); ?>"><?php __('Go to TriCoreTraining.com!'); ?></a></p>
+ 
  <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/edit_userinfo/"><?php __('Stop sending me notifications!'); ?></a></p>
   
 <?php echo $this->element('email/newsletter_footer'); ?>

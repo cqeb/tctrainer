@@ -10,9 +10,9 @@ class CompetitionsController extends AppController {
    var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc'); 
    var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Provider');
 
-/**
-list all competitions with paging
-**/
+	/**
+	list all competitions with paging
+	**/
 
    var $paginate = array(
        'Competition' => array(
