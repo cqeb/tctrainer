@@ -120,7 +120,7 @@ class AppController extends Controller {
                            $this->Cookie->del('tct_auth');
                            $this->Cookie->del('tct_auth_blog');
 						   
-                           $this->Session->setFlash("Sorry, your session has expired or you're not logged in.");
+                           $this->Session->setFlash(__("Sorry, your session has expired or you're not logged in.", true));
                            $this->redirect('/users/login');
 		                   exit();
                       } else
