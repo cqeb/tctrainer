@@ -170,5 +170,18 @@ class TriBikeProvider extends WorkoutProvider {
 		$d = round($d / 5) * 5;
 		return $d;
 	}
+	
+	/**
+	 * (non-PHPdoc)
+	 * @see WorkoutProvider::isSportMatching()
+	 */
+	protected function isSportMatching(Race $race) {
+		$t = substr($race->getType(), 0, 3);
+		if ($t === 'BIK' || $t === 'TRI') {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 ?>

@@ -202,7 +202,9 @@ abstract class WorkoutProvider {
 		$ldRace = $this->athlete->getSchedule()->getNextLDRace($week);
 
 		// lsd trainings start 12 weeks before the event
-		if ($ldRace && $ldRace->getWeeksTillRaceday($week) <= 12) {
+		if ($ldRace 
+			&& $this->isSportMatching($ldRace) 
+			&& $ldRace->getWeeksTillRaceday($week) <= 12) {
 			$lsdWorkout = $this->generateLSDWorkout($ldRace);
 			if ($lsdWorkout) {
 				$this->addWorkout($lsdWorkout, false);
@@ -316,5 +318,17 @@ abstract class WorkoutProvider {
 		$this->modificatorCount[$type]++;
 		return $modificator;
 	}
+	
+	/**
+	 * determine if a race matches the workoutprovider's sport type
+	 * this is mainly used for the generation of lsd events. swim
+	 * lsd trainings make no sense, if you are just training for a
+	 * marathon. so, if you've got a marathon upcoming, and the current
+	 * provider is a swim provider, false should be returned. a run
+	 * provider should return true in this case.
+	 * @param Race $race to be checked
+	 * @return boolean true if the competition type matches the provider
+	 */
+	protected abstract function isSportMatching(Race $race);
 }
 ?>
