@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-23 18:40+0100\n"
-"PO-Revision-Date: 2011-01-23 18:50+0100\n"
+"POT-Creation-Date: 2011-01-29 15:17+0100\n"
+"PO-Revision-Date: 2011-01-29 15:19+0100\n"
 "Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -944,6 +944,10 @@ msgstr "Ukraine"
 #: \controllers\components\unitcalc.php:796
 msgid "Other"
 msgstr "Anderes"
+
+#: \core\renderers\workoutrenderer.class.php:20
+msgid "This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them."
+msgstr "Das ist eine spezielle Trainingseinheit, die für ein kommendes Langdistanzrennen eingeplant wurde. Dieses Training ist sehr wichtig - Du solltest es nicht auslassen."
 
 #: \core\workouts\bikeworkout.class.php:40
 #: \core\workouts\runworkout.class.php:35

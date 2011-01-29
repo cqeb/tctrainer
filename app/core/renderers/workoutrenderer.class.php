@@ -16,7 +16,9 @@ class WorkoutRenderer {
 		$trimps = 0;
 		foreach ($workouts as $k => $w) {
 			if ($w->isLsd()) {
-				$star = '<img src="/trainer/img/star.gif" /> ';
+				$star = '<img src="/trainer/img/star.gif" class="lsd" title="'
+					. __('This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them.', true) 
+					. '"/> ';
 			} else {
 				$star = false;
 			}

@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-01-23 18:40+0100\n"
+"POT-Creation-Date: 2011-01-29 15:17+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -942,6 +942,10 @@ msgstr ""
 
 #: \controllers\components\unitcalc.php:796
 msgid "Other"
+msgstr ""
+
+#: \core\renderers\workoutrenderer.class.php:20
+msgid "This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them."
 msgstr ""
 
 #: \core\workouts\bikeworkout.class.php:40

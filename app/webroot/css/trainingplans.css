@@ -194,6 +194,9 @@ table.workouts td.sport, table.workouts td.duration, table.workouts td.trimp {
 	padding-top: 15px;
 }
 
+.workouts .type img.lsd {
+	cursor: help;
+}
 
 .mesocycle {
 	margin-bottom: 20px;
