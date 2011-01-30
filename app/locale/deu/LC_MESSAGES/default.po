@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-01-30 00:43+0100\n"
-"PO-Revision-Date: 2011-01-30 00:49+0100\n"
+"PO-Revision-Date: 2011-01-30 09:41+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -313,7 +313,7 @@ msgstr "Ausloggen"
 
 #: \controllers\users_controller.php:213
 msgid "You're logged out. Bye."
-msgstr "Du bist ausgeloggt. Ciao."
+msgstr "Du bist ausgeloggt. Bis bald."
 
 #: \controllers\users_controller.php:219
 #: \views\users\password_forgotten.ctp:2

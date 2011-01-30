@@ -29,7 +29,7 @@
         	<li><?php echo $html->link(__('Edit weight goals',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
 		    <li><?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?></li>
         	<li><?php echo $html->link(__('Change password',true),array('controller' => 'users', 'action' => 'edit_password'))?></li>
-		    <?php if ( isset( $userobject ) && $userobject['advanced_features'] ) { ?><li><?php echo $html->link(__('Edit images',true),array('controller' => 'users', 'action' => 'edit_images'))?></li><?php } ?>
+		    <?php if ( isset( $userobject ) && $userobject['advanced_features'] ) { ?><li><?php echo $html->link(__('Edit images',true).' - Beta',array('controller' => 'users', 'action' => 'edit_images'))?></li><?php } ?>
         	<li><?php echo $html->link(__('Change metric',true),array('controller' => 'users', 'action' => 'edit_metric'))?></li>
         	<li>&nbsp;</li>
         	<li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); echo ' - '; __('Support'); ?></a></li>        

@@ -9,8 +9,8 @@
 </div>
 
 <div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
-<b><?php __('Recommendation'); ?></b>
-<br /><br />
+<!--<b><?php __('Recommendation'); ?></b>-->
+<!--<br /><br />-->
 
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";

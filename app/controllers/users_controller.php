@@ -1643,7 +1643,6 @@ class UsersController extends AppController {
 
 		}
 
-
 		// delete old transactions
 		$this->loadModel('Transaction');
 		$this->Transactionhandler->_delete_old_transactions( $this->Transaction );
@@ -1831,7 +1830,7 @@ class UsersController extends AppController {
 		
 		          // weight you have to loose to achieve your weight target
 		          $weight_per_month_check = $diff_weight / $divisor;
-		
+				  
 		          if ( $weight_per_month_check > 2 ) 
 		          {
 		              $weight_unit_array = $this->Unitcalc->check_weight(2, 'show');
@@ -1913,11 +1912,15 @@ class UsersController extends AppController {
 				}
 			}
 		  */
-		  if ( ( strtotime( $u['paid_to'] ) < time() ) && $u['level'] != 'freemember' )
+		  if ( ( strtotime( $u['paid_to'] ) < time() ) )
 		  {
-		      // set level = paymember
-		      $this->User->id = $u['id'];
-		      $this->User->savefield('level', 'freemember', false);
+		      if ( $u['level'] != 'freemember' )
+			  {
+			      // set level = paymember
+			      $this->User->id = $u['id'];
+			      $this->User->savefield('level', 'freemember', false);
+			  }
+
 		      $text_for_mail_premium =  
 				__('Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please', true) . ' ' .
 				'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "\n";
@@ -1931,7 +1934,7 @@ class UsersController extends AppController {
 
 		      if ( $text_for_mail_training )
 		      {
-		      		$content = $text_for_mail_training;		
+		      		$content = $text_for_mail_training . '<br /><br />' . "\n\n";		
 		      }
 			  if ( $text_for_mail_premium )
 			  {
