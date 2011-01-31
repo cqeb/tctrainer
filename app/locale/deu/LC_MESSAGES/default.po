@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-01-30 00:43+0100\n"
-"PO-Revision-Date: 2011-01-30 09:41+0100\n"
+"PO-Revision-Date: 2011-01-30 21:53+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -603,11 +603,11 @@ msgstr "Dein Account ist nicht aktiviert bis jetzt. Bitte verwende dein Willkomm
 
 #: \controllers\users_controller.php:1922
 msgid "Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please"
-msgstr "Deine PREMIUM Mitgliedschaft ist vorbei. Wenn du einen wieder deinen professionellen, interaktiven Trainingscoach für 3 Kaffees pro Monat haben willst,"
+msgstr "Deine PREMIUM Mitgliedschaft ist vorbei. Wenn du wieder deinen professionellen, interaktiven Trainingscoach für 3 Kaffees pro Monat haben willst,"
 
 #: \controllers\users_controller.php:1923
 msgid "subscribe"
-msgstr "abonniere"
+msgstr "abonniere PREMIUM"
 
 #: \controllers\users_controller.php:1924
 #: \views\elements\email\html\premiumreminder.ctp:14
@@ -1535,7 +1535,7 @@ msgstr "Empfehlung"
 
 #: \views\elements\rightbar.ctp:30
 msgid "Administrate users"
-msgstr "Administratiere Benutzer"
+msgstr "Administriere Benutzer"
 
 #: \views\elements\rightbar.ctp:40
 msgid "Graphs"

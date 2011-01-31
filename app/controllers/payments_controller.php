@@ -8,7 +8,7 @@ class PaymentsController extends AppController {
    var $name = 'Payments';
 
    var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc'); // 'TabDisplay',
-   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Loghandler');
+   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Loghandler', 'Rebatehandler');
 
    var $paginate = array(
        'Payments' => array(
@@ -100,7 +100,7 @@ shows the chosen paymentplan by the user
             $timeinterval = $this->params['named']['t'];
             if ( !$timeinterval ) $timeinterval = 1;
 
-            if ( $_SERVER['HTTP_HOST'] == 'localhost' || $results['User']['advanced_features'] )
+            if ( $_SERVER['HTTP_HOST'] == 'localhost' || $results['User']['admin'] )
             {
             	$price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
             } else

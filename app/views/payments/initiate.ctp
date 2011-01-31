@@ -156,7 +156,7 @@ EOE;
 			__('Unfortunately our PAYPAL account is not activated right now. Until end of January 2011 we will activate it.'); 
 			echo '</b><br /><br />';
 
-			if ( $userobject['advanced_features'] )
+			if ( $userobject['admin'] )
 			{
 ?>
 
@@ -210,7 +210,7 @@ if ( $days_to_end > 0 )
             <input type="image" src="https://www.<?php echo $testing; ?>paypal.com/en_US/i/btn/btn_subscribe_LG.gif" border="0" name="submit" alt="">
             <img alt="" border="0" src="https://www.<?php echo $testing; ?>paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
             </form>
-			<?php } // end advanced_features ?>
+			<?php } // end admin ?>
 			
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
             <br /><br />

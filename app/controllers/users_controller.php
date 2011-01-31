@@ -1936,14 +1936,18 @@ class UsersController extends AppController {
 		      {
 		      		$content = $text_for_mail_training . '<br /><br />' . "\n\n";		
 		      }
+
+			  $content .= __('Your new trainingplan for next week is here.', true); 
+			  $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view" target="_blank">&raquo; ' . __('Read it (also mobile), print it, USE it!', true) . '</a>' . "\n";
+
 			  if ( $text_for_mail_premium )
 			  {
-			  		$content .= $text_for_mail_premium;
+			  		$content .= $text_for_mail_premium . '<br /><br />' . "\n\n";
 			  }		      
 		      if ( $text_for_mail ) 
 		      {
 		      		$content .= __('There is something to update in your profile.', true) . 
-		      			"<br />\n" . '<ol>' . $text_for_mail . '</ol>';
+		      			"<br />\n" . '<ol>' . $text_for_mail . '</ol>' . '<br /><br />' . "\n\n";
 			  }
 		
 		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);

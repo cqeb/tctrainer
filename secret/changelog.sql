@@ -86,3 +86,6 @@ ALTER TABLE  `payments` CHANGE  `payed_to`  `paid_to` DATE NULL DEFAULT NULL;
 
 #2011-01-29 KMS
 ALTER TABLE `users` ADD `admin` BOOL NOT NULL AFTER `advanced_features`;
+
+#2011-01-30 KMS
+ALTER TABLE `users` ADD `inviter` VARCHAR( 20 ) NOT NULL AFTER `paid_to`;

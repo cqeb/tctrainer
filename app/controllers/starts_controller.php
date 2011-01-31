@@ -56,7 +56,7 @@ class StartsController extends AppController {
   {
       $this->checkSession();
 	  $userobject = $this->Session->read('userobject');
-      if ( isset( $userobject['advanced_features'] ) && $userobject['advanced_features'] == 1 )
+      if ( isset( $userobject['admin'] ) && $userobject['advanced_features'] == 1 )
 	  {
 		      $this->autoRender = false;            
 		      $this->Filldatabase->prefill($this->Start);
