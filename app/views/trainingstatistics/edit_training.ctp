@@ -1,5 +1,44 @@
 <h1><?php __('Track workouts'); ?></h1>
+<style>
+label.ui-button {
+	color: #666;
+	border: 2px solid #67C5F8;
+	border-color: #999 #666 #666 #999;
+	padding: 2px 5px;
+	background: #efefef;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #ccc),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#efefef 0%,
+    	#ddd 100%
+	);
+	text-shadow: 1px 1px 1px white;
+	cursor: pointer;
+}
 
+label.ui-corner-left {
+	border-radius: 5px 0px 0px 5px;
+	-moz-border-radius: 5px 0px 0px 5px;
+	-webkit-border-radius: 5px 0px 0px 5px;
+}
+
+label.ui-corner-right {
+	border-radius: 0px 5px 5px 0px;
+	-moz-border-radius: 0px 5px 5px 0px;
+	-webkit-border-radius: 0px 5px 5px 0px;
+}
+
+label.ui-state-active, label.ui-button:hover {
+	border-color: #67C5F8 #238cc5 #238cc5 #67C5F8;
+}
+
+</style>
 <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
 
 <fieldset>
@@ -12,30 +51,31 @@
 
 echo $form->input('user_id',array('type'=>'hidden'));
 
+echo $form->input('sportstype',
+	array(
+		'legend' => false,
+        'label' => __('Sport', true),
+		'type' => 'radio',
+        'class' => 'required',
+		'default' => 'RUN',
+        'options' => array(
+			'RUN' => __('Run', true),
+            'BIKE' => __('Bike', true),
+            'SWIM' => __('Swim', true)
+	)));
+
+?>
+<div id="date"></div>
+<?php
+
 echo $form->input('date',
 	array(
-    	'before' => '',
-        'after' => '',
-        'between' => '',
         'class' => 'required',
         'label' => __('Date', true),
         'minYear' => date('Y',time())-1,
         'maxYear' => date('Y',time())+1
 ));
 
-echo $form->input('sportstype',
-	array(
-		'legend' => false,
-        'label' => __('Sport', true),
-        'before' => '',
-        'after' => '',
-        'between' => '',
-        'class' => 'required',
-        'options' => array(
-			'RUN' => __('Run', true),
-            'BIKE' => __('Bike / Mountain-Bike', true),
-            'SWIM' => __('Swim', true)
-	)));
 
 echo $form->input('distance',
 	array(
@@ -120,17 +160,6 @@ echo $form->input('name',
 ?>
 <br />
 <a name="AF"></a>
-
-<!--
-<hr />
-
-<h2><?php __('Optional data'); ?></h2>
-
-<a href="#AF" onClick="javascript:show_layer();return false;"><?php __('Show advanced functions'); ?></a>
-
-<div id="layer_hidden">
--->
-
 <?php
 
 $min_weight = $unitcalc->check_weight('40', 'single');
@@ -326,43 +355,14 @@ echo $form->submit(__('Save',true));
 ?>
 <a name="Save"></a>
 
-                 </fieldset>
-<?php
+</fieldset>
 
-echo $form->end();
-
-$this->js_addon = <<<EOE
-<script language="JavaScript">
-function show_layer() {
-    \$('#layer_hidden').show();
-}
-\$(document).ready(function() {
-      
-        // facebox box
-        \$('a[rel*=facebox]').facebox();
-        
-        if ( \$("#TrainingstatisticLocation").val() ) 
-        {
-            \$("#gmap").css("height","250px");
-            \$("#gmap").css("margin","20px");
-            
-            \$("#gmap").gMap({ markers: [
-                            { address: \$("#TrainingstatisticLocation").val(),
-                              html: "Your training" }],
-                  address: \$("#TrainingstatisticLocation").val(),
-                  zoom: 10 });
-        }
-
-EOE;
-    
-if ( !isset ( $data ) || count($data) < 2 )
-      $this->js_addon .= "$('#layer_hidden').hide();";
-        
-      $this->js_addon .= <<<EOE
-      
-      \$('.help').tipTip();
-      
+<script type="text/javascript">
+jQuery(document).ready(function() {
+	// prepare form
+	jQuery('div.radio').buttonset();
+	jQuery('div#date').datepicker();
+	// tooltips
+	jQuery('.help').tipTip();
 });
 </script>
-EOE;
-?>
