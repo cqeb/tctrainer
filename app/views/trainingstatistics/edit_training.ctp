@@ -1,90 +1,75 @@
 <?php
-
-            $GMAPS_API = 'ABQIAAAAilf2rpNqnwxzswbTSxpTKhR0vcTud5tngwSMB1bBY6nA3aJGXhRefbgF7FG4R1KtdAaVJ3x60UlI4Q';
-            $this->addScript('gmaps_google', $javascript->link('http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$GMAPS_API));
-            $this->addScript('gmaps_jquery', $javascript->link('jquery.gmap-1.1.0'));
-
+$GMAPS_API = 'ABQIAAAAilf2rpNqnwxzswbTSxpTKhR0vcTud5tngwSMB1bBY6nA3aJGXhRefbgF7FG4R1KtdAaVJ3x60UlI4Q';
+$this->addScript('gmaps_google', $javascript->link('http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$GMAPS_API));
+$this->addScript('gmaps_jquery', $javascript->link('jquery.gmap-1.1.0'));
 ?>
+<h1><?php __('Track workouts'); ?></h1>
 
-                   <h1><?php __('Track workouts'); ?></h1>
+<?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
 
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
-                  
-                   <fieldset>
-                   <legend><?php __('Add or edit your workout!'); ?></legend>
-
-                   <?php if ($session->check('Message.flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
-                   </div><br />
-                   <?php } ?>
-
-                   <!--<?php echo $html->link(__('Back to list of workouts',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null) ?>-->
-
-<?php
+<fieldset>
+<?php if ($session->check('Message.flash')) { ?>
+<div class="<?php echo $statusbox; ?>">
+	<?php $session->flash(); ?>
+</div>
+<?php 
+} 
 
 echo $form->input('user_id',array('type'=>'hidden'));
 
 echo $form->input('date',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'class' => 'required',
-                  'label' => __('Date', true),
-                  'minYear' => date('Y',time())-1,
-                  'maxYear' => date('Y',time())+1
+	array(
+    	'before' => '',
+        'after' => '',
+        'between' => '',
+        'class' => 'required',
+        'label' => __('Date', true),
+        'minYear' => date('Y',time())-1,
+        'maxYear' => date('Y',time())+1
 ));
-
-__('RUN', true);
-__('BIKE', true);
-__('SWIM', true);
 
 echo $form->input('sportstype',
-                  array(
-                  'legend' => false,
-                  'label' => __('Sport', true),
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'class' => 'required',
-                  'options' => array(
-                                 'RUN' => __('Run', true),
-                                 'BIKE' => __('Bike / Mountain-Bike', true),
-                                 'SWIM' => __('Swim', true)
-                                 //'BIKE' => __('Mountain-Bike', true),
-                                 //'STRENGTH' => __('Strength', true),
-                                 //'MISC' => __('Misc', true)
-                                 )));
+	array(
+		'legend' => false,
+        'label' => __('Sport', true),
+        'before' => '',
+        'after' => '',
+        'between' => '',
+        'class' => 'required',
+        'options' => array(
+			'RUN' => __('Run', true),
+            'BIKE' => __('Bike / Mountain-Bike', true),
+            'SWIM' => __('Swim', true)
+	)));
 
 echo $form->input('distance',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'class' => 'required',
-                  'maxLength' => 255,
-                  'error' => array(
-                      'numeric' => __('Enter a distance for your workout',true), 
-                      'notempty' => __('Enter a distance for your workout',true)
-                  ),
-                  'label' => __('Distance (' . $unit['length'] . ')', true)
-));
+	array(
+    	'before' => '',
+        'after' => '',
+        'between' => '',
+        'class' => 'required',
+        'maxLength' => 255,
+        'error' => array(
+        	'numeric' => __('Enter a distance for your workout',true), 
+            'notempty' => __('Enter a distance for your workout',true)
+		),
+		'label' => __('Distance (' . $unit['length'] . ')', true)
+	));
 
 echo $form->input('duration',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'default' => '00:00:00',
-                  'maxLength' => 255,
-                  'class' => 'required',
-                  'error' => array(
-                      'notempty' => __('Enter a duration for your workout', true),
-                      'greater' => __('Enter a duration for your workout', true)
-                  ),
-                  'label' => __('Duration (HH:MM:SS)', true)
-));
+	array(
+    	'before' => '',
+        'after' => '',
+        'between' => '',
+        'default' => '00:00:00',
+        'maxLength' => 255,
+        'class' => 'required',
+        'error' => array(
+        	'notempty' => __('Enter a duration for your workout', true),
+            'greater' => __('Enter a duration for your workout', true)
+		),
+        'label' => __('Duration (HH:MM:SS)', true)
+	));
 
 $help_avg_pulse = '<a class="help" title="' . 
 	__("This is a pulse-oriented training! Use your heart rate monitor to track your pulse. If you don't enter an average heart rate, we have to approximate.", true) .
@@ -215,64 +200,6 @@ echo $form->textarea('comment',
            ));
 echo '<br /><br />';
 
-?>
-
-
-<?php
-
-/*
-echo $form->input('avg_pulse_zone1',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 5,
-                  'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                  'label' => __('Zone 1', true)
-));
-
-echo $form->input('avg_pulse_zone2',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 5,
-                  'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                  'label' => __('Zone 2', true)
-));
-
-echo $form->input('avg_pulse_zone3',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 5,
-                  'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                  'label' => __('Zone 3', true)
-));
-
-echo $form->input('avg_pulse_zone4',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 5,
-                  'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                  'label' => __('Zone 4', true)
-));
-
-echo $form->input('avg_pulse_zone5',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 5,
-                  'error' => array('wrap' => 'div', 'style' => 'color:red'),
-                  'label' => __('Zone 5', true)
-));
-
-*/
-
 if ( $userobject['advanced_features'] ) {
 
 $location_label = __('Location', true) . '<br />(' . __('City', true) . ', ' . __('Country', true) . ')';
@@ -386,12 +313,6 @@ echo $form->radio('conditions_mood',
 
 <?php
 
-/*
-// TODO (B)
-echo $form->input('publish_community', array('label' => __('Publish to community',true), 'type' => 'checkbox'));
-echo $form->input('publish_facebook', array('label' => __('Publish to facebook',true), 'type' => 'checkbox'));
-echo $form->input('publish_twitter', array('label' => __('Publish to twitter',true), 'type' => 'checkbox'));
-*/
 
 }
 
@@ -413,9 +334,9 @@ echo $form->submit(__('Save',true));
                  </fieldset>
 <?php
 
-      echo $form->end();
+echo $form->end();
 
-      $this->js_addon = <<<EOE
+$this->js_addon = <<<EOE
 <script language="JavaScript">
 function show_layer() {
     \$('#layer_hidden').show();
@@ -449,5 +370,4 @@ if ( !isset ( $data ) || count($data) < 2 )
 });
 </script>
 EOE;
-
 ?>
