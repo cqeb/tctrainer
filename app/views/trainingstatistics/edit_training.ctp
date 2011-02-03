@@ -1,8 +1,3 @@
-<?php
-$GMAPS_API = 'ABQIAAAAilf2rpNqnwxzswbTSxpTKhR0vcTud5tngwSMB1bBY6nA3aJGXhRefbgF7FG4R1KtdAaVJ3x60UlI4Q';
-$this->addScript('gmaps_google', $javascript->link('http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$GMAPS_API));
-$this->addScript('gmaps_jquery', $javascript->link('jquery.gmap-1.1.0'));
-?>
 <h1><?php __('Track workouts'); ?></h1>
 
 <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
