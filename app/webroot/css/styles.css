@@ -323,12 +323,12 @@ input[type=text]:focus, input[type=password]:focus, button:focus, input[type=sub
 
 button, input[type=submit] {
 	color: #666;
-	border: 2px solid #67C5F8;
+	border: 1px solid #67C5F8;
 	border-color: #67C5F8 #238cc5 #238cc5 #67C5F8;
 	padding: 5px 10px;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 	background: #efefef;
 	background: -webkit-gradient(
 	    linear,

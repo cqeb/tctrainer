@@ -2,7 +2,8 @@
 <style>
 label.ui-button {
 	color: #666;
-	border: 2px solid #67C5F8;
+	width: auto;
+	border: 1px solid #67C5F8;
 	border-color: #999 #666 #666 #999;
 	padding: 2px 5px;
 	background: #efefef;
@@ -23,19 +24,41 @@ label.ui-button {
 }
 
 label.ui-corner-left {
-	border-radius: 5px 0px 0px 5px;
-	-moz-border-radius: 5px 0px 0px 5px;
-	-webkit-border-radius: 5px 0px 0px 5px;
+	border-radius: 2px 0px 0px 2px;
+	-moz-border-radius: 2px 0px 0px 2px;
+	-webkit-border-radius: 2px 0px 0px 2px;
 }
 
 label.ui-corner-right {
-	border-radius: 0px 5px 5px 0px;
-	-moz-border-radius: 0px 5px 5px 0px;
-	-webkit-border-radius: 0px 5px 5px 0px;
+	border-radius: 0px 2px 2px 0px;
+	-moz-border-radius: 0px 2px 2px 0px;
+	-webkit-border-radius: 0px 2px 2px 0px;
 }
 
 label.ui-state-active, label.ui-button:hover {
 	border-color: #67C5F8 #238cc5 #238cc5 #67C5F8;
+	background: #d1eeff;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #c5dae5),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#c5dae5 0%,
+    	#fff 100%
+	);
+}
+
+#datepicker {
+	visibility:hidden;
+	width: 1px;
+}
+
+.ui-datepicker-trigger {
+	margin-bottom: -10px;
 }
 
 </style>
@@ -62,20 +85,16 @@ echo $form->input('sportstype',
 			'RUN' => __('Run', true),
             'BIKE' => __('Bike', true),
             'SWIM' => __('Swim', true)
-	)));
-
-?>
-<div id="date"></div>
-<?php
+)));
 
 echo $form->input('date',
 	array(
         'class' => 'required',
-        'label' => __('Date', true),
+        'label' => false,
+		'after' => '<input id="datepicker" style=""/>',
         'minYear' => date('Y',time())-1,
         'maxYear' => date('Y',time())+1
 ));
-
 
 echo $form->input('distance',
 	array(
@@ -336,14 +355,8 @@ echo $form->radio('conditions_mood',
 </table>
 
 <?php
-
-
 }
 
-?>
-<!--</div>-->
-
-<?php
 /** not finished **/
 echo $form->hidden('avg_speed');
 echo $form->hidden('trimp');
@@ -361,7 +374,14 @@ echo $form->submit(__('Save',true));
 jQuery(document).ready(function() {
 	// prepare form
 	jQuery('div.radio').buttonset();
-	jQuery('div#date').datepicker();
+
+	jQuery('#datepicker').datepicker({
+		showOn: "button",
+		buttonImage: "../img/icon_calendar.gif",
+		buttonImageOnly: true,
+		buttonText: '<?php __("Date"); ?>'
+	});
+
 	// tooltips
 	jQuery('.help').tipTip();
 });
