@@ -43,27 +43,26 @@ echo $form->input('workouttype',
 		)
 ));
 ?>
-<div class="outerwrap">
-<div class="wrapspecial wrapduration">
+<div>
 <?php
 echo $form->input('duration',
 	array(
         'label' => '<img src="/trainer/img/icons/duration.gif">' . __('Duration', true),
 		'title' => __('Enter the duration of your workout, using hours, minutes and seconds like: 01:15:23', true),
-        'default' => '00:00:00',
+        'div' => 'wrap duration',
+		'default' => '00:00:00',
         'maxLength' => 255,
         'class' => 'required',
         'error' => array(
         	'notempty' => __('Enter a duration for your workout', true),
             'greater' => __('Enter a duration for your workout', true)
 )));
-?>
-</div><div class="wrapspecial">
-<?php
+
 echo $form->input('avg_pulse',
 	array(
         'label' => '<img src="/trainer/img/icons/heartrate.gif">' . 'bpm',
 		'title' => __('The average heart rate measured during your workout', true),
+		'div' => 'wrap avg_pulse',
 		'maxLength' => 255,
 		'class' => 'required',
         'error' => array(
@@ -77,14 +76,17 @@ echo $form->input('distance',
 	array(
         'label' => '<img src="/trainer/img/icons/distance.gif">' . $unit['length'],
 		'title' => __("The distance you've covered during your workout", true),
-        'class' => 'required',
+        'div' => 'wrap distance',
+		'class' => 'required',
         'maxLength' => 255,
         'error' => array(
         	'numeric' => __('Enter a distance for your workout',true), 
             'notempty' => __('Enter a distance for your workout',true)
 )));
+
 ?>
-</div></div>
+<div class="clear" />
+</div>
 <?php
 if ( $userobject['advanced_features'] ) {
 echo $form->input('competition', array(

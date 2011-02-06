@@ -9,6 +9,10 @@ body {
 	-webkit-border-radius: 2px;
 }
 
+.clear {
+	clear: both;
+}
+
 /**
  * Tables
  */

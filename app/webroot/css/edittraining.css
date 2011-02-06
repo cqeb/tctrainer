@@ -63,29 +63,19 @@ label.ui-state-active, label.ui-button:hover {
 /*
  * special layouts for avg hr, time and distance
  */
-.outerwrap {
-	width: 100%;
-	height: 120px;
-	padding: 10px 0px;
-}
- 
-.wrapspecial {
-	width: 220px;
+.wrap {
+	width: 110px;
 	height: 100px;
+	display: block;
 	float: left;
+	margin: 10px 0px 20px 0px;
 }
 
-.wrapspecial.wrapduration {
+.wrap.duration {
 	width: 191px;
 }
 
-.wrapspecial div {
-	display: inline-block;
-	width: 110px;
-	float: left;
-}
-
-.wrapspecial input {
+.wrap input {
 	width: 90px;
 	height: 60px;
 	font-size: 36px;
@@ -94,7 +84,7 @@ label.ui-state-active, label.ui-button:hover {
 	text-shadow: 2px 2px 1px white;
 }
 
-.wrapspecial label {
+.wrap label {
 	position: absolute;
 	margin-top: 71px;
 	background: #efefef;
@@ -108,12 +98,13 @@ label.ui-state-active, label.ui-button:hover {
 	-webkit-border-radius: 0px 0px 2px 2px;
 }
 
-.wrapspecial label img {
+.wrap label img {
 	margin-bottom: -5px;
 }
 
-.wrapspecial.wrapduration label {
+.wrap.duration label {
 	width: 160px;	
 }
 #TrainingstatisticDuration {
 	width: 170px;
+}
