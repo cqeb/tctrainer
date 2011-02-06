@@ -12,7 +12,6 @@
 echo $form->input('date',
 	array(
         'class' => 'required',
-        // 'label' => __('Date', true),
 		'label' => false,
 		'after' => '<input id="datepicker" style=""/>',
         'minYear' => date('Y',time())-1,
@@ -37,7 +36,7 @@ echo $form->input('workouttype',
 		'label' => false,
 		'type' => 'select',
 		'options' => array(
-			0 => 'none',
+			0 => __('Pick a workout', true),
 			__('Swim', true) => array(
 				'e1' => 'lala'
 			)
@@ -49,7 +48,7 @@ echo $form->input('workouttype',
 <?php
 echo $form->input('duration',
 	array(
-        'label' =>  __('Duration', true),
+        'label' => '<img src="/trainer/img/icons/duration.gif">' . __('Duration', true),
 		'title' => __('Enter the duration of your workout, using hours, minutes and seconds like: 01:15:23', true),
         'default' => '00:00:00',
         'maxLength' => 255,
@@ -63,7 +62,7 @@ echo $form->input('duration',
 <?php
 echo $form->input('avg_pulse',
 	array(
-        'label' => 'bpm',
+        'label' => '<img src="/trainer/img/icons/heartrate.gif">' . 'bpm',
 		'title' => __('The average heart rate measured during your workout', true),
 		'maxLength' => 255,
 		'class' => 'required',
@@ -76,7 +75,7 @@ echo $form->input('avg_pulse',
 
 echo $form->input('distance',
 	array(
-        'label' => $unit['length'],
+        'label' => '<img src="/trainer/img/icons/distance.gif">' . $unit['length'],
 		'title' => __("The distance you've covered during your workout", true),
         'class' => 'required',
         'maxLength' => 255,

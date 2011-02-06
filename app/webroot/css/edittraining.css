@@ -108,6 +108,10 @@ label.ui-state-active, label.ui-button:hover {
 	-webkit-border-radius: 0px 0px 2px 2px;
 }
 
+.wrapspecial label img {
+	margin-bottom: -5px;
+}
+
 .wrapspecial.wrapduration label {
 	width: 160px;	
 }
