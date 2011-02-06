@@ -76,7 +76,7 @@ label.ui-state-active, label.ui-button:hover {
 }
 
 .wrapspecial.wrapduration {
-	width: 200px;
+	width: 191px;
 }
 
 .wrapspecial div {
@@ -86,9 +86,9 @@ label.ui-state-active, label.ui-button:hover {
 }
 
 .wrapspecial input {
-	width: 80px;
+	width: 90px;
 	height: 60px;
-	font-size: 40px;
+	font-size: 36px;
 	font-weight: bold;
 	text-align: center;
 	text-shadow: 2px 2px 1px white;
@@ -98,7 +98,7 @@ label.ui-state-active, label.ui-button:hover {
 	position: absolute;
 	margin-top: 71px;
 	background: #efefef;
-	width: 70px;
+	width: 80px;
 	padding: 5px 10px;
 	text-align: center;
 	border: 1px solid #999;

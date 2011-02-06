@@ -38,7 +38,8 @@ echo $form->input('sportstype',
 <?php
 echo $form->input('duration',
 	array(
-        'label' => __('Duration', true),
+        'label' =>  __('Duration', true),
+		'title' => __('Enter the duration of your workout, using hours, minutes and seconds like: 01:15:23', true),
         'default' => '00:00:00',
         'maxLength' => 255,
         'class' => 'required',
@@ -52,6 +53,7 @@ echo $form->input('duration',
 echo $form->input('avg_pulse',
 	array(
         'label' => 'bpm',
+		'title' => __('The average heart rate measured during your workout', true),
 		'maxLength' => 255,
 		'class' => 'required',
         'error' => array(
@@ -64,6 +66,7 @@ echo $form->input('avg_pulse',
 echo $form->input('distance',
 	array(
         'label' => $unit['length'],
+		'title' => __("The distance you've covered during your workout", true),
         'class' => 'required',
         'maxLength' => 255,
         'error' => array(
@@ -303,12 +306,12 @@ jQuery(document).ready(function() {
 
 	jQuery('#datepicker').datepicker({
 		showOn: "button",
-		buttonImage: "../img/calendar_icon.png",
+		buttonImage: "/trainer/img/calendar_icon.png",
 		buttonImageOnly: true,
 		buttonText: '<?php __("Date"); ?>'
 	});
 
 	// tooltips
-	jQuery('.help').tipTip();
+	jQuery('.help, #TrainingstatisticDuration, #TrainingstatisticAvgPulse, #TrainingstatisticDistance').tipTip();
 });
 </script>
