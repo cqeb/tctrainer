@@ -87,6 +87,19 @@ echo $form->input('distance',
 ?>
 <div class="clear" />
 </div>
+
+<table id="stats">
+	<tr>
+		<td id="kcal">0</td>
+		<td id="avgspeed">0</td>
+		<td id="trimp">0</td>
+	</tr>
+	<tr>
+		<th class="border-right">kcal</th>
+		<th class="border-right"><?php echo $unit['length']; ?>/h</th>
+		<th>TRIMPs</th>
+	</tr>
+</table>
 <?php
 if ( $userobject['advanced_features'] ) {
 echo $form->input('competition', array(

@@ -108,3 +108,51 @@ label.ui-state-active, label.ui-button:hover {
 #TrainingstatisticDuration {
 	width: 170px;
 }
+
+/*
+ * stats table
+ */
+table#stats {
+	width: 402px;
+	border: 1px solid #999;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-collapse: separate;
+}
+
+table#stats td {
+	font-size: 36px;
+	font-weight: bold;
+	text-align: center;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #ddd),
+	    color-stop(1, white)
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#c5dae5 0%,
+    	#fff 100%
+	);
+	text-shadow: 1px 1px 1px white;
+}
+
+#kcal, #avgspeed {
+	border: 0px solid #999;
+	border-right-width: 1px;
+	width: 33%;
+}
+
+table#stats th {
+	border: 0px;
+	border-top: 1px dotted #999;
+	background: #efefef;
+	padding: 7px;
+}
+
+table#stats .border-right {
+	border-right: 1px solid #999;
+}
