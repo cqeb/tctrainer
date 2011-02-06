@@ -263,6 +263,9 @@ ul.pages li {
 
 input[type=text], input[type=password] {
 	width: 200px;
+	box-shadow: inset 3px 3px 3px #ddd;
+	-webkit-box-shadow: inset 3px 3px 3px #ddd;
+	-moz-box-shadow: inset 3px 3px 3px #ddd;
 }
 
 input:disabled, button:disabled {

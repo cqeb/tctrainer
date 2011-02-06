@@ -1,78 +1,24 @@
 <h1><?php __('Track workouts'); ?></h1>
-<style>
-label.ui-button {
-	color: #666;
-	width: auto;
-	border: 1px solid #67C5F8;
-	border-color: #999 #666 #666 #999;
-	padding: 2px 5px;
-	background: #efefef;
-	background: -webkit-gradient(
-	    linear,
-    	left bottom,
-    	left top,
-	    color-stop(0, #ccc),
-	    color-stop(1, rgb(255,255,255))
-	);
-	background: -moz-linear-gradient(
-    	center bottom,
-    	#efefef 0%,
-    	#ddd 100%
-	);
-	text-shadow: 1px 1px 1px white;
-	cursor: pointer;
-}
-
-label.ui-corner-left {
-	border-radius: 2px 0px 0px 2px;
-	-moz-border-radius: 2px 0px 0px 2px;
-	-webkit-border-radius: 2px 0px 0px 2px;
-}
-
-label.ui-corner-right {
-	border-radius: 0px 2px 2px 0px;
-	-moz-border-radius: 0px 2px 2px 0px;
-	-webkit-border-radius: 0px 2px 2px 0px;
-}
-
-label.ui-state-active, label.ui-button:hover {
-	border-color: #67C5F8 #238cc5 #238cc5 #67C5F8;
-	background: #d1eeff;
-	background: -webkit-gradient(
-	    linear,
-    	left bottom,
-    	left top,
-	    color-stop(0, #c5dae5),
-	    color-stop(1, rgb(255,255,255))
-	);
-	background: -moz-linear-gradient(
-    	center bottom,
-    	#c5dae5 0%,
-    	#fff 100%
-	);
-}
-
-#datepicker {
-	visibility:hidden;
-	width: 1px;
-}
-
-.ui-datepicker-trigger {
-	margin-bottom: -10px;
-}
-
-</style>
+<link rel="stylesheet" type="text/css" href="/trainer/css/edittraining.css" />
 <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
 
 <fieldset>
 <?php if ($session->check('Message.flash')) { ?>
 <div class="<?php echo $statusbox; ?>">
-	<?php $session->flash(); ?>
+<?php $session->flash(); ?>
 </div>
 <?php 
 } 
-
 echo $form->input('user_id',array('type'=>'hidden'));
+
+echo $form->input('date',
+	array(
+        'class' => 'required',
+        'label' => __('Date', true),
+		'after' => '<input id="datepicker" style=""/>',
+        'minYear' => date('Y',time())-1,
+        'maxYear' => date('Y',time())+1
+));
 
 echo $form->input('sportstype',
 	array(
@@ -86,67 +32,47 @@ echo $form->input('sportstype',
             'BIKE' => __('Bike', true),
             'SWIM' => __('Swim', true)
 )));
-
-echo $form->input('date',
-	array(
-        'class' => 'required',
-        'label' => false,
-		'after' => '<input id="datepicker" style=""/>',
-        'minYear' => date('Y',time())-1,
-        'maxYear' => date('Y',time())+1
-));
-
-echo $form->input('distance',
-	array(
-    	'before' => '',
-        'after' => '',
-        'between' => '',
-        'class' => 'required',
-        'maxLength' => 255,
-        'error' => array(
-        	'numeric' => __('Enter a distance for your workout',true), 
-            'notempty' => __('Enter a distance for your workout',true)
-		),
-		'label' => __('Distance (' . $unit['length'] . ')', true)
-	));
-
+?>
+<div class="outerwrap">
+<div class="wrapspecial wrapduration">
+<?php
 echo $form->input('duration',
 	array(
-    	'before' => '',
-        'after' => '',
-        'between' => '',
+        'label' => __('Duration', true),
         'default' => '00:00:00',
         'maxLength' => 255,
         'class' => 'required',
         'error' => array(
         	'notempty' => __('Enter a duration for your workout', true),
             'greater' => __('Enter a duration for your workout', true)
-		),
-        'label' => __('Duration (HH:MM:SS)', true)
-	));
-
-$help_avg_pulse = '<a class="help" title="' . 
-	__("This is a pulse-oriented training! Use your heart rate monitor to track your pulse. If you don't enter an average heart rate, we have to approximate.", true) .
-	'" href="#">?</a>';
-	
+)));
+?>
+</div><div class="wrapspecial">
+<?php
 echo $form->input('avg_pulse',
-                  array(
-                  'before' => '',
-                  'after' => $help_avg_pulse,
-                  'between' => '',
-                  'maxLength' => 255,
-                  'class' => 'required',
-                  'error' => array(
-                      'numeric' => __('Enter an average heart rate for your workout',true),
-                      'notempty' => __('Enter an average heart rate for your workout',true),
-                      'greater' => __('Must be greater than',true) . ' 80',
-                      'lower' => __('Must be lower than',true) . ' 240'
-                  ),
-                  'label' => __('Avg. heart rate', true)
-));
+	array(
+        'label' => 'bpm',
+		'maxLength' => 255,
+		'class' => 'required',
+        'error' => array(
+        	'numeric' => __('Enter an average heart rate for your workout',true),
+            'notempty' => __('Enter an average heart rate for your workout',true),
+            'greater' => __('Must be greater than',true) . ' 80',
+            'lower' => __('Must be lower than',true) . ' 240'
+)));
 
-echo '<br />';
-
+echo $form->input('distance',
+	array(
+        'label' => $unit['length'],
+        'class' => 'required',
+        'maxLength' => 255,
+        'error' => array(
+        	'numeric' => __('Enter a distance for your workout',true), 
+            'notempty' => __('Enter a distance for your workout',true)
+)));
+?>
+</div></div>
+<?php
 if ( $userobject['advanced_features'] ) {
 echo $form->input('competition', array(
                 'label' => __('Competition',true), 
@@ -377,7 +303,7 @@ jQuery(document).ready(function() {
 
 	jQuery('#datepicker').datepicker({
 		showOn: "button",
-		buttonImage: "../img/icon_calendar.gif",
+		buttonImage: "../img/calendar_icon.png",
 		buttonImageOnly: true,
 		buttonText: '<?php __("Date"); ?>'
 	});

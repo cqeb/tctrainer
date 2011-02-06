@@ -1,0 +1,115 @@
+label.ui-button {
+	color: #666;
+	width: auto;
+	border: 1px solid #67C5F8;
+	border-color: #999 #666 #666 #999;
+	padding: 2px 5px;
+	background: #efefef;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #ccc),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#efefef 0%,
+    	#ddd 100%
+	);
+	text-shadow: 1px 1px 1px white;
+	cursor: pointer;
+}
+
+label.ui-corner-left {
+	border-radius: 2px 0px 0px 2px;
+	-moz-border-radius: 2px 0px 0px 2px;
+	-webkit-border-radius: 2px 0px 0px 2px;
+}
+
+label.ui-corner-right {
+	border-radius: 0px 2px 2px 0px;
+	-moz-border-radius: 0px 2px 2px 0px;
+	-webkit-border-radius: 0px 2px 2px 0px;
+}
+
+label.ui-state-active, label.ui-button:hover {
+	border-color: #67C5F8 #238cc5 #238cc5 #67C5F8;
+	background: #d1eeff;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #c5dae5),
+	    color-stop(1, rgb(255,255,255))
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#c5dae5 0%,
+    	#fff 100%
+	);
+}
+
+#datepicker {
+	visibility:hidden;
+	width: 1px;
+}
+
+.ui-datepicker-trigger {
+	margin-bottom: -5px;
+	cursor: pointer;
+}
+
+/*
+ * special layouts for avg hr, time and distance
+ */
+.outerwrap {
+	width: 100%;
+	height: 120px;
+	padding: 10px 0px;
+}
+ 
+.wrapspecial {
+	width: 220px;
+	height: 100px;
+	float: left;
+}
+
+.wrapspecial.wrapduration {
+	width: 200px;
+}
+
+.wrapspecial div {
+	display: inline-block;
+	width: 110px;
+	float: left;
+}
+
+.wrapspecial input {
+	width: 80px;
+	height: 60px;
+	font-size: 40px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 2px 2px 1px white;
+}
+
+.wrapspecial label {
+	position: absolute;
+	margin-top: 71px;
+	background: #efefef;
+	width: 70px;
+	padding: 5px 10px;
+	text-align: center;
+	border: 1px solid #999;
+	border-top: 1px dotted #999;
+	border-radius: 0px 0px 2px 2px;
+	-moz-border-radius: 0px 0px 2px 2px;
+	-webkit-border-radius: 0px 0px 2px 2px;
+}
+
+.wrapspecial.wrapduration label {
+	width: 160px;	
+}
+#TrainingstatisticDuration {
+	width: 170px;
