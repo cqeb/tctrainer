@@ -9,12 +9,11 @@
 </div>
 <?php 
 } 
-echo $form->input('user_id',array('type'=>'hidden'));
-
 echo $form->input('date',
 	array(
         'class' => 'required',
-        'label' => __('Date', true),
+        // 'label' => __('Date', true),
+		'label' => false,
 		'after' => '<input id="datepicker" style=""/>',
         'minYear' => date('Y',time())-1,
         'maxYear' => date('Y',time())+1
@@ -32,6 +31,18 @@ echo $form->input('sportstype',
             'BIKE' => __('Bike', true),
             'SWIM' => __('Swim', true)
 )));
+
+echo $form->input('workouttype',
+	array(
+		'label' => false,
+		'type' => 'select',
+		'options' => array(
+			0 => 'none',
+			__('Swim', true) => array(
+				'e1' => 'lala'
+			)
+		)
+));
 ?>
 <div class="outerwrap">
 <div class="wrapspecial wrapduration">
