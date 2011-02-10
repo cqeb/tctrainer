@@ -6,6 +6,7 @@ TimeParser = {
 	 * contains the parsed time in minutes
 	 */
 	mins : -1,
+	secs : 0,
 	
 	/**
 	 * parse a provided time string
@@ -15,7 +16,17 @@ TimeParser = {
 	 */
 	parse : function (str) {
 		this.mins = -1;
+		this.secs = 0;
 		str = str.replace(/[^,^.^:^0-9]/, "");
+		var secs;
+		// check if there are seconds at the end of the string
+		if (secs = str.match(/\d+[\.,:]\d+[\.,:](\d+)/)) {
+			// seconds do not count for our calculations
+			// so they will be stripped if found
+			str = str.replace(/[\.,:](\d+)$/, '');
+			this.secs = parseInt(secs[1]);
+		}
+		
 		if (str.indexOf(":") != -1) {
 			// clock notation 8:30
 			var res = str.match(/^(\d+):(\d+).*/);
@@ -36,11 +47,16 @@ TimeParser = {
 	 * render a beautiful representation of internal minute setting
 	 * 130 eg. will become 2:10h
 	 * @param int mins minutes to be rendered. optional parameter, this.mins is fallback
+	 * @param secs if set to true, time will be formatted with seconds
 	 * @return formatted time string 
 	 */
-	format : function (mins) {
+	format : function (mins, secs) {
 		if (mins == null) {
 			mins = this.mins;
+		}
+		
+		if (typeof secs == 'number') {
+			this.secs = secs;
 		}
 		
 		mins = parseInt(mins);
@@ -50,6 +66,14 @@ TimeParser = {
 		if (m < 10) {
 			m = "0" + m;
 		}
-		return h + ":" + m + "h";
+		
+		if (secs) {
+			if (this.secs < 10) {
+				this.secs = '0' + this.secs;
+			}
+			return h + ":" + m + ":" + this.secs;
+		} else {
+			return h + ":" + m;
+		}
 	}
 };

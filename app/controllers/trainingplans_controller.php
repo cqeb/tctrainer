@@ -100,6 +100,20 @@ class TrainingplansController extends AppController {
 	}
 	
 	/**
+	 * calculate the TRIMP for a workout
+	 * requires get parameters sport (like BIKE, RUN), time (in minutes) and hr (average heart rate)
+	 */
+	function calc_trimp() {
+		$this->layout = 'plain';
+		Configure::write('debug', 0);
+		$this->set('res',
+			$this->Provider->getAthlete()->calcTRIMP(
+				$_GET['sport'], $_GET['time'], $_GET['hr']
+			)
+		);
+	}
+	
+	/**
 	 * persist workout settings such as time and ratio to database
 	 */ 
 	function save_workout_settings() {

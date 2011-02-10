@@ -41,7 +41,7 @@ TrainingPlanner = {
 		
 		this.initDistributor();
 		
-		$('#avg').val(TimeParser.format(weeklymins));
+		$('#avg').val(TimeParser.format(weeklymins) + "h");
 		
 		// init the slider
 		this.slider = $("#slider");
@@ -233,9 +233,9 @@ TrainingPlanner = {
 			
 			// update weekly training hours
 			if (workoutSettings.usertime > 0) {
-				$('#week').val(TimeParser.format(workoutSettings.usertime));
+				$('#week').val(TimeParser.format(workoutSettings.usertime) + 'h');
 			} else {
-				$('#week').val(TimeParser.format(workoutSettings.time));
+				$('#week').val(TimeParser.format(workoutSettings.time) + 'h');
 			}
 
 			// update ratios
@@ -320,7 +320,7 @@ TrainingPlanner = {
 	avgUpdated : function () {
 		var avg = $('#avg');
 		TimeParser.parse(avg.val());
-		avg.val(TimeParser.format());
+		avg.val(TimeParser.format() + 'h');
 	},
 
 	/**
@@ -330,7 +330,7 @@ TrainingPlanner = {
 	weekUpdated : function (save) {
 		var week = $('#week');
 		TimeParser.parse(week.val());
-		week.val(TimeParser.format());
+		week.val(TimeParser.format() + 'h');
 		// show reset button if applicable
 		if (workoutSettings.time != TimeParser.mins) {
 			$('.avgweekly .reset').fadeIn();
@@ -368,8 +368,8 @@ TrainingPlanner = {
 		}
 
 		// now render times to the html elements
-		$('#time1').text(TimeParser.format(mins1)); 
-		$('#time2').text(TimeParser.format(mins2)); 
+		$('#time1').text(TimeParser.format(mins1) + 'h'); 
+		$('#time2').text(TimeParser.format(mins2) + 'h'); 
 
 		// update percentage values
 		$('#p1').text(val1 + "%");
@@ -381,7 +381,7 @@ TrainingPlanner = {
 
 		if (this.tri) {
 			var mins3 = parseInt((100 - val2) * minsPercent);
-			$('#time3').text(TimeParser.format(mins3)); 
+			$('#time3').text(TimeParser.format(mins3) + 'h'); 
 			$('#p3').text((100 - val2) + "%");
 		}
 		
@@ -389,7 +389,7 @@ TrainingPlanner = {
 	},
 	
 	resetWeeklyHours : function () {
-		$('#week').val(TimeParser.format(workoutSettings.time));
+		$('#week').val(TimeParser.format(workoutSettings.time) + 'h');
 		this.weekUpdated(true);
 	},
 	

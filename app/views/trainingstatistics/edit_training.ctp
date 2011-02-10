@@ -1,4 +1,6 @@
 <h1><?php __('Track workouts'); ?></h1>
+<script type="text/javascript" src="/trainer/js/workoutstats.js"></script>
+<script type="text/javascript" src="/trainer/js/timeparser.js"></script>
 <link rel="stylesheet" type="text/css" href="/trainer/css/edittraining.css" />
 <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
 
@@ -336,7 +338,47 @@ jQuery(document).ready(function() {
 		buttonText: '<?php __("Date"); ?>'
 	});
 
-	// tooltips
+	var duration = jQuery('#TrainingstatisticDuration');
+	var distance = jQuery('#TrainingstatisticDistance');
+	var heartrate = jQuery('#TrainingstatisticAvgPulse');
+
+	// format time field on change
+	duration.change(function () {
+		TimeParser.parse(duration.val());
+		duration.val(
+			TimeParser.format(null,true)
+		);
+	});
+	
+	// update training stats
+	// average speed
+	jQuery('#TrainingstatisticDuration, #TrainingstatisticDistance')
+		.change(function () {
+			TimeParser.parse(
+				duration.val()
+			);
+			jQuery('#avgspeed').text(
+				WorkoutStats.calcSpeed(
+					distance.val(),
+					TimeParser.mins / 60
+				)
+			);
+	});
+	
+	// trimps
+	jQuery('#TrainingstatisticDuration, #TrainingstatisticAvgPulse')
+		.change(function () {
+		TimeParser.parse(duration.val());
+		jQuery('#trimp').text(
+			WorkoutStats.calcTrimps(
+				heartrate.val(),
+				'RUN',
+				TimeParser.mins
+			)
+		);
+	});
+	
+	// add tooltips
 	jQuery('.help, #TrainingstatisticDuration, #TrainingstatisticAvgPulse, #TrainingstatisticDistance').tipTip();
 });
 </script>
