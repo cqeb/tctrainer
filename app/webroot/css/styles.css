@@ -289,6 +289,9 @@ input.medium {
 
 select {
 	width: 210px;
+	box-shadow: inset 3px 3px 3px #ddd;
+	-webkit-box-shadow: inset 3px 3px 3px #ddd;
+	-moz-box-shadow: inset 3px 3px 3px #ddd;
 }
 
 #UserBirthdayMonth, #CompetitionCompetitiondateMonth, #TrainingstatisticDateMonth, #UserTargetweightdateMonth,

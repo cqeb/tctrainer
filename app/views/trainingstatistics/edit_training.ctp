@@ -37,19 +37,37 @@ echo $form->input('sportstype',
 		)
 ));
 
-echo $form->input('workouttype',
+echo $form->input('swimworkouttypes',
 	array(
 		'label' => false,
 		'type' => 'select',
-		'options' => array(
-			0 => __('Pick a workout', true),
-			__('Swim', true) => $workouts['Swim'],
-			__('Bike', true) => $workouts['Bike'],
-			__('Run', true) => $workouts['Run']
-		),
-		'div' => array(
-			'id' => 'workouttype'
-		)
+		'options' => $workouts['Swim'],
+		'div' => 'swimworkouttypes',
+		'title' => __('Pick a workout type to specify which kind of workout you completed (optional)', true)
+));
+
+echo $form->input('bikeworkouttypes',
+	array(
+		'label' => false,
+		'type' => 'select',
+		'options' => $workouts['Bike'],
+		'div' => 'bikeworkouttypes',
+		'title' => __('Pick a workout type to specify which kind of workout you completed (optional)', true)
+));
+
+echo $form->input('runworkouttypes',
+	array(
+		'label' => false,
+		'type' => 'select',
+		'options' => $workouts['Run'],
+		'div' => 'runworkouttypes',
+		'title' => __('Pick a workout type to specify which kind of workout you completed (optional)', true)
+));
+
+echo $form->input('workouttype',
+	array(
+		'div' => 'workouttype',
+		'label' => false
 ));
 ?>
 <div>
@@ -295,36 +313,53 @@ echo $form->submit(__('Save',true));
 
 <script type="text/javascript">
 jQuery(document).ready(function() {
-	/**
-	 * only display workouts for a given sports type
-	 */
-	function showWorkoutsForSport(sport) {
-		var l;
-		if (sport === 'SWIM') {
-			l = '<?php echo __("Swim", true);?>';
-		} else if (sport === 'BIKE') {
-			l = '<?php echo __("Bike", true);?>';
-		} else if (sport === 'RUN') {
-			l = '<?php echo __("Run", true);?>';
-		}
-		jQuery('#workouttype optgroup[label=' 
-				+ l 
-				+ '], #workouttype optgroup[label=' 
-				+ l 
-				+ '] option').show();
-	}
-
 	// sportstype
 	jQuery('div.radio')
 		.buttonset()
 		.change(function (e) {
-			var v = jQuery(e.target).val();
-			// hide all available options
-			jQuery('#workouttype optgroup option, #workouttype optgroup').hide();
-			// now show only
-			showWorkoutsForSport(v); 
+			var sport = jQuery(e.target).val();
+
+			// hide all select first
+			jQuery('.swimworkouttypes, .bikeworkouttypes, .runworkouttypes').hide();
+			
+			// .. then reveal the correct one
+			if (sport === 'SWIM') {
+				jQuery('.swimworkouttypes').show();
+			} else if (sport === 'BIKE') {
+				jQuery('.bikeworkouttypes').show();
+			} else if (sport === 'RUN') {
+				jQuery('.runworkouttypes').show();
+			}
 		});
-	
+
+	// wokrouttypes
+	jQuery('.swimworkouttypes select, .bikeworkouttypes select, .runworkouttypes select')
+		.change(function () {
+			var v = jQuery(this).val();
+			// store value
+			jQuery('#TrainingstatisticWorkouttype').val(v);
+			// synchronize other workout types
+			jQuery('.swimworkouttypes select option[value='
+					+ v 
+					+ '], '
+					+ '.bikeworkouttypes select option[value='
+					+ v
+					+ '], '
+					+ '.runworkouttypes select option[value='
+					+ v
+					+ ']').attr('selected', 'selected');
+		})
+		.tipTip();
+
+	// show workouttype that should be displayed by actual workout selection
+	var sport = jQuery('#sportstype input[type=radio]:checked').val()
+	if (sport == 'SWIM') {
+		jQuery('.swimworkouttypes').show();
+	} else if (sport == 'BIKE') {
+		jQuery('.bikeworkouttypes').show();
+	} else if (sport == 'RUN') {
+		jQuery('.runworkouttypes').show();
+	}
 
 	jQuery('#datepicker').datepicker({
 		showOn: "button",

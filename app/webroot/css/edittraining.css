@@ -21,6 +21,10 @@ label.ui-button {
 	cursor: pointer;
 }
 
+.ui-button-text {
+	font-weight: normal;
+}
+
 label.ui-corner-left {
 	border-radius: 2px 0px 0px 2px;
 	-moz-border-radius: 2px 0px 0px 2px;
@@ -120,6 +124,11 @@ label.ui-state-active, label.ui-button:hover {
 #CourseName input {
 	width: 391px;
 	font-size: 18px;
+}
+
+.workouttype, .swimworkouttypes, .bikeworkouttypes, .runworkouttypes {
+	display: none;
+	margin-bottom: 10px;
 }
 
 /*

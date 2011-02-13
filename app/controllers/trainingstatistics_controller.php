@@ -599,7 +599,7 @@ class TrainingstatisticsController extends AppController {
 	  	}
 	  	$courseNamesAutocomplete = '[' . implode(',', $cnames) . ']';
 	  	
-	  	// build workout type selector
+	  	// build workout type selectors
 	  	$sports = array('Swim', 'Bike', 'Run');
 	  	$types = array('E', 'S', 'M', 'F');
 	  	$workouts = array();
@@ -611,6 +611,7 @@ class TrainingstatisticsController extends AppController {
 	  			while ($label) {
 		  			$i++;
 		  			$t = $type . $i;
+		  			$workouts[$sport][''] = __('Pick workout type', true);
 	  				switch ($sport) {
 		  				case 'Swim':
 		  					$label = SwimWorkout::getTypeLabel($t);
