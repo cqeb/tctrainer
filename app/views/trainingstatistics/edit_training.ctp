@@ -1,4 +1,4 @@
-<h1><?php __('Workouts details'); ?></h1>
+<h1><?php __('Workout details'); ?></h1>
 <script type="text/javascript" src="/trainer/js/workoutstats.js"></script>
 <script type="text/javascript" src="/trainer/js/timeparser.js"></script>
 <link rel="stylesheet" type="text/css" href="/trainer/css/edittraining.css" />
@@ -107,9 +107,9 @@ echo $form->input('distance',
 
 <table id="stats">
 	<tr>
-		<td id="kcal">0</td>
-		<td id="avgspeed">0</td>
-		<td id="trimp">0</td>
+		<td id="kcal"><?php echo $data['kcal']; ?></td>
+		<td id="avgspeed"><?php echo $data['avg_speed']; ?></td>
+		<td id="trimp"><?php echo $data['trimp']; ?></td>
 	</tr>
 	<tr>
 		<th class="border-right">kcal</th>
@@ -150,38 +150,6 @@ echo $form->input('weight',
      'label' => __('Weight', true) . ' (' . $unit['weight'] . ')'
 ));
 
-?>
-<ul>
-<?php
-
-if ( isset( $data['avg_speed'] ) && $data['avg_speed'] > 0 ) $avg_speed = $unitcalc->check_distance($data['avg_speed']);
-
-if ( isset( $avg_speed['amount'] ) && $data['avg_speed'] > 0 ) {
-   echo '<br /><br />';
-   echo '<li>';
-   __('AVG Speed'); 
-   echo ' ' . $avg_speed['amount'] . ' ' . $unit['length'] . '/h';
-   echo '</li>'; 
-}
-
-if ( isset( $data['trimp'] ) && $data['trimp'] > 0 ) {
-   echo '<li>';
-   __('TRIMP'); 
-   echo ' ' . $data['trimp'];
-   echo '</li>'; 
-}
- 
-if ( isset( $data['kcal'] ) && $data['kcal'] > 0 ) {
-   echo '<li>';
-   __('Burnt'); 
-   echo ' ' . $data['kcal'] . ' ' . 'kcal';
-   echo '</li>';
-}
-
-?>
-</ul>
-
-<?php
 __('Comment');
 echo '<br />';
 echo $form->textarea('comment',
