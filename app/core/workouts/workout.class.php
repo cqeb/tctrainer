@@ -190,9 +190,10 @@ abstract class Workout {
 	
 	/**
 	 * return a human read- & understandable text label for this workout
-	 * @param string $type string which identifies the workout type such as "E1"..
+	 * @param string $type OPTIONAL string which identifies the workout type such as "E1"..
+	 * @return type label string or false if unknown
 	 */
-	public abstract function getTypeLabel();
+	public abstract function getTypeLabel($type=false);
 	
 	/**
 	 * retrieve the average workout heart rate for a given workout

@@ -26,8 +26,11 @@ class SwimWorkout extends Workout {
 	 * (non-PHPdoc)
 	 * @see Workout::getTypeLabel()
 	 */
-	public function getTypeLabel() {
-	switch ($this->type) {
+	public function getTypeLabel($type=false) {
+		if (!$type) {
+			$type = $this->type;
+		}
+		switch ($type) {
 			case Workout::E1:
 				return __('Recovery', true);
 				break;
@@ -65,7 +68,7 @@ class SwimWorkout extends Workout {
 				return __('Threshold Swim', true);
 				break;
 			default:
-				return 'UNKNOWN';
+				return false;
 				break;
 		}
 	}
