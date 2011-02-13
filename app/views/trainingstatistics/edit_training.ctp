@@ -1,4 +1,4 @@
-<h1><?php __('Track workouts'); ?></h1>
+<h1><?php __('Workouts details'); ?></h1>
 <script type="text/javascript" src="/trainer/js/workoutstats.js"></script>
 <script type="text/javascript" src="/trainer/js/timeparser.js"></script>
 <link rel="stylesheet" type="text/css" href="/trainer/css/edittraining.css" />
@@ -47,6 +47,21 @@ echo $form->input('workouttype',
 ?>
 <div>
 <?php
+echo $form->input('name',
+	array(
+		'div' => array(
+			'id' => 'CourseName'
+		),
+		'maxLength' => 255,
+        'class' => 'required',
+        'error' => array(
+        	'notempty' => __('Enter name for your workout route', true)
+		),
+	'label' => __('Course name', true),
+	'title' => __('Enter a name for your course, so you can identify it later (optional)', true)
+));
+
+
 echo $form->input('duration',
 	array(
         'label' => '<img src="/trainer/img/icons/duration.gif">' . __('Duration', true),
@@ -109,29 +124,6 @@ echo $form->input('competition', array(
                 'type' => 'checkbox')
                 );
 }
-/*
-echo $form->input('testworkout', array(
-                'label' => __('Testworkout',true), 
-                'type' => 'checkbox')
-                );
-*/
-
-$help_name = '<a class="help" title="' . __('Enter a name for the workout (route) to display it in your form curve.', true) .
-	'" href="#">?</a>';
-	
-echo $form->input('name',
-                  array(
-                  'before' => '',
-                  'after' => $help_name,
-                  'between' => '',
-                  'maxLength' => 255,
-                  'class' => 'required',
-                  'error' => array(
-                      'notempty' => __('Enter name for your workout route', true)
-                  ),
-                  'label' => __('Name for workout', true)
-));
-
 ?>
 <br />
 <a name="AF"></a>
@@ -349,6 +341,29 @@ jQuery(document).ready(function() {
 			TimeParser.format(null,true)
 		);
 	});
+
+	// handle name field
+	var name = jQuery('#TrainingstatisticName');
+	name
+		.autocomplete({
+			source : <?php echo $courseNamesAutocomplete; ?>,
+			delay : 100
+		})
+		.focus(function () {
+			jQuery('#CourseName label').fadeOut('fast');
+		})
+		.blur(function () {
+			var val = jQuery.trim(name.val());
+			if (val == '') {
+				// clean whitespaces first
+				name.val(val);
+				jQuery('#CourseName label').fadeIn('normal');
+			}
+		})
+		.tipTip();
+	if (name.val() == '') {
+		jQuery('#CourseName label').show();
+	}
 	
 	// update training stats
 	// average speed

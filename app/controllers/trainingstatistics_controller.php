@@ -585,8 +585,22 @@ class TrainingstatisticsController extends AppController {
 	  		}
 	  	}
 	
+	  	// build course name autocomplete data
+	  	$courseNames = $this->Trainingstatistic->query("SELECT name, count(name) count
+	  		FROM trainingstatistics
+	  		WHERE name != ''
+	  		AND user_id = " . $session_userid . "
+	  		GROUP BY name
+	  		ORDER BY count DESC, name ASC");
+	  	while (list($k,$v) = each($courseNames)) {
+	  		$cnames[] = '"' . str_replace(
+	  			'"', '\"',
+	  			$v['trainingstatistics']['name']) . '"';
+	  	}
+	  	$courseNamesAutocomplete = '[' . implode(',', $cnames) . ']';
+	  	
 	  	$this->set('unit', $unit);
-	  	$this->set('UserID', $this->User->id);
+	  	$this->set('courseNamesAutocomplete', $courseNamesAutocomplete);
 	  	$this->set('statusbox', $statusbox);
 	  	$this->set('data', $this->data['Trainingstatistic']);
 	}

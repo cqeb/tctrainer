@@ -109,6 +109,18 @@ label.ui-state-active, label.ui-button:hover {
 	width: 170px;
 }
 
+#CourseName label {
+	position: absolute;
+	font-size: 18px;
+	margin-top: 8px;
+	margin-left: 6px;
+	display: none;
+}
+#CourseName input {
+	width: 391px;
+	font-size: 18px;
+}
+
 /*
  * stats table
  */
