@@ -31,7 +31,11 @@ echo $form->input('sportstype',
 			'RUN' => __('Run', true),
             'BIKE' => __('Bike', true),
             'SWIM' => __('Swim', true)
-)));
+		),
+		'div' => array(
+			'id' => 'sportstype'
+		)
+));
 
 echo $form->input('workouttype',
 	array(
@@ -39,9 +43,12 @@ echo $form->input('workouttype',
 		'type' => 'select',
 		'options' => array(
 			0 => __('Pick a workout', true),
-			__('Swim', true) => array(
-				'e1' => 'lala'
-			)
+			__('Swim', true) => $workouts['Swim'],
+			__('Bike', true) => $workouts['Bike'],
+			__('Run', true) => $workouts['Run']
+		),
+		'div' => array(
+			'id' => 'workouttype'
 		)
 ));
 ?>
@@ -288,8 +295,36 @@ echo $form->submit(__('Save',true));
 
 <script type="text/javascript">
 jQuery(document).ready(function() {
-	// prepare form
-	jQuery('div.radio').buttonset();
+	/**
+	 * only display workouts for a given sports type
+	 */
+	function showWorkoutsForSport(sport) {
+		var l;
+		if (sport === 'SWIM') {
+			l = '<?php echo __("Swim", true);?>';
+		} else if (sport === 'BIKE') {
+			l = '<?php echo __("Bike", true);?>';
+		} else if (sport === 'RUN') {
+			l = '<?php echo __("Run", true);?>';
+		}
+		jQuery('#workouttype optgroup[label=' 
+				+ l 
+				+ '], #workouttype optgroup[label=' 
+				+ l 
+				+ '] option').show();
+	}
+
+	// sportstype
+	jQuery('div.radio')
+		.buttonset()
+		.change(function (e) {
+			var v = jQuery(e.target).val();
+			// hide all available options
+			jQuery('#workouttype optgroup option, #workouttype optgroup').hide();
+			// now show only
+			showWorkoutsForSport(v); 
+		});
+	
 
 	jQuery('#datepicker').datepicker({
 		showOn: "button",

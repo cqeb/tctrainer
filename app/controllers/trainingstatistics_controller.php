@@ -4,7 +4,7 @@ class TrainingstatisticsController extends AppController {
    var $name = 'Trainingstatistics';
 
    var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc', 'Unitcalc', 'Xls');
-   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc');
+   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Provider');
 
    var $paginate = array(
        'Trainingstatistic' => array(
@@ -599,6 +599,38 @@ class TrainingstatisticsController extends AppController {
 	  	}
 	  	$courseNamesAutocomplete = '[' . implode(',', $cnames) . ']';
 	  	
+	  	// build workout type selector
+	  	$sports = array('Swim', 'Bike', 'Run');
+	  	$types = array('E', 'S', 'M', 'F');
+	  	$workouts = array();
+	  	while (list($k, $sport) = each($sports)) {
+	  		reset($types);
+	  		while (list($l, $type) = each($types)) {
+	  			$label = true;
+	  			$i = 0;
+	  			while ($label) {
+		  			$i++;
+		  			$t = $type . $i;
+	  				switch ($sport) {
+		  				case 'Swim':
+		  					$label = SwimWorkout::getTypeLabel($t);
+		  					break;
+		  				case 'Bike':
+		  					$label = BikeWorkout::getTypeLabel($t);
+		  					break;
+		  				case 'Run':
+		  					$label = RunWorkout::getTypeLabel($t);
+		  					break;
+		  			}
+		  			
+		  			if ($label) {
+		  				$workouts[$sport][$t] = $label;
+		  			}
+	  			} 
+	  		}
+	  	}
+	  	
+	  	$this->set('workouts', $workouts);
 	  	$this->set('unit', $unit);
 	  	$this->set('courseNamesAutocomplete', $courseNamesAutocomplete);
 	  	$this->set('statusbox', $statusbox);
