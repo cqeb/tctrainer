@@ -310,7 +310,6 @@ echo $form->submit(__('Save',true));
 <a name="Save"></a>
 
 </fieldset>
-
 <script type="text/javascript">
 jQuery(document).ready(function() {
 	// sportstype
@@ -418,17 +417,27 @@ jQuery(document).ready(function() {
 			);
 	});
 	
-	// trimps
+	// trimps and kcals
 	jQuery('#TrainingstatisticDuration, #TrainingstatisticAvgPulse')
 		.change(function () {
 		TimeParser.parse(duration.val());
-		jQuery('#trimp').text(
+		// trimps
+		/*jQuery('#trimp').text(
 			WorkoutStats.calcTrimps(
 				heartrate.val(),
 				'RUN',
 				TimeParser.mins
 			)
-		);
+		);*/
+		
+		// kcals
+		jQuery('#kcal').text(WorkoutStats.calcKcal(
+			'<?php echo $user['gender']; ?>', 
+			<?php echo $user['weight']; ?>, 
+			<?php echo (date("Y") - substr($user['birthday'],0,4)); ?>,
+			TimeParser.mins * 60,
+			parseInt(heartrate.val())
+		));
 	});
 	
 	// add tooltips

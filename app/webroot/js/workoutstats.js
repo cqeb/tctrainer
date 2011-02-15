@@ -4,21 +4,34 @@
 WorkoutStats = {
 	/**
 	 * approximate kcals as done in unitcalc
+	 * @param sex the athletes sex (may be m or f)
+	 * @param weight in kilograms
+	 * @param age in years
+	 * @param duration in SECONDS!
+	 * @param hr average heart rate
 	 */
 	calcKcal : function (sex, weight, age, duration, hr) {
+		var ret;
 		if (sex == 'm') {
-			return Math.round(
+			ret = Math.round(
 				( -55.0969 + 0.6309 * hr + 0.1988 * weight + 0.2017 * age ) 
 				/ 
-				( 4.1845 * duration / 60 )
+				4.1845 * duration / 60
 			);
 		} else {
-			return Math.round(
+			ret = Math.round(
 				( -20.4022 + 0.4472 * avgHR + 0.1263 * weight + 0.074 * age )
 				/
-				( 4.1845 * duration / 60 )
+				4.1845 * duration / 60
 			);
-		}            
+		}
+		
+		// as negative values may occur on extremely low pulse values, 
+		// we'll cap them with 0
+		if (ret < 0) {
+			ret = 0;
+		}
+		return ret;
 	},
 	
 	/**

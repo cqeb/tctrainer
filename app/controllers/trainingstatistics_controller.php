@@ -528,19 +528,7 @@ class TrainingstatisticsController extends AppController {
 	  				$this->Unitcalc->calc_kcal( $data );
 	  			}
 	
-	  			/**
-	  			 http://www.triathlontrainingblog.com/calculators/calories-burned-calculator-based-on-average-heart-rate/
-	
-	  			 Based on the following formulas:
-	  			 Using VO2max
-	  			 Men: C/min = (-59.3954 + (-36.3781 + 0.271 x age + 0.394 x weight + 0.404 x VO2max + 0.634 x HR))/4.184
-	  			 Women: C/min = (-59.3954 + (0.274 x age + 0.103 x weight + 0.380 x VO2max + 0.450 x HR)) / 4.184
-	
-	  			 Without VO2max
-	  			 Men: C/min = (-55.0969 + 0.6309 x HR + 0.1988 x weight + 0.2017 x age) / 4.184
-	  			 Women: C/min = (-20.4022 + 0.4472 x HR + 0.1263 x weight + 0.074 x age) / 4.184
-	  			 weight is in kg
-	  			 */
+	  			
 	  		}
 	
 	  		$this->data['Trainingstatistic']['user_id'] = $session_userid;
@@ -632,6 +620,7 @@ class TrainingstatisticsController extends AppController {
 	  	}
 	  	
 	  	$this->set('workouts', $workouts);
+	  	$this->set('user', $results['User']);
 	  	$this->set('unit', $unit);
 	  	$this->set('courseNamesAutocomplete', $courseNamesAutocomplete);
 	  	$this->set('statusbox', $statusbox);
