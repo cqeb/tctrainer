@@ -91,6 +91,9 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
     
     }
 
+		// Paypal payment email
+		Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
+
     /**
      * mail sending options
      */
@@ -112,6 +115,9 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
       Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
       Configure::write('App.uploadDir', '/var/www/vhosts/www.tricoretraining.com/trainer/app/webroot/files/');
 
+		// Paypal payment email
+		Configure::write('App.paymentemail', 'payment@tricoretraining.com');
+
     /**
      * mail sending options
      */
@@ -125,8 +131,6 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 
 }
 	
-// Paypal payment email
-Configure::write('App.paymentemail', 'km.schremser@gentics.com');
 	
 /**
  * Uncomment the define below to use CakePHP admin routes.
@@ -199,7 +203,7 @@ Configure::write('Session.cookie', 'CAKEPHP');
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
  */
-Configure::write('Session.timeout', '320000');
+Configure::write('Session.timeout', '2592000');
 
 /**
  * If set to false, sessions are not automatically started.
