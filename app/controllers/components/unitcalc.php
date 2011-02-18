@@ -17,7 +17,7 @@ class UnitcalcComponent extends Object {
      if ( $convertunit != '' )
      {
        switch ( $convertunit )
-      {
+       {
             case "cm_ft":
             $result = $amount / 30.48;
             break;
@@ -41,7 +41,7 @@ class UnitcalcComponent extends Object {
             case "mi_km":
             $result = $amount / 0.62137;
             break;
-      }
+       }
      } else
             $result = $amount;
             
@@ -74,44 +74,54 @@ class UnitcalcComponent extends Object {
    /**
    check a distance to be saved and viewed in the correct metric
    **/
-   function check_distance( $amount, $mode = 'show', $ret = 'both' )
+   function check_distance( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
             if ( is_numeric( $amount ) )
             {
-              $session_userobject = $this->Session->read('userobject');
-              if (  $session_userobject['unit'] == 'imperial' )
-              {
-                 if ( $mode == 'show' ) $convert = 'km_mi';
-                 else
-                     $convert = 'mi_km';
-
-                 $amount_array['amount'] = $this->convert_metric( $amount, $convert );
-                 $amount_array['unit'] = 'mi';
-              } else
-              {
-                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  else $amount_array['amount'] = $amount;
-
-                  $amount_array['unit'] = 'km';
-              }
-
-              if ( $ret == 'single' )
-                 return $amount_array['amount'];
-              else
-                 return $amount_array;
+            	echo $amount . '<br >';
+	              $session_userobject = $this->Session->read('userobject');
+				  $locale = $session_userobject['yourlanguage'];
+				  
+	              if (  $session_userobject['unit'] == 'imperial' )
+	              {
+	                 if ( $mode == 'show' ) $convert = 'km_mi';
+	                 else
+	                     $convert = 'mi_km';
+	
+	                 $amount_array['amount'] = $this->convert_metric( $amount, $convert );
+	                 $amount_array['unit'] = 'mi';
+	              } else
+	              {
+	                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+	                  else $amount_array['amount'] = $amount;
+	
+	                  $amount_array['unit'] = 'km';
+	              }
+	
+						echo $amount_array['amount'];
+				  if ( $locale == 'ger' )
+				  { 
+				  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+				  }
+				  	
+	              if ( $ret == 'single' )
+	                 return $amount_array['amount'];
+	              else
+	                 return $amount_array;
 
             } else
-                return false;
+              	  return false;
    }
 
    /**
    check a weight to be saved and viewed in the correct metric
    **/
-   function check_weight( $amount, $mode = 'show', $ret = 'both' )
+   function check_weight( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
             if ( is_numeric( $amount ) )
             {
               $session_userobject = $this->Session->read('userobject');
+			  $locale = $session_userobject['yourlanguage'];
               if (  $session_userobject['unit'] == 'imperial' )
               {
                  if ( $mode == 'show' ) $convert = 'kg_lbs';
@@ -126,6 +136,10 @@ class UnitcalcComponent extends Object {
                   else $amount_array['amount'] = $amount;
                   $amount_array['unit'] = 'kg';
               }
+			  
+			  if ( $locale == 'ger' ) 
+			  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+			
               if ( $ret == 'single' )
                  return $amount_array['amount'];
               else
