@@ -4,7 +4,7 @@ class TrainingstatisticsController extends AppController {
    var $name = 'Trainingstatistics';
 
    var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc', 'Unitcalc', 'Xls');
-   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc');
+   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Statisticshandler');
 
    var $paginate = array(
        'Trainingstatistic' => array(
@@ -571,9 +571,6 @@ class TrainingstatisticsController extends AppController {
                      {
 					      $this->data['Trainingstatistic']['weight'] = str_replace( ',', '.', $this->data['Trainingstatistic']['weight'] );
 					      $saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
-						  //echo $saveweight . "<br>";
-					      //$saveweight = $this->data['Trainingstatistic']['weight'];
-                          //$saveweight = str_replace( ',', '.', $saveweight );
                      } else
                           $saveweight = $results['User']['weight'];
 
@@ -936,11 +933,9 @@ class TrainingstatisticsController extends AppController {
             $sql .= "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
               "' AND distance = '" . $searchsplit[1] . "'";
 
-//echo $sql . "<br>";
 
             $trainings = $this->Trainingstatistic->query( $sql );
 
-//pr($trainings);
 
             for ( $i = 0; $i < count( $trainings ); $i++ )
             {
@@ -951,7 +946,6 @@ class TrainingstatisticsController extends AppController {
             }
             // what is the average pulse
             $total_avg_pulse = round( ( ( $pulse['max'] + $pulse['min'] ) / 2 ), 0 );
-//echo $total_avg_pulse . "<br>";
             $max_perunit = 0;
 
             for ( $i = 0; $i < count( $trainings ); $i++ )
@@ -962,42 +956,32 @@ class TrainingstatisticsController extends AppController {
 
                   // calculate current average pulse minus total average pulse
                   $diff_pulse = ( $dt['avg_pulse'] - $total_avg_pulse ); // 190 - 160 = 30 / basic value
-//echo $diff_pulse . "<br>";
 
                   $change_value = ( $diff_pulse / $dt['avg_pulse'] ) + 1;
-//echo $change_value . "<br>";
 
                   $dt['old_duration'] = $dt['duration'];
                   $duration_interim = ( $dt['duration'] * $change_value );
 				
                   $dt['duration'] = $newduration = round( $duration_interim, 0 );
-//echo $dt['duration'] . "<br>";
 
                   $correct_distance = $this->Unitcalc->check_distance( $dt['distance'] );
                   $distanceperunit_interim =  $newduration / $correct_distance['amount'] / 60;
                   $dt['distanceperunit'] = round( $distanceperunit_interim, 2);
 				  
-//echo $dt['distanceperunit'] . "<br>"; 
-//pr($dt);  
                   if ( $distanceperunit_interim > $max_perunit ) $max_perunit = round( $distanceperunit_interim, 1);
-//echo $max_perunit . "<br>";  
                   // depends on minutes per km / mi
                   $newdate = split( ' ', $dt['date'] );
                   $newdate2 = $newdate[0];
-//pr($newdate);				  
+
                   // date, distance, duration, avg_pulse
                	  $traindate2[$newdate2] = $dt;
-//echo $newdate2 . "<br>";
-//pr($traindate2);
             }
 
             $initiator = 0;
-//echo "--------------" . "<br>";
 
             for ( $i = 0; $i < $diff_dates; $i++ )
             {
                      $rdate = date( 'Y-m-d', ( $startday_ts + $i * 86400 ) );
-//echo $rdate . "<br>";
 
 					 // set last value if no testworkout is in the array for this date					 
                      if ( !isset( $traindate2[$rdate]['distanceperunit'] ) )
@@ -1005,16 +989,12 @@ class TrainingstatisticsController extends AppController {
                      		$traindate[$rdate]['distanceperunit'] = $initiator;
                      } else 
                      		$traindate[$rdate]['distanceperunit'] = $initiator = $traindate2[$rdate]['distanceperunit'];
-//echo $rdate . ' - ' . $traindate[$rdate]['distanceperunit'] . "<br>";
                      
                      $traindate[$rdate]['date'] = $rdate;
 
             }
 
-//pr($traindate);
-
             $max_perunit = round( $max_perunit, 0 ) + 1;
-//echo $max_perunit . "<br>";
 
             $this->set('start', $start);
             $this->set('end', $end);
@@ -1261,8 +1241,6 @@ class TrainingstatisticsController extends AppController {
           $sql .= "GROUP BY week ORDER BY week ASC";
           $trainings = $this->Trainingstatistic->query( $sql );
           
-//echo $sql . "<br>";
-//pr($trainings);
           $lastentry = count($trainings);
           
           if ( $lastentry > 0 )
@@ -1271,15 +1249,12 @@ class TrainingstatisticsController extends AppController {
             $start_ts = strtotime( $firsttraining['weekday'] );
 
             $weeks_between_dates = round(($end_ts - $start_ts)/(86400*7),0)+1;
-//echo $weeks_between_dates . "<br>";
 			
             $week_ts = $start_ts;
-//echo $end;
 
             if ( isset( $targetweightdate ) && isset( $targetweight ) && $end_orig == date( 'Y-m-d', time()) )
             {
                   $train_array = $trainings[$lastentry-1][0];
-//pr($train_array);
                   
                   $diff_time = strtotime( $targetweightdate ) - strtotime( $train_array['weekday'] );
   
@@ -1324,8 +1299,6 @@ class TrainingstatisticsController extends AppController {
             {
                  $yearweek = $nyear[$i] . '' . $nweek[$i];
 
-//echo "i" . $i . '-' . ( $weeks_between_dates - $diff_week ) . "<br>";
- 
                  if ( $i > ( $weeks_between_dates - $diff_week ) ) 
                  {
                      $train[$yearweek]['avgweight'] = 'null';
@@ -1479,17 +1452,14 @@ class TrainingstatisticsController extends AppController {
             $start_year = date('o', $start_ts);
             $start_week = date('W', $start_ts);
             if ( $start_week == 53 ) { $start_week = "01"; $start_year += 1; }
-            //echo $start_week . "<br />";
 			
             $end_year = date('o', $end_ts);
             $end_week = date('W', $end_ts);
             if ( $end_week == 53 ) { $end_week = 1; $end_year += 1; }
-            //echo $end_week . "<br />";
 
             // what if the period defined goes until next year
             // we need that for calculations!
             if ( $end_year > $start_year ) $end_week = $end_week + ( 52 * ( $end_year - $start_year ) );
-            //echo $end_week . "<br />";
 
             $weeks_between_dates = $end_week - $start_week;
 
@@ -1509,8 +1479,6 @@ class TrainingstatisticsController extends AppController {
                $sql .= "group by week order by week asc";
 
                $trainings = $this->Trainingstatistic->query( $sql );
-			   //echo $sql . "<br>";
-			   //pr($trainings);
                $lastentry = count($trainings);
                $minweek = $trainings[0][0]['week'];
                $maxweek = $trainings[$lastentry-1][0]['week'];
@@ -1518,7 +1486,6 @@ class TrainingstatisticsController extends AppController {
                for ( $i = 0; $i < count( $trainings ); $i++ )
                {
                    $week = $trainings[$i][0]['week'];
-				   //echo $week . '<br />';
 				   if ( substr( $week, 4, 2 ) == '00' ) 
 				   {
 				   	   $j = $i - 1;
@@ -1543,30 +1510,23 @@ class TrainingstatisticsController extends AppController {
 				   {
 	                   if ( $trainings2[$previous_week]['sumdistance'] > $maxdistance ) $maxdistance = $trainings2[$previous_week]['sumdistance'] * 1.1;
 	                   if ( $trainings2[$previous_week]['sumduration'] > $maxduration ) $maxduration = $trainings2[$previous_week]['sumduration'] * 1.1;
-					   //echo "prev " . $maxduration . "<br>";
 				   } else 
 				   {
 	                   if ( isset( $trainings2 ) && $trainings2[$week]['sumdistance'] > $maxdistance ) $maxdistance = $trainings2[$week]['sumdistance'] * 1.1;
 	                   if ( isset( $trainings2 ) && $trainings2[$week]['sumduration'] > $maxduration ) $maxduration = $trainings2[$week]['sumduration'] * 1.1;
-					   //echo "curr " . $maxduration . "<br>";
 				   }				   
                }
 
-//pr($trainings2);
 			   $maxduration = round( $maxduration );
-				//pr($trainings2);
-				//echo $weeks_between_dates . "<br>";
 
                // go through all weeks - in case you have weeks without trainings you have to set them to 0
                for( $i = 0; $i <= $weeks_between_dates; $i++ )
                {
                    if ( isset( $start_week ) && $start_week < 10 && substr( $start_week, 0, 1 ) != '0' ) $start_week = '0' . $start_week;
-				   //echo $start_week . "<br>";
 
                    $yearweek = $start_year . $start_week;
                    $weeks[$i] = $yearweek;
 
-				   //echo $yearweek . '--' . $start_year . '-' . $start_week . '<br />';
                    if ( empty($trainings2[$yearweek]['sumdistance']) )
                    {
                       $trainings2[$yearweek]['sumdistance'] = 0;
@@ -1579,7 +1539,6 @@ class TrainingstatisticsController extends AppController {
                }
             }
 			ksort($trainings2);
-			//pr($trainings2);
 
             $this->set('start', $start);
             $this->set('end', $end);
