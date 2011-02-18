@@ -18,14 +18,14 @@ class UnitcalcHelper extends AppHelper {
         return UnitcalcComponent::convert_metric( $amount, $convertunit, $roundnumber );
    }
  
-   function check_distance( $amount, $mode = 'show', $ret = 'both' )
+   function check_distance( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
-        return UnitcalcComponent::check_distance( $amount, $mode, $ret );
+        return UnitcalcComponent::check_distance( $amount, $mode, $ret, $excel );
    }
 
-   function check_weight( $amount, $mode = 'show', $ret = 'both' )
+   function check_weight( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
-        return UnitcalcComponent::check_weight( $amount, $mode, $ret );
+        return UnitcalcComponent::check_weight( $amount, $mode, $ret, $excel );
    }
 
    function check_height( $amount, $mode = 'show', $ret = 'both' )
