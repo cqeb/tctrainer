@@ -62,7 +62,7 @@ for ( $i = 0; $i < $maxweeks; $i++ )
 {
     $w = $weeks[$i];
     if ( $trainings2[$w]['avgweight'] > 0 ) 
-        echo round($trainings2[$w]['avgweight']); 
+        echo round($trainings2[$w]['avgweight'], 1); 
     else 
         echo "null"; 
     if ( $i != ($maxweeks-1) ) echo ","; 
