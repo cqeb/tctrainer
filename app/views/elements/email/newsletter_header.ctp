@@ -3,6 +3,7 @@
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
    <title>TriCoreTraining.com</title>
    <style type="text/css" media="screen">
+
       body {
 
          background-color: #e6e6e6;
@@ -19,6 +20,18 @@
          font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
       }
       
+      ul {
+         color: #333333;
+         font-size: 12px;
+         font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
+      }
+
+      a {
+         font-size: 12px;
+         font-weight: normal;
+         color: #6cb9ce;
+      }
+
       a img {
          border: none;
       }
@@ -251,11 +264,13 @@
       <td align="center" valign="top">
 
          <table width="580" border="0" cellspacing="0" cellpadding="0" class="main">
+<!--
             <tr>
                <td align="center" class="permission">
                   <p><?php __("You're receiving this notification because you are registered at TriCoreTraining.com."); ?></p>
                </td>
             </tr>
+-->
             <tr>
                <td height="90" valign="bottom" align="left" class="header">
                   <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/header.gif" width="580" height="90" alt="TriCoreTraining.com" />
@@ -271,44 +286,5 @@
                         <td class="date"><p><?php date('YYYY-mm-dd', time()); ?></p></td>
                      </tr>
                      <tr align="left" rowspan="3" valign="top">
-
-                        <td width="192" valign="top" class="sidebar" align="left">
-
-                           <table width="100%" cellspacing="0" cellpadding="4" bgcolor="#eeeeee">
-                              <tr>
-                                 <td bgcolor="#FFAE00" class="sideHeader">
-                                    <h3><?php __('Help?'); ?></h3>
-                                 </td>
-                              </tr>
-                           </table>
-                           <p>
-                           <?php __('Hi'); ?>,<br />
-                           <?php __("my name is Clemens and I'm one of the founders of TriCoreTraining."); ?>
-                           <?php __('If you need help, please'); ?> <a href="mailto:support@tricoretraining.com"><?php __('just ask me'); ?></a>.
-                           <br /><br />
-                           <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/cp_sporty.png" alt="Clemens Prerovsky" />
-                           </p>
-
-                           <img alt="" src="<?php echo Configure::read('App.hostUrl'); ?><?php echo Configure::read('App.serverUrl'); ?>/img/smallspacer.gif" width="192" height="25" />
-
-                           <table width="100%" cellspacing="0" cellpadding="4" bgcolor="#FFAE00">
-                              <tr>
-                                 <td class="sideHeader">
-                                    <h3><?php __('Follow us'); ?></h3>
-                                 </td>
-                              </tr>
-                           </table>
-                           <p>
-                           <a href="http://www.facebook.com/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><?php __('Visit us at Facebook'); ?></a>
-                           <br />
-                           <a href="http://www.twitter.com/tricoretraining/" target="_blank"><?php __('Follow us on Twitter'); ?></a>
-                           </p>
-                           <img alt="" src="<?php echo Configure::read('App.hostUrl'); ?><?php echo Configure::read('App.serverUrl'); ?>/img/smallhr.gif" width="190" height="19" />
-
-                           <img alt="" src="<?php echo Configure::read('App.hostUrl'); ?><?php echo Configure::read('App.serverUrl'); ?>/img/smallspacer.gif" width="192" height="25" />
-
-                        </td>
-
-                        <td width="28"></td>
 
                         <td width="330" valign="top" class="mainbar" align="left">
