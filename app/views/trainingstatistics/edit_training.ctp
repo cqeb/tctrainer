@@ -142,15 +142,6 @@ echo $form->input('distance',
 		<th>TRIMPs</th>
 	</tr>
 </table>
-<?php
-if ( $userobject['advanced_features'] ) {
-echo $form->input('competition', array(
-                'label' => __('Competition',true), 
-                'type' => 'checkbox')
-                );
-}
-?>
-<br />
 <a name="AF"></a>
 <?php
 
@@ -181,27 +172,7 @@ echo $form->textarea('comment',
                   array(
                   'rows' => '5',
                   'cols' => '45'
-           ));
-echo '<br /><br />';
-
-if ( $userobject['advanced_features'] ) {
-
-$location_label = __('Location', true) . '<br />(' . __('City', true) . ', ' . __('Country', true) . ')';
-
-echo $form->input('location',
-                  array(
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'maxLength' => 100,
-                  'label' => $location_label
-                  ));
-
-?>
-
-<div id="gmap"></div>
-
-<?php
+));
 
 echo $form->input('workout_link',
      array(
@@ -212,103 +183,11 @@ echo $form->input('workout_link',
      'default' => 'http://',
      'label' => __('Link workout', true)
 ));
-
 ?>
 <ul>
 <li><a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a></li>
 <li><a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a></li>
 </ul>
-
-<table border="0" width="100%">
-<tr>
-    <th width="50%">
-    <?php __('Temperature'); ?>
-    </th>
-    <th width="50%">
-    <?php __('Weather'); ?>
-    </th>
-</tr>
-<tr>
-    <td>
-<?php
-
-echo $form->radio('conditions_temperature', 
-  array(
-    'warm' => __('warm',true), 
-    'cold' => __('cold',true)
-  ),
-  array('legend' => false,'default'=>'warm','separator'=>'<br />'));
-
-?>
-    </td>
-    <td>
-<?php
-
-echo $form->radio('conditions_weather', 
-  array(
-    'sunny' => __('sunny',true), 
-    'windy' => __('windy',true), 
-    'rain' => __('rain',true)
-  ),
-  array('legend' => false,'default'=>'sunny','separator'=>'<br />'));
-
-?>
-    </td>
-</tr>
-</table>
-
-<table border="0" width="100%">
-<tr>
-    <th width="50%">
-    <?php __('Route'); ?>
-    </th>
-    <th width="50%">
-    <?php __('Feeling'); ?>
-    </th>
-</tr>
-<tr>
-    <td>
-<?php
-
-echo $form->radio('conditions_inclination', 
-    array(
-      'flat' => __('flat',true), 
-      'hilly' => __('hilly',true), 
-      'mountainous' => __('mountainous',true) 
-    ),
-    array('legend' => false,'default'=>'flat','separator'=>'<br />'));
-
-?>
-    </td>
-    <td>
-<?php
-
-echo $form->radio('conditions_mood', 
-    array(
-      'feeling_well' => __('well',true), 
-      'feeling_bad' => __('bad',true) 
-    ),
-    array('legend' => false,'default'=>'feeling_well','separator'=>'<br />'));
-
-?>
-    </td>
-</tr>
-</table>
-
-<?php
-}
-
-/** not finished **/
-echo $form->hidden('avg_speed');
-echo $form->hidden('trimp');
-echo $form->hidden('kcal');
-
-echo $form->hidden('id');
-echo $form->hidden('user_id');
-echo $form->submit(__('Save',true));
-?>
-<a name="Save"></a>
-
 </fieldset>
 <script type="text/javascript">
 jQuery(document).ready(function() {
