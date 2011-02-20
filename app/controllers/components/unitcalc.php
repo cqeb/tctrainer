@@ -432,7 +432,6 @@ class UnitcalcComponent extends Object {
            $trimp = 0;
            $avgHR = $avg_pulse_total;
            $minutes = $duration_total;
-           //echo $sport;
            $this->threshold = $lth;
 
            $zones = $this->getZones($sport);
