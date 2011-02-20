@@ -93,13 +93,14 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 
 		// Paypal payment email
 		Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
+		Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 
     /**
      * mail sending options
      */
 
     Configure::write('App.mailFrom', 'TriCoreTraining <cqeb@gmx.net>');
-    Configure::write('App.mailAdmin', 'support@tricoretraining.com');
+    Configure::write('App.mailAdmin', 'klaus@tricoretraining.com');
     Configure::write('App.mailPort', '25');
     Configure::write('App.mailHost', 'mail.gmx.net');
     Configure::write('App.mailUser', 'cqeb@gmx.net');
