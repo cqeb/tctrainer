@@ -5,7 +5,7 @@
 **/
 
 class UnitcalcComponent extends Object {
-   var $components = array('Session');
+   var $components = array('Session', 'Provider');
    var $helpers = array('Session');
 
    /**
@@ -445,32 +445,13 @@ class UnitcalcComponent extends Object {
            return intval($minutes * $factor);
    }
 
-    // from athletes class
-    function getZones($sport) 
-    {
-          switch ($sport) {
-            case "BIKE":      
-              return array(
-                0 => intval($this->threshold * 0.65),
-                1 => intval($this->threshold * 0.81),
-                2 => intval($this->threshold * 0.89),
-                3 => intval($this->threshold * 0.93),
-                4 => $this->threshold - 1
-              );
-              break;
-            // running will also be our default setting
-            case "RUN":
-            default:
-              return array(
-                0 => intval($this->threshold * 0.66), 
-                1 => intval($this->threshold * 0.85),
-                2 => intval($this->threshold * 0.89),
-                3 => intval($this->threshold * 0.94),
-                4 => $this->threshold - 1
-              );
-              break;
-          }
-   }
+	/**
+	 * (non-PHPdoc)
+	 * @see Athlete::getZones()
+	 */
+	function getZones($sport) {
+    	return $this->Provider->getAthlete()->getZones($sport);
+	}
        
    /**
    this functions seems to be duplicate - damn!
