@@ -104,6 +104,7 @@ class AppController extends Controller {
 
      function checkSession()
      {
+
 	        // fill $username with session data
 	        $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');

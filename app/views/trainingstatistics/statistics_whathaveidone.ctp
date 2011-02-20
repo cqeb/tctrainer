@@ -223,7 +223,7 @@ if ( count( $trainings ) > 0 )
 
 <div id="my_chart1"></div>
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $jsonurl ) ) { ?>
 <br /><br />
 Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl.'type:distance/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
@@ -238,8 +238,8 @@ Debugging: (only localhost)<br />
 if ( count( $trainings ) > 0 ) 
 {
     
-$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
+	$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
+	echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
 
 } else
 {
@@ -250,7 +250,7 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' .
 
 <div id="my_chart2"></div>
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $jsonurl ) ) { ?>
 <br /><br />
 Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>

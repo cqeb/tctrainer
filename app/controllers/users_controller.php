@@ -925,7 +925,7 @@ class UsersController extends AppController {
 			if ($this->User->save( $this->data, array(
 		      'validate' => true,
 		      'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'birthday',
-		      'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
+		      'address', 'zip', 'city', 'country', 'phonemobile', 'myrecommendation' ) ) ) )
 		      {
 		          // we have to change all session info because of email change
 		          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
@@ -1701,7 +1701,7 @@ class UsersController extends AppController {
 		
 				if ( $diff_time > $last_training )
 				{
-					$text_for_mail_training = __("don't be lazy	!", true) . ' ' .  
+					$text_for_mail_training = __("don't be lazy!", true) . ' ' .  
 						__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
 						'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - NOW!', true); 
 	 
@@ -1824,13 +1824,13 @@ class UsersController extends AppController {
 		
 		  // check for recommendations
 		  // TODO (B) not yet implemented
-			/**
-		      if ( !$u['recommendation'] )
-		      { 
-		          $text_for_mail .= __('Please recommend our service! Get a free trainingmonth.', true) . '[LINK].', true);
+	      if ( !$u['myrecommendation'] )
+	      { 
+		          $text_for_mail .= __('Please recommend our service!', true) . 
+		          " " . '<a href="' . Configure::read('App.hostUrl') . 
+		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Of course.', true) . '</a>';
 		          $text_for_mail .= '<br />';
-		      }
-			**/
+	      }
 		  
 		  // check for medical limitations
 		  if ( $u['tos'] == '0')

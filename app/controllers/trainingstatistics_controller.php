@@ -39,7 +39,7 @@ class TrainingstatisticsController extends AppController {
             
             $this->set('trainingstatistics', $trainingstatistics);
             $this->set('statusbox', $statusbox);
-   }
+  }
 
   function import_workout()
   {
@@ -625,8 +625,6 @@ class TrainingstatisticsController extends AppController {
 
 			$trainingdata_ownuser = $this->Statisticshandler->get_trimps( $this->Trainingstatistic, $session_userid, $sportstype, $start, $end );
 
-			$trainingdatas[0] = $trainingdata_ownuser;
-			
 			// in case we don't have data we set startdate to the date of first data
 			if ( strtotime( $start ) < strtotime( $trainingdata_ownuser[0]['trainingstatistics']['date'] ) )
 			{
@@ -643,7 +641,7 @@ class TrainingstatisticsController extends AppController {
             $this->set('sportstype', $sportstype);
             $this->set('length_unit', $unit['length']);
             $this->set('statusbox', $statusbox);
-			$this->set('trainingdatas', $trainingdatas);
+			$this->set('trainingdatas', $trainingdata_ownuser);
    }
 
    // JSON for "how fit am I"

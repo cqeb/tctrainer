@@ -62,11 +62,20 @@ class StatisticsHelper extends AppHelper {
 	{
 		if ( !isset( $steps ) || $steps == '' )
 		{
-			$steps = round( $number_labels / 8 );
-		} else
-		{
-			$steps = 8;
+			if ( isset( $number_labels ) )
+			{
+				if ( $number_labels < 10 )
+					$steps = 2;
+				else
+					$steps = round( $number_labels / 5 );
+				
+			} else
+			{
+				$steps = 5;
+			}
 		}
+		
+		if ( $steps < 1 ) $steps = 1;
 		
 		$chart_xaxis = '
 		"x_legend":{

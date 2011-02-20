@@ -45,7 +45,7 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
 <?php $training = $trainingstatistic['Trainingstatistic']; ?>
 
 <tr>
-    <td><?php echo $html->link($unitcalc->check_date($training['date']), array('action' => 'edit_training', 'id' => $trainingstatistic['Trainingstatistic']['id']),null); echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
+    <td><a <?php if ( isset( $training['name'] ) && $training['name'] != '' ) echo 'class="help2" title="' . $training['name'] . '"'; ?>" href="/trainer/trainingstatistics/edit_training/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><?php echo $unitcalc->check_date($training['date']); ?></a><?php echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
     <td><?php $stype = $training['sportstype']; __($stype); ?></td>
     <td><?php $distance = $unitcalc->check_distance($training['distance'], 'show'); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
     <td><?php $duration = $unitcalc->seconds_to_time($training['duration']); echo $duration; ?></td>

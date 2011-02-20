@@ -430,31 +430,39 @@ class StatisticshandlerComponent extends Object {
 
 			$last_entry = count( $trainings ) - 1;
 			
-			$start = $trainings[0]['trainingstatistics']['date'];
-			$end = $trainings[$last_entry]['trainingstatistics']['date'];
-			
-            // collect them, accumulate per sportstype
-            for ( $i = 0; $i < count( $trainings ); $i++ )
-            {
-                  $dt = $trainings[$i]['trainingstatistics'];
-                  $sportstype = strtoupper($dt['sportstype']);
-                  if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
-                  {
-                       $sumdata['collected_sportstypes'][] = strtoupper($sportstype);
-                       $sumdata['duration'][$sportstype] = 0;
-                       $sumdata['distance'][$sportstype] = 0;
-                       $sumdata['trimp'][$sportstype] = 0;
-                  }
-
-                  $sumdata['duration'][$sportstype] += ( $dt['duration'] );
-                  $sumdata['distance'][$sportstype] += $dt['distance'];
-                  $sumdata['trimp'][$sportstype] += $dt['trimp'];
-            }
-			$return['sumdata'] = $sumdata;
-			$return['trainings'] = $trainings;
-			$return['start'] = $start;
-			$return['end'] = $end;
-			
+			if ( $last_entry > 0 )
+			{
+				$start = $trainings[0]['trainingstatistics']['date'];
+				$end = $trainings[$last_entry]['trainingstatistics']['date'];
+				
+	            // collect them, accumulate per sportstype
+	            for ( $i = 0; $i < count( $trainings ); $i++ )
+	            {
+	                  $dt = $trainings[$i]['trainingstatistics'];
+	                  $sportstype = strtoupper($dt['sportstype']);
+	                  if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
+	                  {
+	                       $sumdata['collected_sportstypes'][] = strtoupper($sportstype);
+	                       $sumdata['duration'][$sportstype] = 0;
+	                       $sumdata['distance'][$sportstype] = 0;
+	                       $sumdata['trimp'][$sportstype] = 0;
+	                  }
+	
+	                  $sumdata['duration'][$sportstype] += ( $dt['duration'] );
+	                  $sumdata['distance'][$sportstype] += $dt['distance'];
+	                  $sumdata['trimp'][$sportstype] += $dt['trimp'];
+	            }
+				$return['sumdata'] = $sumdata;
+				$return['trainings'] = $trainings;
+				$return['start'] = $start;
+				$return['end'] = $end;
+			} else
+			{
+				$return['sumdata'] = $sumdata;
+				$return['trainings'] = $trainings;
+				$return['start'] = $start;
+				$return['end'] = $end;
+			}			
 			return $return;
 	}
 

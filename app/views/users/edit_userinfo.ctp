@@ -146,6 +146,14 @@ echo $form->input('notifications',
                   )
 ));
 
+__('We would be very happy if you write a review (recommendation) about TriCoreTraining.com. Thank you.');
+echo '<br />';
+echo $form->textarea('myrecommendation',
+                  array(
+                  'rows' => '5',
+                  'cols' => '45'
+           ));
+
 ?>
 
 <hr />
