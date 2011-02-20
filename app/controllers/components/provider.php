@@ -1,27 +1,27 @@
 <?php
 // include all core components
 // TODO this is just plain ugly with cake - find a better solution for this
-require '../../app/core/athlete/athlete.class.php';
-require '../../app/core/helpers/database.class.php';
-require '../../app/core/helpers/datetimehelper.class.php';
-require '../../app/core/providers/workoutprovider.class.php';
-require '../../app/core/providers/mesocyclephasetableprovider.class.php';
-require '../../app/core/providers/mesocycleprovider.class.php';
-require '../../app/core/providers/trirunprovider.class.php';
-require '../../app/core/providers/tribikeprovider.class.php';
-require '../../app/core/providers/triswimprovider.class.php';
-require '../../app/core/schedule/schedule.class.php';
-require '../../app/core/schedule/race.class.php';
-require '../../app/core/sequences/sequence.class.php';
-require '../../app/core/sequences/workouttypesequence.class.php';
-require '../../app/core/sequences/trirunworkouttypesequence.class.php';
-require '../../app/core/sequences/tribikeworkouttypesequence.class.php';
-require '../../app/core/sequences/triswimworkouttypesequence.class.php';
-require '../../app/core/workouts/workout.class.php';
-require '../../app/core/workouts/swimworkout.class.php';
-require '../../app/core/workouts/bikeworkout.class.php';
-require '../../app/core/workouts/runworkout.class.php';
-require '../../app/core/renderers/workoutrenderer.class.php';
+require_once '../../app/core/athlete/athlete.class.php';
+require_once '../../app/core/helpers/database.class.php';
+require_once '../../app/core/helpers/datetimehelper.class.php';
+require_once '../../app/core/providers/workoutprovider.class.php';
+require_once '../../app/core/providers/mesocyclephasetableprovider.class.php';
+require_once '../../app/core/providers/mesocycleprovider.class.php';
+require_once '../../app/core/providers/trirunprovider.class.php';
+require_once '../../app/core/providers/tribikeprovider.class.php';
+require_once '../../app/core/providers/triswimprovider.class.php';
+require_once '../../app/core/schedule/schedule.class.php';
+require_once '../../app/core/schedule/race.class.php';
+require_once '../../app/core/sequences/sequence.class.php';
+require_once '../../app/core/sequences/workouttypesequence.class.php';
+require_once '../../app/core/sequences/trirunworkouttypesequence.class.php';
+require_once '../../app/core/sequences/tribikeworkouttypesequence.class.php';
+require_once '../../app/core/sequences/triswimworkouttypesequence.class.php';
+require_once '../../app/core/workouts/workout.class.php';
+require_once '../../app/core/workouts/swimworkout.class.php';
+require_once '../../app/core/workouts/bikeworkout.class.php';
+require_once '../../app/core/workouts/runworkout.class.php';
+require_once '../../app/core/renderers/workoutrenderer.class.php';
 
 class ProviderComponent extends Object {
 	public $components = array('Session', 'Unitcalc');

@@ -300,14 +300,25 @@ jQuery(document).ready(function() {
 	jQuery('#TrainingstatisticDuration, #TrainingstatisticAvgPulse')
 		.change(function () {
 		TimeParser.parse(duration.val());
+
+		var sport = jQuery('div.radio input:checked').val();
+		var zones;
+		
 		// trimps
-		/*jQuery('#trimp').text(
-			WorkoutStats.calcTrimps(
+		// choose zones array first
+		if (sport == 'BIKE') {
+			zones = [<?php echo implode(',', $bikezones); ?>];
+		} else {
+			zones = [<?php echo implode(',', $runzones); ?>];
+		}
+		// calculate & update trimps
+		jQuery('#trimp').text(
+			WorkoutStats.calcTrimp(
 				heartrate.val(),
-				'RUN',
-				TimeParser.mins
+				TimeParser.mins,
+				zones
 			)
-		);*/
+		);
 		
 		// kcals
 		jQuery('#kcal').text(WorkoutStats.calcKcal(

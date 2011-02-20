@@ -620,6 +620,10 @@ class TrainingstatisticsController extends AppController {
 	  		}
 	  	}
 	  	
+	  	
+	  	// set template variables
+	  	$this->set('bikezones', $this->Provider->getAthlete()->getZones('BIKE'));
+	  	$this->set('runzones', $this->Provider->getAthlete()->getZones('RUN'));
 	  	$this->set('workouts', $workouts);
 	  	$this->set('user', $results['User']);
 	  	$this->set('unit', $unit);
