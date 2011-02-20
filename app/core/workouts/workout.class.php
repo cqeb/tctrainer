@@ -32,8 +32,11 @@ abstract class Workout {
 	const M5 = "M5";
 	
 	// test
-	const TEST_SHORT = "TS";
-	const TEST_LONG = "TL";
+	const TEST_SHORT = "T1";
+	const TEST_LONG = "T2";
+	
+	// competition
+	const COMPETITION = "C1";
 	
 	/**
 	 * the workout's duration measured in minutes

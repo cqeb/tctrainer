@@ -79,6 +79,9 @@ class RunWorkout extends Workout {
 			case Workout::TEST_LONG:
 				return __('Long Test', true);
 				break;
+			case Workout::COMPETITION:
+				return __('Competition', true);
+				break;
 			default:
 				return false;
 				break;

@@ -348,7 +348,7 @@ jQuery(document).ready(function() {
 					+ v
 					+ ']').attr('selected', 'selected');
 		})
-		.tipTip();
+		.tipTip({ defaultPosition: 'top' });
 
 	// show workouttype that should be displayed by actual workout selection
 	var sport = jQuery('#sportstype input[type=radio]:checked').val()
@@ -441,6 +441,6 @@ jQuery(document).ready(function() {
 	});
 	
 	// add tooltips
-	jQuery('.help, #TrainingstatisticDuration, #TrainingstatisticAvgPulse, #TrainingstatisticDistance').tipTip();
+	jQuery('.help, #TrainingstatisticDuration, #TrainingstatisticAvgPulse, #TrainingstatisticDistance').tipTip({ defaultPosition: 'top' });
 });
 </script>

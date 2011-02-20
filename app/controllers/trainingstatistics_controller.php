@@ -589,7 +589,7 @@ class TrainingstatisticsController extends AppController {
 	  	
 	  	// build workout type selectors
 	  	$sports = array('Swim', 'Bike', 'Run');
-	  	$types = array('E', 'S', 'M', 'F');
+	  	$types = array('E', 'S', 'M', 'F', 'T', 'C');
 	  	$workouts = array();
 	  	while (list($k, $sport) = each($sports)) {
 	  		reset($types);
@@ -612,6 +612,7 @@ class TrainingstatisticsController extends AppController {
 		  					break;
 		  			}
 		  			
+		  			// now add the workout
 		  			if ($label) {
 		  				$workouts[$sport][$t] = $label;
 		  			}

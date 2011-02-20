@@ -67,6 +67,9 @@ class SwimWorkout extends Workout {
 			case Workout::M3:
 				return __('Threshold Swim', true);
 				break;
+			case Workout::COMPETITION:
+				return __('Competition', true);
+				break;
 			default:
 				return false;
 				break;
