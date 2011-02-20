@@ -19,7 +19,7 @@
                    <fieldset>
                    <legend><?php __('Invoice Details'); ?></legend>
 
-                   <b>TriCoreTraining - <?php __('Association'); ?></b><br />
+                   <b>TriCoreTraining - <?php __('Club'); ?></b><br />
                    Gonzagagasse 11/25<br />
                    A-1010 <?php __('Vienna, Austria'); ?><br />
                    <br /><br />
@@ -52,7 +52,7 @@
                    </tr>
                    <tr>
                         <td></td>
-                        <td><?php __('We are not allowed to charge VAT as an association.'); ?></td>
+                        <td><?php __('We are not allowed to charge VAT as a club.'); ?></td>
                    </tr>
                    </tbody>
                    <tr class="total">

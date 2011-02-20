@@ -1,63 +1,49 @@
 <?php 
 
 $intervaldays = 14;
+$startday_ts = strtotime( $start );
 
 ?>{
 "elements":[{
-      "text":"<?php __('Formcurve'); ?>",
-      "type":"area",
-      "fill-alpha":0.4,
-      "width":2,
-      "dot-size":2,
-      "halo-size":1,
-	  "colour":"#F1AD28",
-	  "fill":"#FFFCCF",     
-      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
-	  "dot-style":{
-	  	"tip":"#val# min/<?php echo $unit['length']; ?>" 
-	  },
+<?php
+
+	echo $statistics->chart_settings( __('Formcurve', true), '#F1AD28', '#FFFCCF', 'mid-slide', 'area', 'min/' . $unit['length'] . '<br>#x_label#');
+
+?>
 	  "values":[<?php 
-for ( $i = 0; $i < count($trainings); $i++ ) 
+
+	  for ( $i = 0; $i < count($trainings); $i++ ) 
 {
 	 $rdate = date( 'Y-m-d', ( $startday_ts + ( $i * 86400 ) ) ); 
 	 $val = $trainings[$rdate]['distanceperunit']; 
 	 echo $val; 
 	 if ( $i < ( count( $trainings ) - 1 ) ) echo ","; 
 } 
+
 ?>]
 	}],
-	"title":{
-			"text":"<?php __('How fast am I?'); ?>",
-			"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
-	},
-	"y_axis":{
-		"stroke":1,
-		"offset":true,
-	    "colour":"#AAAAAA",
-		"grid-colour":"#DDDDDD",
-		"min":0,
-		"max":<?php echo $max_perunit; ?>
-	},
-	"x_axis":{
-		"stroke":1,
-		"offset":true,
-	    "colour":"#AAAAAA",
-		"grid-visible": false,
-		"labels":{
-	        	"rotate": "vertical",
-				"steps": 20,
-				"labels":[<?php 
-for ( $i = 0; $i < count($trainings); $i++ ) 
-{
-	 $rdate = $unitcalc->check_date( date( 'Y-m-d', ( $startday_ts + ( $i * 86400 ) ) ) ); 
-	 echo "\"" . $rdate . "\"";  
-	 
-	 if ( $i < ( count( $trainings ) - 1 ) ) echo ","; 
-}  
-?> ]
-			}
-	},
-	"bg_colour":"#ffffff"
+<?php
+
+	//echo $statistics->chart_title( __('How fast am I?', true) );
+
+	echo $statistics->y_axis( 1, $max_perunit, 0, 1, 'min/' . $unit['length'] );
+
+	$labels_output = '';
+	
+	for ( $i = 0; $i < count($trainings); $i++ ) 
+	{
+		
+		$rdate = $unitcalc->check_date( date( 'Y-m-d', ( $startday_ts + ( $i * 86400 ) ) ) );
+		$labels_output .= '"' . $rdate . '"';  
+		 
+		if ( $i < ( count( $trainings ) - 1 ) ) $labels_output .= ","; 
+	}  
+	
+	echo $statistics->x_axis( __('Time', true), $labels_output, 1, '', count( $trainings ) );
+
+	echo $statistics->chart_bgcolor();
+
+?>
 }
 
 <?php

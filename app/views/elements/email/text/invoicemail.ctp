@@ -1,7 +1,18 @@
 
 <?php __('Aloha'); ?> <?php echo $user['User']['firstname']; ?>,
        
+
 <?php __('thanks for your trust in TriCoreTraining.com.'); ?>
+
+*TriCoreTraining - <?php __('Club'); ?>*
+Gonzagagasse 11/25
+A-1010 <?php __('Vienna, Austria'); ?>
+
+
+*<?php echo $userobject['firstname'] . ' ' . $userobject['lastname']; ?>*
+<?php echo $userobject['address']; ?>
+<?php echo $userobject['zip'] . '-' . $userobject['city'] . ', ' . $userobject['country']; ?>
+
 
 *TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?>*
 

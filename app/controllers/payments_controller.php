@@ -57,7 +57,7 @@ class PaymentsController extends AppController {
                        $this->User->id = $session_userid;
 
                        $this->User->savefield('canceled', true, false);
-                       $this->User->savefield('cancellation_reason', $this->data['Payment']['cancelation_reason'], false);
+                       if ( isset( $this->data['Payment']['cancelation_reason'] ) ) $this->User->savefield('cancellation_reason', $this->data['Payment']['cancelation_reason'], false);
 
                        $statusbox = 'statusbox ok';
                        $this->Session->setFlash(__('Registered cancellation request.', true));
@@ -94,8 +94,9 @@ shows the chosen paymentplan by the user
             $session_userid = $results['User']['id'];
 
             // debugging paypal
-            //$testing = 'sandbox.';
-            $testing = '';
+            if ( 1 == 2 && $_SERVER['HTTP_HOST'] == 'localhost' ) $testing = 'sandbox.';
+			else 
+				$testing = '';
 
             $timeinterval = $this->params['named']['t'];
             if ( !$timeinterval ) $timeinterval = 1;
@@ -164,7 +165,7 @@ shows the chosen paymentplan by the user
                $this->Session->write('pay_transaction_id', $tid);
                $this->set('tid', $tid);
             }
-
+	
 			$countries = $this->Unitcalc->get_countries();
             $this->set('timeinterval', $timeinterval);
             $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
@@ -214,9 +215,61 @@ shows the chosen paymentplan by the user
             if ( $_POST ) $params = $_POST;
             else $params = $_GET;
 
+			/*
+			 *
+			 * http://localhost/trainer/payments/notify/lang:ger/?
+			 * cmd=_notify-validate&
+			 * mc_gross=0.10&
+			 * protection_eligibility=Ineligible&
+			 * address_status=unconfirmed&
+			 * payer_id=M2H23WE8JBUVE&
+			 * address_street=Reisenbauerring+4/2/7&
+			 * payment_date=00:18:05+Feb+19,+2011+PST&
+			 * payment_status=Completed&
+			 * charset=windows-1252&
+			 * address_zip=2351&
+			 * first_name=Elisabeth&
+			 * mc_fee=0.10&
+			 * address_country_code=AT&
+			 * address_name=Elisabeth+Schremser&
+			 * notify_version=3.0&
+			 * subscr_id=I-FXMWPPUPB6XL&
+			 * custom=3b7abce59212be7f106b925e594645a9&
+			 * payer_status=unverified&
+			 * business=payment%40tricoretraining.com&
+			 * address_country=Austria&
+			 * address_city=Wiener+Neudorf&
+			 * verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-ANMPOHq7XE8iQs-5Be4W1wPgg2Do&
+			 * payer_email=tri-lisi%40schremser.com&
+			 * txn_id=9G0374107E637632S&
+			 * payment_type=instant&
+			 * last_name=Schremser&
+			 * address_state=&
+			 * receiver_email=payment%40tricoretraining.com&
+			 * payment_fee=&
+			 * receiver_id=TGHR6X4FUYYZW&
+			 * txn_type=subscr_payment&
+			 * item_name=TriCoreTrainingsplan-1m&
+			 * mc_currency=EUR&
+			 * item_number=tctplan-1m&
+			 * residence_country=AT&
+			 * transaction_subject=&
+			 * payment_gross=
+			 *  
+			 * 
+			 * copy full request of PAYPAL to this documentation
+			 * // TODO (B) check whether all types of requests are handled here
+			 * txn_type=subscr_payment
+			 * txn_type=subscr_signup
+			 * txn_type=subscr_cancel
+			 * 
+			 */
+			 
             // this is the payment_transaction_id
-            if ( isset( $params['custom'] ) ) $this->payment_tid = $params['custom'];
-            else $this->payment_tid = '';
+            if ( isset( $params['custom'] ) ) 
+            	$this->payment_tid = $params['custom'];
+            else 
+            	$this->payment_tid = '';
 
             if ( !$this->payment_tid )
             {
@@ -258,16 +311,15 @@ shows the chosen paymentplan by the user
                       }
 
                       $posturl = $posturl . '?cmd=_notify-validate&' . $logurl;
-                      //$return = $this->do_post_request($posturl, $params, $optional_headers = null);
-                      //$logurl = implode( '&', $params );
+
                       if ( $_GET['testing'] == 'true' )
                           $return = 'VERIFIED';
                       else
                           $return = implode( "", file( $posturl ) );
 
-                      if ( $return != 'VERIFIED' )
+                      if ( $return != 'VERIFIED' || $params['txn_type'] != 'subscr_payment')
                       {
-                                  $error .= __('Verification by PAYPAL failed',true) . '. ' . $posturl . ' ';
+                                  $error .= __('Verification by PAYPAL failed',true) . '.<br /><br /> ' . $posturl . ' ';
                       } else
                       {
                                   $sql = "SELECT MAX(invoice) AS minv FROM payments";
@@ -288,10 +340,25 @@ shows the chosen paymentplan by the user
                                   $this->data['Payment']['price'] = $transactions['pay_price'];
                                   $this->data['Payment']['currency'] = $transactions['pay_currency'];
                                   $this->data['Payment']['payment_transaction_id'] = $this->payment_tid;
-                                  // this days PAYPAL gave us a positive verification
+                                  // PAYPAL gave us a positive verification
                                   $this->data['Payment']['payment_confirmed'] = 1;
-                                  $this->data['Payment']['paid_from'] = $transactions['pay_paid_new_from'];
-                                  $this->data['Payment']['paid_to'] = $transactions['pay_paid_new_to'];
+                                  
+                                  // to change !!!
+                                  if ( $results_user['User']['level'] == 'freemember' ) 
+                                  {
+                                  		$this->data['Payment']['paid_from'] = $transactions['pay_paid_new_from'];
+                                  		$this->data['Payment']['paid_to'] = $transactions['pay_paid_new_to'];
+								  } else
+								  {
+								  		if ( strtotime( $results_user['User']['paid_to'] ) < time() ) 
+								  				$paid_f_new = date( 'Y-m-d', time() );
+										else  
+												$paid_f_new = $results_user['User']['paid_to'];
+												
+                                  		$this->data['Payment']['paid_from'] = $transactions['pay_paid_new_from'] = $paid_f_new;
+                                  		$this->data['Payment']['paid_to'] = $transactions['pay_paid_new_to'] = date( 'Y-m-d', strtotime($results_user['User']['paid_to'])+31*24*3600*$transactions['pay_timeinterval'] );
+										
+								  }
 
                                   if ($this->Payment->save( $this->data, array(
                                               'validate' => true,
@@ -302,9 +369,10 @@ shows the chosen paymentplan by the user
                                               // change user-model - set new level and period of training
                                               // save single fields
                                               $this->User->id = $transactions['pay_userid'];
-                                              $now_ts = date('Y-m-d', time());
-                                              $this->User->savefield('paid_from', $now_ts, false);
-                                              $this->User->savefield('paid_to', $transactions['pay_paid_new_to'], false);
+                                              
+                                              $this->User->savefield('paid_from', $this->data['Payment']['paid_from'], false);
+                                              $this->User->savefield('paid_to', $this->data['Payment']['paid_to'], false);
+
                                               $this->User->savefield('level', 'paymember', false);
 
                                               $this->_sendInvoice($transactions, 'invoice');

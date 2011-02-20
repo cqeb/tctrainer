@@ -13,7 +13,7 @@
 
 <?php
 
-__('Your membership is valid from');
+__('Your current membership is valid from');
 echo ' <b>' . $paid_from . ' ';
 __('to');
 echo ' ' . $paid_to . '</b>.<br /><br />';
@@ -152,11 +152,8 @@ EOE;
 <?php
 } else
 {
-			echo '<b style="color:red">';
-			__('Unfortunately our PAYPAL account is not activated right now. Until end of January 2011 we will activate it.'); 
-			echo '</b><br /><br />';
 
-			if ( $userobject['admin'] )
+			if ( 1 == 1 ) //$userobject['admin'] )
 			{
 ?>
 
@@ -174,9 +171,22 @@ EOE;
             <!-- billing cycle subscription -->
             <!-- amount months -->
             <input type="hidden" name="p3" value="<?php echo $timeinterval; ?>" />
+<?php 
+if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+{
+?>
+            <!-- day -->
+            <input type="hidden" name="t3" value="D" />
+
+<?php	
+} else
+{
+?>
             <!-- month -->
             <input type="hidden" name="t3" value="M" />
 <?php
+}
+
 if ( $days_to_end > 0 )
 {
 ?>
@@ -191,7 +201,19 @@ if ( $days_to_end > 0 )
 ?>
             <input type="hidden" name="no_note" value="1" />
             
+<?php
+if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+{
+?>
+            <input type="hidden" name="notify_url" value="http://www.tricoretraining.com/log/paypal.php" />
+
+<?php
+} else {
+?>
             <input type="hidden" name="notify_url" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/notify/lang:<?php echo $locale; ?>/" />
+<?php
+}
+?>
             <input type="hidden" name="return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s/lang:<?php echo $locale; ?>/" />
             <input type="hidden" name="cancel_return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c/lang:<?php echo $locale; ?>/">
             

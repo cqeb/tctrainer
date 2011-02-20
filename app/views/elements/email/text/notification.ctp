@@ -6,10 +6,20 @@
 <?php
 
 echo $error;
+
+foreach ( $user['User'] as $key => $value )
+{
+	echo $key . " = " . $value . "\n\n";
+}
+
 echo '---------------------------------------------\n';
-print_r( $user );
+
+foreach ( $array as $key => $value )
+{
+	echo $key . " = " . $value . "\n\n";
+}
+
 echo '---------------------------------------------\n';
-print_r( $array );
 
 ?>
 

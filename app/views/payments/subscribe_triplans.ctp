@@ -20,6 +20,13 @@
 
                    <br />
 
+<?php
+
+if ( $pay_member == 'freemember' || $_SERVER['HTTP_HOST'] == 'localhost' )
+{
+
+?>
+	
 <table summary="<?php __('All possible subscriptions'); ?>">
 <colgroup>
           <col class="colA">
@@ -85,6 +92,11 @@ $price12pm['USD'] = '11.66';
 </tbody>
 </table>
 
+<?php
+
+}
+
+?>
 <table summary="<?php __('All possible subscriptions'); ?>">
 <!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->
 <colgroup>
@@ -146,6 +158,10 @@ $price12pm['USD'] = '11.66';
 solutions for websites. You send your necessary confidential payment information via a secure connection (128-bit encrypted SSL-connection)
 and provide these confidential data only to PAYPAL and NOT to us (we only receive your payment).'); ?>
 <br /><br />
+<a target="_blank" href="http://www.paypal.com">&raquo; Paypal-<?php __('Website'); ?> (www.paypal.com)</a>
+
+<br /><br />
+
 <?php __('Your trial period will be added if you subscribe to a PREMIUM membership.'); ?>
 <br />
 

@@ -93,7 +93,7 @@ if ( $searchfilter && count($testworkoutsfilter) > 0 )
 {
   $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_formcurve_json/';
 
-  echo $ofc->createflash('my_chart1','680','400',$jsonurl.'searchfilter:' . $searchfilter . '/type:' . $sportstype . '/start:' . $start . '/end:' . $end);
+  echo $ofc->createflash('my_chart1','680','400',$jsonurl.'searchfilter:' . $searchfilter . '/type:' . '/start:' . $start . '/end:' . $end);
 
 ?>
 
@@ -103,7 +103,7 @@ if ( $searchfilter && count($testworkoutsfilter) > 0 )
 <br /><br />
 Debugging: (only localhost)<br />
 
-<a href="<?php echo $jsonurl.'searchfilter:' . $searchfilter . '/type:' . $sportstype . '/start:' . $start . '/end:' . $end; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<a href="<?php echo $jsonurl.'searchfilter:' . $searchfilter . '/type:' . '/start:' . $start . '/end:' . $end; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
 <?php

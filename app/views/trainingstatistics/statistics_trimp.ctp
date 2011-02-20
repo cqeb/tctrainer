@@ -69,7 +69,7 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 
       echo $form->end();
 
-if ( count( $trainingdata ) > 0 )
+if ( count( $trainingdatas[0] ) > 0 )
 {
 ?>
 

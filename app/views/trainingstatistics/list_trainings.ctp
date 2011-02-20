@@ -18,9 +18,7 @@ __('SWIM workout', true);
 
                    <a href="/trainer/trainingstatistics/edit_training"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
                    
-                   <?php if ( $userobject['advanced_features'] ) { ?>
                    <a href="/trainer/trainingstatistics/import_workout"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
-                   <?php } ?>
 
                    <br /><br />
 
@@ -49,9 +47,9 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
 <tr>
     <td><?php echo $html->link($unitcalc->check_date($training['date']), array('action' => 'edit_training', 'id' => $trainingstatistic['Trainingstatistic']['id']),null); echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
     <td><?php $stype = $training['sportstype']; __($stype); ?></td>
-    <td><?php $distance = $unitcalc->check_distance($training['distance']); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
+    <td><?php $distance = $unitcalc->check_distance($training['distance'], 'show'); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
     <td><?php $duration = $unitcalc->seconds_to_time($training['duration']); echo $duration; ?></td>
-    <td style="text-align:right;">
+    <td>
 <?php 
 
 $facebookurl = "http://www.facebook.com/sharer.php?u=http://tricoretraining.com"; 
@@ -70,10 +68,11 @@ $twitterurl = urldecode( substr( $twittertext, 0, 140 ) );
 <a href="<?php echo $training['workout_link']; ?>" target="_blank"><img alt="<?php __('Link to workout'); ?>" width="18" src="/trainer/img/icon_external.gif" /></a>
 <?php } ?>
 
-<a target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
-<a target="_blank" href="http://twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
-
 <a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
+
+<a class="help2" title="<?php __('Tell your friends on Facebook about your great workout!'); ?>" target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
+<a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="http://twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
+
 </nowrap>
 
     </td>
@@ -111,6 +110,8 @@ __('Sun');
         // facebox box
         \$('a[rel*=facebox]').facebox();
 
+        \$('.help2').tipTip();
+        
 });
 
 </script>
