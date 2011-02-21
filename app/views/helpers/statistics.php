@@ -66,6 +66,8 @@ class StatisticsHelper extends AppHelper {
 			{
 				if ( $number_labels < 10 )
 					$steps = 2;
+				elseif ( $number_labels < 20 )
+					$steps = 3;
 				else
 					$steps = 5; //round( $number_labels / 5 );
 				
