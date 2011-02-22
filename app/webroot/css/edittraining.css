@@ -178,3 +178,50 @@ table#stats th {
 table#stats .border-right {
 	border-right: 1px solid #999;
 }
+
+.input.date.required {
+	position: absolute;
+	margin-top: -52px;
+	margin-left: 172px;
+}
+
+.sportworkoutlabels, .sportworkout {
+	float: left;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #efefef),
+	    color-stop(1, white)
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#efefef 0%,
+    	#fff 100%
+	);
+	width: 85px;
+	height: 76px;
+	padding: 10px;
+	border: 1px solid #999;
+}
+.sportworkout {
+	width: 275px;
+	border-left: 0;
+	border-radius: 0px 2px 2px 0px;
+	-webkit-border-radius: 0px 2px 2px 0px;
+	-moz-border-radius: 0px 2px 2px 0px;
+}
+.sportworkoutlabels {
+	background: #efefef;
+	border-radius: 2px 0px 0px 2px;
+	-webkit-border-radius: 2px 0px 0px 2px;
+	-moz-border-radius: 2px 0px 0px 2px;
+	border-right-style: dotted;
+	margin-bottom: 10px;
+}
+.sportworkoutlabels label {
+	margin-top: 5px;
+	margin-bottom: 14px;
+	font-size: 18px;
+	text-shadow: 1px 1px 1px white;
+}

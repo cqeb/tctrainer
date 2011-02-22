@@ -15,11 +15,16 @@ echo $form->input('date',
 	array(
         'class' => 'required',
 		'label' => false,
-		'after' => '<input id="datepicker" style=""/>',
         'minYear' => date('Y',time())-1,
         'maxYear' => date('Y',time())+1
 ));
-
+?>
+<div class="sportworkoutlabels">
+<label>Sport</label>
+<label>Workout</label>
+</div>
+<div class="sportworkout">
+<?php
 echo $form->input('sportstype',
 	array(
 		'legend' => false,
@@ -70,6 +75,9 @@ echo $form->input('workouttype',
 		'label' => false
 ));
 ?>
+</div>
+<div class="clear"></div>
+
 <div>
 <?php
 echo $form->input('name',
@@ -238,13 +246,6 @@ jQuery(document).ready(function() {
 	} else if (sport == 'RUN') {
 		jQuery('.runworkouttypes').show();
 	}
-
-	jQuery('#datepicker').datepicker({
-		showOn: "button",
-		buttonImage: "/trainer/img/calendar_icon.png",
-		buttonImageOnly: true,
-		buttonText: '<?php __("Date"); ?>'
-	});
 
 	var duration = jQuery('#TrainingstatisticDuration');
 	var distance = jQuery('#TrainingstatisticDistance');
