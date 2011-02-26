@@ -52,12 +52,24 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
     <td>
 <?php 
 
-$facebookurl = "http://www.facebook.com/sharer.php?u=http://tricoretraining.com"; 
-$facebookurl .= '/trainer/starts/index/distance:'.$distance['amount'].'/distance_unit:'. $distance['unit'] .'/duration:' . $duration . '/stype:' . $stype;
+$facebookurl = 'http://www.facebook.com/sharer.php?u=http://tricoretraining.com'; 
+$facebookurl = '/trainer/starts/index/';
 
+/*
+$pp['di'] = $distance['amount'];
+$pp['di_u'] = $distance['unit'];
+$pp['st'] = $stype;
+$pp_url = base64_encode(serialize( $pp ));
+*/
+$pp_url = '/di:'.$distance['amount'].'/di_u:'. $distance['unit'] .'/du:' . $duration . '/st:' . $stype . '/u:' . base64_encode($session_userid);
+$facebookurl .= 'pp:' . $pp_url;
+ 
 $twittertext =
 __('I did a', true) . ' ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . __($stype . ' workout', true) . ' ' . 
-__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 'http://tricoretraining.com'; 
+__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 
+'http://tricoretraining.com/u:' . base64_encode( $session_userid ); 
+
+//$twittertext .= '?pp=' . $pp_url;
 
 $twitterurl = urldecode( substr( $twittertext, 0, 140 ) ); 
 

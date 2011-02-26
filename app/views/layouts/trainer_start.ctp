@@ -69,6 +69,7 @@ $(document).ready(function() {
 
 </head>
 <body>
+<a href="/trainer/starts/show_workout/" class="facebox">Show facebox</a>
 <!-- Header -->
 <div class="container_12 header">
 	<div class="grid_12 branding">
@@ -173,6 +174,19 @@ try {
   feedback_widget_options.color = "#222";
   feedback_widget_options.style = "idea";
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+
+<script type="text/javascript">
+
+/** initiate JQuery **/
+
+\$(document).ready(function() {
+
+        // facebox box
+        $('a[rel*=facebox]').facebox();
+
+});
+
 </script>
 
 </body>

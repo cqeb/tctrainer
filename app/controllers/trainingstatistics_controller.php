@@ -820,7 +820,7 @@ class TrainingstatisticsController extends AppController {
             $session_userid = $results['User']['id'];
 
 			// automatic default date chooser
-			$choosedates = $this->Statisticshandler->choose_daterange( $results, $this->data, 'formcurve_date' );
+			$choosedates = $this->Statisticshandler->choose_daterange( $results, $this->data, 'weight_date' );
 
 			// set form-fields of search form
 			$this->data['Trainingstatistic']['fromdate'] = $start = $choosedates['start'];
