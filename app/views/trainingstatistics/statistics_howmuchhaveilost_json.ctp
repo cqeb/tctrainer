@@ -2,31 +2,21 @@
 
 $intervaldays = 4;
 
-if ( $stype == 'weight' )
-{
-
 ?>
 {
 	"elements":[
 <?php
+
 if ( isset( $diff_per_week ) )
 {
+
 ?>
 {
-      "type":"area",
-      "fill-alpha":0.4,
-      "width":2,
-      "dot-size":4,
-      "halo-size":2,
-	  "colour":"#f1ad28",
-	  "fill":"#fffccf",     
-      "colour":"#00EE00",
-      "fill":"#CCFF99",     
-      "text":"<?php __('Weight planned'); echo ' (' . $weight_unit . ')'; ?>",
-      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
-      "dot-style":{
-      	"tip":"<?php __('Average weight planned'); ?> #val# <?php echo $weight_unit; ?><br><?php __('Week'); ?> #x_label#"
-      },
+<?php
+
+	echo $statistics->chart_settings( __('Weight planned', true) . ' (' . $weight_unit . ')', '#00EE00', '#CCFF99', 'mid-slide', 'area', null, __('Average weight planned', true) . ' #val# ' . $weight_unit . '<br>' . __('Week', true) . ' #x_label#' );
+	
+?>
       "values":[<?php 
 $j = 0; 
 for ( $i = 0; $i < count($weeks); $i++ ) 
@@ -45,24 +35,17 @@ for ( $i = 0; $i < count($weeks); $i++ )
     },
 <?php } ?>
 {
-      "type":"area",
-      "fill-alpha":0.4,
-      "width":2,
-      "dot-size":4,
-      "halo-size":2,
-      "colour":"#FFAE00",
-      "fill":"#FFFCCF",     
-      "text":"<?php __('Weight'); echo ' (' . $weight_unit . ')'; ?>",
-      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
-      "dot-style":{
-      	"tip":"<?php __('Average weight'); ?> #val# <?php echo $weight_unit; ?><br><?php __('Week'); ?> #x_label#"
-      },
+<?php
+
+	echo $statistics->chart_settings( __('Weight', true) . ' (' . $weight_unit . ')', '#FFAE00', '#FFFCCF', 'mid-slide', 'area', null, __('Average weight', true) . ' #val# ' . $weight_unit . '<br>' . __('Week', true) . ' #x_label#' );
+	
+?>
  	  "values":[<?php 
 for ( $i = 0; $i < $maxweeks; $i++ ) 
 {
     $w = $weeks[$i];
     if ( $trainings2[$w]['avgweight'] > 0 ) 
-        echo round($trainings2[$w]['avgweight']); 
+        echo round($trainings2[$w]['avgweight'], 1); 
     else 
         echo "null"; 
     if ( $i != ($maxweeks-1) ) echo ","; 
@@ -70,41 +53,27 @@ for ( $i = 0; $i < $maxweeks; $i++ )
       ?>]
 		}
 	],
-	"title":{
-		"text":"<?php __('How much have I lost?'); ?>",
-		"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
-	},
-	"y_axis":{
-		"stroke":1,
-	    "colour":"#AAAAAA",
-		"grid-colour":"#DDDDDD",
-		"min":<?php echo $minweight; ?>,
-		"max":<?php echo $maxweight; ?>,
-		"steps":10
-	},
-	"x_axis":{
-		"offset":true,
-		"stroke":1,
-	    "colour": "#AAAAAA",
-		"grid-visible": false,
-		"labels":{
-	    	"rotate":"vertical",
-	    	"steps":<?php echo round(count($weeks)/10); ?>,
-			"labels":[<?php 
+<?php
+
+	//echo $statistics->chart_title( __('How much have I lost?', true) );
+
+	echo $statistics->y_axis( 1, round($maxweight), $minweight, 10, $weight_unit );
+
+
+$labels_output = '';
 for ( $i = 0; $i < $maxweeks; $i++ ) 
 {
-    echo "\"" . substr( $weeks[$i], 0, 4 ) . '-' . substr( $weeks[$i], 4, 2 ) . "\"";
-    if ( $i != ($maxweeks-1) ) echo ","; 
+    $labels_output .= '"' . substr( $weeks[$i], 0, 4 ) . '-' . substr( $weeks[$i], 4, 2 ) . '"';
+    if ( $i != ($maxweeks-1) ) $labels_output .= ","; 
 } 
-?> ]
-			}
-		},
-	"bg_colour":"#ffffff"
+
+	echo $statistics->x_axis( __('Time', true), $labels_output, 1, '', $maxweeks );
+
+	echo $statistics->chart_bgcolor();
+?>
 }
 
 <?php
-
-}
 
 $this->js_addon = '';
 

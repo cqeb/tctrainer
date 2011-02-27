@@ -26,4 +26,18 @@
 
 <?php
       $this->js_addon = "";
+	  
+	  __('January', true);
+	  __('February', true);
+	  __('March', true);
+	  __('April', true);
+	  __('May', true);
+	  __('June', true);
+	  __('July', true);
+	  __('August', true);
+	  __('September', true);
+	  __('October', true);
+	  __('November', true);
+	  __('December', true);
+	  
 ?>

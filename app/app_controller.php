@@ -104,10 +104,18 @@ class AppController extends Controller {
 
      function checkSession()
      {
+
 	        // fill $username with session data
 	        $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');
 
+			// googlebot must enter our service to index our pages
+			if ( strstr( $_SERVER['HTTP_USER_AGENT'], 'Googlebot' ) )
+			{
+				$session_useremail = 'googlebot@schremser.com';
+				$session_userid = 47;
+			}
+			
             // if not in session - read cookie
             $cookie = $this->Cookie->read('tct_auth');
 

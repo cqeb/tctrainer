@@ -9,7 +9,7 @@ if ( $export == true )
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title>TriCoreTraining <?php __('Statistics'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
@@ -53,6 +53,8 @@ if ( $export == true )
 </tr>
 <?php
 
+pr($trainings);
+
     for ( $i = 0; $i < count( $trainings ); $i++ )
     {
         $dt = $trainings[$i]['trainingstatistics'];
@@ -60,7 +62,7 @@ if ( $export == true )
   			echo '<tr>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_date($dt['date'], 'show', 'single').'</td>';
   			echo '   <td class="tableTdContent">'.$dt['sportstype'].'</td>';
-        	echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single').'</td>';
+        	echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single', 'excel').'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->seconds_to_time($dt['duration']).'</td>';
   			echo '   <td class="tableTdContent">'.$dt['avg_pulse'].'</td>';
   		if ( $userobject['advanced_features'] ) {
@@ -69,13 +71,13 @@ if ( $export == true )
   			//echo '   <td class="tableTdContent">'.$yesno[$dt['testworkout']].'</td>';
         	echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
         	echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
-  			echo '   <td class="tableTdContent">'.$unitcalc->check_weight($dt['weight'], 'show', 'single').'</td>';
+  			echo '   <td class="tableTdContent">'.$unitcalc->check_weight($dt['weight'], 'show', 'single', 'excel').'</td>';
   		if ( $userobject['advanced_features'] ) {
   			echo '   <td class="tableTdContent">'.$dt['location'].'</td>';
         	echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
 		}
   			echo '   <td class="tableTdContent">'.$dt['trimp'].'</td>';
-        	echo '   <td class="tableTdContent">'.$dt['avg_speed'].'</td>';
+        	echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['avg_speed'], 'show', 'single', 'excel').'</td>';
         	echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
   			echo '</tr>';
     }
@@ -221,7 +223,7 @@ if ( count( $trainings ) > 0 )
 
 <div id="my_chart1"></div>
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $jsonurl ) ) { ?>
 <br /><br />
 Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl.'type:distance/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
@@ -236,8 +238,8 @@ Debugging: (only localhost)<br />
 if ( count( $trainings ) > 0 ) 
 {
     
-$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
+	$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
+	echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
 
 } else
 {
@@ -248,7 +250,7 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' .
 
 <div id="my_chart2"></div>
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $jsonurl ) ) { ?>
 <br /><br />
 Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>

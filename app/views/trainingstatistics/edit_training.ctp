@@ -193,6 +193,10 @@ echo $form->input('workout_link',
 <li><a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a></li>
 <li><a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a></li>
 </ul>
+
+<?php
+echo $form->submit(__('Save',true));
+?>
 </fieldset>
 <script type="text/javascript">
 jQuery(document).ready(function() {

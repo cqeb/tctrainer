@@ -11,15 +11,34 @@
 
  <p><i><?php __('some notification arrived.'); ?></i></p>
  <p>
-<?php
+<font color="red"><?php
 
 echo $error;
-echo '<hr>';
-print_r( $user );
-echo '<hr>';
-print_r( $array );
 
 ?>
+</font>
+</p>
+<p>
+<i>
+<?php
+
+foreach ( $user['User'] as $key => $value )
+{
+	echo $key . " = " . $value . "<br />\n\n";
+}
+
+?>
+</p>
+<p>
+<?php
+
+foreach ( $array as $key => $value )
+{
+	echo $key . " = " . $value . "<br />\n\n";
+}
+
+?>
+</i>
  </p>
  
  <p><?php __('Yours, Clemens'); ?></p>

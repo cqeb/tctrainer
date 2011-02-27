@@ -30,8 +30,8 @@
                    <?php foreach ($payments as $payment): ?>
                    <tr>
                    <!--    <td><?php echo $payment['Payment']['id']; ?></td>-->
-                        <td><?php echo $html->link(__('Invoice-No.', true) . ' ' . $payment['Payment']['invoice'],"/payments/show_invoice/".$payment['Payment']['id']); ?></td>
-                        <td><?php echo $payment['Payment']['timeinterval']; ?></td>
+                        <td><?php echo $html->link(__('No.', true) . ' ' . $payment['Payment']['invoice'],"/payments/show_invoice/".$payment['Payment']['id']); ?></td>
+                        <td align="center"><?php echo $payment['Payment']['timeinterval']; ?></td>
                         <td><?php echo sprintf('%.2f', $payment['Payment']['price']); ?> <?php echo $payment['Payment']['currency']; ?></td>
                         <td><?php echo $unitcalc->check_date($payment['Payment']['paid_from']); ?> to <br /><?php echo $unitcalc->check_date($payment['Payment']['paid_to']); ?></td>
                         <td><?php echo $unitcalc->check_date($payment['Payment']['created']); ?></td>

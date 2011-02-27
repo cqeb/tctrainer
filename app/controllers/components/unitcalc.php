@@ -17,7 +17,7 @@ class UnitcalcComponent extends Object {
      if ( $convertunit != '' )
      {
        switch ( $convertunit )
-      {
+       {
             case "cm_ft":
             $result = $amount / 30.48;
             break;
@@ -41,7 +41,7 @@ class UnitcalcComponent extends Object {
             case "mi_km":
             $result = $amount / 0.62137;
             break;
-      }
+       }
      } else
             $result = $amount;
             
@@ -74,44 +74,52 @@ class UnitcalcComponent extends Object {
    /**
    check a distance to be saved and viewed in the correct metric
    **/
-   function check_distance( $amount, $mode = 'show', $ret = 'both' )
+   function check_distance( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
             if ( is_numeric( $amount ) )
             {
-              $session_userobject = $this->Session->read('userobject');
-              if (  $session_userobject['unit'] == 'imperial' )
-              {
-                 if ( $mode == 'show' ) $convert = 'km_mi';
-                 else
-                     $convert = 'mi_km';
-
-                 $amount_array['amount'] = $this->convert_metric( $amount, $convert );
-                 $amount_array['unit'] = 'mi';
-              } else
-              {
-                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  else $amount_array['amount'] = $amount;
-
-                  $amount_array['unit'] = 'km';
-              }
-
-              if ( $ret == 'single' )
-                 return $amount_array['amount'];
-              else
-                 return $amount_array;
+	              $session_userobject = $this->Session->read('userobject');
+				  $locale = $session_userobject['yourlanguage'];
+				  
+	              if (  $session_userobject['unit'] == 'imperial' )
+	              {
+	                 if ( $mode == 'show' ) $convert = 'km_mi';
+	                 else
+	                     $convert = 'mi_km';
+	
+	                 $amount_array['amount'] = $this->convert_metric( $amount, $convert );
+	                 $amount_array['unit'] = 'mi';
+	              } else
+	              {
+	                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+	                  else $amount_array['amount'] = $amount;
+	
+	                  $amount_array['unit'] = 'km';
+	              }
+	
+				  if ( $locale == 'ger' )
+				  { 
+				  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+				  }
+				  	
+	              if ( $ret == 'single' )
+	                 return $amount_array['amount'];
+	              else
+	                 return $amount_array;
 
             } else
-                return false;
+              	  return false;
    }
 
    /**
    check a weight to be saved and viewed in the correct metric
    **/
-   function check_weight( $amount, $mode = 'show', $ret = 'both' )
+   function check_weight( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
             if ( is_numeric( $amount ) )
             {
               $session_userobject = $this->Session->read('userobject');
+			  $locale = $session_userobject['yourlanguage'];
               if (  $session_userobject['unit'] == 'imperial' )
               {
                  if ( $mode == 'show' ) $convert = 'kg_lbs';
@@ -126,6 +134,10 @@ class UnitcalcComponent extends Object {
                   else $amount_array['amount'] = $amount;
                   $amount_array['unit'] = 'kg';
               }
+			  
+			  if ( $locale == 'ger' ) 
+			  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+			
               if ( $ret == 'single' )
                  return $amount_array['amount'];
               else
@@ -420,7 +432,6 @@ class UnitcalcComponent extends Object {
            $trimp = 0;
            $avgHR = $avg_pulse_total;
            $minutes = $duration_total;
-           //echo $sport;
            $this->threshold = $lth;
 
            $zones = $this->getZones($sport);
@@ -810,6 +821,20 @@ class UnitcalcComponent extends Object {
      * weight is in kg
      * duration is in seconds
      */
+        /**
+        http://www.triathlontrainingblog.com/calculators/calories-burned-calculator-based-on-average-heart-rate/
+            
+            Based on the following formulas:
+            Using VO2max
+               Men: C/min = (-59.3954 + (-36.3781 + 0.271 x age + 0.394 x weight + 0.404 x VO2max + 0.634 x HR))/4.184
+               Women: C/min = (-59.3954 + (0.274 x age + 0.103 x weight + 0.380 x VO2max + 0.450 x HR)) / 4.184
+            
+            Without VO2max
+               Men: C/min = (-55.0969 + 0.6309 x HR + 0.1988 x weight + 0.2017 x age) / 4.184
+               Women: C/min = (-20.4022 + 0.4472 x HR + 0.1263 x weight + 0.074 x age) / 4.184
+            weight is in kg
+            */
+
     function calc_kcal( $data )
     {
       $avgHR = $data['avg_pulse'];

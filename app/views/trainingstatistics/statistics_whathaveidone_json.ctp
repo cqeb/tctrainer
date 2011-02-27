@@ -1,53 +1,47 @@
 <?php
 
-$intervaldays = round( $maxweeks / 10 );
+$intervaldays = round( $maxweeks / 8 );
 
 if ( $stype == 'distance' )
 {
 
 ?>{
 "elements":[{
-      "type":"area",
-      "fill-alpha":0.4,
-      "width":2,
-      "dot-size":4,
-      "halo-size":2,
- 	  "colour":"#F1AD28",
-	  "fill":"#FFFCCF",
-	  "text":"<?php __('Distance'); ?> (<?php echo $length_unit; ?>)",
-      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
-      "dot-style":{
-			"tip":"#val# <?php echo $length_unit; ?><br><?php __('Week'); ?> #x_label#" 
-      },
-	  "values":[<?php for ( $i = 0; $i <= $maxweeks; $i++ ) { $w = $weeks[$i]; echo $trainings2[$w]['sumdistance']; if ( $i != ($maxweeks) ) echo ","; } ?>]
+<?php
+
+	echo $statistics->chart_settings( __('Distance', true) . ' (' . $length_unit . ')', '#F1AD28', '#FFFCCF', 'mid-slide', 'area', null, '#val# ' . $length_unit . '<br>' . __('Week', true) . ' #x_label#');
+
+?>
+	  "values":[<?php 
+for ( $i = 0; $i <= $maxweeks; $i++ ) 
+{
+		$w = $weeks[$i]; 
+		echo $trainings2[$w]['sumdistance']; 
+		if ( $i != ($maxweeks) ) echo ","; 
+} 
+?>]
 }],
+
+<?php
+
+	//echo $statistics->chart_title( __('What have I done?', true) );
+
+	echo $statistics->y_axis( 1, $maxdistance, 0, round( $maxdistance / 8), $length_unit );
+
+	$labels_output = '';
 	
-"title":{
-		"text":"<?php __('What have I done?'); ?>",
-		"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
-},
+	for ( $i = 0; $i <= $maxweeks; $i++ ) 
+	{
+		 $labels_output .= "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; 
+		 if ( $i != ($maxweeks) ) $labels_output .= ","; 
+	} 
+	
+	echo $statistics->x_axis( __('Time', true), $labels_output, round( count( $weeks ) / 8 ), '', $maxweeks );
 
-"y_axis":{
-		"stroke":1,
-	    "colour":"#AAAAAA",
-		"grid-colour":"#DDDDDD",
-		"min":0,
-		"max":<?php echo $maxdistance; ?>,
-		"steps":<?php echo round( $maxdistance / 10); ?>
-},
+	echo $statistics->chart_bgcolor();
 
-"x_axis":{
-		"offset":true,
-		"stroke":1,
-	    "colour": "#AAAAAA",
-		"grid-visible":false,
-		"labels":{
-      		"rotate": "vertical",
-	      	"steps": <?php echo round( count( $weeks ) / 8 ); ?>,
-			"labels":[<?php for ( $i = 0; $i <= $maxweeks; $i++ ) { echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; if ( $i != ($maxweeks) ) echo ","; } ?> ]
-		}
-	},
-	"bg_colour":"#ffffff"
+?>
+
 }
 
 <?php
@@ -59,19 +53,13 @@ if ( $stype == 'duration' )
 
 ?>{
 "elements":[{
-      "type":"area",
-      "fill-alpha":0.4,
-      "width":2,
-      "dot-size":4,
-      "halo-size":2,
- 	  "colour":"#F1AD28",
-	  "fill":"#FFFCCF",     
-	  "text":"<?php __('Duration'); echo ' ('; __('hours'); echo ')'; ?>",
-      "on-show":{"type": "mid-slide", "cascade":1, "delay":0.5},
-      "dot-style":{
-			"tip":"#val# h<br><?php __('Week'); ?> #x_label#"  
-      },
+<?php
+
+	echo $statistics->chart_settings( __('Duration', true) . ' (' . __('hours',true) . ')', '#F1AD28', '#FFFCCF', 'mid-slide', 'area', null, '#val# h<br>' . __('Week', true) . ' #x_label#');
+
+?>
 	  "values":[<?php 
+
 for ( $i = 0; $i <= $maxweeks; $i++ ) 
 {
 	 $w = $weeks[$i]; 
@@ -80,36 +68,25 @@ for ( $i = 0; $i <= $maxweeks; $i++ )
 } 
 ?>]
 }],
-	"title":{
-		"text":"<?php __('What have I done?'); ?>",
-		"style":"{font-size:12px;padding-bottom:10px;text-align:left;color:#999999;}"
-	},
-	"y_axis":{
-		"stroke":1,
-	    "colour":"#AAAAAA",
-		"grid-colour":"#DDDDDD",
-		"min":0,
-		"max":<?php echo $maxduration; ?>,
-		"steps":<?php echo round($maxduration/10); ?>
-	},
-	"x_axis":{
-		"offset":true,
-		"stroke":1,
-	    "colour":"#AAAAAA",
-		"grid-visible":false,
-		"labels":{
-	      	"rotate":"vertical",
-	      	"steps":<?php echo round( count( $weeks ) / 8 ); ?>,
-			"labels":[<?php 
-for ( $i = 0; $i <= $maxweeks; $i++ ) 
-{
-	 echo "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; 
-	 if ( $i != ($maxweeks) ) echo ","; 
-} 
-?> ]
-		}
-	},
-	"bg_colour":"#ffffff"
+<?php
+
+	//echo $statistics->chart_title( __('What have I done?', true) );
+
+	echo $statistics->y_axis( 1, $maxduration, 0, round( $maxduration / 8), __('hours',true) );
+
+	$labels_output = '';
+	
+	for ( $i = 0; $i <= $maxweeks; $i++ ) 
+	{
+		 $labels_output .= "\"" . substr( $weeks[$i], 0, 4) . "-" . substr( $weeks[$i], 4, 2) . "\""; 
+		 if ( $i != ($maxweeks) ) $labels_output .= ","; 
+	} 
+	
+	echo $statistics->x_axis( __('Time', true), $labels_output, 1, '', $maxweeks );
+
+	echo $statistics->chart_bgcolor();
+
+?>
 }
 
 <?php
