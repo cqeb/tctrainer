@@ -141,6 +141,7 @@ table#stats {
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-collapse: separate;
+	margin-bottom: 10px;
 }
 
 table#stats td {
