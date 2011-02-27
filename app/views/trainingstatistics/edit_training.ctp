@@ -157,13 +157,10 @@ $min_weight = $unitcalc->check_weight('40', 'single');
 $min_weight = $min_weight['amount'] . ' ' . $unit['weight'];
 $max_weight = $unitcalc->check_weight('150', 'single');
 $max_weight = $max_weight['amount'] . ' ' . $unit['weight'];
-//$max_weight = $unitcalc->check_weight('150', 'single') . ' ' . $unit['weight'];
 
 echo $form->input('weight',
      array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
+     'div' => 'wrap weight',
      'maxLength' => 5,
      'error' => array( 
              'numeric' => __('Enter your current weight',true),
@@ -173,15 +170,15 @@ echo $form->input('weight',
      ),
      'label' => __('Weight', true) . ' (' . $unit['weight'] . ')'
 ));
-
-__('Comment');
-echo '<br />';
-echo $form->textarea('comment',
-                  array(
-                  'rows' => '5',
-                  'cols' => '45'
-));
-
+?>
+<div id="comment">
+<label for="TrainingstatisticComment"><?php __('Comment'); ?></label>
+<?php
+echo $form->textarea('comment');
+?>
+</div>
+<div class="clear"></div>
+<?php
 echo $form->input('workout_link',
      array(
      'before' => '',
@@ -280,6 +277,23 @@ jQuery(document).ready(function() {
 		.tipTip();
 	if (name.val() == '') {
 		jQuery('#CourseName label').show();
+	}
+
+	// handle comment field
+	jQuery('#TrainingstatisticComment')
+		.focus(function () {
+			jQuery('#comment label').fadeOut('fast');
+		})
+		.blur(function () {
+			var val = jQuery.trim(jQuery('#TrainingstatisticComment').val());
+			if (val === '') {
+				// clean whitespaces first
+				jQuery('#TrainingstatisticComment').val(val);
+				jQuery('#comment label').fadeIn('normal');
+			}
+	});
+	if (jQuery('#TrainingstatisticComment').val() == '') {
+		jQuery('#comment label').show();
 	}
 	
 	// update training stats

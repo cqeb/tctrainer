@@ -114,11 +114,11 @@ label.ui-state-active, label.ui-button:hover {
 	width: 170px;
 }
 
-#CourseName label {
+#CourseName label, #comment label {
 	position: absolute;
 	font-size: 18px;
 	margin-top: 8px;
-	margin-left: 6px;
+	margin-left: 10px;
 	display: none;
 }
 #CourseName input {
@@ -224,4 +224,18 @@ table#stats .border-right {
 	margin-bottom: 14px;
 	font-size: 18px;
 	text-shadow: 1px 1px 1px white;
+}
+
+#comment label {
+	margin: 15px 5px;
+}
+
+#comment textarea {
+	width: 280px;
+	height: 87px;
+	border: 1px solid #999;
+	margin-top: 10px;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
 }

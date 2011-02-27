@@ -265,11 +265,15 @@ ul.pages li {
  * Form
  */
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], textarea {
 	width: 200px;
 	box-shadow: inset 3px 3px 3px #ddd;
 	-webkit-box-shadow: inset 3px 3px 3px #ddd;
 	-moz-box-shadow: inset 3px 3px 3px #ddd;
+}
+
+textarea {
+	padding: 5px;	
 }
 
 input:disabled, button:disabled {

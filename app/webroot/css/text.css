@@ -8,7 +8,7 @@
 /* `Basic HTML
 ----------------------------------------------------------------------------------------------------*/
 
-body {
+body, textarea {
 	font: 14px Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
 	color: #666666;
 }
