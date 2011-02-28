@@ -41,7 +41,8 @@
  *
  */
 
-define( 'DEBUG', true );
+if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+	define( 'DEBUG', true );
 
 /**
  * default ratios
