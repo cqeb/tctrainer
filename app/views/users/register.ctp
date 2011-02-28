@@ -54,6 +54,16 @@ echo $form->input('gender',
      'options' => array('m' => __('male', true), 'f' => __('female', true))
 ));
 
+if ( isset( $companyemail ) )
+{
+	echo "<div class='statusbox'>";
+	__('Please use your company email for registration to receive your company discount!');
+	echo ' ';
+	__('Your email must end with');
+	echo ' ' . $companyemail;
+	echo "</div><br />";
+}
+
 echo $form->input('email',
      array(
      'class' => 'required',
@@ -123,47 +133,6 @@ echo $form->hidden('lactatethreshold');
 echo $form->hidden('bikelactatethreshold');
 echo $form->hidden('weeklyhours');
 
-/*
-echo $form->input('lactatethreshold',
-     array(
-     'class' => 'medium',
-     'error' => array( 
-        'numeric' => __('Enter your lactate threshold heart rate',true),
-        'greater' => __('Must be at least',true) . ' 120',
-        'lower' => __('Must be lower than',true) . ' 220',
-        'notempty' => __('Enter your lactate threshold heart rate',true)
-     ),
-     'label' => __('Lactate threshold', true)
-));
-echo $form->input('bikelactatethreshold',
-     array(
-     'class' => 'medium',
-     'error' => array( 
-        'numeric' => __('Enter your bike lactate threshold heart rate',true),
-        'greater' => __('Must be at least',true) . ' 120',
-        'lower' => __('Must be lower than',true) . ' 220',
-        'notempty' => __('Enter your bike lactate threshold heart rate',true)
-     ),
-     'label' => __('Bike lactate threshold', true)
-));
-?>
-<!--<a target="_blank" href="/blog/en/url....">TODO [?]</a>-->
-<?php
-echo $form->input('weeklyhours',
-     array(
-     'class' => 'short',
-     'maxLength' => 255,
-     'error' => array( 
-          'numeric' => __('Enter your weekly available training hours', true),
-          'greater' => __('Must be at least',true) . ' 0 ' . __('hours', true),
-          'lower' => __('Must be lower than', true) . ' 60 ' . __('hours', true),
-          'notempty' => __('Enter your weekly available training hours',true) 
-     ),
-     'label' => __('Weekly hours', true)
-));
-
-*/
-
 ?>
 <span id="weeklyhours"></span>
 
@@ -214,6 +183,7 @@ echo $form->input( 'paid_from', array('type' => 'hidden', 'value' => $paid_from)
 echo $form->input( 'paid_to', array('type' => 'hidden', 'value' => $paid_to));
 
 echo $form->hidden('id');
+echo $form->hidden('inviter');
 
 echo $form->submit(__('Register',true));
 
