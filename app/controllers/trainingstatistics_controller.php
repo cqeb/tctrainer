@@ -4,7 +4,7 @@ class TrainingstatisticsController extends AppController {
    var $name = 'Trainingstatistics';
 
    var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc', 'Unitcalc', 'Xls', 'Statistics');
-   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Statisticshandler');
+   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Statisticshandler', 'Transactionhandler');
 
    var $paginate = array(
        'Trainingstatistic' => array(
@@ -972,6 +972,44 @@ class TrainingstatisticsController extends AppController {
             $this->set('length_unit', $unit['length']);
    }
 
+	function url_redirect($id = null)
+	{
+		
+		$transaction_id = '';
+		$p['smtype'] = $this->params['named']['type'];
+		$p['distance'] = $this->params['named']['distance'];
+		$p['distance_unit'] = $this->params['named']['distance_unit'];
+		$p['duration'] = $this->params['named']['duration'];
+		$p['sport'] = $this->params['named']['sport'];
+		$p['userid'] = $this->Session->read('session_userid');
+	
+		// information is saved in transactions
+		$this->loadModel('Transaction');
+
+		$save_p = serialize( $p );
+		$transaction_id = $this->Transactionhandler->handle_transaction( $this->Transaction, null, 'create', 'sm_recommend', $save_p );
+		 
+		if ( $p['smtype'] == 'facebook' )
+		{
+			$socialmedia_url = 'http://www.facebook.com/sharer.php?u=http://tricoretraining.com' .  
+				'/trainer/starts/index/u:' . $transaction_id;
+		} elseif ( $p['smtype'] == 'twitter' )
+		{
+			$twittertext =
+			__('I did a', true) . ' ' . $p['distance'] . ' ' . $p['distance_unit'] . ' ' . 
+			__($p['sport'] . ' workout', true) . ' ' . __('in',true) . ' ' . $p['duration'] . 
+			' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 
+			'http://tricoretraining.com/u:' . $transaction_id; 
+			
+			$socialmedia_url = 'http://twitter.com/?status=' . urldecode( substr( $twittertext, 0, 140 ) );
+		}
+
+		$this->redirect( $socialmedia_url );
+		
+		$this->autoRender = false;
+		
+	}
+
    function delete($id)
    {
             $this->checkSession();
@@ -1004,7 +1042,8 @@ class TrainingstatisticsController extends AppController {
             $this->set('statusbox', 'statusbox');
             $this->Session->setFlash(__('Workout deleted.',true));
             $this->redirect(array('action'=>'list_trainings'));
-   }
+	}
+
 }
 
 ?>
