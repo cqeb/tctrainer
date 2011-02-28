@@ -47,6 +47,10 @@ class UnitcalcHelper extends AppHelper {
    {
         return UnitcalcComponent::format_number( $number, $decimals, $thousand_separator, $decimal_point );
    }
+   function get_prices($country, $currency, $userobject)
+   {
+        return UnitcalcComponent::get_prices( $country, $currency, $userobject );
+   }
 
 }
 ?>
