@@ -615,6 +615,43 @@ class UnitcalcComponent extends Object {
             return $currency;
    }
 
+
+	function get_prices( $country = null, $currency = null, $userobject )
+	{
+		if ( isset( $country ) ) $currency = $this->currency_for_country( $country );
+		elseif ( !isset( $currency ) )  $currency = 'USD';
+					
+		if ( isset( $userobject['inviter'] ) && preg_match( '/@/', $userobject['inviter'] ) && preg_match( '/'.$userobject['inviter'].'/', Configure::read('company_emails') ) )
+		{
+			$price_eur = Configure::read('company_price_eur');
+			$price_eur_month = Configure::read('company_price_eur_month');
+			$price_usd = Configure::read('company_price_usd');
+			$price_usd_month = Configure::read('company_price_usd_month');
+		} elseif ( isset( $userobject['admin'] ) && $userobject['admin'] == '1' )
+		{
+			$price_eur = Configure::read('tct_price_eur');
+			$price_eur_month = Configure::read('tct_price_eur_month');
+		} else
+		{
+			$price_eur = Configure::read('price_eur');
+			$price_eur_month = Configure::read('price_eur_month');
+			$price_usd = Configure::read('price_usd');
+			$price_usd_month = Configure::read('price_usd_month');
+		}
+				
+		if ( $currency == 'USD' )
+		{
+			$price_array_split['USD']['total'] = str_replace( '"', '', split(",",$price_usd));
+			$price_array_split['USD']['month'] = str_replace( '"', '', split(",",$price_usd_month));
+		} else
+		{
+			$price_array_split['EUR']['total'] = str_replace( '"', '', split(",",$price_eur));
+			$price_array_split['EUR']['month'] = str_replace( '"', '', split(",",$price_eur_month));
+		}
+				
+		return $price_array_split;
+	}
+	
    /**
     * this function should return you the coldest month for various countries
     * TODO (B) not finished 
