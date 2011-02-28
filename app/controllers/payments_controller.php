@@ -7,8 +7,8 @@ do the payment with PAYPAL
 class PaymentsController extends AppController {
    var $name = 'Payments';
 
-   var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc'); // 'TabDisplay',
-   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Loghandler', 'Rebatehandler');
+   var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Loghandler', 'Rebatehandler', 'Sendmailhandler');
+   var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc');
 
    var $paginate = array(
        'Payments' => array(
@@ -80,10 +80,9 @@ class PaymentsController extends AppController {
             $this->set('statusbox', $statusbox);
    }
 
-/**
-shows the chosen paymentplan by the user
-**/
-
+	/**
+	shows the chosen paymentplan by the user
+	**/
    function initiate()
    {
 
@@ -94,26 +93,22 @@ shows the chosen paymentplan by the user
             $session_userid = $results['User']['id'];
 
             // debugging paypal
-            if ( 1 == 2 && $_SERVER['HTTP_HOST'] == 'localhost' ) $testing = 'sandbox.';
+            if ( 1 == 2 && $_SERVER['HTTP_HOST'] == 'localhost' ) 
+            	$testing = 'sandbox.';
 			else 
 				$testing = '';
 
             $timeinterval = $this->params['named']['t'];
+			
             if ( !$timeinterval ) $timeinterval = 1;
+			
+			$currency = $this->Unitcalc->currency_for_country($results['User']['country']);
+			
+			$price_array = $this->Unitcalc->get_prices( null, $currency, $results['User'] );
+			$price_array_split = $price_array[$currency]['total'];
+			$price_month_array_split = $price_array[$currency]['month'];
 
-            if ( $_SERVER['HTTP_HOST'] == 'localhost' || $results['User']['admin'] )
-            {
-            	$price_array = array( '1' => '0.10', '3' => '0.30', '6' => '0.60', '12' => '1.20' );
-            } else
-			{
-	            if ( $this->Unitcalc->currency_for_country($results['User']['country']) == 'USD' )
-	            {
-	              $price_array = array( '1' => '14.90', '3' => '39.90', '6' => '74.90', '12' => '139.90' );
-	            } else 
-	            {
-	              $price_array = array( '1' => '9.90', '3' => '26.90', '6' => '49.90', '12' => '94.90' );
-	            }
-			}
+           	$price_array = array( '1' => $price_array_split[0], '3' => $price_array_split[1], '6' => $price_array_split[2], '12' => $price_array_split[3] );
             
             // check address in user profile - otherwise redirect to edit profile
             // user has to give us an address for invoice
@@ -191,6 +186,7 @@ shows the chosen paymentplan by the user
    function notify()
    {
 			// don't check session because paypal is not logged in
+			//$this->checkSession();
 			if ( isset( $this->params['named']['lang'] ) )
 			{
 					$this->code = $this->params['named']['lang']; 				
@@ -199,9 +195,7 @@ shows the chosen paymentplan by the user
 					$this->code = 'eng';
 			}	 
 			$this->Session->write('Config.language', $this->code);
-
-            $this->checkSession();
-
+            
             $this->set('js_addon','');
             $error = '';
             $logurl = '';
@@ -212,8 +206,10 @@ shows the chosen paymentplan by the user
 
             // Paypal notifies us through a POST-request
             // $_GET for testing
-            if ( $_POST ) $params = $_POST;
-            else $params = $_GET;
+            if ( $_POST ) 
+            	$params = $_POST;
+            else 
+            	$params = $_GET;
 
 			/*
 			 *
@@ -376,12 +372,51 @@ shows the chosen paymentplan by the user
                                               $this->User->savefield('level', 'paymember', false);
 
                                               $this->_sendInvoice($transactions, 'invoice');
+											  
+											  // check recommendations / inviter
+											  $inviter = $results_user['User']['inviter'];
+											  
+											  if ( isset( $inviter ) && $inviter != '' && !preg_match( '/@/', $inviter ) )
+											  {
+											  		// these inviters receive money
+											  		if ( preg_match( '/money:/', $inviter ) )
+													{
+														
+														
+													} else
+													{
+															$inviter_user = $this->User->findById( $inviter );
+															$paid_to = $this->Unitcalc->date_plus_days( $inviter_user['User']['paid_to'], 90);
+															$this->User->savefield('paid_to', $paid_to, false);
+
+															if ( is_array( $inviter_user ) )
+															{
+																$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed to a PREMIUM membership!', true);
+																$template = 'standardmail';
+																$content = __('great', true) . '. ' . $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' ' . __('bought a PREMIUM membership.', true);
+																$content .= '<br /><br />' . __('You receive 3 month PREMIUM membership as a "Thank you" for FREE.', true);
+																
+																$this->_sendMail( $inviter_user, $subject, $template, $content, $results_user['User']['yourlanguage'], '' );
+																
+																$admin_user = $this->User->findByEmail( 'klaus@tricoretraining.com' );
+
+																$subject = __('TriCoreTraining', true) . ' - ' . __('affiliate gets money!', true);
+																$template = 'standardmail';
+																$content = $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' (' . $results_user['User']['id'] . ') ' . __('bought a PREMIUM membership. Thank you.', true);
+																$content .= ' ';
+																$content .= $inviter_user['User']['firstname'] . ' ' . $inviter_user['User']['lastname'] . ' (' . $inviter_user['User']['id'] . ') ' . __('receives money.', true);
+																
+																$this->_sendMail( $inviter_user, $subject, $template, $content, $results_user['User']['yourlanguage'], $admin_user['User'] );
+															}
+
+													}
+											  }
 
                                               $this->Session->setFlash(__('Received notification', true) . '. ' . __('Invoice sent', true) . '. ' . __('Thank you', true) . '.');
                                               //$this->redirect(array('action' => '', $this->User->id));
                                   } else
                                   {
-                                              $error .= __('Saving of payment status failed',true) . '.';
+                                  		$error .= __('Saving of payment status failed',true) . '.';
                                   }
                       }
                }
@@ -506,6 +541,7 @@ shows the chosen paymentplan by the user
             $this->set('paid_to', $this->Unitcalc->check_date($pay['pay_paid_to']));
             $this->set('paid_new_from', $this->Unitcalc->check_date($pay['pay_paid_new_from']));
             $this->set('paid_new_to', $this->Unitcalc->check_date($pay['pay_paid_new_to']));
+			$this->set('created', $this->Unitcalc->check_date(date('Y-m-d', time())));
             $this->set('userobject', $this->Session->read('userobject'));
 
             $this->Email->to = $User['User']['email'];
@@ -550,6 +586,7 @@ shows the chosen paymentplan by the user
             $this->set('smtperrors', $this->Email->smtpError);
    }
 
+	// ugly duplicated
    function _sendNotification($user, $array, $error, $subject)
    {
          //$this->layout = 'newsletter';
@@ -589,6 +626,66 @@ shows the chosen paymentplan by the user
          $this->set('smtperrors', $this->Email->smtpError);
 
    }
+
+	function _sendMail($user, $subject, $template, $content = '', $language = 'eng', $to_user = '' )
+	{
+		$debug = false;
+
+   	  	if ( $language ) 
+	  		Configure::write('Config.language',$language);
+    	
+    	if ( isset( $user['User'] ) ) $user = $user['User'];
+    
+	    if ( !isset($to_user['email']) ) $to_user['email'] = $user['email'];
+	    if ( !isset($to_user['email']) ) $to_user['email'] = $user['User']['email'];
+	    if ( !isset($to_user['name']) ) $to_user['name'] = $user['firstname'];
+	    if ( !isset($to_user['name']) && isset( $user['User'] ) ) $to_user['name'] = $user['User']['firstname'];
+
+		$this->Email->to = $to_user['email'];
+		$this->Email->replyTo = Configure::read('App.mailFrom');
+		$this->Email->from = Configure::read('App.mailFrom');
+		$this->Email->subject = $subject;
+    	if ( !isset( $template ) ) $template = 'standardmail';
+		
+		//Set view variables as normal
+		if ( isset( $to_user['name'] ) ) $this->set('to_name', $to_user['name']);
+		$this->set('user', $user);
+	    //$this->set('content', $content);
+	    $this->set('mcontent', $content);
+
+		$this->Email->template = $template; // note no '.ctp'
+
+		//Send as 'html', 'text' or 'both' (default is 'text')
+		$this->Email->sendAs = 'both'; // because we like to send pretty mail
+
+		/* SMTP Options */
+		$mailPort = Configure::read('App.mailPort');
+		$mailHost = Configure::read('App.mailHost');
+		$mailUser = Configure::read('App.mailUser');
+		$mailPassword = Configure::read('App.mailPassword');
+
+		$this->Email->smtpOptions = array(
+	        'port'=>$mailPort,
+	        'timeout'=>'30',
+	        'host'=>$mailHost,
+	        'username'=>$mailUser,
+	        'password'=>$mailPassword,
+	        'client'=>'smtp_helo_hostname'
+        );
+
+	    /* Set delivery method */
+	    $this->Email->delivery = 'smtp';
+	    /* Do not pass any args to send() */
+	    $this->Email->send();
+	    /* Check for SMTP errors. */
+	    $this->set('smtperrors', $this->Email->smtpError);
+	    $this->set('mailsend', 'mail sent');
+	
+	    // TODO (B) maybe later to prevent spam-suspicion
+	    //sleep(5); 
+	}
+
+
 }
 
 ?>
