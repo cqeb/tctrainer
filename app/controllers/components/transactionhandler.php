@@ -19,7 +19,7 @@ class TransactionhandlerComponent extends Object {
             if ( $mode == 'create' )
             {
                $tid = rand() . microtime();
-               $tid = md5($tid);
+               $tid = substr( md5($tid), 0, 8);
 
                $model->create();
             }
