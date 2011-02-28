@@ -52,27 +52,14 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
     <td>
 <?php 
 
-$facebookurl = 'http://www.facebook.com/sharer.php?u=http://tricoretraining.com'; 
-$facebookurl = '/trainer/starts/index/';
+$facebookurl = '/trainer/trainingstatistics/url_redirect/type:facebook/distance:'.
+	$distance['amount'] . '/distance_unit:' . $distance['unit'] .
+	'/duration:' . $duration . '/sport:' . $stype;
 
-/*
-$pp['di'] = $distance['amount'];
-$pp['di_u'] = $distance['unit'];
-$pp['st'] = $stype;
-$pp_url = base64_encode(serialize( $pp ));
-*/
-$pp_url = '/di:'.$distance['amount'].'/di_u:'. $distance['unit'] .'/du:' . $duration . '/st:' . $stype . '/u:' . base64_encode($session_userid);
-$facebookurl .= 'pp:' . $pp_url;
+$twitterurl = '/trainer/trainingstatistics/url_redirect/type:twitter/distance:'.
+	$distance['amount'] . '/distance_unit:' . $distance['unit'] .
+	'/duration:' . $duration . '/sport:' . $stype;
  
-$twittertext =
-__('I did a', true) . ' ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . __($stype . ' workout', true) . ' ' . 
-__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 
-'http://tricoretraining.com/u:' . base64_encode( $session_userid ); 
-
-//$twittertext .= '?pp=' . $pp_url;
-
-$twitterurl = urldecode( substr( $twittertext, 0, 140 ) ); 
-
 ?>
     
 <nowrap>
@@ -83,7 +70,7 @@ $twitterurl = urldecode( substr( $twittertext, 0, 140 ) );
 <a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
 
 <a class="help2" title="<?php __('Tell your friends on Facebook about your great workout!'); ?>" target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
-<a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="http://twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
+<a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
 
 </nowrap>
 
