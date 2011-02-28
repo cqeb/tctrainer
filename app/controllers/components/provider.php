@@ -311,15 +311,15 @@ class ProviderComponent extends Object {
 	 */
 	private function purge() {
 		$date = DateTimeHelper::getWeekStartDay(new DateTime())->format("Y-m-d");
-		$this->DB->query("DELETE FROM mesocyclephases WHERE date >= \"$date\" 
+		$this->DB->query("DELETE FROM mesocyclephases WHERE date >= '$date' 
 			AND athlete_id = " . $this->getAthlete()->getId());
-		$this->DB->query("DELETE FROM scheduledtrainings WHERE week >= \"$date\" 
+		$this->DB->query("DELETE FROM scheduledtrainings WHERE week >= '$date' 
 			AND athlete_id = " . $this->getAthlete()->getId());
-		$this->DB->query("DELETE FROM trirunworkouttypesequence WHERE week >= \"$date\" 
+		$this->DB->query("DELETE FROM trirunworkouttypesequence WHERE week >= '$date' 
 			AND athlete_id = " . $this->getAthlete()->getId());
-		$this->DB->query("DELETE FROM tribikeworkouttypesequence WHERE week >= \"$date\" 
+		$this->DB->query("DELETE FROM tribikeworkouttypesequence WHERE week >= '$date' 
 			AND athlete_id = " . $this->getAthlete()->getId());
-		$this->DB->query("DELETE FROM triswimworkouttypesequence WHERE week >= \"$date\" 
+		$this->DB->query("DELETE FROM triswimworkouttypesequence WHERE week >= '$date' 
 			AND athlete_id = " . $this->getAthlete()->getId());
 		return true;
 	}
