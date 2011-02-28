@@ -25,7 +25,10 @@ A-1010 <?php __('Vienna, Austria'); ?>
 <br /><br />
 
 <table class="main" summary="TriCoreTraining.com <?php __('Invoice'); ?>">
-<caption>TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?></caption>
+<caption>
+TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?><br />
+<?php __('Date'); echo ':'; ?> <?php echo $created; ?>
+</caption>
 <colgroup>
           <col class="colA">
           <col class="colB">
