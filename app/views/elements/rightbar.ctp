@@ -8,10 +8,13 @@
 <a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
 </div>
 
-<div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
-<!--<b><?php __('Recommendation'); ?></b>-->
-<!--<br /><br />-->
+<div class="box">
+<b><?php __('Recommendation'); ?></b>
+<br /><br />
+<?php echo $this->element('referral'); ?>
+</div>
 
+<div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
 /* Content right 2 */
