@@ -16,6 +16,8 @@ class TransactionhandlerComponent extends Object {
 	          //$this->loadModel('Transaction');
 
             // create transaction
+            // if tid is already existing then create a new tid
+            // TODO (B)
             if ( $mode == 'create' )
             {
                $tid = rand() . microtime();
