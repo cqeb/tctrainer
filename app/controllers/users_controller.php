@@ -3,8 +3,8 @@
 class UsersController extends AppController {
 	var $name = 'Users';
 
-	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Provider', 'Xmlhandler');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Flowplayer', 'Unitcalc'); // 'TabDisplay',
+	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Provider', 'Xmlhandler', 'Sendmailhandler');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Flowplayer', 'Unitcalc');
 
 	var $paginate = array(
        'User' => array(
@@ -115,6 +115,41 @@ class UsersController extends AppController {
 			$this->set('statusbox', $statusbox);
 	}
 
+	function login_facebook()
+	{
+			//http://www.facebook.com/developers/apps.php?app_id=132439964636&ret=2
+			$fbuser = $this->params['named']['fbuser'];
+		
+			if ( isset( $fbuser) )
+			{
+				pr( unserialize( base64_decode( $fbuser ) ) );
+			} else
+			{
+				$app_id = 132439964636;
+				$app_secret = "500f333152751fea132b669313052120";
+				$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
+	
+				$code = $this->params['named']['code'];
+	
+				if ( empty($code) )
+				{
+					$dialog_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&scope=email,read_stream&redirect_uri=" . urlencode($my_url);
+	        		$this->redirect($dialog_url);
+				}
+	
+				$token_url = "https://graph.facebook.com/oauth/access_token?client_id=" .
+	        		$app_id . "&redirect_uri=" . urlencode($my_url) . "&client_secret=" .
+	        		$app_secret . "&code=" . $code;
+	
+				$access_token = file_get_contents($token_url);
+				$graph_url = "https://graph.facebook.com/me?" . $access_token;
+				$user = json_decode(file_get_contents($graph_url));
+			}
+			// make login things		
+		    $this->autoRender = false;            
+		
+	}
+	
 	function login()
 	{
 	    if ( $this->Session->read('session_userid') ) 
@@ -124,6 +159,7 @@ class UsersController extends AppController {
 
 	    } else
 	    {
+
 		  	$this->pageTitle = __('Login', true);
 		  	$this->set('error', false);
 
@@ -311,101 +347,140 @@ class UsersController extends AppController {
 	function register() 
 	{
 	  
-    if ( $this->Session->read('session_userid') ) 
-    {
-      $this->checkSession();
-      $this->redirect('/trainingplans/view');
-    }
-    
-    $this->pageTitle = __('Create your account', true);
-    $success = false;
-    $statusbox = 'statusbox';
-    //$save_fails = 'false';
-    
-    if (empty($this->data))
-    {
-      
-    } else
-    {
-      // tells you - user clicked back in browser :(
-      $session_register_userid_just_in_case = $this->Session->read('register_userid');
+	    if ( $this->Session->read('session_userid') ) 
+	    {
+	      $this->checkSession();
+	      $this->redirect('/trainingplans/view');
+	    }
 
-      // check email (if correct and not duplicate) at registration
-      if ( $this->data['User']['email'] && $this->data['User']['id'] )
-      {
-        $checkemail = $this->check_email_function( $this->data['User']['email'], $this->data['User']['id'], true );
-      } else
-      {
-        if ( $session_register_userid_just_in_case != '' )
-        {
-          // change insert to update statement by setting userid for user-data
-          $set_userid = $session_register_userid_just_in_case;
-        } else
-        {
-          $set_userid = null;
-        }
-        // check email - maybe user already registered with this email
-        $checkemail = $this->check_email_function( $this->data['User']['email'], $set_userid, true );
-      }
-
-      // checkemail is a hidden field in form which tells the model whether the email is ok or not
-      if ( $checkemail == 0 && $this->data['User']['email'] != '' )
-      {
-        // email is already taken - sorry.
-        $this->data['User']['emailcheck'] = "0";
-      } else
-      {
-        $this->data['User']['emailcheck'] = "1";
-      }
-
-        // no chance - you have to get the newsletter
-        $this->data['User']['newsletter'] = "1";
-        // we do not ask for "where do you know us from?" - for Clemens' sake :)
-        $this->data['User']['dayofheaviesttraining'] = 'FRI';
-
-		// locate your country automatically
-		$countries = $this->Unitcalc->get_countries();
-	
-		/*
-		https://github.com/fiorix/freegeoip/blob/master/README.rst
-		http://freegeoip.net/json/74.200.247.59
-		http://freegeoip.net/csv/74.200.247.59
-		http://freegeoip.net/xml/74.200.247.59
-		*/
-		
-		if ( $_SERVER['HTTP_HOST'] == 'localhost' )
-			$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+		if ( $this->Session->read( 'recommendation_userid' ) ) 
+			$inviter = $this->Session->read('recommendation_userid');
 		else
-			$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
-			
-		$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+			$inviter = '';
+  
+	    $this->pageTitle = __('Create your account', true);
+	    $success = false;
+	    $statusbox = 'statusbox';
+	    
+	    if (empty($this->data))
+	    {
+				if ( preg_match( '/@/', $inviter ) )
+				{
+					$this->set('companyemail', $inviter);	
+				}
+	      
+	    } else
+	    {
+	      // tells you - user clicked back in browser :(
+	      $session_register_userid_just_in_case = $this->Session->read('register_userid');
 	
-		if ( isset( $yourlocation->country_code ) && isset( $countries[$yourlocation->country_code]) && strlen( $yourlocation->country_code ) > 0 )
-		{
-				$this->data['User']['country'] = $yourlocation->country_code;
-				//$this->data['User']['city'] = $yourlocation->city;
-		} else
-				$this->data['User']['country'] = 'DE';
-		
-      // yet not implemented
-      $this->data['User']['coldestmonth'] = $this->Unitcalc->coldestmonth_for_country('DE');
-      $this->data['User']['unit'] = $this->Unitcalc->unit_for_country('DE', 'unit');
-      $this->data['User']['unitdate'] = $this->Unitcalc->unit_for_country('DE', 'unitdate');;
-      $this->data['User']['yourlanguage'] = $this->Session->read('Config.language');
+		// TODO (B) modernize this crap
 
-      $this->data['User']['passwordcheck'] = "1";
-      $this->data['User']['publicprofile'] = "0";
-      $this->data['User']['publictrainings'] = "0";
-      
-      if ( $this->data['User']['password'] && strlen($this->data['User']['password']) > 3 ) 
-      {
-	        $password_unenc = ($this->data['User']['password']);
-	        $this->data['User']['password'] = md5( $password_unenc );
-      }
-      
-	  
-      if ( isset( $this->data['User']['birthday'] ) )
-      {
+	      // check email (if correct and not duplicate) at registration
+	      if ( $this->data['User']['email'] && $this->data['User']['id'] )
+	      {
+	        $checkemail = $this->check_email_function( $this->data['User']['email'], $this->data['User']['id'], true );
+	      } else
+	      {
+	        if ( $session_register_userid_just_in_case != '' )
+	        {
+	          // change insert to update statement by setting userid for user-data
+	          $set_userid = $session_register_userid_just_in_case;
+	        } else
+	        {
+	          $set_userid = null;
+	        }
+	        // check email - maybe user already registered with this email
+	        $checkemail = $this->check_email_function( $this->data['User']['email'], $set_userid, true );
+	      }
+	
+	      // checkemail is a hidden field in form which tells the model whether the email is ok or not
+	      if ( $checkemail == 0 && $this->data['User']['email'] != '' )
+	      {
+	        // email is already taken - sorry.
+	        $this->data['User']['emailcheck'] = "0";
+	      } else
+	      {
+	        $this->data['User']['emailcheck'] = "1";
+	      }
+	
+	        // no chance - you have to get the newsletter
+	        $this->data['User']['newsletter'] = "1";
+	        // we do not ask for "where do you know us from?" - for Clemens' sake :)
+	        $this->data['User']['dayofheaviesttraining'] = 'FRI';
+	
+			// locate your country automatically
+			$countries = $this->Unitcalc->get_countries();
+		
+			/*
+			https://github.com/fiorix/freegeoip/blob/master/README.rst
+			http://freegeoip.net/json/74.200.247.59
+			http://freegeoip.net/csv/74.200.247.59
+			http://freegeoip.net/xml/74.200.247.59
+			*/
+			
+			if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+				$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+			else
+				$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
+				
+			$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+		
+			if ( isset( $yourlocation->country_code ) && isset( $countries[$yourlocation->country_code]) && strlen( $yourlocation->country_code ) > 0 )
+			{
+					$this->data['User']['country'] = $yourlocation->country_code;
+					//$this->data['User']['city'] = $yourlocation->city;
+			} else
+					$this->data['User']['country'] = 'DE';
+			
+			// yet not implemented
+			$this->data['User']['coldestmonth'] = $this->Unitcalc->coldestmonth_for_country('DE');
+			$this->data['User']['unit'] = $this->Unitcalc->unit_for_country('DE', 'unit');
+			$this->data['User']['unitdate'] = $this->Unitcalc->unit_for_country('DE', 'unitdate');;
+			$this->data['User']['yourlanguage'] = $this->Session->read('Config.language');
+			
+			// TODO (B)
+			$this->data['User']['passwordcheck'] = "1";
+			$this->data['User']['publicprofile'] = "0";
+			$this->data['User']['publictrainings'] = "0";
+		  
+			// check if anybody invited this user
+			if ( isset( $inviter ) ) 
+			{
+				$this->data['User']['inviter'] = $inviter;
+				// TODO users get something for new users
+				// money users don't get extra months				
+				if ( preg_match( '/money/', $inviter ) )
+				{ 
+					$send_to_userid = str_replace( 'money:', '', $inviter );
+					$this->data['User']['inviter'] = $inviter;	
+				} elseif ( preg_match( '/@/', $inviter ) )
+				{
+					if ( isset( $this->data['User']['email'] ) && preg_match( '/' . $inviter . '/', $this->data['User']['email'] ) ) 
+					{
+						$this->data['User']['inviter'] = $inviter;	
+					} else
+					{
+						$this->data['User']['inviter'] = '';
+					}
+					$this->set('companyemail', $inviter);
+					
+				} else
+				{
+					$send_to_userid = $inviter;
+					$this->data['User']['inviter'] = $inviter;	
+					
+				}
+				
+			}
+			
+	      
+			if ( $this->data['User']['password'] && strlen($this->data['User']['password']) > 3 ) 
+			{
+				$password_unenc = ($this->data['User']['password']);
+				$this->data['User']['password'] = md5( $password_unenc );
+			}
+		  
 			$age = $this->Unitcalc->how_old( $this->data['User']['birthday'] );
 			
 			// default value for weekly hours
@@ -440,216 +515,72 @@ class UsersController extends AppController {
 			}
 			$this->data['User']['weeklyhours'] = $whrs;
 						
-      		// approximations
-      		$this->data['User']['lactatethreshold'] = round( ( 220 - $age ) * 0.85 );
-      		$this->data['User']['bikelactatethreshold'] = round ( $this->data['User']['lactatethreshold'] * 0.96 );
-      		$this->data['User']['maximumheartrate'] = round ( $this->data['User']['lactatethreshold'] / 0.85 );
-	  }
-
-      if ( $this->User->save( $this->data, array(
-           'validate' => true,
-           'fieldList' => array(
-               'firstname', 'lastname', 'gender', 'email', 
-               'password', 
-               'birthday',
-               'lactatethreshold', 
-               'bikelactatethreshold', 
-               'maximumheartrate',
-               'typeofsport', 
-               'tos',
-               'country',
-               'passwordcheck', 'emailcheck', 
-               'paid_from', 'paid_to',
-               'rookie', 'weeklyhours',
-               'newsletter', 'coldestmonth', 'dayofheaviesttraining',
-               'publicprofile','publictrainings',
-               'maximumheartrate', 
-               'unit', 'unitdate', 'yourlanguage' 
-           ) ) ) )
-      {
-          // send user with activation link
-          $tid = $this->_sendNewUserMail( $this->User->id );
-
-          // write imperial / metric to session and date-format
-          $this->Session->write('session_unit', $this->data['User']['unit']);
-          $this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-
-          $statusbox = 'statusbox_ok';
-          $this->Session->write('register_userid', $this->User->id);
-
-          $this->Session->setFlash(__('Registration finished',true));
-          $this->redirect(array('action' => 'register_finish', $this->User->id));
-      } else
-      {
-          if ( isset( $password_unenc ) ) $this->data['User']['password'] = $password_unenc;
-          //pr($this->User->invalidFields( ));
-      }
-
-      $statusbox = 'statusbox error';
-      $this->Session->setFlash(__('Some errors occured',true));
-      $this->set('statusbox', $statusbox);
-    }
-
-    $this->set('sports', $this->Unitcalc->get_sports());
-    $this->set('statusbox', $statusbox);
-  }
-
-/**
- * deprecated registration form
- */	
- 
-/**
-
-  	function add_step1($id = null)
-	{
-    	die();
-    
-		$this->pageTitle = __('Registration - Step 1/2',true);
-		$statusbox = 'statusbox';
-
-		if (empty($this->data))
-		{ } else
-		{
-			// tells you - user clicked back in browser :(
-			$session_register_userid_just_in_case = $this->Session->read('register_userid');
-
-			// check email (if correct and not duplicate) at registration
-			if ( $this->data['User']['email'] && $this->data['User']['id'] )
-			{
-				$checkemail = $this->check_email_function( $this->data['User']['email'], $this->data['User']['id'], true );
-			} else
-			{
-				if ( $session_register_userid_just_in_case != '' )
+	  		// approximations
+	  		$this->data['User']['lactatethreshold'] = round( ( 220 - $age ) * 0.85 );
+	  		$this->data['User']['bikelactatethreshold'] = round ( $this->data['User']['lactatethreshold'] * 0.96 );
+	  		$this->data['User']['maximumheartrate'] = round ( $this->data['User']['lactatethreshold'] / 0.85 );
+	
+	      if ( $this->User->save( $this->data, array(
+	           'validate' => true,
+	           'fieldList' => array(
+	               'firstname', 'lastname', 'gender', 'email', 
+	               'password', 
+	               'birthday',
+	               'lactatethreshold', 
+	               'bikelactatethreshold', 
+	               'maximumheartrate',
+	               'typeofsport', 
+	               'tos',
+	               'country',
+	               'passwordcheck', 'emailcheck', 
+	               'paid_from', 'paid_to',
+	               'rookie', 'weeklyhours',
+	               'newsletter', 'coldestmonth', 'dayofheaviesttraining',
+	               'publicprofile','publictrainings',
+	               'maximumheartrate', 
+	               'unit', 'unitdate', 'yourlanguage', 'inviter' 
+	           ) ) ) )
+	      {
+				if ( isset( $send_to_userid ) )
 				{
-					// change insert to update statement by setting userid for user-data
-					$set_userid = $session_register_userid_just_in_case;
-				} else
-				{
-					$set_userid = null;
+					$inviter_user = $this->User->findById( $send_to_userid );
+					if ( is_array( $inviter_user ) )
+					{
+						$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed!', true);
+						$template = 'standardmail';
+						$content = __('great', true) . '. ' . $this->data['User']['firstname'] . ' ' . $this->data['User']['lastname'] . ' ' . __('wants to become an athlete too. Maybe you do workouts together?', true);
+						$content .= '<br /><br />' . __('After he/she buys a PREMIUM membership, you receive 3 month PREMIUM membership as a "Thank you" for FREE.', true);
+						
+						$this->_sendMail( $inviter_user, $subject, $template, $content, $this->data['User']['yourlanguage'], '' );
+					}
 				}
-				// check email - maybe user already registered with this email
-				$checkemail = $this->check_email_function( $this->data['User']['email'], $set_userid, true );
-			}
 
-			// checkemail is a hidden field in form which tells the model whether the email is ok or not
-			if ( $checkemail == 0 && $this->data['User']['email'] != '' )
-			{
-				// email is already taken - sorry.
-				$this->data['User']['emailcheck'] = "0";
-			} else
-			{
-				$this->data['User']['emailcheck'] = "1";
-			}
-
-			// check if password + password-approve field are equal
-			if ( $this->data['User']['password'] == $this->data['User']['passwordapprove'] )
-      {
-			     $this->data['User']['passwordcheck'] = "1";
-           $save_pw = $this->data['User']['password'];
-           $this->data['User']['password'] = md5($this->data['User']['password']);
-           
-			} else
-			{
-			     $this->data['User']['passwordcheck'] = "0";
-      }
-
-			// no chance - you have to get the newsletter
-			$this->data['User']['newsletter'] = "1";
-			// we do not ask for "where do you know us from?" - for Clemens' sake :)
-
-			// save user profile part 1
-			if ($this->User->save( $this->data, array(
-           'validate' => true,
-           'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'password', 'birthday',
-           'passwordcheck', 'emailcheck', 'newsletter', 'youknowus' )
-			) ) )
-			{
-				$statusbox = 'statusbox_ok';
-				$this->Session->write('register_userid', $this->User->id);
-				$this->Session->setFlash(__('Step 1. of registration finished',true));
-				$this->redirect(array('action' => 'add_step2', $this->User->id));
-			} else
-			{
-			  $this->data['User']['password'] = $save_pw; 
-				$statusbox = 'statusbox error';
-				$this->Session->setFlash(__('Some errors occured',true));
-				$this->set('statusbox', $statusbox);
-			}
-			//}
-		}
-		$this->set('statusbox', $statusbox);
-	}
-
-	function add_step2($id = null) 
-    {
-    	die();
-
-		$this->pageTitle = __('Registration - Step 2/2',true);
-		$statusbox = 'statusbox ok';
-
-		if (empty($this->data))
-		{
-			// for security reasons - if somebody wants to hack by changing the userid in request_url
-			$session_register_userid = $this->Session->read('register_userid');
-
-			if ( $session_register_userid != $this->User->id )
-			{
-				$this->Session->setFlash(__("Sorry. Something is wrong. Don't hack other accounts!",true));
-				$this->redirect(array('action' => 'add_step1'));
-			}
-
-			// read userdata from last form
-			$this->data = $User = $this->User->read();
-
-			// you have to preset view-variables - otherwise you get an error
-			$this->set('UserID', $this->User->id);
-			$this->set('smtperrors', '');
-
-			// loads userdata twice - ramsch :)
-			//$User = $this->User->read(null,$this->User->id);
-			$birthday = $User['User']['birthday'];
-
-			// calculate age of user
-			$age = $this->Unitcalc->how_old( $birthday );
-			$this->set('age',$age);
-
-		} else
-		{
-			$birthday = $this->data['User']['birthday'];
-			$age = $this->Unitcalc->how_old( $birthday );
-
-			$this->set('age',$age);
-
-			if ($this->User->save( $this->data, array(
-          'validate' => true,
-          'fieldList' => array( 
-          'typeofsport', 'rookie', 'tos', 'weeklyhours',
-          'dayofheaviesttraining', 'maximumheartrate', 'unit', 'unitdate',
-          'coldestmonth', 'level', 'paid_from', 'paid_to', 'yourlanguage'
-          ) ) ) )
-          {
-          	//$this->_sendNewUserMail( $this->User->id );
-          	// send user with activation link
-          	$tid = $this->_sendNewUserMail( $this->User->id );
-
-          	// write imperial / metric to session and date-format
-          	$this->Session->write('session_unit', $this->data['User']['unit']);
-          	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-
-          	$this->Session->setFlash(__('Registration finished. Please click your activation link in your e-mail!',true));
-          	$this->redirect(array('action' => 'register_finish', $this->User->id));
-          } else
-          {
-          	$statusbox = 'statusbox error';
-          	$this->Session->setFlash(__('Some errors occured',true));
-          	$this->set('statusbox', $statusbox);
-          }
-		}
-
-		$this->set('statusbox', $statusbox);
-		$this->set('sports', $this->Unitcalc->get_sports());
-	}
-**/
+	          // send user with activation link
+	          $tid = $this->_sendNewUserMail( $this->User->id );
+	
+	          // write imperial / metric to session and date-format
+	          $this->Session->write('session_unit', $this->data['User']['unit']);
+	          $this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+	
+	          $statusbox = 'statusbox_ok';
+	          $this->Session->write('register_userid', $this->User->id);
+	
+	          $this->Session->setFlash(__('Registration finished',true));
+	          $this->redirect(array('action' => 'register_finish', $this->User->id));
+	      } else
+	      {
+	          if ( isset( $password_unenc ) ) $this->data['User']['password'] = $password_unenc;
+	          //pr($this->User->invalidFields( ));
+	      }
+	
+	      $statusbox = 'statusbox error';
+	      $this->Session->setFlash(__('Some errors occured',true));
+	      $this->set('statusbox', $statusbox);
+	    }
+	
+	    $this->set('sports', $this->Unitcalc->get_sports());
+	    $this->set('statusbox', $statusbox);
+  }
 
 	function register_finish($id = null)
 	{
@@ -1556,30 +1487,6 @@ class UsersController extends AppController {
         $this->set('mailsend', 'mail sent');
 	}
 
-	function change_language()
-	{
-
-		if ( isset( $this->params['named']['code'] ) ) 
-			$this->code = $this->params['named']['code'];
-		else
-			$this->code = 'eng';
-
-	    if ( $this->Session->read('session_userid') )
-	    {
-	          $this->User->id = $this->Session->read('session_userid');
-	          $this->User->savefield('yourlanguage', $this->code, false);
-	    }
-
-		$this->Session->write('Config.language', $this->code);
-		$this->Session->setFlash(__('Language changed.',true));
-
-		if ( $this->referer() ) 
-		    $this->redirect($this->referer());
-	    else 
-	        $this->redirect(array('action'=>'index'));
-
-	}
-
 /**
     go through all users (even not activated once) and send notifications
     or make modifications
@@ -1631,7 +1538,7 @@ class UsersController extends AppController {
               
 		}
 
-		// delete old transactions
+		// delete old transactions - currently not activated in component 
 		$this->loadModel('Transaction');
 		$this->Transactionhandler->_delete_old_transactions( $this->Transaction );
 		$this->set('output', $output);
@@ -1909,9 +1816,10 @@ class UsersController extends AppController {
 
 	function _sendMail($user, $subject, $template, $content = '', $language = 'eng', $to_user = '' )
 	{
-		$debug = true;
-	  	if ( $language ) Configure::write('Config.language',$language);
-    	if ( $debug == true ) echo "language: $language<br />\n";
+		$debug = false;
+
+   	  	if ( $language ) 
+	  		Configure::write('Config.language',$language);
     	
     	if ( isset( $user['User'] ) ) $user = $user['User'];
     
@@ -1924,7 +1832,8 @@ class UsersController extends AppController {
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 		$this->Email->subject = $subject;
-    
+    	if ( !isset( $template ) ) $template = 'standardmail';
+		
 		//Set view variables as normal
 		if ( isset( $to_user['name'] ) ) $this->set('to_name', $to_user['name']);
 		$this->set('user', $user);
@@ -1943,12 +1852,12 @@ class UsersController extends AppController {
 		$mailPassword = Configure::read('App.mailPassword');
 
 		$this->Email->smtpOptions = array(
-        'port'=>$mailPort,
-        'timeout'=>'30',
-        'host'=>$mailHost,
-        'username'=>$mailUser,
-        'password'=>$mailPassword,
-        'client'=>'smtp_helo_hostname'
+	        'port'=>$mailPort,
+	        'timeout'=>'30',
+	        'host'=>$mailHost,
+	        'username'=>$mailUser,
+	        'password'=>$mailPassword,
+	        'client'=>'smtp_helo_hostname'
         );
 
 	    /* Set delivery method */
@@ -1962,6 +1871,8 @@ class UsersController extends AppController {
 	    // TODO (B) maybe later to prevent spam-suspicion
 	    //sleep(5); 
 	}
+
+
 }
 
 ?>
