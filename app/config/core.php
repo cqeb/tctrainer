@@ -68,18 +68,18 @@ Configure::write('App.encoding', 'UTF-8');
 if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 {
   
-    if (function_exists( 'gethostname' ) && gethostname() === "Main") {
-    	
-    	// Clemens' config
-    	
-    	Configure::write('App.serverUrl', '/trainer');
-    	Configure::write('App.uploadDir', 'D:\clemens\Documents\Projects\xampp\htdocs\trainer\app\webroot\files\\');
-    	// Domain with protocol and NO trailing slash
-    	Configure::write('App.hostUrl', 'http://localhost');
-    
-    
-    } else {
-    	
+	if (function_exists( 'gethostname' ) && gethostname() === "Main") {
+		
+		// Clemens' config
+		
+		Configure::write('App.serverUrl', '/trainer');
+		Configure::write('App.uploadDir', 'D:\clemens\Documents\Projects\xampp\htdocs\trainer\app\webroot\files\\');
+		// Domain with protocol and NO trailing slash
+		Configure::write('App.hostUrl', 'http://localhost');
+	
+	
+	} else {
+			
     	// Klaus-M. config
     	
     	// this is the path-information - I know the variable is not named correctly :) (so please without host-info)
@@ -91,48 +91,64 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
     
     }
 
-		// Paypal payment email
-		Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
-		Configure::write('App.paymentemail', 'payment@tricoretraining.com');
+	// Paypal payment email
+	Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
+	Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 
-    /**
-     * mail sending options
-     */
-
-    Configure::write('App.mailFrom', 'TriCoreTraining <cqeb@gmx.net>');
-    Configure::write('App.mailAdmin', 'klaus@tricoretraining.com');
-    Configure::write('App.mailPort', '25');
-    Configure::write('App.mailHost', 'mail.gmx.net');
-    Configure::write('App.mailUser', 'cqeb@gmx.net');
-    Configure::write('App.mailPassword', 'finger99');
+	/**
+	 * mail sending options
+	 */
+	
+	Configure::write('App.mailFrom', 'TriCoreTraining <cqeb@gmx.net>');
+	Configure::write('App.mailAdmin', 'klaus@tricoretraining.com');
+	Configure::write('App.mailPort', '25');
+	Configure::write('App.mailHost', 'mail.gmx.net');
+	Configure::write('App.mailUser', 'cqeb@gmx.net');
+	Configure::write('App.mailPassword', 'finger99');
 
 } else
 {
-// server configuration
+	// server configuration
+	
+	// rename this variable
+	Configure::write('App.serverUrl', '/trainer');
+	// Domain with protocol and NO trailing slash
+	Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
+	Configure::write('App.uploadDir', '/var/www/vhosts/www.tricoretraining.com/trainer/app/webroot/files/');
 
-      // rename this variable
-      Configure::write('App.serverUrl', '/trainer');
-      // Domain with protocol and NO trailing slash
-      Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
-      Configure::write('App.uploadDir', '/var/www/vhosts/www.tricoretraining.com/trainer/app/webroot/files/');
+	// Paypal payment email
+	Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 
-		// Paypal payment email
-		Configure::write('App.paymentemail', 'payment@tricoretraining.com');
-
-    /**
-     * mail sending options
-     */
-
-    Configure::write('App.mailFrom', 'TriCoreTraining <support@tricoretraining.com>');
-    Configure::write('App.mailAdmin', 'support@tricoretraining.com');
-    Configure::write('App.mailPort', '25');
-    Configure::write('App.mailHost', 'localhost');
-    Configure::write('App.mailUser', '');
-    Configure::write('App.mailPassword', '');
+	/**
+	 * mail sending options
+	 */
+	
+	Configure::write('App.mailFrom', 'TriCoreTraining <support@tricoretraining.com>');
+	Configure::write('App.mailAdmin', 'support@tricoretraining.com');
+	Configure::write('App.mailPort', '25');
+	Configure::write('App.mailHost', 'localhost');
+	Configure::write('App.mailUser', '');
+	Configure::write('App.mailPassword', '');
 
 }
 	
-	
+Configure::write('price_eur', '"9.90","26.90","49.90","94.90"');
+Configure::write('price_eur_month', '"9.90","8.97","8.32","7.91"');
+
+Configure::write('price_usd', '"14.90","39.90","74.90","139.90"');
+Configure::write('price_usd_month', '"14.90","13.30","12.48","11.66"');
+
+Configure::write('tct_price_eur', '"0.10","0.30","0.60","1.20"');
+Configure::write('tct_price_eur_month', '"9.90","8.97","8.32","7.91"');
+
+Configure::write('company_price_eur', '"6.90","18.80","34.90","65.90"');
+Configure::write('company_price_eur_month', '"6.90","6.27","5.82","5.49"');
+
+Configure::write('company_price_usd', '"9.90","27.90","51.90","97,90"');
+Configure::write('company_price_usd_month', '"9.90","9.30","8.65","8.16"');
+
+Configure::write('company_emails', '"@gentics.com","@nullzeit.at"');
+
 /**
  * Uncomment the define below to use CakePHP admin routes.
  *
