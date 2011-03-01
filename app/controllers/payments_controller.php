@@ -33,6 +33,12 @@ class PaymentsController extends AppController {
             // maybe user has not added his country yet.
             if ( !$currency ) $currency = 'EUR';
 
+			if ( strtotime( $results['User']['paid_to'] ) < time() )
+			{
+                       $this->User->id = $session_userid;
+                       $this->User->savefield('level', 'freemember', false);
+			}
+				
             $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
             $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
             $this->set('pay_member', $results['User']['level']);

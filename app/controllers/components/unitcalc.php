@@ -365,9 +365,11 @@ class UnitcalcComponent extends Object {
    function check_date( $date, $mode = 'show', $session_unitdate_overwrite = '' )
    {
             $session_userobject = $this->Session->read('userobject');
+			
 			$session_unidate = '';
-            if ( isset( $session_unitdate_overwrite ) ) 
+            if ( isset( $session_unitdate_overwrite ) && $session_unitdate_overwrite != '' ) 
             	$session_unitdate = $session_unitdate_overwrite;
+				
 			else
 			{
 				$session_unitdate = $session_userobject['unitdate'];
@@ -375,8 +377,9 @@ class UnitcalcComponent extends Object {
 			
             if ( $session_unitdate == '' ) 
             	$session_unitdate = $this->Session->read('session_unitdate');
+				
             if ( $session_unitdate == '' )
-				$session_unidate = 'yyyymmdd'; 
+				$session_unitdate = 'yyyymmdd'; 
 			
             $return = "";
 

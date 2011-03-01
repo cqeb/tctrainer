@@ -6,10 +6,9 @@
 <br /><br />
 <?php } ?>
 <a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
-<!--
+
 <br /><br /><br />
 <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
--->
 </div>
 
 <div class="box">

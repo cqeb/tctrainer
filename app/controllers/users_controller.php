@@ -183,8 +183,8 @@ class UsersController extends AppController {
 						$results['User']['last_login'] = date("Y-m-d H:i:s");
 						$this->Session->write('last_login', $results['User']['last_login']);
 
-echo "<a href='/trainer/trainingplans/view/'>click</a>";
-
+						echo '<script language="JavaScript">top.location.href="/trainer/trainingplans/view/";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
+						// doesn't work with facebook login - session get's lost
 						//$this->redirect('/trainingplans/view/');
 					}
 				} else
@@ -199,9 +199,8 @@ echo "<a href='/trainer/trainingplans/view/'>click</a>";
 					$this->Session->write('fbemail', $user->email);
 					$this->Session->write('facebook_user', serialize($fbuserarray));
 
-					
-echo "<a href='/trainer/users/register/'>click</a>";
-
+					echo '<script language="JavaScript">top.location.href="/trainer/users/register/";</script><a href="/trainer/users/register/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
+					// doesn't work with facebook login - session get's lost
 					//$this->redirect('/users/register/');
 				}
 			}
@@ -430,7 +429,7 @@ echo "<a href='/trainer/users/register/'>click</a>";
 						$this->data['User']['gender'] = 'm';
 					$this->data['User']['email'] = $facebook_user['email'];
 					$this->data['User']['birthday'] = $facebook_user['birthday'];
-					$this->Session->setFlash(__('We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login.',true));
+					$this->Session->setFlash(__('We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as in your Facebook account.',true));
 				}
 				
 				if ( preg_match( '/@/', $inviter ) )
