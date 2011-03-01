@@ -213,7 +213,9 @@ class PaymentsController extends AppController {
 			{
 					$this->code = 'eng';
 			}	 
-			$this->Session->write('Config.language', $this->code);
+			//$this->Session->write('Config.language', $this->code);
+			Configure::write('Config.language',$this->code);
+			
             
             $this->set('js_addon','');
             $error = '';
@@ -279,7 +281,7 @@ class PaymentsController extends AppController {
             else 
             	$this->payment_tid = '';
 
-            if ( !$this->payment_tid )
+            if ( !isset( $this->payment_tid ) || $this->payment_tid == '' )
             {
                       $error = __('No Transaction-ID defined - something is wrong - sorry.') . ' ' . __('Contact our support', true) . ' - <a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a>.';
                       $transactions = array();
@@ -289,12 +291,12 @@ class PaymentsController extends AppController {
                       $this->loadModel('Transaction');
                       $transactions = $this->Transactionhandler->handle_transaction( $this->Transaction, $this->payment_tid, 'read' );
 
-                      $session_userid = $transactions['pay_userid'];
+                      $p_userid = $transactions['pay_userid'];
 
-                      $results_user = $this->User->findById($session_userid);
+                      $results_user = $this->User->findById($p_userid);
                       if ( !is_array( $results_user ) )
                       {
-                                 $error .= __('UserID',true) . ' ' . $session_userid . ' ' . __('was not found in database',true) . '.';
+                                 $error .= __('UserID',true) . ' ' . $p_userid . ' ' . __('was not found in database',true) . '.';
                       }
             }
 
@@ -439,7 +441,7 @@ class PaymentsController extends AppController {
                                               //$this->redirect(array('action' => '', $this->User->id));
                                   } else
                                   {
-                                  		$error .= __('Saving of payment status failed',true) . '.';
+                                  		$error	 .= __('Saving of payment status failed',true) . '.';
                                   }
                       }
                }
@@ -460,8 +462,11 @@ class PaymentsController extends AppController {
 
             } else
             {
-                 // only for information purposes - do not create a new invoice
-                 $this->_sendInvoice($transactions, 'info');
+                 if ( is_array( $transactions ) )
+				 {
+	                 // only for information purposes - do not create a new invoice
+	                 $this->_sendInvoice($transactions, 'info');
+				 }
                  $this->Session->setFlash(__('Received notification', true) . '. ' . __('No invoice', true) . '. ' . __('Thank you', true) . '.');
                  //$this->redirect(array('action' => '', $this->User->id));
             }
@@ -473,6 +478,7 @@ class PaymentsController extends AppController {
                  // something is wrong // probably no transaction-id and therefore no user :(
                  if ( is_array( $results_user ) ) $user = $results_user;
                  else $user = array();
+
                  if ( is_array( $transactions ) ) $array = $transactions;
                  else $transactions = array();
 
@@ -560,12 +566,13 @@ class PaymentsController extends AppController {
             if ( $mailtype == 'invoice' )
                            $this->set('invoice', $pay['pay_invoice']);
 
-            $this->set('paid_from', $this->Unitcalc->check_date($pay['pay_paid_from']));
-            $this->set('paid_to', $this->Unitcalc->check_date($pay['pay_paid_to']));
-            $this->set('paid_new_from', $this->Unitcalc->check_date($pay['pay_paid_new_from']));
-            $this->set('paid_new_to', $this->Unitcalc->check_date($pay['pay_paid_new_to']));
-			$this->set('created', $this->Unitcalc->check_date(date('Y-m-d', time())));
-            $this->set('userobject', $this->Session->read('userobject'));
+            $this->set('paid_from', $this->Unitcalc->check_date($pay['pay_paid_from'], 'snow', $User['unitdate']));
+            $this->set('paid_to', $this->Unitcalc->check_date($pay['pay_paid_to'], 'snow', $User['unitdate']));
+            $this->set('paid_new_from', $this->Unitcalc->check_date($pay['pay_paid_new_from'], 'snow', $User['unitdate']));
+            $this->set('paid_new_to', $this->Unitcalc->check_date($pay['pay_paid_new_to'], 'snow', $User['unitdate']));
+			$this->set('created', $this->Unitcalc->check_date(date('Y-m-d', time()), 'snow', $User['unitdate']));
+            // that's not possible
+            //$this->set('userobject', $this->Session->read('userobject'));
 
             $this->Email->to = $User['User']['email'];
 

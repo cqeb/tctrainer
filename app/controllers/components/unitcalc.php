@@ -362,7 +362,7 @@ class UnitcalcComponent extends Object {
    show date in correct format (depending on your user profile)
    save date in correct format
    **/
-   function check_date( $date, $mode = 'show' )
+   function check_date( $date, $mode = 'show', $session_unitdate_overwrite = '' )
    {
             $session_userobject = $this->Session->read('userobject');
             $session_unitdate = $session_userobject['unitdate'];
