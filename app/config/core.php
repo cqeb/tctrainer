@@ -92,7 +92,7 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
     }
 
 	// Paypal payment email
-	Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
+	//Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
 	Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 
 	/**
@@ -116,12 +116,12 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 {
 	// Domain with protocol and NO trailing slash
-	Configure::write('App.hostUrl', 'http:/test.tricoretraining.com');
+	Configure::write('App.hostUrl', 'http://test.tricoretraining.com');
 	Configure::write('App.uploadDir', '/var/www/vhosts/test.tricoretraining.com/trainer/app/webroot/files/');
 } else
 {
 	// Domain with protocol and NO trailing slash
-	Configure::write('App.hostUrl', 'http:/www.tricoretraining.com');
+	Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
 	Configure::write('App.uploadDir', '/var/www/vhosts/www.tricoretraining.com/trainer/app/webroot/files/');
 	
 }

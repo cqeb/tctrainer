@@ -209,8 +209,13 @@ class PaymentsController extends AppController {
 			           $logurl .= $key . '=' . urlencode($val) . '&';
 			}
 			
+			if ( isset( $params['custom'] ) )
+				$tid_notice = $params['custom'];
+			else
+				$tid_notice = 'no';
+				
 			$posturl = '?cmd=_notify-validate&' . $logurl;
-			$logtext = date('Y-m-d H:i:s', time()) . '|' . $params['custom'] . '|' . $_SERVER['REMOTE_ADDR'] . '|' . $posturl . '|' . $_SERVER['REQUEST_URI'] . "\n\n";
+			$logtext = date('Y-m-d H:i:s', time()) . '|' . $tid_notice . '|' . $_SERVER['REMOTE_ADDR'] . '|' . $posturl . '|' . $_SERVER['REQUEST_URI'] . "\n\n";
 			if ( $_SERVER['HTTP_HOST'] != 'localhost' ) mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Request', $logtext, 'From: server@tricoretraining.com' );
 
 			if ( isset( $this->params['named']['lang'] ) )
@@ -455,11 +460,15 @@ class PaymentsController extends AppController {
             } elseif ( $error )
             {
                  // something is wrong
-                 if ( is_array( $results_user ) ) $user = $results_user;
-                 else $user = array();
+                 if ( isset( $results_user ) && is_array( $results_user ) ) 
+                 	$user = $results_user;
+                 else 
+                 	$user = array();
 
-                 if ( is_array( $transactions ) ) $array = $transactions;
-                 else $transactions = array();
+                 if ( isset( $transactions ) && is_array( $transactions ) ) 
+                 	$array = $transactions;
+                 else 
+                 	$array = $transactions = array();
 
                  // do not translate 
                  $subject = 'TCT Invoice Error - something wrong/not finished in notify/paypal';
