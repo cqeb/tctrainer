@@ -37,6 +37,7 @@ class PaymentsController extends AppController {
 			{
                        $this->User->id = $session_userid;
                        $this->User->savefield('level', 'freemember', false);
+					   $results['User']['level'] = 'freemember';
 			}
 				
             $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
@@ -471,7 +472,7 @@ class PaymentsController extends AppController {
                  if ( is_array( $transactions ) )
 				 {
 	                 // only for information purposes - do not create a new invoice
-	                 $this->_sendInvoice($transactions, 'info');
+	                 //$this->_sendInvoice($transactions, 'info');
 				 }
                  $this->Session->setFlash(__('Received notification', true) . '. ' . __('No invoice', true) . '. ' . __('Thank you', true) . '.');
                  //$this->redirect(array('action' => '', $this->User->id));

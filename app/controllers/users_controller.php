@@ -64,7 +64,7 @@ class UsersController extends AppController {
 	function edit_user($id = null, $setuser = null)
 	{
       		$this->checkSession();
-			$setuser = $this->params['named']['setuser'];
+			if ( isset( $this->params['named']['setuser'] ) ) $setuser = $this->params['named']['setuser'];
             $statusbox = 'statusbox';
 
             $session_userid = $this->Session->read('session_userid');
