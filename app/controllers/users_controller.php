@@ -427,9 +427,12 @@ class UsersController extends AppController {
 						$this->data['User']['gender'] = 'f';
 					else
 						$this->data['User']['gender'] = 'm';
+
 					$this->data['User']['email'] = $facebook_user['email'];
 					$this->data['User']['birthday'] = $facebook_user['birthday'];
+					
 					$this->Session->setFlash(__('We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as in your Facebook account.',true));
+
 				}
 				
 				if ( preg_match( '/@/', $inviter ) )
@@ -587,8 +590,15 @@ class UsersController extends AppController {
 	  		$this->data['User']['lactatethreshold'] = round( ( 220 - $age ) * 0.85 );
 	  		$this->data['User']['bikelactatethreshold'] = round ( $this->data['User']['lactatethreshold'] * 0.96 );
 	  		$this->data['User']['maximumheartrate'] = round ( $this->data['User']['lactatethreshold'] / 0.85 );
-	
-	      if ( $this->User->save( $this->data, array(
+
+			if ( $this->Session->read('facebook_user') )
+			{
+				$facebook_user = unserialize( $this->Session->read('facebook_user') );
+				if ( $this->data['User']['email'] == $facebook_user['email'] )
+					$this->data['User']['activated'] = 1;
+			}
+			
+	      	if ( $this->User->save( $this->data, array(
 	           'validate' => true,
 	           'fieldList' => array(
 	               'firstname', 'lastname', 'gender', 'email', 
@@ -605,10 +615,10 @@ class UsersController extends AppController {
 	               'rookie', 'weeklyhours',
 	               'newsletter', 'coldestmonth', 'dayofheaviesttraining',
 	               'publicprofile','publictrainings',
-	               'maximumheartrate', 
+	               'maximumheartrate', 'activated',
 	               'unit', 'unitdate', 'yourlanguage', 'inviter' 
 	           ) ) ) )
-	      {
+	      	{
 				if ( isset( $send_to_userid ) )
 				{
 					$inviter_user = $this->User->findById( $send_to_userid );

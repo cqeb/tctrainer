@@ -184,6 +184,8 @@ echo $form->input( 'paid_to', array('type' => 'hidden', 'value' => $paid_to));
 
 echo $form->hidden('id');
 echo $form->hidden('inviter');
+// for facebook login
+echo $form->hidden('activated');
 
 echo $form->submit(__('Register',true));
 
