@@ -117,35 +117,95 @@ class UsersController extends AppController {
 
 	function login_facebook()
 	{
-			//http://www.facebook.com/developers/apps.php?app_id=132439964636&ret=2
-			$fbuser = $this->params['named']['fbuser'];
-		
-			if ( isset( $fbuser) )
-			{
-				pr( unserialize( base64_decode( $fbuser ) ) );
-			} else
-			{
-				$app_id = 132439964636;
-				$app_secret = "500f333152751fea132b669313052120";
+
+			$app_id = 132439964636;
+			$app_secret = "500f333152751fea132b669313052120";
+			
+			if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+				$my_url = 'http://test.tricoretraining.com/facebook/login.php';
+			else
 				$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
+
+			if ( isset( $this->params['named']['fbuser'] ) ) 
+				$fbuser = $this->params['named']['fbuser'];
+
+			if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $fbuser ) )
+			{
+				$user = unserialize( base64_decode( $fbuser ) );
+			} else
+			{ 
+				
+				if ( isset( $_GET['code'] ) ) $code = $_GET['code'];
 	
-				$code = $this->params['named']['code'];
-	
-				if ( empty($code) )
+				if ( empty( $code ) )
 				{
 					$dialog_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&scope=email,read_stream&redirect_uri=" . urlencode($my_url);
 	        		$this->redirect($dialog_url);
+	        		die();
+				} else
+				{
+					$token_url = "https://graph.facebook.com/oauth/access_token?client_id=" .
+		        		$app_id . "&redirect_uri=" . urlencode($my_url) . "&client_secret=" .
+		        		$app_secret . "&code=" . $code;
+		
+					$access_token = file_get_contents($token_url);
+					$graph_url = "https://graph.facebook.com/me?" . $access_token;
+					$user = json_decode(file_get_contents($graph_url));
 				}
-	
-				$token_url = "https://graph.facebook.com/oauth/access_token?client_id=" .
-	        		$app_id . "&redirect_uri=" . urlencode($my_url) . "&client_secret=" .
-	        		$app_secret . "&code=" . $code;
-	
-				$access_token = file_get_contents($token_url);
-				$graph_url = "https://graph.facebook.com/me?" . $access_token;
-				$user = json_decode(file_get_contents($graph_url));
 			}
+			
 			// make login things		
+			if ( $user->verified == 1 && $user->email )
+			{
+				$results = $this->User->findByEmail($user->email);
+			
+				if ( is_array( $results ) ) 
+				{
+			
+					// has user activated his profile and do WE not have deactivated user
+					if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
+					{
+						$cookie = array();
+						$cookie['email'] = $results['User']['email'];
+						$cookie['userid'] = $results['User']['id'];
+						$cookie['firstname'] = $results['User']['firstname'];
+							
+						$this->Cookie->write('tct_auth_blog', $cookie, true, '+1 hour');
+	
+						// set "user" session equal to email address
+						// user might have a different session from other login
+						$this->Session->write('session_useremail', $results['User']['email']);
+						$this->Session->write('session_userid', $results['User']['id']);
+
+						$this->set('session_userid', $results['User']['id']);
+	
+						// set "last_login" session equal to users last login time
+						$results['User']['last_login'] = date("Y-m-d H:i:s");
+						$this->Session->write('last_login', $results['User']['last_login']);
+
+echo "<a href='/trainer/trainingplans/view/'>click</a>";
+
+						//$this->redirect('/trainingplans/view/');
+					}
+				} else
+				{
+					$fbuserarray['firstname'] = $user->first_name;
+					$fbuserarray['lastname'] = $user->last_name;
+					$fbuserarray['birthday'] = date( 'Y-m-d', strtotime($user->birthday));
+					$fbuserarray['gender'] = $user->gender;
+					$fbuserarray['locale'] = $user->locale;
+					$fbuserarray['email'] = $user->email;
+					
+					$this->Session->write('fbemail', $user->email);
+					$this->Session->write('facebook_user', serialize($fbuserarray));
+
+					
+echo "<a href='/trainer/users/register/'>click</a>";
+
+					//$this->redirect('/users/register/');
+				}
+			}
+
 		    $this->autoRender = false;            
 		
 	}
@@ -187,13 +247,11 @@ class UsersController extends AppController {
 						if ( $this->data['User']['remember_me'] )
 						{
 							//$session_timeout = 60*60*24*365;
-	
 							//Configure::write('Session.timeout', $session_timeout);
 							$this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
 							
 						} else
 						{
-							//$session_timeout = 60*60*1;
 							$this->Cookie->write('tct_auth_blog', $cookie, true, '+1 hour');
 						}
 	
@@ -207,9 +265,6 @@ class UsersController extends AppController {
 						$results['User']['last_login'] = date("Y-m-d H:i:s");
 						$this->Session->write('last_login', $results['User']['last_login']);
 	
-						// save last_login date
-						//$this->User->save($results);
-						//$this->Session->setFlash(__('Logged in. Welcome.', true));
 						$this->redirect('/trainingplans/view');
 					} else
 					{
@@ -364,6 +419,20 @@ class UsersController extends AppController {
 	    
 	    if (empty($this->data))
 	    {
+				if ( $this->Session->read('facebook_user') )
+				{
+					$facebook_user = unserialize( $this->Session->read('facebook_user') );
+					$this->data['User']['firstname'] = $facebook_user['firstname'];
+					$this->data['User']['lastname'] = $facebook_user['lastname'];
+					if ( $facebook_user['gender'] == 'female' )
+						$this->data['User']['gender'] = 'f';
+					else
+						$this->data['User']['gender'] = 'm';
+					$this->data['User']['email'] = $facebook_user['email'];
+					$this->data['User']['birthday'] = $facebook_user['birthday'];
+					$this->Session->setFlash(__('We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login.',true));
+				}
+				
 				if ( preg_match( '/@/', $inviter ) )
 				{
 					$this->set('companyemail', $inviter);	
@@ -912,7 +981,7 @@ class UsersController extends AppController {
 		      'fieldList' => array( 'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
 		      {
 		      	   	//$statusbox = 'statusbox ok';
-		      	   	//$this->Session->setFlash(__('User profile saved.',true));
+		      	   	$this->Session->setFlash(__('Please confirm your address.',true));
 		      	   	if ( $this->referer() ) 
 				   		$this->redirect($this->referer());
 	    			else 

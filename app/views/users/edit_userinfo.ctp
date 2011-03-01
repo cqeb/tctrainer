@@ -146,13 +146,19 @@ echo $form->input('notifications',
                   )
 ));
 
+echo '<div class="statusbox">';
 __('We would be very happy if you write a review (recommendation) about TriCoreTraining.com. Thank you.');
-echo '<br />';
+echo '</div><br />';
 echo $form->textarea('myrecommendation',
                   array(
                   'rows' => '5',
                   'cols' => '45'
            ));
+
+
+echo "<br /><br />";
+echo $form->submit(__('Save', true));
+echo "<br />";
 
 ?>
 

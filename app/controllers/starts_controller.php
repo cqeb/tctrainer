@@ -16,7 +16,7 @@ class StartsController extends AppController
   		$this->layout = 'trainer_start';
 	}
 
-	function index( $language )
+	function index( $language = 'en' )
 	{
       	$this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
 

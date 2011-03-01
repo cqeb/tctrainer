@@ -187,6 +187,25 @@ class PaymentsController extends AppController {
    {
 			// don't check session because paypal is not logged in
 			//$this->checkSession();
+
+            // Paypal notifies us through a POST-request
+            // $_GET for testing
+            if ( $_POST ) 
+            	$params = $_POST;
+            else 
+            	$params = $_GET;
+
+			// just for monitoring purpose
+			$logurl = '';
+			foreach ( $params as $key => $val )
+			{
+			           $logurl .= $key . '=' . urlencode($val) . '&';
+			}
+			
+			$posturl = '?cmd=_notify-validate&' . $logurl;
+			$logtext = date('Y-m-d H:i:s', time()) . '|' . $posturl . '|' . $_SERVER['REQUEST_URI'] . "\n\n";
+			if ( $_SERVER['HTTP_HOST'] != 'localhost' ) mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Request', $logtext, 'From: server@tricoretraining.com' );
+
 			if ( isset( $this->params['named']['lang'] ) )
 			{
 					$this->code = $this->params['named']['lang']; 				
@@ -203,13 +222,6 @@ class PaymentsController extends AppController {
 
             // have to do this - because checkSession is uncommented
             $this->loadModel('User');
-
-            // Paypal notifies us through a POST-request
-            // $_GET for testing
-            if ( $_POST ) 
-            	$params = $_POST;
-            else 
-            	$params = $_GET;
 
 			/*
 			 *
@@ -313,6 +325,8 @@ class PaymentsController extends AppController {
                       else
                           $return = implode( "", file( $posturl ) );
 
+					  if ( $_SERVER['HTTP_HOST'] != 'localhost' ) mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Answer', $return . "-" . $results['id'] . "\n\n" . $logtext, 'From: server@tricoretraining.com' );
+
                       if ( $return != 'VERIFIED' || $params['txn_type'] != 'subscr_payment')
                       {
                                   $error .= __('Verification by PAYPAL failed',true) . '.<br /><br /> ' . $posturl . ' ';
@@ -381,8 +395,17 @@ class PaymentsController extends AppController {
 											  		// these inviters receive money
 											  		if ( preg_match( '/money:/', $inviter ) )
 													{
-														
-														
+
+																$admin_user = $this->User->findByEmail( 'klaus@tricoretraining.com' );
+																$inviter_user = $this->User->findById( $inviter );
+
+																$subject = __('TriCoreTraining', true) . ' - ' . __('affiliate gets money!', true);
+																$template = 'standardmail';
+																$content = $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' (' . $results_user['User']['id'] . ') ' . __('bought a PREMIUM membership. Thank you.', true);
+																$content .= ' ';
+																$content .= $inviter_user['User']['firstname'] . ' ' . $inviter_user['User']['lastname'] . ' (' . $inviter_user['User']['id'] . ') ' . __('receives money.', true);
+																
+																$this->_sendMail( $inviter_user, $subject, $template, $content, $results_user['User']['yourlanguage'], $admin_user['User'] );
 													} else
 													{
 															$inviter_user = $this->User->findById( $inviter );
@@ -404,7 +427,7 @@ class PaymentsController extends AppController {
 																$template = 'standardmail';
 																$content = $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' (' . $results_user['User']['id'] . ') ' . __('bought a PREMIUM membership. Thank you.', true);
 																$content .= ' ';
-																$content .= $inviter_user['User']['firstname'] . ' ' . $inviter_user['User']['lastname'] . ' (' . $inviter_user['User']['id'] . ') ' . __('receives money.', true);
+																$content .= $inviter_user['User']['firstname'] . ' ' . $inviter_user['User']['lastname'] . ' (' . $inviter_user['User']['id'] . ') ' . __('receives more months.', true);
 																
 																$this->_sendMail( $inviter_user, $subject, $template, $content, $results_user['User']['yourlanguage'], $admin_user['User'] );
 															}
