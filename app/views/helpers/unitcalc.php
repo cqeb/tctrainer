@@ -38,7 +38,7 @@ class UnitcalcHelper extends AppHelper {
         return UnitcalcComponent::seconds_to_time( $seconds );
    }
 
-   function check_date( $date, $mode = 'show' )
+   function check_date( $date, $mode = 'show', $session_unitdate_overwrite = '' )
    {
         return UnitcalcComponent::check_date( $date, $mode );
    }
