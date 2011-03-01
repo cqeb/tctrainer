@@ -376,7 +376,7 @@ class UnitcalcComponent extends Object {
             if ( $session_unitdate == '' ) 
             	$session_unitdate = $this->Session->read('session_unitdate');
             if ( $session_unitdate == '' )
-				$session_unidate = 'YYYYMMDD'; 
+				$session_unidate = 'yyyymmdd'; 
 			
             $return = "";
 

@@ -203,7 +203,7 @@ class PaymentsController extends AppController {
 			}
 			
 			$posturl = '?cmd=_notify-validate&' . $logurl;
-			$logtext = date('Y-m-d H:i:s', time()) . '|' . $posturl . '|' . $_SERVER['REQUEST_URI'] . "\n\n";
+			$logtext = date('Y-m-d H:i:s', time()) . '|' . $params['custom'] . '|' . $_SERVER['REMOTE_ADDR'] . '|' . $posturl . '|' . $_SERVER['REQUEST_URI'] . "\n\n";
 			if ( $_SERVER['HTTP_HOST'] != 'localhost' ) mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Request', $logtext, 'From: server@tricoretraining.com' );
 
 			if ( isset( $this->params['named']['lang'] ) )
@@ -327,7 +327,7 @@ class PaymentsController extends AppController {
                       else
                           $return = implode( "", file( $posturl ) );
 
-					  if ( $_SERVER['HTTP_HOST'] != 'localhost' ) mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Answer', $return . "-" . $results['id'] . "\n\n" . $logtext, 'From: server@tricoretraining.com' );
+					  if ( $_SERVER['HTTP_HOST'] != 'localhost' ) mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Answer', $return . "-" . $p_userid . "\n\n" . $logtext, 'From: server@tricoretraining.com' );
 
                       if ( $return != 'VERIFIED' || $params['txn_type'] != 'subscr_payment')
                       {
@@ -566,11 +566,11 @@ class PaymentsController extends AppController {
             if ( $mailtype == 'invoice' )
                            $this->set('invoice', $pay['pay_invoice']);
 
-            $this->set('paid_from', $this->Unitcalc->check_date($pay['pay_paid_from'], 'snow', $User['unitdate']));
-            $this->set('paid_to', $this->Unitcalc->check_date($pay['pay_paid_to'], 'snow', $User['unitdate']));
-            $this->set('paid_new_from', $this->Unitcalc->check_date($pay['pay_paid_new_from'], 'snow', $User['unitdate']));
-            $this->set('paid_new_to', $this->Unitcalc->check_date($pay['pay_paid_new_to'], 'snow', $User['unitdate']));
-			$this->set('created', $this->Unitcalc->check_date(date('Y-m-d', time()), 'snow', $User['unitdate']));
+            $this->set('paid_from', $this->Unitcalc->check_date($pay['pay_paid_from'], 'show', $User['User']['unitdate']));
+            $this->set('paid_to', $this->Unitcalc->check_date($pay['pay_paid_to'], 'show', $User['User']['unitdate']));
+            $this->set('paid_new_from', $this->Unitcalc->check_date($pay['pay_paid_new_from'], 'show', $User['User']['unitdate']));
+            $this->set('paid_new_to', $this->Unitcalc->check_date($pay['pay_paid_new_to'], 'show', $User['User']['unitdate']));
+			$this->set('created', $this->Unitcalc->check_date(date('Y-m-d', time()), 'show', $User['User']['unitdate']));
             // that's not possible
             //$this->set('userobject', $this->Session->read('userobject'));
 
