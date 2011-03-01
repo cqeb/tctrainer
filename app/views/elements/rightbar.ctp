@@ -1,14 +1,16 @@
 <div class="box">
 <b><?php __('Hot News'); ?></b>
 <br /><br />
-<?php if ( $session_userid ) { ?>
+<?php if ( isset( $session_userid ) ) { ?>
 <a href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('PREMIUM Upgrade'); ?></b></a>
 <br /><br />
 <?php } ?>
 <a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
 
+<?php if ( !isset( $session_userid ) ) { ?>
 <br /><br /><br />
 <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
+<?php } ?>
 </div>
 
 <div class="box">
