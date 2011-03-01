@@ -1879,15 +1879,20 @@ class UsersController extends AppController {
 			  }		      
 
 			  $content .= __('Some magazine articles',true) . ":<br />\n" . 
-			  	'<ul>' . $this->blognews . '</ul><br /><br />' . "\n\n";
+			  	'<p><ul>' . $this->blognews . '</ul></p>' . "\n\n";
 			    	 			  
 			  if ( $text_for_mail ) 
 		      {
 		      		$content .= __('There is something to update in your profile.', true) . 
-		      			"<br />\n" . '<ul>' . $text_for_mail . '</ul>' . '<br /><br />' . "\n\n";
+		      			"\n" . '<ul>' . $text_for_mail . '</ul>' . '<br />' . "\n\n";
 			  }
 		
 		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
+		      
+		      // send to admin 
+		      $to_user['email'] = 'klaus@tricoretraining.com';
+		      $to_user['name'] = 'Admin';
+		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage'], $to_user);
 		  } 
 		  
 	}
