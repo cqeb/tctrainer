@@ -990,7 +990,9 @@ class UsersController extends AppController {
 		      'fieldList' => array( 'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
 		      {
 		      	   	//$statusbox = 'statusbox ok';
-		      	   	$this->Session->setFlash(__('Please confirm your address.',true));
+		      	   	//$this->Session->setFlash(__('Please confirm your address.',true));
+		      	   	
+		      	   	
 		      	   	if ( $this->referer() ) 
 				   		$this->redirect($this->referer());
 	    			else 

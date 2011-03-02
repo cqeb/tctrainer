@@ -643,14 +643,22 @@ class StatisticshandlerComponent extends Object {
             planned trainings
             **/
             // TODO (B) we have to load the correct fields from table
+/*
+			$sql = "SELECT s.duration AS duration, m.date AS date, s.athlete_id AS user_id, s.sport AS sportstype,
+			m.time AS time, m.usertime AS usertime, IF (s.trimp IS NULL, IF (m.usertime > 0, m.usertime * 1.1, m.time * 1.1), trimp) trimp
+			FROM mesocyclephases m LEFT JOIN scheduledtrainings s ON s.athlete_id = m.athlete_id AND s.week = m.date
+			WHERE m.athlete_id = " . $userid . " AND ";
+            if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
+            $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY date ASC";
+echo $sql;
+*/            
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
                 "athlete_id = $userid AND ";
             if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
             $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY date ASC";
-            
             $Trainingplans = $Trainingstatistic->query( $sql );
-
+//pr($Trainingplans);
             $sumdata_tp['collected_sportstypes'] = array();
             $sumdata_tp['duration'] = array();
             $sumdata_tp['distance'] = array();
@@ -659,6 +667,14 @@ class StatisticshandlerComponent extends Object {
             for ( $i = 0; $i < count( $Trainingplans ); $i++ )
             {
                   $dt = $Trainingplans[$i]['scheduledtrainings'];
+				  //$dt = $Trainingplans[$i];
+				  /*$dt['trimp'] = $dt['s']['trimp'];
+				  $dt['duration'] = $dt['s']['duration'];
+				  $dt['sportstype'] = $dt['s']['sportstype'];
+				   * 
+				   */
+				  
+				  
                   $sportstype_set = $dt['sportstype'];
                   if ( !in_array( $sportstype, $sumdata_tp['collected_sportstypes'] ) )
                   {

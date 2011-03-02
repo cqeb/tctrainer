@@ -972,8 +972,9 @@ class TrainingstatisticsController extends AppController {
             $this->set('length_unit', $unit['length']);
    }
 
-	function url_redirect($id = null)
+	function url_redirect($id = null, $userid = null)
 	{
+        $this->checkSession();
 		
 		$transaction_id = '';
 		$p['smtype'] = $this->params['named']['type'];
@@ -999,7 +1000,7 @@ class TrainingstatisticsController extends AppController {
 			__('I did a', true) . ' ' . $p['distance'] . ' ' . $p['distance_unit'] . ' ' . 
 			__($p['sport'] . ' workout', true) . ' ' . __('in',true) . ' ' . $p['duration'] . 
 			' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 
-			'http://tricoretraining.com/u:' . $transaction_id; 
+			'http://tricoretraining.com/?u=' . $transaction_id; 
 			
 			$socialmedia_url = 'http://twitter.com/?status=' . urldecode( substr( $twittertext, 0, 140 ) );
 		}

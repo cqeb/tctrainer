@@ -5,7 +5,7 @@
 
 
                    <?php if ($session->check('Message.flash')) { ?>
-                   <div class="messagebox">
+                   <div class="statusbox">
                    <?php $session->flash(); ?>
                    </div><br />
                    <?php } ?>
