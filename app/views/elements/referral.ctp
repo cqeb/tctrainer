@@ -1,4 +1,5 @@
 <?php
+
 $referral_text[] = __('TriCoreTraining sped up my Half-Ironman time from 06:30 to 05:30 hours. It is awesome. Thanks.', true);
 $referral_name[] = 'Klaus-M. Schremser, 35 ys';
 $referral_email[] = 'km.schremser@gentics.com';

@@ -99,12 +99,10 @@ class AppController extends Controller {
             $this->Session->write('Config.language', $locale);
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
-
      }
 
      function checkSession()
      {
-
 	        // fill $username with session data
 	        $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');

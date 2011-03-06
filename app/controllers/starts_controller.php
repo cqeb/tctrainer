@@ -118,8 +118,10 @@ class StartsController extends AppController
 
 	    if ( $this->Session->read('session_userid') )
 	    {
-	          $this->User->id = $this->Session->read('session_userid');
-	          $this->User->savefield('yourlanguage', $this->code, false);
+				$this->loadModel('User');
+	
+				$this->User->id = $this->Session->read('session_userid');
+				$this->User->savefield('yourlanguage', $this->code, false);
 	    }
 
 		$this->Session->write('Config.language', $this->code);

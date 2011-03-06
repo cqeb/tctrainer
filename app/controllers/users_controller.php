@@ -183,6 +183,12 @@ class UsersController extends AppController {
 						$results['User']['last_login'] = date("Y-m-d H:i:s");
 						$this->Session->write('last_login', $results['User']['last_login']);
 
+						$language = Configure::read('Config.language');
+						$sql = "SELECT myrecommendation FROM users WHERE myrecommendations = '' AND yourlanguage = '" . $language . "'";
+						$user_recommendations = $this->User->query( $sql );
+						
+						$this->Session->save( 'recommendations', serialize($user_recommendations) );
+						
 						echo '<script language="JavaScript">top.location.href="/trainer/trainingplans/view/";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
 						// doesn't work with facebook login - session get's lost
 						//$this->redirect('/trainingplans/view/');
@@ -264,6 +270,12 @@ class UsersController extends AppController {
 						$results['User']['last_login'] = date("Y-m-d H:i:s");
 						$this->Session->write('last_login', $results['User']['last_login']);
 	
+						$language = Configure::read('Config.language');
+						$sql = "SELECT myrecommendation FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $language . "'";
+						$user_recommendations = $this->User->query( $sql );
+						
+						$this->Session->save( 'recommendations', serialize($user_recommendations) );
+
 						$this->redirect('/trainingplans/view');
 					} else
 					{
@@ -1885,8 +1897,8 @@ class UsersController extends AppController {
 			    	 			  
 			  if ( $text_for_mail ) 
 		      {
-		      		$content .= __('There is something to update in your profile.', true) . 
-		      			"\n" . '<ul>' . $text_for_mail . '</ul>' . '<br />' . "\n\n";
+		      		$content .= '<p>' . __('There is something to update in your profile.', true) . 
+		      			"\n" . '<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
 			  }
 		
 		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);

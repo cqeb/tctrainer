@@ -31,7 +31,7 @@
 
 	//echo $statistics->chart_title( __('How fit am I?', true) );
 
-	echo $statistics->y_axis( 1, $max_unit, 0, round($max_unit/8), __('Trimps', true) );
+	echo $statistics->y_axis( 1, $max_unit, 0, round($max_unit/8), __('Sum', true) . ' ' . __('Trimps', true) ); //. ' / ' . __('day', true)
 
 ?>
 <?php

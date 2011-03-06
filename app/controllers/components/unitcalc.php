@@ -97,7 +97,7 @@ class UnitcalcComponent extends Object {
 	                  $amount_array['unit'] = 'km';
 	              }
 	
-				  if ( $locale == 'ger' )
+				  if ( $locale == 'ger' || $excel == 'excel' )
 				  { 
 				  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
 				  }
@@ -135,7 +135,7 @@ class UnitcalcComponent extends Object {
                   $amount_array['unit'] = 'kg';
               }
 			  
-			  if ( $locale == 'ger' ) 
+			  if ( $locale == 'ger' || $excel == 'excel' ) 
 			  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
 			
               if ( $ret == 'single' )
