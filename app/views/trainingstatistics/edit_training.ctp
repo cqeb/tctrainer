@@ -180,21 +180,17 @@ echo $form->textarea('comment');
 <div class="clear"></div>
 <?php
 echo $form->input('workout_link',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'default' => 'http://',
-     'label' => __('Link workout', true)
-));
-?>
-<ul>
-<li><a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a></li>
-<li><a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a></li>
-</ul>
+	array(
+		'after' => '<button>&#8680;</button>',
+		'maxLength' => 255,
+		'label' => __('Link workout', true),
+		'title' => __('Add a link for your workout. You might want to check out www.runmap.net or www.bikemap.net for mapping your workouts!', true),
+		'div' => array(
+			'id' => 'workoutlink'
+		)
+	)
+);
 
-<?php
 echo $form->submit(__('Save',true));
 ?>
 </fieldset>
@@ -347,6 +343,28 @@ jQuery(document).ready(function() {
 			TimeParser.mins * 60,
 			parseInt(heartrate.val())
 		));
+	});
+
+	// workout link
+	var link = jQuery('#TrainingstatisticWorkoutLink');
+	link.focus(function () {
+			jQuery('#workoutlink label').fadeOut('fast');
+		})
+		.blur(function () {
+			var val = jQuery.trim(link.val());
+			if (val == '') {
+				// clean whitespaces first
+				link.val(val);
+				jQuery('#workoutlink label').fadeIn('normal');
+			}
+		})
+		.tipTip();
+	if (link.val() == '') {
+		jQuery('#workoutlink label').show();
+	}
+	jQuery('#workoutlink button').click(function () {
+		window.open(link.val());
+		return false;
 	});
 	
 	// add tooltips

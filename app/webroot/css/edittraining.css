@@ -114,16 +114,31 @@ label.ui-state-active, label.ui-button:hover {
 	width: 170px;
 }
 
-#CourseName label, #comment label {
+#CourseName label, #comment label, #workoutlink label {
 	position: absolute;
 	font-size: 18px;
 	margin-top: 8px;
 	margin-left: 10px;
 	display: none;
 }
-#CourseName input {
+#CourseName input, #workoutlink input {
 	width: 391px;
 	font-size: 18px;
+}
+
+#workoutlink input {
+	width: 351px;
+	margin-bottom: 20px;
+}
+
+#workoutlink button {
+	font-size: 25px;
+	position: absolute;
+	width: 40px;
+	height: 34px;
+	padding: 0px;
+	margin-top: 2px;
+	vertical-align: -10px;
 }
 
 .workouttype, .swimworkouttypes, .bikeworkouttypes, .runworkouttypes {
