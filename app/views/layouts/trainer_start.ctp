@@ -3,17 +3,51 @@
 <head>
     <title><?php
 
-if ( isset( $distance ) && $distance != '' ) 
-{
-  // facebook text
-  $title =
-__('I did a', true) . ' ' . $distance . ' ' . $distance_unit . ' ' . __($stype . ' workout', true) . ' ' . 
-__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 'http://tricoretraining.com'; 
-  echo $title;
-} else
-{
-	
+if ( isset( $title ) ) 
+	echo $title;
+else	
 	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
+	
+if ( $userinfo ) 
+{
+		$facebox_content = '';
+			
+		// create text for facebox with workout
+		if ( $distance ) 
+		{
+			
+			$facebox_content = '<br /><h1>' . __('My TriCoreTraining.com workout!', true) . '</h1><p>' . 
+			__('I did a', true) . ' ' . $distance . ' ' . $distance_unit . ' ' . 
+			__($sport . ' workout', true) . ' ' . __('in',true) . ' ' . $duration . ' ' . 
+			__('hour(s)',true) . ' ' . __('with', true) . ' ' .	'TriCoreTraining.com' .	
+			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or loose weight, why not register?', true) . '</a></p>' . 
+			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
+
+        	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';
+
+		// user recommended our service
+		} else
+		{
+			$facebox_content = '<br /><h1>' . __('I LIKE TriCoreTraining.com!', true) . '</h1><p>' . 
+			__("Why don't YOU become a triathlon athlete too? Why not a marathon runner? I already did it! With TriCoreTraining.com.", true) .
+			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or loose weight, why not register?', true) . '</a></p>' . 
+			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
+
+        	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';		
+		}
+		
+}
+
+if ( $companyinfo ) 
+{
+			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of membership costs!', true) . '</h1><p>' . 
+			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 3 coffees a month.", true) . 
+			'<br /><br />' . __('Yours', true) . ', Klaus-M. (' . __('founder of', true) . ') ' . __('TriCoreTraining', true) . '<br /><br />' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or loose weight, why not register?', true) . '</a></p>';
+
+        	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';		
 }
 
 ?></title>
@@ -86,6 +120,7 @@ $(document).ready(function() {
 <div class="container_12 main">
 	<!-- Center column -->
  		<div class="grid_12 center">
+
 		<!-- Content -->
 		<div class="box content" style="padding-bottom: 18px; height: 285px;">
 			<div id="signup">
@@ -141,11 +176,10 @@ $(document).ready(function() {
 <?php echo $this->element('footer'); ?>
 <!-- /Footer -->
 
-<!--
 <div class="container_12">
 <?php echo $cakeDebug; ?>
 </div>
--->
+
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -173,6 +207,19 @@ try {
   feedback_widget_options.color = "#222";
   feedback_widget_options.style = "idea";
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
+</script>
+
+<script type="text/javascript">
+
+/** initiate JQuery **/
+
+$(document).ready(function() {
+
+        // facebox box
+        //$('a[rel*=facebox]').facebox();
+		<?php echo $facebox_content; ?>
+});
+
 </script>
 
 </body>

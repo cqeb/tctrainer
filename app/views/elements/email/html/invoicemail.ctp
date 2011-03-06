@@ -19,13 +19,16 @@
 Gonzagagasse 11/25<br />
 A-1010 <?php __('Vienna, Austria'); ?>
 <br /><br />
-<b><?php echo $userobject['firstname'] . ' ' . $userobject['lastname']; ?></b><br />
-<?php echo $userobject['address']; ?><br />
-<?php echo $userobject['zip'] . '-' . $userobject['city'] . ', ' . $userobject['country']; ?>
+<b><?php echo $user['User']['firstname'] . ' ' . $user['User']['lastname']; ?></b><br />
+<?php echo $user['User']['address']; ?><br />
+<?php echo $user['User']['zip'] . '-' . $user['User']['city'] . ', ' . $user['User']['country']; ?>
 <br /><br />
 
 <table class="main" summary="TriCoreTraining.com <?php __('Invoice'); ?>">
-<caption>TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?></caption>
+<caption>
+TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?><br />
+<?php __('Date'); echo ':'; ?> <?php echo $created; ?>
+</caption>
 <colgroup>
           <col class="colA">
           <col class="colB">

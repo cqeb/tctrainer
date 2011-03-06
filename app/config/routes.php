@@ -37,10 +37,5 @@ Router::connect('/', array('controller' => 'starts', 'action' => 'index', 'home'
  */
 //Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
 
-/**
- * 
- */
-// does not work
-Router::connect('/de', array('controller' => 'users', 'action' => 'change_language', 'deu'));
  
 ?>

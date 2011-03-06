@@ -52,15 +52,14 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
     <td>
 <?php 
 
-$facebookurl = "http://www.facebook.com/sharer.php?u=http://tricoretraining.com"; 
-$facebookurl .= '/trainer/starts/index/distance:'.$distance['amount'].'/distance_unit:'. $distance['unit'] .'/duration:' . $duration . '/stype:' . $stype;
+$facebookurl = '/trainer/trainingstatistics/url_redirect/type:facebook/distance:'.
+	$distance['amount'] . '/distance_unit:' . $distance['unit'] .
+	'/duration:' . $duration . '/sport:' . $stype;
 
-$twittertext =
-__('I did a', true) . ' ' . $distance['amount'] . ' ' . $distance['unit'] . ' ' . __($stype . ' workout', true) . ' ' . 
-__('in',true) . ' ' . $duration . ' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 'http://tricoretraining.com'; 
-
-$twitterurl = urldecode( substr( $twittertext, 0, 140 ) ); 
-
+$twitterurl = '/trainer/trainingstatistics/url_redirect/type:twitter/distance:'.
+	$distance['amount'] . '/distance_unit:' . $distance['unit'] .
+	'/duration:' . $duration . '/sport:' . $stype;
+ 
 ?>
     
 <nowrap>
@@ -71,7 +70,7 @@ $twitterurl = urldecode( substr( $twittertext, 0, 140 ) );
 <a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
 
 <a class="help2" title="<?php __('Tell your friends on Facebook about your great workout!'); ?>" target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
-<a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="http://twitter.com/?status=<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
+<a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
 
 </nowrap>
 

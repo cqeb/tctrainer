@@ -31,7 +31,7 @@
                    <div style="margin: 0px;" class="block" id="tables">
                     
                    <table summary="<?php __('TriCoreTraining.com Invoice'); ?>">
-                   <caption><?php __('TriCoreTraining.com Invoice') ?> <?php __('No.'); ?> <?php echo $data['invoice']; ?></caption>
+                   <caption><?php __('TriCoreTraining.com Invoice') ?> <?php __('No.'); ?> <?php echo $data['invoice']; ?> (<?php __('Date'); echo ':'; ?> <?php echo $unitcalc->check_date($data['created']); ?>)</caption>
                    <thead>
                    <tr>
                         <th colspan="3" class="table-head"><?php __('TriCoreTraining-Plan'); ?></th>

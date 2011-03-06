@@ -14,7 +14,7 @@ A-1010 <?php __('Vienna, Austria'); ?>
 <?php echo $userobject['zip'] . '-' . $userobject['city'] . ', ' . $userobject['country']; ?>
 
 
-*TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?>*
+*TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?> (<?php __('Date'); echo ':'; ?> <?php echo $created; ?>)*
 
 <?php __('Product'); ?> | <?php __('Interval'); ?>  | <?php __('Price'); ?>
 <?php __('Total'); ?>                                 <?php echo $currency . ' ' . $price; ?>

@@ -17,8 +17,7 @@ class LoghandlerComponent extends Object {
             $this->data_l['Log']['logmessage'] = $logmessage;
             $this->data_l['Log']['comment'] = $logcomment;
 
-            if ( $model->save(
-                          $this->data_l,
+            if ( $model->save( $this->data_l,
                           array(
                                  'validate' => true,
                                  'fieldList' =>
@@ -26,10 +25,12 @@ class LoghandlerComponent extends Object {
                                  )
                           )
             )
-                          return true;
-            else
-                          return false;
-
+			{
+				return true;
+            } else
+			{
+				return false;
+			}
 /**
             $results = $model->findAllByTransaction($tid);
 

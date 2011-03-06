@@ -9,9 +9,9 @@ class UnitcalcHelper extends AppHelper {
 
    }
 
-/**
- * reuse code of component here
- */
+	/**
+	 * reuse code of component here
+	 */
 
    function convert_metric( $amount, $convertunit, $roundnumber = 0 )
    {
@@ -38,7 +38,7 @@ class UnitcalcHelper extends AppHelper {
         return UnitcalcComponent::seconds_to_time( $seconds );
    }
 
-   function check_date( $date, $mode = 'show' )
+   function check_date( $date, $mode = 'show', $session_unitdate_overwrite = '' )
    {
         return UnitcalcComponent::check_date( $date, $mode );
    }
@@ -46,6 +46,10 @@ class UnitcalcHelper extends AppHelper {
    function format_number($number, $decimals = 0, $thousand_separator = '&nbsp;', $decimal_point = '.')
    {
         return UnitcalcComponent::format_number( $number, $decimals, $thousand_separator, $decimal_point );
+   }
+   function get_prices($country, $currency, $userobject)
+   {
+        return UnitcalcComponent::get_prices( $country, $currency, $userobject );
    }
 
 }

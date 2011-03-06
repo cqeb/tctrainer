@@ -555,7 +555,7 @@ a.reset:hover {
     	rgba(150,150,150,0.7) 0%,
     	white 100%
 	);
-	z-index: 200;
+	z-index: 98;
 	border-radius: 2px;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;

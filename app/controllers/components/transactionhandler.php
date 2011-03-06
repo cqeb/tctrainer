@@ -13,13 +13,15 @@ class TransactionhandlerComponent extends Object {
    function handle_transaction( $model, $tid = null, $mode = 'create', $key = '', $val = '' )
    {
             // create // add // read
-	          //$this->loadModel('Transaction');
+	        //$this->loadModel('Transaction');
 
             // create transaction
+            // if tid is already existing then create a new tid
+            // TODO (B)
             if ( $mode == 'create' )
             {
                $tid = rand() . microtime();
-               $tid = md5($tid);
+               $tid = substr( md5($tid), 0, 8);
 
                $model->create();
             }

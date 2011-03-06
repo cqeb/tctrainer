@@ -153,8 +153,6 @@ EOE;
 } else
 {
 
-			if ( 1 == 1 ) //$userobject['admin'] )
-			{
 ?>
 
             <form target="paypal" action="https://www.<?php echo $testing; ?>paypal.com/cgi-bin/webscr" method="post">
@@ -165,65 +163,47 @@ EOE;
             <input type="hidden" name="item_number" value="tctplan-<?php echo $timeinterval; ?>m" />
             <input type="hidden" name="currency_code" value="<?php echo $currency_code; ?>" />
 
-            <!-- price of subscription -->
+            <!-- billing cycle subscription -->
+            <!-- regular price of subscription -->
             <input type="hidden" name="a3" value="<?php echo $price; ?>" />
 
-            <!-- billing cycle subscription -->
-            <!-- amount months -->
+            <!-- regular amount time  -->
             <input type="hidden" name="p3" value="<?php echo $timeinterval; ?>" />
-<?php 
-if ( $_SERVER['HTTP_HOST'] == 'localhost' )
-{
-?>
-            <!-- day -->
+
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+            <!-- regular subscription day -->
             <input type="hidden" name="t3" value="D" />
-
-<?php	
-} else
-{
-?>
-            <!-- month -->
+<?php } else { ?>
+            <!-- regular subscription month -->
             <input type="hidden" name="t3" value="M" />
-<?php
-}
-
-if ( $days_to_end > 0 )
-{
-?>
-              <!-- price of trial -->
+<?php }
+if ( $days_to_end > 0 ) { ?>
+              <!-- price of trial period -->
               <input type="hidden" name="a1" value="0" />
               <!-- amount of days trial -->
-              <input type="hidden" name="p1" value="<?php echo $days_to_end; ?>" />
-              <!-- days / months / years -->
+              <input type="hidden" name="p1" value="<?php echo round($days_to_end); ?>" />
+              <!-- days / months / years of trial period -->
               <input type="hidden" name="t1" value="D" />
-<?php
-}
-?>
+<?php } ?>
+			<!-- no note for subscriber in dialog -->
             <input type="hidden" name="no_note" value="1" />
             
-<?php
-if ( $_SERVER['HTTP_HOST'] == 'localhost' )
-{
-?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
             <input type="hidden" name="notify_url" value="http://www.tricoretraining.com/log/paypal.php" />
-
-<?php
-} else {
-?>
+<?php } else { ?>
             <input type="hidden" name="notify_url" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/notify/lang:<?php echo $locale; ?>/" />
-<?php
-}
-?>
+<?php } ?>
             <input type="hidden" name="return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s/lang:<?php echo $locale; ?>/" />
             <input type="hidden" name="cancel_return" value="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c/lang:<?php echo $locale; ?>/">
             
             <input type="hidden" name="business" value="<?php echo Configure::read('App.paymentemail'); ?>" />
             
-            <!-- recurring payment -->
+            <!-- recurring payment / 0 = not recurring -->
             <input type="hidden" name="src" value="1" />
             
             <!-- recurring times -->
-            <input type="hidden" name="srt" value="" />
+            <!--input type="hidden" name="srt" value="" /-->
+            <!-- recurring attempt -->
             <input type="hidden" name="sra" value="1" />
 
 			<!-- transaction-id -->
@@ -242,9 +222,6 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
             TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:s/lang:<?php echo $locale; ?>/">click to success</a><br />
             TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/show_payments/i:c/lang:<?php echo $locale; ?>/">click to cancel</a><br />
 <?php } ?>
-<?php 
-}
-?>
 
                  </fieldset>
 <?php

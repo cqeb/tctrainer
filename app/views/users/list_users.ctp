@@ -17,6 +17,8 @@ $yesno[0] = __('No', true);
                    </div><br />
                    <?php } ?>
 
+<?php echo $paginator->numbers(); ?>
+
 <table>
 <tr>
     <th><?php echo $paginator->sort(__('ID',true), 'id'); ?></th>

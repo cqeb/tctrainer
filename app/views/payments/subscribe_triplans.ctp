@@ -38,30 +38,27 @@ if ( $pay_member == 'freemember' || $_SERVER['HTTP_HOST'] == 'localhost' )
     <th colspan="3"><h2><?php __('Click to subscribe to a PREMIUM membership'); ?></h2></th>
 </tr>
 <?php
-$price1m['EUR'] = '9.90';
-$price1pm['EUR'] = '9.90';
-$price3m['EUR'] = '26.90';
-$price3pm['EUR'] = '8.97';
-$price6m['EUR'] = '49.90';
-$price6pm['EUR'] = '8.32';
-$price12m['EUR'] = '94.90';
-$price12pm['EUR'] = '7.91';
 
-$price1m['USD'] = '14.90';
-$price1pm['USD'] = '14.90';
-$price3m['USD'] = '39.90';
-$price3pm['USD'] = '13.30';
-$price6m['USD'] = '74.90';
-$price6pm['USD'] = '12.48';
-$price12m['USD'] = '139.90';
-$price12pm['USD'] = '11.66';
+$price_array = $unitcalc->get_prices( null, $currency, $userobject );
+$price_array_split = $price_array[$currency]['total'];
+$price_month_array_split = $price_array[$currency]['month'];
+
+$price1m[$currency] = $price_array_split[0];
+$price1pm[$currency] = $price_month_array_split[0];
+$price3m[$currency] = $price_array_split[1];
+$price3pm[$currency] = $price_month_array_split[1];
+$price6m[$currency] = $price_array_split[2];
+$price6pm[$currency] = $price_month_array_split[2];
+$price12m[$currency] = $price_array_split[3];
+$price12pm[$currency] = $price_month_array_split[3];
 
 ?>
 <tr>
     <td colspan="3">
     <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
     <b>1 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
-    <?php __('for ONLY'); ?> <?php echo $price1m[$currency]; ?> <?php echo $currency; ?>
+    <?php __('for ONLY'); ?> <?php echo $price1m[$currency]; ?> <?php echo $currency; ?> 
+    <?php if ( isset( $userobject['inviter'] ) && preg_match('/@/', $userobject['inviter'] ) ) echo '(30% ' . __('discount', true) . ')'; ?>
     </a>
     </td>
 </tr>
@@ -70,6 +67,7 @@ $price12pm['USD'] = '11.66';
     <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
     <b>3 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price3m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price3pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
+    <?php if ( isset( $userobject['inviter'] ) && preg_match('/@/', $userobject['inviter'] ) ) echo '(30% ' . __('discount', true) . ')'; ?>
     </a>
     </td>
 </tr>
@@ -78,6 +76,7 @@ $price12pm['USD'] = '11.66';
     <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:6">
     <b>6 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price6m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price6pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
+    <?php if ( isset( $userobject['inviter'] ) && preg_match('/@/', $userobject['inviter'] ) ) echo '(30% ' . __('discount', true) . ')'; ?>
     </a>
     </td>
 </tr>
@@ -86,6 +85,7 @@ $price12pm['USD'] = '11.66';
     <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
     <b>12 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price12m[$currency]; ?> <?php echo $currency; ?> (<?php echo $price12pm[$currency]; ?> <?php echo $currency; ?> <?php __('per month'); ?>)
+    <?php if ( isset( $userobject['inviter'] ) && preg_match('/@/', $userobject['inviter'] ) ) echo '(30% ' . __('discount', true) . ')'; ?>
     </a>
     </td>
 </tr>
@@ -181,7 +181,7 @@ and provide these confidential data only to PAYPAL and NOT to us (we only receiv
 \$(document).ready(function() {
 
         // facebox box
-        $('a[rel*=facebox]').facebox();
+        \$('a[rel*=facebox]').facebox();
 
 });
 
