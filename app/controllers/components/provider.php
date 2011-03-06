@@ -99,11 +99,11 @@ class ProviderComponent extends Object {
 				
 				$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
 				$bikeWorkouts = $tbp->generate($genWeek);
-				$tbp->save(false); 
+				$tbp->save(); 
 
 				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
-				$trp->save(false);
+				$trp->save();
 				break;
             case 'DUATHLON':
             	$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
@@ -112,7 +112,7 @@ class ProviderComponent extends Object {
 				
 				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
 				$runWorkouts = $trp->generate($genWeek);
-				$trp->save(false);
+				$trp->save();
 				break;
 			case 'RUN':
 				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
