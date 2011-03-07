@@ -95,6 +95,20 @@ class AppController extends Controller {
              tar application/x-tar
             **/
 
+            if ( $this->Session->read('recommendations') )
+			{
+				$this->loadModel('User');
+						
+				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
+				$user_recommendations = $this->User->query( $sql );
+						
+				$this->Session->write( 'recommendations', serialize($user_recommendations) );
+			} else
+			{
+				$user_recommendations = unserialize( $this->Session->read('recommendations'));
+			}
+			
+			if ( isset( $user_recommendations ) ) $this->set('recommendations', $user_recommendations);
             $this->set('locale', $locale);
             $this->Session->write('Config.language', $locale);
             $this->set('session_userid', $this->Session->read('session_userid'));

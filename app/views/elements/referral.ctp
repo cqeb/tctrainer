@@ -1,11 +1,22 @@
 <?php
 
+//pr($recommendations);
+if ( isset( $recommendations ) )
+{
+	foreach ( $recommendations as $key => $val )
+	{
+		$referral_text[] = $val['users']['myrecommendation'];
+		$referral_name[] = $val['users']['firstname'] . ' ' . $val['users']['lastname'];
+		$referral_email[] = $val['users']['email'];
+	}
+}
+
 $referral_text[] = __('TriCoreTraining sped up my Half-Ironman time from 06:30 to 05:30 hours. It is awesome. Thanks.', true);
-$referral_name[] = 'Klaus-M. Schremser, 35 ys';
+$referral_name[] = 'Klaus-M. Schremser';
 $referral_email[] = 'km.schremser@gentics.com';
 
 $referral_text[] = __('10:45 for Ironman in Carinthia was the goal and TriCoreTraining helped me to achieve it. Thank you.', true);
-$referral_name[] = 'Clemens Prerovsky, 30 ys';
+$referral_name[] = 'Clemens Prerovsky';
 $referral_email[] = 'c.prerovsky@gmail.com';
 
 $count_referrals = count( $referral_text ) - 1;
