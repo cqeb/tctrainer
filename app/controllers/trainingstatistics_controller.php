@@ -626,7 +626,7 @@ class TrainingstatisticsController extends AppController {
 			$trainingdata_ownuser = $this->Statisticshandler->get_trimps( $this->Trainingstatistic, $session_userid, $sportstype, $start, $end );
 
 			// in case we don't have data we set startdate to the date of first data
-			if ( strtotime( $start ) < strtotime( $trainingdata_ownuser[0]['trainingstatistics']['date'] ) )
+			if ( isset( $trainingdata_ownuser[0] ) && ( strtotime( $start ) < strtotime( $trainingdata_ownuser[0]['trainingstatistics']['date'] ) ) )
 			{
 					$start = $this->data['Trainingstatistic']['fromdate'] = $trainingdata_ownuser[0]['trainingstatistics']['date'];
 			}
