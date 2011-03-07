@@ -95,7 +95,7 @@ class AppController extends Controller {
              tar application/x-tar
             **/
 
-            if ( $this->Session->read('recommendations') )
+            if ( !$this->Session->read('recommendations') )
 			{
 				$this->loadModel('User');
 						

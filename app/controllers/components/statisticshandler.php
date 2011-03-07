@@ -181,6 +181,7 @@ class StatisticshandlerComponent extends Object {
 				$max_unit = 50;
             //if ( isset( $max_unit ) && $max_unit < 1 ) $max_unit = 50;
 			*/
+			$max_unit = round( $max_unit * 1.1 );
 			
             // for the graph we need the days in reverse order
             $trimp_tl_done = array_reverse($trimp_tl_done);
