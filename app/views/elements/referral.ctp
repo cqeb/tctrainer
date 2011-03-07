@@ -1,7 +1,7 @@
 <?php
 
 //pr($recommendations);
-if ( isset( $recommendations ) )
+if ( isset( $recommendations ) && count( $recommendations ) > 0 )
 {
 	foreach ( $recommendations as $key => $val )
 	{
