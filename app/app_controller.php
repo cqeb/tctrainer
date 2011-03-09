@@ -21,7 +21,6 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
      	{
-
 			// if user is from AUT or GER - change language to German
 			$language = $this->Session->read('Config.language');
 	        if ( !isset( $language ) )
@@ -38,7 +37,7 @@ class AppController extends Controller {
                 		Configure::write('Config.language','deu');
 				} else
                 		Configure::write('Config.language','eng');
-			} else	
+			} else
                 Configure::write('Config.language',$this->Session->read('Config.language'));
 
           	$locale = Configure::read('Config.language');
@@ -186,9 +185,9 @@ class AppController extends Controller {
                              $this->Session->write('Config.language', $results['User']['yourlanguage']);
                              $this->set('userobject', $results['User']);
                         }
-	          }
+	        }
 
-            	$this->set('session_userid', $session_userid);
+			$this->set('session_userid', $session_userid);
 
 	  }
 

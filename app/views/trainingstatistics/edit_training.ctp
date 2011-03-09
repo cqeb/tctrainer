@@ -19,7 +19,6 @@
                    </div><br />
                    <?php } ?>
 
-                   <!--<?php echo $html->link(__('Back to list of workouts',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null) ?>-->
 
 <?php
 
@@ -303,11 +302,13 @@ echo $form->input('workout_link',
 ));
 
 ?>
+<?php __('Visualize your workout on'); ?><br /><br />
 <ul>
-<li><a target="_blank" href="http://www.runmap.net"><?php __('Visualize your run workouts on runmap.net!'); ?></a></li>
-<li><a target="_blank" href="http://www.bikemap.net"><?php __('Visualize your bike workouts on bikemap.net!'); ?></a></li>
+<li><a target="_blank" href="http://www.runmap.net">www.runmap.net</a></li>
+<li><a target="_blank" href="http://www.bikemap.net">www.bikemap.net</a></li>
 </ul>
 
+<!--
 <table border="0" width="100%">
 <tr>
     <th width="50%">
@@ -383,6 +384,7 @@ echo $form->radio('conditions_mood',
     </td>
 </tr>
 </table>
+-->
 
 <?php
 
