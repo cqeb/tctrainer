@@ -10,6 +10,11 @@
 
 <a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>category/faq/">&raquo; <?php __('FAQs'); ?></a>
 
+<?php if ( isset( $session_userid ) ) { ?>
+<br /><br />
+<a href="/trainer/starts/index/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>ur:<?php echo base64_encode($userobject['id']); ?>/">&raquo; <?php __('Invite your friends'); ?></a>
+<?php } ?>
+
 <?php if ( !isset( $session_userid ) ) { ?>
 <br /><br /><br />
 <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
