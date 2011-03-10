@@ -150,7 +150,7 @@ class AppController extends Controller {
             } else
             {
                        // if cookie data are not the as session data, delete cookie
-                       if ( ( $cookie['email'] && $cookie['userid'] ) )
+                       if ( ( isset( $cookie['email'] ) && isset( $cookie['userid'] ) ) )
                        {
                           if ( ( $cookie['email'] != $session_useremail ) || ( $cookie['userid']  != $session_userid ) )
                           {
