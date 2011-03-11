@@ -225,6 +225,9 @@ Configure::write('Session.save', 'php');
  * The name of CakePHP's session cookie.
  */
 Configure::write('Session.cookie', 'CAKEPHP');
+
+// kms
+Configure::write('Session.path', '/');
 /**
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.

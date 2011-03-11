@@ -21,8 +21,10 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
      	{
+			
 			// if user is from AUT or GER - change language to German
 			$language = $this->Session->read('Config.language');
+
 	        if ( !isset( $language ) )
 			{
 				if ( $_SERVER['HTTP_HOST'] == 'localhost' )

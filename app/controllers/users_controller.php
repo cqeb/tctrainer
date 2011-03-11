@@ -16,6 +16,8 @@ class UsersController extends AppController {
 	{
   		parent::beforeFilter();
   		$this->layout = 'default_trainer';
+		
+		$this->Cookie->path = '/';
   
   		// necessary for upload
   		// fill with associated array of name, type, size to the corresponding column name
@@ -170,7 +172,7 @@ class UsersController extends AppController {
 						$cookie['userid'] = $results['User']['id'];
 						$cookie['firstname'] = $results['User']['firstname'];
 							
-						$this->Cookie->write('tct_auth_blog', $cookie, true, '+1 hour');
+						$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 hour');
 	
 						// set "user" session equal to email address
 						// user might have a different session from other login
@@ -253,13 +255,11 @@ class UsersController extends AppController {
 						// if you want to stay logged in, we have to write a cookie
 						if ( $this->data['User']['remember_me'] )
 						{
-							//$session_timeout = 60*60*24*365;
-							//Configure::write('Session.timeout', $session_timeout);
-							$this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+							$this->Cookie->write('tct_auth', $cookie, false, '+52 weeks');
 							
 						} else
 						{
-							$this->Cookie->write('tct_auth_blog', $cookie, true, '+1 hour');
+							$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 hour');
 						}
 	
 						// set "user" session equal to email address
@@ -962,7 +962,7 @@ class UsersController extends AppController {
 		                      $cookie['email'] = $new_email;
 		                      $cookie['userid'] = $session_userid;
 		                      
-		                      $this->Cookie->write('tct_auth', $cookie, true, '+52 weeks');
+		                      $this->Cookie->write('tct_auth', $cookie, false, '+52 weeks');
 		                }
 		           }
 		      	   $statusbox = 'statusbox ok';
