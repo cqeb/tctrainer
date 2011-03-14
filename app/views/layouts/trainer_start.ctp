@@ -8,7 +8,7 @@ if ( isset( $title ) )
 else	
 	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
 	
-if ( $userinfo ) 
+if ( isset( $userinfo ) ) 
 {
 		$facebox_content = '';
 			
@@ -40,7 +40,7 @@ if ( $userinfo )
 		
 }
 
-if ( $companyinfo ) 
+if ( isset( $companyinfo ) ) 
 {
 			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of membership costs!', true) . '</h1><p>' . 
 			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 3 coffees a month.", true) . 
