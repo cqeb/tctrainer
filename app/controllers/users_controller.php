@@ -1642,7 +1642,7 @@ class UsersController extends AppController {
 			else
 				$this->blognews = $blognews_en['html'];
 				
-      		if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+      		if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 			{
 				$misc['counter'] = $i;
 				$this->_advanced_checks( $user, $check_on_day, $debug, $misc );
@@ -1956,7 +1956,7 @@ class UsersController extends AppController {
     
 	    if ( !isset($to_user['email']) ) 
 	    		$to_user['email'] = $user['email'];
-				
+			
 	    if ( !isset($to_user['email']) ) 
 	    		$to_user['email'] = $user['User']['email'];
 				
@@ -1969,11 +1969,11 @@ class UsersController extends AppController {
 		if ( !isset( $to_user['name'] ) ) $to_user['name'] = __('athlete', true);
 		
 		// DEBUG send to admin 
-/*		if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+		if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 		{ 
 		  		$to_user['email'] = 'klaus@tricoretraining.com';
 		}
-*/
+
 
 		$this->Email->to = $to_user['email'];
 		echo "email sent to " . $to_user['email'] . "<br />\n";
