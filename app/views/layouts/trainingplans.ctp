@@ -126,7 +126,7 @@ $(document).ready(function() {
 		$.fancybox([
 			{
 				'href'	: '/trainer/img/guide/01_trainingplan.jpg',
-				'title'	: '<?php __('1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum.'); echo '<br />'; __('2. Change your available time, if necessary.'); echo '<br />'; __('3. Change your sports balance, if necessary.'); echo '<br />'; ?>'
+				'title'	: '<?php __('1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum.'); echo '<br />'; __('2. Change your available time, if necessary.'); echo '<br />'; __('3. Change your sports balance, if necessary.'); echo '<br />'; __('Click on the right side of the image to go to the next step.'); echo '<br />'; ?>'
 			},
 			{
 				'href'	: '/trainer/img/guide/02_competition.jpg',
@@ -152,8 +152,7 @@ $(document).ready(function() {
 			'titleFormat'       : function(title, currentArray, currentIndex, currentOpts) {
 		    	return '<span id="fancybox-title-over">' + title + ' (<?php __('Step'); ?> ' +  (currentIndex + 1) + ' / ' + currentArray.length + ')</span>';
 			},
-			'changeFade'        : 0,
-			'showNavArrows'		: true
+			'changeFade'        : 0
 		});
 	});
 

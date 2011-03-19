@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-03-19 19:46+0100\n"
+"POT-Creation-Date: 2011-03-19 20:14+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -2230,6 +2230,10 @@ msgstr ""
 
 #: \views\layouts\trainingplans.ctp:129
 msgid "3. Change your sports balance, if necessary."
+msgstr ""
+
+#: \views\layouts\trainingplans.ctp:129
+msgid "Click on the right side of the image to go to the next step."
 msgstr ""
 
 #: \views\layouts\trainingplans.ctp:133
