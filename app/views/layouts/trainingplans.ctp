@@ -95,7 +95,7 @@
 
       	<div class="grid_6">
       		<div class="box last">
-    			<a id="guide" href="javascript:;" title="">Beginner's Guide to your training</a>
+    			<a id="guide" href="javascript:;" title=""><?php __('Beginner\'s guide to your training'); ?></a>
       		</div>
       	</div>
 
