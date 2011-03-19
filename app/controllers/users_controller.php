@@ -1593,9 +1593,19 @@ class UsersController extends AppController {
 
 	function check_notifications()
 	{
-		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.46.255.219' ) die('No access!');
+		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.46.255.219' ) 
+					die('No access!');
+	
+		$timer['start'] = time();
+
+		$_SESSION = array();
+		$this->Session->destroy();
+		Configure::write('Session.start', false);
 		$debug = true;
 		
+		if ( $debug == true )
+			echo "start language " . Configure::read('Config.language') . "<br />";
+			
 	    $this->layout = 'plain';
 	    // Sun = 0
 	    $check_on_day = 0;
@@ -1609,11 +1619,14 @@ class UsersController extends AppController {
 		$blognews_en = $this->Xmlhandler->readrss('http://feeds.feedburner.com/tricoretraining/EN', 'html');
 		
 		$count_results = count( $results );
-		$count_results = 2;
-		
+		//if ( $_SERVER['HTTP_HOST'] == 'localhost' ) $count_results = 15;
+			
 		for ( $i = 0; $i < $count_results; $i++ )
 		{
 			$user = $results[$i]['users'];
+			if ( $debug == true ) echo "<br />initial language " . Configure::read('Config.language');
+			if ( $debug == true ) echo "<br />written language " . $user['yourlanguage'];
+			Configure::write('Config.language', $user['yourlanguage']);
 
       		if ( $debug == true ) 
 			{
@@ -1621,6 +1634,7 @@ class UsersController extends AppController {
 				echo "notifications " . $user['notifications'] . "<br />\n";
 				echo "deactivated " . $user['deactivated']  . "<br />\n";
 				echo "activated " . $user['activated'] . "<br />\n";
+				echo "language " . $user['yourlanguage'] . "<br />\n";
       		}
       
 			if ( $user['yourlanguage'] == 'ger' )
@@ -1628,33 +1642,48 @@ class UsersController extends AppController {
 			else
 				$this->blognews = $blognews_en['html'];
 				
-      		if ( date('w', time()) == $check_on_day )
-               $this->_advanced_checks( $user, $check_on_day, $debug );
-              
+      		if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+			{
+				$misc['counter'] = $i;
+				$this->_advanced_checks( $user, $check_on_day, $debug, $misc );
+			} else
+			{
+      			if ( date('w', time()) == $check_on_day )
+               		$this->_advanced_checks( $user, $check_on_day, $debug );
+			}  
+			if ( $debug == true ) echo "<hr />";
 		}
 
 		// delete old transactions - currently not activated in component 
 		$this->loadModel('Transaction');
 		$this->Transactionhandler->_delete_old_transactions( $this->Transaction );
 		$this->set('output', $output);
+		$timer['end'] = time();
+		$result_timer = $timer['end'] - $timer['start'];
+
+		if ( $debug == true ) echo "time of processing mails " . $result_timer . " sec.";
 
 	}
 
-	function _advanced_checks( $user, $check_on_day, $debug = false )
+	function _advanced_checks( $user, $check_on_day, $debug = false, $misc = array() )
 	{
+
+	  	$last_workout_limit = 10; // 10 days 
 		
-	  	  $last_workout_limit = 10; // 10 days 
+		$u = $user;
 		
-		  $u = $user;
-		  $text_for_mail = $text_for_mail_training = $text_for_mail_premium = '';
-		  $content = '';
+		if ( $debug == true ) echo "language written 2 ". $u['yourlanguage'] . "<br />";
+		Configure::write('Config.language',$u['yourlanguage']);
+		  
+		$text_for_mail = $text_for_mail_training = $text_for_mail_premium = '';
+		$content = '';
 		   
-		  /**
-		   check if profile is complete from technical point of view
-		   * 
-		   **/
-		  $wrong_attributes = "";
-		  $check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
+		/**
+		*	check if profile is complete from technical point of view
+		* 
+		**/
+		$wrong_attributes = "";
+		$check_attributes = array( 'firstname', 'lastname', 'gender', 'email', 'emailcheck', 'birthday',
 		    'password', 'passwordcheck', 'lactatethreshold', 'bikelactatethreshold', 'typeofsport',
 		    'coldestmonth', 'unit', 'unitdate', 'weeklyhours',
 		    'dayofheaviesttraining', 'yourlanguage', 'level' );
@@ -1831,7 +1860,7 @@ class UsersController extends AppController {
 		          $text_for_mail .= __('Please recommend our service!', true) . 
 		          " " . '<a href="' . Configure::read('App.hostUrl') . 
 		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Of course.', true) . '</a>';
-		          $text_for_mail .= '<br />';
+		          $text_for_mail .= '<br /><br />';
 	      }
 		  
 		  // check for medical limitations
@@ -1898,44 +1927,66 @@ class UsersController extends AppController {
 			  $content .= __('Some magazine articles',true) . ":<br />\n" . 
 			  	'<p><ul>' . $this->blognews . '</ul></p>' . "\n\n";
 			    	 			  
-			  if ( $text_for_mail ) 
-		      {
+			if ( $text_for_mail ) 
+		    {
 		      		$content .= '<p>' . __('There is something to update in your profile.', true) . 
 		      			"\n" . '<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
-			  }
-		
-		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
-		      
-		      // send to admin 
-		      $to_user['email'] = 'klaus@tricoretraining.com';
-		      $to_user['name'] = 'Admin';
-		      $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage'], $to_user);
+			}
+	  		
+			if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+				echo $u['yourlanguage'] . ' ' . $misc['counter'] . ' ' . $mailsubject;
+				
+		    $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
 		  } 
 		  
 	}
 
-	function _sendMail($user, $subject, $template, $content = '', $language = 'eng', $to_user = '' )
+	function _sendMail($user, $subject, $template, $content = '', $language = '', $to_user = '' )
 	{
 		$debug = false;
 
-   	  	if ( $language ) 
+   	  	if ( isset( $language ) && $language != '' )
+		{
+			if ( $debug == true ) echo "language written 3 ". $language . "<br />";
+			 
 	  		Configure::write('Config.language',$language);
-    	
-    	if ( isset( $user['User'] ) ) $user = $user['User'];
+    	}
+		
+    	if ( isset( $user['User']['firstname'] ) ) $user = $user['User'];
     
-	    if ( !isset($to_user['email']) ) $to_user['email'] = $user['email'];
-	    if ( !isset($to_user['email']) ) $to_user['email'] = $user['User']['email'];
-	    if ( !isset($to_user['name']) ) $to_user['name'] = $user['firstname'];
-	    if ( !isset($to_user['name']) && isset( $user['User'] ) ) $to_user['name'] = $user['User']['firstname'];
+	    if ( !isset($to_user['email']) ) 
+	    		$to_user['email'] = $user['email'];
+				
+	    if ( !isset($to_user['email']) ) 
+	    		$to_user['email'] = $user['User']['email'];
+				
+	    if ( !isset($to_user['name']) && isset( $user['firstname'] ) ) 
+	    		$to_user['name'] = $user['firstname'];
+				
+	    if ( !isset($to_user['name']) && isset( $user['User'] ) ) 
+	    		$to_user['name'] = $user['User']['firstname'];
+
+		if ( !isset( $to_user['name'] ) ) $to_user['name'] = __('athlete', true);
+		
+		// DEBUG send to admin 
+/*		if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+		{ 
+		  		$to_user['email'] = 'klaus@tricoretraining.com';
+		}
+*/
 
 		$this->Email->to = $to_user['email'];
+		echo "email sent to " . $to_user['email'] . "<br />\n";
+		
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 		$this->Email->subject = $subject;
     	if ( !isset( $template ) ) $template = 'standardmail';
 		
 		//Set view variables as normal
-		if ( isset( $to_user['name'] ) ) $this->set('to_name', $to_user['name']);
+		if ( isset( $to_user['name'] ) ) 
+			$this->set('to_name', $to_user['name']);
+		
 		$this->set('user', $user);
 	    //$this->set('content', $content);
 	    $this->set('mcontent', $content);
