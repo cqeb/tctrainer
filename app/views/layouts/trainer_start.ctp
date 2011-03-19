@@ -217,7 +217,7 @@ $(document).ready(function() {
 
         // facebox box
         //$('a[rel*=facebox]').facebox();
-		<?php echo $facebox_content; ?>
+		<?php if ( isset( $facebox_content ) ) echo $facebox_content; ?>
 });
 
 </script>
