@@ -1798,228 +1798,227 @@ class UsersController extends AppController {
 		  if ( $user['notifications'] != 1 ) 
 		  {   
 
-			if ( $user['deactivated'] == 0 && $user['activated'] == 1 )
-			{ 
-				$userid = $user['id'];
-				$this->loadModel('Trainingstatistic');
-	
-				$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
-			
-				$results = $this->Trainingstatistic->query($sql);
-				//if ( $debug == true ) echo $sql . "<br />\n";
+				if ( $user['deactivated'] == 0 && $user['activated'] == 1 )
+				{ 
+					$userid = $user['id'];
+					$this->loadModel('Trainingstatistic');
 		
-				$last_training = strtotime($results[0][0]['ldate']);
-				$diff_time = time() - ( 86400 * $last_workout_limit );
-		
-				if ( $diff_time > $last_training )
-				{
-					$text_for_mail_training = __("don't be lazy!", true) . ' ' .  
-						__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
-						'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true); 
-	 
-					if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
-				}
-			}
-
-		      // check name + address
-		      if ( !$u['firstname'] ) 
-		        $text_for_mail .= '<li>' . __('Your firstname is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-		         " " . '<a href="' . Configure::read('App.hostUrl') . 
-		         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
-		         __('Change it.', true) . '</a>' . 
-		        "</li>\n";
-		
-		      if ( !$u['lastname'] ) 
-		        $text_for_mail .= '<li>' . __('Your lastname is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
-		         " " . '<a href="' . Configure::read('App.hostUrl') . 
-		         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
-		         __('Change it.', true) . '</a>' . 
-		         "</li>\n";
-		      
-		      if ( $u['level'] == 'paymember' && !$u['address'] ) 
-		        $text_for_mail .= '<li>' . __('Your address is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-		         " " . '<a href="' . Configure::read('App.hostUrl') . 
-		         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
-		         __('Change it.', true) . '</a>' . 
-		         "</li>\n";
-		
-		      if ( $u['level'] == 'paymember' && !$u['zip'] ) 
-		        $text_for_mail .= '<li>' . __('Your zip is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
-		         " " . '<a href="' . Configure::read('App.hostUrl') . 
-		         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
-		         __('Change it.', true) . '</a>' . 
-		         "</li>\n";
-		
-		      if ( $u['level'] == 'paymember' && !$u['city'] ) 
-		        $text_for_mail .= '<li>' . __('Your city is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-		         " " . '<a href="' . Configure::read('App.hostUrl') . 
-		         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
-		         __('Change it.', true) . '</a>' . 
-		         "</li>\n";
-		
-		      if ( $u['level'] == 'paymember' && !$u['country'] ) 
-		        $text_for_mail .= '<li>' . __('Your country is missing!',true) . ' ' . __('Please add it to your profile.', true) .
-		         " " . '<a href="' . Configure::read('App.hostUrl') . 
-		         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
-		         __('Change it.', true) . '</a>' . 
-		         "</li>\n";
-		
-		      // check birthday
-		      if ( !$u['birthday'] ) 
-		        $text_for_mail .= '<li>' . __('Your birthday is missing! This is essentiell for calculations.', true) . "</li>\n";
-		      
-		      // check lactatethreshold
-		      if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) {
-		        $nothing = "";
-		      } else {
-		        $text_for_mail .= '<li>' . __('Your run lactate threshold must be between 100 and 210.', true) . 
-		          " " . '<a href="' . Configure::read('App.hostUrl') . 
-		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
-		      }
-		
-		      // check bike lactatethreshold
-		      if ( $u['bikelactatethreshold'] > 100 && $u['bikelactatethreshold'] < 210 ) {
-		        $nothing = "";
-		      } else {
-		        $text_for_mail .= '<li>' . __('Your bike lactate threshold must be between 100 and 210.', true) . 
-		          " " . '<a href="' . Configure::read('App.hostUrl') . 
-		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
-		      }
-		      		      
-		      // check for target weight
-		      if ( $u['targetweight'] && $u['targetweightdate'] )
-		      {
-		          $nowts = time();
-		          $futurets = strtotime( $u['targetweightdate'] );
-		          
-		          $diff_weight = ( $u['targetweight'] - $u['weight'] ) * (-1);
-		          $divisor = ( $futurets - $nowts ) / 86400 / 30;
-		
-		          // weight you have to loose to achieve your weight target
-		          $weight_per_month_check = $diff_weight / $divisor;
-				  
-		          if ( $weight_per_month_check > 2 ) 
-		          {
-		              $weight_unit_array = $this->Unitcalc->check_weight(2, 'show');
-		              $weight_unit = $weight_unit_array['unit'];
-		
-		              $text_for_mail .= '<li>' . __('Your weight loss per month to achieve your weight goal must be', true) . ' ' . 
-		                  round( $this->Unitcalc->check_weight($weight_per_month_check, 'show', 'single'), 1 ) .
-		                  ' ' . $weight_unit . ' - ' . __("that's not healthy - set a new weight goal!", true) . ' ' . 
-		                  " " . '<a href="' . Configure::read('App.hostUrl') . 
-		                  Configure::read('App.serverUrl') . '/users/edit_weight/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
-		                  "</li>\n";
-		          } 
-		      }
-		    
-		      // TODO (B) hours per sport          
-		      if ( !$u['weeklyhours'] ) 
-		      {
-		          // check per sport how many hours an user should train
-		          $text_for_mail .= '<li>' . __('You have not entered your weekly training time.', true) . 
-		          " " . '<a href="' . Configure::read('App.hostUrl') . 
-		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
-		          "</li>\n";
-		      }
-		
-		      // after 9 month of being rookie
-		      $rookie_month = 9;
-		
-		      if ( ( ( strtotime( $u['created'] ) + 86400*30*$rookie_month ) < time() ) && $u['rookie'] == '1' )
-		      {
-		          $text_for_mail .= '<li>' . __("You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining for more than 9 months, maybe you should change that!", true) .
-		          " " . '<a href="' . Configure::read('App.hostUrl') . 
-		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
-		          "</li>\n";
-		      }   
-		  } 
-		
-		  // check for recommendations
-		  // TODO (B) not yet implemented
-	      if ( !$u['myrecommendation'] )
-	      { 
-		          $text_for_mail .= '<a href="' . Configure::read('App.hostUrl') . 
-		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Please recommend our service!', true) . '</a>';
-		          $text_for_mail .= '<br /><br />';
-	      }
-		  
-		  // check for medical limitations
-		  if ( $u['tos'] == '0')
-		  { 
-		      $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
-		      " " . '<a href="' . Configure::read('App.hostUrl') . 
-		      Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
-		      "</li>\n";
-		  }
-		
-		  if ( 
-		    ( ( strtotime( $u['created'] ) + (86400*5) ) < time() ) && 
-		    ( ( strtotime( $u['created'] ) + (86400*25) ) > time() ) && 
-		    $u['activated'] != '1' )
-		  {
-		      $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
-		  }   
-
-		  if ( ( strtotime( $u['paid_to'] ) < time() ) )
-		  {
-		      if ( $u['level'] != 'freemember' )
-			  {
-			      // set level = paymember
-			      $this->User->id = $u['id'];
-			      $this->User->savefield('level', 'freemember', false);
-			  }
-
-		      $text_for_mail_premium =  
-				__('Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please', true) . ' ' .
-				'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "\n";
-				'<br /><br />' . "\n\n" . __('Gain speed, loose weight');
-		  }
-		
-		  if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
-		  {
-		      $mailsubjectarr[] = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com message for you!', true);
-		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('your training plan needs you!', true);
-		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('please read this notice from TriCoreTraining.com for you!', true);
-		      $mailsubjectarr[] = __('Gain speed, loose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is your motto!', true);
-		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('TriCoreTraining.com needs you!', true);
-
-			  $whichsb = rand( 0, 4 );
-			  $mailsubject = $mailsubjectarr[$whichsb];
-			  
-		      $template = 'standardmail';
-
-		      $content .= "<br />\n";
-		      
-		      if ( $text_for_mail_training )
-		      {
-		      		$content = $text_for_mail_training . '<br /><br />' . "\n\n";		
-		      }
-
-			  $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b> '; 
-			  $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Click here, print it and use it!', true) . '</a>' . "\n";
-			  $content .= "<br /><br />\n\n";	
-
-			  if ( $text_for_mail_premium )
-			  {
-			  		$content .= $text_for_mail_premium . '<br /><br />' . "\n\n";
-			  }		      
-
-			  $content .= __('Some magazine articles',true) . ":<br />\n" . 
-			  	'<p><ul>' . $this->blognews . '</ul></p>' . "\n\n";
-			    	 			  
-			if ( $text_for_mail ) 
-		    {
-		      		$content .= '<p>' . 
-		      		//__('There is something to update in your profile.', true) . "\n" . 
-		      		'<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
-			}
-	  		
-			if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
-				echo $u['yourlanguage'] . ' ' . $misc['counter'] . ' ' . $mailsubject;
+					$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
 				
-		    $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
-		  } 
-		  
+					$results = $this->Trainingstatistic->query($sql);
+					//if ( $debug == true ) echo $sql . "<br />\n";
+			
+					$last_training = strtotime($results[0][0]['ldate']);
+					$diff_time = time() - ( 86400 * $last_workout_limit );
+			
+					if ( $diff_time > $last_training )
+					{
+						$text_for_mail_training = __("don't be lazy!", true) . ' ' .  
+							__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
+							'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true); 
+		 
+						if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
+					}
+				}
+
+			      // check name + address
+			      if ( !$u['firstname'] ) 
+			        $text_for_mail .= '<li>' . __('Your firstname is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+			         " " . '<a href="' . Configure::read('App.hostUrl') . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
+			         __('Change it.', true) . '</a>' . 
+			        "</li>\n";
+			
+			      if ( !$u['lastname'] ) 
+			        $text_for_mail .= '<li>' . __('Your lastname is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
+			         " " . '<a href="' . Configure::read('App.hostUrl') . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
+			         __('Change it.', true) . '</a>' . 
+			         "</li>\n";
+			      
+			      if ( $u['level'] == 'paymember' && !$u['address'] ) 
+			        $text_for_mail .= '<li>' . __('Your address is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+			         " " . '<a href="' . Configure::read('App.hostUrl') . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
+			         __('Change it.', true) . '</a>' . 
+			         "</li>\n";
+			
+			      if ( $u['level'] == 'paymember' && !$u['zip'] ) 
+			        $text_for_mail .= '<li>' . __('Your zip is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
+			         " " . '<a href="' . Configure::read('App.hostUrl') . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
+			         __('Change it.', true) . '</a>' . 
+			         "</li>\n";
+			
+			      if ( $u['level'] == 'paymember' && !$u['city'] ) 
+			        $text_for_mail .= '<li>' . __('Your city is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+			         " " . '<a href="' . Configure::read('App.hostUrl') . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
+			         __('Change it.', true) . '</a>' . 
+			         "</li>\n";
+			
+			      if ( $u['level'] == 'paymember' && !$u['country'] ) 
+			        $text_for_mail .= '<li>' . __('Your country is missing!',true) . ' ' . __('Please add it to your profile.', true) .
+			         " " . '<a href="' . Configure::read('App.hostUrl') . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . 
+			         __('Change it.', true) . '</a>' . 
+			         "</li>\n";
+			
+			      // check birthday
+			      if ( !$u['birthday'] ) 
+			        $text_for_mail .= '<li>' . __('Your birthday is missing! This is essentiell for calculations.', true) . "</li>\n";
+			      
+			      // check lactatethreshold
+			      if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) {
+			        $nothing = "";
+			      } else {
+			        $text_for_mail .= '<li>' . __('Your run lactate threshold must be between 100 and 210.', true) . 
+			          " " . '<a href="' . Configure::read('App.hostUrl') . 
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
+			      }
+			
+			      // check bike lactatethreshold
+			      if ( $u['bikelactatethreshold'] > 100 && $u['bikelactatethreshold'] < 210 ) {
+			        $nothing = "";
+			      } else {
+			        $text_for_mail .= '<li>' . __('Your bike lactate threshold must be between 100 and 210.', true) . 
+			          " " . '<a href="' . Configure::read('App.hostUrl') . 
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
+			      }
+			      		      
+			      // check for target weight
+			      if ( $u['targetweight'] && $u['targetweightdate'] )
+			      {
+			          $nowts = time();
+			          $futurets = strtotime( $u['targetweightdate'] );
+			          
+			          $diff_weight = ( $u['targetweight'] - $u['weight'] ) * (-1);
+			          $divisor = ( $futurets - $nowts ) / 86400 / 30;
+			
+			          // weight you have to loose to achieve your weight target
+			          $weight_per_month_check = $diff_weight / $divisor;
+					  
+			          if ( $weight_per_month_check > 2 ) 
+			          {
+			              $weight_unit_array = $this->Unitcalc->check_weight(2, 'show');
+			              $weight_unit = $weight_unit_array['unit'];
+			
+			              $text_for_mail .= '<li>' . __('Your weight loss per month to achieve your weight goal must be', true) . ' ' . 
+			                  round( $this->Unitcalc->check_weight($weight_per_month_check, 'show', 'single'), 1 ) .
+			                  ' ' . $weight_unit . ' - ' . __("that's not healthy - set a new weight goal!", true) . ' ' . 
+			                  " " . '<a href="' . Configure::read('App.hostUrl') . 
+			                  Configure::read('App.serverUrl') . '/users/edit_weight/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
+			                  "</li>\n";
+			          } 
+			      }
+			    
+			      // TODO (B) hours per sport          
+			      if ( !$u['weeklyhours'] ) 
+			      {
+			          // check per sport how many hours an user should train
+			          $text_for_mail .= '<li>' . __('You have not entered your weekly training time.', true) . 
+			          " " . '<a href="' . Configure::read('App.hostUrl') . 
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
+			          "</li>\n";
+			      }
+			
+			      // after 9 month of being rookie
+			      $rookie_month = 9;
+			
+			      if ( ( ( strtotime( $u['created'] ) + 86400*30*$rookie_month ) < time() ) && $u['rookie'] == '1' )
+			      {
+			          $text_for_mail .= '<li>' . __("You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining for more than 9 months, maybe you should change that!", true) .
+			          " " . '<a href="' . Configure::read('App.hostUrl') . 
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
+			          "</li>\n";
+			      }   
+			
+				  // check for recommendations
+				  // TODO (B) not yet implemented
+			      if ( !$u['myrecommendation'] )
+			      { 
+				          $text_for_mail .= '<a href="' . Configure::read('App.hostUrl') . 
+				          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Please recommend our service!', true) . '</a>';
+				          $text_for_mail .= '<br /><br />';
+			      }
+				  
+				  // check for medical limitations
+				  if ( $u['tos'] == '0')
+				  { 
+				      $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!", true) . 
+				      " " . '<a href="' . Configure::read('App.hostUrl') . 
+				      Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
+				      "</li>\n";
+				  }
+				
+				  if ( 
+				    ( ( strtotime( $u['created'] ) + (86400*5) ) < time() ) && 
+				    ( ( strtotime( $u['created'] ) + (86400*25) ) > time() ) && 
+				    $u['activated'] != '1' )
+				  {
+				      $text_for_mail .= '<li>' . __('Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks.', true) . "</li>\n";
+				  }   
+		
+				  if ( ( strtotime( $u['paid_to'] ) < time() ) )
+				  {
+				      if ( $u['level'] != 'freemember' )
+					  {
+					      // set level = paymember
+					      $this->User->id = $u['id'];
+					      $this->User->savefield('level', 'freemember', false);
+					  }
+		
+				      $text_for_mail_premium =  
+						__('Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please', true) . ' ' .
+						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "\n";
+						'<br /><br />' . "\n\n" . __('Gain speed, loose weight');
+				  }
+				
+				  if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
+				  {
+				      $mailsubjectarr[] = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com message for you!', true);
+				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('your training plan needs you!', true);
+				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('please read this notice from TriCoreTraining.com for you!', true);
+				      $mailsubjectarr[] = __('Gain speed, loose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is your motto!', true);
+				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('TriCoreTraining.com needs you!', true);
+		
+					  $whichsb = rand( 0, 4 );
+					  $mailsubject = $mailsubjectarr[$whichsb];
+					  
+				      $template = 'standardmail';
+		
+				      $content .= "<br />\n";
+				      
+				      if ( $text_for_mail_training )
+				      {
+				      		$content = $text_for_mail_training . '<br /><br />' . "\n\n";		
+				      }
+		
+					  $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b> '; 
+					  $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Click here, print it and use it!', true) . '</a>' . "\n";
+					  $content .= "<br /><br />\n\n";	
+		
+					  if ( $text_for_mail_premium )
+					  {
+					  		$content .= $text_for_mail_premium . '<br /><br />' . "\n\n";
+					  }		      
+		
+					  $content .= __('Some magazine articles',true) . ":<br />\n" . 
+					  	'<p><ul>' . $this->blognews . '</ul></p>' . "\n\n";
+					    	 			  
+						if ( $text_for_mail ) 
+					    {
+					      		$content .= '<p>' . 
+					      		//__('There is something to update in your profile.', true) . "\n" . 
+					      		'<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
+						}
+				  		
+						if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+							echo $u['yourlanguage'] . ' ' . $misc['counter'] . ' ' . $mailsubject;
+							
+					    $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
+			  	} 
+			 } 
 	}
 
 	function _sendMail($user, $subject, $template, $content = '', $language = '', $to_user = '' )
