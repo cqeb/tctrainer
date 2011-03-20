@@ -22,7 +22,7 @@
                            <?php __('If you need help, please'); ?> <a href="mailto:support@tricoretraining.com"><?php __('just ask me'); ?></a>.
                            <br /><br />
                            <!--<img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/cp_sporty.png" alt="Clemens" />-->
-                           <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/kms_sporty.png" alt="Klaus-M." />-->
+                           <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/kms_sporty.png" alt="Klaus-M." />
                            </p>
 
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); ?><?php echo Configure::read('App.serverUrl'); ?>/img/smallspacer.gif" width="192" height="25" />
