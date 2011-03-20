@@ -14,7 +14,10 @@
                    </div><br />
                    <?php } ?>
 
+<a href="/trainer/users/list_users">&raquo; <?php __('List users'); ?></a><br /><br />
+
 <?php
+
 
 if ( isset( $users_to_send ) ) 
 {
@@ -30,33 +33,34 @@ if ( isset( $users_to_send ) )
 	echo $form->hidden('users_to_send', array('value' => serialize($users_to_send)));
 }
 
-echo $form->input('subject',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'class' => 'required',
-     'label' => __('Subject', true)
-));
+if ( !isset( $noform ) )
+{
+	echo $form->input('subject',
+	     array(
+	     'before' => '',
+	     'after' => '',
+	     'between' => '',
+	     'maxLength' => 255,
+	     'class' => 'required',
+	     'label' => __('Subject', true)
+	));
 
-?>
+	__('Message');
+	echo "<br />";
+	
+	echo $form->textarea('message',
+	                  array(
+	                  'rows' => '15',
+	                  'cols' => '45'
+	           ));
+	
+	
+	echo "<br /><br />";
+	echo $form->submit(__('Send', true));
+	echo "<br />";
+}
 
-
-<?php
-__('Message');
-echo "<br />";
-
-echo $form->textarea('message',
-                  array(
-                  'rows' => '15',
-                  'cols' => '45'
-           ));
-
-
-echo "<br /><br />";
-echo $form->submit(__('Send', true));
-echo "<br />";
+echo $form->hidden('submitted',array('value' => 1));
 
 ?>
                  </fieldset>

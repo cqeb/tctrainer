@@ -24,6 +24,7 @@ $yesno[0] = __('No', true);
 <tr>
     <th><?php echo $paginator->sort(__('ID',true), 'id'); ?></th>
     <th><?php echo $paginator->sort(__('Name',true), 'lastname'); ?></th>
+    <th><?php echo $paginator->sort(__('Lang',true), 'yourlanguage'); ?></th>
     <th><?php echo $paginator->sort(__('Pay-Date',true), 'paid_to'); ?></th>
     <th><?php echo $paginator->sort(__('Activation',true), 'deactivated'); ?></th>
     <th><?php __('Beta/Admin'); ?></th>
@@ -35,7 +36,7 @@ $yesno[0] = __('No', true);
 if ( !isset( $users ) || count( $users ) < 1 )
 {
   
-    echo '<td colspan="6">' . __('No users available.', true) . '</td>';  
+    echo '<td colspan="7">' . __('No users available.', true) . '</td>';  
 }
  
 ?>
@@ -48,6 +49,7 @@ if ( !isset( $users ) || count( $users ) < 1 )
 <tr>
     <td>
 <span><?php echo $html->link($user['id'], array('action' => 'edit_user', 'id' => $user['id']), null); ?></span>
+<br />
 <?php 
 echo $form->input('user_' . $user['id'],
                   array(
@@ -62,7 +64,8 @@ echo $form->input('user_' . $user['id'],
                   )
 ));
 ?></td>
-    <td><?php echo $user['firstname'] . ' ' . $user['lastname']; ?> ( <?php echo $user['yourlanguage']; ?> )</td>
+    <td><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></td>
+    <td><?php echo $user['yourlanguage']; ?></td>
     <td><?php echo $user['paid_from'] . ' - ' . $user['paid_to']; ?></td>
     <td><?php echo 'Activ. <b>' . $yesno[$user['activated']] . '</b><br />' . 'Deact. <b>' . $yesno[$user['deactivated']]; ?></b></td>
     <td><?php echo 'Beta <b>' . $yesno[$user['advanced_features']] . '</b><br />' . 'Admin <b>' . $yesno[$user['admin']]; ?></b></td>

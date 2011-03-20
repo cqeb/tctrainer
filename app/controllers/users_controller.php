@@ -132,19 +132,42 @@ class UsersController extends AppController {
 					$this->redirect('/users/login');
 			}
 
-			if (empty($this->data))
+			if ( isset( $this->data ) && isset( $this->data['User']['subject'] ) )
 			{
-				$users = array();				
-			} elseif ( isset( $this->data ) && isset( $this->data['User']['subject'] ) )
+	      	   	
+				$userdata = $this->data['User'];
+
+				if ( strlen( $userdata['subject'] ) > 5 && strlen( $userdata['message'] ) && isset( $userdata['users_to_send'] ) )
+				{
+					$userlist = unserialize($userdata['users_to_send']);
+
+					foreach( $userlist AS $key => $val )
+					{
+						//pr($val['users']);
+						$user = $val['users'];
+						$subject = $val['users']['firstname'] . ' - ' . $userdata['subject'];
+						$template = 'standardmessage';
+						$language = $val['users']['yourlanguage'];
+						
+						$content = str_replace( "\n", "<br />\n", $userdata['message'] );
+
+						$this->_sendMail($user, $subject, $template, $content, $language);
+
+						$statusbox = 'statusbox ok';
+						$this->Session->setFlash(__('Message sent to users',true));
+						
+						$this->set('noform', true);
+					}
+
+				} else
+				{
+					$statusbox = 'statusbox error';
+					$this->Session->setFlash(__('Error', true) . ' - ' . __('message not send', true));
+					
+				}
+	
+			} elseif ( isset( $this->data ) )
 			{
-	      	   $statusbox = 'statusbox error';
-	      	   $this->Session->setFlash('Not finished - not send');
-			} else
-			{
-/**
-	      	   $statusbox = 'statusbox ok';
-	      	   $this->Session->setFlash(__('User profile saved.',true));
-*/
 				$users = $this->data['User'];
 
 				foreach( $users AS $key => $val )
@@ -155,10 +178,19 @@ class UsersController extends AppController {
 					}					
 					
 				}
-				$users = implode( ',', $userlist );
+				
+				if ( isset( $userlist ) && is_array( $userlist ) )
+				{
+					$users = implode( ',', $userlist );
 
-				$sql = "SELECT firstname, lastname, email, yourlanguage FROM users WHERE id IN (" . $users . ")";
-				$users_to_send = $this->User->query( $sql );
+					$sql = "SELECT firstname, lastname, email, yourlanguage FROM users WHERE id IN (" . $users . ")";
+					$users_to_send = $this->User->query( $sql );
+				} else
+				{
+					$users_to_send = array();
+					$statusbox = 'statusbox error';
+					$this->Session->setFlash(__('No users selected.', true));
+				}
 
 				$this->set('users_to_send', $users_to_send);
  			} 
@@ -2025,7 +2057,7 @@ class UsersController extends AppController {
 
 
 		$this->Email->to = $to_user['email'];
-		echo "email sent to " . $to_user['email'] . "<br />\n";
+		//echo "email sent to " . $to_user['email'] . "<br />\n";
 		
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
@@ -2037,7 +2069,7 @@ class UsersController extends AppController {
 			$this->set('to_name', $to_user['name']);
 		
 		$this->set('user', $user);
-	    //$this->set('content', $content);
+	    $this->set('subject', $subject);
 	    $this->set('mcontent', $content);
 
 		$this->Email->template = $template; // note no '.ctp'

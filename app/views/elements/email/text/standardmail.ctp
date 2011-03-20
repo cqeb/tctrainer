@@ -5,9 +5,6 @@
 
 <?php echo strip_tags( $mcontent ); ?>
                            
-<?php __('Go to TriCoreTraining.com!'); ?>
-<a href="<?php echo Configure::read('App.hostUrl'); ?>">
-
 <?php __('Stop sending me notifications!'); ?>
 <?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/edit_userinfo/?utm_source=tricoretraining.com&utm_medium=newsletter
 

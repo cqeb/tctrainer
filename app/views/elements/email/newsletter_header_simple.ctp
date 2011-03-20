@@ -280,4 +280,4 @@
                      </tr>
                      <tr align="left" rowspan="3" valign="top">
 
-                        <td width="330" valign="top" class="mainbar" align="left">
+                        <td width="580" valign="top" class="mainbar" align="left">
