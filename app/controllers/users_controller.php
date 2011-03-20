@@ -53,7 +53,7 @@ class UsersController extends AppController {
 			}
 			
             $this->paginate = array(
-                  'limit' => 40,
+                  'limit' => 200,
                   'order' => array('User.id' => 'desc')
             );
 
@@ -114,6 +114,48 @@ class UsersController extends AppController {
 				  $this->data = $this->User->read();
 			}
 			$this->set('user', $this->data['User']);
+			$this->set('statusbox', $statusbox);
+	}
+
+	function send_message()
+	{
+      		$this->checkSession();
+			$statusbox = 'statusbox';
+
+            $session_userid = $this->Session->read('session_userid');
+            $userobject = $this->Session->read('userobject');
+            
+			if ( $userobject['admin'] != "1" )
+			{
+					// login data is wrong, redirect to login page
+					$this->Session->setFlash(__("Sorry. Don't fool around with our security.",true));
+					$this->redirect('/users/login');
+			}
+
+			if (empty($this->data))
+			{
+				$users = array();				
+			} else
+			{
+/**
+			      	   $statusbox = 'statusbox ok';
+			      	   $this->Session->setFlash(__('User profile saved.',true));
+			      	   $statusbox = 'statusbox error';
+			      	   $this->Session->setFlash(__('Some errors occured.',true));
+*/
+				$users = $this->data['User'];
+
+				foreach( $users AS $key => $val )
+				{
+					if ( $val == 1 )
+					{
+						$userlist[] = str_replace( 'user_', '', $key );
+					}					
+					
+				}
+				$users = implode( ',', $userlist );
+echo $users;
+ 			}
 			$this->set('statusbox', $statusbox);
 	}
 
@@ -1637,7 +1679,7 @@ class UsersController extends AppController {
 				echo "language " . $user['yourlanguage'] . "<br />\n";
       		}
       
-			if ( $user['yourlanguage'] == 'ger' )
+			if ( $user['yourlanguage'] == 'deu' )
 				$this->blognews = $blognews_de['html'];
 			else
 				$this->blognews = $blognews_en['html'];
@@ -1698,15 +1740,15 @@ class UsersController extends AppController {
 		        $to_user['email'] = 'support@tricoretraining.com';
 		        $to_user['name'] = 'Admin';
 		        
-		        $mailsubject = 'Funky TCT user - plz check';
+		        $mailsubject = __('Strange user - please check', true);
 		        $mailtemplate = 'standardmail';
-		        $mailcontent = 'These attributes are not set at the user profile: ' . "\n\n<br /><br />" .  
+		        $mailcontent = __('These attributes are not defined in this user profile', true) . ": \n\n<br /><br />" .  
 		            'ID=' . $u['id'] . " <br />\n" . 
 		            'firstname=' . $u['firstname'] . " <br />\n" . 
 		            'lastname=' . $u['lastname'] . " <br />\n" .
 		            $wrong_attributes;
 		        $this->_sendMail( $u, $mailsubject, $mailtemplate, $mailcontent, 'eng', $to_user );
-		        if ( $debug == true ) echo $u['id'] . " is not correct<br />\n";
+		        if ( $debug == true ) echo $u['id'] . " " . __('is not correct',true) . "<br />\n";
 		  } 
 
 		  /*
@@ -1734,7 +1776,7 @@ class UsersController extends AppController {
 				{
 					$text_for_mail_training = __("don't be lazy!", true) . ' ' .  
 						__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
-						'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - NOW!', true); 
+						'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true); 
 	 
 					if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
 				}
@@ -1791,7 +1833,7 @@ class UsersController extends AppController {
 		      if ( $u['lactatethreshold'] > 100 && $u['lactatethreshold'] < 210 ) {
 		        $nothing = "";
 		      } else {
-		        $text_for_mail .= '<li>' . __('Your lactate threshold must be between 100 and 210.', true) . 
+		        $text_for_mail .= '<li>' . __('Your run lactate threshold must be between 100 and 210.', true) . 
 		          " " . '<a href="' . Configure::read('App.hostUrl') . 
 		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
 		      }
@@ -1846,7 +1888,7 @@ class UsersController extends AppController {
 		
 		      if ( ( ( strtotime( $u['created'] ) + 86400*30*$rookie_month ) < time() ) && $u['rookie'] == '1' )
 		      {
-		          $text_for_mail .= '<li>' . __("You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining since more than 9 months, maybe you should change that!", true) .
+		          $text_for_mail .= '<li>' . __("You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining for more than 9 months, maybe you should change that!", true) .
 		          " " . '<a href="' . Configure::read('App.hostUrl') . 
 		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Change it.', true) . '</a>' .
 		          "</li>\n";
@@ -1857,9 +1899,8 @@ class UsersController extends AppController {
 		  // TODO (B) not yet implemented
 	      if ( !$u['myrecommendation'] )
 	      { 
-		          $text_for_mail .= __('Please recommend our service!', true) . 
-		          " " . '<a href="' . Configure::read('App.hostUrl') . 
-		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Of course.', true) . '</a>';
+		          $text_for_mail .= '<a href="' . Configure::read('App.hostUrl') . 
+		          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Please recommend our service!', true) . '</a>';
 		          $text_for_mail .= '<br /><br />';
 	      }
 		  
@@ -1897,11 +1938,11 @@ class UsersController extends AppController {
 		
 		  if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
 		  {
-		      $mailsubjectarr[] = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com for YOU!', true);
-		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('your training plan needs YOU!', true);
-		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('please read this notice from TriCoreTraining.com for YOU!', true);
-		      $mailsubjectarr[] = __('Gain speed, loose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is the motto for YOU!', true);
-		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('TriCoreTraining.com needs YOU!', true);
+		      $mailsubjectarr[] = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com message for you!', true);
+		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('your training plan needs you!', true);
+		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('please read this notice from TriCoreTraining.com for you!', true);
+		      $mailsubjectarr[] = __('Gain speed, loose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is your motto!', true);
+		      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('TriCoreTraining.com needs you!', true);
 
 			  $whichsb = rand( 0, 4 );
 			  $mailsubject = $mailsubjectarr[$whichsb];
@@ -1915,8 +1956,8 @@ class UsersController extends AppController {
 		      		$content = $text_for_mail_training . '<br /><br />' . "\n\n";		
 		      }
 
-			  $content .= '<b>' . __('Your training schedule for NEXT WEEK is here!', true) . '</b> '; 
-			  $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Read it (also mobile), print it, USE it!', true) . '</a>' . "\n";
+			  $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b> '; 
+			  $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Click here, print it and use it!', true) . '</a>' . "\n";
 			  $content .= "<br /><br />\n\n";	
 
 			  if ( $text_for_mail_premium )
@@ -1929,8 +1970,9 @@ class UsersController extends AppController {
 			    	 			  
 			if ( $text_for_mail ) 
 		    {
-		      		$content .= '<p>' . __('There is something to update in your profile.', true) . 
-		      			"\n" . '<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
+		      		$content .= '<p>' . 
+		      		//__('There is something to update in your profile.', true) . "\n" . 
+		      		'<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
 			}
 	  		
 			if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 

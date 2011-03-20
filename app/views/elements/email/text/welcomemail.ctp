@@ -10,8 +10,6 @@
                            
 <?php __('Login to your personal training dashboard.'); ?>
 
-<?php __('Yours, Clemens'); ?>
-
 <?php echo $this->element('email/newsletter_text_footer'); ?>
 
 

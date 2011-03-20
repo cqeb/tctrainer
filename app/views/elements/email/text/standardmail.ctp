@@ -5,8 +5,6 @@
 
 <?php echo strip_tags( $mcontent ); ?>
                            
-<?php __('Yours, Clemens'); ?>
-
 <?php __('Go to TriCoreTraining.com!'); ?>
 <a href="<?php echo Configure::read('App.hostUrl'); ?>">
 

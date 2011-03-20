@@ -1,3 +1,4 @@
+<?php __('Yours,'); ?>Clemens
 
 --
 <?php __('TriCoreTraining and TriCoreTraining.com'); ?> <?php __('are registered trademarks'); ?>.

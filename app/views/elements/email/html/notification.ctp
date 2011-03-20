@@ -41,7 +41,5 @@ foreach ( $array as $key => $value )
 </i>
  </p>
  
- <p><?php __('Yours, Clemens'); ?></p>
- <br />
 
 <?php echo $this->element('email/newsletter_footer'); ?>

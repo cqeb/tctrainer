@@ -1,3 +1,6 @@
+							<p><?php __('Yours,'); ?> Klaus-M.</p>
+							<br />
+
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/hr.gif" width="329" height="27" />
 
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/spacer.gif" width="329" height="12" />
@@ -15,10 +18,11 @@
                            </table>
                            <p>
                            <?php __('Hi'); ?>,<br /><br />
-                           <?php __("my name is Clemens and I'm one of the founders of TriCoreTraining."); ?>
+                           <?php __("my name is"); ?> Klaus-M. <?php __("and I'm one of the founders of TriCoreTraining."); ?>
                            <?php __('If you need help, please'); ?> <a href="mailto:support@tricoretraining.com"><?php __('just ask me'); ?></a>.
                            <br /><br />
-                           <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/cp_sporty.png" alt="Clemens Prerovsky" />
+                           <!--<img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/cp_sporty.png" alt="Clemens" />-->
+                           <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/kms_sporty.png" alt="Klaus-M." />-->
                            </p>
 
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); ?><?php echo Configure::read('App.serverUrl'); ?>/img/smallspacer.gif" width="192" height="25" />
