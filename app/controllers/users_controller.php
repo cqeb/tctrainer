@@ -135,13 +135,15 @@ class UsersController extends AppController {
 			if (empty($this->data))
 			{
 				$users = array();				
+			} elseif ( isset( $this->data ) && isset( $this->data['User']['subject'] ) )
+			{
+	      	   $statusbox = 'statusbox error';
+	      	   $this->Session->setFlash('Not finished - not send');
 			} else
 			{
 /**
-			      	   $statusbox = 'statusbox ok';
-			      	   $this->Session->setFlash(__('User profile saved.',true));
-			      	   $statusbox = 'statusbox error';
-			      	   $this->Session->setFlash(__('Some errors occured.',true));
+	      	   $statusbox = 'statusbox ok';
+	      	   $this->Session->setFlash(__('User profile saved.',true));
 */
 				$users = $this->data['User'];
 
@@ -154,8 +156,13 @@ class UsersController extends AppController {
 					
 				}
 				$users = implode( ',', $userlist );
-echo $users;
- 			}
+
+				$sql = "SELECT firstname, lastname, email, yourlanguage FROM users WHERE id IN (" . $users . ")";
+				$users_to_send = $this->User->query( $sql );
+
+				$this->set('users_to_send', $users_to_send);
+ 			} 
+			
 			$this->set('statusbox', $statusbox);
 	}
 

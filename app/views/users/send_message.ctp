@@ -16,6 +16,20 @@
 
 <?php
 
+if ( isset( $users_to_send ) ) 
+{
+	
+	echo "<ul>";
+	for( $i = 0; $i < count( $users_to_send ); $i++ )
+	{
+		$dt = ($users_to_send[$i]['users']);
+		echo "<li>&quot;" . $dt['firstname'] . ' ' . $dt['lastname'] . ' <b>(' . $dt['yourlanguage'] . ')</b> &lt;' . $dt['email'] . '&gt;</li>';		
+	}
+	echo "</ul>";
+	
+	echo $form->hidden('users_to_send', array('value' => serialize($users_to_send)));
+}
+
 echo $form->input('subject',
      array(
      'before' => '',
@@ -31,10 +45,11 @@ echo $form->input('subject',
 
 <?php
 __('Message');
+echo "<br />";
 
 echo $form->textarea('message',
                   array(
-                  'rows' => '5',
+                  'rows' => '15',
                   'cols' => '45'
            ));
 
