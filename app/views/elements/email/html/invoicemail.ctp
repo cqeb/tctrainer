@@ -67,7 +67,6 @@ TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invo
 <!--<p class="more"><?php __('Please'); ?> <a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/<?php echo $transaction_id?>"><?php __('Continue to train.'); ?></a></p>-->
 
 <p><?php __('No VAT included, because as a club we are not allowed to charge VAT!'); ?></p>
-<p><?php __('Yours, Clemens'); ?></p>
 <br />
 
 <?php echo $this->element('email/newsletter_footer'); ?>

@@ -740,7 +740,7 @@ class UsersController extends AppController {
 	          $this->Session->write('register_userid', $this->User->id);
 	
 	          $this->Session->setFlash(__('Registration finished',true));
-	          $this->redirect(array('action' => 'register_finish', $this->User->id));
+	          $this->redirect(array('action' => 'register_finish'));
 	      } else
 	      {
 	          if ( isset( $password_unenc ) ) $this->data['User']['password'] = $password_unenc;
@@ -756,12 +756,13 @@ class UsersController extends AppController {
 	    $this->set('statusbox', $statusbox);
   }
 
-	function register_finish($id = null)
+	function register_finish()
 	{
 		$this->pageTitle = __('Registration - Finished',true);
 
 		if (empty($this->data))
 		{
+			$this->User->id = $this->Session->read('register_userid');
 			$this->data = $User = $this->User->read();
 
 			// activation key
@@ -1366,7 +1367,7 @@ class UsersController extends AppController {
           {
           	$statusbox = 'statusbox ok';
           	$this->Session->setFlash(__('Image(s) saved.',true));
-          	//$this->redirect(array('action' => 'edit_images', $this->User->id));
+          	//$this->redirect(array('action' => 'edit_images'));
           } else
           {
           	$this->Session->setFlash(__('Some errors occured.',true));
@@ -1388,7 +1389,7 @@ class UsersController extends AppController {
 		$this->User->savefield($field, '', false);
 
 		$this->Session->setFlash(__('Image deleted.',true));
-		$this->redirect(array('action' => 'edit_images', $this->User->id));
+		$this->redirect(array('action' => 'edit_images'));
 	}
 
 	function edit_metric()
@@ -1473,8 +1474,8 @@ class UsersController extends AppController {
 	             'password', 'passwordcheck'
 	             ) ) ) )
 	             {
-	             	  $this->Session->setFlash(__('New password saved.',true));
-	             	  $statusbox = 'statusbox ok';
+	             	$this->Session->setFlash(__('New password saved.',true));
+	             	$statusbox = 'statusbox ok';
 	                $this->data['User']['password'] = '';
 	                $this->data['User']['passwordapprove'] = '';
 	                
@@ -1484,8 +1485,8 @@ class UsersController extends AppController {
 	    
 	                //pr($this->User->validationErrors);
 	                
-	             	  $statusbox = 'statusbox error';
-	             	  $this->Session->setFlash(__('Some errors occured.',true));
+	             	$statusbox = 'statusbox error';
+	             	$this->Session->setFlash(__('Some errors occured.',true));
 	             }
 	      }
 	    }

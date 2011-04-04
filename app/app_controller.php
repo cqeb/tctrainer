@@ -123,7 +123,7 @@ class AppController extends Controller {
             $session_userid    = $this->Session->read('session_userid');
 
 			// googlebot must enter our service to index our pages
-			if ( strstr( $_SERVER['HTTP_USER_AGENT'], 'Googlebot' ) )
+			if ( strstr( $_SERVER['HTTP_USER_AGENT'], 'Mediapartners' ) )
 			{
 				$session_useremail = 'googlebot@schremser.com';
 				$session_userid = 47;
