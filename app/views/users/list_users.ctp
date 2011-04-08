@@ -97,7 +97,7 @@ echo $form->input('user_' . $user['id'],
 \$(document).ready(function() {
 
         // facebox box
-        /*\$('a[rel*=facebox]').facebox();*/
+        //\$('a[rel*=facebox]').facebox();
 
 });
 

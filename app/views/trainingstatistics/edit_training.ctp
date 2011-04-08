@@ -425,7 +425,7 @@ function show_layer() {
 \$(document).ready(function() {
       
         // facebox box
-        \$('a[rel*=facebox]').facebox();
+        //\$('a[rel*=facebox]').facebox();
         
         if ( \$("#TrainingstatisticLocation").val() ) 
         {

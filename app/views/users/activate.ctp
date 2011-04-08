@@ -28,7 +28,7 @@
 <script type="text/javascript">
 
         // facebox box
-        $('a[rel*=facebox]').facebox();
+        //$('a[rel*=facebox]').facebox();
 
 });
 

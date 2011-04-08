@@ -50,7 +50,7 @@ echo $html->link(__('Activate', true), array('controller' => 'users', 'action' =
 <script type="text/javascript">
 
         // facebox box
-        $('a[rel*=facebox]').facebox();
+        //$('a[rel*=facebox]').facebox();
 
 });
 

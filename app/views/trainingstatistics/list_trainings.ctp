@@ -107,7 +107,7 @@ __('Sun');
 \$(document).ready(function() {
 
         // facebox box
-        \$('a[rel*=facebox]').facebox();
+        //\$('a[rel*=facebox]').facebox();
 
         \$('.help2').tipTip();
         

@@ -314,7 +314,7 @@ $this->js_addon .= <<<EOH
   		});
 
         // facebox box
-        \$('a[rel*=facebox]').facebox();
+        //\$('a[rel*=facebox]').facebox();
 		
 		\$('.help').tipTip();
 

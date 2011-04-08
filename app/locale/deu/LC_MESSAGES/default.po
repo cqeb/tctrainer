@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-03-20 11:24+0100\n"
-"PO-Revision-Date: 2011-03-20 11:25+0100\n"
+"PO-Revision-Date: 2011-04-04 05:02+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1303,7 +1303,7 @@ msgstr "Unternimm einen Ausdauer-Lauf in Zone 2. Sprinte 4-8 Mal für 20 Sekunde
 
 #: \core\workouts\runworkout.class.php:104
 msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for 5 kilometers. Keep your pace for 2 minutes, then slow down to Zone 2. Repeat up to 6 times."
-msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximl 5 Kilometer lang halten könntest. Behalte diese Geschwindigkeit 2 Minuten lang bei. Laufe danach lockerer, bis dein Puls wieder Zone 2 erreicht. Wiederhole diese Beschleunigungen maximal 6 Mal."
+msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximal 5 Kilometer lang halten könntest. Behalte diese Geschwindigkeit 2 Minuten lang bei. Laufe danach lockerer, bis dein Puls wieder Zone 2 erreicht. Wiederhole diese Beschleunigungen maximal 6 Mal."
 
 #: \core\workouts\runworkout.class.php:107
 msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than 5 minutes."

@@ -2010,7 +2010,7 @@ class UsersController extends AppController {
 						if ( $text_for_mail ) 
 					    {
 					      		$content .= '<p>' . 
-					      		//__('There is something to update in your profile.', true) . "\n" . 
+					      		'<b>' . __('There is something to update in your profile.', true) . "</b><br />\n" . 
 					      		'<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
 						}
 				  		

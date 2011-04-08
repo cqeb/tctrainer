@@ -206,7 +206,7 @@ if ( !isset( $errormessage ) )
 	});
 
         // facebox box
-        $('a[rel*=facebox]').facebox();
+        //$('a[rel*=facebox]').facebox();
 
 });
 

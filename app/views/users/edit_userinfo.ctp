@@ -271,7 +271,7 @@ EOE;
 	});
 
         // facebox box
-        \$('a[rel*=facebox]').facebox();
+        //\$('a[rel*=facebox]').facebox();
 
 });
 
