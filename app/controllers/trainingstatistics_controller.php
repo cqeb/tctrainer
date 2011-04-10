@@ -96,7 +96,7 @@ class TrainingstatisticsController extends AppController {
 	        {
 	            $this->Session->setFlash(__('No import data found!', true));
 	            $this->set('statusbox', $statusbox);
-	            $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+	            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	            die();
 	        }
 	
@@ -348,7 +348,7 @@ class TrainingstatisticsController extends AppController {
 	        {
 	            $this->Session->setFlash(__('Import of workouts finished!', true));
 	            $this->set('statusbox', $statusbox);
-	            $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+	            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	        }  
 	
 	        $this->data['Trainingstatistic']['hiddenimportfile'] = serialize($newimportfilearray);
@@ -459,7 +459,7 @@ class TrainingstatisticsController extends AppController {
                        {
                           $this->Session->setFlash(__('Sorry. This is not your entry!', true));
                           $this->set('statusbox', $statusbox);
-                          $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+                          $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
                        }
                      }
                      
@@ -566,7 +566,7 @@ class TrainingstatisticsController extends AppController {
                           
                           $this->Session->setFlash(__('Training saved.',true));
                           $this->set('statusbox', $statusbox);
-                          $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+                          $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
                      } else
                      {
                           $statusbox = 'statusbox error';
@@ -1034,7 +1034,7 @@ class TrainingstatisticsController extends AppController {
                {
                   $this->Session->setFlash(__('Sorry. This is not your entry!', true));
                   $this->set('statusbox', 'statusbox error');
-                  $this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+                  $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
                }
             }
 
