@@ -272,8 +272,6 @@ echo $form->input('avg_pulse_zone5',
 
 */
 
-if ( $userobject['advanced_features'] ) {
-
 $location_label = __('Location', true) . '<br />(' . __('City', true) . ', ' . __('Country', true) . ')';
 
 echo $form->input('location',
@@ -387,6 +385,8 @@ echo $form->radio('conditions_mood',
 -->
 
 <?php
+
+if ( $userobject['advanced_features'] ) {
 
 /*
 // TODO (B)
