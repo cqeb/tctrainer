@@ -353,13 +353,14 @@ class UsersController extends AppController {
 						$results['User']['last_login'] = date("Y-m-d H:i:s");
 						$this->Session->write('last_login', $results['User']['last_login']);
 	
-						/*
-						$language = Configure::read('Config.language');
-						$sql = "SELECT myrecommendation FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $language . "'";
+						$locale = Configure::read('Config.language');
+						$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
 						$user_recommendations = $this->User->query( $sql );
+									
+						$this->Session->write( 'recommendations', serialize($user_recommendations) );
 						
-						$this->Session->save( 'recommendations', serialize($user_recommendations) );
-						*/
+						if ( isset( $user_recommendations ) ) $this->set('recommendations', $user_recommendations);
+												
 						$this->redirect('/trainingplans/view');
 					} else
 					{
