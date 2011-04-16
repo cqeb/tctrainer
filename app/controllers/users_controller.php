@@ -508,7 +508,7 @@ class UsersController extends AppController {
 			$inviter = $this->Session->read('recommendation_userid');
 		else
 			$inviter = '';
-  
+
 	    $this->pageTitle = __('Create your account', true);
 	    $success = false;
 	    $statusbox = 'statusbox';
@@ -532,35 +532,35 @@ class UsersController extends AppController {
 
 				}
 				
-				if ( preg_match( '/@/', $inviter ) )
+				if ( preg_match( '/@/', $inviter ) || preg_match( '/company/', $inviter ))
 				{
 					$this->set('companyemail', $inviter);	
 				}
 	      
 	    } else
 	    {
-	      // tells you - user clicked back in browser :(
-	      $session_register_userid_just_in_case = $this->Session->read('register_userid');
+	    	// tells you - user clicked back in browser :(
+	    	$session_register_userid_just_in_case = $this->Session->read('register_userid');
 	
-		// TODO (B) modernize this crap
+			// TODO (B) modernize this crap
 
-	      // check email (if correct and not duplicate) at registration
-	      if ( $this->data['User']['email'] && $this->data['User']['id'] )
-	      {
-	        $checkemail = $this->check_email_function( $this->data['User']['email'], $this->data['User']['id'], true );
-	      } else
-	      {
-	        if ( $session_register_userid_just_in_case != '' )
-	        {
-	          // change insert to update statement by setting userid for user-data
-	          $set_userid = $session_register_userid_just_in_case;
-	        } else
-	        {
-	          $set_userid = null;
-	        }
-	        // check email - maybe user already registered with this email
-	        $checkemail = $this->check_email_function( $this->data['User']['email'], $set_userid, true );
-	      }
+	    	// check email (if correct and not duplicate) at registration
+	    	if ( $this->data['User']['email'] && $this->data['User']['id'] )
+	    	{
+	    		$checkemail = $this->check_email_function( $this->data['User']['email'], $this->data['User']['id'], true );
+	    	} else
+	    	{
+	        	if ( $session_register_userid_just_in_case != '' )
+	        	{
+	        		// change insert to update statement by setting userid for user-data
+	        		$set_userid = $session_register_userid_just_in_case;
+	        	} else
+	        	{
+	        		$set_userid = null;
+	        	}
+	        	// check email - maybe user already registered with this email
+	        	$checkemail = $this->check_email_function( $this->data['User']['email'], $set_userid, true );
+			}
 	
 	      // checkemail is a hidden field in form which tells the model whether the email is ok or not
 	      if ( $checkemail == 0 && $this->data['User']['email'] != '' )
@@ -613,7 +613,7 @@ class UsersController extends AppController {
 			$this->data['User']['publictrainings'] = "0";
 		  
 			// check if anybody invited this user
-			if ( isset( $inviter ) ) 
+			if ( isset( $inviter ) || isset( $this->data['User']['inviter'] ) ) 
 			{
 				$this->data['User']['inviter'] = $inviter;
 				// TODO users get something for new users
@@ -633,15 +633,18 @@ class UsersController extends AppController {
 					}
 					$this->set('companyemail', $inviter);
 					
+				} elseif ( preg_match( '/company/', $inviter ) )
+				{
+    				$emaildomain = explode( "@", $this->data['User']['email'], 2 );
+					$this->data['User']['inviter'] = '@' . $emaildomain[1];
+					$this->set('companyemail', '@' . $emaildomain[1]);			
+					//echo '@' . $emaildomain[1]; 		
 				} else
 				{
 					$send_to_userid = $inviter;
 					$this->data['User']['inviter'] = $inviter;	
-					
 				}
-				
 			}
-			
 	      
 			if ( $this->data['User']['password'] && strlen($this->data['User']['password']) > 3 ) 
 			{
@@ -654,7 +657,8 @@ class UsersController extends AppController {
 			// default value for weekly hours
 			$whrs = 6;
 			
-			switch ($this->data['User']['typeofsport']) {
+			switch ($this->data['User']['typeofsport']) 
+			{
 				case 'TRIATHLON IRONMAN':
 				case 'RUN ULTRA':
 				case 'BIKE ULTRA':
@@ -841,7 +845,6 @@ class UsersController extends AppController {
 		{
 			// check at first registration, is this email already registered?
 			$User_entry = $this->User->findByEmail($checkuseremail);
-
 			// yes, this email is already in use
 			if ( is_array( $User_entry ) && count( $User_entry ) > 0 )
 			{

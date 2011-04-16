@@ -58,9 +58,11 @@ if ( isset( $companyemail ) )
 {
 	echo "<div class='statusbox'>";
 	__('Please use your company email for registration to receive your company discount!');
+	/*
 	echo ' ';
 	__('Your email must end with');
 	echo ' ' . $companyemail;
+	*/
 	echo "</div><br />";
 }
 

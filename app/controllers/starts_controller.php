@@ -28,8 +28,9 @@ class StartsController extends AppController
             $this->set('locale', $this->code);
 		}
 			
-		if ( isset( $language ) && $language != '' )
+		if ( isset( $language ) && $language != '' && ( strlen( $language ) == 2 ) )
 		{
+			
 			if ( $language == 'de' ) 
 				$this->code = 'deu';
 			else 
@@ -101,6 +102,16 @@ class StartsController extends AppController
 			{ 
 				$this->Session->write('recommendation_userid', $company_email);
 				$this->set( 'companyinfo', $company_email );
+			}
+			
+ 		} elseif ( isset( $this->params['named']['discount'] ) )
+ 		{
+ 			$discount = $this->params['named']['discount'];
+			if ( isset( $discount ) )
+			{ 
+				$this->Session->write('recommendation_userid', $discount);
+				
+				$this->set( 'companyinfo', $discount );
 			}
 			
 		} elseif ( $this->Session->read('session_userid') )

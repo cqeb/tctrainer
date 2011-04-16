@@ -632,7 +632,8 @@ class UnitcalcComponent extends Object {
 	{
 		if ( isset( $country ) ) $currency = $this->currency_for_country( $country );
 		elseif ( !isset( $currency ) )  $currency = 'USD';
-					
+		
+		// show special prices for companies			
 		if ( isset( $userobject['inviter'] ) && preg_match( '/@/', $userobject['inviter'] ) && preg_match( '/'.$userobject['inviter'].'/', Configure::read('company_emails') ) )
 		{
 			$price_eur = Configure::read('company_price_eur');
