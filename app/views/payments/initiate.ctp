@@ -73,6 +73,7 @@ echo $form->input('address',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',     
      'maxLength' => 255,
      'label' => __('Address', true)
 ));
@@ -82,6 +83,7 @@ echo $form->input('zip',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',     
      'maxLength' => 255,
      'label' => __('ZIP', true)
 ));
@@ -91,6 +93,7 @@ echo $form->input('city',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',     
      'maxLength' => 255,
      'label' => __('City', true)
 ));
@@ -102,6 +105,7 @@ echo $form->input('country',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',     
      'options' => $countries
 ));
 
@@ -110,6 +114,7 @@ echo $form->input('phonemobile',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',     
      'maxLength' => 255,
      'label' => __('Phone', true)
 ));
@@ -214,7 +219,7 @@ if ( $days_to_end > 0 ) { ?>
             </form>
 			<?php } // end admin ?>
 			
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $tid ) ) { ?>
             <br /><br />
             For Debugging (only localhost):<br />
             TEST <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/notify/lang:<?php echo $locale; ?>/?cmd=_notify-validate&mc_gross=0.10&protection_eligibility=Ineligible&address_status=unconfirmed&payer_id=JA6U2C75C2NV8&address_street=Gonzagagasse+11%2F25%0D%0AGentics+Software+GmbH&payment_date=07%3A19%3A28+May+23%2C+2010+PDT&payment_status=Completed&charset=windows-1252&address_zip=1010&first_name=Klaus&mc_fee=0.10&address_country_code=AT&address_name=Klaus+Schremser&notify_version=2.9&subscr_id=I-FVYX869EU1PR&custom=<?php echo $tid; ?>&payer_status=unverified&business=payment%40tricoretraining.com&address_country=Austria&address_city=Wien&verify_sign=An5ns1Kso7MWUdW4ErQKJJJ4qi4-AYXfIKa-SWz.qrl3zxkPiKa8M3t5&payer_email=km.schremser%40gentics.com&txn_id=4K020743F0083711A&payment_type=instant&last_name=Schremser&address_state=&receiver_email=payment%40tricoretraining.com&payment_fee=&receiver_id=TGHR6X4FUYYZW&txn_type=subscr_payment&item_name=TriCoreTrainingsplan-1m&mc_currency=EUR&item_number=tctplan-1m&residence_country=AT&transaction_subject=&payment_gross=&testing=true">notify (payment completed)</a><br />

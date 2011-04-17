@@ -1093,11 +1093,11 @@ class UsersController extends AppController {
 		      	   	//$statusbox = 'statusbox ok';
 		      	   	//$this->Session->setFlash(__('Please confirm your address.',true));
 		      	   	
-		      	   	
-		      	   	if ( $this->referer() ) 
+					if ( $this->referer() ) 
 				   		$this->redirect($this->referer());
 	    			else 
 	        			$this->redirect(array('controller'=>'payments','action'=>'subscribe_triplans'));
+					
 		      } else
 		      {
 		      	   $statusbox = 'statusbox error';

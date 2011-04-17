@@ -29,6 +29,7 @@ echo $form->input('address',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',
      'maxLength' => 255,
      'label' => __('Address', true)
 ));
@@ -38,6 +39,7 @@ echo $form->input('zip',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',
      'maxLength' => 255,
      'label' => __('ZIP', true)
 ));
@@ -47,6 +49,7 @@ echo $form->input('city',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',
      'maxLength' => 255,
      'label' => __('City', true)
 ));
@@ -58,6 +61,7 @@ echo $form->input('country',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',     
      'options' => $countries
 ));
 
@@ -66,6 +70,7 @@ echo $form->input('phonemobile',
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'required',     
      'maxLength' => 255,
      'label' => __('Phone', true)
 ));

@@ -96,10 +96,15 @@ class PaymentsController extends AppController {
             $error = '';
             $tid = '';
 
+            // do not take user data from session (they are old - no address)
             $results['User'] = $this->Session->read('userobject');
             $session_userid = $results['User']['id'];
 
-            // debugging paypal
+            $this->loadModel('User');
+			$this->User->id = $session_userid;
+			$results = $this->data = $this->User->read();
+
+            // debugging paypal - we do not use yet.
             if ( 1 == 2 && $_SERVER['HTTP_HOST'] == 'localhost' ) 
             	$testing = 'sandbox.';
 			else 
@@ -146,9 +151,11 @@ class PaymentsController extends AppController {
             if ( $days_to_end > 90 )
                $error = 'trial';
 
+/*
             $this->loadModel('User');
 			$this->User->id = $session_userid;
 			$this->data = $this->User->read();
+*/
 
             if ( $error == '' )
             {
