@@ -156,7 +156,7 @@ Configure::write('company_price_eur_month', '"6.90","6.27","5.82","5.49"');
 Configure::write('company_price_usd', '"9.90","27.90","51.90","97,90"');
 Configure::write('company_price_usd_month', '"9.90","9.30","8.65","8.16"');
 
-Configure::write('company_emails', '"@gentics.com","@nullzeit.at","@s-itsolutions.at","@erstebank.at","@erstegroup.com","@immorent.com","@sparkasse.at"');
+Configure::write('company_emails', '"@gentics.com","@nullzeit.at","@s-itsolutions.at","@erstebank.at","@erstegroup.com","@immorent.com","@sparkasse.at","@s-zv.at"');
 
 /**
  * Uncomment the define below to use CakePHP admin routes.

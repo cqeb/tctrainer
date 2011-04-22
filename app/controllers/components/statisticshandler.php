@@ -95,6 +95,9 @@ class StatisticshandlerComponent extends Object {
                   }
             }
 
+            /**
+			 * CHECK with CLEMENS
+			 */
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
                 "athlete_id = $userid AND ";
@@ -646,8 +649,8 @@ class StatisticshandlerComponent extends Object {
 
             /**
             planned trainings
+			- CHECK with CLEMENS
             **/
-            // TODO (B) we have to load the correct fields from table
 			$sql = "SELECT s.duration AS duration, m.date AS week, s.athlete_id AS user_id, s.sport AS sportstype,
 			m.time AS time, m.usertime AS usertime, IF (s.trimp IS NULL, IF (m.usertime > 0, m.usertime * 1.1, m.time * 1.1), trimp) trimp
 			FROM mesocyclephases m LEFT JOIN scheduledtrainings s ON s.athlete_id = m.athlete_id AND s.week = m.date
