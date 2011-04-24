@@ -38,10 +38,20 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) ) 
+if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) )
+{ 
 	Configure::write('debug', 2);
-else 
+	/**
+	 * Defines the default error type when using the log() function. Used for
+	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
+	 */
+	define('LOG_ERROR', 2);
+} else 
+{
+	define('LOG_ERROR', 0);
+	
 	Configure::write('debug', 0);
+}
 
 /**
  * Application wide charset encoding
@@ -188,11 +198,6 @@ else
  *
  */
 //Configure::write('Cache.check', true);
-/**
- * Defines the default error type when using the log() function. Used for
- * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
- */
-define('LOG_ERROR', 2);
 /**
  * The preferred session handling method. Valid values:
  *

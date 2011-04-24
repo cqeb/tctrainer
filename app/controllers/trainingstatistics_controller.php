@@ -675,7 +675,7 @@ class TrainingstatisticsController extends AppController {
 			   $graphtitle = 'CTL';
             } elseif ( $graphtype == 'acute' )
 			{
-			   $timeperiod = 7;
+			   $timeperiod = 6;
 			   $graphtitle = 'ATL';
 			}
 

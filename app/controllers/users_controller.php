@@ -58,8 +58,19 @@ class UsersController extends AppController {
             );
 
             $users = $this->paginate('User');
-			
+			$sql = 'SELECT user_id, max(date) AS lasttraining, count(*) AS sumtrainings FROM trainingstatistics group by user_id';
+			$usertrainings = $this->User->query( $sql );
+
+			for ( $i = 0; $i < count($usertrainings); $i++ )
+			{
+				$dt = $usertrainings[$i]['trainingstatistics'];
+				$dt2 = $usertrainings[$i][0];
+				$user_id = $dt['user_id'];
+				$usertrainingdata[$user_id]['lasttraining'] = $dt2['lasttraining'];
+				$usertrainingdata[$user_id]['sumtrainings'] = $dt2['sumtrainings']; 
+			}			
             $this->set('users', $users);
+			$this->set('usertrainings', $usertrainingdata);
             $this->set('statusbox', $statusbox);
 	}
 
@@ -151,7 +162,7 @@ class UsersController extends AppController {
 						
 						$content = str_replace( "\n", "<br />\n", $userdata['message'] );
 
-						$this->_sendMail($user, $subject, $template, $content, $language);
+						$this->_sendMail($user, $subject, $template, $content, $language, '', 'text');
 
 						$statusbox = 'statusbox ok';
 						$this->Session->setFlash(__('Message sent to users',true));
@@ -2026,7 +2037,7 @@ class UsersController extends AppController {
 			 } 
 	}
 
-	function _sendMail($user, $subject, $template, $content = '', $language = '', $to_user = '' )
+	function _sendMail($user, $subject, $template, $content = '', $language = '', $to_user = '', $mimetype = 'both' )
 	{
 		$debug = false;
 
@@ -2079,7 +2090,7 @@ class UsersController extends AppController {
 		$this->Email->template = $template; // note no '.ctp'
 
 		//Send as 'html', 'text' or 'both' (default is 'text')
-		$this->Email->sendAs = 'both'; // because we like to send pretty mail
+		$this->Email->sendAs = $mimetype; // because we like to send pretty mail
 
 		/* SMTP Options */
 		$mailPort = Configure::read('App.mailPort');
@@ -2103,6 +2114,7 @@ class UsersController extends AppController {
 	    /* Check for SMTP errors. */
 	    $this->set('smtperrors', $this->Email->smtpError);
 	    $this->set('mailsend', 'mail sent');
+
 	
 	    // TODO (B) maybe later to prevent spam-suspicion
 	    //sleep(5); 

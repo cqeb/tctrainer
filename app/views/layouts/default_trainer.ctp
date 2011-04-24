@@ -12,7 +12,6 @@ $url = Configure::read('App.serverUrl');
 
 <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
@@ -20,10 +19,13 @@ $url = Configure::read('App.serverUrl');
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
 
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
+
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
 <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
 
 <?php echo $scripts_for_layout; ?>
@@ -68,18 +70,6 @@ $url = Configure::read('App.serverUrl');
 		<!-- Right column -->
 		<div class="grid_3 right">
 
-<!--
-<?php if ( isset($userobject) ) { ?>
-			<div class="box userinfo">
-				<h1><?php __('Aloha'); ?>, <?php echo $userobject['firstname']; ?>!</h1>
-				<img width="80" src="<?php if ( $userobject['myimage'] ) { /** echo resize( $userobject['myimage'], array("w"=>80,"h"=>80)); **/ echo $userobject['myimage']; } else { ?>http://www.gravatar.com/avatar/<?php echo md5( strtolower( trim( $userobject['email'] ) ) ); } ?>" />
-				<b><?php echo $userobject['firstname'] . ' ' . $userobject['lastname']; ?></b>
-        <br /><br />
-        <br /><br />
-			</div>
-<?php } ?>
--->
-			
 			<?php echo $this->element('rightbar'); ?>
 
 		</div>
@@ -110,6 +100,8 @@ $url = Configure::read('App.serverUrl');
 	} catch(err) {}
 	</script>
 
+<?php
+/*
 	<script type="text/javascript" charset="utf-8">
 	  var is_ssl = ("https:" == document.location.protocol);
 	  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
@@ -126,6 +118,8 @@ $url = Configure::read('App.serverUrl');
   feedback_widget_options.style = "idea";
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
+*/
+?>
 
 </body>
 </html>

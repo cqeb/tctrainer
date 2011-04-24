@@ -44,7 +44,7 @@ if ( !isset( $users ) || count( $users ) < 1 )
 <?php foreach ($users as $userentry): ?>
 <?php $user = $userentry['User']; ?>
 
-<?php //pr($user); ?>
+<?php $userid = $user['id']; ?>
 
 <tr>
     <td>
@@ -64,7 +64,15 @@ echo $form->input('user_' . $user['id'],
                   )
 ));
 ?></td>
-    <td><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></td>
+    <td><?php echo $user['firstname'] . ' ' . $user['lastname']; ?><br />
+    <?php 
+    if ( isset( $usertrainings[$userid]['lasttraining'] ) ) {
+    	 echo $usertrainings[$userid]['lasttraining']; echo ' ('; echo $usertrainings[$userid]['sumtrainings']; echo ')'; 
+    } else {
+    echo '<span style="color:red">no trainings</span>'; 
+	} 
+	?>
+    </td>
     <td><?php echo $user['yourlanguage']; ?></td>
     <td><?php echo $user['paid_from'] . ' - ' . $user['paid_to']; ?></td>
     <td><?php echo 'Activ. <b>' . $yesno[$user['activated']] . '</b><br />' . 'Deact. <b>' . $yesno[$user['deactivated']]; ?></b></td>
