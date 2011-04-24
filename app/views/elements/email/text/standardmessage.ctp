@@ -1,4 +1,4 @@
-<?php __('Welcome'); ?> <?php echo $user['firstname']; ?>,
+<?php __('Aloha'); ?> <?php echo $user['firstname']; ?>,
 
 <?php echo strip_tags( $mcontent ); ?>
                            
