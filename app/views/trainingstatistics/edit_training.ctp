@@ -210,24 +210,36 @@ jQuery(document).ready(function() {
 			}
 		});
 
-	// wokrouttypes
+	/**
+	 * synchronize workouttype select fields
+	 */
+	function syncWorkouttypes(v) {
+		// synchronize other workout types
+		jQuery('.swimworkouttypes select option[value='
+				+ v 
+				+ '], '
+				+ '.bikeworkouttypes select option[value='
+				+ v
+				+ '], '
+				+ '.runworkouttypes select option[value='
+				+ v
+				+ ']').attr('selected', 'selected');
+	}
+	
+	// workouttypes
 	jQuery('.swimworkouttypes select, .bikeworkouttypes select, .runworkouttypes select')
 		.change(function () {
 			var v = jQuery(this).val();
+			// sync workouttypes
+			syncWorkouttypes(v);
+			
 			// store value
 			jQuery('#TrainingstatisticWorkouttype').val(v);
-			// synchronize other workout types
-			jQuery('.swimworkouttypes select option[value='
-					+ v 
-					+ '], '
-					+ '.bikeworkouttypes select option[value='
-					+ v
-					+ '], '
-					+ '.runworkouttypes select option[value='
-					+ v
-					+ ']').attr('selected', 'selected');
 		})
 		.tipTip({ defaultPosition: 'top' });
+
+	// init the workouttypes dropdown fields
+	syncWorkouttypes(jQuery('#TrainingstatisticWorkouttype').val());
 
 	// show workouttype that should be displayed by actual workout selection
 	var sport = jQuery('#sportstype input[type=radio]:checked').val()
