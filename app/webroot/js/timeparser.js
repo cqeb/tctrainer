@@ -15,7 +15,9 @@ TimeParser = {
 	 * @return int minutes
 	 */
 	parse : function (str) {
-		str = str.trim();
+		if (str.trim) {
+			str = str.trim();
+		}
 		if (str === '') {
 			this.mins = 0;
 			this.secs = 0;
