@@ -387,6 +387,9 @@ if ($user['weight']) {
 		window.open(link.val());
 		return false;
 	});
+
+	// trigger change to initialize calculation of values
+	jQuery('#TrainingstatisticDuration').change();
 	
 	// add tooltips
 	jQuery('.help, #TrainingstatisticDuration, #TrainingstatisticAvgPulse, #TrainingstatisticDistance').tipTip({ defaultPosition: 'top' });
