@@ -321,7 +321,7 @@ a.reset {
 	border-color: #999;
 }
 
-.workouts .type button.done {
+.workouts .type button[data-trainingid] {
 	border: none;
 	background: none;
 	color: #6C9745;

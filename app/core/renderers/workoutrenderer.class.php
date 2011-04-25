@@ -60,14 +60,22 @@ class WorkoutRenderer {
 	 * render the mark as done button
 	 * @param Workout $w
 	 */
-	public static function renderCheckButton($w, $athlete, $duration) {
-		return '<button title="' . __('Mark training as done', true) .
-			'" ' . 
-			'data-sportstype="' . $w->getSport() . '" ' .
-			'data-duration="' . $duration . ':00" ' .
-			'data-workouttype="' . $w->getType() . '" ' .
-			'data-avghr="' . $w->getAVGHR($athlete) . '" ' .
-			'>&#10003;</button>';
+	public static function renderCheckButton(Workout $w, Athlete $athlete, $duration) {
+		$trainingId = $w->getTrainingId();
+		if ($trainingId) {
+			return '<button title="' . __('See allocated training', true) .
+				'" ' . 
+				'data-trainingid="' . $trainingId . '"' .
+				'>&#10003;</button>';
+		} else {
+			return '<button title="' . __('Record training as done', true) .
+				'" ' . 
+				'data-sportstype="' . $w->getSport() . '" ' .
+				'data-duration="' . $duration . ':00" ' .
+				'data-workouttype="' . $w->getType() . '" ' .
+				'data-avghr="' . $w->getAVGHR($athlete) . '"' .
+				'>&#10003;</button>';
+		}
 	}
 	
 	/**

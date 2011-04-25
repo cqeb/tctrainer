@@ -64,6 +64,13 @@ abstract class Workout {
 	protected $athlete;
 	
 	/**
+	 * reference to a training id
+	 * will be set if a user has already completed this workout
+	 * @see ProviderComponent::linkWorkouts
+	 */
+	protected $trainingId;
+	
+	/**
 	 * generate a new workout
 	 * @param Athlete $athlete athlete
 	 * @param $type of the workout
@@ -118,6 +125,14 @@ abstract class Workout {
 	
 	public function getTRIMP() {
 		return $this->trimp;
+	}
+	
+	public function getTrainingId() {
+		return $this->trainingId;
+	}
+	
+	public function setTrainingId($id) {
+		return $this->trainingId = $id;
 	}
 	
 	/**

@@ -133,6 +133,9 @@ class ProviderComponent extends Object {
 		// sort those workouts by trimp
 		uasort($workouts, 'ProviderComponent::sortWorkouts');
 		
+		// link workouts to completed trainings
+		$workouts = $this->linkWorkouts($workouts, $genWeek);
+		
 		$html = "<h1>" . __("Week", true) . " " . 
 			$this->Unitcalc->check_date($genWeek->format("Y-m-d")) . 
 			"</h1>";
@@ -145,6 +148,45 @@ class ProviderComponent extends Object {
 		$benchmarkTime = microtime(true) - $timerStart;
 		$html .= "\n<!-- generated in {$benchmarkTime}s -->\n";
 		return $html;
+	}
+	
+	/**
+	 * link trainings from the plan to completed trainings of this week
+	 * @param array $workouts array of workouts in the plan
+	 * @param DateTime $week training plan week start day
+	 * @return array of workouts with reference to a completed training
+	 */
+	private function linkWorkouts($workouts, $week) {
+		$trainings = $this->DB->query("SELECT id, sportstype, workouttype
+			FROM trainingstatistics
+			WHERE date >= '" . $week->format("Y-m-d") . "' 
+			AND date < DATE_ADD('" . $week->format("Y-m-d") . "', INTERVAL 1 WEEK)
+			AND workouttype != ''
+			AND user_id = " . $this->athlete->getId());
+		
+		if (count($trainings) === 0) {
+			return $workouts;
+		}
+		
+		// now match registered trainings to workouts
+		reset($workouts);
+		while (list($k, $w) = each(&$workouts)) {
+			reset($trainings);
+			while (list($l, $t) = each($trainings)) {
+				if ($t['sportstype'] === $w->getSport() &&
+					$t['workouttype'] === $w->getType()) {
+					$w->setTrainingId($t['id']);
+					unset($trainings[$l]);
+				}
+			}
+			
+			// return if all trainings have been assigned
+			if (count($trainings) === 0) {
+				return $workouts;
+			}
+		}
+
+		return $workouts;
 	}
 	
 	/**

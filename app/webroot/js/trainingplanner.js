@@ -276,11 +276,15 @@ TrainingPlanner = {
 	 * or show a training that was already entered
 	 */
 	linkWorkout : function(b) {
-		var params;
-		params = '?sportstype=' + b.attr('data-sportstype')	+
-			'&workouttype=' + b.attr('data-workouttype') + 
-			'&duration=' + b.attr('data-duration') +
-			'&avghr=' + b.attr('data-avghr');
+		var params, tid;
+		if (tid = b.attr('data-trainingid')) {
+			params = '/' + tid;
+		} else {
+			params = '?sportstype=' + b.attr('data-sportstype')	+
+				'&workouttype=' + b.attr('data-workouttype') + 
+				'&duration=' + b.attr('data-duration') +
+				'&avghr=' + b.attr('data-avghr');
+		}
 
 		// redirect
 		document.location = '/trainer/trainingstatistics/edit_training' + params;
