@@ -338,7 +338,21 @@ jQuery(document).ready(function() {
 		// kcals
 		jQuery('#kcal').text(WorkoutStats.calcKcal(
 			'<?php echo $user['gender']; ?>', 
-			<?php echo $user['weight']; ?>, 
+			<?php 
+// do a little fallback here if the user has entered no weigth
+if ($user['weight']) {
+	echo $user['weight'];
+} else {
+	// age 30-40
+	// roughly taken http://gesundheit-zahlen-daten-fakten.blogspot.com/2010/11/korpergewicht-und-lebensalter-kennen.html
+	// as a point of orientation and scaled values down for athletes
+	if ($user['gender'] === 'm') {
+		echo 80;
+	} else {
+		echo 63;
+	}
+}
+			?>, 
 			<?php echo (date("Y") - substr($user['birthday'],0,4)); ?>,
 			TimeParser.mins * 60,
 			parseInt(heartrate.val())
