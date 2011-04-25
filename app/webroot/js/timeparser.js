@@ -15,6 +15,13 @@ TimeParser = {
 	 * @return int minutes
 	 */
 	parse : function (str) {
+		str = str.trim();
+		if (str === '') {
+			this.mins = 0;
+			this.secs = 0;
+			return this.mins;
+		}
+		
 		this.mins = -1;
 		this.secs = 0;
 		str = str.replace(/[^,^.^:^0-9]/, "");
