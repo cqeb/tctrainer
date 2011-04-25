@@ -8,8 +8,9 @@ class WorkoutRenderer {
 	/**
 	 * render a list of workouts
 	 * @param array $workouts array of workouts to be rendered
+	 * @param Athlete $athlete
 	 */
-	public static function render($workouts) {
+	public static function render($workouts, $athlete) {
 		$html = "<table class=\"workouts\">";
 		// overall training length
 		$length = 0;
@@ -22,6 +23,7 @@ class WorkoutRenderer {
 			} else {
 				$star = false;
 			}
+			$durationHr = self::formatTime($w->getDuration());
 			$html .= "
 <tr>
 	<td class=\"sport\">" . __($w->getSport(), true) . "</td>
@@ -30,8 +32,8 @@ class WorkoutRenderer {
 		<span class=\"category br\" title=\"" .
 			$w->getCategoryDescription() .		 
 			"\">" . __($w->getCategory(), true) . "</span>
-			" . self::renderCheckButton($w) . "
-	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
+			" . self::renderCheckButton($w, $athlete, $durationHr) . "
+	<td class=\"duration\">" . $durationHr . "<small>h</small></td>
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
 </tr>
 <tr>
@@ -54,12 +56,17 @@ class WorkoutRenderer {
 		return $html;
 	}
 
-	public static function renderCheckButton($w) {
+	/**
+	 * render the mark as done button
+	 * @param Workout $w
+	 */
+	public static function renderCheckButton($w, $athlete, $duration) {
 		return '<button title="' . __('Mark training as done', true) .
 			'" ' . 
 			'data-sportstype="' . $w->getSport() . '" ' .
-			'data-duration="' . $w->getDuration() . '" ' .
+			'data-duration="' . $duration . ':00" ' .
 			'data-workouttype="' . $w->getType() . '" ' .
+			'data-avghr="' . $w->getAVGHR($athlete) . '" ' .
 			'>&#10003;</button>';
 	}
 	

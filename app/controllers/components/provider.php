@@ -136,7 +136,7 @@ class ProviderComponent extends Object {
 		$html = "<h1>" . __("Week", true) . " " . 
 			$this->Unitcalc->check_date($genWeek->format("Y-m-d")) . 
 			"</h1>";
-		$html .= WorkoutRenderer::render($workouts);
+		$html .= WorkoutRenderer::render($workouts, $this->getAthlete());
 		
 		// also attach time and workout settings
 		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->getAthlete()->getId()); 

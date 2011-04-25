@@ -438,7 +438,7 @@ function edit_training($id = null) {
 	
 	  	$session_userid = $this->Session->read('session_userid');
 	  	$results['User'] = $this->Session->read('userobject');
-	
+
 	  	if ( empty($this->data) ) {
 	  		$statusbox = 'statusbox';
 	  		// security check - don't view workouts of other users
@@ -620,7 +620,17 @@ function edit_training($id = null) {
 	  		}
 	  	}
 	  	
-	  	
+	  	// prefill data from get variables
+	  	if ($this->data['Trainingstatistic'] === null) {
+	  		$this->data['Trainingstatistic'] = array(
+	  			'avg_pulse' => $_GET['avghr'],
+	  			'sportstype' => $_GET['sportstype'],
+	  			'workouttype' => $_GET['workouttype'],
+	  			'duration' => $_GET['duration']
+	  		// sportstype workouttype distance duration
+	  		);
+	  	}
+
 	  	// set template variables
 	  	$this->set('bikezones', $this->Provider->getAthlete()->getZones('BIKE'));
 	  	$this->set('runzones', $this->Provider->getAthlete()->getZones('RUN'));

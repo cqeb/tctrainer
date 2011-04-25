@@ -262,9 +262,30 @@ TrainingPlanner = {
 			
 			// finally apply tipTips
 			jQuery('#plan .category, img.lsd, .workouts .type button').tipTip();
+			
+			// follow linked workout
+			jQuery('.workouts .type button')
+				.click(function () { 
+					that.linkWorkout(jQuery(this));
+				});
 		});
 	},
 
+	/**
+	 * will either attempt to create a new training in the log
+	 * or show a training that was already entered
+	 */
+	linkWorkout : function(b) {
+		var params;
+		params = '?sportstype=' + b.attr('data-sportstype')	+
+			'&workouttype=' + b.attr('data-workouttype') + 
+			'&duration=' + b.attr('data-duration') +
+			'&avghr=' + b.attr('data-avghr');
+
+		// redirect
+		document.location = '/trainer/trainingstatistics/edit_training' + params;
+	},
+	
 	/**
 	 * will add zone markup to highlight individual
 	 * training zones
