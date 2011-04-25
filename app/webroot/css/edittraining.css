@@ -263,3 +263,7 @@ table#stats .border-right {
 	position: absolute;
 	width: 80px;
 }
+
+#workoutlink label {
+	width: 150px;
+}
