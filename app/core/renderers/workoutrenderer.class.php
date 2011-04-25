@@ -30,7 +30,7 @@ class WorkoutRenderer {
 		<span class=\"category br\" title=\"" .
 			$w->getCategoryDescription() .		 
 			"\">" . __($w->getCategory(), true) . "</span>
-		<button title=\"" . __('Mark training as done', true) . "\">&#10003;</button>
+			" . self::renderCheckButton($w) . "
 	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
 </tr>
@@ -54,6 +54,15 @@ class WorkoutRenderer {
 		return $html;
 	}
 
+	public static function renderCheckButton($w) {
+		return '<button title="' . __('Mark training as done', true) .
+			'" ' . 
+			'data-sportstype="' . $w->getSport() . '" ' .
+			'data-duration="' . $w->getDuration() . '" ' .
+			'data-workouttype="' . $w->getType() . '" ' .
+			'>&#10003;</button>';
+	}
+	
 	/**
 	 * nicely format a time given in minutes
 	 * examples:
