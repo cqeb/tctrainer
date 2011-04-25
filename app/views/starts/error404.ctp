@@ -21,7 +21,7 @@
 \$(document).ready(function() {
 
         // facebox box
-        $('a[rel*=facebox]').facebox();
+        //$('a[rel*=facebox]').facebox();
 
 });
 

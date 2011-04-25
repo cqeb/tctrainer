@@ -21,9 +21,10 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
      	{
-
+			
 			// if user is from AUT or GER - change language to German
 			$language = $this->Session->read('Config.language');
+
 	        if ( !isset( $language ) )
 			{
 				if ( $_SERVER['HTTP_HOST'] == 'localhost' )
@@ -38,7 +39,7 @@ class AppController extends Controller {
                 		Configure::write('Config.language','deu');
 				} else
                 		Configure::write('Config.language','eng');
-			} else	
+			} else
                 Configure::write('Config.language',$this->Session->read('Config.language'));
 
           	$locale = Configure::read('Config.language');
@@ -95,22 +96,34 @@ class AppController extends Controller {
              tar application/x-tar
             **/
 
+            if ( !$this->Session->read('recommendations') )
+			{
+				$this->loadModel('User');
+						
+				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
+				$user_recommendations = $this->User->query( $sql );
+						
+				$this->Session->write( 'recommendations', serialize($user_recommendations) );
+			} else
+			{
+				$user_recommendations = unserialize( $this->Session->read('recommendations'));
+			}
+			
+			if ( isset( $user_recommendations ) ) $this->set('recommendations', $user_recommendations);
             $this->set('locale', $locale);
             $this->Session->write('Config.language', $locale);
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
-
      }
 
      function checkSession()
      {
-
 	        // fill $username with session data
 	        $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');
 
 			// googlebot must enter our service to index our pages
-			if ( strstr( $_SERVER['HTTP_USER_AGENT'], 'Googlebot' ) )
+			if ( strstr( $_SERVER['HTTP_USER_AGENT'], 'Mediapartners' ) )
 			{
 				$session_useremail = 'googlebot@schremser.com';
 				$session_userid = 47;
@@ -139,7 +152,7 @@ class AppController extends Controller {
             } else
             {
                        // if cookie data are not the as session data, delete cookie
-                       if ( ( $cookie['email'] && $cookie['userid'] ) )
+                       if ( ( isset( $cookie['email'] ) && isset( $cookie['userid'] ) ) )
                        {
                           if ( ( $cookie['email'] != $session_useremail ) || ( $cookie['userid']  != $session_userid ) )
                           {
@@ -174,9 +187,9 @@ class AppController extends Controller {
                              $this->Session->write('Config.language', $results['User']['yourlanguage']);
                              $this->set('userobject', $results['User']);
                         }
-	          }
+	        }
 
-            	$this->set('session_userid', $session_userid);
+			$this->set('session_userid', $session_userid);
 
 	  }
 

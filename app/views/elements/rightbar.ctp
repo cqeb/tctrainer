@@ -5,7 +5,18 @@
 <a href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('PREMIUM Upgrade'); ?></b></a>
 <br /><br />
 <?php } ?>
-<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>" target="_blank">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
+<!--
+<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
+<br /><br />
+-->
+
+<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>category/faq/">&raquo; <?php __('FAQs'); ?></a>
+
+<?php if ( isset( $session_userid ) ) { ?>
+<br /><br />
+<?php __('Send this link to your friends'); ?>:<br />
+<a href="/trainer/starts/index/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>ur:<?php echo base64_encode($userobject['id']); ?>/">&raquo; <?php __('Invite your friends'); ?></a>
+<?php } ?>
 
 <?php if ( !isset( $session_userid ) ) { ?>
 <br /><br /><br />
@@ -35,7 +46,19 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <?php if ( isset( $userobject ) && $userobject['admin'] == '1' ) { ?>
 <br /><br />
 <ul>
-        <li><a href="/trainer/users/list_users"><?php __('Administrate users'); ?></a></li>
+	<li><a href="/trainer/users/list_users"><?php __('Administrate users'); ?></a></li>
+<?php 
+if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $userobject ) && $userobject['admin'] == 1 )
+{
+?>
+	<li><a href="#/trainer/starts/index/en/u:TRANSACTIONID">Redirect workout (u)</a></li> 
+	<li><a href="/trainer/starts/index/en/ur:<?php echo base64_encode("1"); ?>">Redirect no Money (ur):1</a></li> 
+	<li><a href="/trainer/starts/index/en/urm:<?php echo base64_encode("1"); ?>">Redirect Money (urm):1</a></li>
+	<li><a href="/trainer/starts/index/en/c:<?php echo base64_encode("@gentics.com"); ?>">Company:@gentics.com</a></li>
+<?php
+}
+?>
+        
 </ul>
 <?php } ?>
   

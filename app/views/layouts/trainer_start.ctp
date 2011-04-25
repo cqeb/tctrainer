@@ -8,7 +8,7 @@ if ( isset( $title ) )
 else	
 	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
 	
-if ( $userinfo ) 
+if ( isset( $userinfo ) ) 
 {
 		$facebox_content = '';
 			
@@ -40,7 +40,7 @@ if ( $userinfo )
 		
 }
 
-if ( $companyinfo ) 
+if ( isset( $companyinfo ) ) 
 {
 			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of membership costs!', true) . '</h1><p>' . 
 			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 3 coffees a month.", true) . 
@@ -64,15 +64,16 @@ if ( $companyinfo )
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
 
+<!--    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />-->
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
 
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+
     <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
 <?php echo $scripts_for_layout; ?>
@@ -128,7 +129,7 @@ $(document).ready(function() {
 				<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?></p>
 				<button onClick="javascript:top.location.href='<?php echo Configure::read('App.serverUrl'); ?>/users/register/';"><?php __('Sign up now');?> &mdash; <em><?php __('it´s free!');?></em></button>
 			</div>
-			<iframe id="facebook" src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode('http://www.facebook.com/pages/TriCoreTraining/150997251602079'); ?>&amp;layout=standard&amp;show_faces=false&amp;width=280&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=20" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+			<iframe id="facebook" src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode('http://www.facebook.com/pages/TriCoreTraining/150997251602079'); ?>&amp;layout=standard&amp;show_faces=false&amp;width=280&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=40" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 
 			<div class="teaserimages">
 				<img src="/trainer/img/start/start-1.jpg" alt="" />
@@ -217,7 +218,7 @@ $(document).ready(function() {
 
         // facebox box
         //$('a[rel*=facebox]').facebox();
-		<?php echo $facebox_content; ?>
+		<?php if ( isset( $facebox_content ) ) echo $facebox_content; ?>
 });
 
 </script>

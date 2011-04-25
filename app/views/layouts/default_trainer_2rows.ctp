@@ -18,15 +18,15 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
+
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
 
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
-    <!--<script type="text/javascript" src="<?php echo Configure::read('App.serverUrl'); ?>/js/jquery-ui.js"></script>-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <!--script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script-->
-    <!--script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script-->
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+
+	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
 
 <?php echo $scripts_for_layout; ?>
 
@@ -53,12 +53,6 @@
       <?php //__('Navigation');?>
                <?php echo $this->element('subnavigation_all'); ?>
       </div>
-<!--
-      <div class="box last">
-        <h1>Yet another...</h1>
-        ... box.      
-      </div>
--->
     </div>
     <!-- /Left column -->
     
@@ -99,11 +93,15 @@
   } catch(err) {}
   </script>
 
+<?php
+/*
+
 <script type="text/javascript" charset="utf-8">
   var is_ssl = ("https:" == document.location.protocol);
   var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
   document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
+
 
 <script type="text/javascript" charset="utf-8">
   var feedback_widget_options = {};
@@ -115,6 +113,9 @@
   feedback_widget_options.style = "idea";
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
+
+*/
+?>
 
 </body>
 </html>

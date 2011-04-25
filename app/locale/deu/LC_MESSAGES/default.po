@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-03-01 15:15+0100\n"
-"PO-Revision-Date: 2011-03-01 15:16+0100\n"
+"POT-Creation-Date: 2011-03-20 11:24+0100\n"
+"PO-Revision-Date: 2011-04-04 05:02+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -14,16 +14,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: \app_controller.php:131
+#: \app_controller.php:144
 msgid "Sorry, your session has expired or you're not logged in."
 msgstr "Sorry, deine Session ist abgelaufen oder du bist nicht eingeloggt."
 
-#: \app_controller.php:166
+#: \app_controller.php:179
 msgid "Incorrect session data. Sorry."
 msgstr "Ungültige Sessiondaten. Sorry."
 
 #: \controllers\competitions_controller.php:106
-#: \controllers\trainingstatistics_controller.php:460;1034
+#: \controllers\trainingstatistics_controller.php:460;1035
 msgid "Sorry. This is not your entry!"
 msgstr "Sorry. Das ist nicht dein Eintrag!"
 
@@ -43,115 +43,115 @@ msgstr "Wettkampf wurde gespeichert."
 msgid "The competition has been deleted."
 msgstr "Der Wettkampf wurde gelöscht."
 
-#: \controllers\payments_controller.php:69
+#: \controllers\payments_controller.php:70
 msgid "Registered cancellation request."
 msgstr "Wir haben einen Abbruch-Request bekommen."
 
-#: \controllers\payments_controller.php:292
+#: \controllers\payments_controller.php:298
 msgid "No Transaction-ID defined - something is wrong - sorry."
 msgstr "Keine Transaktions-ID definiert - irgendwas ist hier falsch - sorry."
 
-#: \controllers\payments_controller.php:292
+#: \controllers\payments_controller.php:298
 msgid "Contact our support"
 msgstr "Kontaktiere unseren Support"
 
-#: \controllers\payments_controller.php:305
+#: \controllers\payments_controller.php:311
 msgid "UserID"
 msgstr "UserID"
 
-#: \controllers\payments_controller.php:305
+#: \controllers\payments_controller.php:311
 msgid "was not found in database"
 msgstr "wurde nicht in der Datenbank gefunden."
 
-#: \controllers\payments_controller.php:314
+#: \controllers\payments_controller.php:320
 msgid "Your payment is not completed yet"
 msgstr "Dein Bezahlvorgang wurde noch nicht abgeschlossen."
 
-#: \controllers\payments_controller.php:340
+#: \controllers\payments_controller.php:346
 msgid "Verification by PAYPAL failed"
 msgstr "Verifizierung durch PAYPAL ist fehlgeschlagen."
 
-#: \controllers\payments_controller.php:410;425;434
-#: \controllers\users_controller.php:617
+#: \controllers\payments_controller.php:416;431;440
+#: \controllers\users_controller.php:691
 #: \views\elements\footer.ctp:27
 #: \views\layouts\trainer_start.ctp:47
 #: \views\users\index.ctp:2
 msgid "TriCoreTraining"
 msgstr "TriCoreTraining"
 
-#: \controllers\payments_controller.php:410;434
+#: \controllers\payments_controller.php:416;440
 msgid "affiliate gets money!"
 msgstr "Affiliate bekommt Geld!"
 
-#: \controllers\payments_controller.php:412;436
+#: \controllers\payments_controller.php:418;442
 msgid "bought a PREMIUM membership. Thank you."
 msgstr "hat eine PREMIUM Mitgliedschaft gekauft. Danke schön."
 
-#: \controllers\payments_controller.php:414
+#: \controllers\payments_controller.php:420
 msgid "receives money."
 msgstr "bekommt Geld."
 
-#: \controllers\payments_controller.php:425
+#: \controllers\payments_controller.php:431
 msgid "your friend subscribed to a PREMIUM membership!"
 msgstr "dein/e Freund/in hat sich für eine PREMIUM Mitgliedschaft eingeschrieben!"
 
-#: \controllers\payments_controller.php:427
-#: \controllers\users_controller.php:619
+#: \controllers\payments_controller.php:433
+#: \controllers\users_controller.php:693
 msgid "great"
 msgstr "großartig"
 
-#: \controllers\payments_controller.php:427
+#: \controllers\payments_controller.php:433
 msgid "bought a PREMIUM membership."
 msgstr "hat eine PREMIUM Mitgliedschaft gekauft."
 
-#: \controllers\payments_controller.php:428
+#: \controllers\payments_controller.php:434
 msgid "You receive 3 month PREMIUM membership as a \"Thank you\" for FREE."
 msgstr "Du bekommst 3 Monate PREMIUM Mitgliedschaft als \"Danke schön\" GRATIS."
 
-#: \controllers\payments_controller.php:438
+#: \controllers\payments_controller.php:444
 msgid "receives more months."
 msgstr "bekommt mehr Monate."
 
-#: \controllers\payments_controller.php:446;476
+#: \controllers\payments_controller.php:452;486
 msgid "Received notification"
 msgstr "Wir haben eine Benachrichtigung erhalten."
 
-#: \controllers\payments_controller.php:446
+#: \controllers\payments_controller.php:452
 msgid "Invoice sent"
 msgstr "Rechnung wurde versandt."
 
-#: \controllers\payments_controller.php:446;476
+#: \controllers\payments_controller.php:452;486
 msgid "Thank you"
 msgstr "Danke schön"
 
-#: \controllers\payments_controller.php:450
+#: \controllers\payments_controller.php:456
 msgid "Saving of payment status failed"
 msgstr "Das Speichern des Bezahlvorgang-Status ist fehlgeschlagen."
 
-#: \controllers\payments_controller.php:476
+#: \controllers\payments_controller.php:486
 msgid "No invoice"
 msgstr "Keine Rechnung"
 
-#: \controllers\payments_controller.php:518
+#: \controllers\payments_controller.php:528
 msgid "Thank you for subscribing for a membership. You receive your invoice as soon as your subscription period starts. "
 msgstr "Danke, dass du dich zur Mitgliedschaft angemeldet hast. Du erhältst eine Rechnung sobald deine bezahlte Mitgliedschaftsperiode beginnt."
 
-#: \controllers\payments_controller.php:522
+#: \controllers\payments_controller.php:532
 msgid ""
 "You canceled the payment transaction. If this was not intended, do the payment process again. If something else\n"
 "               is not ok for you"
 msgstr "Du hast deinen Bezahlvorgang unterbrochen. Wenn du das nicht beabsichtigt hast, dann starte den Bezahlvorgang nochmal. Wenn irgendetwas anderes nicht ok ist für dich"
 
-#: \controllers\payments_controller.php:523
-#: \controllers\users_controller.php:873
+#: \controllers\payments_controller.php:533
+#: \controllers\users_controller.php:947
 msgid "contact our support"
 msgstr "kontaktiere unseren Support"
 
-#: \controllers\payments_controller.php:586
+#: \controllers\payments_controller.php:596
 msgid "TriCoreTraining Invoice"
 msgstr "TriCoreTraining Rechnung"
 
-#: \controllers\payments_controller.php:588
+#: \controllers\payments_controller.php:598
 msgid "TriCoreTraining Subscription Info"
 msgstr "TriCoreTraining Abo-Info"
 
@@ -159,37 +159,37 @@ msgstr "TriCoreTraining Abo-Info"
 msgid "the interactive, online training plan service for run, bike and triathlon athletes "
 msgstr "der interaktive Online-Trainingsplan-Service für Laufen, Radeln und Triathlon Athleten"
 
-#: \controllers\starts_controller.php:48
-#: \controllers\trainingstatistics_controller.php:999
+#: \controllers\starts_controller.php:60
+#: \controllers\trainingstatistics_controller.php:1000
 #: \views\layouts\trainer_start.ctp:20
 msgid "I did a"
 msgstr "Ich machte ein"
 
-#: \controllers\starts_controller.php:49
-#: \controllers\trainingstatistics_controller.php:1000
+#: \controllers\starts_controller.php:61
+#: \controllers\trainingstatistics_controller.php:1001
 #: \views\layouts\trainer_start.ctp:21
 msgid "in"
 msgstr "in"
 
-#: \controllers\starts_controller.php:50
-#: \controllers\trainingstatistics_controller.php:1001
+#: \controllers\starts_controller.php:62
+#: \controllers\trainingstatistics_controller.php:1002
 #: \views\layouts\trainer_start.ctp:22
 msgid "hour(s)"
 msgstr "Stunde(n)"
 
-#: \controllers\starts_controller.php:50
-#: \controllers\trainingstatistics_controller.php:1001
+#: \controllers\starts_controller.php:62
+#: \controllers\trainingstatistics_controller.php:1002
 #: \views\layouts\trainer_start.ctp:22
 msgid "with"
 msgstr "mit"
 
-#: \controllers\starts_controller.php:126
+#: \controllers\starts_controller.php:141
 msgid "Language changed."
 msgstr "Sprache gespeichert."
 
 #: \controllers\trainingplans_controller.php:42
 #: \controllers\components\unitcalc.php:718;722;726;730
-#: \views\trainingstatistics\edit_training.ctp:54
+#: \views\trainingstatistics\edit_training.ctp:53
 #: \views\trainingstatistics\statistics_competition.ctp:44
 #: \views\trainingstatistics\statistics_trimp.ctp:33
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:123
@@ -198,7 +198,7 @@ msgstr "Schwimmen"
 
 #: \controllers\trainingplans_controller.php:42;45;51
 #: \controllers\components\unitcalc.php:719;723;727;731;742;746
-#: \views\layouts\trainingplans.ctp:111
+#: \views\layouts\trainingplans.ctp:122
 #: \views\trainingstatistics\statistics_competition.ctp:42
 #: \views\trainingstatistics\statistics_trimp.ctp:32
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:122
@@ -208,8 +208,8 @@ msgstr "Radfahren"
 
 #: \controllers\trainingplans_controller.php:42;45;48
 #: \controllers\components\unitcalc.php:720;724;728;732;734;735;736;737;738;741;743;745;747
-#: \views\layouts\trainingplans.ctp:110
-#: \views\trainingstatistics\edit_training.ctp:52
+#: \views\layouts\trainingplans.ctp:121
+#: \views\trainingstatistics\edit_training.ctp:51
 #: \views\trainingstatistics\statistics_competition.ctp:41
 #: \views\trainingstatistics\statistics_trimp.ctp:31
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:121
@@ -243,7 +243,7 @@ msgstr "Keine Importdaten gefunden!"
 #: \views\elements\email\html\invoicemail.ctp:30
 #: \views\elements\email\text\invoicemail.ctp:17
 #: \views\payments\show_invoice.ctp:34
-#: \views\trainingstatistics\edit_training.ctp:34
+#: \views\trainingstatistics\edit_training.ctp:33
 #: \views\trainingstatistics\import_workout.ctp:65
 #: \views\trainingstatistics\list_trainings.ctp:27
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:34
@@ -257,8 +257,8 @@ msgstr "ist nicht gültig!"
 #: \controllers\trainingstatistics_controller.php:174
 #: \views\competitions\edit_competition.ctp:67
 #: \views\competitions\list_competitions.ctp:20
-#: \views\layouts\trainingplans.ctp:108
-#: \views\trainingstatistics\edit_training.ctp:46
+#: \views\layouts\trainingplans.ctp:119
+#: \views\trainingstatistics\edit_training.ctp:45
 #: \views\trainingstatistics\import_workout.ctp:67
 #: \views\trainingstatistics\list_trainings.ctp:28
 #: \views\trainingstatistics\statistics_trimp.ctp:25
@@ -284,12 +284,12 @@ msgid "Duration"
 msgstr "Dauer"
 
 #: \controllers\trainingstatistics_controller.php:212
-#: \views\trainingstatistics\edit_training.ctp:106
+#: \views\trainingstatistics\edit_training.ctp:105
 msgid "Avg. heart rate"
 msgstr "Durchschnittl. Herzfrequenz"
 
 #: \controllers\trainingstatistics_controller.php:249
-#: \views\trainingstatistics\edit_training.ctp:174
+#: \views\trainingstatistics\edit_training.ctp:173
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:40
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:45
 #: \views\users\edit_weight.ctp:53
@@ -308,7 +308,7 @@ msgstr "Dieses Training existiert schon!"
 #: \views\users\edit_traininginfo.ctp:133;154
 #: \views\users\edit_user.ctp:56;71;85;99;114
 #: \views\users\edit_userinfo.ctp:145
-#: \views\users\list_users.ctp:4
+#: \views\users\list_users.ctp:4;61
 #: \views\users\register.ctp:156
 msgid "No"
 msgstr "Nein"
@@ -319,7 +319,7 @@ msgstr "Nein"
 #: \views\users\edit_traininginfo.ctp:132;153
 #: \views\users\edit_user.ctp:55;70;84;98;113
 #: \views\users\edit_userinfo.ctp:144
-#: \views\users\list_users.ctp:3
+#: \views\users\list_users.ctp:3;60
 #: \views\users\register.ctp:155
 msgid "Yes"
 msgstr "Ja"
@@ -345,366 +345,370 @@ msgid "Training saved."
 msgstr "Training gespeichert."
 
 #: \controllers\trainingstatistics_controller.php:573
-#: \controllers\users_controller.php:645;1199
+#: \controllers\users_controller.php:719;1275
 msgid "Some errors occured"
 msgstr "Es sind Fehler aufgetreten"
 
-#: \controllers\trainingstatistics_controller.php:1043
+#: \controllers\trainingstatistics_controller.php:1044
 msgid "Workout deleted."
 msgstr "Training wurde gelöscht."
 
-#: \controllers\users_controller.php:49;76
+#: \controllers\users_controller.php:51;78;131
 msgid "Sorry. Don't fool around with our security."
 msgstr "Sorry. Spiel nicht mit unserer Sicherheit herum bitte."
 
-#: \controllers\users_controller.php:105;944
+#: \controllers\users_controller.php:107;1018
 msgid "User profile saved."
 msgstr "Benutzerinformationen gespeichert."
 
-#: \controllers\users_controller.php:110;949;991;1035;1264;1320;1380
+#: \controllers\users_controller.php:112;1023;1067;1111;1340;1396;1456
 msgid "Some errors occured."
 msgstr "Es sind Fehler aufgetreten."
 
-#: \controllers\users_controller.php:186;202
+#: \controllers\users_controller.php:245;261
 msgid "Wait a second please. If you are not redirected, please click here."
 msgstr "Warte eine Sekunde bitte. Wenn du nicht umgeleitet wirst, dann klicke hier bitte."
 
-#: \controllers\users_controller.php:222
+#: \controllers\users_controller.php:281
 #: \views\elements\topnavigation_public.ctp:21
 msgid "Login"
 msgstr "Login"
 
-#: \controllers\users_controller.php:271
+#: \controllers\users_controller.php:335
 msgid "Not activated yet. Please follow the activation link in the welcome mail."
 msgstr "Noch nicht aktiviert. Bitte folge dem Aktivierungslink in der Willkommensmail."
 
-#: \controllers\users_controller.php:277
+#: \controllers\users_controller.php:341
 msgid "Wrong or non-existing e-mail or password. Please try again."
 msgstr "Falsche/s oder nicht existierende Email oder Passwort. Bitte versuche es nochmal."
 
-#: \controllers\users_controller.php:287
+#: \controllers\users_controller.php:351
 #: \views\users\login.ctp:17
 msgid "Logout"
 msgstr "Ausloggen"
 
-#: \controllers\users_controller.php:303
+#: \controllers\users_controller.php:367
 msgid "You're logged out. Bye."
 msgstr "Du bist ausgeloggt. Bis bald."
 
-#: \controllers\users_controller.php:309
+#: \controllers\users_controller.php:373
 #: \views\users\password_forgotten.ctp:2
 #: \views\users\password_reset.ctp:2
 msgid "Password forgotten"
 msgstr "Passwort vergessen"
 
-#: \controllers\users_controller.php:324
+#: \controllers\users_controller.php:388
 msgid "Sorry Captcha not correct!"
 msgstr "Sorry Captcha (Spamschutz-Code) ist nicht korrekt!"
 
-#: \controllers\users_controller.php:334
+#: \controllers\users_controller.php:398
 msgid "E-mail was not found in database!"
 msgstr "Email wurde nicht in unserer Datenbank gefunden!"
 
-#: \controllers\users_controller.php:340
+#: \controllers\users_controller.php:404
 msgid "Click link in e-mail to reset password!"
 msgstr "Klicke den Link in deiner Email, um das Passwort zurückzusetzen!"
 
-#: \controllers\users_controller.php:353
+#: \controllers\users_controller.php:417
 msgid "Password reset"
 msgstr "Passwort rücksetzen"
 
-#: \controllers\users_controller.php:387
+#: \controllers\users_controller.php:451
 msgid "Your new password is sent to your e-mail."
 msgstr "Dein neues Passwort wurde dir per Email zugesandt."
 
-#: \controllers\users_controller.php:391
+#: \controllers\users_controller.php:455
 msgid "Something is wrong - sorry."
 msgstr "Es ist irgendetwas falsch - sorry."
 
-#: \controllers\users_controller.php:391
+#: \controllers\users_controller.php:455
 msgid "Contact our support."
 msgstr "Kontaktiere unseren Support."
 
-#: \controllers\users_controller.php:415
+#: \controllers\users_controller.php:479
 #: \views\users\register.ctp:1
 msgid "Create your account"
 msgstr "Erstelle deinen Account"
 
-#: \controllers\users_controller.php:432
+#: \controllers\users_controller.php:498
 msgid "We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as in your Facebook account."
 msgstr "Wir haben deine Registrierung mit deinen Facebook-Daten vorausgefüllt, bitte ergänze die fehlenden Daten. In der Zukunft kannst du dich mit deinem Facebook Login einloggen. Wenn du schon einen TriCoreTraining account hast, dann ändere deine E-Mail auf dieselbe, die du im Facebook Account hast."
 
-#: \controllers\users_controller.php:617
+#: \controllers\users_controller.php:691
 msgid "your friend subscribed!"
 msgstr "dein/e Freund/in hat sich angemeldet!"
 
-#: \controllers\users_controller.php:619
+#: \controllers\users_controller.php:693
 msgid "wants to become an athlete too. Maybe you do workouts together?"
 msgstr "möchte auch ein Athlete werden. Vielleicht trainiert ihr zusammen?"
 
-#: \controllers\users_controller.php:620
+#: \controllers\users_controller.php:694
 msgid "After he/she buys a PREMIUM membership, you receive 3 month PREMIUM membership as a \"Thank you\" for FREE."
 msgstr "Wenn sie/er eine PREMIUM Mitgliedschaft kauft, dann bekommst du 3 Monate PREMIUM Mitgliedschaft als \"Danke schön\" GRATIS."
 
-#: \controllers\users_controller.php:636
+#: \controllers\users_controller.php:710
 #: \views\users\register_finish.ctp:2
 msgid "Registration finished"
 msgstr "Registrierung abgeschlossen"
 
-#: \controllers\users_controller.php:655
+#: \controllers\users_controller.php:729
 msgid "Registration - Finished"
 msgstr "Registrierung - Abgeschlossen"
 
-#: \controllers\users_controller.php:674
+#: \controllers\users_controller.php:748
 msgid "Sorry. Something is wrong. Don't hack other accounts!"
 msgstr "Sorry. Irgendetwas ist falsch hier. Hacke keine anderen Accounts!"
 
-#: \controllers\users_controller.php:780
+#: \controllers\users_controller.php:854
 msgid "Sorry, your e-mail is not correct!"
 msgstr "Sorry, deine E-Mail ist nicht korrekt!"
 
-#: \controllers\users_controller.php:797
+#: \controllers\users_controller.php:871
 msgid "Sorry, your e-mail is already registered!"
 msgstr "Sorry, deine E-Mail ist bereits registriert!"
 
-#: \controllers\users_controller.php:813
+#: \controllers\users_controller.php:887
 msgid "E-mail is not registered!"
 msgstr "E-Mail ist nicht registriert!"
 
-#: \controllers\users_controller.php:820
+#: \controllers\users_controller.php:894
 msgid "E-mail changed!"
 msgstr "E-mail wurde verändert!"
 
-#: \controllers\users_controller.php:833
+#: \controllers\users_controller.php:907
 msgid "Registration - Activation"
 msgstr "Registrierung - Aktivierung"
 
-#: \controllers\users_controller.php:854
+#: \controllers\users_controller.php:928
 msgid "You will receive regularly training schedules from TriCoreTraining.com. Start your sports career."
 msgstr "Du wirst regelmässig Trainingspläne von TriCoreTraining.com erhalten. Beginne deine Sportkarriere jetzt."
 
-#: \controllers\users_controller.php:873
+#: \controllers\users_controller.php:947
 msgid "Something went wrong - sorry. Maybe you're already activated?"
 msgstr "Es ist irgendetwas nicht in Ordnung - sorry. Vielleicht hast du dich noch nicht aktiviert? Wenn nicht"
 
-#: \controllers\users_controller.php:873
+#: \controllers\users_controller.php:947
 msgid "If not"
 msgstr "Wenn nicht"
 
-#: \controllers\users_controller.php:891
+#: \controllers\users_controller.php:965
 msgid "Your BMI is"
 msgstr "Dein BMI ist"
 
-#: \controllers\users_controller.php:891
+#: \controllers\users_controller.php:965
 msgid "Your BMI-check says:"
 msgstr "Dein BMI-Check sagt:"
 
-#: \controllers\users_controller.php:895
+#: \controllers\users_controller.php:969
 msgid "Please check your height and weight again - we got an incorrect BMI"
 msgstr "Bitte prüfe deine Größe und dein Gewicht nochmal - wir haben einen falschen BMI"
 
-#: \controllers\users_controller.php:895
+#: \controllers\users_controller.php:969
 msgid "thank you"
 msgstr "dank dir"
 
-#: \controllers\users_controller.php:906
+#: \controllers\users_controller.php:980
 #: \views\payments\subscribe_triplans.ctp:129
 msgid "Change profile"
 msgstr "Profil ändern"
 
-#: \controllers\users_controller.php:960
+#: \controllers\users_controller.php:1034
 msgid "Change address"
 msgstr "Adresse bearbeiten"
 
-#: \controllers\users_controller.php:983
-msgid "Please confirm your address."
-msgstr "Bitte bestätige deine Adresse."
-
-#: \controllers\users_controller.php:1001
+#: \controllers\users_controller.php:1077
 msgid "Change training info"
 msgstr "Trainingsinfo ändern"
 
-#: \controllers\users_controller.php:1028
+#: \controllers\users_controller.php:1104
 msgid "Traininginfo saved."
 msgstr "Trainingsinformation gespeichert."
 
-#: \controllers\users_controller.php:1045
+#: \controllers\users_controller.php:1121
 msgid "Change weight management"
 msgstr "Gewichtsmanagement ändern"
 
-#: \controllers\users_controller.php:1090
+#: \controllers\users_controller.php:1166
 msgid "Your target weight date is in the past and must be in the future!"
 msgstr "Dein Datum für dein Zielgewicht liegt in der Vergangenheit und muss in der Zukunft sein!"
 
-#: \controllers\users_controller.php:1096
+#: \controllers\users_controller.php:1172
 msgid "This system won't work if you want to gain weight!"
 msgstr "Das System funktioniert nicht, wenn du Gewicht zunehmen willst!"
 
-#: \controllers\users_controller.php:1115
+#: \controllers\users_controller.php:1191
 msgid "You have to loose"
 msgstr "Verliere"
 
-#: \controllers\users_controller.php:1116
+#: \controllers\users_controller.php:1192
 msgid "per month to achieve your goal."
 msgstr "pro Monat, um dein Ziel zu erreichen."
 
-#: \controllers\users_controller.php:1121
+#: \controllers\users_controller.php:1197
 msgid "You should at maximum loose"
 msgstr "Verliere maximal"
 
-#: \controllers\users_controller.php:1123
+#: \controllers\users_controller.php:1199
 msgid "per month."
 msgstr "pro Monat."
 
-#: \controllers\users_controller.php:1158
+#: \controllers\users_controller.php:1234
 msgid "Your target weight is not ok. Your goals would bring your BMI to a critical"
 msgstr "Dein Zielgewicht ist nicht ok. Dein Ziel bringt deinen BMI zu einem kritisch"
 
-#: \controllers\users_controller.php:1174
+#: \controllers\users_controller.php:1250
 msgid "Your settings are saved."
 msgstr "Deine Einstellungen wurden gespeichert."
 
-#: \controllers\users_controller.php:1210
+#: \controllers\users_controller.php:1286
 msgid "Change profile - images"
 msgstr "Profilbild bearbeiten"
 
-#: \controllers\users_controller.php:1260
+#: \controllers\users_controller.php:1336
 msgid "Image(s) saved."
 msgstr "Bilder gespeichert."
 
-#: \controllers\users_controller.php:1282
+#: \controllers\users_controller.php:1358
 msgid "Image deleted."
 msgstr "Bild gelöscht."
 
-#: \controllers\users_controller.php:1288
+#: \controllers\users_controller.php:1364
 msgid "Change profile - metric"
 msgstr "Einheiten bearbeiten"
 
-#: \controllers\users_controller.php:1313
+#: \controllers\users_controller.php:1389
 msgid "Metric information saved."
 msgstr "Einheiten gespeichert."
 
-#: \controllers\users_controller.php:1328
+#: \controllers\users_controller.php:1404
 msgid "Change profile - password"
 msgstr "Passwort bearbeiten"
 
-#: \controllers\users_controller.php:1356
+#: \controllers\users_controller.php:1432
 msgid "No passwords entered or passwords do not match!"
 msgstr "Kein Passwort eingegeben oder die Passwörter stimmen nicht überein!"
 
-#: \controllers\users_controller.php:1368
+#: \controllers\users_controller.php:1444
 msgid "New password saved."
 msgstr "Neues Passwort gespeichert."
 
-#: \controllers\users_controller.php:1472
+#: \controllers\users_controller.php:1548
 msgid "TriCoreTraining signup"
 msgstr "TriCoreTraining Registrierung"
 
-#: \controllers\users_controller.php:1510
+#: \controllers\users_controller.php:1586
 msgid "TriCoreTraining - password reset"
 msgstr "TriCoreTraining - Passwort zurückgesetzt"
 
-#: \controllers\users_controller.php:1513
+#: \controllers\users_controller.php:1589
 msgid "TriCoreTraining - password forgotten"
 msgstr "TriCoreTraining - Passwort vergessen"
 
-#: \controllers\users_controller.php:1679
+#: \controllers\users_controller.php:1750
+msgid "Strange user - please check"
+msgstr "Seltsamer User - bitte prüfen"
+
+#: \controllers\users_controller.php:1752
+msgid "These attributes are not defined in this user profile"
+msgstr "Diese Attribute sind nicht im Userprofil definiert"
+
+#: \controllers\users_controller.php:1758
+msgid "is not correct"
+msgstr "ist nicht korrekt"
+
+#: \controllers\users_controller.php:1784
 msgid "don't be lazy!"
 msgstr "sei nicht faul!"
 
-#: \controllers\users_controller.php:1680
+#: \controllers\users_controller.php:1785
 msgid "Go to"
 msgstr "Gehe zu"
 
-#: \controllers\users_controller.php:1681
-msgid "and track your workouts - NOW!"
-msgstr "und zeichne deine Trainings auf - JETZT!"
+#: \controllers\users_controller.php:1786
+msgid "and track your workouts - now!"
+msgstr "und zeichne deine Trainings auf - jetzt!"
 
-#: \controllers\users_controller.php:1689
+#: \controllers\users_controller.php:1794
 msgid "Your firstname is missing!"
 msgstr "Dein Vorname fehlt."
 
-#: \controllers\users_controller.php:1689;1696;1703;1710;1717;1724
+#: \controllers\users_controller.php:1794;1801;1808;1815;1822;1829
 msgid "Please add it to your profile."
 msgstr "Bitte zu deinem Profil hinzufügen."
 
-#: \controllers\users_controller.php:1692;1699;1706;1713;1720;1727;1740;1749;1773;1784;1795;1815
+#: \controllers\users_controller.php:1797;1804;1811;1818;1825;1832;1845;1854;1878;1889;1900;1919
 msgid "Change it."
 msgstr "Profil ändern."
 
-#: \controllers\users_controller.php:1696
+#: \controllers\users_controller.php:1801
 msgid "Your lastname is missing!"
 msgstr "Dein Nachname fehlt!"
 
-#: \controllers\users_controller.php:1703
+#: \controllers\users_controller.php:1808
 msgid "Your address is missing!"
 msgstr "Deine Adresse fehlt!"
 
-#: \controllers\users_controller.php:1710
+#: \controllers\users_controller.php:1815
 msgid "Your zip is missing!"
 msgstr "Deine PLZ fehlt!"
 
-#: \controllers\users_controller.php:1717
+#: \controllers\users_controller.php:1822
 msgid "Your city is missing!"
 msgstr "Deine Stadt fehlt!"
 
-#: \controllers\users_controller.php:1724
+#: \controllers\users_controller.php:1829
 msgid "Your country is missing!"
 msgstr "Dein Land fehlt!"
 
-#: \controllers\users_controller.php:1732
+#: \controllers\users_controller.php:1837
 msgid "Your birthday is missing! This is essentiell for calculations."
 msgstr "Dein Geburtstag fehlt! Das ist interne Berechnungen wichtig."
 
-#: \controllers\users_controller.php:1738
-msgid "Your lactate threshold must be between 100 and 210."
+#: \controllers\users_controller.php:1843
+msgid "Your run lactate threshold must be between 100 and 210."
 msgstr "Dein Lauf-Laktatgrenzwert muss zwischen 100 und 210 liegen."
 
-#: \controllers\users_controller.php:1747
+#: \controllers\users_controller.php:1852
 msgid "Your bike lactate threshold must be between 100 and 210."
 msgstr "Dein Radfahr-Laktatgrenzwert muss zwischen 100 und 210 liegen."
 
-#: \controllers\users_controller.php:1769
+#: \controllers\users_controller.php:1874
 msgid "Your weight loss per month to achieve your weight goal must be"
 msgstr "Dein Gewichtsverlust pro Monat, um dein Zielgewicht zu erreichen, ist "
 
-#: \controllers\users_controller.php:1771
+#: \controllers\users_controller.php:1876
 msgid "that's not healthy - set a new weight goal!"
 msgstr "das ist nicht gesund - setze ein neues Gewichtsziel"
 
-#: \controllers\users_controller.php:1782
+#: \controllers\users_controller.php:1887
 msgid "You have not entered your weekly training time."
 msgstr "Gibt deine wöchentlich verfügbaren Trainingsstunden an."
 
-#: \controllers\users_controller.php:1793
-msgid "You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining since more than 9 months, maybe you should change that!"
+#: \controllers\users_controller.php:1898
+msgid "You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining for more than 9 months, maybe you should change that!"
 msgstr "Du hast TriCoreTraining mitgeteilt, dass du Anfänger bist. Nachdem du schon seit über 9 Monaten mit uns trainierst, solltest du das ändern!"
 
-#: \controllers\users_controller.php:1804
+#: \controllers\users_controller.php:1910
 msgid "Please recommend our service!"
 msgstr "Bitte empfehle unser Service weiter!"
 
-#: \controllers\users_controller.php:1806
-msgid "Of course."
-msgstr "Natürlich."
-
-#: \controllers\users_controller.php:1813
+#: \controllers\users_controller.php:1917
 msgid "You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!"
 msgstr "Du hast unsere allgemeinen Geschäftsbedingungen nicht akzeptiert oder dein Gesundheitszustand ist nicht gut genug für sportliches Training. Ist das noch immer so? Du erhältst keine Trainingspläne mit einer unzureichenden Gesundheit. Sorry!"
 
-#: \controllers\users_controller.php:1824
+#: \controllers\users_controller.php:1928
 msgid "Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks."
 msgstr "Dein Account ist nicht aktiviert bis jetzt. Bitte verwende dein Willkommensmail, um deinen Account zu aktivieren oder kontaktiere unseren Support. Danke."
 
-#: \controllers\users_controller.php:1837
+#: \controllers\users_controller.php:1941
 msgid "Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please"
 msgstr "Deine PREMIUM Mitgliedschaft ist vorbei. Wenn du wieder deinen professionellen, interaktiven Trainingscoach für 3 Kaffees pro Monat haben willst,"
 
-#: \controllers\users_controller.php:1838
+#: \controllers\users_controller.php:1942
 msgid "subscribe"
 msgstr "abonniere PREMIUM"
 
-#: \controllers\users_controller.php:1839;1847
+#: \controllers\users_controller.php:1943;1951
 #: \views\payments\subscribe_triplans.ctp:8
 #: \views\payments\unsubscribe_triplans.ctp:8
 #: \views\starts\error404.ctp:7
@@ -712,7 +716,7 @@ msgstr "abonniere PREMIUM"
 msgid "Gain speed, loose weight"
 msgstr "Werde schneller, werde leichter"
 
-#: \controllers\users_controller.php:1844
+#: \controllers\users_controller.php:1948
 #: \views\elements\email\html\invoiceinfomail.ctp:7
 #: \views\elements\email\html\invoicemail.ctp:7
 #: \views\elements\email\html\notification.ctp:7
@@ -729,41 +733,41 @@ msgstr "Werde schneller, werde leichter"
 msgid "Aloha"
 msgstr "Aloha"
 
-#: \controllers\users_controller.php:1844
-msgid "TriCoreTraining.com for YOU!"
-msgstr "TriCoreTraining.com für DICH!"
+#: \controllers\users_controller.php:1948
+msgid "TriCoreTraining.com message for you!"
+msgstr "TriCoreTraining.com Nachricht für DICH!"
 
-#: \controllers\users_controller.php:1845
-msgid "your training plan needs YOU!"
-msgstr "dein Trainingsplan braucht DICH!"
+#: \controllers\users_controller.php:1949
+msgid "your training plan needs you!"
+msgstr "dein Trainingsplan braucht dich!"
 
-#: \controllers\users_controller.php:1846
-msgid "please read this notice from TriCoreTraining.com for YOU!"
-msgstr "bitte lies die Notiz von TriCoreTraining.com für DICH!"
+#: \controllers\users_controller.php:1950
+msgid "please read this notice from TriCoreTraining.com for you!"
+msgstr "bitte lies die Notiz von TriCoreTraining.com für dich!"
 
-#: \controllers\users_controller.php:1847
-msgid "this is the motto for YOU!"
-msgstr "das ist das Motto für DICH!"
+#: \controllers\users_controller.php:1951
+msgid "this is your motto!"
+msgstr "das ist dein Motto!"
 
-#: \controllers\users_controller.php:1848
-msgid "TriCoreTraining.com needs YOU!"
-msgstr "TriCoreTraining.com braucht DICH!"
+#: \controllers\users_controller.php:1952
+msgid "TriCoreTraining.com needs you!"
+msgstr "TriCoreTraining.com braucht dich!"
 
-#: \controllers\users_controller.php:1862
-msgid "Your training schedule for NEXT WEEK is here!"
-msgstr "Dein Trainingsplan für NÄCHSTE WOCHE ist hier!"
+#: \controllers\users_controller.php:1966
+msgid "Your training schedule for next week is here!"
+msgstr "Dein Trainingsplan für nächste Woche ist hier!"
 
-#: \controllers\users_controller.php:1863
-msgid "Read it (also mobile), print it, USE it!"
-msgstr "Lies das (auch mobil), drucke es aus, BENUTZE es!"
+#: \controllers\users_controller.php:1967
+msgid "Click here, print it and use it!"
+msgstr "Klicke hier, drucke es aus und verwende es!"
 
-#: \controllers\users_controller.php:1871
+#: \controllers\users_controller.php:1975
 msgid "Some magazine articles"
 msgstr "Einige Magazinartikel"
 
-#: \controllers\users_controller.php:1876
-msgid "There is something to update in your profile."
-msgstr "Es gibt etwas zu aktualisieren in deinem Profil."
+#: \controllers\users_controller.php:2018
+msgid "athlete"
+msgstr "Athlet"
 
 #: \controllers\components\provider.php:63
 msgid "Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions."
@@ -905,7 +909,7 @@ msgid "Germany"
 msgstr "Deutschland"
 
 #: \controllers\components\unitcalc.php:804
-#: \views\elements\email\newsletter_text_footer.ctp:6
+#: \views\elements\email\newsletter_text_footer.ctp:7
 msgid "Austria"
 msgstr "Österreich"
 
@@ -1299,7 +1303,7 @@ msgstr "Unternimm einen Ausdauer-Lauf in Zone 2. Sprinte 4-8 Mal für 20 Sekunde
 
 #: \core\workouts\runworkout.class.php:104
 msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for 5 kilometers. Keep your pace for 2 minutes, then slow down to Zone 2. Repeat up to 6 times."
-msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximl 5 Kilometer lang halten könntest. Behalte diese Geschwindigkeit 2 Minuten lang bei. Laufe danach lockerer, bis dein Puls wieder Zone 2 erreicht. Wiederhole diese Beschleunigungen maximal 6 Mal."
+msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximal 5 Kilometer lang halten könntest. Behalte diese Geschwindigkeit 2 Minuten lang bei. Laufe danach lockerer, bis dein Puls wieder Zone 2 erreicht. Wiederhole diese Beschleunigungen maximal 6 Mal."
 
 #: \core\workouts\runworkout.class.php:107
 msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than 5 minutes."
@@ -1502,7 +1506,7 @@ msgid "Important"
 msgstr "Wichtig"
 
 #: \views\competitions\edit_competition.ctp:109
-#: \views\trainingstatistics\edit_training.ctp:278
+#: \views\trainingstatistics\edit_training.ctp:277
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:47
 msgid "Location"
 msgstr "Ort"
@@ -1525,7 +1529,7 @@ msgstr "Zeit für Laufen (HH:MM:SS)"
 
 #: \views\competitions\edit_competition.ctp:224
 #: \views\payments\initiate.ctp:128
-#: \views\trainingstatistics\edit_training.ctp:409
+#: \views\trainingstatistics\edit_training.ctp:411
 #: \views\users\edit_address.ctp:84
 #: \views\users\edit_images.ctp:95
 #: \views\users\edit_metric.ctp:60
@@ -1547,7 +1551,7 @@ msgstr "Prio"
 
 #: \views\competitions\list_competitions.ctp:21
 #: \views\trainingstatistics\import_workout.ctp:66
-#: \views\users\list_users.ctp:23
+#: \views\users\list_users.ctp:26
 msgid "Name"
 msgstr "Name"
 
@@ -1632,11 +1636,11 @@ msgstr "TriCoreTrainng der interaktive Online Trainingplan-Service für Triathlo
 msgid "TriCoreTraining triathlon plans, sport plans, training schedules, running, biking, run, bike, swim, ironman, half ironman"
 msgstr "TriCoreTraining Triathlon Pläne, Sportpläne, Trainingspläne, Laufen, Biken, Lauf, Rad, Schwimmen, Ironman, Halbironman"
 
-#: \views\elements\referral.ctp:2
+#: \views\elements\referral.ctp:14
 msgid "TriCoreTraining sped up my Half-Ironman time from 06:30 to 05:30 hours. It is awesome. Thanks."
 msgstr "TriCoreTraining hat meine Halb-Ironman Zeit von 06:30 auf 05:30 Stunden gebracht. Das ist großartig. Danke."
 
-#: \views\elements\referral.ctp:6
+#: \views\elements\referral.ctp:18
 msgid "10:45 for Ironman in Carinthia was the goal and TriCoreTraining helped me to achieve it. Thank you."
 msgstr "10:45 für den Ironman in Kärnten war das Ziel und TriCoreTraining half mir dieses zu erreichen. Vielen Dank."
 
@@ -1649,36 +1653,48 @@ msgstr "Neueste Nachrichten"
 msgid "PREMIUM Upgrade"
 msgstr "PREMIUM Upgrade"
 
-#: \views\elements\rightbar.ctp:8
+#: \views\elements\rightbar.ctp:9
 msgid "TriCoreTraining Blog"
 msgstr "TriCoreTraining Blog"
 
-#: \views\elements\rightbar.ctp:11
+#: \views\elements\rightbar.ctp:13
+msgid "FAQs"
+msgstr "FAQs"
+
+#: \views\elements\rightbar.ctp:17
+msgid "Send this link to your friends"
+msgstr "Sende diesen Link an deine Freunde"
+
+#: \views\elements\rightbar.ctp:18
+msgid "Invite your friends"
+msgstr "Lade Freunde ein"
+
+#: \views\elements\rightbar.ctp:23
 msgid "Login with your Facebook account!"
 msgstr "Log dich ein mit deinem Facebook Account!"
 
-#: \views\elements\rightbar.ctp:15
+#: \views\elements\rightbar.ctp:28
 msgid "Recommendation"
 msgstr "Empfehlung"
 
-#: \views\elements\rightbar.ctp:36
+#: \views\elements\rightbar.ctp:49
 msgid "Administrate users"
 msgstr "Administriere Benutzer"
 
-#: \views\elements\rightbar.ctp:46
+#: \views\elements\rightbar.ctp:71
 msgid "Graphs"
 msgstr "Graphen"
 
-#: \views\elements\rightbar.ctp:47
+#: \views\elements\rightbar.ctp:72
 msgid "PHPMyAdmin"
 msgstr "PHPMyAdmin"
 
-#: \views\elements\rightbar.ctp:48
+#: \views\elements\rightbar.ctp:73
 msgid "Fill my database"
 msgstr "Befülle meine Datenbank"
 
 #: \views\elements\subnavigation_all.ctp:4
-#: \views\elements\topprofile.ctp:15
+#: \views\elements\topprofile.ctp:3
 msgid "Home"
 msgstr "Home"
 
@@ -1785,7 +1801,7 @@ msgstr "Einstellungen"
 
 #: \views\elements\topnavigation_private.ctp:32
 #: \views\elements\topnavigation_public.ctp:27
-#: \views\elements\topprofile.ctp:26
+#: \views\elements\topprofile.ctp:14
 #: \views\starts\features.ctp:38
 msgid "Blog"
 msgstr "Blog"
@@ -1799,72 +1815,81 @@ msgstr "GRATIS registrieren"
 msgid "Features & Prices"
 msgstr "Features & Preise"
 
-#: \views\elements\topprofile.ctp:22
+#: \views\elements\topprofile.ctp:10
 msgid "Sign out"
 msgstr "Ausloggen"
 
-#: \views\elements\topprofile.ctp:31
+#: \views\elements\topprofile.ctp:19
 msgid "English"
 msgstr "English"
 
-#: \views\elements\topprofile.ctp:34
+#: \views\elements\topprofile.ctp:22
 msgid "Deutsch"
 msgstr "German"
 
-#: \views\elements\email\newsletter_footer.ctp:12
+#: \views\elements\email\newsletter_footer.ctp:1
+#: \views\elements\email\newsletter_text_footer.ctp:1
+msgid "Yours,"
+msgstr "Euer,"
+
+#: \views\elements\email\newsletter_footer.ctp:15
 msgid "Help?"
 msgstr "Hilfe?"
 
-#: \views\elements\email\newsletter_footer.ctp:17
+#: \views\elements\email\newsletter_footer.ctp:20
 msgid "Hi"
 msgstr "Hi"
 
-#: \views\elements\email\newsletter_footer.ctp:18
-msgid "my name is Clemens and I'm one of the founders of TriCoreTraining."
-msgstr "mein Name ist Clemens und ich bin einer der Gründer von TriCoreTraining."
+#: \views\elements\email\newsletter_footer.ctp:21
+msgid "my name is"
+msgstr "mein Name ist"
 
-#: \views\elements\email\newsletter_footer.ctp:19
+#: \views\elements\email\newsletter_footer.ctp:21
+msgid "and I'm one of the founders of TriCoreTraining."
+msgstr "und ich bin einer der Gründer von TriCoreTraining."
+
+#: \views\elements\email\newsletter_footer.ctp:22
 msgid "If you need help, please"
 msgstr "Wenn du Hilfe brauchst, bitte"
 
-#: \views\elements\email\newsletter_footer.ctp:19
+#: \views\elements\email\newsletter_footer.ctp:22
 msgid "just ask me"
 msgstr "frage nach mir"
 
-#: \views\elements\email\newsletter_footer.ctp:29
+#: \views\elements\email\newsletter_footer.ctp:33
 msgid "Follow us"
 msgstr "Folge uns"
 
-#: \views\elements\email\newsletter_footer.ctp:34
+#: \views\elements\email\newsletter_footer.ctp:38
 msgid "Visit us at Facebook"
 msgstr "Besuche uns auf Facebook"
 
-#: \views\elements\email\newsletter_footer.ctp:35
+#: \views\elements\email\newsletter_footer.ctp:39
 msgid "Follow us on Twitter"
 msgstr "Folge uns auf Twitter"
 
-#: \views\elements\email\newsletter_footer.ctp:50
-#: \views\elements\email\newsletter_text_footer.ctp:3
+#: \views\elements\email\newsletter_footer.ctp:54
+#: \views\elements\email\newsletter_text_footer.ctp:4
 msgid "TriCoreTraining and TriCoreTraining.com"
 msgstr "TriCoreTraining und TriCoreTraining.com"
 
-#: \views\elements\email\newsletter_footer.ctp:50
-#: \views\elements\email\newsletter_text_footer.ctp:3
+#: \views\elements\email\newsletter_footer.ctp:54
+#: \views\elements\email\newsletter_text_footer.ctp:4
 msgid "are registered trademarks"
 msgstr "sind eingetragene Markenzeichen"
 
-#: \views\elements\email\newsletter_footer.ctp:51
-#: \views\elements\email\newsletter_text_footer.ctp:5
+#: \views\elements\email\newsletter_footer.ctp:55
+#: \views\elements\email\newsletter_text_footer.ctp:6
 msgid "TriCoreTraining Association"
 msgstr "TriCoreTraining Verein"
 
-#: \views\elements\email\newsletter_footer.ctp:51
-#: \views\elements\email\newsletter_text_footer.ctp:6
+#: \views\elements\email\newsletter_footer.ctp:55
+#: \views\elements\email\newsletter_text_footer.ctp:7
 msgid "Vienna"
 msgstr "Wien"
 
-#: \views\elements\email\newsletter_footer.ctp:51
-#: \views\elements\email\newsletter_text_footer.ctp:7
+#: \views\elements\email\newsletter_footer.ctp:55
+#: \views\elements\email\newsletter_text_footer.ctp:8
 #: \views\payments\initiate.ctp:114
 #: \views\users\edit_address.ctp:70
 #: \views\users\edit_userinfo.ctp:213
@@ -1913,23 +1938,6 @@ msgstr "bis"
 #: \views\elements\email\text\invoicemail.ctp:25
 msgid "New period:"
 msgstr "Neue Periode:"
-
-#: \views\elements\email\html\invoiceinfomail.ctp:19
-#: \views\elements\email\html\invoicemail.ctp:70
-#: \views\elements\email\html\notification.ctp:44
-#: \views\elements\email\html\passwordforgotten.ctp:15
-#: \views\elements\email\html\passwordreset.ctp:16
-#: \views\elements\email\html\standardmail.ctp:14
-#: \views\elements\email\html\welcomemail.ctp:17
-#: \views\elements\email\text\invoiceinfomail.ctp:11
-#: \views\elements\email\text\invoicemail.ctp:27
-#: \views\elements\email\text\notification.ctp:26
-#: \views\elements\email\text\passwordforgotten.ctp:9
-#: \views\elements\email\text\passwordreset.ctp:11
-#: \views\elements\email\text\standardmail.ctp:8
-#: \views\elements\email\text\welcomemail.ctp:13
-msgid "Yours, Clemens"
-msgstr "Dein Clemens"
 
 #: \views\elements\email\html\invoicemail.ctp:12
 #: \views\elements\email\text\invoicemail.ctp:5
@@ -2023,6 +2031,10 @@ msgstr "Setze dein Training fort."
 msgid "No VAT included, because as a club we are not allowed to charge VAT!"
 msgstr "Keine MWSt inkludiert, weil als Verein dürfen wir keine MWSt verrechnen!"
 
+#: \views\elements\email\html\invoicemail.ctp:70
+msgid "Yours, Clemens"
+msgstr "Dein Clemens"
+
 #: \views\elements\email\html\notification.ctp:12
 #: \views\elements\email\text\notification.ctp:4
 msgid "some notification arrived."
@@ -2053,8 +2065,8 @@ msgstr "Dein neues Passwort auf TriCoreTraining.com ist"
 msgid "Click here to login"
 msgstr "Klicke hier, um dich einzuloggen"
 
-#: \views\elements\email\html\standardmail.ctp:17
-#: \views\elements\email\text\standardmail.ctp:13
+#: \views\elements\email\html\standardmail.ctp:14
+#: \views\elements\email\text\standardmail.ctp:11
 msgid "Stop sending me notifications!"
 msgstr "Ich will keine Benachrichtungen mehr!"
 
@@ -2083,7 +2095,7 @@ msgstr "Klicke hier, um deinen Account zu aktivieren"
 msgid "Login to your personal training dashboard."
 msgstr "Logge dich zu deinem persönlichen Trainingscockpit ein."
 
-#: \views\elements\email\text\standardmail.ctp:10
+#: \views\elements\email\text\standardmail.ctp:8
 msgid "Go to TriCoreTraining.com!"
 msgstr "Gehe zu TriCoreTraining.com!"
 
@@ -2167,43 +2179,83 @@ msgstr "Erhalte individuell auf dich abgestimmte Trainingspläne."
 msgid "Receive individual training plans based on your workouts and upcoming competitions."
 msgstr "Erhalte Trainingspläne, die individuell auf dein bisheriges Training und deine kommenden Wettkämpfe zugeschnitten sind."
 
-#: \views\layouts\trainingplans.ctp:74
+#: \views\layouts\trainingplans.ctp:76
 msgid "Training Hours"
 msgstr "Trainingsstunden"
 
-#: \views\layouts\trainingplans.ctp:75;78
-#: \views\users\list_users.ctp:52
+#: \views\layouts\trainingplans.ctp:77;80
+#: \views\users\list_users.ctp:70
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: \views\layouts\trainingplans.ctp:76
+#: \views\layouts\trainingplans.ctp:78
 msgid "These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected."
 msgstr "Das sind deine <b>durchschnittlichen</b> Trainingsstunden - jene Zeit, die du durchschnittlich im Jahr mit Training zubringst. Wenn du diese Einstellung anpasst, werden auch alle zukünftigen Trainingswochen entsprechend angepasst."
 
-#: \views\layouts\trainingplans.ctp:77
+#: \views\layouts\trainingplans.ctp:79
 msgid "This Week"
 msgstr "Diese Woche"
 
-#: \views\layouts\trainingplans.ctp:79
+#: \views\layouts\trainingplans.ctp:81
 msgid "This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week."
 msgstr "Hier findest du die Trainingszeit, die für diese Woche reserviert ist. Der Wert wird aus den durchschnittlichen Trainingsstunden direkt oberhalb errechnet. Du kannst diesen Wert anpassen, um mehr oder weniger Training für diese Woche zu erhalten."
 
-#: \views\layouts\trainingplans.ctp:80;86
+#: \views\layouts\trainingplans.ctp:82;88
 msgid "reset"
 msgstr "zurücksetzen"
 
-#: \views\layouts\trainingplans.ctp:86
+#: \views\layouts\trainingplans.ctp:88
 msgid "Workout Balance"
 msgstr "Aufteilung der Trainings"
 
-#: \views\layouts\trainingplans.ctp:87
+#: \views\layouts\trainingplans.ctp:89
 msgid "Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks."
 msgstr "Hier kannst du die Aufteilung der Zeit zwischen den einzelnen Sportarten bestimmen. Ziehe die Regler, um das Verhältnis zu beeinflussen. Wenn du diese Einstellung änderst, werden alle zukünftigen Trainingswochen davon beeinflusst."
 
-#: \views\layouts\trainingplans.ctp:109
+#: \views\layouts\trainingplans.ctp:98
+msgid "Beginner's guide to your training"
+msgstr "Ersten Schritte für Trainingsanfänger"
+
+#: \views\layouts\trainingplans.ctp:120
 #: \views\users\edit_traininginfo.ctp:190
 msgid "Zone"
 msgstr "Zone"
+
+#: \views\layouts\trainingplans.ctp:129
+msgid "1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum."
+msgstr "1. Deine Trainings sind nach Relevanz sortiert. Wenn du viele Trainings erhältst, dann kannst du sie auch kombinieren, aber plane mindestens einen Erholungstag ein."
+
+#: \views\layouts\trainingplans.ctp:129
+msgid "2. Change your available time, if necessary."
+msgstr "2. Ändere deine verfügbare Trainingszeit, wenn notwendig."
+
+#: \views\layouts\trainingplans.ctp:129
+msgid "3. Change your sports balance, if necessary."
+msgstr "3. Ändere die Balance der Sportarten, wenn notwendig."
+
+#: \views\layouts\trainingplans.ctp:129
+msgid "Click on the right side of the image to go to the next step."
+msgstr "Klicke auf die rechte Seite des Bildes, um zum nächsten Schritt zu kommen."
+
+#: \views\layouts\trainingplans.ctp:133
+msgid "Add your important competitions to get an improved training plan based on your sport goals."
+msgstr "Füge deine wichtigen Wettkämpfe hinzu, um einen verbesserten Trainingsplan basierend auf deinen Trainingszielen zu bekommen."
+
+#: \views\layouts\trainingplans.ctp:137
+msgid "If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones."
+msgstr "Wenn du weitere, spezifische Trainingsdaten hast, dann ändere deine Einstellungen. Ändere deinen Laktatgrenzwert oder prüfe deine Herzfrequenzzonen."
+
+#: \views\layouts\trainingplans.ctp:141
+msgid "Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook."
+msgstr "Trage deine Trainings ein, um einen Verlauf deiner Trainings zu bekommen und passendere Trainings zu bekommen. Poste deine Ergebnisse auf Twitter oder Facebook."
+
+#: \views\layouts\trainingplans.ctp:145
+msgid "Analyse the results of your training with the most important graphs and statistics."
+msgstr "Analysiere die Ergebnisse deines Trainings mit den wichtigsten Graphen und Statistiken."
+
+#: \views\layouts\trainingplans.ctp:153
+msgid "Step"
+msgstr "Schritt"
 
 #: \views\payments\initiate.ctp:1
 msgid "month PREMIUM membership"
@@ -2266,14 +2318,14 @@ msgid "ZIP"
 msgstr "PLZ"
 
 #: \views\payments\initiate.ctp:95
-#: \views\trainingstatistics\edit_training.ctp:278
+#: \views\trainingstatistics\edit_training.ctp:277
 #: \views\users\edit_address.ctp:51
 #: \views\users\edit_userinfo.ctp:194
 msgid "City"
 msgstr "Stadt"
 
 #: \views\payments\initiate.ctp:101
-#: \views\trainingstatistics\edit_training.ctp:278
+#: \views\trainingstatistics\edit_training.ctp:277
 #: \views\users\edit_address.ctp:57
 #: \views\users\edit_userinfo.ctp:200
 msgid "Country"
@@ -2529,175 +2581,167 @@ msgstr "Nächste"
 msgid "Add or edit your workout!"
 msgstr "Training hinzufügen oder bearbeiten!"
 
-#: \views\trainingstatistics\edit_training.ctp:22
-msgid "Back to list of workouts"
-msgstr "Zurück zur Liste der Trainings"
-
-#: \views\trainingstatistics\edit_training.ctp:39
+#: \views\trainingstatistics\edit_training.ctp:38
 msgid "RUN"
 msgstr "Laufen"
 
-#: \views\trainingstatistics\edit_training.ctp:40
+#: \views\trainingstatistics\edit_training.ctp:39
 msgid "BIKE"
 msgstr "Radfahren"
 
-#: \views\trainingstatistics\edit_training.ctp:41
+#: \views\trainingstatistics\edit_training.ctp:40
 msgid "SWIM"
 msgstr "Schwimmen"
 
-#: \views\trainingstatistics\edit_training.ctp:53
+#: \views\trainingstatistics\edit_training.ctp:52
 msgid "Bike / Mountain-Bike"
 msgstr "Rennrad / Mountainbike"
 
-#: \views\trainingstatistics\edit_training.ctp:68;69
+#: \views\trainingstatistics\edit_training.ctp:67;68
 msgid "Enter a distance for your workout"
 msgstr "Gibt eine Distanz für dein Training an"
 
-#: \views\trainingstatistics\edit_training.ctp:83;84
+#: \views\trainingstatistics\edit_training.ctp:82;83
 msgid "Enter a duration for your workout"
 msgstr "Gib eine Dauer für dein Training an"
 
-#: \views\trainingstatistics\edit_training.ctp:86
+#: \views\trainingstatistics\edit_training.ctp:85
 msgid "Duration (HH:MM:SS)"
 msgstr "Dauer (HH:MM:SS)"
 
-#: \views\trainingstatistics\edit_training.ctp:90
+#: \views\trainingstatistics\edit_training.ctp:89
 msgid "This is a pulse-oriented training! Use your heart rate monitor to track your pulse. If you don't enter an average heart rate, we have to approximate."
 msgstr "Das ist ein puls-orientiertes Training! Nutze deinen Pulsmonitor, um deine Herzfrequenz aufzuzeichnen. Wenn du keine durchschnittliche Herzfrequenz eingibst, dann müssen wir schätzen."
 
-#: \views\trainingstatistics\edit_training.ctp:101;102
+#: \views\trainingstatistics\edit_training.ctp:100;101
 msgid "Enter an average heart rate for your workout"
 msgstr "Gib eine durchschnittliche Herzfrequenz für das Training ein"
 
-#: \views\trainingstatistics\edit_training.ctp:103
+#: \views\trainingstatistics\edit_training.ctp:102
 msgid "Must be greater than"
 msgstr "Muss größer sein als"
 
-#: \views\trainingstatistics\edit_training.ctp:104;171
+#: \views\trainingstatistics\edit_training.ctp:103;170
 #: \views\users\edit_weight.ctp:32;50;65
 msgid "Must be lower than"
 msgstr "Muss geringer sein als"
 
-#: \views\trainingstatistics\edit_training.ctp:113
+#: \views\trainingstatistics\edit_training.ctp:112
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:40
 msgid "Competition"
 msgstr "Wettkampf"
 
-#: \views\trainingstatistics\edit_training.ctp:124
+#: \views\trainingstatistics\edit_training.ctp:123
 msgid "Enter a name for the workout (route) to display it in your form curve."
 msgstr "Gib einen Namen für die Trainingsstrecke ein, um dieses in der Formkurve anzuzeigen."
 
-#: \views\trainingstatistics\edit_training.ctp:135
+#: \views\trainingstatistics\edit_training.ctp:134
 msgid "Enter name for your workout route"
 msgstr "Gibt einen Namen für die Trainingsstrecke an"
 
-#: \views\trainingstatistics\edit_training.ctp:137
+#: \views\trainingstatistics\edit_training.ctp:136
 msgid "Name for workout"
 msgstr "Name für das Training"
 
-#: \views\trainingstatistics\edit_training.ctp:147
+#: \views\trainingstatistics\edit_training.ctp:146
 msgid "Optional data"
 msgstr "Zusätzliche Daten"
 
-#: \views\trainingstatistics\edit_training.ctp:149
+#: \views\trainingstatistics\edit_training.ctp:148
 msgid "Show advanced functions"
 msgstr "Zeige erweiterte Funktionen"
 
-#: \views\trainingstatistics\edit_training.ctp:169;172
+#: \views\trainingstatistics\edit_training.ctp:168;171
 #: \views\users\edit_weight.ctp:48;51
 msgid "Enter your current weight"
 msgstr "Gibt dein aktuelles Gewicht an"
 
-#: \views\trainingstatistics\edit_training.ctp:170
+#: \views\trainingstatistics\edit_training.ctp:169
 #: \views\users\edit_weight.ctp:31;49;64
 msgid "Must be at least"
 msgstr "Nicht weniger als"
 
-#: \views\trainingstatistics\edit_training.ctp:186
+#: \views\trainingstatistics\edit_training.ctp:185
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:51
 msgid "AVG Speed"
 msgstr "Durchschnittliche Geschwindigkeit"
 
-#: \views\trainingstatistics\edit_training.ctp:193
+#: \views\trainingstatistics\edit_training.ctp:192
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:50;175
 msgid "TRIMP"
 msgstr "TRIMP"
 
-#: \views\trainingstatistics\edit_training.ctp:200
+#: \views\trainingstatistics\edit_training.ctp:199
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:52
 msgid "Burnt"
 msgstr "Verbrannt"
 
-#: \views\trainingstatistics\edit_training.ctp:209
+#: \views\trainingstatistics\edit_training.ctp:208
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:44
 msgid "Comment"
 msgstr "Kommentar"
 
-#: \views\trainingstatistics\edit_training.ctp:302
+#: \views\trainingstatistics\edit_training.ctp:301
 msgid "Link workout"
 msgstr "Link zum Workout"
 
-#: \views\trainingstatistics\edit_training.ctp:307
-msgid "Visualize your run workouts on runmap.net!"
-msgstr "Visualisiere deine Lauftrainings auf runmap.net!"
+#: \views\trainingstatistics\edit_training.ctp:305
+msgid "Visualize your workout on"
+msgstr "Visualisiere deine Lauftrainings auf"
 
-#: \views\trainingstatistics\edit_training.ctp:308
-msgid "Visualize your bike workouts on bikemap.net!"
-msgstr "Visualisiere deine Radtrainings auf bikemap.net!"
-
-#: \views\trainingstatistics\edit_training.ctp:314
+#: \views\trainingstatistics\edit_training.ctp:315
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: \views\trainingstatistics\edit_training.ctp:317
+#: \views\trainingstatistics\edit_training.ctp:318
 msgid "Weather"
 msgstr "Wetter"
 
-#: \views\trainingstatistics\edit_training.ctp:326
+#: \views\trainingstatistics\edit_training.ctp:327
 msgid "warm"
 msgstr "warm"
 
-#: \views\trainingstatistics\edit_training.ctp:327
+#: \views\trainingstatistics\edit_training.ctp:328
 msgid "cold"
 msgstr "kalt"
 
-#: \views\trainingstatistics\edit_training.ctp:338
+#: \views\trainingstatistics\edit_training.ctp:339
 msgid "sunny"
 msgstr "sonnig"
 
-#: \views\trainingstatistics\edit_training.ctp:339
+#: \views\trainingstatistics\edit_training.ctp:340
 msgid "windy"
 msgstr "windig"
 
-#: \views\trainingstatistics\edit_training.ctp:340
+#: \views\trainingstatistics\edit_training.ctp:341
 msgid "rain"
 msgstr "regnerisch"
 
-#: \views\trainingstatistics\edit_training.ctp:352
+#: \views\trainingstatistics\edit_training.ctp:353
 msgid "Route"
 msgstr "Route"
 
-#: \views\trainingstatistics\edit_training.ctp:355
+#: \views\trainingstatistics\edit_training.ctp:356
 msgid "Feeling"
 msgstr "Gefühl"
 
-#: \views\trainingstatistics\edit_training.ctp:364
+#: \views\trainingstatistics\edit_training.ctp:365
 msgid "flat"
 msgstr "flach"
 
-#: \views\trainingstatistics\edit_training.ctp:365
+#: \views\trainingstatistics\edit_training.ctp:366
 msgid "hilly"
 msgstr "hügelig"
 
-#: \views\trainingstatistics\edit_training.ctp:366
+#: \views\trainingstatistics\edit_training.ctp:367
 msgid "mountainous"
 msgstr "bergig"
 
-#: \views\trainingstatistics\edit_training.ctp:377
+#: \views\trainingstatistics\edit_training.ctp:378
 msgid "well"
 msgstr "gut"
 
-#: \views\trainingstatistics\edit_training.ctp:378
+#: \views\trainingstatistics\edit_training.ctp:379
 msgid "bad"
 msgstr "schlecht"
 
@@ -2750,7 +2794,7 @@ msgid "Add workout"
 msgstr "Training hinzufügen"
 
 #: \views\trainingstatistics\list_trainings.ctp:31
-#: \views\users\list_users.ctp:27
+#: \views\users\list_users.ctp:30
 msgid "Action"
 msgstr "Aktion"
 
@@ -2846,47 +2890,47 @@ msgstr "Alles"
 msgid "Display"
 msgstr "Anzeigen"
 
-#: \views\trainingstatistics\statistics_competition.ctp:71
+#: \views\trainingstatistics\statistics_competition.ctp:69
 msgid "No training information available. Start training and then come back!"
 msgstr "Keine Trainingsinformation verfügbar. Beginne dein Training und dann komm zurück!"
 
-#: \views\trainingstatistics\statistics_competition.ctp:86
+#: \views\trainingstatistics\statistics_competition.ctp:84
 msgid "In this season you should have reached training impulse (TRIMP): "
 msgstr "In dieser Saison solltest du soviel Trainingsimpulse erreicht haben (TRIMP):"
 
-#: \views\trainingstatistics\statistics_competition.ctp:87
+#: \views\trainingstatistics\statistics_competition.ctp:85
 msgid "In this season you already reached this training impulse (TRIMP): "
 msgstr "In dieser Saison hast du soviele Trainingsimpulse erreicht (TRIMP):"
 
-#: \views\trainingstatistics\statistics_competition.ctp:88
+#: \views\trainingstatistics\statistics_competition.ctp:86
 msgid "Percentage: "
 msgstr "Prozentsatz:"
 
-#: \views\trainingstatistics\statistics_competition.ctp:91
+#: \views\trainingstatistics\statistics_competition.ctp:89
 msgid "Green"
 msgstr "Grün"
 
-#: \views\trainingstatistics\statistics_competition.ctp:93;100;107
+#: \views\trainingstatistics\statistics_competition.ctp:91;98;105
 msgid "means"
 msgstr "bedeutet"
 
-#: \views\trainingstatistics\statistics_competition.ctp:95
+#: \views\trainingstatistics\statistics_competition.ctp:93
 msgid "you reach your goal."
 msgstr "du erreichst dein Ziel."
 
-#: \views\trainingstatistics\statistics_competition.ctp:98
+#: \views\trainingstatistics\statistics_competition.ctp:96
 msgid "Orange"
 msgstr "Orange"
 
-#: \views\trainingstatistics\statistics_competition.ctp:102
+#: \views\trainingstatistics\statistics_competition.ctp:100
 msgid "you are currently under- or overperforming."
 msgstr "du unter- oder überperformst."
 
-#: \views\trainingstatistics\statistics_competition.ctp:105
+#: \views\trainingstatistics\statistics_competition.ctp:103
 msgid "Red"
 msgstr "Rot"
 
-#: \views\trainingstatistics\statistics_competition.ctp:109
+#: \views\trainingstatistics\statistics_competition.ctp:107
 msgid "you didn't do enough or too much. You can't finish your competition."
 msgstr "du hast nicht genug oder zu viel gemacht. Du kannst deinen Wettkampf nicht mehr erreichen."
 
@@ -2972,6 +3016,11 @@ msgid "TRIMP trained"
 msgstr "Trainierte  TRIMPs"
 
 #: \views\trainingstatistics\statistics_trimp_json.ctp:34
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:173
+msgid "Sum"
+msgstr "Summe"
+
+#: \views\trainingstatistics\statistics_trimp_json.ctp:34
 msgid "Trimps"
 msgstr "Trimps"
 
@@ -2995,10 +3044,6 @@ msgstr "Exportieren"
 msgid "Season Statistics"
 msgstr "Saisonstatistiken"
 
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:173
-msgid "Sum"
-msgstr "Summe"
-
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:196
 msgid "Points"
 msgstr "Punkte"
@@ -3013,7 +3058,7 @@ msgstr "Zeit Statistiken"
 
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:58;75
 #: \views\users\edit_traininginfo.ctp:245
-#: \views\users\register.ctp:209
+#: \views\users\register.ctp:211
 msgid "hours"
 msgstr "Stunden"
 
@@ -3222,12 +3267,12 @@ msgid "Your bike lactate threshold is not valid! Should be between 220 and 120."
 msgstr "Dein Radfahr-Laktatgrenzwert ist nicht gültig! Dieser sollte zwischen 220 und 120 liegen."
 
 #: \views\users\edit_traininginfo.ctp:244
-#: \views\users\register.ctp:208
+#: \views\users\register.ctp:210
 msgid "Weekly training load varies between"
 msgstr "Die wöchentliche Trainingslast variiert zwischen"
 
 #: \views\users\edit_traininginfo.ctp:245
-#: \views\users\register.ctp:209
+#: \views\users\register.ctp:211
 msgid "and"
 msgstr "und"
 
@@ -3441,33 +3486,38 @@ msgstr "Dezember"
 msgid "List users"
 msgstr "Benutzer auflisten"
 
-#: \views\users\list_users.ctp:12
+#: \views\users\list_users.ctp:13
 msgid "Administrate our users!"
 msgstr "Administriere unsere Benutzer!"
 
-#: \views\users\list_users.ctp:22
+#: \views\users\list_users.ctp:25
 msgid "ID"
 msgstr "ID"
 
-#: \views\users\list_users.ctp:24
+#: \views\users\list_users.ctp:27
 msgid "Pay-Date"
 msgstr "Zahl-Datum"
 
-#: \views\users\list_users.ctp:25
+#: \views\users\list_users.ctp:28
 msgid "Activation"
 msgstr "Aktivierung"
 
-#: \views\users\list_users.ctp:26
+#: \views\users\list_users.ctp:29
 msgid "Beta/Admin"
 msgstr "Beta/Admin"
 
-#: \views\users\list_users.ctp:35
+#: \views\users\list_users.ctp:38
 msgid "No users available."
 msgstr "Keine Benutzer verfügbar."
 
-#: \views\users\list_users.ctp:54
+#: \views\users\list_users.ctp:72
 msgid "Become user"
 msgstr "Werde dieser Benutzer"
+
+#: \views\users\list_users.ctp:83
+#: \views\users\send_message.ctp:2
+msgid "Send message"
+msgstr "Sende Nachricht"
 
 #: \views\users\login.ctp:15
 msgid "You are logged in and want to leave?"
@@ -3503,6 +3553,7 @@ msgid "Your e-mail"
 msgstr "Deine E-Mail"
 
 #: \views\users\password_forgotten.ctp:47
+#: \views\users\send_message.ctp:58
 msgid "Send"
 msgstr "Senden"
 
@@ -3562,7 +3613,7 @@ msgstr "Ich stimme zu"
 msgid "You HAVE TO agree to our terms and conditions! That's the way you protect our rights :)."
 msgstr "Du MUSST den AGBs zustimmen! Das ist der Weg, wie du unsere Rechte schützt :)."
 
-#: \views\users\register.ctp:188
+#: \views\users\register.ctp:190
 msgid "Register"
 msgstr "Registrieren"
 
@@ -3581,6 +3632,36 @@ msgstr "Deine GRATIS Mitgliedschaft ist gültig von"
 #: \views\users\register_finish.ctp:35
 msgid "Activate"
 msgstr "Aktivieren"
+
+#: \views\users\send_message.ctp:9
+msgid "Send messages to specific users"
+msgstr "Sende Nachrichten an spezielle Benutzer"
+
+#: \views\users\send_message.ctp:40
+msgid "Subject"
+msgstr "Betreff"
+
+#: \views\users\send_message.ctp:47
+msgid "Message"
+msgstr "Nachricht"
+
+#~ msgid "Of course."
+#~ msgstr "Natürlich."
+
+#~ msgid "Read it (also mobile), print it, USE it!"
+#~ msgstr "Lies das (auch mobil), drucke es aus, BENUTZE es!"
+
+#~ msgid "There is something to update in your profile."
+#~ msgstr "Es gibt etwas zu aktualisieren in deinem Profil."
+
+#~ msgid "Back to list of workouts"
+#~ msgstr "Zurück zur Liste der Trainings"
+
+#~ msgid "Visualize your bike workouts on bikemap.net!"
+#~ msgstr "Visualisiere deine Radtrainings auf bikemap.net!"
+
+#~ msgid "Please confirm your address."
+#~ msgstr "Bitte bestätige deine Adresse."
 
 #~ msgid "-month(s)"
 #~ msgstr "Monat(e)"
@@ -4023,6 +4104,3 @@ msgstr "Aktivieren"
 #~ msgstr ""
 #~ "Registrierung abgeschlossen. Bitte klicke den Aktivierungslink in deiner "
 #~ "Email!"
-
-#~ msgid "is not correct!"
-#~ msgstr "ist nicht korrekt!"

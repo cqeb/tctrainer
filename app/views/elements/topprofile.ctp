@@ -1,17 +1,5 @@
 
 <div class="tools">
-<?php 
-if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $userobject ) && $userobject['admin'] == 1 )
-{
-?>
-<a href="/trainer/starts/index/en/u:<?php echo base64_encode("1"); ?>">u:1</a> | 
-<a href="/trainer/starts/index/en/ur:<?php echo base64_encode("1"); ?>">ur:1</a> | 
-<a href="/trainer/starts/index/en/urm:<?php echo base64_encode("1"); ?>">urm:1</a> | 
-<a href="/trainer/starts/index/en/c:<?php echo base64_encode("@gentics.com"); ?>">c:@gentics.com</a> |  	 
-<?php
-}
-?>
-
 <a href="/trainer/"><?php __('Home'); ?></a>
  | 
 <?php if ( !isset( $session_userid ) ) { ?>

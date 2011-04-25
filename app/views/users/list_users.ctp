@@ -8,6 +8,7 @@ $yesno[0] = __('No', true);
 
                    <?php echo $this->element('js_error'); ?>
 
+                   <?php echo $form->create('User', array('action' => 'send_message')); ?>
                    <fieldset> 
                    <legend><?php __('Administrate our users!'); ?></legend>
 
@@ -23,10 +24,11 @@ $yesno[0] = __('No', true);
 <tr>
     <th><?php echo $paginator->sort(__('ID',true), 'id'); ?></th>
     <th><?php echo $paginator->sort(__('Name',true), 'lastname'); ?></th>
-    <th style="width: 15%"><?php echo $paginator->sort(__('Pay-Date',true), 'paid_to'); ?></th>
-    <th style="width: 15%"><?php echo $paginator->sort(__('Activation',true), 'deactivated'); ?></th>
-    <th style="width: 15%"><?php __('Beta/Admin'); ?></th>
-    <th><?php __('Action'); ?></th>
+    <th><?php echo $paginator->sort(__('Lang',true), 'yourlanguage'); ?></th>
+    <th><?php echo $paginator->sort(__('Pay-Date',true), 'paid_to'); ?></th>
+    <th><?php echo $paginator->sort(__('Activation',true), 'deactivated'); ?></th>
+    <th><?php __('Beta/Admin'); ?></th>
+    <th width="15%"><?php __('Action'); ?></th>
 </tr>
 
 <?php 
@@ -34,7 +36,7 @@ $yesno[0] = __('No', true);
 if ( !isset( $users ) || count( $users ) < 1 )
 {
   
-    echo '<td colspan="6">' . __('No users available.', true) . '</td>';  
+    echo '<td colspan="7">' . __('No users available.', true) . '</td>';  
 }
  
 ?>
@@ -42,11 +44,37 @@ if ( !isset( $users ) || count( $users ) < 1 )
 <?php foreach ($users as $userentry): ?>
 <?php $user = $userentry['User']; ?>
 
-<?php //pr($user); ?>
+<?php $userid = $user['id']; ?>
 
 <tr>
-    <td><?php echo $html->link($user['id'], array('action' => 'edit_user', 'id' => $user['id']), null); ?></td>
-    <td><?php echo $user['firstname'] . ' ' . $user['lastname']; ?></td>
+    <td>
+<span><?php echo $html->link($user['id'], array('action' => 'edit_user', 'id' => $user['id']), null); ?></span>
+<br />
+<?php 
+echo $form->input('user_' . $user['id'],
+                  array(
+                  'label' => false,
+                  'div' => false,
+                  'style' => 'margin:0px;',
+                  'legend' => false,
+                  'type' => 'checkbox',
+                  'options' => array(
+                            '1' => __('Yes',true),
+                            '0' => __('No',true)
+                  )
+));
+?></td>
+    <td>
+    <?php if ( $user['deactivated'] == 1 ) echo '<strike>'; echo $user['firstname'] . ' ' . $user['lastname']; if ( $user['deactivated'] == 1 ) echo '</strike>'; ?><br />
+    <?php 
+    if ( isset( $usertrainings[$userid]['lasttraining'] ) ) {
+    	 echo $usertrainings[$userid]['lasttraining']; echo ' ('; echo $usertrainings[$userid]['sumtrainings']; echo ')'; 
+    } else {
+    echo '<span style="color:red">no trainings</span>'; 
+	} 
+	?>
+    </td>
+    <td><?php echo $user['yourlanguage']; ?></td>
     <td><?php echo $user['paid_from'] . ' - ' . $user['paid_to']; ?></td>
     <td><?php echo 'Activ. <b>' . $yesno[$user['activated']] . '</b><br />' . 'Deact. <b>' . $yesno[$user['deactivated']]; ?></b></td>
     <td><?php echo 'Beta <b>' . $yesno[$user['advanced_features']] . '</b><br />' . 'Admin <b>' . $yesno[$user['admin']]; ?></b></td>
@@ -64,7 +92,9 @@ if ( !isset( $users ) || count( $users ) < 1 )
                  </fieldset>
 <?php
 
-      echo $form->end();
+	echo $form->submit(__('Send message',true));
+
+	echo $form->end();
 
 ?>
 
@@ -76,7 +106,7 @@ if ( !isset( $users ) || count( $users ) < 1 )
 \$(document).ready(function() {
 
         // facebox box
-        /*\$('a[rel*=facebox]').facebox();*/
+        //\$('a[rel*=facebox]').facebox();
 
 });
 

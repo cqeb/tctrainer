@@ -97,7 +97,7 @@ class UnitcalcComponent extends Object {
 	                  $amount_array['unit'] = 'km';
 	              }
 	
-				  if ( $locale == 'ger' )
+				  if ( $locale == 'ger' || $excel == 'excel' )
 				  { 
 				  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
 				  }
@@ -135,7 +135,7 @@ class UnitcalcComponent extends Object {
                   $amount_array['unit'] = 'kg';
               }
 			  
-			  if ( $locale == 'ger' ) 
+			  if ( $locale == 'ger' || $excel == 'excel' ) 
 			  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
 			
               if ( $ret == 'single' )
@@ -613,7 +613,8 @@ class UnitcalcComponent extends Object {
 	{
 		if ( isset( $country ) ) $currency = $this->currency_for_country( $country );
 		elseif ( !isset( $currency ) )  $currency = 'USD';
-					
+		
+		// show special prices for companies			
 		if ( isset( $userobject['inviter'] ) && preg_match( '/@/', $userobject['inviter'] ) && preg_match( '/'.$userobject['inviter'].'/', Configure::read('company_emails') ) )
 		{
 			$price_eur = Configure::read('company_price_eur');

@@ -13,7 +13,5 @@
  <p><?php __('Your new password on TriCoreTraining.com is'); ?> <b><?php echo $randompassword; ?></b>.</p>
  <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/login/"><?php __('Click here to login'); ?>.</a></p>
                            
- <p><?php __('Yours, Clemens'); ?></p>
- <br /> 
 
 <?php echo $this->element('email/newsletter_footer'); ?>

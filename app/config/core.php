@@ -38,10 +38,20 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) ) 
+if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) )
+{ 
 	Configure::write('debug', 2);
-else 
+	/**
+	 * Defines the default error type when using the log() function. Used for
+	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
+	 */
+	define('LOG_ERROR', 2);
+} else 
+{
+	define('LOG_ERROR', 0);
+	
 	Configure::write('debug', 0);
+}
 
 /**
  * Application wide charset encoding
@@ -156,7 +166,7 @@ Configure::write('company_price_eur_month', '"6.90","6.27","5.82","5.49"');
 Configure::write('company_price_usd', '"9.90","27.90","51.90","97,90"');
 Configure::write('company_price_usd_month', '"9.90","9.30","8.65","8.16"');
 
-Configure::write('company_emails', '"@gentics.com","@nullzeit.at"');
+Configure::write('company_emails', '"@gentics.com","@nullzeit.at","@s-itsolutions.at","@erstebank.at","@erstegroup.com","@immorent.com","@sparkasse.at","@s-zv.at"');
 
 /**
  * Uncomment the define below to use CakePHP admin routes.
@@ -189,11 +199,6 @@ else
  */
 //Configure::write('Cache.check', true);
 /**
- * Defines the default error type when using the log() function. Used for
- * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
- */
-define('LOG_ERROR', 2);
-/**
  * The preferred session handling method. Valid values:
  *
  * 'php'	 		Uses settings defined in your php.ini.
@@ -225,6 +230,9 @@ Configure::write('Session.save', 'php');
  * The name of CakePHP's session cookie.
  */
 Configure::write('Session.cookie', 'CAKEPHP');
+
+// kms
+Configure::write('Session.path', '/');
 /**
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
@@ -291,27 +299,30 @@ Configure::write('Acl.database', 'default');
  *
  * File storage engine.
  *
- * 	 Cache::config('default', array(
- *		'engine' => 'File', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
- * 		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
- * 		'lock' => false, //[optional]  use file locking
- * 		'serialize' => true, [optional]
- *	));
+ *
+  	 Cache::config('default', array(
+ 		'engine' => 'File', //[required]
+ 		'duration'=> 3600, //[optional]
+ 		'probability'=> 100, //[optional]
+  		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
+  		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
+  		'lock' => false, //[optional]  use file locking
+  		'serialize' => true //[optional]
+ 	));
  *
  *
  * APC (http://pecl.php.net/package/APC)
  *
- * 	 Cache::config('default', array(
- *		'engine' => 'Apc', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
- *	));
  *
- * Xcache (http://xcache.lighttpd.net/)
+ Cache::config('default', array(
+ 		'engine' => 'Apc', //[required]
+ 		'duration'=> 3600, //[optional]
+ 		'probability'=> 100, //[optional]
+  		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
+ 	));
+ 
+ * 
+ *  Xcache (http://xcache.lighttpd.net/)
  *
  * 	 Cache::config('default', array(
  *		'engine' => 'Xcache', //[required]

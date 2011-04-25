@@ -16,16 +16,29 @@ class StartsController extends AppController
   		$this->layout = 'trainer_start';
 	}
 
-	function index( $language = 'en' )
+	function index( $language = '' )
 	{
       	$this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
 
-		if ( isset( $language ) )
+		if ( isset( $this->params['named']['code'] ) ) 
 		{
-			if ( $language == 'de' ) $this->code = 'deu';
-			else $this->code = 'eng';
-			
+			$this->code = $this->params['named']['code'];
 			$this->Session->write('Config.language', $this->code);
+			Configure::write('Config.language',$this->code);
+            $this->set('locale', $this->code);
+		}
+			
+		if ( isset( $language ) && $language != '' && ( strlen( $language ) == 2 ) )
+		{
+			
+			if ( $language == 'de' ) 
+				$this->code = 'deu';
+			else 
+				$this->code = 'eng';
+				
+			$this->Session->write('Config.language', $this->code);
+			Configure::write('Config.language',$this->code);
+            $this->set('locale', $this->code);
 		}
 		
       	if ( isset( $this->params['named']['u'] ) ) 
@@ -91,6 +104,16 @@ class StartsController extends AppController
 				$this->set( 'companyinfo', $company_email );
 			}
 			
+ 		} elseif ( isset( $this->params['named']['discount'] ) )
+ 		{
+ 			$discount = $this->params['named']['discount'];
+			if ( isset( $discount ) )
+			{ 
+				$this->Session->write('recommendation_userid', $discount);
+				
+				$this->set( 'companyinfo', $discount );
+			}
+			
 		} elseif ( $this->Session->read('session_userid') )
             $this->redirect('/trainingplans/view');
      
@@ -118,17 +141,23 @@ class StartsController extends AppController
 
 	    if ( $this->Session->read('session_userid') )
 	    {
-	          $this->User->id = $this->Session->read('session_userid');
-	          $this->User->savefield('yourlanguage', $this->code, false);
+				$this->loadModel('User');
+	
+				$this->User->id = $this->Session->read('session_userid');
+				$this->User->savefield('yourlanguage', $this->code, false);
 	    }
 
+		Configure::write('Config.language',$this->code);
 		$this->Session->write('Config.language', $this->code);
 		$this->Session->setFlash(__('Language changed.',true));
 
-		if ( $this->referer() ) 
+		if ( $this->referer() && $this->referer() != '/' )
+		{
 		    $this->redirect($this->referer());
-	    else 
-	        $this->redirect(array('action'=>'index'));
+	    } else
+		{ 
+	        $this->redirect(array('controller' => 'starts', 'action' => 'index', 'code' => $this->code));
+	    }
 
 	}
 

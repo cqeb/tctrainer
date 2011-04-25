@@ -8,6 +8,5 @@
 <?php __('Old period:'); ?> <?php echo $paid_from; ?> <?php __('to'); ?> <?php echo $paid_to; ?>
 <?php __('New period:'); ?> <?php echo $paid_new_from; ?> <?php __('to'); ?> <?php echo $paid_new_to; ?>
 
-<?php __('Yours, Clemens'); ?>
 
 <?php echo $this->element('email/newsletter_text_footer'); ?>

@@ -181,7 +181,7 @@ and provide these confidential data only to PAYPAL and NOT to us (we only receiv
 \$(document).ready(function() {
 
         // facebox box
-        \$('a[rel*=facebox]').facebox();
+        //\$('a[rel*=facebox]').facebox();
 
 });
 

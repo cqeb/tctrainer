@@ -12,21 +12,29 @@
 
     <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
+
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
 
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
+<!--
+    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
+-->
+
     <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/zoneguide.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
 <?php echo $scripts_for_layout; ?>
 
@@ -87,7 +95,16 @@
       			<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>"></div>
       		</div>
       	</div>
+     
+       	
 	<!-- /Training hour distribution -->
+
+      	<div class="grid_6">
+      		<div class="box last">
+    			<a id="guide" href="javascript:;" title=""><?php __('Beginner\'s guide to your training'); ?></a>
+      		</div>
+      	</div>
+
 	</div>
 	<div class="clear"></div>
 	<!-- /Main -->
@@ -110,6 +127,42 @@ $(document).ready(function() {
  		run : "<?php echo __('Run',true); ?>",
  		bike : "<?php echo __('Bike',true); ?>"
  	}, true));
+
+    $("#guide").click(function() {
+		$.fancybox([
+			{
+				'href'	: '/trainer/img/guide/01_trainingplan.jpg',
+				'title'	: '<?php __('1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum.'); echo '<br />'; __('2. Change your available time, if necessary.'); echo '<br />'; __('3. Change your sports balance, if necessary.'); echo '<br />'; __('Click on the right side of the image to go to the next step.'); echo '<br />'; ?>'
+			},
+			{
+				'href'	: '/trainer/img/guide/02_competition.jpg',
+				'title'	: '<?php __('Add your important competitions to get an improved training plan based on your sport goals.'); ?>'
+			},
+			{
+				'href'	: '/trainer/img/guide/03_settings.jpg',
+				'title'	: '<?php __('If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones.'); ?>'
+			},
+			{
+				'href'	: '/trainer/img/guide/04_workout.jpg',
+				'title'	: '<?php __('Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook.'); ?>'
+			},
+			{
+				'href'	: '/trainer/img/guide/05_statistics.jpg',
+				'title'	: '<?php __('Analyse the results of your training with the most important graphs and statistics.'); ?>'
+			}
+		], {
+			'padding'			: 0,
+			'transitionIn'		: 'none',
+			'transitionOut'		: 'none',
+			'titlePosition' 	: 'over',
+			'titleFormat'       : function(title, currentArray, currentIndex, currentOpts) {
+		    	return '<span id="fancybox-title-over">' + title + ' (<?php __('Step'); ?> ' +  (currentIndex + 1) + ' / ' + currentArray.length + ')</span>';
+			},
+			'changeFade'        : 0
+		});
+	});
+
+
 });
 
 </script>

@@ -61,19 +61,17 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 thanks to 
 http://www.rodpetrovic.com/jquery/behavior/
 -->
-<table width="100%">
 <?php
 
 if ( !isset( $total_trimp_tp ) || $total_trimp_tp == 0 )
 {
 ?>
-<tr>
-    <th><?php __('No training information available. Start training and then come back!'); ?></th>
-</tr>
+    <?php __('No training information available. Start training and then come back!'); ?>
 <?php
 } else
 {  
 ?>
+<table width="100%">
 <tr>
     <td>
     <div class="traffic-light">
@@ -110,10 +108,10 @@ if ( !isset( $total_trimp_tp ) || $total_trimp_tp == 0 )
     ?>
     </td>
 </tr>
+</table>
 <?php
 }
 ?>
-</table>
 
                  </fieldset>
 <?php

@@ -8,7 +8,6 @@
 <?php __('Click here to login'); ?>:
 <?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/login/
                            
-<?php __('Yours, Clemens'); ?>
 
 <?php echo $this->element('email/newsletter_text_footer'); ?>
 

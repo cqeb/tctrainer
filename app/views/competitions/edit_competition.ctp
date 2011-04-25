@@ -240,7 +240,7 @@ echo $form->submit(__('Save',true));
 \$(document).ready(function() 
 {
         // facebox box
-        \$('a[rel*=facebox]').facebox();
+        //\$('a[rel*=facebox]').facebox();
 
         /** 
          * thanks to http://gmap.nurtext.de/examples.html

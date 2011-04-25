@@ -14,7 +14,5 @@
  <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/activate/transaction_id:<?php echo $transaction_id?>"><?php __('Click to activate your account'); ?></a></p>
                            
  <p><?php __('Login to your personal training dashboard.'); ?></p>
- <p><?php __('Yours, Clemens'); ?></p>
- <br />
 
 <?php echo $this->element('email/newsletter_footer'); ?>
