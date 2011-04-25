@@ -5,12 +5,7 @@
 <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
 
 <fieldset>
-<?php if ($session->check('Message.flash')) { ?>
-<div class="<?php echo $statusbox; ?>">
-<?php $session->flash(); ?>
-</div>
 <?php 
-} 
 echo $form->input('date',
 	array(
         'class' => 'required',
@@ -140,9 +135,9 @@ echo $form->input('distance',
 
 <table id="stats">
 	<tr>
-		<td id="kcal"><?php echo $data['kcal']; ?></td>
-		<td id="avgspeed"><?php echo $data['avg_speed']; ?></td>
-		<td id="trimp"><?php echo $data['trimp']; ?></td>
+		<td id="kcal"><?php if ($data && array_key_exists('kcal', $data)) { echo $data['kcal']; } ?></td>
+		<td id="avgspeed"><?php if ($data && array_key_exists('avg_speed', $data)) { echo $data['avg_speed']; } ?></td>
+		<td id="trimp"><?php if ($data && array_key_exists('trimp', $data)) { echo $data['trimp']; } ?></td>
 	</tr>
 	<tr>
 		<th class="border-right">kcal</th>

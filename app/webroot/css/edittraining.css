@@ -255,3 +255,11 @@ table#stats .border-right {
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 }
+
+/* fixed broken eror messages */
+.error-message {
+	margin-top: 27px;
+	margin-right: 9px;
+	position: absolute;
+	width: 80px;
+}
