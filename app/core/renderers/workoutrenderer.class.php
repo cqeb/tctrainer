@@ -30,6 +30,7 @@ class WorkoutRenderer {
 		<span class=\"category br\" title=\"" .
 			$w->getCategoryDescription() .		 
 			"\">" . __($w->getCategory(), true) . "</span>
+		<button title=\"" . __('Mark training as done', true) . "\">&#10003;</button>
 	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
 </tr>

@@ -261,7 +261,7 @@ TrainingPlanner = {
 			that.checkBalance();
 			
 			// finally apply tipTips
-			jQuery('#plan .category, img.lsd').tipTip();
+			jQuery('#plan .category, img.lsd, .workouts .type button').tipTip();
 		});
 	},
 
