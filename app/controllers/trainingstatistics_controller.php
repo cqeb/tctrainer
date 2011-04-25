@@ -24,10 +24,10 @@ class TrainingstatisticsController extends AppController {
    // list all trainings
    function list_trainings()
    {
-   	$this->checkSession();
-   	$this->layout = 'default_trainer';
-   	$statusbox = 'statusbox';
-   	$session_userid = $this->Session->read('session_userid');
+            $this->checkSession();
+            $this->layout = 'default_trainer';
+            $statusbox = 'statusbox';
+            $session_userid = $this->Session->read('session_userid');
 
             $this->paginate = array(
                       'conditions' => array('Trainingstatistic.user_id = ' => $session_userid),
@@ -43,16 +43,16 @@ class TrainingstatisticsController extends AppController {
 
   function import_workout()
   {
-  	$this->pageTitle = __('Import workouts',true);
-  	$this->checkSession();
-  	$statusbox = 'statusbox';
-
-  	$newimportfile = '';
-  	$newimportfilearray[] = '';
-  	$outputfile = '';
-  	$import_error = '';
-  	 
-  	$session_userid = $this->Session->read('session_userid');
+	    $this->pageTitle = __('Import workouts',true);
+	    $this->checkSession();
+	    $statusbox = 'statusbox';
+	
+	    $newimportfile = '';
+	    $newimportfilearray[] = '';
+	    $outputfile = '';
+	    $import_error = '';
+	    
+	    $session_userid = $this->Session->read('session_userid');
 	    $results['User'] = $this->Session->read('userobject');
 	    $this->User->id = $session_userid;
 	
@@ -74,15 +74,15 @@ class TrainingstatisticsController extends AppController {
 	      if ( isset( $csv_file['tmp_name'] ) || $this->data['Trainingstatistic']['hiddenimportfile'] )
 	      {
 	
-	      	$userid = $this->User->id;
-
-	      	if ( isset( $csv_file['tmp_name'] ) )
-	      	{
-	      		$return = $this->_save_file($csv_file, $userid, "file", "import");
-	      		//if (!$return['error']) echo $return['destination'];
-
-	      		$importfile = $_SERVER['DOCUMENT_ROOT'] . $return['destination'];
-	      		$importfile = str_replace( '/', '\\', $importfile);
+	        $userid = $this->User->id;
+	
+	        if ( isset( $csv_file['tmp_name'] ) )
+	        {
+	          $return = $this->_save_file($csv_file, $userid, "file", "import");
+	          //if (!$return['error']) echo $return['destination'];
+	
+	          $importfile = $_SERVER['DOCUMENT_ROOT'] . $return['destination'];
+	          $importfile = str_replace( '/', '\\', $importfile);
 	          $importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);
 	  
 	          $importdata = file( $importfile );
@@ -429,7 +429,7 @@ class TrainingstatisticsController extends AppController {
     //$extension = substr($value[0]['name'] , strrpos($value[0]['name'] , '.') +1);
   }
 
-  	function edit_training($id = null) {
+function edit_training($id = null) {
 		$this->checkSession();
 	  	$this->layout = 'default_trainer';
 	  	$this->set('js_addon','');
@@ -481,162 +481,156 @@ class TrainingstatisticsController extends AppController {
 	  				$this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Trainingstatistic']['distance'] ), 'save', 'single' );
 	  		}
 
-            $session_userid = $this->Session->read('session_userid');
-            $results['User'] = $this->Session->read('userobject');
-            
-            if ( empty($this->data) )
-            {
-                     $statusbox = 'statusbox';
-                     // security check - don't view workouts of other users
-                     if ( $id )
-                     {
-                       $result = $this->Trainingstatistic->find ('all', 
-                          array('conditions' => 
-                              array( 'and' => 
-                                  array( 'id' => $id, 'user_id' => $session_userid ) 
-                              ) 
-                          )
-                       );
-                       if ( isset( $result[0] ) )
-                          $this->data = $result[0];
-                       else
-                       {
-                          $this->Session->setFlash(__('Sorry. This is not your entry!', true));
-                          $this->set('statusbox', $statusbox);
-                          $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
-                       }
-                     }
-                     
-                     if ( isset( $this->data['Trainingstatistic']['duration'] ) )
-                          $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['Trainingstatistic']['duration'] );
-
-                     if ( isset( $this->data['Trainingstatistic']['distance'] ) )
-                     {
-                          $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
-                          $this->data['Trainingstatistic']['distance'] = $distance['amount'];
-                     }
-                     
-                     if ( isset( $this->data['Trainingstatistic']['weight'] ) )
-                          $this->data['Trainingstatistic']['weight'] = round( $this->Unitcalc->check_weight( $results['User']['weight'], 'show', 'single' ), 1);
-                     
-            } else
-            {
-                     $statusbox = 'statusbox';
-
-                     // check for metric / unit
-                     if ( isset( $this->data['Trainingstatistic']['distance'] ) )
-					 {
-					 	$remove_array = array( ' ', 'km', 'mi' );
-                     	$this->data['Trainingstatistic']['distance'] = str_replace( $remove_array, '', $this->data['Trainingstatistic']['distance'] );
-						
-					    $this->data['Trainingstatistic']['distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Trainingstatistic']['distance'] ), 'save', 'single' );
-                     }
-					 	
-                     if ( isset( $this->data['Trainingstatistic']['duration'] ) )
-					 {
-					 	$remove_array = array( ' ' );
-                     	$this->data['Trainingstatistic']['duration'] = str_replace( $remove_array, '', $this->data['Trainingstatistic']['duration'] );
-						
-						if ( preg_match( "/,/", $this->data['Trainingstatistic']['duration'] ) || preg_match( "/\./", $this->data['Trainingstatistic']['duration'] ) )
-						{
-							$replace_array = array( ',', '.' );
-	                     	$this->data['Trainingstatistic']['duration'] = str_replace( $replace_array, ':', $this->data['Trainingstatistic']['duration'] );
-							$this->data['Trainingstatistic']['duration'] = $this->data['Trainingstatistic']['duration'] . ':00';
-						}
-												
-						if ( count( split( ':', $this->data['Trainingstatistic']['duration'] ) ) == 2 ) 
-								$this->data['Trainingstatistic']['duration'] = '00:' . $this->data['Trainingstatistic']['duration'];
-						
-					    $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
-					 }
-					 					 
-					 if ( $this->data['Trainingstatistic']['avg_pulse'] < 1 )
-					 {
-					 		if ( $this->data['Trainingstatistic']['sportstype'] == 'SWIM' ) $factor = 0.85;
-							else $factor = 0.89;
-							
-					 		$this->data['Trainingstatistic']['avg_pulse'] = round ( $results['User']['lactatethreshold'] * $factor );
-					 }
-					 
-                     if ( ( isset( $this->data['Trainingstatistic']['duration'] ) && $this->data['Trainingstatistic']['duration'] > 0 ) && $this->data['Trainingstatistic']['distance'] && $this->data['Trainingstatistic']['avg_pulse'] ) 
-                     {
-                        $time_in_zones = "";
-                        $this->data['Trainingstatistic']['trimp'] = round(
-                            $this->Unitcalc->calc_trimp( 
-                                $this->data['Trainingstatistic']['duration']/60, 
-                                $this->data['Trainingstatistic']['avg_pulse'], 
-                                $time_in_zones, 
-                                $results['User']['lactatethreshold'],
-                                $this->data['Trainingstatistic']['sportstype'] 
-                            )
-                        );
-                     
-                        $this->data['Trainingstatistic']['avg_speed'] = round( ( $this->data['Trainingstatistic']['distance'] / ( $this->data['Trainingstatistic']['duration'] / 3600 ) ), 2); 
-                        
-                        if ( $results['User']['gender'] && $results['User']['weight'] && $results['User']['birthday'] )
-                        {
-                            $data['avg_pulse'] = $this->data['Trainingstatistic']['avg_pulse'];
-                            $data['duration'] = $this->data['Trainingstatistic']['duration'];
-                            $data['birthday'] = $results['User']['birthday'];
-                            $data['weight'] = $results['User']['weight'];
-                            $data['gender'] = $results['User']['gender'];
-  
-                            // calculate kcal for workout
-                            $this->data['Trainingstatistic']['kcal'] = 
-                                $this->Unitcalc->calc_kcal( $data );
-                        }
-
-                     }
- 
-                     $this->data['Trainingstatistic']['user_id'] = $session_userid;
-
-					 $tdate = $this->data['Trainingstatistic']['date'];
-					 $tdate = $tdate['year'] . '-' . $tdate['month'] . '-' . $tdate['day'];
-					 
-                     if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] > 0 && ( strtotime( $tdate ) > ( time() - ( 86400 * 7 ) ) ) )
-                     {
-					      $this->data['Trainingstatistic']['weight'] = str_replace( ',', '.', $this->data['Trainingstatistic']['weight'] );
-					      $saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
-                     } else
-                          $saveweight = $results['User']['weight'];
-
-                     $this->data['Trainingstatistic']['weight'] = $saveweight;
-                                            
-                     // save workout for user 
-                     if ($this->Trainingstatistic->save( $this->data, array('validate' => true)))
-                     {
-                          $this->User->id = $session_userid;
-                          if ( isset( $saveweight ) && $saveweight > 0 ) $this->User->savefield('weight', $saveweight, false);
-                          
-                          $this->Session->setFlash(__('Training saved.',true));
-                          $this->set('statusbox', $statusbox);
-                          $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
-                     } else
-                     {
-                          $statusbox = 'statusbox error';
-                          $this->Session->setFlash(__('Some errors occured',true));
-                     }
-
-                     if ( isset( $this->data['Trainingstatistic']['duration'] ) )
-                          $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['Trainingstatistic']['duration'] );
-
-                     if ( isset( $this->data['Trainingstatistic']['distance'] ) )
-                     {
-                          $distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
-                          $this->data['Trainingstatistic']['distance'] = $distance['amount'];
-                     }
-
-                     if ( isset( $this->data['Trainingstatistic']['weight'] ) )
-                     {
-                          $this->data['Trainingstatistic']['weight'] = round( $this->Unitcalc->check_weight($this->data['Trainingstatistic']['weight'], 'show', 'single' ), 1);
-                     } 
-            }
-
-            $this->set('unit', $unit);
-            $this->set('UserID', $this->User->id);
-            $this->set('statusbox', $statusbox);
-            $this->set('data', $this->data['Trainingstatistic']);
-   }
+	  		if ( isset( $this->data['Trainingstatistic']['duration'] ) ) {  			$remove_array = array( ' ' );
+	  			$this->data['Trainingstatistic']['duration'] = str_replace( $remove_array, '', $this->data['Trainingstatistic']['duration'] );
+	  			if ( preg_match( "/,/", $this->data['Trainingstatistic']['duration'] ) || preg_match( "/\./", $this->data['Trainingstatistic']['duration'] ) ) {
+	  				$replace_array = array( ',', '.' );
+	  				$this->data['Trainingstatistic']['duration'] = str_replace( $replace_array, ':', $this->data['Trainingstatistic']['duration'] );
+	  				$this->data['Trainingstatistic']['duration'] = $this->data['Trainingstatistic']['duration'] . ':00';
+	  			}
+	
+	  			if ( count( split( ':', $this->data['Trainingstatistic']['duration'] ) ) == 2 )
+	  			$this->data['Trainingstatistic']['duration'] = '00:' . $this->data['Trainingstatistic']['duration'];
+	  			$this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
+	  		}
+	
+	  		if ( $this->data['Trainingstatistic']['avg_pulse'] < 1 ) {
+	  			if ( $this->data['Trainingstatistic']['sportstype'] == 'SWIM' ) {
+	  				$factor = 0.85;
+	  			} else {
+	  				$factor = 0.89;
+	  			}
+	  			$this->data['Trainingstatistic']['avg_pulse'] = round( $results['User']['lactatethreshold'] * $factor );
+	  		}
+	
+	  		if ( ( isset( $this->data['Trainingstatistic']['duration'] ) && $this->data['Trainingstatistic']['duration'] > 0 ) && $this->data['Trainingstatistic']['distance'] && $this->data['Trainingstatistic']['avg_pulse'] ) {
+	  			$time_in_zones = "";
+	  			$this->data['Trainingstatistic']['trimp'] = round(
+	  				$this->Unitcalc->calc_trimp(
+		  				$this->data['Trainingstatistic']['duration']/60,
+		  				$this->data['Trainingstatistic']['avg_pulse'],
+		  				$time_in_zones,
+		  				$results['User']['lactatethreshold'],
+		  				$this->data['Trainingstatistic']['sportstype']
+	  			));
+	  			 
+	  			$this->data['Trainingstatistic']['avg_speed'] = round( ( $this->data['Trainingstatistic']['distance'] / ( $this->data['Trainingstatistic']['duration'] / 3600 ) ), 2);
+	
+	  			if ( $results['User']['gender'] && $results['User']['weight'] && $results['User']['birthday'] ) {
+	  				$data['avg_pulse'] = $this->data['Trainingstatistic']['avg_pulse'];
+	  				$data['duration'] = $this->data['Trainingstatistic']['duration'];
+	  				$data['birthday'] = $results['User']['birthday'];
+	  				$data['weight'] = $results['User']['weight'];
+	  				$data['gender'] = $results['User']['gender'];
+	
+	  				// calculate kcal for workout
+	  				$this->data['Trainingstatistic']['kcal'] =
+	  				$this->Unitcalc->calc_kcal( $data );
+	  			}
+	
+	  			
+	  		}
+	
+	  		$this->data['Trainingstatistic']['user_id'] = $session_userid;
+	
+	  		$tdate = $this->data['Trainingstatistic']['date'];
+	  		$tdate = $tdate['year'] . '-' . $tdate['month'] . '-' . $tdate['day'];
+	
+	  		if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] > 0 && ( strtotime( $tdate ) > ( time() - ( 86400 * 7 ) ) ) ) {
+	  			$this->data['Trainingstatistic']['weight'] = str_replace( ',', '.', $this->data['Trainingstatistic']['weight'] );
+	  			$saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
+	  		} else {
+	  			$saveweight = $results['User']['weight'];
+	  		}
+	
+	  		$this->data['Trainingstatistic']['weight'] = $saveweight;
+	
+	  		// save workout for user
+	  		if ($this->Trainingstatistic->save( $this->data, array('validate' => true))) {
+	  			$this->User->id = $session_userid;
+	  			if ( isset( $saveweight ) && $saveweight > 0 ) {
+	  				$this->User->savefield('weight', $saveweight, false);
+	  			}
+	  			$this->Session->setFlash(__('Training saved.',true));
+	  			$this->set('statusbox', $statusbox);
+	  			$this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+	  		} else {
+	  			$statusbox = 'statusbox error';
+	  			$this->Session->setFlash(__('Some errors occured',true));
+	  		}
+	
+	  		if ( isset( $this->data['Trainingstatistic']['duration'] ) ) {
+	  			$this->data['Trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['Trainingstatistic']['duration'] );
+	  		}
+	
+	  		if ( isset( $this->data['Trainingstatistic']['distance'] ) ) {
+	  			$distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
+	  			$this->data['Trainingstatistic']['distance'] = $distance['amount'];
+	  		}
+	
+	  		if ( isset( $this->data['Trainingstatistic']['weight'] ) ) {
+	  			$this->data['Trainingstatistic']['weight'] = round( $this->Unitcalc->check_weight($this->data['Trainingstatistic']['weight'], 'show', 'single' ), 1);
+	  		}
+	  	}
+	
+	  	// build course name autocomplete data
+	  	$courseNames = $this->Trainingstatistic->query("SELECT name, count(name) count
+	  		FROM trainingstatistics
+	  		WHERE name != ''
+	  		AND user_id = " . $session_userid . "
+	  		GROUP BY name
+	  		ORDER BY count DESC, name ASC");
+	  	while (list($k,$v) = each($courseNames)) {
+	  		$cnames[] = '"' . str_replace(
+	  			'"', '\"',
+	  			$v['trainingstatistics']['name']) . '"';
+	  	}
+	  	$courseNamesAutocomplete = '[' . implode(',', $cnames) . ']';
+	  	
+	  	// build workout type selectors
+	  	$sports = array('Swim', 'Bike', 'Run');
+	  	$types = array('E', 'S', 'M', 'F', 'T', 'C');
+	  	$workouts = array();
+	  	while (list($k, $sport) = each($sports)) {
+	  		reset($types);
+	  		while (list($l, $type) = each($types)) {
+	  			$label = true;
+	  			$i = 0;
+	  			while ($label) {
+		  			$i++;
+		  			$t = $type . $i;
+		  			$workouts[$sport][''] = __('Pick workout type', true);
+	  				switch ($sport) {
+		  				case 'Swim':
+		  					$label = SwimWorkout::getTypeLabel($t);
+		  					break;
+		  				case 'Bike':
+		  					$label = BikeWorkout::getTypeLabel($t);
+		  					break;
+		  				case 'Run':
+		  					$label = RunWorkout::getTypeLabel($t);
+		  					break;
+		  			}
+		  			
+		  			// now add the workout
+		  			if ($label) {
+		  				$workouts[$sport][$t] = $label;
+		  			}
+	  			} 
+	  		}
+	  	}
+	  	
+	  	
+	  	// set template variables
+	  	$this->set('bikezones', $this->Provider->getAthlete()->getZones('BIKE'));
+	  	$this->set('runzones', $this->Provider->getAthlete()->getZones('RUN'));
+	  	$this->set('workouts', $workouts);
+	  	$this->set('user', $results['User']);
+	  	$this->set('unit', $unit);
+	  	$this->set('courseNamesAutocomplete', $courseNamesAutocomplete);
+	  	$this->set('statusbox', $statusbox);
+	  	$this->set('data', $this->data['Trainingstatistic']);
+	}
 
    // how fit am I?
    function statistics_trimp()
