@@ -120,20 +120,19 @@ class StartsController extends AppController
 
 	}
   
-  function error404()
-  {
-    $this->layout = 'default_trainer';
-  }
+	function error404()
+	{
+    	$this->layout = 'default_trainer';
+	}
   
-  function features()
-  {
-    $this->layout = 'default_trainer';
-	$this->set('statusbox', 'statusbox');
-  }
+	function features()
+	{
+    	$this->layout = 'default_trainer';
+		$this->set('statusbox', 'statusbox');
+	}
 
 	function change_language()
 	{
-
 		if ( isset( $this->params['named']['code'] ) ) 
 			$this->code = $this->params['named']['code'];
 		else
@@ -160,9 +159,41 @@ class StartsController extends AppController
 	    }
 
 	}
+	
+	function coupon( $partner = '' )
+	{
+		$statusbox = 'statusbox';
+	    $this->layout = 'default_trainer';
 
-  function fill_my_database()
-  {
+		if (empty($this->data))
+		{
+			$this->data['Start']['partner'] = $partner; 
+
+		} else
+		{
+			$partner = $this->data['Start']['partner'];
+
+			if ( strlen( $this->data['Start']['coupon'] ) > 3 )
+			{
+				$this->Session->write('recommendation_userid', 'coupon:' . $this->data['Start']['coupon']);
+				
+				$statusbox = 'statusbox ok';
+				$this->Session->setFlash(__('Coupon code saved.', true) . 
+					' <a href="/trainer/users/register/">' . __('Please register now!', true) . '</a>');				
+				if ( $_SERVER['HTTP_HOST'] != 'localhost' ) 
+					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From: support@tricoretraining.com');
+			} else
+			{
+				$statusbox = 'statusbox error';
+				$this->Session->setFlash(__('Please add the valid coupon code!', true));				
+			}   
+		}		
+		$this->set('partner', $partner);
+		$this->set('statusbox', $statusbox);
+	}
+
+	function fill_my_database()
+	{
       $this->checkSession();
 	  $userobject = $this->Session->read('userobject');
 	  
@@ -171,6 +202,6 @@ class StartsController extends AppController
 		      $this->autoRender = false;            
 		      $this->Filldatabase->prefill($this->Start);
 	  }      
-  }
+	}
 }
 ?>
