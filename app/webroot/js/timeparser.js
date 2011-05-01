@@ -46,7 +46,14 @@ TimeParser = {
 			this.mins = parseInt(parseFloat(str) * 60);
 		} else {
 			// we'll just parse for integer
-			this.mins = parseInt(str) * 60;
+			var num = parseInt(str);
+			// if < 10 we'll treat the value as hours ...
+			if (num < 10) {
+				this.mins = num * 60;
+			} else {
+				// otherwise it's minutes
+				this.mins = num;
+			}
 		}
 		
 		return this.mins;
