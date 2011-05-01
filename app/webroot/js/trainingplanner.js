@@ -41,7 +41,7 @@ TrainingPlanner = {
 		
 		this.initDistributor();
 		
-		$('#avg').val(TimeParser.format(weeklymins));
+		$('#avg').val(TimeParser.format(weeklymins) + "h");
 		
 		// init the slider
 		this.slider = $("#slider");
@@ -233,9 +233,9 @@ TrainingPlanner = {
 			
 			// update weekly training hours
 			if (workoutSettings.usertime > 0) {
-				$('#week').val(TimeParser.format(workoutSettings.usertime));
+				$('#week').val(TimeParser.format(workoutSettings.usertime) + 'h');
 			} else {
-				$('#week').val(TimeParser.format(workoutSettings.time));
+				$('#week').val(TimeParser.format(workoutSettings.time) + 'h');
 			}
 
 			// update ratios
@@ -261,10 +261,35 @@ TrainingPlanner = {
 			that.checkBalance();
 			
 			// finally apply tipTips
-			jQuery('#plan .category, img.lsd').tipTip();
+			jQuery('#plan .category, img.lsd, .workouts .type button').tipTip();
+			
+			// follow linked workout
+			jQuery('.workouts .type button')
+				.click(function () { 
+					that.linkWorkout(jQuery(this));
+				});
 		});
 	},
 
+	/**
+	 * will either attempt to create a new training in the log
+	 * or show a training that was already entered
+	 */
+	linkWorkout : function(b) {
+		var params, tid;
+		if (tid = b.attr('data-trainingid')) {
+			params = '/' + tid;
+		} else {
+			params = '?sportstype=' + b.attr('data-sportstype')	+
+				'&workouttype=' + b.attr('data-workouttype') + 
+				'&duration=' + b.attr('data-duration') +
+				'&avghr=' + b.attr('data-avghr');
+		}
+
+		// redirect
+		document.location = '/trainer/trainingstatistics/edit_training' + params;
+	},
+	
 	/**
 	 * will add zone markup to highlight individual
 	 * training zones
@@ -320,7 +345,7 @@ TrainingPlanner = {
 	avgUpdated : function () {
 		var avg = $('#avg');
 		TimeParser.parse(avg.val());
-		avg.val(TimeParser.format());
+		avg.val(TimeParser.format() + 'h');
 	},
 
 	/**
@@ -330,7 +355,7 @@ TrainingPlanner = {
 	weekUpdated : function (save) {
 		var week = $('#week');
 		TimeParser.parse(week.val());
-		week.val(TimeParser.format());
+		week.val(TimeParser.format() + 'h');
 		// show reset button if applicable
 		if (workoutSettings.time != TimeParser.mins) {
 			$('.avgweekly .reset').fadeIn();
@@ -368,8 +393,8 @@ TrainingPlanner = {
 		}
 
 		// now render times to the html elements
-		$('#time1').text(TimeParser.format(mins1)); 
-		$('#time2').text(TimeParser.format(mins2)); 
+		$('#time1').text(TimeParser.format(mins1) + 'h'); 
+		$('#time2').text(TimeParser.format(mins2) + 'h'); 
 
 		// update percentage values
 		$('#p1').text(val1 + "%");
@@ -381,7 +406,7 @@ TrainingPlanner = {
 
 		if (this.tri) {
 			var mins3 = parseInt((100 - val2) * minsPercent);
-			$('#time3').text(TimeParser.format(mins3)); 
+			$('#time3').text(TimeParser.format(mins3) + 'h'); 
 			$('#p3').text((100 - val2) + "%");
 		}
 		
@@ -389,7 +414,7 @@ TrainingPlanner = {
 	},
 	
 	resetWeeklyHours : function () {
-		$('#week').val(TimeParser.format(workoutSettings.time));
+		$('#week').val(TimeParser.format(workoutSettings.time) + 'h');
 		this.weekUpdated(true);
 	},
 	

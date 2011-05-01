@@ -309,4 +309,24 @@ a.reset {
 	);
 	padding: 4px;
 }
- 
+/* check buttons for workouts */
+.workouts .type button {
+	position: absolute;
+	margin-left: 173px;
+	margin-top: -14px;
+	width: 30px;
+	height: 30px;
+	color: grey;
+	font-weight: bold;
+	border-color: #999;
+}
+
+.workouts .type button[data-trainingid] {
+	border: none;
+	background: none;
+	color: #6C9745;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+

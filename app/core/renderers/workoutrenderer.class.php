@@ -8,8 +8,9 @@ class WorkoutRenderer {
 	/**
 	 * render a list of workouts
 	 * @param array $workouts array of workouts to be rendered
+	 * @param Athlete $athlete
 	 */
-	public static function render($workouts) {
+	public static function render($workouts, $athlete) {
 		$html = "<table class=\"workouts\">";
 		// overall training length
 		$length = 0;
@@ -22,6 +23,7 @@ class WorkoutRenderer {
 			} else {
 				$star = false;
 			}
+			$durationHr = self::formatTime($w->getDuration());
 			$html .= "
 <tr>
 	<td class=\"sport\">" . __($w->getSport(), true) . "</td>
@@ -30,7 +32,8 @@ class WorkoutRenderer {
 		<span class=\"category br\" title=\"" .
 			$w->getCategoryDescription() .		 
 			"\">" . __($w->getCategory(), true) . "</span>
-	<td class=\"duration\">" . self::formatTime($w->getDuration()) . "<small>h</small></td>
+			" . self::renderCheckButton($w, $athlete, $durationHr) . "
+	<td class=\"duration\">" . $durationHr . "<small>h</small></td>
 	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
 </tr>
 <tr>
@@ -53,6 +56,28 @@ class WorkoutRenderer {
 		return $html;
 	}
 
+	/**
+	 * render the mark as done button
+	 * @param Workout $w
+	 */
+	public static function renderCheckButton(Workout $w, Athlete $athlete, $duration) {
+		$trainingId = $w->getTrainingId();
+		if ($trainingId) {
+			return '<button title="' . __('See allocated training', true) .
+				'" ' . 
+				'data-trainingid="' . $trainingId . '"' .
+				'>&#10003;</button>';
+		} else {
+			return '<button title="' . __('Record training as done', true) .
+				'" ' . 
+				'data-sportstype="' . $w->getSport() . '" ' .
+				'data-duration="' . $duration . ':00" ' .
+				'data-workouttype="' . $w->getType() . '" ' .
+				'data-avghr="' . $w->getAVGHR($athlete) . '"' .
+				'>&#10003;</button>';
+		}
+	}
+	
 	/**
 	 * nicely format a time given in minutes
 	 * examples:

@@ -61,12 +61,11 @@ if ( isset( $companyinfo ) )
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
 
-<!--    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />-->
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
 
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
@@ -127,7 +126,7 @@ $(document).ready(function() {
 			<div id="signup">
 				<h1><?php __('Gain speed, loose weight!'); ?></h1>
 				<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?></p>
-				<button onClick="javascript:top.location.href='<?php echo Configure::read('App.serverUrl'); ?>/users/register/';"><?php __('Sign up now');?> &mdash; <em><?php __('it´s free!');?></em></button>
+				<a href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/?btn=1"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a>
 			</div>
 			<iframe id="facebook" src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode('http://www.facebook.com/pages/TriCoreTraining/150997251602079'); ?>&amp;layout=standard&amp;show_faces=false&amp;width=280&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=40" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 

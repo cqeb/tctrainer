@@ -5,7 +5,7 @@
 **/
 
 class UnitcalcComponent extends Object {
-   var $components = array('Session');
+   var $components = array('Session', 'Provider');
    var $helpers = array('Session');
 
    /**
@@ -468,32 +468,13 @@ class UnitcalcComponent extends Object {
            return intval($minutes * $factor);
    }
 
-    // from athletes class
-    function getZones($sport) 
-    {
-          switch ($sport) {
-            case "BIKE":      
-              return array(
-                0 => intval($this->threshold * 0.65),
-                1 => intval($this->threshold * 0.81),
-                2 => intval($this->threshold * 0.89),
-                3 => intval($this->threshold * 0.93),
-                4 => $this->threshold - 1
-              );
-              break;
-            // running will also be our default setting
-            case "RUN":
-            default:
-              return array(
-                0 => intval($this->threshold * 0.66), 
-                1 => intval($this->threshold * 0.85),
-                2 => intval($this->threshold * 0.89),
-                3 => intval($this->threshold * 0.94),
-                4 => $this->threshold - 1
-              );
-              break;
-          }
-   }
+	/**
+	 * (non-PHPdoc)
+	 * @see Athlete::getZones()
+	 */
+	function getZones($sport) {
+    	return $this->Provider->getAthlete()->getZones($sport);
+	}
        
    /**
    this functions seems to be duplicate - damn!
@@ -877,7 +858,19 @@ class UnitcalcComponent extends Object {
       }
       return true; // kein ungültiges UTF-8-Zeichen gefunden
     }
-    
+
+    /**
+     * http://www.triathlontrainingblog.com/calculators/calories-burned-calculator-based-on-average-heart-rate/
+	 *
+     * Based on the following formulas:
+	 *
+     * Without VO2max
+     * Men: C/min = (-55.0969 + 0.6309 x HR + 0.1988 x weight + 0.2017 x age) / 4.184
+     * Women: C/min = (-20.4022 + 0.4472 x HR + 0.1263 x weight + 0.074 x age) / 4.184
+     * 
+     * weight is in kg
+     * duration is in seconds
+     */
         /**
         http://www.triathlontrainingblog.com/calculators/calories-burned-calculator-based-on-average-heart-rate/
             

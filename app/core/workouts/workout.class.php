@@ -32,8 +32,11 @@ abstract class Workout {
 	const M5 = "M5";
 	
 	// test
-	const TEST_SHORT = "TS";
-	const TEST_LONG = "TL";
+	const TEST_SHORT = "T1";
+	const TEST_LONG = "T2";
+	
+	// competition
+	const COMPETITION = "C1";
 	
 	/**
 	 * the workout's duration measured in minutes
@@ -59,6 +62,13 @@ abstract class Workout {
 	 * athlete reference
 	 */
 	protected $athlete;
+	
+	/**
+	 * reference to a training id
+	 * will be set if a user has already completed this workout
+	 * @see ProviderComponent::linkWorkouts
+	 */
+	protected $trainingId;
 	
 	/**
 	 * generate a new workout
@@ -115,6 +125,14 @@ abstract class Workout {
 	
 	public function getTRIMP() {
 		return $this->trimp;
+	}
+	
+	public function getTrainingId() {
+		return $this->trainingId;
+	}
+	
+	public function setTrainingId($id) {
+		return $this->trainingId = $id;
 	}
 	
 	/**
@@ -190,9 +208,10 @@ abstract class Workout {
 	
 	/**
 	 * return a human read- & understandable text label for this workout
-	 * @param string $type string which identifies the workout type such as "E1"..
+	 * @param string $type OPTIONAL string which identifies the workout type such as "E1"..
+	 * @return type label string or false if unknown
 	 */
-	public abstract function getTypeLabel();
+	public abstract function getTypeLabel($type=false);
 	
 	/**
 	 * retrieve the average workout heart rate for a given workout

@@ -90,5 +90,5 @@ ALTER TABLE `users` ADD `admin` BOOL NOT NULL AFTER `advanced_features`;
 #2011-01-30 KMS
 ALTER TABLE `users` ADD `inviter` VARCHAR( 20 ) NOT NULL AFTER `paid_to`;
 
-#2011-05-01 KMS
-ALTER TABLE `users` CHANGE `inviter` `inviter` VARCHAR( 255 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL 
+#2011-04-25 CP
+ALTER TABLE  `trainingstatistics` ADD  `workouttype` VARCHAR( 2 ) NOT NULL AFTER `sportstype`;

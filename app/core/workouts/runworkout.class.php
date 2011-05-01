@@ -29,8 +29,11 @@ class RunWorkout extends Workout {
 	 * (non-PHPdoc)
 	 * @see Workout::getTypeLabel()
 	 */
-	public function getTypeLabel() {
-		switch ($this->type) {
+	public function getTypeLabel($type=false) {
+		if (!$type) {
+			$type = $this->type;
+		} 
+		switch ($type) {
 			case Workout::E1:
 				return __('Recovery', true);
 				break;
@@ -76,8 +79,11 @@ class RunWorkout extends Workout {
 			case Workout::TEST_LONG:
 				return __('Long Test', true);
 				break;
+			case Workout::COMPETITION:
+				return __('Competition', true);
+				break;
 			default:
-				return 'UNKNOWN';
+				return false;
 				break;
 		}
 	}

@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-05-01 09:20+0200\n"
-"PO-Revision-Date: 2011-05-01 09:27+0100\n"
-"Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
+"POT-Creation-Date: 2011-04-25 18:45+0200\n"
+"PO-Revision-Date: 2011-04-25 18:53+0100\n"
+"Last-Translator: Clemens Prerovsky <clemens@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,7 +23,7 @@ msgid "Incorrect session data. Sorry."
 msgstr "Ungültige Sessiondaten. Sorry."
 
 #: \controllers\competitions_controller.php:106
-#: \controllers\trainingstatistics_controller.php:460;1035
+#: \controllers\trainingstatistics_controller.php:454;1083
 msgid "Sorry. This is not your entry!"
 msgstr "Sorry. Das ist nicht dein Eintrag!"
 
@@ -160,49 +160,37 @@ msgstr "TriCoreTraining Abo-Info"
 msgid "the interactive, online training plan service for run, bike and triathlon athletes "
 msgstr "der interaktive Online-Trainingsplan-Service für Laufen, Radeln und Triathlon Athleten"
 
-#: \controllers\starts_controller.php:72
-#: \controllers\trainingstatistics_controller.php:1000
+#: \controllers\starts_controller.php:61
+#: \controllers\trainingstatistics_controller.php:1048
 #: \views\layouts\trainer_start.ctp:20
 msgid "I did a"
 msgstr "Ich machte ein"
 
-#: \controllers\starts_controller.php:73
-#: \controllers\trainingstatistics_controller.php:1001
+#: \controllers\starts_controller.php:62
+#: \controllers\trainingstatistics_controller.php:1049
 #: \views\layouts\trainer_start.ctp:21
 msgid "in"
 msgstr "in"
 
-#: \controllers\starts_controller.php:74
-#: \controllers\trainingstatistics_controller.php:1002
+#: \controllers\starts_controller.php:63
+#: \controllers\trainingstatistics_controller.php:1050
 #: \views\layouts\trainer_start.ctp:22
 msgid "hour(s)"
 msgstr "Stunde(n)"
 
-#: \controllers\starts_controller.php:74
-#: \controllers\trainingstatistics_controller.php:1002
+#: \controllers\starts_controller.php:63
+#: \controllers\trainingstatistics_controller.php:1050
 #: \views\layouts\trainer_start.ctp:22
 msgid "with"
 msgstr "mit"
 
-#: \controllers\starts_controller.php:162
+#: \controllers\starts_controller.php:152
 msgid "Language changed."
 msgstr "Sprache gespeichert."
 
-#: \controllers\starts_controller.php:192
-msgid "Coupon code saved."
-msgstr "Gutschein Code wurde gespeichert."
-
-#: \controllers\starts_controller.php:193
-msgid "Please register now!"
-msgstr "Bitte registriere dich jetzt!"
-
-#: \controllers\starts_controller.php:200
-msgid "Please add the valid coupon code!"
-msgstr "Bitte gibt deinen gültigen Gutschein Code an!"
-
 #: \controllers\trainingplans_controller.php:42
-#: \controllers\components\unitcalc.php:719;723;727;731
-#: \views\trainingstatistics\edit_training.ctp:53
+#: \controllers\components\unitcalc.php:700;704;708;712
+#: \views\trainingstatistics\edit_training.ctp:33
 #: \views\trainingstatistics\statistics_competition.ctp:44
 #: \views\trainingstatistics\statistics_trimp.ctp:33
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:123
@@ -210,8 +198,9 @@ msgid "Swim"
 msgstr "Schwimmen"
 
 #: \controllers\trainingplans_controller.php:42;45;51
-#: \controllers\components\unitcalc.php:720;724;728;732;743;747
+#: \controllers\components\unitcalc.php:701;705;709;713;724;728
 #: \views\layouts\trainingplans.ctp:128
+#: \views\trainingstatistics\edit_training.ctp:32
 #: \views\trainingstatistics\statistics_competition.ctp:42
 #: \views\trainingstatistics\statistics_trimp.ctp:32
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:122
@@ -220,9 +209,9 @@ msgid "Bike"
 msgstr "Radfahren"
 
 #: \controllers\trainingplans_controller.php:42;45;48
-#: \controllers\components\unitcalc.php:721;725;729;733;735;736;737;738;739;742;744;746;748
+#: \controllers\components\unitcalc.php:702;706;710;714;716;717;718;719;720;723;725;727;729
 #: \views\layouts\trainingplans.ctp:127
-#: \views\trainingstatistics\edit_training.ctp:51
+#: \views\trainingstatistics\edit_training.ctp:31
 #: \views\trainingstatistics\statistics_competition.ctp:41
 #: \views\trainingstatistics\statistics_trimp.ctp:31
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:121
@@ -256,7 +245,6 @@ msgstr "Keine Importdaten gefunden!"
 #: \views\elements\email\html\invoicemail.ctp:30
 #: \views\elements\email\text\invoicemail.ctp:17
 #: \views\payments\show_invoice.ctp:34
-#: \views\trainingstatistics\edit_training.ctp:33
 #: \views\trainingstatistics\import_workout.ctp:65
 #: \views\trainingstatistics\list_trainings.ctp:27
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:34
@@ -271,7 +259,7 @@ msgstr "ist nicht gültig!"
 #: \views\competitions\edit_competition.ctp:67
 #: \views\competitions\list_competitions.ctp:20
 #: \views\layouts\trainingplans.ctp:125
-#: \views\trainingstatistics\edit_training.ctp:45
+#: \views\trainingstatistics\edit_training.ctp:26
 #: \views\trainingstatistics\import_workout.ctp:67
 #: \views\trainingstatistics\list_trainings.ctp:28
 #: \views\trainingstatistics\statistics_trimp.ctp:25
@@ -289,6 +277,7 @@ msgid "Distance"
 msgstr "Distanz"
 
 #: \controllers\trainingstatistics_controller.php:198;203
+#: \views\trainingstatistics\edit_training.ctp:95
 #: \views\trainingstatistics\import_workout.ctp:69
 #: \views\trainingstatistics\list_trainings.ctp:30
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:37;174
@@ -297,12 +286,11 @@ msgid "Duration"
 msgstr "Dauer"
 
 #: \controllers\trainingstatistics_controller.php:212
-#: \views\trainingstatistics\edit_training.ctp:105
 msgid "Avg. heart rate"
 msgstr "Durchschnittl. Herzfrequenz"
 
 #: \controllers\trainingstatistics_controller.php:249
-#: \views\trainingstatistics\edit_training.ctp:173
+#: \views\trainingstatistics\edit_training.ctp:166
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:40
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:45
 #: \views\users\edit_weight.ctp:53
@@ -354,16 +342,20 @@ msgstr "nicht ok"
 msgid "Import of workouts finished!"
 msgstr "Import der Trainings ist erledigt!"
 
-#: \controllers\trainingstatistics_controller.php:567
+#: \controllers\trainingstatistics_controller.php:554
 msgid "Training saved."
 msgstr "Training gespeichert."
 
-#: \controllers\trainingstatistics_controller.php:573
+#: \controllers\trainingstatistics_controller.php:559
 #: \controllers\users_controller.php:767;1323
 msgid "Some errors occured"
 msgstr "Es sind Fehler aufgetreten"
 
-#: \controllers\trainingstatistics_controller.php:1044
+#: \controllers\trainingstatistics_controller.php:602
+msgid "Pick workout type"
+msgstr "Wähle einen Trainingstyp"
+
+#: \controllers\trainingstatistics_controller.php:1092
 msgid "Workout deleted."
 msgstr "Training wurde gelöscht."
 
@@ -381,15 +373,16 @@ msgstr "Es sind Fehler aufgetreten."
 
 #: \controllers\users_controller.php:168
 msgid "Message sent to users"
-msgstr "Nachricht an Benutzer gesendet."
+msgstr "Die Nachricht wurde an Benutzer gesendet"
 
 #: \controllers\users_controller.php:176
 msgid "message not send"
-msgstr "Nachricht nicht gesendet"
+msgstr ""
 
 #: \controllers\users_controller.php:203
+#, fuzzy
 msgid "No users selected."
-msgstr "Keine Benutzer selektiert."
+msgstr "Keine Benutzer verfügbar."
 
 #: \controllers\users_controller.php:288;304
 msgid "Wait a second please. If you are not redirected, please click here."
@@ -809,7 +802,7 @@ msgstr "Wir können dir im Moment leider keinen Trainingsplan erstellen, da dein
 msgid "Become PREMIUM"
 msgstr "Werde PREMIUM"
 
-#: \controllers\components\provider.php:136
+#: \controllers\components\provider.php:139
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:17;40
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:12;58
 msgid "Week"
@@ -835,665 +828,680 @@ msgstr "nicht kritisch (aber zu hoch)"
 msgid "critical (too high)"
 msgstr "kritisch (zu hoch)"
 
-#: \controllers\components\unitcalc.php:718
+#: \controllers\components\unitcalc.php:699
 msgid "Ironman"
 msgstr "Ironman"
 
-#: \controllers\components\unitcalc.php:722
+#: \controllers\components\unitcalc.php:703
 msgid "Half-Ironman"
 msgstr "Halb-Ironman"
 
-#: \controllers\components\unitcalc.php:726
+#: \controllers\components\unitcalc.php:707
 msgid "Olympic Distance"
 msgstr "Olympische Distanz"
 
-#: \controllers\components\unitcalc.php:730
+#: \controllers\components\unitcalc.php:711
 msgid "Sprint Distance"
 msgstr "Sprint Distanz"
 
-#: \controllers\components\unitcalc.php:735
+#: \controllers\components\unitcalc.php:716
 msgid "Ultrarun"
 msgstr "Ultrarun"
 
-#: \controllers\components\unitcalc.php:736
+#: \controllers\components\unitcalc.php:717
 msgid "Marathon"
 msgstr "Marathon"
 
-#: \controllers\components\unitcalc.php:737
+#: \controllers\components\unitcalc.php:718
 msgid "Half-Marathon"
 msgstr "Halb-Marathon"
 
-#: \controllers\components\unitcalc.php:738;739
+#: \controllers\components\unitcalc.php:719;720
 msgid "Race"
 msgstr "Rennen"
 
-#: \controllers\components\unitcalc.php:741;745
+#: \controllers\components\unitcalc.php:722;726
 msgid "Duathlon"
 msgstr "Duathlon"
 
-#: \controllers\components\unitcalc.php:750;751;752;753
+#: \controllers\components\unitcalc.php:731;732;733;734
 msgid "Races"
 msgstr "Rennen"
 
-#: \controllers\components\unitcalc.php:782
+#: \controllers\components\unitcalc.php:763
 msgid "TRIATHLON IRONMAN"
 msgstr "Ironman Triathlon"
 
-#: \controllers\components\unitcalc.php:783
+#: \controllers\components\unitcalc.php:764
 msgid "TRIATHLON HALFIRONMAN"
 msgstr "Halb-Ironman Triathlon"
 
-#: \controllers\components\unitcalc.php:784
+#: \controllers\components\unitcalc.php:765
 msgid "TRIATHLON OLYMPIC"
 msgstr "Olympischer Triathlon"
 
-#: \controllers\components\unitcalc.php:785
+#: \controllers\components\unitcalc.php:766
 msgid "TRIATHLON SPRINT"
 msgstr "Sprint Triathlon"
 
-#: \controllers\components\unitcalc.php:786
+#: \controllers\components\unitcalc.php:767
 msgid "RUN ULTRA"
 msgstr "Lauf Ultradistanz"
 
-#: \controllers\components\unitcalc.php:787
+#: \controllers\components\unitcalc.php:768
 msgid "RUN MARATHON"
 msgstr "Marathon Lauf"
 
-#: \controllers\components\unitcalc.php:788
+#: \controllers\components\unitcalc.php:769
 msgid "RUN HALFMARATHON"
 msgstr "Halbmarathon Lauf"
 
-#: \controllers\components\unitcalc.php:789
+#: \controllers\components\unitcalc.php:770
 msgid "RUN 10K"
 msgstr "10km Lauf"
 
-#: \controllers\components\unitcalc.php:790
+#: \controllers\components\unitcalc.php:771
 msgid "RUN 5K"
 msgstr "5km Lauf"
 
-#: \controllers\components\unitcalc.php:791
+#: \controllers\components\unitcalc.php:772
 msgid "DUATHLON MIDDLE"
 msgstr "Duathlon Mitteldistanz"
 
-#: \controllers\components\unitcalc.php:792
+#: \controllers\components\unitcalc.php:773
 msgid "DUATHLON SHORT"
 msgstr "Duathlon Kurzdistanz"
 
-#: \controllers\components\unitcalc.php:793
+#: \controllers\components\unitcalc.php:774
 msgid "BIKE ULTRA"
 msgstr "Radfahren Ultradistanz"
 
-#: \controllers\components\unitcalc.php:794
+#: \controllers\components\unitcalc.php:775
 msgid "BIKE LONG"
 msgstr "Radfahren Langdistanz"
 
-#: \controllers\components\unitcalc.php:795
+#: \controllers\components\unitcalc.php:776
 msgid "BIKE MIDDLE"
 msgstr "Radfahren Mitteldistanz"
 
-#: \controllers\components\unitcalc.php:796
+#: \controllers\components\unitcalc.php:777
 msgid "BIKE SHORT"
 msgstr "Radfahren Mitteldistanz"
 
-#: \controllers\components\unitcalc.php:804
+#: \controllers\components\unitcalc.php:785
 msgid "Germany"
 msgstr "Deutschland"
 
-#: \controllers\components\unitcalc.php:805
+#: \controllers\components\unitcalc.php:786
 #: \views\elements\email\newsletter_text_footer.ctp:4
 msgid "Austria"
 msgstr "Österreich"
 
-#: \controllers\components\unitcalc.php:806
+#: \controllers\components\unitcalc.php:787
 msgid "Australia"
 msgstr "Australien"
 
-#: \controllers\components\unitcalc.php:807
+#: \controllers\components\unitcalc.php:788
 msgid "Canada"
 msgstr "Kanada"
 
-#: \controllers\components\unitcalc.php:808
+#: \controllers\components\unitcalc.php:789
 msgid "France"
 msgstr "Frankreich"
 
-#: \controllers\components\unitcalc.php:809
+#: \controllers\components\unitcalc.php:790
 msgid "United Kingdom"
 msgstr "Großbritannien"
 
-#: \controllers\components\unitcalc.php:810
+#: \controllers\components\unitcalc.php:791
 msgid "United States of America"
 msgstr "Vereinigte Staaten von Amerika"
 
-#: \controllers\components\unitcalc.php:812
+#: \controllers\components\unitcalc.php:793
 msgid "Andorry"
 msgstr "Andorra"
 
-#: \controllers\components\unitcalc.php:813
+#: \controllers\components\unitcalc.php:794
 msgid "Argentina"
 msgstr "Argentinien"
 
-#: \controllers\components\unitcalc.php:814
+#: \controllers\components\unitcalc.php:795
 msgid "Belgium"
 msgstr "Belgien"
 
-#: \controllers\components\unitcalc.php:815
+#: \controllers\components\unitcalc.php:796
 msgid "Bosnia"
 msgstr "Bosnien"
 
-#: \controllers\components\unitcalc.php:816
+#: \controllers\components\unitcalc.php:797
 msgid "Brazil"
 msgstr "Brasilien"
 
-#: \controllers\components\unitcalc.php:817
+#: \controllers\components\unitcalc.php:798
 msgid "Bulgaria"
 msgstr "Bulgarien"
 
-#: \controllers\components\unitcalc.php:818
+#: \controllers\components\unitcalc.php:799
 msgid "China"
 msgstr "China"
 
-#: \controllers\components\unitcalc.php:819
+#: \controllers\components\unitcalc.php:800
 msgid "Croatia"
 msgstr "Kroatien"
 
-#: \controllers\components\unitcalc.php:820
+#: \controllers\components\unitcalc.php:801
 msgid "Cyprus"
 msgstr "Zypern"
 
-#: \controllers\components\unitcalc.php:821
+#: \controllers\components\unitcalc.php:802
 msgid "Czech Republic"
 msgstr "Tschechien"
 
-#: \controllers\components\unitcalc.php:822
+#: \controllers\components\unitcalc.php:803
 msgid "Denmark"
 msgstr "Dänemark"
 
-#: \controllers\components\unitcalc.php:823
+#: \controllers\components\unitcalc.php:804
 msgid "Estonia"
 msgstr "Estland"
 
-#: \controllers\components\unitcalc.php:824
+#: \controllers\components\unitcalc.php:805
 msgid "Finland"
 msgstr "Finnland"
 
-#: \controllers\components\unitcalc.php:825
+#: \controllers\components\unitcalc.php:806
 msgid "Greece"
 msgstr "Griechenland"
 
-#: \controllers\components\unitcalc.php:826
+#: \controllers\components\unitcalc.php:807
 msgid "Guatemala"
 msgstr "Guatemala"
 
-#: \controllers\components\unitcalc.php:827
+#: \controllers\components\unitcalc.php:808
 msgid "Hong Kong"
 msgstr "Hong Kong"
 
-#: \controllers\components\unitcalc.php:828
+#: \controllers\components\unitcalc.php:809
 msgid "Hungary"
 msgstr "Ungarn"
 
-#: \controllers\components\unitcalc.php:829
+#: \controllers\components\unitcalc.php:810
 msgid "India"
 msgstr "Indien"
 
-#: \controllers\components\unitcalc.php:830
+#: \controllers\components\unitcalc.php:811
 msgid "Ireland"
 msgstr "Irland"
 
-#: \controllers\components\unitcalc.php:831
+#: \controllers\components\unitcalc.php:812
 msgid "Israel"
 msgstr "Israel"
 
-#: \controllers\components\unitcalc.php:832
+#: \controllers\components\unitcalc.php:813
 msgid "Italy"
 msgstr "Italien"
 
-#: \controllers\components\unitcalc.php:833
+#: \controllers\components\unitcalc.php:814
 msgid "Japan"
 msgstr "Japan"
 
-#: \controllers\components\unitcalc.php:834
+#: \controllers\components\unitcalc.php:815
 msgid "Jemen"
 msgstr "Jemen"
 
-#: \controllers\components\unitcalc.php:835
+#: \controllers\components\unitcalc.php:816
 msgid "Latvia"
 msgstr "Lettland"
 
-#: \controllers\components\unitcalc.php:836
+#: \controllers\components\unitcalc.php:817
 msgid "Liechtenstein"
 msgstr "Liechtenstein"
 
-#: \controllers\components\unitcalc.php:837
+#: \controllers\components\unitcalc.php:818
 msgid "Lithuania"
 msgstr "Litauen"
 
-#: \controllers\components\unitcalc.php:838
+#: \controllers\components\unitcalc.php:819
 msgid "Luxembourg"
 msgstr "Luxemburg"
 
-#: \controllers\components\unitcalc.php:839
+#: \controllers\components\unitcalc.php:820
 msgid "Malta"
 msgstr "Malta"
 
-#: \controllers\components\unitcalc.php:840
+#: \controllers\components\unitcalc.php:821
 msgid "Netherlands"
 msgstr "Niederlande"
 
-#: \controllers\components\unitcalc.php:841
+#: \controllers\components\unitcalc.php:822
 msgid "New Zealand"
 msgstr "Neuseeland"
 
-#: \controllers\components\unitcalc.php:842
+#: \controllers\components\unitcalc.php:823
 msgid "Norway"
 msgstr "Norwegen"
 
-#: \controllers\components\unitcalc.php:843
+#: \controllers\components\unitcalc.php:824
 msgid "Peru"
 msgstr "Peru"
 
-#: \controllers\components\unitcalc.php:844
+#: \controllers\components\unitcalc.php:825
 msgid "Poland"
 msgstr "Polen"
 
-#: \controllers\components\unitcalc.php:845
+#: \controllers\components\unitcalc.php:826
 msgid "Portugal"
 msgstr "Portugal"
 
-#: \controllers\components\unitcalc.php:846
+#: \controllers\components\unitcalc.php:827
 msgid "Russian Federation"
 msgstr "Russland"
 
-#: \controllers\components\unitcalc.php:847
+#: \controllers\components\unitcalc.php:828
 msgid "Romania"
 msgstr "Rumänien"
 
-#: \controllers\components\unitcalc.php:848
+#: \controllers\components\unitcalc.php:829
 msgid "Slovakia"
 msgstr "Slowakien"
 
-#: \controllers\components\unitcalc.php:849
+#: \controllers\components\unitcalc.php:830
 msgid "Slovenia"
 msgstr "Slowenien"
 
-#: \controllers\components\unitcalc.php:850
+#: \controllers\components\unitcalc.php:831
 msgid "Switzerland"
 msgstr "Schweiz"
 
-#: \controllers\components\unitcalc.php:851
+#: \controllers\components\unitcalc.php:832
 msgid "South Africa"
 msgstr "Südafrika"
 
-#: \controllers\components\unitcalc.php:852
+#: \controllers\components\unitcalc.php:833
 msgid "Spain"
 msgstr "Spanien"
 
-#: \controllers\components\unitcalc.php:853
+#: \controllers\components\unitcalc.php:834
 msgid "Sweden"
 msgstr "Schweden"
 
-#: \controllers\components\unitcalc.php:854
+#: \controllers\components\unitcalc.php:835
 msgid "Taiwan"
 msgstr "Taiwan"
 
-#: \controllers\components\unitcalc.php:855
+#: \controllers\components\unitcalc.php:836
 msgid "Turkey"
 msgstr "Turkei"
 
-#: \controllers\components\unitcalc.php:856
+#: \controllers\components\unitcalc.php:837
 msgid "Ukraine"
 msgstr "Ukraine"
 
-#: \controllers\components\unitcalc.php:857
+#: \controllers\components\unitcalc.php:838
 msgid "Other"
 msgstr "Anderes"
 
-#: \core\renderers\workoutrenderer.class.php:20
+#: \core\renderers\workoutrenderer.class.php:21
 msgid "This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them."
 msgstr "Das ist eine spezielle Trainingseinheit, die für ein kommendes Langdistanzrennen eingeplant wurde. Dieses Training ist sehr wichtig - Du solltest es nicht auslassen."
 
-#: \core\workouts\bikeworkout.class.php:40
-#: \core\workouts\runworkout.class.php:35
-#: \core\workouts\swimworkout.class.php:32
-msgid "Recovery"
-msgstr "Regeneration"
+#: \core\renderers\workoutrenderer.class.php:66
+msgid "See allocated training"
+msgstr "Zeige das verknüpfte Training an"
+
+#: \core\renderers\workoutrenderer.class.php:71
+msgid "Record training as done"
+msgstr "Markiere das Training als erledigt"
 
 #: \core\workouts\bikeworkout.class.php:43
 #: \core\workouts\runworkout.class.php:38
 #: \core\workouts\swimworkout.class.php:35
-msgid "Extensive Endurance"
-msgstr "Extensive Ausdauer"
+msgid "Recovery"
+msgstr "Regeneration"
 
 #: \core\workouts\bikeworkout.class.php:46
 #: \core\workouts\runworkout.class.php:41
 #: \core\workouts\swimworkout.class.php:38
+msgid "Extensive Endurance"
+msgstr "Extensive Ausdauer"
+
+#: \core\workouts\bikeworkout.class.php:49
+#: \core\workouts\runworkout.class.php:44
+#: \core\workouts\swimworkout.class.php:41
 msgid "Intensive Endurance"
 msgstr "Intensive Ausdauer"
 
-#: \core\workouts\bikeworkout.class.php:49
+#: \core\workouts\bikeworkout.class.php:52
 msgid "Cadence Intervals"
 msgstr "Kadenzintervalle"
 
-#: \core\workouts\bikeworkout.class.php:52
+#: \core\workouts\bikeworkout.class.php:55
 msgid "Single Leg Intervals"
 msgstr "Einbeinige Intervalle"
 
-#: \core\workouts\bikeworkout.class.php:55
-#: \core\workouts\runworkout.class.php:44
+#: \core\workouts\bikeworkout.class.php:58
+#: \core\workouts\runworkout.class.php:47
 msgid "Sprints"
 msgstr "Sprints"
 
-#: \core\workouts\bikeworkout.class.php:58
+#: \core\workouts\bikeworkout.class.php:61
 msgid "Moderate Hills"
 msgstr "Mittlere Hügel"
 
-#: \core\workouts\bikeworkout.class.php:61
-#: \core\workouts\runworkout.class.php:53
+#: \core\workouts\bikeworkout.class.php:64
+#: \core\workouts\runworkout.class.php:56
 msgid "Long Hills"
 msgstr "Lange Hügel"
 
-#: \core\workouts\bikeworkout.class.php:64
-#: \core\workouts\runworkout.class.php:56
+#: \core\workouts\bikeworkout.class.php:67
+#: \core\workouts\runworkout.class.php:59
 msgid "Hill Climbs"
 msgstr "Hügelsprints"
 
-#: \core\workouts\bikeworkout.class.php:67
+#: \core\workouts\bikeworkout.class.php:70
 msgid "Tempo Ride"
 msgstr "Tempofahrt"
 
-#: \core\workouts\bikeworkout.class.php:70
-#: \core\workouts\runworkout.class.php:62
+#: \core\workouts\bikeworkout.class.php:73
+#: \core\workouts\runworkout.class.php:65
 msgid "Intervals"
 msgstr "Intervalle"
 
-#: \core\workouts\bikeworkout.class.php:73
-#: \core\workouts\runworkout.class.php:65
+#: \core\workouts\bikeworkout.class.php:76
+#: \core\workouts\runworkout.class.php:68
 msgid "Hill Intervals"
 msgstr "Hügel-Intervalle"
 
-#: \core\workouts\bikeworkout.class.php:76
-#: \core\workouts\runworkout.class.php:68
+#: \core\workouts\bikeworkout.class.php:79
+#: \core\workouts\runworkout.class.php:71
 msgid "Threshold Intevals"
 msgstr "Tempohärte-Intervalle"
 
-#: \core\workouts\bikeworkout.class.php:79
+#: \core\workouts\bikeworkout.class.php:82
 msgid "Threshold Ride"
 msgstr "Tempohärte"
 
-#: \core\workouts\bikeworkout.class.php:82
-#: \core\workouts\runworkout.class.php:74
+#: \core\workouts\bikeworkout.class.php:85
+#: \core\workouts\runworkout.class.php:77
 msgid "Short Test"
 msgstr "Kurzer Test"
 
-#: \core\workouts\bikeworkout.class.php:85
-#: \core\workouts\runworkout.class.php:77
+#: \core\workouts\bikeworkout.class.php:88
+#: \core\workouts\runworkout.class.php:80
 msgid "Long Test"
 msgstr "Langer Test"
 
-#: \core\workouts\bikeworkout.class.php:100
+#: \core\workouts\bikeworkout.class.php:91
+#: \core\workouts\runworkout.class.php:83
+#: \core\workouts\swimworkout.class.php:71
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:40
+msgid "Competition"
+msgstr "Wettkampf"
+
+#: \core\workouts\bikeworkout.class.php:106
 msgid "Do an easy ride in Zone 1."
 msgstr "Eine lockere Ausfahrt in Zone 1."
 
-#: \core\workouts\bikeworkout.class.php:103
+#: \core\workouts\bikeworkout.class.php:109
 msgid "Do an endurance ride in Zone 2."
 msgstr "Ein Ausdauertraining in Zone 2."
 
-#: \core\workouts\bikeworkout.class.php:106
+#: \core\workouts\bikeworkout.class.php:112
 msgid "An intensive, aerobic workout. Ride a course with small hills, which take you into Zone 3 frequently."
 msgstr "Ein intensives, aerobes Workout. Wähle einen Kurs mit einigen kleinen Hügeln, die dich in Zone 3 bringen."
 
-#: \core\workouts\bikeworkout.class.php:109
+#: \core\workouts\bikeworkout.class.php:115
 msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times."
 msgstr "Fahre in Zone 2. Dann schalte in einen leichten Gang, und beschleunige deine Trittfrequenz bis ans Maximum (bevor Du im Sattel zu hüpfen anfängst) über 1  Minute hinweg. Halte die hohe Frequenz möglichst lange, und erhole dich danach für 1  Minute. Wiederhole diese Intervalle mehrmals."
 
-#: \core\workouts\bikeworkout.class.php:112
+#: \core\workouts\bikeworkout.class.php:118
 msgid "Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times."
 msgstr "Fahre in Zone 2. Dann schalte in einen leichten Gang, und tritt nur mehr mit einem Bein. Nimm den anderen Fuß dabei nicht vom Pedal (er ist wie ein blinder Passagier), und wechsle die Seite, wenn ein Fuß ermüdet. Wiederhole den Vorgang mehrmals."
 
-#: \core\workouts\bikeworkout.class.php:115
+#: \core\workouts\bikeworkout.class.php:121
 msgid "Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort."
 msgstr "Ein Ausdauertraining in Zone 2, bei der du mehrmals Sprints mit 10 Sekunden Dauer unter Maximalbelastung durchführst."
 
-#: \core\workouts\bikeworkout.class.php:118
+#: \core\workouts\bikeworkout.class.php:124
 msgid "Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about 5 minutes to ascend. Do not stand up while climbing."
 msgstr "Wähle einen hügeligen Kurs, der deine Herzfrequenz zwischen Zone 1 und Zone 5 wechseln lässt. Ein Anstieg sollte nicht länger als 5 Minuten dauern. Bleibe im Sattel, während Du bergauf fährst."
 
-#: \core\workouts\bikeworkout.class.php:121
+#: \core\workouts\bikeworkout.class.php:127
 msgid "Pick a hilly course with several ascents that take more than 5 minutes to climb. Stay seated, and do not max out your pulse while climbing."
 msgstr "Wähle einen hügeligen Kurs mit mehreren Anstiegen, die länger als fünf Minuten sind. Bleib sitzen, während du bergauf fährst, und belaste Dich nicht maximal."
 
-#: \core\workouts\bikeworkout.class.php:124
+#: \core\workouts\bikeworkout.class.php:130
 msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of 8 times."
 msgstr "Wärme Dich gründlich auf. Dann wähle einen steilen Hügel, auf den Du etwa 1 Minute lang bergauf fahren kannst. Fahre mit maximaler Belastung im Anstieg, und lass Dich dann langsam wieder in Richtung Tal rollen. Bleib im Sattel beim bergauf fahren, und wiederhole maximal 8 Mal."
 
-#: \core\workouts\bikeworkout.class.php:127
+#: \core\workouts\bikeworkout.class.php:133
 msgid "Pick a flat course, and ride in Zone 3 with low cadence after warming up."
 msgstr "Wähle einen flachen Kurs, und fahr in Zone 3 mit niedriger Trittfrequenz, nachdem du dich aufgewärmt hast."
 
-#: \core\workouts\bikeworkout.class.php:130
+#: \core\workouts\bikeworkout.class.php:136
 msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times."
 msgstr "Wähle einen flachen Kurs und wärme Dich gut auf. Beschleunige bis zum oberen Ende der Zone 4, und halte diese Belastung maximal 10 Minuten lang (beginne mit 5 Minuten). Fahr mit niedriger Trittfrequenz. Erhole dich für 2 Minuten nach jedem Intervall, und wiederhole die Übung 3-5 Mal."
 
-#: \core\workouts\bikeworkout.class.php:133
+#: \core\workouts\bikeworkout.class.php:139
 msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
 msgstr "Wärme dich gründlich auf. Wähle einen hügeligen Kurs, und beschleunige bis ans obere Ende von Zone 4. Behalte diese Geschwindigkeit maximal 10 Minuten lang bei (beginne mit 5), und fahre mit einer niedrigen Trittfrequenz. Erhole dich 2 Minuten, und wiederhole das Intervall 3-5 Mal. Du kannst dieses Training auch auf einem Kurs mit starkem Gegenwind durchführen."
 
-#: \core\workouts\bikeworkout.class.php:136
+#: \core\workouts\bikeworkout.class.php:142
 msgid "Accelerate slowly after warming up. When Zone 4 is reached, take 2 minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals."
 msgstr "Beschleunige langsam, nachdem du aufgewärmt bist. Wenn Du Zone 4 erreichst, beschleunige 2 Minuten lang weiter, bis du das untere Drittel von Zone 5 erreichst. Dann reduziere die Belastung über 2 Minuten hinweg, bis du die Untergrenze von Zone 4 erreichst. Wiederhole diesen Wechsel maximal 40 Minuten lang, und fahre dabei immer mit möglichst niedriger Trittfrequenz. Fahre bis zum Ende des Trainings in Zone 2."
 
-#: \core\workouts\bikeworkout.class.php:139
+#: \core\workouts\bikeworkout.class.php:145
 msgid "Pick a flat course. After warming up establish Zone 5, and stay there while maintaining low cadence. STOP immediately if you feel nauseous."
 msgstr "Wähle einen flachen Kurs. Nachdem du aufgewärmt bist beschleunige, bis dein Puls Zone 5 erreicht, und halte die Zone, während du mit niedriger Trittfrequenz fährst. Sollte dir übel werden beende das Training sofort."
 
-#: \core\workouts\bikeworkout.class.php:142
+#: \core\workouts\bikeworkout.class.php:148
 msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your bike lactate threshold in your training info settings."
 msgstr "Wähle einen flachen Kurs, und fahre mit einer Geschwindigkeit, die du auch bei einem Wettkampf fahren würdest. Beschleunige gleich von Anfang an, und nutze den \"Zwischenzeit\"-Knopf deiner Pulsuhr, um den durchschnittlichen Puls der letzten 20 Minuten der Trainingseinheit zu ermitteln. Nutze diesen Pulswert, um den Laktatgrenzwert für Radfahren in deinen Trainingsinfos zu aktualisieren."
 
-#: \core\workouts\bikeworkout.class.php:143;147
-#: \core\workouts\runworkout.class.php:132;136
+#: \core\workouts\bikeworkout.class.php:149;153
+#: \core\workouts\runworkout.class.php:138;142
 #: \views\elements\subnavigation_all.ctp:28
 msgid "Edit training info"
 msgstr "Trainingsinfo bearbeiten"
 
-#: \core\workouts\bikeworkout.class.php:146
+#: \core\workouts\bikeworkout.class.php:152
 msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your bike lactate threshold in your training info settings."
 msgstr "Wähle einen flachen Kurs, und fahre mit einer Geschwindigkeit, die du auch bei einem Wettkampf fahren würdest. Beschleunige gleich von Anfang an, und nutze den \"Zwischenzeit\"-Knopf deiner Pulsuhr, um den durchschnittlichen Puls der letzten 50 Minuten der Trainingseinheit zu ermitteln. Nutze diesen Pulswert, um den Laktatgrenzwert für Radfahren in deinen Trainingsinfos zu aktualisieren."
 
-#: \core\workouts\runworkout.class.php:47
+#: \core\workouts\runworkout.class.php:50
 msgid "Speedups"
 msgstr "Beschleunigungen"
 
-#: \core\workouts\runworkout.class.php:50
+#: \core\workouts\runworkout.class.php:53
 msgid "Small Hills"
 msgstr "Kleine Hügel"
 
-#: \core\workouts\runworkout.class.php:59
+#: \core\workouts\runworkout.class.php:62
 msgid "Tempo Run"
 msgstr "Tempolauf"
 
-#: \core\workouts\runworkout.class.php:71
+#: \core\workouts\runworkout.class.php:74
 msgid "Threshold Run"
 msgstr "Tempohärte-Lauf"
 
-#: \core\workouts\runworkout.class.php:92
+#: \core\workouts\runworkout.class.php:98
 msgid "Pick a flat course and run easy in Zone 1."
 msgstr "Wähle einen flachen Kurs und laufe in Zone 1."
 
-#: \core\workouts\runworkout.class.php:95
+#: \core\workouts\runworkout.class.php:101
 msgid "Do an endurance run in Zone 2."
 msgstr "Unternimm einen Dauerlauf in Zone 2."
 
-#: \core\workouts\runworkout.class.php:98
+#: \core\workouts\runworkout.class.php:104
 msgid "An intensive, aerobic workout. Run a course with small hills, which take you into Zone 3 frequently."
 msgstr "Ein intensives, aerobes Training, für das du am besten eine Strecke mit kleinen Hügeln wählst, auf denen du immer wieder in Zone 3 laufen musst."
 
-#: \core\workouts\runworkout.class.php:101
+#: \core\workouts\runworkout.class.php:107
 msgid "Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat 4-8 times during the run."
 msgstr "Unternimm einen Ausdauer-Lauf in Zone 2. Sprinte 4-8 Mal für 20 Sekunden, nachdem du dich ordentlich warmgelaufen hast."
 
-#: \core\workouts\runworkout.class.php:104
+#: \core\workouts\runworkout.class.php:110
 msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for 5 kilometers. Keep your pace for 2 minutes, then slow down to Zone 2. Repeat up to 6 times."
 msgstr "Ein Ausdauerlauf in Zone 2. Nach dem Aufwärmen beschleunige langsam, bis du eine Geschwindigkeit erreichst, die du maximal 5 Kilometer lang halten könntest. Behalte diese Geschwindigkeit 2 Minuten lang bei. Laufe danach lockerer, bis dein Puls wieder Zone 2 erreicht. Wiederhole diese Beschleunigungen maximal 6 Mal."
 
-#: \core\workouts\runworkout.class.php:107
+#: \core\workouts\runworkout.class.php:113
 msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than 5 minutes."
 msgstr "Wähle einen hügeligen Kurs, und laufe in Zone 1 bis Zone 5. Laufe keine Anstiege, die länger als 5 Minuten dauern."
 
-#: \core\workouts\runworkout.class.php:110
+#: \core\workouts\runworkout.class.php:116
 msgid "Pick a hilly course with several ascents that take more than 5 minutes to climb. Your pulse may climb to Zone 5, but refrain from maxing out."
 msgstr "Wähle einen hügeligen Kurs mit Anstiegen, die länger als 5 Minuten dauern. Dein Puls darf dabei Zone 5 erreichen. Vermeide es, dich maximal zu belasten."
 
-#: \core\workouts\runworkout.class.php:113
+#: \core\workouts\runworkout.class.php:119
 msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Run fast uphills, and jog down very easy (take up to 4mins to recover). Repeat to a maximum of 8 times."
 msgstr "Wärme dich gründlich auf. Wähle einen steilen Hügel, für den Du 1 Minute benötigst. Laufe schnell bergauf, und sehr entspannt wieder nach unten (du kannst dir bis zu 4 Minuten Zeit lassen). Wiederhole maximal 8 Mal."
 
-#: \core\workouts\runworkout.class.php:116
+#: \core\workouts\runworkout.class.php:122
 msgid "Pick a flat course, and run in Zone 3 after warming up."
 msgstr "Wähle einen flachen Kurs und laufe in Zone 3, nachdem du dich aufgewärmt hast."
 
-#: \core\workouts\runworkout.class.php:119
+#: \core\workouts\runworkout.class.php:125
 msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times."
 msgstr "Wähle einen flachen Kurs und wärme dich auf. Beschleunige bis zum oberen Ende der Zone 4. Behalte die Belastung für maximal 10 Minuten bei (beginne beim ersten Mal mit 5), und erhole dich 2 Minuten nach jedem Intervall. Wiederhole 3-5 Mal."
 
-#: \core\workouts\runworkout.class.php:122
+#: \core\workouts\runworkout.class.php:128
 msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
 msgstr "Wärme dich gut auf und wähle eine Strecke mit kleinen Hügeln. Beschleunige, bis dein Puls die Obergrenze von Zone 4 erreicht, und behalte die Geschwindigkeit maximal 10 Minuten lang bei (beginne mit 5). Erhole dich für 2 Minuten nach jedem Intervall, und wiederhole 3-5 Mal. Du kannst dieses Training auch auf einer Strecke mit starkem Gegenwind durchführen."
 
-#: \core\workouts\runworkout.class.php:125
+#: \core\workouts\runworkout.class.php:131
 msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2."
 msgstr "Beschleunige langsam bis in Zone 4, nachdem du dich aufgewärmt hast. Danach beschleunige, bis du das untere Drittel der Zone 5 erreichst. Verringere die Belastung über 2 Minuten, bis du die Untergrenze von Zone 4 erreichst, und wiederhole den Wechsel maximal 30 Minuten. Beende dein Training danach in Zone 2."
 
-#: \core\workouts\runworkout.class.php:128
+#: \core\workouts\runworkout.class.php:134
 msgid "Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous."
 msgstr "Wähle einen flachen Kurs. Wärme dich gut auf, und beschleunige bis in die Zone 5. Halte deine Geschwindigkeit, und mach keine Pausen. Beende das Training sofort, solltest du dich unwohl fühlen."
 
-#: \core\workouts\runworkout.class.php:131
+#: \core\workouts\runworkout.class.php:137
 msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your run lactate threshold in your training info settings."
 msgstr "Wähle einen flachen kurs, und laufe mit Wettkampfgeschwindigkeit gleich von Beginn an. Nutze den \"Rundenzeit\"-Knopf auf deiner Pulsuhr, um die durchschnittliche Herzfrequenz der letzten 20 Minuten des Trainings zu ermitteln. Nutze diesen Pulswert, um den Laktatgrenzwert für Laufen in deinen Trainingsinfos zu aktualisieren."
 
-#: \core\workouts\runworkout.class.php:135
+#: \core\workouts\runworkout.class.php:141
 msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your run lactate threshold in your training info settings."
 msgstr "Wähle einen flachen kurs, und laufe mit Wettkampfgeschwindigkeit gleich von Beginn an. Nutze den \"Rundenzeit\"-Knopf auf deiner Pulsuhr, um die durchschnittliche Herzfrequenz der letzten 50 Minuten des Trainings zu ermitteln. Nutze diesen Pulswert, um den Laktatgrenzwert für Laufen in deinen Trainingsinfos zu aktualisieren."
 
-#: \core\workouts\swimworkout.class.php:41
+#: \core\workouts\swimworkout.class.php:44
 msgid "Swimming Technique Drills"
 msgstr "Schwimmtechnik"
 
-#: \core\workouts\swimworkout.class.php:44
+#: \core\workouts\swimworkout.class.php:47
 msgid "Buoyancy Drills"
 msgstr "Wasserlage"
 
-#: \core\workouts\swimworkout.class.php:47
-#: \core\workouts\workout.class.php:131
+#: \core\workouts\swimworkout.class.php:50
+#: \core\workouts\workout.class.php:149
 msgid "Speed"
 msgstr "Geschwindigkeit"
 
-#: \core\workouts\swimworkout.class.php:50
+#: \core\workouts\swimworkout.class.php:53
 msgid "Open Water"
 msgstr "Freiwasser"
 
-#: \core\workouts\swimworkout.class.php:53
+#: \core\workouts\swimworkout.class.php:56
 msgid "Paddles"
 msgstr "Paddles"
 
-#: \core\workouts\swimworkout.class.php:56
+#: \core\workouts\swimworkout.class.php:59
 msgid "Strength Drills"
 msgstr "Kraftausdauer"
 
-#: \core\workouts\swimworkout.class.php:59
+#: \core\workouts\swimworkout.class.php:62
 msgid "Long Intervals"
 msgstr "Lange Intervalle"
 
-#: \core\workouts\swimworkout.class.php:62
+#: \core\workouts\swimworkout.class.php:65
 msgid "Short Intervals"
 msgstr "Kurze Intervalle"
 
-#: \core\workouts\swimworkout.class.php:65
+#: \core\workouts\swimworkout.class.php:68
 msgid "Threshold Swim"
 msgstr "Tempohärte"
 
-#: \core\workouts\swimworkout.class.php:80
+#: \core\workouts\swimworkout.class.php:86
 msgid "Do an easy recovery swim."
 msgstr "Ein lockeres Schwimmtraining zur Regeneration."
 
-#: \core\workouts\swimworkout.class.php:83
+#: \core\workouts\swimworkout.class.php:89
 msgid "Swim intervals of medium intensity, that take 5-10 minutes, and recover for 30 to 60 seconds."
 msgstr "Schwimme Intervalle mit mittlerer Intensität, die 3-5 Minuten dauern. Erhole dich dazwischen für 30 bis 60 Sekunden."
 
-#: \core\workouts\swimworkout.class.php:86
+#: \core\workouts\swimworkout.class.php:92
 msgid "An intensive, aerobic workout. Swim intervals of medium effort which take 5 minutes, and recover for 30 seconds."
 msgstr "Ein intensives, aerobes Training. Schwimme intervalle mittlerer Intensität, die 5 Minuten lang dauern. Erhole dich dazwischen für jeweils 30 Sekunden."
 
-#: \core\workouts\swimworkout.class.php:89
+#: \core\workouts\swimworkout.class.php:95
 msgid "Use this workout to focus entirely on your technique flaws."
 msgstr "Konzentriere dich bei diesem Training voll auf deine Schwimmtechnik."
 
-#: \core\workouts\swimworkout.class.php:92
+#: \core\workouts\swimworkout.class.php:98
 msgid "Use this workout to focus on your buoyancy and body position."
 msgstr "Nutze dieses Training, um an deiner Wasserlage zu arbeiten."
 
-#: \core\workouts\swimworkout.class.php:95
+#: \core\workouts\swimworkout.class.php:101
 msgid "Do fast repeats for 1 swimming lane lengths at maximum effort, and recover for 1 minute between intervals. Focus on technique, even when fatigue sets in. Repeat to a maximum of 300 meters/yards."
 msgstr "Schwimme mit hoher Frequenz und maximaler Belastung über eine Länge. Erhole dich danach für 1 Minute. Konzentriere dich dabei auf deine Schwimmtechnik, auch, wenn deine Arme bereits ermüden. Wiederhole über eine Distanz von maximal 300 Metern."
 
-#: \core\workouts\swimworkout.class.php:98
+#: \core\workouts\swimworkout.class.php:104
 msgid "Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous."
 msgstr "Schwimme in einem Fluss oder See."
 
-#: \core\workouts\swimworkout.class.php:101
+#: \core\workouts\swimworkout.class.php:107
 msgid "Use this workout to bring your paddles for endurance sets."
 msgstr "Trainiere mit Paddles."
 
-#: \core\workouts\swimworkout.class.php:104
+#: \core\workouts\swimworkout.class.php:110
 msgid "Use this workout to focus on strength drills."
 msgstr "Konzentriere dich bei diesem Training auf deine Kraft."
 
-#: \core\workouts\swimworkout.class.php:107
+#: \core\workouts\swimworkout.class.php:113
 msgid "Swim intervals of 6 minutes or more at high intensity. Recover for up to 2 minutes. Try to swim your next race distance."
 msgstr "Schwimme Intervalle mit hoher Belastung, die 6 Minuten oder länger dauern. Erhole dich dazwischen für 2 Minuten. Versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
 
-#: \core\workouts\swimworkout.class.php:110
+#: \core\workouts\swimworkout.class.php:116
 msgid "Swim intervals to a maximum of 5 minutes at high intensity. Recover for less than 1 minute, and try to cover your next race distance."
 msgstr "Schwimme Intervalle mit hoher Intensität, die maximal 5 Minuten dauern. Erhole dich kürzer als 1 Minute, und versuche diese Übung über die Schwimmdistanz deines nächsten Wettkampfes durchzuführen."
 
-#: \core\workouts\swimworkout.class.php:113
+#: \core\workouts\swimworkout.class.php:119
 msgid "Swim at race speed and do not recover. Stop after a maximum of 30 minutes."
 msgstr "Schwimme mit deiner Wettkampfgeschwindigkeit, und mache keine Pausen für maximal 30 Minuten."
 
-#: \core\workouts\workout.class.php:127
+#: \core\workouts\workout.class.php:145
 msgid "Endurance"
 msgstr "Ausdauer"
 
-#: \core\workouts\workout.class.php:134
+#: \core\workouts\workout.class.php:152
 msgid "Force"
 msgstr "Kraft"
 
-#: \core\workouts\workout.class.php:138
+#: \core\workouts\workout.class.php:156
 msgid "Tempo Hardness"
 msgstr "Tempohärte"
 
-#: \core\workouts\workout.class.php:141
+#: \core\workouts\workout.class.php:159
 msgid "Test"
 msgstr "Test"
 
-#: \core\workouts\workout.class.php:163
+#: \core\workouts\workout.class.php:181
 msgid "Endurance allows you to maintain performance whilst resisting fatigue."
 msgstr "Ausdauertrainings erlauben dir, deine Leistung in langen Trainings aufrecht zu erhalten, und die Ermüdung zu verzögern."
 
-#: \core\workouts\workout.class.php:167
+#: \core\workouts\workout.class.php:185
 msgid "Speed trainings will teach your body to move more quickly, while maintaining efficenciy."
 msgstr "Geschwindigkeitstrainings schulen deine Feinmotorik und Effizienz bei schnellen Bewegungen."
 
-#: \core\workouts\workout.class.php:170
+#: \core\workouts\workout.class.php:188
 msgid "Force trainings teach you to apply maximum effort repeatedly."
 msgstr "Krafttrainings verbessern deine Fähigkeit, wiederholten, maximalen Kraftanstrengungen zu wiederstehen."
 
-#: \core\workouts\workout.class.php:174
+#: \core\workouts\workout.class.php:192
 msgid "Tempo Hardness allows your body to withstand high exertion for longer intervals without dropping performance."
 msgstr "Temprohärte ist die Fähigkeit deines Körpers, hohen Belastungen über längere Zeiträume zu wiederstehen, ohne dabei Leistung einbüßen zu müssen."
 
-#: \core\workouts\workout.class.php:177
+#: \core\workouts\workout.class.php:195
 msgid "Test workouts will be used to determine your lactate threshold levels. This is very important, as your heart rate zones are derived from those values!"
 msgstr "Test-Trainings werden genutzt, um deine Laktatgrenzwerte zu ermitteln. Absolviere diese Trainings mit großer Sorgfalt, da die ermittelten Werte die Grundlage für Deine Herzfrequenzzonen darstellen!"
 
@@ -1537,7 +1545,6 @@ msgid "Important"
 msgstr "Wichtig"
 
 #: \views\competitions\edit_competition.ctp:109
-#: \views\trainingstatistics\edit_training.ctp:275
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:47
 msgid "Location"
 msgstr "Ort"
@@ -1560,8 +1567,7 @@ msgstr "Zeit für Laufen (HH:MM:SS)"
 
 #: \views\competitions\edit_competition.ctp:224
 #: \views\payments\initiate.ctp:133
-#: \views\starts\coupon.ctp:37
-#: \views\trainingstatistics\edit_training.ctp:411
+#: \views\trainingstatistics\edit_training.ctp:189
 #: \views\users\edit_address.ctp:89
 #: \views\users\edit_images.ctp:95
 #: \views\users\edit_metric.ctp:60
@@ -1743,7 +1749,6 @@ msgid "Create training schedule"
 msgstr "Trainingsplan erstellen"
 
 #: \views\elements\subnavigation_all.ctp:16
-#: \views\trainingstatistics\edit_training.ctp:9
 #: \views\trainingstatistics\list_trainings.ctp:6
 msgid "Track workouts"
 msgstr "Trainings aufzeichnen"
@@ -2341,14 +2346,12 @@ msgid "ZIP"
 msgstr "PLZ"
 
 #: \views\payments\initiate.ctp:98
-#: \views\trainingstatistics\edit_training.ctp:275
 #: \views\users\edit_address.ctp:54
 #: \views\users\edit_userinfo.ctp:202
 msgid "City"
 msgstr "Stadt"
 
 #: \views\payments\initiate.ctp:104
-#: \views\trainingstatistics\edit_training.ctp:275
 #: \views\users\edit_address.ctp:60
 #: \views\users\edit_userinfo.ctp:208
 msgid "Country"
@@ -2556,35 +2559,6 @@ msgstr "wir wollen dich GLÜCKLICH machen!"
 msgid "You will be redirected to Paypal.com and have to unsubscribe there. IMPORTANT! You cancel all payments in the future. Refunding of already paid fees is not possible. The current subscription will automatically end with"
 msgstr "Du wirst zu Paypal.com weitergeleitet und musst dort die Zahlungen kündigen. WICHTIG! Du kündigst damit alle zukünftigen Zahlungen. Rückerstattungen von bereits gezahlten Beiträgen ist leider nicht möglich. Die aktuelle Mitgliedschaft wird automatisch enden mit"
 
-#: \views\starts\coupon.ctp:2
-msgid "Coupon"
-msgstr "Gutschein-Code"
-
-#: \views\starts\coupon.ctp:8
-#: \views\users\edit_weight.ctp:8
-msgid "Get rid of your weight and gain speed."
-msgstr "Krieg dein Gewicht in den Griff und werde schneller."
-
-#: \views\starts\coupon.ctp:16
-msgid "You received your coupon code from"
-msgstr "Du erhieltest den Gutscheincode von"
-
-#: \views\starts\coupon.ctp:16
-msgid "our partner"
-msgstr "unser Partner"
-
-#: \views\starts\coupon.ctp:17
-msgid "Please enter your code here and then register yourself. We will check your coupon code and then prolong your PREMIUM membership."
-msgstr "Bitte gib deinen Gutscheincode hier an und registriere dich dann. Wir prüfen deinen Gutscheincode und aktivieren deine PREMIUM Mitgliedschaft."
-
-#: \views\starts\coupon.ctp:30
-msgid "Enter your coupon code"
-msgstr "Gibt deinen Gutschein-Code ein"
-
-#: \views\starts\coupon.ctp:32
-msgid "Coupon Code"
-msgstr "Gutschein Code"
-
 #: \views\starts\error404.ctp:2
 msgid "Error (404) - file not found!"
 msgstr "Fehler (404) - Datei nicht gefunden!"
@@ -2629,173 +2603,81 @@ msgstr "Vorherige"
 msgid "Next"
 msgstr "Nächste"
 
-#: \views\trainingstatistics\edit_training.ctp:14
-msgid "Add or edit your workout!"
-msgstr "Training hinzufügen oder bearbeiten!"
+#: \views\trainingstatistics\edit_training.ctp:1
+msgid "Workout details"
+msgstr "Trainingsdetails"
 
-#: \views\trainingstatistics\edit_training.ctp:38
-msgid "RUN"
-msgstr "Laufen"
+#: \views\trainingstatistics\edit_training.ctp:46;55;64
+msgid "Pick a workout type to specify which kind of workout you completed (optional)"
+msgstr "Gib den Typ des absolvierten Trainings an (optional)"
 
-#: \views\trainingstatistics\edit_training.ctp:39
-msgid "BIKE"
-msgstr "Radfahren"
+#: \views\trainingstatistics\edit_training.ctp:86
+msgid "Enter name for your workout route"
+msgstr "Gibt einen Namen für die Trainingsstrecke an"
 
-#: \views\trainingstatistics\edit_training.ctp:40
-msgid "SWIM"
-msgstr "Schwimmen"
+#: \views\trainingstatistics\edit_training.ctp:88
+msgid "Course name"
+msgstr "Streckenname"
 
-#: \views\trainingstatistics\edit_training.ctp:52
-msgid "Bike / Mountain-Bike"
-msgstr "Rennrad / Mountainbike"
+#: \views\trainingstatistics\edit_training.ctp:89
+msgid "Enter a name for your course, so you can identify it later (optional)"
+msgstr "Benenne deine Trainingsstrecke, um sie für die Statistiken nutzen zu können (optional)"
 
-#: \views\trainingstatistics\edit_training.ctp:67;68
-msgid "Enter a distance for your workout"
-msgstr "Gibt eine Distanz für dein Training an"
+#: \views\trainingstatistics\edit_training.ctp:96
+msgid "Enter the duration of your workout, using hours, minutes and seconds like: 01:15:23"
+msgstr "Gib die länge deines Trainings in Stunden, Minuten und Sekunden an. Beispiel: 01:15:23"
 
-#: \views\trainingstatistics\edit_training.ctp:82;83
+#: \views\trainingstatistics\edit_training.ctp:102;103
 msgid "Enter a duration for your workout"
 msgstr "Gib eine Dauer für dein Training an"
 
-#: \views\trainingstatistics\edit_training.ctp:85
-msgid "Duration (HH:MM:SS)"
-msgstr "Dauer (HH:MM:SS)"
+#: \views\trainingstatistics\edit_training.ctp:109
+msgid "The average heart rate measured during your workout"
+msgstr "Gib die durchschnittliche Herzfrequenz für das Training ein"
 
-#: \views\trainingstatistics\edit_training.ctp:89
-msgid "This is a pulse-oriented training! Use your heart rate monitor to track your pulse. If you don't enter an average heart rate, we have to approximate."
-msgstr "Das ist ein puls-orientiertes Training! Nutze deinen Pulsmonitor, um deine Herzfrequenz aufzuzeichnen. Wenn du keine durchschnittliche Herzfrequenz eingibst, dann müssen wir schätzen."
-
-#: \views\trainingstatistics\edit_training.ctp:100;101
+#: \views\trainingstatistics\edit_training.ctp:114;115
 msgid "Enter an average heart rate for your workout"
 msgstr "Gib eine durchschnittliche Herzfrequenz für das Training ein"
 
-#: \views\trainingstatistics\edit_training.ctp:102
+#: \views\trainingstatistics\edit_training.ctp:116
 msgid "Must be greater than"
 msgstr "Muss größer sein als"
 
-#: \views\trainingstatistics\edit_training.ctp:103;170
+#: \views\trainingstatistics\edit_training.ctp:117;163
 #: \views\users\edit_weight.ctp:32;50;65
 msgid "Must be lower than"
 msgstr "Muss geringer sein als"
 
-#: \views\trainingstatistics\edit_training.ctp:112
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:40
-msgid "Competition"
-msgstr "Wettkampf"
-
 #: \views\trainingstatistics\edit_training.ctp:123
-msgid "Enter a name for the workout (route) to display it in your form curve."
-msgstr "Gib einen Namen für die Trainingsstrecke ein, um dieses in der Formkurve anzuzeigen."
+msgid "The distance you've covered during your workout"
+msgstr "Die Distanz, die du in diesem Training zurückgeleg hast"
 
-#: \views\trainingstatistics\edit_training.ctp:134
-msgid "Enter name for your workout route"
-msgstr "Gibt einen Namen für die Trainingsstrecke an"
+#: \views\trainingstatistics\edit_training.ctp:128;129
+msgid "Enter a distance for your workout"
+msgstr "Gibt eine Distanz für dein Training an"
 
-#: \views\trainingstatistics\edit_training.ctp:136
-msgid "Name for workout"
-msgstr "Name für das Training"
-
-#: \views\trainingstatistics\edit_training.ctp:146
-msgid "Optional data"
-msgstr "Zusätzliche Daten"
-
-#: \views\trainingstatistics\edit_training.ctp:148
-msgid "Show advanced functions"
-msgstr "Zeige erweiterte Funktionen"
-
-#: \views\trainingstatistics\edit_training.ctp:168;171
+#: \views\trainingstatistics\edit_training.ctp:161;164
 #: \views\users\edit_weight.ctp:48;51
 msgid "Enter your current weight"
 msgstr "Gibt dein aktuelles Gewicht an"
 
-#: \views\trainingstatistics\edit_training.ctp:169
+#: \views\trainingstatistics\edit_training.ctp:162
 #: \views\users\edit_weight.ctp:31;49;64
 msgid "Must be at least"
 msgstr "Nicht weniger als"
 
-#: \views\trainingstatistics\edit_training.ctp:185
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:51
-msgid "AVG Speed"
-msgstr "Durchschnittliche Geschwindigkeit"
-
-#: \views\trainingstatistics\edit_training.ctp:192
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:50;175
-msgid "TRIMP"
-msgstr "TRIMP"
-
-#: \views\trainingstatistics\edit_training.ctp:199
-#: \views\trainingstatistics\statistics_whathaveidone.ctp:52
-msgid "Burnt"
-msgstr "Verbrannt"
-
-#: \views\trainingstatistics\edit_training.ctp:208
+#: \views\trainingstatistics\edit_training.ctp:170
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:44
 msgid "Comment"
 msgstr "Kommentar"
 
-#: \views\trainingstatistics\edit_training.ctp:299
+#: \views\trainingstatistics\edit_training.ctp:181
 msgid "Link workout"
 msgstr "Link zum Workout"
 
-#: \views\trainingstatistics\edit_training.ctp:303
-msgid "Visualize your workout on"
-msgstr "Visualisiere deine Lauftrainings auf"
-
-#: \views\trainingstatistics\edit_training.ctp:313
-msgid "Temperature"
-msgstr "Temperatur"
-
-#: \views\trainingstatistics\edit_training.ctp:316
-msgid "Weather"
-msgstr "Wetter"
-
-#: \views\trainingstatistics\edit_training.ctp:325
-msgid "warm"
-msgstr "warm"
-
-#: \views\trainingstatistics\edit_training.ctp:326
-msgid "cold"
-msgstr "kalt"
-
-#: \views\trainingstatistics\edit_training.ctp:337
-msgid "sunny"
-msgstr "sonnig"
-
-#: \views\trainingstatistics\edit_training.ctp:338
-msgid "windy"
-msgstr "windig"
-
-#: \views\trainingstatistics\edit_training.ctp:339
-msgid "rain"
-msgstr "regnerisch"
-
-#: \views\trainingstatistics\edit_training.ctp:351
-msgid "Route"
-msgstr "Route"
-
-#: \views\trainingstatistics\edit_training.ctp:354
-msgid "Feeling"
-msgstr "Gefühl"
-
-#: \views\trainingstatistics\edit_training.ctp:363
-msgid "flat"
-msgstr "flach"
-
-#: \views\trainingstatistics\edit_training.ctp:364
-msgid "hilly"
-msgstr "hügelig"
-
-#: \views\trainingstatistics\edit_training.ctp:365
-msgid "mountainous"
-msgstr "bergig"
-
-#: \views\trainingstatistics\edit_training.ctp:376
-msgid "well"
-msgstr "gut"
-
-#: \views\trainingstatistics\edit_training.ctp:377
-msgid "bad"
-msgstr "schlecht"
+#: \views\trainingstatistics\edit_training.ctp:182
+msgid "Add a link for your workout. You might want to check out www.runmap.net or www.bikemap.net for mapping your workouts!"
+msgstr "Füge deinem Training einen Link hinzu. Du kannst zum Beispiel deine Lauf- und Radrouten auf www.runmap.net und www.bikemap.net aufzeichnen!"
 
 #: \views\trainingstatistics\import_workout.ctp:11
 msgid "Check import data und confirm import!"
@@ -3083,6 +2965,18 @@ msgstr "Durchschnittl. Herzfrequenz"
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:43
 msgid "Name of (Test-)Workout"
 msgstr "Name der (Test-) Trainingsstrecke"
+
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:50;175
+msgid "TRIMP"
+msgstr "TRIMP"
+
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:51
+msgid "AVG Speed"
+msgstr "Durchschnittliche Geschwindigkeit"
+
+#: \views\trainingstatistics\statistics_whathaveidone.ctp:52
+msgid "Burnt"
+msgstr "Verbrannt"
 
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:105
 msgid "These statistics show you what and how much you have achieved in a certain period of time."
@@ -3427,6 +3321,10 @@ msgstr "Keine Benachrichtigungen an mich mehr"
 msgid "We would be very happy if you write a review (recommendation) about TriCoreTraining.com. Thank you."
 msgstr "Wir würden uns sehr freuen, wenn du eine Empfehlung über TriCoreTraining.com schreibst. Danke."
 
+#: \views\users\edit_weight.ctp:8
+msgid "Get rid of your weight and gain speed."
+msgstr "Krieg dein Gewicht in den Griff und werde schneller."
+
 #: \views\users\edit_weight.ctp:16
 msgid "Weight management"
 msgstr "Gewichtsmanagement"
@@ -3545,8 +3443,9 @@ msgid "ID"
 msgstr "ID"
 
 #: \views\users\list_users.ctp:27
+#, fuzzy
 msgid "Lang"
-msgstr "Lang"
+msgstr "Orange"
 
 #: \views\users\list_users.ctp:28
 msgid "Pay-Date"
@@ -3695,9 +3594,6 @@ msgstr "Betreff"
 msgid "Message"
 msgstr "Nachricht"
 
-#~ msgid "Your email must end with"
-#~ msgstr "Dein E-Mail mit enden mit"
-
 #~ msgid ""
 #~ "You're receiving this notification because you are registered at "
 #~ "TriCoreTraining.com."
@@ -3710,6 +3606,96 @@ msgstr "Nachricht"
 
 #~ msgid "Go to TriCoreTraining.com!"
 #~ msgstr "Gehe zu TriCoreTraining.com!"
+
+#~ msgid "Add or edit your workout!"
+#~ msgstr "Training hinzufügen oder bearbeiten!"
+
+#~ msgid "RUN"
+#~ msgstr "Laufen"
+
+#~ msgid "BIKE"
+#~ msgstr "Radfahren"
+
+#~ msgid "SWIM"
+#~ msgstr "Schwimmen"
+
+#~ msgid "Bike / Mountain-Bike"
+#~ msgstr "Rennrad / Mountainbike"
+
+#~ msgid "Duration (HH:MM:SS)"
+#~ msgstr "Dauer (HH:MM:SS)"
+
+#~ msgid ""
+#~ "This is a pulse-oriented training! Use your heart rate monitor to track "
+#~ "your pulse. If you don't enter an average heart rate, we have to "
+#~ "approximate."
+#~ msgstr ""
+#~ "Das ist ein puls-orientiertes Training! Nutze deinen Pulsmonitor, um "
+#~ "deine Herzfrequenz aufzuzeichnen. Wenn du keine durchschnittliche "
+#~ "Herzfrequenz eingibst, dann müssen wir schätzen."
+
+#~ msgid ""
+#~ "Enter a name for the workout (route) to display it in your form curve."
+#~ msgstr ""
+#~ "Gib einen Namen für die Trainingsstrecke ein, um dieses in der Formkurve "
+#~ "anzuzeigen."
+
+#~ msgid "Name for workout"
+#~ msgstr "Name für das Training"
+
+#~ msgid "Optional data"
+#~ msgstr "Zusätzliche Daten"
+
+#~ msgid "Show advanced functions"
+#~ msgstr "Zeige erweiterte Funktionen"
+
+#~ msgid "Visualize your workout on"
+#~ msgstr "Visualisiere deine Lauftrainings auf"
+
+#~ msgid "Temperature"
+#~ msgstr "Temperatur"
+
+#~ msgid "Weather"
+#~ msgstr "Wetter"
+
+#~ msgid "warm"
+#~ msgstr "warm"
+
+#~ msgid "cold"
+#~ msgstr "kalt"
+
+#~ msgid "sunny"
+#~ msgstr "sonnig"
+
+#~ msgid "windy"
+#~ msgstr "windig"
+
+#~ msgid "rain"
+#~ msgstr "regnerisch"
+
+#~ msgid "Route"
+#~ msgstr "Route"
+
+#~ msgid "Feeling"
+#~ msgstr "Gefühl"
+
+#~ msgid "flat"
+#~ msgstr "flach"
+
+#~ msgid "hilly"
+#~ msgstr "hügelig"
+
+#~ msgid "mountainous"
+#~ msgstr "bergig"
+
+#~ msgid "well"
+#~ msgstr "gut"
+
+#~ msgid "bad"
+#~ msgstr "schlecht"
+
+#~ msgid "Your email must end with"
+#~ msgstr "Dein E-Mail mit enden mit"
 
 #~ msgid "Of course."
 #~ msgstr "Natürlich."
@@ -3890,9 +3876,6 @@ msgstr "Nachricht"
 
 #~ msgid "Passwort-Strength"
 #~ msgstr "Passwortstärke"
-
-#~ msgid "My last training"
-#~ msgstr "Mein letztes Training"
 
 #~ msgid "Name of Training"
 #~ msgstr "Name des Trainings"
