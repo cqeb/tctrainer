@@ -20,6 +20,17 @@ class StartsController extends AppController
 	{
       	$this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
 
+		/*
+		if ( !$this->Session->read('newest_trainings') )
+		{
+			$this->loadModel('User');
+			$sql = 'SELECT users.firstname, users.lastname, sportstype, distance FROM trainingstatistics,users WHERE trainingstatistics.user_id = users.id AND date BETWEEN ' . 
+				'\'' . date('Y-m-d', time()-86400*700) . '\' AND \'' . date( 'Y-m-d', time() ) . '\' LIMIT 10';
+			$usertrainings = $this->User->query( $sql );
+			pr($usertrainings);
+		}
+		*/
+		
 		if ( isset( $this->params['named']['code'] ) ) 
 		{
 			$this->code = $this->params['named']['code'];
@@ -175,11 +186,12 @@ class StartsController extends AppController
 
 			if ( strlen( $this->data['Start']['coupon'] ) > 3 )
 			{
-				$this->Session->write('recommendation_userid', 'coupon:' . $this->data['Start']['coupon']);
+				$this->Session->write('recommendation_userid', $this->data['Start']['partner'] . '-' . __('coupon', true) . ':' . $this->data['Start']['coupon']);
 				
 				$statusbox = 'statusbox ok';
 				$this->Session->setFlash(__('Coupon code saved.', true) . 
 					' <a href="/trainer/users/register/">' . __('Please register now!', true) . '</a>');				
+
 				if ( $_SERVER['HTTP_HOST'] != 'localhost' ) 
 					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From: support@tricoretraining.com');
 			} else
