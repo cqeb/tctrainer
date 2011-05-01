@@ -15,12 +15,12 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
 
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
@@ -30,9 +30,9 @@
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
 -->
 
-    <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/zoneguide.js"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js?v=<?php echo VERSION; ?>"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js?v=<?php echo VERSION; ?>"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/zoneguide.js?v=<?php echo VERSION; ?>"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
 
