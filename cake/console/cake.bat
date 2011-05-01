@@ -30,6 +30,6 @@
 SET app=%0
 SET lib=%~dp0
 
-D:\clemens\Documents\Projects\xampp\php\php -q "%lib%cake.php" -working "%CD%" %*
+C:\Users\kms\Documents\XAMPP\xampp\php\php -q "%lib%cake.php" -working "%CD%" %*
 
 echo.

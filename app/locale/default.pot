@@ -6,7 +6,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-04-25 18:45+0200\n"
+"POT-Creation-Date: 2011-05-01 09:57+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -159,32 +159,48 @@ msgstr ""
 msgid "the interactive, online training plan service for run, bike and triathlon athletes "
 msgstr ""
 
-#: \controllers\starts_controller.php:61
+#: \controllers\starts_controller.php:72
 #: \controllers\trainingstatistics_controller.php:1048
 #: \views\layouts\trainer_start.ctp:20
 msgid "I did a"
 msgstr ""
 
-#: \controllers\starts_controller.php:62
+#: \controllers\starts_controller.php:73
 #: \controllers\trainingstatistics_controller.php:1049
 #: \views\layouts\trainer_start.ctp:21
 msgid "in"
 msgstr ""
 
-#: \controllers\starts_controller.php:63
+#: \controllers\starts_controller.php:74
 #: \controllers\trainingstatistics_controller.php:1050
 #: \views\layouts\trainer_start.ctp:22
 msgid "hour(s)"
 msgstr ""
 
-#: \controllers\starts_controller.php:63
+#: \controllers\starts_controller.php:74
 #: \controllers\trainingstatistics_controller.php:1050
 #: \views\layouts\trainer_start.ctp:22
 msgid "with"
 msgstr ""
 
-#: \controllers\starts_controller.php:152
+#: \controllers\starts_controller.php:162
 msgid "Language changed."
+msgstr ""
+
+#: \controllers\starts_controller.php:189
+msgid "coupon"
+msgstr ""
+
+#: \controllers\starts_controller.php:192
+msgid "Coupon code saved."
+msgstr ""
+
+#: \controllers\starts_controller.php:193
+msgid "Please register now!"
+msgstr ""
+
+#: \controllers\starts_controller.php:200
+msgid "Please add the valid coupon code!"
 msgstr ""
 
 #: \controllers\trainingplans_controller.php:42
@@ -1565,6 +1581,7 @@ msgstr ""
 
 #: \views\competitions\edit_competition.ctp:224
 #: \views\payments\initiate.ctp:133
+#: \views\starts\coupon.ctp:37
 #: \views\trainingstatistics\edit_training.ctp:189
 #: \views\users\edit_address.ctp:89
 #: \views\users\edit_images.ctp:95
@@ -2157,51 +2174,51 @@ msgstr ""
 msgid "founder of"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:128
+#: \views\layouts\trainer_start.ctp:127
 msgid "Gain speed, loose weight!"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:129
+#: \views\layouts\trainer_start.ctp:128
 msgid "TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:130
+#: \views\layouts\trainer_start.ctp:129
 msgid "Sign up now"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:130
+#: \views\layouts\trainer_start.ctp:129
 msgid "it´s free!"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:148
+#: \views\layouts\trainer_start.ctp:147
 msgid "You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:151
+#: \views\layouts\trainer_start.ctp:150
 msgid "You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:158;158
+#: \views\layouts\trainer_start.ctp:157;157
 msgid "Track your trainings"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:159
+#: \views\layouts\trainer_start.ctp:158
 msgid "Log your trainings, manage your competitions, and also keep track of your weight."
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:162;162
+#: \views\layouts\trainer_start.ctp:161;161
 msgid "Analyze your workouts"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:163
+#: \views\layouts\trainer_start.ctp:162
 msgid "Use detailed statistics to assess yor fitness and gain even more from your workouts."
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:166;166
+#: \views\layouts\trainer_start.ctp:165;165
 msgid "Get individual training plans"
 msgstr ""
 
-#: \views\layouts\trainer_start.ctp:167
+#: \views\layouts\trainer_start.ctp:166
 msgid "Receive individual training plans based on your workouts and upcoming competitions."
 msgstr ""
 
@@ -2550,6 +2567,35 @@ msgstr ""
 
 #: \views\payments\unsubscribe_triplans.ctp:34
 msgid "You will be redirected to Paypal.com and have to unsubscribe there. IMPORTANT! You cancel all payments in the future. Refunding of already paid fees is not possible. The current subscription will automatically end with"
+msgstr ""
+
+#: \views\starts\coupon.ctp:2
+msgid "Coupon"
+msgstr ""
+
+#: \views\starts\coupon.ctp:8
+#: \views\users\edit_weight.ctp:8
+msgid "Get rid of your weight and gain speed."
+msgstr ""
+
+#: \views\starts\coupon.ctp:16
+msgid "You received your coupon code from"
+msgstr ""
+
+#: \views\starts\coupon.ctp:16
+msgid "our partner"
+msgstr ""
+
+#: \views\starts\coupon.ctp:17
+msgid "Please enter your code here and then register yourself. We will check your coupon code and then prolong your PREMIUM membership."
+msgstr ""
+
+#: \views\starts\coupon.ctp:30
+msgid "Enter your coupon code"
+msgstr ""
+
+#: \views\starts\coupon.ctp:32
+msgid "Coupon Code"
 msgstr ""
 
 #: \views\starts\error404.ctp:2
@@ -3312,10 +3358,6 @@ msgstr ""
 
 #: \views\users\edit_userinfo.ctp:150
 msgid "We would be very happy if you write a review (recommendation) about TriCoreTraining.com. Thank you."
-msgstr ""
-
-#: \views\users\edit_weight.ctp:8
-msgid "Get rid of your weight and gain speed."
 msgstr ""
 
 #: \views\users\edit_weight.ctp:16
