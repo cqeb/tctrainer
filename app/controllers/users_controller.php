@@ -1046,7 +1046,7 @@ class UsersController extends AppController {
 			if ($this->User->save( $this->data, array(
 		      'validate' => true,
 		      'fieldList' => array( 'firstname', 'lastname', 'gender', 'email', 'birthday',
-		      'address', 'zip', 'city', 'country', 'phonemobile', 'myrecommendation' ) ) ) )
+		      'address', 'zip', 'city', 'country', 'phonemobile', 'myrecommendation','notifications' ) ) ) )
 		      {
 		          // we have to change all session info because of email change
 		          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )

@@ -311,7 +311,7 @@ a.reset {
 }
 /* check buttons for workouts */
 .workouts .type button {
-	position: absolute;
+/*  	position: absolute;*/
 	margin-left: 173px;
 	margin-top: -14px;
 	width: 30px;

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-05-01 09:57+0200\n"
-"PO-Revision-Date: 2011-05-01 09:59+0100\n"
+"PO-Revision-Date: 2011-05-02 22:46+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -2258,7 +2258,7 @@ msgstr "Hier kannst du die Aufteilung der Zeit zwischen den einzelnen Sportarten
 
 #: \views\layouts\trainingplans.ctp:104
 msgid "Beginner's guide to your training"
-msgstr "Ersten Schritte für Trainingsanfänger"
+msgstr "Erste Schritte für Trainingsanfänger"
 
 #: \views\layouts\trainingplans.ctp:126
 #: \views\users\edit_traininginfo.ctp:190

@@ -193,7 +193,7 @@ class StartsController extends AppController
 					' <a href="/trainer/users/register/">' . __('Please register now!', true) . '</a>');				
 
 				if ( $_SERVER['HTTP_HOST'] != 'localhost' ) 
-					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From: support@tricoretraining.com');
+					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From:support@tricoretraining.com');
 			} else
 			{
 				$statusbox = 'statusbox error';
