@@ -77,7 +77,11 @@ class ProviderComponent extends Object {
 
 		if (isset($_GET['o'])) {
 			$offset = intval($_GET['o']) * 7;
-			$genWeek->add(new DateInterval("P" . $offset . "D"));
+			if ($offset >= 0) {
+				$genWeek->add(new DateInterval("P" . $offset . "D"));
+			} else {
+				$genWeek->sub(new DateInterval("P" . ($offset * -1) . "D"));
+			}
 		}
 		
 		// generate mesocycle

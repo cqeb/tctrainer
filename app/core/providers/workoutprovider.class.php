@@ -46,6 +46,12 @@ abstract class WorkoutProvider {
 	protected $SPORT = null;
 	
 	/**
+	 * flag that will turn true if historic data was loaded
+	 * @var boolean
+	 */
+	protected $historic = false;
+	
+	/**
 	 * bytecache for getModificator()
 	 * @var array
 	 */
@@ -196,6 +202,13 @@ abstract class WorkoutProvider {
 	 */
 	public final function generate(DateTime $week) {
 		$this->generateWeek = $week;
+		
+		// if an old generate week is referred we'll just load from the database
+		if ($week < new DateTime()) {
+			$this->historic = true;
+			return $this->loadWorkouts();
+		}
+		
 		$nextA = $this->athlete->getSchedule()->getNextARace($week);
 
 		// determine if LSD run is needed
@@ -242,10 +255,27 @@ abstract class WorkoutProvider {
 	}
 	
 	/**
+	 * loads workouts for the current genweek from the database
+	 * will not generate any additional workouts
+	 */
+	private function loadWorkouts() {
+		$res = $this->DB->query("SELECT type, duration FROM scheduledtrainings
+			WHERE athlete_id = " . $this->athlete->getId() . "
+			AND week = '" . $this->generateWeek->format('Y-m-d') . "'
+			AND sport = '" . $this->SPORT . "'");
+		if (count($res) > 0) {
+			while (list($k,$v) = each($res)) {
+				$this->addWorkout($this->newWorkout($v['type'], $v['duration']));
+			}
+		}
+		return $this->workouts;
+	}
+	
+	/**
 	 * stores generated workouts back to the database
 	 */
 	public function save() {
-		if (count($this->workouts) == 0) {
+		if (count($this->workouts) == 0 || $this->historic) {
 			return false;
 		}
 		$week = $this->generateWeek->format("Y-m-d");
