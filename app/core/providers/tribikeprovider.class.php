@@ -48,8 +48,8 @@ class TriBikeProvider extends WorkoutProvider {
 	 * (non-PHPdoc)
 	 * @see WorkoutProvider::newWorkout()
 	 */
-	protected function newWorkout($type, $duration) {
-		return new BikeWorkout($this->athlete, $type, $duration);
+	protected function newWorkout($type, $duration, $lsd=false) {
+		return new BikeWorkout($this->athlete, $type, $duration, $lsd);
 	}
 
 	/**

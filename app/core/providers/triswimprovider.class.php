@@ -41,8 +41,8 @@ class TriSwimProvider extends WorkoutProvider {
 	 * (non-PHPdoc)
 	 * @see WorkoutProvider::newWorkout()
 	 */
-	protected function newWorkout($type, $duration) {
-		return new SwimWorkout($this->athlete, $type, $duration);
+	protected function newWorkout($type, $duration, $lsd=false) {
+		return new SwimWorkout($this->athlete, $type, $duration, $lsd);
 	}
 
 	/**

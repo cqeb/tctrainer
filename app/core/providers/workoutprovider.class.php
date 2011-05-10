@@ -177,9 +177,10 @@ abstract class WorkoutProvider {
 	 * generate a new workout of an appropriate type
 	 * @param String $type the workout type like E1...
 	 * @param int $duration in minutes
+	 * @param $lsd flag to mark workout as an lsd workout
 	 * @return Workout
 	 */
-	protected abstract function newWorkout($type, $duration);
+	protected abstract function newWorkout($type, $duration, $lsd=false);
 	
 	/**
 	 * generate workouts based on the provider class
@@ -259,13 +260,13 @@ abstract class WorkoutProvider {
 	 * will not generate any additional workouts
 	 */
 	private function loadWorkouts() {
-		$res = $this->DB->query("SELECT type, duration FROM scheduledtrainings
+		$res = $this->DB->query("SELECT type, duration, lsd FROM scheduledtrainings
 			WHERE athlete_id = " . $this->athlete->getId() . "
 			AND week = '" . $this->generateWeek->format('Y-m-d') . "'
 			AND sport = '" . $this->SPORT . "'");
 		if (count($res) > 0) {
 			while (list($k,$v) = each($res)) {
-				$this->addWorkout($this->newWorkout($v['type'], $v['duration']));
+				$this->addWorkout($this->newWorkout($v['type'], $v['duration'], $v['lsd'] === '1'));
 			}
 		}
 		return $this->workouts;
