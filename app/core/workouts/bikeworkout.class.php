@@ -204,6 +204,10 @@ class BikeWorkout extends Workout {
 			case Workout::M3:
 				return $z[3] - 2;
 				break;
+			case Workout::TEST_LONG:
+			case Workout::TEST_SHORT:
+				return $z[4] + 1;
+				break;
 			default:
 				return 'UNKNOWN';
 				break;
