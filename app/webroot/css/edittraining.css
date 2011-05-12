@@ -196,9 +196,11 @@ table#stats .border-right {
 }
 
 .input.date.required {
+	/*
 	position: absolute;
 	margin-top: -52px;
 	margin-left: 172px;
+	*/
 }
 
 .sportworkoutlabels, .sportworkout {

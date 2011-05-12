@@ -1,7 +1,9 @@
 <h1><?php __('Workout details'); ?></h1>
+
 <script type="text/javascript" src="/trainer/js/workoutstats.js?v=<?php echo VERSION; ?>"></script>
 <script type="text/javascript" src="/trainer/js/timeparser.js?v=<?php echo VERSION; ?>"></script>
 <link rel="stylesheet" type="text/css" href="/trainer/css/edittraining.css?v=<?php echo VERSION; ?>" />
+
 <?php echo $form->create('Trainingstatistic', array('action' => 'edit_training')); ?>
 
 <fieldset>
@@ -189,6 +191,7 @@ echo $form->input('workout_link',
 echo $form->submit(__('Save',true));
 ?>
 </fieldset>
+
 <script type="text/javascript">
 jQuery(document).ready(function() {
 	// sportstype

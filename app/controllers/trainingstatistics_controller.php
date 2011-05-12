@@ -621,7 +621,7 @@ function edit_training($id = null) {
 	  	}
 	  	
 	  	// prefill data from get variables
-	  	if ($this->data['Trainingstatistic'] === null) {
+	  	if ($this->data['Trainingstatistic'] === null && isset( $_GET['sportstype']) ) {
 	  		$this->data['Trainingstatistic'] = array(
 	  			'avg_pulse' => $_GET['avghr'],
 	  			'sportstype' => $_GET['sportstype'],
