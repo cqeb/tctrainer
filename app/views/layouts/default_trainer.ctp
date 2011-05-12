@@ -12,21 +12,19 @@ $url = Configure::read('App.serverUrl');
 
 <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css" />
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css?v=<?php echo VERSION; ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css?v=<?php echo VERSION; ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css?v=<?php echo VERSION; ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css?v=<?php echo VERSION; ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css?v=<?php echo VERSION; ?>" />
 <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-
-<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css?v=<?php echo VERSION; ?>" />
 
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
 <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js"></script>
-<script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js"></script>
-
-<script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js?v=<?php echo VERSION; ?>"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/facebox.js?v=<?php echo VERSION; ?>"></script>
+<script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.minified.js?v=<?php echo VERSION; ?>"></script>
 
 <?php echo $scripts_for_layout; ?>
 
