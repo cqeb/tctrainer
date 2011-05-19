@@ -203,9 +203,8 @@ abstract class WorkoutProvider {
 	 */
 	public final function generate(DateTime $week) {
 		$this->generateWeek = $week;
-		
 		// if an old generate week is referred we'll just load from the database
-		if ($week < new DateTime()) {
+		if ($week < DateTimeHelper::getWeekStartDay(new DateTime())) {
 			$this->historic = true;
 			return $this->loadWorkouts();
 		}
