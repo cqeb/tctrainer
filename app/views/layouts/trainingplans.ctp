@@ -2,10 +2,10 @@
 <html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-    <?php
+<?php
     $url = Configure::read('App.serverUrl');
     echo $html->charset();
-    ?>
+?>
     <?php echo $html->meta('icon'); ?>
 
     <?php echo $this->element('metanavigation'); ?>
@@ -98,9 +98,28 @@
 	<!-- /Training hour distribution -->
 
       	<div class="grid_6">
-      		<div class="box last">
+      		<div class="box">
     			<a id="guide" href="javascript:;" title=""><?php __('Beginner\'s guide to your training'); ?></a>
       		</div>
+
+<?php if ( isset( $userobject ) && $userobject['level'] == 'freemember' ) { ?>
+      		
+      		<div class="box last">
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1221279145141294";
+/* Content middle 2 */
+google_ad_slot = "6926088674";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+			</div>
+
+<?php } ?>
+
       	</div>
 
 	</div>
