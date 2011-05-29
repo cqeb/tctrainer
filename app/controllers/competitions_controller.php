@@ -216,12 +216,14 @@ class CompetitionsController extends AppController {
 
                // SPECIAL ERRORCHECKING
                // get important events - check if there are only 3 in a season
-               $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND important = 1 AND competitiondate BETWEEN '" .
-                    $season['start'] . "' AND '" . $season['end'] . "'";
-               $Comps_important = $this->Competition->query( $sql );
-               if ( count( $Comps_important ) >= 2 && $this->data['Competition']['important'] == 1 )
-                    $error = __('Sorry, only a maximum of 3 important events in a season are useful.', true);
-
+               if ( !isset($id) )
+			   {
+	               $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND important = 1 AND competitiondate BETWEEN '" .
+	                    $season['start'] . "' AND '" . $season['end'] . "'";
+	               $Comps_important = $this->Competition->query( $sql );
+	               if ( count( $Comps_important ) > 2 && $this->data['Competition']['important'] == 1 )
+	                    $error = __('Sorry, only a maximum of 3 important events in a season are useful.', true);
+               }
                $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND competitiondate BETWEEN '" .
                     $season['start'] . "' AND '" . $season['end'] . "' AND competitiondate >= '" . date( 'Y-m-d', time() ) . "'";
                $Comps = $this->Competition->query( $sql );
