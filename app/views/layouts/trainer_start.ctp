@@ -170,58 +170,25 @@ $(document).ready(function() {
   <div class="clear"></div>
   <!-- /Main -->
 
-<!-- Footer -->
-<?php echo $this->element('footer'); ?>
-<!-- /Footer -->
-
-<div class="container_12">
-<?php echo $cakeDebug; ?>
-</div>
-
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript">
-try {
-	var pageTracker = _gat._getTracker("UA-15268905-1");
-	pageTracker._trackPageview();
-} catch(err) {}
-</script>
-
-<?php
-/*
-<script type="text/javascript" charset="utf-8">
-  var is_ssl = ("https:" == document.location.protocol);
-  var asset_host = is_ssl ? "https://s3.amazonaws.com/getsatisfaction.com/" : "http://s3.amazonaws.com/getsatisfaction.com/";
-  document.write(unescape("%3Cscript src='" + asset_host + "javascripts/feedback-v2.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-
-<script type="text/javascript" charset="utf-8">
-  var feedback_widget_options = {};
-
-  feedback_widget_options.display = "overlay";  
-  feedback_widget_options.company = "tricoretraining";
-  feedback_widget_options.placement = "left";
-  feedback_widget_options.color = "#222";
-  feedback_widget_options.style = "idea";
-  var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
-</script>
-*/
-?>
-<script type="text/javascript">
-
-/** initiate JQuery **/
-
-$(document).ready(function() {
-
+	<!-- Footer -->
+	<?php echo $this->element('footer'); ?>
+	<!-- /Footer -->
+	
+	<script type="text/javascript">
+	/** initiate JQuery **/
+	
+	$(document).ready(function() {
+	
         // facebox box
-        //$('a[rel*=facebox]').facebox();
+	    //$('a[rel*=facebox]').facebox();
 		<?php if ( isset( $facebox_content ) ) echo $facebox_content; ?>
-});
+	});
+	</script>
 
-</script>
+	<!-- Footer End -->
+    <?php echo $this->element('footerend'); ?>
+	<!-- /Footer End -->
+
 
 </body>
 </html>
