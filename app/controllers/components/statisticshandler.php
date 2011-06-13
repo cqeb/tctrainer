@@ -349,7 +349,7 @@ class StatisticshandlerComponent extends Object {
 	                  $diff_weight = $targetweight - $train_array['avgweight'];
 	                  $diff_weight_show = $this->Unitcalc->check_weight( $diff_weight, 'show', 'single' );
 					  
-	                  // how much do you have to loose to reach your weight goal
+	                  // how much do you have to lose to reach your weight goal
 	                  $diff_per_week = ($diff_weight / $diff_week);
 					  $diff_per_week_show = $this->Unitcalc->check_weight( $diff_per_week, 'show', 'single' );
 					  

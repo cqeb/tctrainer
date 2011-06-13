@@ -4,7 +4,7 @@
                    <?php echo $this->element('js_error'); ?>
 
                    <fieldset>
-                   <legend><?php __('Gain speed, loose weight'); ?></legend>
+                   <legend><?php __('Gain speed, lose weight'); ?></legend>
 
                    <div class="statusbox error">
                    <?php __('Mysteries of the universe - where did this page go? Who knows ... '); ?>

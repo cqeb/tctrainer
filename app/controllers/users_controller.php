@@ -1204,7 +1204,7 @@ class UsersController extends AppController {
   			// calculate target weight and date
   			if ( isset( $this->data['User']['targetweight'] ) && $this->data['User']['targetweight'] != 0 )
   			{
-  				// calculate time to loose weight
+  				// calculate time to lose weight
   				$diff_time = $this->Unitcalc->time_from_to( '', $this->data['User']['targetweightdate'] );
   				$diff_weight = $this->data['User']['weight'] - $this->data['User']['targetweight'];
   
@@ -1236,13 +1236,13 @@ class UsersController extends AppController {
 					  
 		              $weight_unit = $weight_per_month_array['unit'];
 		              
-		              $additional_message = __('You have to loose', true) . ' ' . $weight_per_month .
+		              $additional_message = __('You have to lose', true) . ' ' . $weight_per_month .
                       	' ' . $weight_unit . ' ' . __('per month to achieve your goal.', true);
                   
 		              // maximum 2 kg per month
 		              if ( $weight_per_month_kg > 2 )
 		              {
-		                    $targetweighterror = __('You should at maximum loose', true) . ' ' .  
+		                    $targetweighterror = __('You should at maximum lose', true) . ' ' .  
 		                        $this->Unitcalc->check_weight('2', 'show', 'single') . ' ' . $weight_unit . ' ' . 
 		                        __('per month.', true);
 		                    $this->data['User']['targetweightcheck'] = 1;
@@ -1911,7 +1911,7 @@ class UsersController extends AppController {
 			          $diff_weight = ( $u['targetweight'] - $u['weight'] ) * (-1);
 			          $divisor = ( $futurets - $nowts ) / 86400 / 30;
 			
-			          // weight you have to loose to achieve your weight target
+			          // weight you have to lose to achieve your weight target
 			          $weight_per_month_check = $diff_weight / $divisor;
 					  
 			          if ( $weight_per_month_check > 2 ) 
@@ -1987,7 +1987,7 @@ class UsersController extends AppController {
 				      $text_for_mail_premium =  
 						__('Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please', true) . ' ' .
 						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "\n";
-						'<br /><br />' . "\n\n" . __('Gain speed, loose weight');
+						'<br /><br />' . "\n\n" . __('Gain speed, lose weight');
 				  }
 				
 				  if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
@@ -1995,7 +1995,7 @@ class UsersController extends AppController {
 				      $mailsubjectarr[] = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com message for you!', true);
 				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('your training plan needs you!', true);
 				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('please read this notice from TriCoreTraining.com for you!', true);
-				      $mailsubjectarr[] = __('Gain speed, loose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is your motto!', true);
+				      $mailsubjectarr[] = __('Gain speed, lose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is your motto!', true);
 				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('TriCoreTraining.com needs you!', true);
 		
 					  $whichsb = rand( 0, 4 );

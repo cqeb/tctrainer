@@ -21,7 +21,7 @@ if ( isset( $userinfo ) )
 			__($sport . ' workout', true) . ' ' . __('in',true) . ' ' . $duration . ' ' . 
 			__('hour(s)',true) . ' ' . __('with', true) . ' ' .	'TriCoreTraining.com' .	
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or loose weight, why not register?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 
         	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';
@@ -32,7 +32,7 @@ if ( isset( $userinfo ) )
 			$facebox_content = '<br /><h1>' . __('I LIKE TriCoreTraining.com!', true) . '</h1><p>' . 
 			__("Why don't YOU become a triathlon athlete too? Why not a marathon runner? I already did it! With TriCoreTraining.com.", true) .
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or loose weight, why not register?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 
         	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';		
@@ -45,7 +45,7 @@ if ( isset( $companyinfo ) )
 			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of membership costs!', true) . '</h1><p>' . 
 			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 3 coffees a month.", true) . 
 			'<br /><br />' . __('Yours', true) . ', Klaus-M. (' . __('founder of', true) . ') ' . __('TriCoreTraining', true) . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or loose weight, why not register?', true) . '</a></p>';
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>';
 
         	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';		
 }
@@ -122,7 +122,7 @@ $(document).ready(function() {
 		<!-- Content -->
 		<div class="box content" style="padding-bottom: 18px; height: 285px;">
 			<div id="signup">
-				<h1><?php __('Gain speed, loose weight!'); ?></h1>
+				<h1><?php __('Gain speed, lose weight!'); ?></h1>
 				<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?></p>
 				<a href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a>
 			</div>

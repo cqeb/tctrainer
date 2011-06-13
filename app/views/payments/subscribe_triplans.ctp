@@ -5,7 +5,7 @@
 
                    <?php //echo $form->create('User', array('action' => 'edit_metric', 'type' => 'file')); ?>
                    <fieldset>
-                   <legend><?php __('Gain speed, loose weight'); ?></legend>
+                   <legend><?php __('Gain speed, lose weight'); ?></legend>
 
                    <?php if ($session->check('Message.flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">

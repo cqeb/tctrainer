@@ -233,7 +233,7 @@ class User extends AppModel {
           'targetweightcheck' => array(
                    'rule' => array('comparison', '<', 1),
                    'required' => true
-                   //'message' => "Error: You should only loose 2 kg per month (maximum)."
+                   //'message' => "Error: You should only lose 2 kg per month (maximum)."
                    )
 	);
 
