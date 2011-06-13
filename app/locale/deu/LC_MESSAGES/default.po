@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-05-01 09:57+0200\n"
-"PO-Revision-Date: 2011-05-02 22:46+0100\n"
+"POT-Creation-Date: 2011-06-13 07:21+0200\n"
+"PO-Revision-Date: 2011-06-13 07:22+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -27,19 +27,19 @@ msgstr "Ungültige Sessiondaten. Sorry."
 msgid "Sorry. This is not your entry!"
 msgstr "Sorry. Das ist nicht dein Eintrag!"
 
-#: \controllers\competitions_controller.php:223
+#: \controllers\competitions_controller.php:225
 msgid "Sorry, only a maximum of 3 important events in a season are useful."
 msgstr "Sorry, aber nur maximal 3 wichtige Event in einer Saison sind sinnvoll."
 
-#: \controllers\competitions_controller.php:235
+#: \controllers\competitions_controller.php:237
 msgid "Event already exists."
 msgstr "Dieser Event existiert bereits."
 
-#: \controllers\competitions_controller.php:245
+#: \controllers\competitions_controller.php:247
 msgid "Competition saved."
 msgstr "Wettkampf wurde gespeichert."
 
-#: \controllers\competitions_controller.php:282
+#: \controllers\competitions_controller.php:284
 msgid "The competition has been deleted."
 msgstr "Der Wettkampf wurde gelöscht."
 
@@ -206,7 +206,7 @@ msgstr "Bitte füge deinen gültigen Gutscheincode ein!"
 
 #: \controllers\trainingplans_controller.php:42
 #: \controllers\components\unitcalc.php:700;704;708;712
-#: \views\trainingstatistics\edit_training.ctp:33
+#: \views\trainingstatistics\edit_training.ctp:35
 #: \views\trainingstatistics\statistics_competition.ctp:44
 #: \views\trainingstatistics\statistics_trimp.ctp:33
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:123
@@ -215,8 +215,8 @@ msgstr "Schwimmen"
 
 #: \controllers\trainingplans_controller.php:42;45;51
 #: \controllers\components\unitcalc.php:701;705;709;713;724;728
-#: \views\layouts\trainingplans.ctp:128
-#: \views\trainingstatistics\edit_training.ctp:32
+#: \views\layouts\trainingplans.ctp:145
+#: \views\trainingstatistics\edit_training.ctp:34
 #: \views\trainingstatistics\statistics_competition.ctp:42
 #: \views\trainingstatistics\statistics_trimp.ctp:32
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:122
@@ -226,8 +226,8 @@ msgstr "Radfahren"
 
 #: \controllers\trainingplans_controller.php:42;45;48
 #: \controllers\components\unitcalc.php:702;706;710;714;716;717;718;719;720;723;725;727;729
-#: \views\layouts\trainingplans.ctp:127
-#: \views\trainingstatistics\edit_training.ctp:31
+#: \views\layouts\trainingplans.ctp:144
+#: \views\trainingstatistics\edit_training.ctp:33
 #: \views\trainingstatistics\statistics_competition.ctp:41
 #: \views\trainingstatistics\statistics_trimp.ctp:31
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:121
@@ -274,8 +274,8 @@ msgstr "ist nicht gültig!"
 #: \controllers\trainingstatistics_controller.php:174
 #: \views\competitions\edit_competition.ctp:67
 #: \views\competitions\list_competitions.ctp:20
-#: \views\layouts\trainingplans.ctp:125
-#: \views\trainingstatistics\edit_training.ctp:26
+#: \views\layouts\trainingplans.ctp:142
+#: \views\trainingstatistics\edit_training.ctp:28
 #: \views\trainingstatistics\import_workout.ctp:67
 #: \views\trainingstatistics\list_trainings.ctp:28
 #: \views\trainingstatistics\statistics_trimp.ctp:25
@@ -293,7 +293,7 @@ msgid "Distance"
 msgstr "Distanz"
 
 #: \controllers\trainingstatistics_controller.php:198;203
-#: \views\trainingstatistics\edit_training.ctp:95
+#: \views\trainingstatistics\edit_training.ctp:97
 #: \views\trainingstatistics\import_workout.ctp:69
 #: \views\trainingstatistics\list_trainings.ctp:30
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:37;174
@@ -306,7 +306,7 @@ msgid "Avg. heart rate"
 msgstr "Durchschnittl. Herzfrequenz"
 
 #: \controllers\trainingstatistics_controller.php:249
-#: \views\trainingstatistics\edit_training.ctp:166
+#: \views\trainingstatistics\edit_training.ctp:168
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:40
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:45
 #: \views\users\edit_weight.ctp:53
@@ -571,7 +571,7 @@ msgid "This system won't work if you want to gain weight!"
 msgstr "Das System funktioniert nicht, wenn du Gewicht zunehmen willst!"
 
 #: \controllers\users_controller.php:1239
-msgid "You have to loose"
+msgid "You have to lose"
 msgstr "Verliere"
 
 #: \controllers\users_controller.php:1240
@@ -579,7 +579,7 @@ msgid "per month to achieve your goal."
 msgstr "pro Monat, um dein Ziel zu erreichen."
 
 #: \controllers\users_controller.php:1245
-msgid "You should at maximum loose"
+msgid "You should at maximum lose"
 msgstr "Verliere maximal"
 
 #: \controllers\users_controller.php:1247
@@ -748,7 +748,7 @@ msgstr "abonniere PREMIUM"
 #: \views\payments\unsubscribe_triplans.ctp:8
 #: \views\starts\error404.ctp:7
 #: \views\starts\features.ctp:8
-msgid "Gain speed, loose weight"
+msgid "Gain speed, lose weight"
 msgstr "Werde schneller, werde leichter"
 
 #: \controllers\users_controller.php:1995
@@ -817,7 +817,7 @@ msgstr "Wir können dir im Moment leider keinen Trainingsplan erstellen, da dein
 msgid "Become PREMIUM"
 msgstr "Werde PREMIUM"
 
-#: \controllers\components\provider.php:139
+#: \controllers\components\provider.php:143
 #: \views\trainingstatistics\statistics_howmuchhaveilost_json.ctp:17;40
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:12;58
 msgid "Week"
@@ -1583,7 +1583,7 @@ msgstr "Zeit für Laufen (HH:MM:SS)"
 #: \views\competitions\edit_competition.ctp:224
 #: \views\payments\initiate.ctp:133
 #: \views\starts\coupon.ctp:37
-#: \views\trainingstatistics\edit_training.ctp:189
+#: \views\trainingstatistics\edit_training.ctp:191
 #: \views\users\edit_address.ctp:89
 #: \views\users\edit_images.ctp:95
 #: \views\users\edit_metric.ctp:60
@@ -1731,19 +1731,19 @@ msgstr "Log dich ein mit deinem Facebook Account!"
 msgid "Recommendation"
 msgstr "Empfehlung"
 
-#: \views\elements\rightbar.ctp:49
+#: \views\elements\rightbar.ctp:52
 msgid "Administrate users"
 msgstr "Administriere Benutzer"
 
-#: \views\elements\rightbar.ctp:71
+#: \views\elements\rightbar.ctp:74
 msgid "Graphs"
 msgstr "Graphen"
 
-#: \views\elements\rightbar.ctp:72
+#: \views\elements\rightbar.ctp:75
 msgid "PHPMyAdmin"
 msgstr "PHPMyAdmin"
 
-#: \views\elements\rightbar.ctp:73
+#: \views\elements\rightbar.ctp:76
 msgid "Fill my database"
 msgstr "Befülle meine Datenbank"
 
@@ -2152,7 +2152,7 @@ msgid "Yours"
 msgstr "Euer"
 
 #: \views\layouts\trainer_start.ctp:24;35;48
-msgid "If you want to improve your athletic skills or loose weight, why not register?"
+msgid "If you want to improve your athletic skills or lose weight, why not register?"
 msgstr "Wenn du deine athletischen Eigenschaften verbessern willst oder Gewicht verlieren willst, warum nicht registrieren?"
 
 #: \views\layouts\trainer_start.ctp:32
@@ -2175,129 +2175,129 @@ msgstr "Registriere dich initial mit deiner Firmenemail, versuche TriCoreTrainin
 msgid "founder of"
 msgstr "Gründer von"
 
-#: \views\layouts\trainer_start.ctp:127
-msgid "Gain speed, loose weight!"
+#: \views\layouts\trainer_start.ctp:125
+msgid "Gain speed, lose weight!"
 msgstr "Werde schneller, verliere Gewicht!"
 
-#: \views\layouts\trainer_start.ctp:128
+#: \views\layouts\trainer_start.ctp:126
 msgid "TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!"
 msgstr "TriCoreTraining bringt dir <b>professionelle</b>, <b>einfach</b> verständliche Trainingspläne, für <b>Laufen</b>, <b>Radfahren</b> und <b>Triathlon</b>!"
 
-#: \views\layouts\trainer_start.ctp:129
+#: \views\layouts\trainer_start.ctp:127
 msgid "Sign up now"
 msgstr "Registriere dich jetzt"
 
-#: \views\layouts\trainer_start.ctp:129
+#: \views\layouts\trainer_start.ctp:127
 msgid "it´s free!"
 msgstr "gratis!"
 
-#: \views\layouts\trainer_start.ctp:147
+#: \views\layouts\trainer_start.ctp:145
 msgid "You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"
 msgstr "Du bist ambitionierter Sportler, und willst das Maximum aus deinem Training holen, aber weder deine Familie noch deinen Job vernachlässigen. <b>Bei uns bist du genau richtig.</b>"
 
-#: \views\layouts\trainer_start.ctp:150
+#: \views\layouts\trainer_start.ctp:148
 msgid "You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"
 msgstr "Du willst deinen ersten Marathon finishen, eine neue Bestzeit beim Halbironman laufen, oder genießt einfach nur das Laufen? <b>Wir helfen dir, mehr aus deinem Training zu machen.</b>"
 
-#: \views\layouts\trainer_start.ctp:157;157
+#: \views\layouts\trainer_start.ctp:155;155
 msgid "Track your trainings"
 msgstr "Erfasse deine Trainings"
 
-#: \views\layouts\trainer_start.ctp:158
+#: \views\layouts\trainer_start.ctp:156
 msgid "Log your trainings, manage your competitions, and also keep track of your weight."
 msgstr "Verwalte Trainingseinheiten, Wettkampfe und sogar dein Gewicht."
 
-#: \views\layouts\trainer_start.ctp:161;161
+#: \views\layouts\trainer_start.ctp:159;159
 msgid "Analyze your workouts"
 msgstr "Analysiere deine Trainings"
 
-#: \views\layouts\trainer_start.ctp:162
+#: \views\layouts\trainer_start.ctp:160
 msgid "Use detailed statistics to assess yor fitness and gain even more from your workouts."
 msgstr "Erfahre durch unsere detaillierten Statistiken mehr über deine Trainingseinheiten."
 
-#: \views\layouts\trainer_start.ctp:165;165
+#: \views\layouts\trainer_start.ctp:163;163
 msgid "Get individual training plans"
 msgstr "Erhalte individuell auf dich abgestimmte Trainingspläne."
 
-#: \views\layouts\trainer_start.ctp:166
+#: \views\layouts\trainer_start.ctp:164
 msgid "Receive individual training plans based on your workouts and upcoming competitions."
 msgstr "Erhalte Trainingspläne, die individuell auf dein bisheriges Training und deine kommenden Wettkämpfe zugeschnitten sind."
 
-#: \views\layouts\trainingplans.ctp:82
+#: \views\layouts\trainingplans.ctp:80
 msgid "Training Hours"
 msgstr "Trainingsstunden"
 
-#: \views\layouts\trainingplans.ctp:83;86
+#: \views\layouts\trainingplans.ctp:81;84
 #: \views\users\list_users.ctp:82
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: \views\layouts\trainingplans.ctp:84
+#: \views\layouts\trainingplans.ctp:82
 msgid "These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected."
 msgstr "Das sind deine <b>durchschnittlichen</b> Trainingsstunden - jene Zeit, die du durchschnittlich im Jahr mit Training zubringst. Wenn du diese Einstellung anpasst, werden auch alle zukünftigen Trainingswochen entsprechend angepasst."
 
-#: \views\layouts\trainingplans.ctp:85
+#: \views\layouts\trainingplans.ctp:83
 msgid "This Week"
 msgstr "Diese Woche"
 
-#: \views\layouts\trainingplans.ctp:87
+#: \views\layouts\trainingplans.ctp:85
 msgid "This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week."
 msgstr "Hier findest du die Trainingszeit, die für diese Woche reserviert ist. Der Wert wird aus den durchschnittlichen Trainingsstunden direkt oberhalb errechnet. Du kannst diesen Wert anpassen, um mehr oder weniger Training für diese Woche zu erhalten."
 
-#: \views\layouts\trainingplans.ctp:88;94
+#: \views\layouts\trainingplans.ctp:86;92
 msgid "reset"
 msgstr "zurücksetzen"
 
-#: \views\layouts\trainingplans.ctp:94
+#: \views\layouts\trainingplans.ctp:92
 msgid "Workout Balance"
 msgstr "Aufteilung der Trainings"
 
-#: \views\layouts\trainingplans.ctp:95
+#: \views\layouts\trainingplans.ctp:93
 msgid "Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks."
 msgstr "Hier kannst du die Aufteilung der Zeit zwischen den einzelnen Sportarten bestimmen. Ziehe die Regler, um das Verhältnis zu beeinflussen. Wenn du diese Einstellung änderst, werden alle zukünftigen Trainingswochen davon beeinflusst."
 
-#: \views\layouts\trainingplans.ctp:104
+#: \views\layouts\trainingplans.ctp:102
 msgid "Beginner's guide to your training"
 msgstr "Erste Schritte für Trainingsanfänger"
 
-#: \views\layouts\trainingplans.ctp:126
+#: \views\layouts\trainingplans.ctp:143
 #: \views\users\edit_traininginfo.ctp:190
 msgid "Zone"
 msgstr "Zone"
 
-#: \views\layouts\trainingplans.ctp:135
+#: \views\layouts\trainingplans.ctp:152
 msgid "1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum."
 msgstr "1. Deine Trainings sind nach Relevanz sortiert. Wenn du viele Trainings erhältst, dann kannst du sie auch kombinieren, aber plane mindestens einen Erholungstag ein."
 
-#: \views\layouts\trainingplans.ctp:135
+#: \views\layouts\trainingplans.ctp:152
 msgid "2. Change your available time, if necessary."
 msgstr "2. Ändere deine verfügbare Trainingszeit, wenn notwendig."
 
-#: \views\layouts\trainingplans.ctp:135
+#: \views\layouts\trainingplans.ctp:152
 msgid "3. Change your sports balance, if necessary."
 msgstr "3. Ändere die Balance der Sportarten, wenn notwendig."
 
-#: \views\layouts\trainingplans.ctp:135
+#: \views\layouts\trainingplans.ctp:152
 msgid "Click on the right side of the image to go to the next step."
 msgstr "Klicke auf die rechte Seite des Bildes, um zum nächsten Schritt zu kommen."
 
-#: \views\layouts\trainingplans.ctp:139
+#: \views\layouts\trainingplans.ctp:156
 msgid "Add your important competitions to get an improved training plan based on your sport goals."
 msgstr "Füge deine wichtigen Wettkämpfe hinzu, um einen verbesserten Trainingsplan basierend auf deinen Trainingszielen zu bekommen."
 
-#: \views\layouts\trainingplans.ctp:143
+#: \views\layouts\trainingplans.ctp:160
 msgid "If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones."
 msgstr "Wenn du weitere, spezifische Trainingsdaten hast, dann ändere deine Einstellungen. Ändere deinen Laktatgrenzwert oder prüfe deine Herzfrequenzzonen."
 
-#: \views\layouts\trainingplans.ctp:147
+#: \views\layouts\trainingplans.ctp:164
 msgid "Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook."
 msgstr "Trage deine Trainings ein, um einen Verlauf deiner Trainings zu bekommen und passendere Trainings zu bekommen. Poste deine Ergebnisse auf Twitter oder Facebook."
 
-#: \views\layouts\trainingplans.ctp:151
+#: \views\layouts\trainingplans.ctp:168
 msgid "Analyse the results of your training with the most important graphs and statistics."
 msgstr "Analysiere die Ergebnisse deines Trainings mit den wichtigsten Graphen und Statistiken."
 
-#: \views\layouts\trainingplans.ctp:159
+#: \views\layouts\trainingplans.ctp:176
 msgid "Step"
 msgstr "Schritt"
 
@@ -2652,75 +2652,75 @@ msgstr "Nächste"
 msgid "Workout details"
 msgstr "Trainingsdetails"
 
-#: \views\trainingstatistics\edit_training.ctp:46;55;64
+#: \views\trainingstatistics\edit_training.ctp:48;57;66
 msgid "Pick a workout type to specify which kind of workout you completed (optional)"
 msgstr "Gib den Typ des absolvierten Trainings an (optional)"
 
-#: \views\trainingstatistics\edit_training.ctp:86
+#: \views\trainingstatistics\edit_training.ctp:88
 msgid "Enter name for your workout route"
 msgstr "Gibt einen Namen für die Trainingsstrecke an"
 
-#: \views\trainingstatistics\edit_training.ctp:88
+#: \views\trainingstatistics\edit_training.ctp:90
 msgid "Course name"
 msgstr "Streckenname"
 
-#: \views\trainingstatistics\edit_training.ctp:89
+#: \views\trainingstatistics\edit_training.ctp:91
 msgid "Enter a name for your course, so you can identify it later (optional)"
 msgstr "Benenne deine Trainingsstrecke, um sie für die Statistiken nutzen zu können (optional)"
 
-#: \views\trainingstatistics\edit_training.ctp:96
+#: \views\trainingstatistics\edit_training.ctp:98
 msgid "Enter the duration of your workout, using hours, minutes and seconds like: 01:15:23"
 msgstr "Gib die länge deines Trainings in Stunden, Minuten und Sekunden an. Beispiel: 01:15:23"
 
-#: \views\trainingstatistics\edit_training.ctp:102;103
+#: \views\trainingstatistics\edit_training.ctp:104;105
 msgid "Enter a duration for your workout"
 msgstr "Gib eine Dauer für dein Training an"
 
-#: \views\trainingstatistics\edit_training.ctp:109
+#: \views\trainingstatistics\edit_training.ctp:111
 msgid "The average heart rate measured during your workout"
 msgstr "Gib die durchschnittliche Herzfrequenz für das Training ein"
 
-#: \views\trainingstatistics\edit_training.ctp:114;115
+#: \views\trainingstatistics\edit_training.ctp:116;117
 msgid "Enter an average heart rate for your workout"
 msgstr "Gib eine durchschnittliche Herzfrequenz für das Training ein"
 
-#: \views\trainingstatistics\edit_training.ctp:116
+#: \views\trainingstatistics\edit_training.ctp:118
 msgid "Must be greater than"
 msgstr "Muss größer sein als"
 
-#: \views\trainingstatistics\edit_training.ctp:117;163
+#: \views\trainingstatistics\edit_training.ctp:119;165
 #: \views\users\edit_weight.ctp:32;50;65
 msgid "Must be lower than"
 msgstr "Muss geringer sein als"
 
-#: \views\trainingstatistics\edit_training.ctp:123
+#: \views\trainingstatistics\edit_training.ctp:125
 msgid "The distance you've covered during your workout"
 msgstr "Die Distanz, die du in diesem Training zurückgeleg hast"
 
-#: \views\trainingstatistics\edit_training.ctp:128;129
+#: \views\trainingstatistics\edit_training.ctp:130;131
 msgid "Enter a distance for your workout"
 msgstr "Gibt eine Distanz für dein Training an"
 
-#: \views\trainingstatistics\edit_training.ctp:161;164
+#: \views\trainingstatistics\edit_training.ctp:163;166
 #: \views\users\edit_weight.ctp:48;51
 msgid "Enter your current weight"
 msgstr "Gibt dein aktuelles Gewicht an"
 
-#: \views\trainingstatistics\edit_training.ctp:162
+#: \views\trainingstatistics\edit_training.ctp:164
 #: \views\users\edit_weight.ctp:31;49;64
 msgid "Must be at least"
 msgstr "Nicht weniger als"
 
-#: \views\trainingstatistics\edit_training.ctp:170
+#: \views\trainingstatistics\edit_training.ctp:172
 #: \views\trainingstatistics\statistics_whathaveidone.ctp:44
 msgid "Comment"
 msgstr "Kommentar"
 
-#: \views\trainingstatistics\edit_training.ctp:181
+#: \views\trainingstatistics\edit_training.ctp:183
 msgid "Link workout"
 msgstr "Link zum Workout"
 
-#: \views\trainingstatistics\edit_training.ctp:182
+#: \views\trainingstatistics\edit_training.ctp:184
 msgid "Add a link for your workout. You might want to check out www.runmap.net or www.bikemap.net for mapping your workouts!"
 msgstr "Füge deinem Training einen Link hinzu. Du kannst zum Beispiel deine Lauf- und Radrouten auf www.runmap.net und www.bikemap.net aufzeichnen!"
 
