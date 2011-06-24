@@ -33,20 +33,20 @@ TimeParser = {
 			// seconds do not count for our calculations
 			// so they will be stripped if found
 			str = str.replace(/[\.,:](\d+)$/, '');
-			this.secs = parseInt(secs[1]);
+			this.secs = parseInt(secs[1], 10);
 		}
 		
 		if (str.indexOf(":") != -1) {
 			// clock notation 8:30
 			var res = str.match(/^(\d+):(\d+).*/);
-			this.mins = (parseInt(res[1]) * 60) + parseInt(res[2]);
+			this.mins = (parseInt(res[1], 10) * 60) + parseInt(res[2], 10);
 		} else if (str.indexOf(".") != -1 || str.indexOf(",") != -1) {
 			str = str.replace(",", ".");
 			// float notation 8.5 or 8,5
-			this.mins = parseInt(parseFloat(str) * 60);
+			this.mins = parseInt(parseFloat(str)* 60, 10);
 		} else {
 			// we'll just parse for integer
-			var num = parseInt(str);
+			var num = parseInt(str, 10);
 			// if < 10 we'll treat the value as hours ...
 			if (num < 10) {
 				this.mins = num * 60;
@@ -75,9 +75,9 @@ TimeParser = {
 			this.secs = secs;
 		}
 		
-		mins = parseInt(mins);
+		mins = parseInt(mins, 10);
 		
-		var h = parseInt(mins / 60);
+		var h = parseInt(mins / 60, 10);
 		var m = mins - (h * 60);
 		if (m < 10) {
 			m = "0" + m;
