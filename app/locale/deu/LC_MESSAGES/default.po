@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-06-13 07:21+0200\n"
-"PO-Revision-Date: 2011-06-13 07:22+0100\n"
+"POT-Creation-Date: 2011-06-26 08:09+0200\n"
+"PO-Revision-Date: 2011-06-26 08:10+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -326,7 +326,7 @@ msgstr "Dieses Training existiert schon!"
 #: \views\users\edit_user.ctp:56;71;85;99;114
 #: \views\users\edit_userinfo.ctp:145
 #: \views\users\list_users.ctp:4;63
-#: \views\users\register.ctp:158
+#: \views\users\register.ctp:161
 msgid "No"
 msgstr "Nein"
 
@@ -337,7 +337,7 @@ msgstr "Nein"
 #: \views\users\edit_user.ctp:55;70;84;98;113
 #: \views\users\edit_userinfo.ctp:144
 #: \views\users\list_users.ctp:3;62
-#: \views\users\register.ctp:157
+#: \views\users\register.ctp:160
 msgid "Yes"
 msgstr "Ja"
 
@@ -1707,43 +1707,45 @@ msgstr "Neueste Nachrichten"
 msgid "PREMIUM Upgrade"
 msgstr "PREMIUM Upgrade"
 
-#: \views\elements\rightbar.ctp:9
+#: \views\elements\rightbar.ctp:8
 msgid "TriCoreTraining Blog"
 msgstr "TriCoreTraining Blog"
 
-#: \views\elements\rightbar.ctp:13
+#: \views\elements\rightbar.ctp:10
 msgid "FAQs"
 msgstr "FAQs"
 
-#: \views\elements\rightbar.ctp:17
+#: \views\elements\rightbar.ctp:14
 msgid "Send this link to your friends"
 msgstr "Sende diesen Link an deine Freunde"
 
-#: \views\elements\rightbar.ctp:18
+#: \views\elements\rightbar.ctp:15
 msgid "Invite your friends"
 msgstr "Lade Freunde ein"
 
-#: \views\elements\rightbar.ctp:23
+#: \views\elements\rightbar.ctp:21
+#: \views\users\login.ctp:34
+#: \views\users\register.ctp:18
 msgid "Login with your Facebook account!"
 msgstr "Log dich ein mit deinem Facebook Account!"
 
-#: \views\elements\rightbar.ctp:28
+#: \views\elements\rightbar.ctp:27
 msgid "Recommendation"
 msgstr "Empfehlung"
 
-#: \views\elements\rightbar.ctp:52
+#: \views\elements\rightbar.ctp:51
 msgid "Administrate users"
 msgstr "Administriere Benutzer"
 
-#: \views\elements\rightbar.ctp:74
+#: \views\elements\rightbar.ctp:73
 msgid "Graphs"
 msgstr "Graphen"
 
-#: \views\elements\rightbar.ctp:75
+#: \views\elements\rightbar.ctp:74
 msgid "PHPMyAdmin"
 msgstr "PHPMyAdmin"
 
-#: \views\elements\rightbar.ctp:76
+#: \views\elements\rightbar.ctp:75
 msgid "Fill my database"
 msgstr "Befülle meine Datenbank"
 
@@ -2334,14 +2336,13 @@ msgstr "Mit dem Klick auf den ABONNIEREN-Button akzeptierst du unsere allgemeine
 
 #: \views\payments\initiate.ctp:33
 #: \views\users\edit_traininginfo.ctp:140
-#: \views\users\register.ctp:166
+#: \views\users\register.ctp:169
 msgid "Read our terms and conditions."
 msgstr "Lies unsere AGBs."
 
 #: \views\payments\initiate.ctp:46
 #: \views\users\edit_address.ctp:8
 #: \views\users\edit_userinfo.ctp:8
-#: \views\users\register.ctp:13
 msgid "Fill in your personal information"
 msgstr "Fülle deine persönlichen Informationen aus"
 
@@ -3049,7 +3050,7 @@ msgstr "Zeit Statistiken"
 
 #: \views\trainingstatistics\statistics_whathaveidone_json.ctp:58;75
 #: \views\users\edit_traininginfo.ctp:245
-#: \views\users\register.ctp:213
+#: \views\users\register.ctp:216
 msgid "hours"
 msgstr "Stunden"
 
@@ -3150,13 +3151,13 @@ msgid "Secure your training service!"
 msgstr "Sichere dein Trainingsservice!"
 
 #: \views\users\edit_password.ctp:27
-#: \views\users\login.ctp:54
-#: \views\users\register.ctp:108
+#: \views\users\login.ctp:62
+#: \views\users\register.ctp:111
 msgid "Password"
 msgstr "Passwort"
 
 #: \views\users\edit_password.ctp:29
-#: \views\users\register.ctp:106
+#: \views\users\register.ctp:109
 msgid "Enter a password"
 msgstr "Gibt ein Passwort ein"
 
@@ -3237,12 +3238,12 @@ msgid "Bike lactate threshold"
 msgstr "Radfahr - Laktatgrenzwert"
 
 #: \views\users\edit_traininginfo.ctp:118
-#: \views\users\register.ctp:144
+#: \views\users\register.ctp:147
 msgid "You're training for competitions and do regular sports for the first time?"
 msgstr "Du trainierst zum ersten Mal für Wettkämpfe und machst regelmässig Sport?"
 
 #: \views\users\edit_traininginfo.ctp:123
-#: \views\users\register.ctp:149
+#: \views\users\register.ctp:152
 msgid "Beginner in structured training?"
 msgstr "Anfänger in strukturiertem Training?"
 
@@ -3259,12 +3260,12 @@ msgid "Your bike lactate threshold is not valid! Should be between 220 and 120."
 msgstr "Dein Radfahr-Laktatgrenzwert ist nicht gültig! Dieser sollte zwischen 220 und 120 liegen."
 
 #: \views\users\edit_traininginfo.ctp:244
-#: \views\users\register.ctp:212
+#: \views\users\register.ctp:215
 msgid "Weekly training load varies between"
 msgstr "Die wöchentliche Trainingslast variiert zwischen"
 
 #: \views\users\edit_traininginfo.ctp:245
-#: \views\users\register.ctp:213
+#: \views\users\register.ctp:216
 msgid "and"
 msgstr "und"
 
@@ -3279,13 +3280,13 @@ msgstr "Zurück zur Liste der Benutzer"
 
 #: \views\users\edit_user.ctp:21
 #: \views\users\edit_userinfo.ctp:33
-#: \views\users\register.ctp:32
+#: \views\users\register.ctp:35
 msgid "Firstname"
 msgstr "Vorname"
 
 #: \views\users\edit_user.ctp:24
 #: \views\users\edit_userinfo.ctp:47
-#: \views\users\register.ctp:43
+#: \views\users\register.ctp:46
 msgid "Lastname"
 msgstr "Nachname"
 
@@ -3318,43 +3319,43 @@ msgid "Minimum of two characters"
 msgstr "Mindestens 2 Buchstaben"
 
 #: \views\users\edit_userinfo.ctp:31
-#: \views\users\register.ctp:30
+#: \views\users\register.ctp:33
 msgid "Enter your firstname"
 msgstr "Gib deinen Vornamen an"
 
 #: \views\users\edit_userinfo.ctp:45
-#: \views\users\register.ctp:41
+#: \views\users\register.ctp:44
 msgid "Enter your lastname"
 msgstr "Gib deinen Nachnamen an"
 
 #: \views\users\edit_userinfo.ctp:52
-#: \views\users\register.ctp:49
+#: \views\users\register.ctp:52
 msgid "Gender"
 msgstr "Geschlecht"
 
 #: \views\users\edit_userinfo.ctp:60
-#: \views\users\register.ctp:54
+#: \views\users\register.ctp:57
 msgid "male"
 msgstr "männlich"
 
 #: \views\users\edit_userinfo.ctp:60
-#: \views\users\register.ctp:54
+#: \views\users\register.ctp:57
 msgid "female"
 msgstr "weiblich"
 
 #: \views\users\edit_userinfo.ctp:70
-#: \views\users\login.ctp:41
-#: \views\users\register.ctp:73
+#: \views\users\login.ctp:49
+#: \views\users\register.ctp:76
 msgid "E-mail"
 msgstr "E-Mail"
 
 #: \views\users\edit_userinfo.ctp:72
-#: \views\users\register.ctp:75
+#: \views\users\register.ctp:78
 msgid "Enter your e-mail"
 msgstr "Gib deine E-Mail an"
 
 #: \views\users\edit_userinfo.ctp:91
-#: \views\users\register.ctp:116
+#: \views\users\register.ctp:119
 msgid "Birthday"
 msgstr "Geburtsdatum"
 
@@ -3516,24 +3517,29 @@ msgstr "Sende Nachricht"
 msgid "You are logged in and want to leave?"
 msgstr "Du bist eingeloggt und willst uns verlassen?"
 
-#: \views\users\login.ctp:43
+#: \views\users\login.ctp:39
+#: \views\users\register.ctp:23
+msgid "or"
+msgstr "oder"
+
+#: \views\users\login.ctp:51
 #: \views\users\password_forgotten.ctp:30
 msgid "You have to enter an e-mail"
 msgstr "Du musst deine E-Mail angeben"
 
-#: \views\users\login.ctp:56
+#: \views\users\login.ctp:64
 msgid "You have to enter a password"
 msgstr "Du musst ein Passwort angeben"
 
-#: \views\users\login.ctp:63
+#: \views\users\login.ctp:71
 msgid "Remember me"
 msgstr "Angemeldet bleiben"
 
-#: \views\users\login.ctp:66
+#: \views\users\login.ctp:74
 msgid "Sign In"
 msgstr "Einloggen"
 
-#: \views\users\login.ctp:70
+#: \views\users\login.ctp:78
 msgid "Can't remember your password?"
 msgstr "Passwort vergessen?"
 
@@ -3558,51 +3564,51 @@ msgstr "Ich weiß, es ist irgendwo in meinem Hirn :)"
 msgid "You received an e-mail with your new password."
 msgstr "Du bekommst eine E-Mail mit deinem neuen Passwort."
 
-#: \views\users\register.ctp:6
+#: \views\users\register.ctp:8
 msgid "Get your trainingplans FREE for 1 month. Then invest less than 3 cups of coffee worth per month for your interactive coach."
 msgstr "Erhalte deine Trainingspläne GRATIS für 1 Monat. Dann musst du nur den Wert von 3 Kaffees pro Monat für deinen interaktiven Coach investieren."
 
-#: \views\users\register.ctp:29;40
+#: \views\users\register.ctp:32;43
 msgid "Minimum 2 characters long"
 msgstr "Mindestens 2 Buchstaben lang"
 
-#: \views\users\register.ctp:60
+#: \views\users\register.ctp:63
 msgid "Please use your company email for registration to receive your company discount!"
 msgstr "Bitte verwende deine Firmenemail für die Registrierung, um den Firmenrabatt zu bekommen!"
 
-#: \views\users\register.ctp:89
+#: \views\users\register.ctp:92
 msgid "Your e-mail is already in use!"
 msgstr "Deine E-Mail wird bereits verwendet!"
 
-#: \views\users\register.ctp:105
+#: \views\users\register.ctp:108
 msgid "Minimum 4 characters long"
 msgstr "Mindestens 4 Buchstaben lang"
 
-#: \views\users\register.ctp:126
+#: \views\users\register.ctp:129
 msgid "Main sport"
 msgstr "Hauptsportart"
 
-#: \views\users\register.ctp:128
+#: \views\users\register.ctp:131
 msgid "Choose your type of sport"
 msgstr "Wähle deine Sportart"
 
-#: \views\users\register.ctp:130
+#: \views\users\register.ctp:133
 msgid "pick yours"
 msgstr "Wähle aus"
 
-#: \views\users\register.ctp:165
+#: \views\users\register.ctp:168
 msgid "You hereby confirm that you've read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!"
 msgstr "Du bestätigst hiermit, dass du die AGBs von TriCoreTraining gelesen hast und diesen zustimmst. Du bestätigst weiterhin, dass du keine medizinischen Einschränkungen zum Sporteln hast!"
 
-#: \views\users\register.ctp:174
+#: \views\users\register.ctp:177
 msgid "I agree"
 msgstr "Ich stimme zu"
 
-#: \views\users\register.ctp:176
+#: \views\users\register.ctp:179
 msgid "You HAVE TO agree to our terms and conditions! That's the way you protect our rights :)."
 msgstr "Du MUSST den AGBs zustimmen! Das ist der Weg, wie du unsere Rechte schützt :)."
 
-#: \views\users\register.ctp:192
+#: \views\users\register.ctp:195
 msgid "Register"
 msgstr "Registrieren"
 
