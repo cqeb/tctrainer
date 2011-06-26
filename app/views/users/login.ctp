@@ -30,7 +30,15 @@ if ( $session_userid && $session_useremail )
                    </div><br />
                    <?php } ?>
 
+<?php if ( !isset( $session_userid ) ) { ?>
+<a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
+<?php } ?>
+
 <?php
+echo '<br /><br /><b>';
+__('or'); 
+echo '</b><br /><br />';
+
 echo $form->input('email',
      array(
      'before' => '',

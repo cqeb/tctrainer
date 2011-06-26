@@ -2,15 +2,10 @@
 
 <?php echo $this->element('js_error'); ?>
 
-<div class="messagebox">
-<?php __('Get your trainingplans FREE for 1 month. Then invest less than 3 cups of coffee worth per month for your interactive coach.'); ?>
-</div>
-
-<br />
 <?php echo $form->create('User', array('action' => 'register')); ?>
 
 <fieldset>
-<!--<legend><?php __('Fill in your personal information'); ?></legend>-->
+<legend><?php __('Get your trainingplans FREE for 1 month. Then invest less than 3 cups of coffee worth per month for your interactive coach.'); ?></legend>
 
 <?php if ($session->check('Message.flash')) { ?>
 <div class="<?php echo $statusbox; ?>">
@@ -19,7 +14,15 @@
 <br />
 <?php } ?>
 
+<?php if ( !isset( $session_userid ) ) { ?>
+<a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
+<?php } ?>
+
 <?php
+echo '<br /><br /><b>';
+__('or'); 
+echo '</b><br /><br />';
+
 
 echo $form->input('firstname',
      array(
