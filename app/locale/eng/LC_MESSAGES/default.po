@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-06-26 08:09+0200\n"
-"PO-Revision-Date: 2011-06-26 08:24+0100\n"
-"Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
+"PO-Revision-Date: 2011-07-04 09:33+0100\n"
+"Last-Translator: Petro Salema <p.salema@gentics.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,17 +16,17 @@ msgstr ""
 
 #: \app_controller.php:144
 msgid "Sorry, your session has expired or you're not logged in."
-msgstr ""
+msgstr "Sorry, your session has either expired or you are not logged in."
 
 #: \app_controller.php:179
 msgid "Incorrect session data. Sorry."
-msgstr ""
+msgstr "Sorry, incorrect session data."
 
 # entry = entry in database / account
 #: \controllers\competitions_controller.php:106
 #: \controllers\trainingstatistics_controller.php:454;1083
 msgid "Sorry. This is not your entry!"
-msgstr ""
+msgstr "Sorry, this is not your entry!"
 
 # triathlon / running / biking season (normally a year)
 #: \controllers\competitions_controller.php:225
@@ -48,7 +48,7 @@ msgstr ""
 # user wants to cancel
 #: \controllers\payments_controller.php:70
 msgid "Registered cancellation request."
-msgstr ""
+msgstr "Your cancellation request has been registered."
 
 #: \controllers\payments_controller.php:305
 msgid "No Transaction-ID defined - something is wrong - sorry."
@@ -56,7 +56,7 @@ msgstr ""
 
 #: \controllers\payments_controller.php:305
 msgid "Contact our support"
-msgstr ""
+msgstr "Please, contact our support."
 
 #: \controllers\payments_controller.php:318
 msgid "UserID"
@@ -108,7 +108,7 @@ msgstr ""
 msgid "great"
 msgstr ""
 
-# your friend bought a PREMIUM ... 
+# your friend bought a PREMIUM ...
 #: \controllers\payments_controller.php:440
 msgid "bought a PREMIUM membership."
 msgstr ""
@@ -158,7 +158,7 @@ msgstr ""
 #: \controllers\payments_controller.php:540
 #: \controllers\users_controller.php:995
 msgid "contact our support"
-msgstr ""
+msgstr "You canceled the payment transaction. If this was not intended, please repeat the payment process again. If you have any other problems please \"contact our support\""
 
 #: \controllers\payments_controller.php:603
 msgid "TriCoreTraining Invoice"
@@ -172,21 +172,21 @@ msgstr ""
 msgid "the interactive, online training plan service for run, bike and triathlon athletes "
 msgstr ""
 
-# I did a run in 2 hours 
+# I did a run in 2 hours
 #: \controllers\starts_controller.php:72
 #: \controllers\trainingstatistics_controller.php:1048
 #: \views\layouts\trainer_start.ctp:20
 msgid "I did a"
 msgstr ""
 
-# I did a run in 2 hours 
+# I did a run in 2 hours
 #: \controllers\starts_controller.php:73
 #: \controllers\trainingstatistics_controller.php:1049
 #: \views\layouts\trainer_start.ctp:21
 msgid "in"
 msgstr ""
 
-# I did a run in 2 hours 
+# I did a run in 2 hours
 #: \controllers\starts_controller.php:74
 #: \controllers\trainingstatistics_controller.php:1050
 #: \views\layouts\trainer_start.ctp:22
@@ -490,7 +490,7 @@ msgstr ""
 
 #: \controllers\users_controller.php:741
 msgid "wants to become an athlete too. Maybe you do workouts together?"
-msgstr ""
+msgstr "wants to become an athlete too. Maybe you can do workouts together?"
 
 #: \controllers\users_controller.php:742
 msgid "After he/she buys a PREMIUM membership, you receive 3 month PREMIUM membership as a \"Thank you\" for FREE."
@@ -531,7 +531,7 @@ msgstr ""
 
 #: \controllers\users_controller.php:976
 msgid "You will receive regularly training schedules from TriCoreTraining.com. Start your sports career."
-msgstr ""
+msgstr "You will receive regular training schedules from TriCoreTraining.com. Start your sports career."
 
 #: \controllers\users_controller.php:995
 msgid "Something went wrong - sorry. Maybe you're already activated?"
@@ -604,7 +604,7 @@ msgstr ""
 # You should at maximum loose 2 kilogramms per month.
 #: \controllers\users_controller.php:1247
 msgid "per month."
-msgstr ""
+msgstr "You should lose a maximum of 2 kilograms per month."
 
 #: \controllers\users_controller.php:1282
 msgid "Your target weight is not ok. Your goals would bring your BMI to a critical"
@@ -716,7 +716,7 @@ msgstr ""
 
 #: \controllers\users_controller.php:1885
 msgid "Your birthday is missing! This is essentiell for calculations."
-msgstr ""
+msgstr "Your birthday is missing! This is essential for calculations."
 
 #: \controllers\users_controller.php:1891
 msgid "Your run lactate threshold must be between 100 and 210."
@@ -761,7 +761,7 @@ msgstr ""
 # Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please "subscribe"
 #: \controllers\users_controller.php:1989
 msgid "subscribe"
-msgstr ""
+msgstr "Your PREMIUM membership has expired. Please \"subscribe\" to continue your training with your interactive, online training coach."
 
 #: \controllers\users_controller.php:1990;1998
 #: \views\elements\email\newsletter_text_footer.ctp:3
@@ -2599,12 +2599,12 @@ msgstr ""
 # BEFORE you cancel, please tell us here why you want to cancel or get in contact with us
 #: \views\payments\unsubscribe_triplans.ctp:22
 msgid "BEFORE you cancel, please tell us here why you want to cancel or get in"
-msgstr ""
+msgstr "Please let us know why you have chosen to cancel (your account). We would love to hear from you about how we can improve our service. Please get in"
 
 # BEFORE you cancel, please tell us here why you want to cancel or get in contact with us
 #: \views\payments\unsubscribe_triplans.ctp:22
 msgid "contact with us"
-msgstr ""
+msgstr "in touch with us"
 
 #: \views\payments\unsubscribe_triplans.ctp:22
 msgid "we want to make you HAPPY again!"
