@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-08-22 22:26+0200\n"
-"PO-Revision-Date: 2011-08-22 22:32+0100\n"
+"POT-Creation-Date: 2011-08-30 23:07+0200\n"
+"PO-Revision-Date: 2011-08-30 23:11+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgstr "Verifizierung durch PAYPAL ist fehlgeschlagen."
 
 #: \controllers\payments_controller.php:423;438;447
 #: \controllers\users_controller.php:739
-#: \views\elements\footer.ctp:27
+#: \views\elements\footer.ctp:29
 #: \views\elements\email\newsletter_text_footer.ctp:3
 #: \views\layouts\trainer_start.ctp:47
 #: \views\users\index.ctp:2
@@ -1682,11 +1682,15 @@ msgstr "Magazin"
 msgid "RSS Feed"
 msgstr "RSS Feed"
 
-#: \views\elements\footer.ctp:25
+#: \views\elements\footer.ctp:23
+msgid "My first Ironman"
+msgstr "Mein erster Ironman"
+
+#: \views\elements\footer.ctp:27
 msgid "Powered by"
 msgstr "Powered by"
 
-#: \views\elements\footer.ctp:28
+#: \views\elements\footer.ctp:30
 msgid "Association"
 msgstr "Verein"
 

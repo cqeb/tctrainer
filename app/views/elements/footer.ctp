@@ -19,6 +19,7 @@
 		<p>
 		    <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a><br />
 			<a target="_blank" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'deu' ) echo 'DE'; else echo 'EN'; ?>"><?php __('RSS Feed'); ?></a><br />
+			<!-- do not remove before 2012-09-01 -->
 			<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>my-1st-ironman-pain-is-temporary-pride-is-4ever/"><?php __('My first Ironman'); ?></a>
 		</p>
 	</div>
