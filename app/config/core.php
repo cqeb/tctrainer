@@ -350,9 +350,6 @@ Configure::write('Acl.database', 'default');
  */
 Cache::config('default', array('engine' => 'File'));
 
-/**
- * Language
- */
 
 
 ?>

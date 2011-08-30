@@ -17,8 +17,9 @@
 	<div class="grid_3">
 		<h2><?php __('Updates'); ?></h2>
 		<p>
-      <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a><br />
-			<a target="_blank" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'deu' ) echo 'DE'; else echo 'EN'; ?>"><?php __('RSS Feed'); ?></a>
+		    <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Magazine'); ?></a><br />
+			<a target="_blank" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'deu' ) echo 'DE'; else echo 'EN'; ?>"><?php __('RSS Feed'); ?></a><br />
+			<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>my-1st-ironman-pain-is-temporary-pride-is-4ever/"><?php __('My first Ironman'); ?></a>
 		</p>
 	</div>
 	<div class="grid_3">

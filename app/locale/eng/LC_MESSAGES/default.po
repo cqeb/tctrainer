@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2011-06-26 08:09+0200\n"
-"PO-Revision-Date: 2011-07-04 09:33+0100\n"
-"Last-Translator: Petro Salema <p.salema@gentics.com>\n"
+"POT-Creation-Date: 2011-08-22 22:26+0200\n"
+"PO-Revision-Date: 2011-08-22 22:30+0100\n"
+"Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -670,100 +670,112 @@ msgstr ""
 msgid "is not correct"
 msgstr ""
 
-#: \controllers\users_controller.php:1832
-msgid "don't be lazy!"
+#: \controllers\users_controller.php:1839
+msgid "Your next race is only a few weeks away."
 msgstr ""
 
-#: \controllers\users_controller.php:1833
-msgid "Go to"
-msgstr ""
-
-#: \controllers\users_controller.php:1834
-msgid "and track your workouts - now!"
-msgstr ""
-
-#: \controllers\users_controller.php:1842
-msgid "Your firstname is missing!"
-msgstr ""
-
-#: \controllers\users_controller.php:1842;1849;1856;1863;1870;1877
-msgid "Please add it to your profile."
-msgstr ""
-
-#: \controllers\users_controller.php:1845;1852;1859;1866;1873;1880;1893;1902;1926;1937;1948;1966
-msgid "Change it."
+#: \controllers\users_controller.php:1841;1851
+msgid "Read this!"
 msgstr ""
 
 #: \controllers\users_controller.php:1849
+msgid "Your next race is only a few days away. TriCoreTraining wishes you the best!"
+msgstr ""
+
+#: \controllers\users_controller.php:1864
+msgid "don't be lazy!"
+msgstr ""
+
+#: \controllers\users_controller.php:1865
+msgid "Go to"
+msgstr ""
+
+#: \controllers\users_controller.php:1866
+msgid "and track your workouts - now!"
+msgstr ""
+
+#: \controllers\users_controller.php:1875
+msgid "Your firstname is missing!"
+msgstr ""
+
+#: \controllers\users_controller.php:1875;1882;1889;1896;1903;1910
+msgid "Please add it to your profile."
+msgstr ""
+
+#: \controllers\users_controller.php:1878;1885;1892;1899;1906;1913;1926;1935;1959;1970;1981;1999
+msgid "Change it."
+msgstr ""
+
+#: \controllers\users_controller.php:1882
 msgid "Your lastname is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1856
+#: \controllers\users_controller.php:1889
 msgid "Your address is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1863
+#: \controllers\users_controller.php:1896
 msgid "Your zip is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1870
+#: \controllers\users_controller.php:1903
 msgid "Your city is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1877
+#: \controllers\users_controller.php:1910
 msgid "Your country is missing!"
 msgstr ""
 
-#: \controllers\users_controller.php:1885
+#: \controllers\users_controller.php:1918
 msgid "Your birthday is missing! This is essentiell for calculations."
 msgstr "Your birthday is missing! This is essential for calculations."
 
-#: \controllers\users_controller.php:1891
+#: \controllers\users_controller.php:1924
 msgid "Your run lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: \controllers\users_controller.php:1900
+#: \controllers\users_controller.php:1933
 msgid "Your bike lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: \controllers\users_controller.php:1922
+#: \controllers\users_controller.php:1955
 msgid "Your weight loss per month to achieve your weight goal must be"
 msgstr ""
 
-#: \controllers\users_controller.php:1924
+#: \controllers\users_controller.php:1957
 msgid "that's not healthy - set a new weight goal!"
 msgstr ""
 
-#: \controllers\users_controller.php:1935
+#: \controllers\users_controller.php:1968
 msgid "You have not entered your weekly training time."
 msgstr ""
 
-#: \controllers\users_controller.php:1946
+#: \controllers\users_controller.php:1979
 msgid "You told TriCoreTraining that you're a rookie. Since you're training with TriCoreTraining for more than 9 months, maybe you should change that!"
 msgstr ""
 
-#: \controllers\users_controller.php:1957
+#: \controllers\users_controller.php:1990
 msgid "Please recommend our service!"
 msgstr ""
 
-#: \controllers\users_controller.php:1964
+#: \controllers\users_controller.php:1997
 msgid "You haven't agreed to our terms and conditions or your medical conditions are not good enough for training. Is that still correct? You want receive training schedules with bad health. Sorry!"
 msgstr ""
 
-#: \controllers\users_controller.php:1975
+#: \controllers\users_controller.php:2008
 msgid "Your account is not activated yet. Please use your activation mail to activate your account or contact our support. Thanks."
 msgstr ""
 
-#: \controllers\users_controller.php:1988
+#: \controllers\users_controller.php:2021
 msgid "Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please"
 msgstr ""
 
 # Your PREMIUM membership is over. If you want to continue your training with your interactive, online training coach, please "subscribe"
-#: \controllers\users_controller.php:1989
+#: \controllers\users_controller.php:2022
 msgid "subscribe"
 msgstr "Your PREMIUM membership has expired. Please \"subscribe\" to continue your training with your interactive, online training coach."
 
-#: \controllers\users_controller.php:1990;1998
+#: \controllers\users_controller.php:2023;2031
 #: \views\elements\email\newsletter_text_footer.ctp:3
 #: \views\payments\subscribe_triplans.ctp:8
 #: \views\payments\unsubscribe_triplans.ctp:8
@@ -772,7 +784,7 @@ msgstr "Your PREMIUM membership has expired. Please \"subscribe\" to continue yo
 msgid "Gain speed, lose weight"
 msgstr ""
 
-#: \controllers\users_controller.php:1995
+#: \controllers\users_controller.php:2028
 #: \views\elements\email\html\invoiceinfomail.ctp:7
 #: \views\elements\email\html\invoicemail.ctp:7
 #: \views\elements\email\html\notification.ctp:7
@@ -789,43 +801,43 @@ msgstr ""
 msgid "Aloha"
 msgstr ""
 
-#: \controllers\users_controller.php:1995
+#: \controllers\users_controller.php:2028
 msgid "TriCoreTraining.com message for you!"
 msgstr ""
 
-#: \controllers\users_controller.php:1996
+#: \controllers\users_controller.php:2029
 msgid "your training plan needs you!"
 msgstr ""
 
-#: \controllers\users_controller.php:1997
+#: \controllers\users_controller.php:2030
 msgid "please read this notice from TriCoreTraining.com for you!"
 msgstr ""
 
-#: \controllers\users_controller.php:1998
+#: \controllers\users_controller.php:2031
 msgid "this is your motto!"
 msgstr ""
 
-#: \controllers\users_controller.php:1999
+#: \controllers\users_controller.php:2032
 msgid "TriCoreTraining.com needs you!"
 msgstr ""
 
-#: \controllers\users_controller.php:2013
+#: \controllers\users_controller.php:2046
 msgid "Your training schedule for next week is here!"
 msgstr ""
 
-#: \controllers\users_controller.php:2014
+#: \controllers\users_controller.php:2047
 msgid "Click here, print it and use it!"
 msgstr ""
 
-#: \controllers\users_controller.php:2022
+#: \controllers\users_controller.php:2055
 msgid "Some magazine articles"
 msgstr ""
 
-#: \controllers\users_controller.php:2028
+#: \controllers\users_controller.php:2061
 msgid "There is something to update in your profile."
 msgstr ""
 
-#: \controllers\users_controller.php:2065
+#: \controllers\users_controller.php:2098
 msgid "athlete"
 msgstr ""
 

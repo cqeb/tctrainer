@@ -239,8 +239,8 @@ class UsersController extends AppController {
 				} else
 				{
 					$token_url = "https://graph.facebook.com/oauth/access_token?client_id=" .
-		        		$app_id . "&redirect_uri=" . urlencode($my_url) . "&client_secret=" .
-		        		$app_secret . "&code=" . $code;
+	        		$app_id . "&redirect_uri=" . urlencode($my_url) . "&client_secret=" .
+	        		$app_secret . "&code=" . $code;
 		
 					$access_token = file_get_contents($token_url);
 					$graph_url = "https://graph.facebook.com/me?" . $access_token;
@@ -264,7 +264,7 @@ class UsersController extends AppController {
 						$cookie['userid'] = $results['User']['id'];
 						$cookie['firstname'] = $results['User']['firstname'];
 							
-						$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 hour');
+						$this->Cookie->write('tct_auth_blog', $cookie, false, '+30 days');
 	
 						// set "user" session equal to email address
 						// user might have a different session from other login
@@ -1768,7 +1768,7 @@ class UsersController extends AppController {
 	  	$last_workout_limit = 10; // 10 days 
 		
 		$u = $user;
-		
+
 		if ( $debug == true ) echo "language written 2 ". $u['yourlanguage'] . "<br />";
 		Configure::write('Config.language',$u['yourlanguage']);
 		  
@@ -1813,14 +1813,46 @@ class UsersController extends AppController {
 		  
 		  if ( $user['notifications'] != 1 ) 
 		  {   
-
 				if ( $user['deactivated'] == 0 && $user['activated'] == 1 )
 				{ 
+
 					$userid = $user['id'];
 					$this->loadModel('Trainingstatistic');
 		
+					$sql = "SELECT * FROM `competitions` where important = 1 and user_id = " . $userid . " and competitiondate > NOW() ORDER by competitiondate ASC";
+					$competitions = $this->Trainingstatistic->query($sql);
+
+					if ( count( $competitions ) > 0 ) 
+					{
+						$next_comp = $competitions[0]['competitions'];
+						$ts_comp = strtotime ($next_comp['competitiondate']);
+						$ts_comp1 = $ts_comp - 30 * 86400;
+						$ts_comp2 = $ts_comp - 20 * 86400;
+						$ts_comp3 = $ts_comp - 10 * 86400;
+						$ts_comp4 = $ts_comp - 3 * 86400;
+
+						if ( time() > $ts_comp1 && time() < $ts_comp2 )
+						{
+							if ( $u['yourlanguage'] == 'deu' ) $lang = 'de';
+							else $lang = 'en';
+						
+							$text_for_mail_training .= '<b>' . __('Your next race is only a few weeks away.', true) . '</b> ' . 
+								'<a href="' . Configure::read('App.hostUrl') . 
+								'/blog/' . $lang . '/now-its-time-the-race-starts-soon/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Read this!', true) . '</a><br /><br />'; 
+		 				}
+
+						if ( time() > $ts_comp3 && time() < $ts_comp4 )
+						{
+							if ( $u['yourlanguage'] == 'deu' ) $lang = 'de';
+							else $lang = 'en';
+						
+							$text_for_mail_training .= '<b>' . __('Your next race is only a few days away. TriCoreTraining wishes you the best!', true) . '</b> ' . 
+								'<a href="' . Configure::read('App.hostUrl') . 
+								'/blog/' . $lang . '/what-can-go-wrong-before-a-competition/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">' . __('Read this!', true) . '</a><br /><br />'; 
+		 				}
+		 			}
+
 					$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
-				
 					$results = $this->Trainingstatistic->query($sql);
 					//if ( $debug == true ) echo $sql . "<br />\n";
 			
@@ -1829,13 +1861,14 @@ class UsersController extends AppController {
 			
 					if ( $diff_time > $last_training )
 					{
-						$text_for_mail_training = __("don't be lazy!", true) . ' ' .  
+						$text_for_mail_training .= __("don't be lazy!", true) . ' ' .  
 							__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
 							'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true); 
 		 
 						if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
 					}
-				}
+	
+			  } 
 
 			      // check name + address
 			      if ( !$u['firstname'] ) 
@@ -2033,7 +2066,7 @@ class UsersController extends AppController {
 							echo $u['yourlanguage'] . ' ' . $misc['counter'] . ' ' . $mailsubject;
 							
 					    $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
-			  	} 
+			  	}
 			 } 
 	}
 

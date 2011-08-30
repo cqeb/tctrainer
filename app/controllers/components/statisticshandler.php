@@ -597,7 +597,6 @@ class StatisticshandlerComponent extends Object {
             $total_trimp = 0;
             $total_trimp_tp = 0;
 
-
             $sql = "SELECT min(week) as mindate FROM scheduledtrainings WHERE " . 
                 "athlete_id = $userid AND ";
             if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
@@ -611,41 +610,6 @@ class StatisticshandlerComponent extends Object {
 				if ( strtotime( $maxstart ) > strtotime( $start ) )
 					$start = $maxstart;
 			}
-
-            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND ";
-            if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
-            $sql .= "(date BETWEEN '" . $start . "' AND '" . $end . "') ORDER BY date";
-
-            $trainings = $Trainingstatistic->query( $sql );
-
-            $sumdata['collected_sportstypes'] = array();
-            $sumdata['duration'] = array();
-            $sumdata['distance'] = array();
-            $sumdata['trimp'] = array();
-
-            // go through all trainings of period defined
-            for ( $i = 0; $i < count( $trainings ); $i++ )
-            {
-                  $dt = $trainings[$i]['trainingstatistics'];
-                  $sportstype_set = $dt['sportstype'];
-                  // reset array per sportstype
-                  if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
-                  {
-                       $sumdata['collected_sportstypes'][] = $sportstype_set;
-                       $sumdata['duration'][$sportstype_set] = 0;
-                       $sumdata['distance'][$sportstype_set] = 0;
-                       $sumdata['trimp'][$sportstype_set] = 0;
-                  }
-
-                  // cummulate values per sportstype
-                  $sumdata['duration'][$sportstype_set] += $dt['duration'];
-
-                  if ( $dt['trimp'] > 0 )
-                  {
-                       $sumdata['trimp'][$sportstype_set] += ( $dt['trimp'] );
-                       $total_trimp += ( $dt['trimp'] );
-                  }
-            }
 
             /**
             planned trainings
@@ -667,10 +631,8 @@ class StatisticshandlerComponent extends Object {
 */
             $Trainingplans = $Trainingstatistic->query( $sql );
 
-/*
-            echo $sql . "<br /><br />";
-			pr($Trainingplans);
-*/            
+			// in case there are less trainings in tp then set new start date
+            $start = $Trainingplans[0]['m']['week'];
 
             $sumdata_tp['collected_sportstypes'] = array();
             $sumdata_tp['duration'] = array();
@@ -704,6 +666,41 @@ class StatisticshandlerComponent extends Object {
                   {
                        $sumdata_tp['trimp'][$sportstype_set] += ( $dt['trimp'] );
                        $total_trimp_tp += ( $dt['trimp'] );
+                  }
+            }
+
+            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND ";
+            if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
+            $sql .= "(date BETWEEN '" . $start . "' AND '" . $end . "') ORDER BY date";
+
+            $trainings = $Trainingstatistic->query( $sql );
+
+            $sumdata['collected_sportstypes'] = array();
+            $sumdata['duration'] = array();
+            $sumdata['distance'] = array();
+            $sumdata['trimp'] = array();
+
+            // go through all trainings of period defined
+            for ( $i = 0; $i < count( $trainings ); $i++ )
+            {
+                  $dt = $trainings[$i]['trainingstatistics'];
+                  $sportstype_set = $dt['sportstype'];
+                  // reset array per sportstype
+                  if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
+                  {
+                       $sumdata['collected_sportstypes'][] = $sportstype_set;
+                       $sumdata['duration'][$sportstype_set] = 0;
+                       $sumdata['distance'][$sportstype_set] = 0;
+                       $sumdata['trimp'][$sportstype_set] = 0;
+                  }
+
+                  // cummulate values per sportstype
+                  $sumdata['duration'][$sportstype_set] += $dt['duration'];
+
+                  if ( $dt['trimp'] > 0 )
+                  {
+                       $sumdata['trimp'][$sportstype_set] += ( $dt['trimp'] );
+                       $total_trimp += ( $dt['trimp'] );
                   }
             }
 

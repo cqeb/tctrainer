@@ -453,7 +453,7 @@ function edit_training($id = null) {
 	  			} else {
 	  				$this->Session->setFlash(__('Sorry. This is not your entry!', true));
 	  				$this->set('statusbox', $statusbox);
-	  				$this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+	  				$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	  			}
 	  		}
 	
@@ -553,7 +553,7 @@ function edit_training($id = null) {
 	  			}
 	  			$this->Session->setFlash(__('Training saved.',true));
 	  			$this->set('statusbox', $statusbox);
-	  			$this->redirect(array('controller' => 'Trainingstatistics', 'action' => 'list_trainings'));
+	  			$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	  		} else {
 	  			$statusbox = 'statusbox error';
 	  			$this->Session->setFlash(__('Some errors occured',true));
