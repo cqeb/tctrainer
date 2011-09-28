@@ -1,4 +1,12 @@
-							<br />
+						   <br />
+
+							<p>
+                           	<a href="http://www.facebook.com/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><?php __('Visit us at Facebook'); ?></a>
+                           	<br /><br />
+                           	<a href="http://www.twitter.com/tricoretraining/" target="_blank"><?php __('Follow us on Twitter'); ?></a>
+                           	</p>
+
+                           <img alt="" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/spacer.gif" width="329" height="12" />
 
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/hr.gif" width="329" height="27" />
 

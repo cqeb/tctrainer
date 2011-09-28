@@ -34,7 +34,8 @@ pageTracker._trackPageview();
   feedback_widget_options.style = "idea";
   var feedback_widget = new GSFN.feedback_widget(feedback_widget_options);
 </script>
-*/
-?>
 
 <script src="http://cdn.wibiya.com/Toolbars/dir_0844/Toolbar_844248/Loader_844248.js" type="text/javascript"></script><noscript><a href="http://www.wibiya.com/">Web Toolbar by Wibiya</a></noscript> 
+
+*/
+?>

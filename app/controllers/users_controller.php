@@ -1617,6 +1617,7 @@ class UsersController extends AppController {
         );
         /* Set delivery method */
         $this->Email->delivery = 'smtp';
+		//pr($this->Email);
         /* Do not pass any args to send() */
         $this->Email->send();
 
@@ -2123,7 +2124,7 @@ class UsersController extends AppController {
 		$this->Email->template = $template; // note no '.ctp'
 
 		//Send as 'html', 'text' or 'both' (default is 'text')
-		$this->Email->sendAs = $mimetype; // because we like to send pretty mail
+		$this->Email->sendAs = 'both'; // because we like to send pretty mail
 
 		/* SMTP Options */
 		$mailPort = Configure::read('App.mailPort');
