@@ -1,0 +1,332 @@
+#loader {
+	position: absolute;
+	margin: 40px 0 0 200px;
+}
+
+.avgweekly.grid_2 .box, .distribution.grid_4 .box {
+	height: 170px;
+}
+
+.avgweekly label, .distribution label {
+	width: 100%;
+	display: block;
+	margin: 10px 0px;
+}
+
+.avgweekly .box {
+	text-align: center;
+}
+
+.avgweekly input {
+	width: 70px;
+	height: 30px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: white 1px 1px 1px;
+}
+.avgweekly img.edit {
+	cursor: pointer;
+	position: absolute;
+	margin-left: -9px;
+	padding-top: 9px; 	
+}
+
+.ui-slider-range.ui-widget-header {
+	background: white;
+}
+
+.sporttime {
+	width: 78px;
+	margin-right: 15px;
+	float: left;
+	border: 1px solid #999999;
+}
+
+.sporttime.last {
+	margin: 0px;
+}
+
+.sporttime h3 {
+	color: #666666;
+	padding: 7px;
+	margin: 0px;
+	font-weight: normal;
+	font-size: 12px;
+	text-shadow: white 1px 1px 1px;
+	border-bottom: 1px dotted #999;
+}
+
+.sporttime div {
+	background: #efefef;
+	text-shadow: white 1px 1px 1px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 10px;
+}
+
+#slider {
+	margin: 20px 0;
+}
+
+/**
+ * Workouts
+ */
+table.workouts {
+	border-collapse:separate;
+	border-spacing: 0 5px;
+	font-size: 14px;
+}
+
+table.workouts td {
+	padding: 10px;
+	padding-bottom: 20px;
+}
+
+.workouts .sport {
+	font-weight: bold;
+	width: 30px;
+	background: #efefef;
+	text-shadow: white 1px 1px 1px;
+	text-align: center;
+	padding: 10px;
+	border: 1px solid #999999;
+	-webkit-border-radius: 2px 0px 0px 2px;
+	-moz-border-radius: 2px 0px 0px 2px;
+	border-radius: 2px 0px 0px 2px;
+}
+
+.type {
+	padding-top: 3px;
+	vertical-align: top;
+	border: 1px solid #999;
+	border-width: 1px 0 1px 0;
+   background: white /**url(../img/lightgrey-fade.png) repeat-x top left**/;
+	text-shadow: 1px 1px 1px white;
+}
+
+.type span.category {
+	font-size: 10px;
+	padding: 1px 5px;
+	margin-top: 3px;
+	text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+	position: absolute;
+	border: 0px solid black;
+	border-width: 0 1px 1px 0;
+	cursor: help;
+}
+
+table.workouts td.description {
+	padding: 0 4px 0;
+	line-height: 18px;
+}
+
+table.workouts td.description div {	
+	-webkit-border-radius: 0px 0px 2px 2px;
+	-moz-border-radius: 0px 0px 2px 2px;
+	border-radius: 0px 0px 2px 2px;
+	background-color: #efefef;
+	padding: 5px;
+	border: 1px solid #aaaaaa;
+	border-top-width: 0px;
+	margin-top: -5px;
+	display: bock;
+	font-size: 12px;
+}
+
+/* green */
+.type.E span.category {
+	background-color: #B2FF65;
+	border-color: #6D9452;
+}
+
+/* yellow */
+.type.S span.category {
+	background-color: #FFEC65;
+	border-color: #C7B110;
+}
+
+/* orange */
+.type.F span.category {
+	background-color: #FF8D65;
+	border-color: #A1603A;
+}
+
+/* blue */
+.type.M span.category {
+	background-color: #95BCFF;
+	border-color: #036599;
+}
+
+/* grey */
+.type.T span.category {
+	background-color: #DFDFDF;
+	border-color: #888;
+}
+
+.workouts .duration, .workouts .trimp {
+	border: 1px solid #999;
+	border-width: 1px 0 1px 1px;
+	border-right: 1px dotted #999;
+	background-color: #efefef;
+	color: #666;
+	text-shadow: 1px 1px 1px white;
+	font-weight: bold;
+	font-size: 16px;
+	width: 40px;
+	text-align: right;
+}
+
+.workouts .trimp {
+	width: 70px;
+	border: 1px solid #999;
+	border-width: 1px 1px 1px 0;
+	border-radius: 0px 2px 2px 0px;	
+	background-color: #F6EDA7;
+}
+
+.workouts small {
+	font-size: 10px;
+}
+
+table.workouts td.sport, table.workouts td.duration, table.workouts td.trimp {
+	padding-top: 15px;
+}
+
+.workouts .type img.lsd {
+	cursor: help;
+}
+
+.mesocycle {
+	margin-bottom: 20px;
+}
+
+.mesocycle div {
+	font-size: 10px;
+	text-align: center;
+	width: 40px;
+	float: left;
+	background-color: #CCCCCC;
+	margin: 1px;
+}
+
+a.reset {
+	position: relative;
+	display: none;
+}
+
+.avgweekly a.reset {
+	top: 5px;
+}
+
+#toggleDesc {
+	float: right;
+}
+
+.phase {
+	font-weight: normal;
+	font-size: 14px;
+	border: 1px solid #666;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	border-color: #ccc #666 #666 #ccc;
+	padding: 3px;
+	color: #666;
+	background: #eee;
+	text-shadow: 1px 1px 1px #fff;
+	vertical-align: 2px;
+}
+
+#plan {
+	width: 430px;	
+}
+
+.workouts .description button {
+	display: block;
+	margin-top: 10px;
+}
+
+/*
+ * Zone guide css
+ */
+.zone {
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background: #666 url(../img/zones/heart.gif) no-repeat 3px 3px;
+	padding: 2px 2px 2px 20px;
+	border: 0px solid #333;
+	border-width: 0px 1px 1px 0px;
+	color: white;
+	text-shadow: -1px -1px 1px #333;
+	cursor: help;
+}
+
+#zoneguide {
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	border: 4px solid #333;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	background: white;
+	font-size: 12px;
+	display: none;
+	box-shadow: 6px 6px 5px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 6px 6px 5px rgba(0,0,0,0.2);
+	-moz-box-shadow: 6px 6px 5px rgba(0,0,0,0.2);
+}
+
+#zoneguide table {
+	margin-bottom: 0px;
+}
+
+#zoneguide .pointer {
+	position: absolute;
+	margin-left: -12px;
+	margin-top: -12px;
+}
+
+#zoneguide .highlight {
+	font-weight: bold;
+	font-size: 14px;
+	color: white;
+	text-shadow: 1px 1px 1px #990000;
+	background: red;
+	background: -webkit-gradient(
+	    linear,
+    	left bottom,
+    	left top,
+	    color-stop(0, #660000),
+	    color-stop(1, #FF0000)
+	);
+	background: -moz-linear-gradient(
+    	center bottom,
+    	#660000 0%,
+    	#FF0000 100%
+	);
+	padding: 4px;
+}
+/* check buttons for workouts */
+.workouts .type button {
+/*  	position: absolute;*/
+	margin-left: 173px;
+	margin-top: -14px;
+	width: 30px;
+	height: 30px;
+	color: grey;
+	font-weight: bold;
+	border-color: #999;
+}
+
+.workouts .type button[data-trainingid] {
+	border: none;
+	background: none;
+	color: #6C9745;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+}
+
