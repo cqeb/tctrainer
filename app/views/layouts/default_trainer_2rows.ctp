@@ -21,12 +21,12 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css?v=<?php echo VERSION; ?>" />
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-		<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>
 <?php } else { ?>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
 <?php } ?>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.js?v=<?php echo VERSION; ?>"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.min.js?v=<?php echo VERSION; ?>"></script>
 
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.min.js?v=<?php echo VERSION; ?>"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
