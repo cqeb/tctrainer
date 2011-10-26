@@ -57,5 +57,5 @@ define('RATIO_DUATHLON', '40,60'); // bike run
  * this will define our trainers version to be appended to css files and so forth
  * to prevent browser caching
  */
-define('VERSION', '1.0.3');
+define('VERSION', '1.0.5');
 ?>
