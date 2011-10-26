@@ -6,7 +6,7 @@
                    <legend><?php __('This is science!'); ?></legend>
 
                    <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div>
 
 <?php

@@ -48,7 +48,7 @@ class UsersController extends AppController {
 			if ( $userobject['admin'] != "1" )
 			{
 					// login data is wrong, redirect to login page
-					$this->Session->setFlash(__("Sorry. Don't fool around with our security.",true));
+					$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
 					$this->redirect('/users/login');
 			}
 			
@@ -86,7 +86,7 @@ class UsersController extends AppController {
 			if ( $userobject['admin'] != "1" )
 			{
 					// login data is wrong, redirect to login page
-					$this->Session->setFlash(__("Sorry. Don't fool around with our security.",true));
+					$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
 					$this->redirect('/users/login');
 			}
 
@@ -115,12 +115,12 @@ class UsersController extends AppController {
 			      'advanced_features', 'notifications', 'canceled' ) ) ) )
 			      {
 			      	   $statusbox = 'statusbox ok';
-			      	   $this->Session->setFlash(__('User profile saved.',true));
+			      	   $this->Session->write('flash',__('User profile saved.',true));
 			
 			      } else
 			      {
 			      	   $statusbox = 'statusbox error';
-			      	   $this->Session->setFlash(__('Some errors occured.',true));
+			      	   $this->Session->write('flash',__('Some errors occured.',true));
 			      }
 				  $this->data = $this->User->read();
 			}
@@ -139,7 +139,7 @@ class UsersController extends AppController {
 			if ( $userobject['admin'] != "1" )
 			{
 					// login data is wrong, redirect to login page
-					$this->Session->setFlash(__("Sorry. Don't fool around with our security.",true));
+					$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
 					$this->redirect('/users/login');
 			}
 
@@ -165,7 +165,7 @@ class UsersController extends AppController {
 						$this->_sendMail($user, $subject, $template, $content, $language, '', 'text');
 
 						$statusbox = 'statusbox ok';
-						$this->Session->setFlash(__('Message sent to users',true));
+						$this->Session->write('flash',__('Message sent to users',true));
 						
 						$this->set('noform', true);
 					}
@@ -173,7 +173,7 @@ class UsersController extends AppController {
 				} else
 				{
 					$statusbox = 'statusbox error';
-					$this->Session->setFlash(__('Error', true) . ' - ' . __('message not send', true));
+					$this->Session->write('flash',__('Error', true) . ' - ' . __('message not send', true));
 					
 				}
 	
@@ -200,7 +200,7 @@ class UsersController extends AppController {
 				{
 					$users_to_send = array();
 					$statusbox = 'statusbox error';
-					$this->Session->setFlash(__('No users selected.', true));
+					$this->Session->write('flash',__('No users selected.', true));
 				}
 
 				$this->set('users_to_send', $users_to_send);
@@ -321,7 +321,7 @@ class UsersController extends AppController {
 	    } else
 	    {
 
-		  	$this->pageTitle = __('Login', true);
+		  	$this->set("title_for_layout", __('Login', true));
 		  	$this->set('error', false);
 
 			if ($this->data)
@@ -376,13 +376,13 @@ class UsersController extends AppController {
 					} else
 					{
 						// login data is wrong, redirect to login page
-						$this->Session->setFlash(__('Not activated yet. Please follow the activation link in the welcome mail.',true));
+						$this->Session->write('flash',__('Not activated yet. Please follow the activation link in the welcome mail.',true));
 						$this->redirect('/users/login');
 					}
 				} else
 				{
 					// login data is wrong, redirect to login page
-					$this->Session->setFlash(__('Wrong or non-existing e-mail or password. Please try again.', true));
+					$this->Session->write('flash',__('Wrong or non-existing e-mail or password. Please try again.', true));
 	        		// You must not redirect otherwise you won't see errors
 					//$this->redirect('/users/login');
 				}
@@ -392,13 +392,13 @@ class UsersController extends AppController {
 
 	function logout()
 	{
-		$this->pageTitle = __('Logout', true);
-
+		$this->set("title_for_layout", __('Logout',true));
+		
 		// kill all session information
-		$this->Session->del('session_useremail');
-		$this->Session->del('session_userid');
-		$this->Cookie->del('tct_auth');
-		$this->Cookie->del('tct_auth_blog');
+		$this->Session->delete('session_useremail');
+		$this->Session->delete('session_userid');
+		$this->Cookie->delete('tct_auth');
+		$this->Cookie->delete('tct_auth_blog');
 
 		$this->set('session_userid', '');
 		$this->set('session_useremail', '');
@@ -408,13 +408,14 @@ class UsersController extends AppController {
 		$this->set('session_lastname', '');
 
 		// login data is wrong, redirect to login page
-		$this->Session->setFlash(__("You're logged out. Bye.",true));
+		$this->Session->write('flash',__("You're logged out. Bye.",true));
 		$this->redirect('/users/login');
 	}
 
 	function password_forgotten($id = null)
 	{
-		$this->pageTitle = __('Password forgotten', true);
+		$this->set("title_for_layout", __('Password forgotten', true));		
+
 		$this->set('transaction_id', '');
 		$statusbox = 'statusbox';
 		$status = '';
@@ -429,7 +430,7 @@ class UsersController extends AppController {
 			if( !$this->Recaptcha->valid($this->params['form']) )
 			{
 				$statusbox = 'statusbox error';
-				$this->Session->setFlash(__('Sorry Captcha not correct!',true));
+				$this->Session->write('flash',__('Sorry Captcha not correct!',true));
 				//$this->redirect('/users/password_forgotten');
 			}
 
@@ -439,13 +440,13 @@ class UsersController extends AppController {
 				if ( !is_array($results) )
 				{
 					$statusbox = 'statusbox error';
-					$this->Session->setFlash(__('E-mail was not found in database!',true));
+					$this->Session->write('flash',__('E-mail was not found in database!',true));
 				} else
 				{
 					$statusbox = 'statusbox';
 					$status = 'sent';
 					$this->_sendPasswordForgotten($results['User']['id']);
-					$this->Session->setFlash(__('Click link in e-mail to reset password!',true));
+					$this->Session->write('flash',__('Click link in e-mail to reset password!',true));
 				}
 			}
 		}
@@ -458,7 +459,7 @@ class UsersController extends AppController {
 	function password_reset()
 	{
     	$statusbox = 'statusbox';
-		$this->pageTitle = __('Password reset',true);
+		$this->set("title_for_layout", __('Password reset', true));		
 
 		//$this->email = base64_decode($this->params['named']['email']);
 		//$this->userid = base64_decode($this->params['named']['id']);
@@ -492,12 +493,12 @@ class UsersController extends AppController {
 				$this->_sendPasswordForgotten($this->userid, $randompassword);
 				$this->set('transaction_id', $this->Session->read('forgotten_transaction_id'));
 
-				$this->Session->setFlash(__('Your new password is sent to your e-mail.',true));
+				$this->Session->write('flash',__('Your new password is sent to your e-mail.',true));
 			} else
 			{
 			  	$statusbox = 'statusbox error';
         		$flash_message = __('Something is wrong - sorry.', true) . '<a href="mailto:support@tricoretraining.com">' . __('Contact our support.', true) . '</a>';
-				$this->Session->setFlash($flash_message);
+				$this->Session->write('flash',$flash_message);
 			}
 		}
     	$this->set('statusbox',$statusbox);
@@ -520,7 +521,9 @@ class UsersController extends AppController {
 		else
 			$inviter = '';
 
-	    $this->pageTitle = __('Create your account', true);
+		$this->set("title_for_layout", __('Create your account', true));		
+		
+		
 	    $success = false;
 	    $statusbox = 'statusbox';
 	    
@@ -539,8 +542,7 @@ class UsersController extends AppController {
 					$this->data['User']['email'] = $facebook_user['email'];
 					$this->data['User']['birthday'] = $facebook_user['birthday'];
 					
-					$this->Session->setFlash(__('We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as in your Facebook account.',true));
-
+					$this->Session->write('flash',__('We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as in your Facebook account.',true));
 				}
 				
 				if ( preg_match( '/@/', $inviter ) || preg_match( '/company/', $inviter ))
@@ -755,7 +757,8 @@ class UsersController extends AppController {
 	          $statusbox = 'statusbox_ok';
 	          $this->Session->write('register_userid', $this->User->id);
 	
-	          $this->Session->setFlash(__('Registration finished',true));
+	          $this->Session->write('flash',__('Registration finished',true));
+	          $this->Session->write('flash',__('Registration finished',true));
 	          $this->redirect(array('action' => 'register_finish'));
 	      } else
 	      {
@@ -764,17 +767,17 @@ class UsersController extends AppController {
 	      }
 	
 	      $statusbox = 'statusbox error';
-	      $this->Session->setFlash(__('Some errors occured',true));
+	      $this->Session->write('flash',__('Some errors occured',true));
 	      $this->set('statusbox', $statusbox);
 	    }
 	
 	    $this->set('sports', $this->Unitcalc->get_sports());
 	    $this->set('statusbox', $statusbox);
-  }
+  	}
 
 	function register_finish()
 	{
-		$this->pageTitle = __('Registration - Finished',true);
+		$this->set("title_for_layout",__('Registration - Finished',true));
 
 		if (empty($this->data))
 		{
@@ -794,7 +797,7 @@ class UsersController extends AppController {
 
 			if ( $session_register_userid != $this->User->id )
 			{
-				$this->Session->setFlash(__("Sorry. Something is wrong. Don't hack other accounts!",true));
+				$this->Session->write('flash',__("Sorry. Something is wrong. Don't hack other accounts!",true));
 				$this->redirect(array('action' => 'add_step1'));
 			}
 		} else
@@ -952,7 +955,7 @@ class UsersController extends AppController {
 
 	function activate($id = null)
 	{
-		$this->pageTitle = __('Registration - Activation',true);
+		$this->set("title_for_layout", __('Registration - Activation',true));		
 
 		// load transaction with information about user
 		$this->transaction_id = $this->params['named']['transaction_id'];
@@ -973,7 +976,7 @@ class UsersController extends AppController {
 				$this->User->id = $transactions['activation_userid'];
 				$this->User->savefield('activated', 1, false);
 
-				$this->Session->setFlash(__('You will receive regularly training schedules from TriCoreTraining.com. Start your sports career.',true));
+				$this->Session->write('flash',__('You will receive regularly training schedules from TriCoreTraining.com. Start your sports career.',true));
         
         if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
         {
@@ -987,12 +990,12 @@ class UsersController extends AppController {
 
           // save last_login date
           //$this->User->save($results);
-          //$this->Session->setFlash(__('Logged in. Welcome.', true));
+          //$this->Session->write('flash',__('Logged in. Welcome.', true));
           $this->redirect('/trainingplans/view');
         }
 			} else
 			{
-				$this->Session->setFlash( __("Something went wrong - sorry. Maybe you're already activated?", true) . ' ' . __('If not', true) . ', <a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '.</a>');
+				$this->Session->write('flash', __("Something went wrong - sorry. Maybe you're already activated?", true) . ' ' . __('If not', true) . ', <a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '.</a>');
 			}
 		}
 	}
@@ -1025,7 +1028,8 @@ class UsersController extends AppController {
 	{
 		$this->checkSession();
 
-		$this->pageTitle = __('Change profile',true);
+		$this->set("title_for_layout", __('Change profile',true));		
+		
 		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
@@ -1063,12 +1067,12 @@ class UsersController extends AppController {
 		                }
 		           }
 		      	   $statusbox = 'statusbox ok';
-		      	   $this->Session->setFlash(__('User profile saved.',true));
+		      	   $this->Session->write('flash',__('User profile saved.',true));
 		
 		      } else
 		      {
 		      	   $statusbox = 'statusbox error';
-		      	   $this->Session->setFlash(__('Some errors occured.',true));
+		      	   $this->Session->write('flash',__('Some errors occured.',true));
 		      }
 		}
     	$this->set('countries', $countries);
@@ -1079,7 +1083,8 @@ class UsersController extends AppController {
 	{
 		$this->checkSession();
 
-		$this->pageTitle = __('Change address',true);
+		$this->set("title_for_layout", __('Change address',true));		
+
 		$statusbox = 'statusbox';
 
 		$session_userid = $this->Session->read('session_userid');
@@ -1102,7 +1107,7 @@ class UsersController extends AppController {
 		      'fieldList' => array( 'address', 'zip', 'city', 'country', 'phonemobile' ) ) ) )
 		      {
 		      	   	//$statusbox = 'statusbox ok';
-		      	   	//$this->Session->setFlash(__('Please confirm your address.',true));
+		      	   	//$this->Session->write('flash',__('Please confirm your address.',true));
 		      	   	
 					if ( $this->referer() ) 
 				   		$this->redirect($this->referer());
@@ -1112,7 +1117,7 @@ class UsersController extends AppController {
 		      } else
 		      {
 		      	   $statusbox = 'statusbox error';
-		      	   $this->Session->setFlash(__('Some errors occured.',true));
+		      	   $this->Session->write('flash',__('Some errors occured.',true));
 		      }
 		}
     	$this->set('countries', $countries);
@@ -1122,7 +1127,8 @@ class UsersController extends AppController {
 	function edit_traininginfo() 
 	{
 
-		$this->pageTitle = __('Change training info',true);
+		$this->set("title_for_layout", __('Change training info',true));		
+
 
 		$this->checkSession();
 		$statusbox = 'statusbox';
@@ -1149,14 +1155,14 @@ class UsersController extends AppController {
 		        'bikelactatethreshold'
 	        	)))) {
 	        	$statusbox = 'statusbox ok';
-	        	$this->Session->setFlash(__('Traininginfo saved.', true));
+	        	$this->Session->write('flash',__('Traininginfo saved.', true));
 	        	// recalculate time track by updating athlete
 	        	$this->Provider->getAthlete()->setTrainingTime(
 	        		$this->data['User']['weeklyhours'] * 60
 	        	);
 	        } else 
 	        {
-	        	$this->Session->setFlash(__('Some errors occured.', true));
+	        	$this->Session->write('flash',__('Some errors occured.', true));
 	        	$statusbox = 'statusbox error';
 	        }
 		}
@@ -1166,7 +1172,8 @@ class UsersController extends AppController {
 
 	function edit_weight()
 	{
-		$this->pageTitle = __('Change weight management', true);
+		$this->set("title_for_layout", __('Change weight management',true));		
+		
 		$this->checkSession();
 		$this->js_addon = '';
     
@@ -1295,7 +1302,7 @@ class UsersController extends AppController {
                  'targetweightdate', 'targetweightcheck'
            ) ) ) )
            {
-                 $this->Session->setFlash(__('Your settings are saved.',true).' '.$additional_message);
+                 $this->Session->write('flash',__('Your settings are saved.',true).' '.$additional_message);
                  $statusbox = 'statusbox ok';
         
                  // convert back in case of error and no redirect
@@ -1318,9 +1325,9 @@ class UsersController extends AppController {
                  $statusbox = 'statusbox error';
 
                  if ( $targetweighterror )
-                    $this->Session->setFlash(__($targetweighterror,true));
+                    $this->Session->write('flash',__($targetweighterror,true));
                  else
-                    $this->Session->setFlash(__('Some errors occured',true));
+                    $this->Session->write('flash',__('Some errors occured',true));
            }
 		}
 
@@ -1331,7 +1338,8 @@ class UsersController extends AppController {
 
 	function edit_images()
 	{
-		$this->pageTitle = __('Change profile - images',true);
+		$this->set("title_for_layout", __('Change profile - images',true));		
+
 		$this->checkSession();
 		$statusbox = 'statusbox';
 
@@ -1381,11 +1389,11 @@ class UsersController extends AppController {
           ) ) ) )
           {
           	$statusbox = 'statusbox ok';
-          	$this->Session->setFlash(__('Image(s) saved.',true));
+          	$this->Session->write('flash',__('Image(s) saved.',true));
           	//$this->redirect(array('action' => 'edit_images'));
           } else
           {
-          	$this->Session->setFlash(__('Some errors occured.',true));
+          	$this->Session->write('flash',__('Some errors occured.',true));
           	$statusbox = 'statusbox error';
           }
 		}
@@ -1403,13 +1411,15 @@ class UsersController extends AppController {
 		// UPDATE image field
 		$this->User->savefield($field, '', false);
 
-		$this->Session->setFlash(__('Image deleted.',true));
+		$this->Session->write('flash',__('Image deleted.',true));
 		$this->redirect(array('action' => 'edit_images'));
 	}
 
 	function edit_metric()
 	{
-		$this->pageTitle = __('Change profile - metric',true);
+		$this->set("title_for_layout", __('Change profile - metric',true));		
+
+
 		$this->checkSession();
 		//$this->js_addon = '';
 		$statusbox = 'statusbox';
@@ -1434,14 +1444,14 @@ class UsersController extends AppController {
          'unit', 'unitdate', 'yourlanguage'
          ) ) ) )
          {
-         	$this->Session->setFlash(__('Metric information saved.',true));
+         	$this->Session->write('flash',__('Metric information saved.',true));
          	$this->Session->write('session_unit', $this->data['User']['unit']);
          	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
          	$statusbox = 'statusbox ok';
          } else
          {
          	$statusbox = 'statusbox error';
-         	$this->Session->setFlash(__('Some errors occured.',true));
+         	$this->Session->write('flash',__('Some errors occured.',true));
          }
 		}
 		$this->set('statusbox', $statusbox);
@@ -1449,7 +1459,8 @@ class UsersController extends AppController {
 
 	function edit_password() 
 	{
-		$this->pageTitle = __('Change profile - password', true);
+		$this->set("title_for_layout", __('Change profile - password',true));		
+
 		$this->checkSession();
 		//$this->js_addon = '';
 		$statusbox = 'statusbox';
@@ -1489,7 +1500,7 @@ class UsersController extends AppController {
 	             'password', 'passwordcheck'
 	             ) ) ) )
 	             {
-	             	$this->Session->setFlash(__('New password saved.',true));
+	             	$this->Session->write('flash',__('New password saved.',true));
 	             	$statusbox = 'statusbox ok';
 	                $this->data['User']['password'] = '';
 	                $this->data['User']['passwordapprove'] = '';
@@ -1501,7 +1512,7 @@ class UsersController extends AppController {
 	                //pr($this->User->validationErrors);
 	                
 	             	$statusbox = 'statusbox error';
-	             	$this->Session->setFlash(__('Some errors occured.',true));
+	             	$this->Session->write('flash',__('Some errors occured.',true));
 	             }
 	      }
 	    }

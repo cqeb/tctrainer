@@ -12,9 +12,9 @@
                    <fieldset>
                    <legend><?php __('Log in and start forming your body'); ?></legend>
 
-                   <?php if ($session->check('Message.flash')) { ?>
+                   <?php if ($session->read('flash')) { ?>
                    <div id="statusbox ok">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
 

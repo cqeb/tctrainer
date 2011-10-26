@@ -18,8 +18,8 @@ class StartsController extends AppController
 
 	function index( $language = '' )
 	{
-      	$this->pageTitle = __('the interactive, online training plan service for run, bike and triathlon athletes ', true);
-
+      	$this->set("title_for_layout", __('the interactive, online training plan service for run, bike and triathlon athletes ', true));
+      	
 		/*
 		if ( !$this->Session->read('newest_trainings') )
 		{
@@ -159,7 +159,7 @@ class StartsController extends AppController
 
 		Configure::write('Config.language',$this->code);
 		$this->Session->write('Config.language', $this->code);
-		$this->Session->setFlash(__('Language changed.',true));
+		$this->Session->write('flash',__('Language changed.',true));
 
 		if ( $this->referer() && $this->referer() != '/' )
 		{
@@ -189,7 +189,7 @@ class StartsController extends AppController
 				$this->Session->write('recommendation_userid', $this->data['Start']['partner'] . '-' . __('coupon', true) . ':' . $this->data['Start']['coupon']);
 				
 				$statusbox = 'statusbox ok';
-				$this->Session->setFlash(__('Coupon code saved.', true) . 
+				$this->Session->write('flash',__('Coupon code saved.', true) . 
 					' <a href="/trainer/users/register/">' . __('Please register now!', true) . '</a>');				
 
 				if ( $_SERVER['HTTP_HOST'] != 'localhost' ) 
@@ -197,7 +197,7 @@ class StartsController extends AppController
 			} else
 			{
 				$statusbox = 'statusbox error';
-				$this->Session->setFlash(__('Please add the valid coupon code!', true));				
+				$this->Session->write('flash',__('Please add the valid coupon code!', true));				
 			}   
 		}		
 		$this->set('partner', $partner);

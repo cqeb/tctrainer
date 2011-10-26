@@ -5,11 +5,14 @@
 <?php echo $form->create('User', array('action' => 'register')); ?>
 
 <fieldset>
-<legend><?php __('Get your trainingplans FREE for 1 month. Then invest less than 3 cups of coffee worth per month for your interactive coach.'); ?></legend>
+<legend><?php 
+//__('Get your trainingplans FREE for 1 month. Then invest less than 3 cups of coffee worth per month for your interactive coach.'); 
+__('Get your training plans for FREE. Train for your best race ever!');
+?></legend>
 
-<?php if ($session->check('Message.flash')) { ?>
+<?php if ($session->read('flash')) { ?>
 <div class="<?php echo $statusbox; ?>">
-<?php $session->flash(); ?>
+<?php echo $session->read('flash'); $session->delete('flash'); ?>
 </div>
 <br />
 <?php } ?>
@@ -182,7 +185,9 @@ echo $form->input('tos',
 
 // calculate FREE training period
 $paid_from = date( "Y-m-d", time() );
-$paid_to = date( "Y-m-d", time() + (30*24*60*60) );
+//$paid_to = date( "Y-m-d", time() + (30*24*60*60) );
+//currently - free registration
+$paid_to = '2012-12-31';
 
 echo $form->input( 'paid_from', array('type' => 'hidden', 'value' => $paid_from));
 echo $form->input( 'paid_to', array('type' => 'hidden', 'value' => $paid_to));

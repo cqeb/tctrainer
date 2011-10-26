@@ -7,9 +7,9 @@
                    <fieldset>
                    <legend><?php __('Fill in your personal information'); ?></legend>
 
-                   <?php if ($session->check('Message.flash')) { ?>
+                   <?php if ($session->read('flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
 
@@ -170,6 +170,7 @@ echo "<br />";
 
 ?>
 
+<!--
 <hr />
 <h3><?php __('Contact data'); ?></h3>
 
@@ -221,21 +222,17 @@ echo $form->input('phonemobile',
      'label' => __('Phone', true)
 ));
 
-/** not finished **/
-
 echo $form->hidden('id');
 echo $form->hidden('emailcheck');
-//echo $form->hidden('passwordcheck');
-
 ?>
 <br />
-
 <?php
 
 echo $form->submit(__('Save', true));
 
 ?>
                  <br />
+-->
 
                  </fieldset>
 

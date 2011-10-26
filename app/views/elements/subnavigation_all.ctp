@@ -23,8 +23,10 @@
 		    <li><?php echo $html->link(__('What have I achieved?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_whathaveidone'))?></li>
 <?php } ?>
 <?php if ( $this->name == 'Users' && $session_userid ) { ?>
+        	<!--
         	<li><a href="/trainer/payments/subscribe_triplans"><b><?php __('Become PREMIUM'); ?></b></a></li>
         	<li>&nbsp;</li>
+        	-->
         	<li><?php echo $html->link(__('Edit training info',true),array('controller' => 'users', 'action' => 'edit_traininginfo'))?></li>
         	<li><?php echo $html->link(__('Edit weight goals',true),array('controller' => 'users', 'action' => 'edit_weight'))?></li>
 		    <li><?php echo $html->link(__('Edit profile',true),array('controller' => 'users', 'action' => 'edit_userinfo'))?></li>

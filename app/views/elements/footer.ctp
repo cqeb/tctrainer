@@ -3,7 +3,8 @@
 		<h2><?php __('Information'); ?></h2>
 		<p>
 			<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>imprint/"><?php __('Imprint'); ?></a><br />
-			<a href="http://www.getsatisfaction.com/tricoretraining" target="_blank"><?php __('Support'); ?></a>
+			<a href="http://www.getsatisfaction.com/tricoretraining" target="_blank"><?php __('Support'); ?></a><br />
+			<?php echo $html->link(__('Triathlon / Marathon Training',true),array('controller' => 'starts', 'action' => 'features'))?>
 		</p>
 	</div>
 	<div class="grid_3">

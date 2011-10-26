@@ -5,9 +5,9 @@
                    <fieldset>
                    <legend><?php __('How much have I lost?'); ?></legend>
 
-                   <?php if ($session->check('Message.flash')) { ?>
+                   <?php if ($session->read('flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
                    

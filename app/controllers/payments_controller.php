@@ -67,7 +67,7 @@ class PaymentsController extends AppController {
                        if ( isset( $this->data['Payment']['cancelation_reason'] ) ) $this->User->savefield('cancellation_reason', $this->data['Payment']['cancelation_reason'], false);
 
                        $statusbox = 'statusbox ok';
-                       $this->Session->setFlash(__('Registered cancellation request.', true));
+                       $this->Session->write('flash',__('Registered cancellation request.', true));
 
                        // notification mail for admin
                        if ( is_array( $results ) )
@@ -456,7 +456,7 @@ class PaymentsController extends AppController {
 													}
 											  }
 
-                                              $this->Session->setFlash(__('Received notification', true) . '. ' . __('Invoice sent', true) . '. ' . __('Thank you', true) . '.');
+                                              $this->Session->write('flash',__('Received notification', true) . '. ' . __('Invoice sent', true) . '. ' . __('Thank you', true) . '.');
                                               //$this->redirect(array('action' => '', $this->User->id));
                                   } else
                                   {
@@ -490,7 +490,7 @@ class PaymentsController extends AppController {
 	                 // only for information purposes - do not create a new invoice
 	                 //$this->_sendInvoice($transactions, 'info');
 				 }
-                 $this->Session->setFlash(__('Received notification', true) . '. ' . __('No invoice', true) . '. ' . __('Thank you', true) . '.');
+                 $this->Session->write('flash',__('Received notification', true) . '. ' . __('No invoice', true) . '. ' . __('Thank you', true) . '.');
                  //$this->redirect(array('action' => '', $this->User->id));
             }
 
@@ -542,7 +542,7 @@ class PaymentsController extends AppController {
 
             $session_userid = $this->Session->read('session_userid');
 
-            if ( $error != "" ) { $this->Session->setFlash($error); }
+            if ( $error != "" ) { $this->Session->write('flash',$error); }
 
             $this->paginate = array(
                   'conditions' => array('Payment.user_id = ' => $session_userid, 'Payment.payment_confirmed = ' => 1),

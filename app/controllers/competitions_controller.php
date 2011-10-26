@@ -103,7 +103,7 @@ class CompetitionsController extends AppController {
                           //$this->data = $result[0];
                        } else
                        {
-                          $this->Session->setFlash(__('Sorry. This is not your entry!', true));
+                          $this->Session->write('flash',__('Sorry. This is not your entry!', true));
                           $this->set('statusbox', 'statusbox error');
                           $this->redirect(array('controller' => 'Competitions', 'action' => 'list_competitions'));
                        }
@@ -244,14 +244,14 @@ class CompetitionsController extends AppController {
                     );
                		if ($this->Competition->save( $this->data, array('validate' => true)))
                     {
-                          $this->Session->setFlash(__('Competition saved.',true));
+                          $this->Session->write('flash',__('Competition saved.',true));
                           $this->redirect(array('action' => 'list_competitions', $this->User->id));
                     }
                } else
                {
 
                      $statusbox = 'statusbox error';
-                     $this->Session->setFlash($error);
+                     $this->Session->write('flash',$error);
                }
             }
 
@@ -281,7 +281,7 @@ class CompetitionsController extends AppController {
    {
             $this->Provider->smartPurgeOnDelete($id);
    			$this->Competition->delete($id);
-            $this->Session->setFlash(__('The competition has been deleted.', true));
+            $this->Session->write('flash',__('The competition has been deleted.', true));
             $this->redirect(array('action'=>'list_competitions'));
    }
 

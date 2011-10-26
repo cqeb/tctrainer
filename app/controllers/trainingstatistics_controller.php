@@ -43,7 +43,7 @@ class TrainingstatisticsController extends AppController {
 
   function import_workout()
   {
-	    $this->pageTitle = __('Import workouts',true);
+	    $this->set("title_for_layout", __('Import workouts',true));
 	    $this->checkSession();
 	    $statusbox = 'statusbox';
 	
@@ -94,7 +94,7 @@ class TrainingstatisticsController extends AppController {
 	
 	        if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
 	        {
-	            $this->Session->setFlash(__('No import data found!', true));
+	            $this->Session->write('flash',__('No import data found!', true));
 	            $this->set('statusbox', $statusbox);
 	            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	            die();
@@ -346,7 +346,7 @@ class TrainingstatisticsController extends AppController {
 	
 	        if ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
 	        {
-	            $this->Session->setFlash(__('Import of workouts finished!', true));
+	            $this->Session->write('flash',__('Import of workouts finished!', true));
 	            $this->set('statusbox', $statusbox);
 	            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	        }  
@@ -451,7 +451,7 @@ function edit_training($id = null) {
 	  			if ( isset( $result[0] ) ) {
 	  				$this->data = $result[0];
 	  			} else {
-	  				$this->Session->setFlash(__('Sorry. This is not your entry!', true));
+	  				$this->Session->write('flash',__('Sorry. This is not your entry!', true));
 	  				$this->set('statusbox', $statusbox);
 	  				$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	  			}
@@ -551,12 +551,12 @@ function edit_training($id = null) {
 	  			if ( isset( $saveweight ) && $saveweight > 0 ) {
 	  				$this->User->savefield('weight', $saveweight, false);
 	  			}
-	  			$this->Session->setFlash(__('Training saved.',true));
+	  			$this->Session->write('flash',__('Training saved.',true));
 	  			$this->set('statusbox', $statusbox);
 	  			$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	  		} else {
 	  			$statusbox = 'statusbox error';
-	  			$this->Session->setFlash(__('Some errors occured',true));
+	  			$this->Session->write('flash',__('Some errors occured',true));
 	  		}
 	
 	  		if ( isset( $this->data['Trainingstatistic']['duration'] ) ) {
@@ -580,12 +580,15 @@ function edit_training($id = null) {
 	  		AND user_id = " . $session_userid . "
 	  		GROUP BY name
 	  		ORDER BY count DESC, name ASC");
+		$cnames = array();
+		
 	  	while (list($k,$v) = each($courseNames)) {
 	  		$cnames[] = '"' . str_replace(
 	  			'"', '\"',
 	  			$v['trainingstatistics']['name']) . '"';
 	  	}
-	  	$courseNamesAutocomplete = '[' . implode(',', $cnames) . ']';
+	  	if ( is_array( $cnames ) ) 
+	  		$courseNamesAutocomplete = '[' . implode(',', $cnames) . ']';
 	  	
 	  	// build workout type selectors
 	  	$sports = array('Swim', 'Bike', 'Run');
@@ -1080,7 +1083,7 @@ function edit_training($id = null) {
                   $this->data = $result[0];
                else
                {
-                  $this->Session->setFlash(__('Sorry. This is not your entry!', true));
+                  $this->Session->write('flash',__('Sorry. This is not your entry!', true));
                   $this->set('statusbox', 'statusbox error');
                   $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
                }
@@ -1089,7 +1092,7 @@ function edit_training($id = null) {
             $this->Trainingstatistic->delete($id);
             
             $this->set('statusbox', 'statusbox');
-            $this->Session->setFlash(__('Workout deleted.',true));
+            $this->Session->write('flash',__('Workout deleted.',true));
             $this->redirect(array('action'=>'list_trainings'));
 	}
 

@@ -12,9 +12,9 @@ $yesno[0] = __('No', true);
                    <fieldset> 
                    <legend><?php __('Administrate our users!'); ?></legend>
 
-                   <?php if ($session->check('Message.flash')) { ?>
+                   <?php if ($session->read('flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
 
@@ -79,9 +79,9 @@ echo $form->input('user_' . $user['id'],
     <td><?php echo 'Activ. <b>' . $yesno[$user['activated']] . '</b><br />' . 'Deact. <b>' . $yesno[$user['deactivated']]; ?></b></td>
     <td><?php echo 'Beta <b>' . $yesno[$user['advanced_features']] . '</b><br />' . 'Admin <b>' . $yesno[$user['admin']]; ?></b></td>
     <td style="text-align:right;">
-    <?php echo $html->link(__('Edit', true), array('action' => 'edit_user', 'id' => $user['id']), null); ?>
+    <?php echo $html->link(__('Edit', true), array('action' => 'edit_user', $user['id']), null); ?>
     <br />
-    <?php echo $html->link(__('Become user', true), array('action' => 'edit_user', 'id' => $user['id'], 'setuser' => 'true'), null); ?>
+    <?php echo $html->link(__('Become user', true), array('action' => 'edit_user', $user['id'], 'setuser' => 'true'), null); ?>
     </td>
 </tr>
 <?php endforeach; ?>

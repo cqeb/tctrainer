@@ -8,22 +8,21 @@
                    <fieldset>
                    <legend><?php __('Thank your for registering at TriCoreTraining.com.'); ?></legend>
 
-                    <?php if ($session->check('Message.flash')) { ?>
+                    <?php if ( $session->read('flash') ) { ?>
                     <div class="statusbox ok">
-                    <?php $session->flash(); ?>
+                    <?php echo $session->read('flash'); $session->delete('flash');  ?>
                     </div>
                     <br />
                     <?php } ?>
 
 <?php
                    if ( $smtperrors != '' )
-                     // never tested
                      echo '<div class="errormessage">' . $smtperrors . '</div>';
 ?>
 
                    <?php __('PLEASE do not forget to activate your account! Thank you and happy training!'); ?>
                    <br /><br />
-                   <b><?php __('Your FREE membership is valid from'); ?> <?php echo $paid_from; ?> <?php __('to'); ?> <?php echo $paid_to; ?>.</b>
+                   <!--<b><?php __('Your FREE membership is valid from'); ?> <?php echo $paid_from; ?> <?php __('to'); ?> <?php echo $paid_to; ?>.</b>-->
 
                    <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
                    <br /><br />

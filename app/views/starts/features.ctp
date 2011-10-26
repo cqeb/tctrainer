@@ -1,77 +1,63 @@
 
-                   <h1><?php __('Subscribe TriCoreTraining-memberships'); ?></h1>
+                   <h1><?php __('TriCoreTraining Features'); ?></h1>
 
                    <?php echo $this->element('js_error'); ?>
 
-                   <?php //echo $form->create('User', array('action' => 'edit_metric', 'type' => 'file')); ?>
                    <fieldset>
                    <legend><?php __('Gain speed, lose weight'); ?></legend>
 
-                   <?php if ($session->check('Message.flash')) { ?>
+                   <?php if ($session->read('flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
 
 
 <table summary="<?php __('All possible subscriptions'); ?>">
-<!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->
 <colgroup>
           <col class="colA">
           <col class="colB">
           <col class="colC">
 </colgroup>
 <thead>
-<!--
-<tr>
-    <th colspan="3" class="table-head"><?php __('SUBSCRIPTIONS'); ?></th>
-</tr>
--->
 <tr>
     <th><?php __('Features'); ?></th>
-    <th style="width:25%"><?php __('Premium'); ?></th>
     <th style="width:25%"><?php __('Free'); ?></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-    <td><?php __('Magazine'); ?> - <?php __('Blog'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
+    <td><b><?php __('Interactive training plan'); ?></b></td>
+    <td style="text-align:center"><b>X</b></td>
 </tr>
 <tr>
     <td><?php __('Community'); ?></td>
-    <td style="text-align:center">X</td>
     <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
     <td><?php __('Settings'); ?></td>
     <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
 </tr>
 <tr>
     <td><?php __('Training logbook'); ?></td>
-    <td style="text-align:center">X</td>
     <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
     <td><?php __('Define competitions'); ?></td>
     <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
 </tr>
 <tr>
     <td><?php __('Statistics'); ?></td>
     <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
-    <td><b><?php __('Interactive training plan'); ?></b></td>
-    <td style="text-align:center"><b>X</b></td>
-    <td style="text-align:center"><b><?php __('No'); ?></b></td>
+    <td><?php __('Blog'); ?></td>
+    <td style="text-align:center">X</td>
 </tr>
 <tr>
-    <td colspan="3">&nbsp;</td>
+    <td colspan="2">&nbsp;</td>
 </tr>
+<!--
 <?php
 
 $currency = 'EUR';
@@ -113,12 +99,15 @@ $price_month_array_split = $price_array[$currency]['month'];
     </a>
     </td>
 </tr>
+-->
+
 </tbody>
 </table>
 
 <?php
 
-__('Signup FREE and get training plans for triathlon, biking and running for 1 month FREE. Then you can upgrade to PREMIUM for less than 3 coffees a month!');
+//__('Signup FREE and get training plans for triathlon, biking and running for 1 month FREE. Then you can upgrade to PREMIUM for less than 3 coffees a month!');
+__('Signup and get your training plans for triathlon, biking and running for FREE.');
 
 ?>
 <br /><br />

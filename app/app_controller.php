@@ -138,10 +138,10 @@ class AppController extends Controller {
                       if ( ( !$cookie['email'] || !$cookie['userid'] ) )
                       {
                            // to be sure
-                           $this->Cookie->del('tct_auth');
-                           $this->Cookie->del('tct_auth_blog');
+                           $this->Cookie->delete('tct_auth');
+                           $this->Cookie->delete('tct_auth_blog');
 						   
-                           $this->Session->setFlash(__("Sorry, your session has expired or you're not logged in.", true));
+                           $this->Session->write('flash',__("Sorry, your session has expired or you're not logged in.", true));
                            $this->redirect('/users/login');
 		                   exit();
                       } else
@@ -156,8 +156,8 @@ class AppController extends Controller {
                        {
                           if ( ( $cookie['email'] != $session_useremail ) || ( $cookie['userid']  != $session_userid ) )
                           {
-                             $this->Cookie->del('tct_auth');
-                             $this->Cookie->del('tct_auth_blog');
+                             $this->Cookie->delete('tct_auth');
+                             $this->Cookie->delete('tct_auth_blog');
                           }
                        }
             }
@@ -174,9 +174,9 @@ class AppController extends Controller {
                         {
 	        			        $this->Session->delete('session_useremail');
                              	$this->Session->delete('session_userid');
-                             	$this->Cookie->del('tct_auth');
-                             	$this->Cookie->del('tct_auth_blog');
-                			    $this->Session->setFlash(__('Incorrect session data. Sorry.',true));
+                             	$this->Cookie->delete('tct_auth');
+                             	$this->Cookie->delete('tct_auth_blog');
+                			    $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
                 			    $this->redirect('/users/login');
                 			    exit();
 		                } else

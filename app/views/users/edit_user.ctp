@@ -7,9 +7,9 @@
                    <fieldset>
                    <legend><?php __('User profile'); ?></legend>
 
-                   <?php if ($session->check('Message.flash')) { ?>
+                   <?php if ($session->read('flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
                    <?php echo $html->link(__('Back to list of users',true), array('controller' => 'users', 'action' => 'list_users'), null) ?>

@@ -11,9 +11,9 @@
                    <fieldset>
                    <legend><?php __('Manage goals for your training.'); ?></legend>
 
-                   <?php if ($session->check('Message.flash')) { ?>
+                   <?php if ($session->read('flash')) { ?>
                    <div class="<?php echo $statusbox; ?>">
-                   <?php $session->flash(); ?>
+                   <?php echo $session->read('flash'); $session->delete('flash');  ?>
                    </div><br />
                    <?php } ?>
 
@@ -29,7 +29,7 @@ echo $form->input('competitiondate',
      'after' => '',
      'between' => '',
      'minYear' => date('Y',time()),
-     'maxYear' => date('Y',time())+10,
+     'maxYear' => date('Y',time())+5,
      'class' => 'required',
      'error' => array( 
         'competitiondate' => __('Enter a valid date', true) 

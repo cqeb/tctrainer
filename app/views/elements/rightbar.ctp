@@ -1,10 +1,12 @@
 <div class="box">
 <b><?php __('Hot News'); ?></b>
 <br /><br />
+<!--
 <?php if ( isset( $session_userid ) ) { ?>
 <a href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('PREMIUM Upgrade'); ?></b></a>
 <br /><br />
 <?php } ?>
+-->
 <a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
 <br /><br />
 <a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>category/faq/">&raquo; <?php __('FAQs'); ?></a>
@@ -15,12 +17,18 @@
 <a href="/trainer/starts/index/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>ur:<?php echo base64_encode($userobject['id']); ?>/">&raquo; <?php __('Invite your friends'); ?></a>
 <?php } ?>
 
-<?php if ( !isset( $session_userid ) ) { ?>
-<!--
-<br /><br /><br />
-<a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
--->
-<?php } ?>
+<br /><br />
+
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-1221279145141294";
+google_ad_slot = "8666894126";
+google_ad_width = 200;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
 </div>
 
 <div class="box">
@@ -30,21 +38,8 @@
 </div>
 
 <div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
-<?php
-/**
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-1221279145141294";
-google_ad_slot = "7321319812";
-google_ad_width = 200;
-google_ad_height = 200;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-**/
-?>
 <iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FTriCoreTraining%2F150997251602079&amp;width=200&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=250" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:250px;" allowTransparency="true"></iframe>
+
 <?php if ( isset( $userobject ) && $userobject['admin'] == '1' ) { ?>
 <br /><br />
 <ul>

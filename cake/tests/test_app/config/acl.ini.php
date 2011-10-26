@@ -1,27 +1,23 @@
-;<?php die() ?>
-; SVN FILE: $Id: acl.ini.php,v 1.1 2010-07-12 19:52:28 klaus Exp $
+;<?php exit() ?>
+; SVN FILE: $Id$
 ;/**
 ; * Test App Ini Based Acl Config File
 ; *
 ; *
 ; * PHP versions 4 and 5
 ; *
-; * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
-; * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+; * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+; * Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
 ; *
 ; *  Licensed under The MIT License
 ; *  Redistributions of files must retain the above copyright notice.
 ; *
-; * @filesource
-; * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
-; * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+; * @copyright     Copyright 2005-2011, Cake Software Foundation, Inc. (http://cakefoundation.org)
+; * @link          http://cakephp.org CakePHP(tm) Project
 ; * @package       cake
 ; * @subpackage    cake.app.config
 ; * @since         CakePHP(tm) v 0.10.0.1076
-; * @version       $Revision: 1.1 $
-; * @modifiedby    $LastChangedBy$
-; * @lastmodified  $Date: 2010-07-12 19:52:28 $
-; * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
+; * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 ; */
 
 ;-------------------------------------

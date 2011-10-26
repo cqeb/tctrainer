@@ -21,7 +21,8 @@ if ( isset( $this->params['action'] ) )
 		<?php echo $html->link(__('Login',true),array('controller' => 'users', 'action' => 'login'), array('class' => $class['login']))?>
 	</li>
 	<li>
-    <?php echo $html->link(__('Features & Prices',true),array('controller' => 'starts', 'action' => 'features'), array('class' => $class['features']))?>
+    <?php //echo $html->link(__('Features',true),array('controller' => 'starts', 'action' => 'features'), array('class' => $class['features']))?>
+	<?php echo $html->link(__('Triathlon / Marathon Training',true),array('controller' => 'starts', 'action' => 'features'), array('class' => $class['features']))?>
 	</li>
 	<li>
 	    <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Blog'); ?></a>
@@ -32,9 +33,9 @@ if ( isset( $this->params['action'] ) )
   	<li>
   		<a href="http://www.twitter.com/tricoretraining/" target="_blank"><img width="30" alt="TriCoreTraining.com on Twitter" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_twitter.png" /></a>
   	</li>
-  	<!--
+<!--
   	<li>
   		<a href="#" target="_blank"><img alt="TriCoreTraining.com RSS-Feed" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_rss.png" /></a>
 	</li>
-	-->
+-->
 </ul>

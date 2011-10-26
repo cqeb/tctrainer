@@ -11,9 +11,9 @@ echo $form->create('User',
 <fieldset>
 <legend><?php __('Fill in your training information'); ?></legend>
 
-<?php if ($session->check('Message.flash')) { ?>
+<?php if ($session->read('flash')) { ?>
 <div class="<?php echo $statusbox; ?>">
-<?php $session->flash(); ?>
+<?php echo $session->read('flash'); $session->delete('flash'); ?>
 </div><br />
 <?php } ?>
 

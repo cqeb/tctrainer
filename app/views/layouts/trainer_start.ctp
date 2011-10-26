@@ -4,7 +4,7 @@
     <title><?php
 
 if ( isset( $title ) ) 
-	echo $title;
+	echo 'TriCoreTraining.com' . ' ' . $title;
 else	
 	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
 	
@@ -122,10 +122,10 @@ $(document).ready(function() {
 <!-- Main -->
 <div class="container_12 main">
 	<!-- Center column -->
- 		<div class="grid_12 center">
+	<div class="grid_12 center">
 
 		<!-- Content -->
-		<div class="box content" style="padding-bottom: 18px; height: 285px;">
+		<div class="box" style="padding-bottom: 18px; height: 285px;">
 			<div id="signup">
 				<h1><?php __('Gain speed, lose weight!'); ?></h1>
 				<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?></p>
@@ -149,13 +149,13 @@ $(document).ready(function() {
     	<div class="box">
 	        <?php __("You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"); ?>
         </div>
-    	<div class="box last">
+    	<div class="box">
 	        <?php __("You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"); ?>
         </div>
     </div>
     
     <div class="grid_9">
-    	<div class="box last features">
+    	<div class="box features">
     		<div>
     			<a href="/trainer/img/startpage-feature-track-big.jpg"><img src="/trainer/img/startpage-feature-track.jpg" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"/></a>
     			<p><?php __('Log your trainings, manage your competitions, and also keep track of your weight.');?></p>
@@ -170,6 +170,268 @@ $(document).ready(function() {
     		</div>
     	</div>
     </div>
+
+
+ 		<div class="grid_12 center">
+
+			<!-- Content -->
+			<div class="box last">
+				<h2>How it works?</h2>
+Suchbegriffe
+
+	* triathlon training
+
+	* triathlon training programs
+
+	* online triathlon training
+
+	* triathlon training log
+
+	* beginner triathlon training
+
+	* triathlon training workouts
+
+	* half triathlon training
+
+	* triathlon training schedules
+
+	* triathlon training software
+
+	* triathlon training online
+
+	* triathlon training guide
+
+	* triathlon training programme
+
+	* triathlon training free
+
+	* triathlon training beginner
+
+	* triathlon training guides
+
+	* beginners triathlon training
+
+	* training for a triathlon
+
+	* training for triathlon
+
+	* train for triathlon
+
+	* how to train for a triathlon
+
+	* train for a triathlon
+
+	* how to train for triathlon
+
+	* ironman training plan
+
+	* ironman training plans
+
+	* ironman training program
+
+	* ironman training schedule
+
+	* ironman training
+
+	* ironman training programs
+
+	* ironman training programs free
+
+	* ironman training plans free
+
+	* 1 2 ironman training program
+
+	* ironman training programme
+
+	* 1 2 ironman training
+
+	* free ironman training program
+
+	* ironman training plan free
+
+	* ironman training schedules
+
+	* online triathlon coaching
+
+	* triathlon
+
+	* triathlon workouts
+
+	* triathlon coaching
+
+	* triathlon online coaching
+
+	* triathlon coach
+
+	* half triathlon
+
+	* mini triathlon
+
+	* triathlon nutrition
+
+	* triathlon programs
+
+	* coaching triathlon
+
+	* triathlon trainingsplan
+
+	* triathlon trainer
+
+	* triathlon blog
+
+	* triathlon distance
+
+	* first triathlon
+
+	* triathlon sprint
+
+	* triathlon news
+
+	* trainingsplan triathlon
+
+	* triathlon program
+
+	* training for a marathon
+
+	* training for a 5k
+
+	* training for marathon
+
+	* training for ironman
+
+	* training for triathlons
+
+	* training for an ironman
+
+	* training for a 10k
+
+	* training for a 10k run
+
+	* training for running
+
+	* marathon training
+
+	* marathon training program
+
+	* marathon training plan
+
+	* marathon training programme
+
+	* marathon training guide
+
+	* marathon training plans
+
+	* marathon training tips
+
+	* marathon training programs
+
+	* beginner marathon training
+
+	* london marathon training
+
+	* running marathon training
+
+	* triathlon training program
+
+	* beginner triathlon training program
+
+	* duathlon training program
+
+	* beginner triathlete
+
+	* beginner triathlon
+
+	* triathlon beginner
+
+	* beginner running program
+
+	* beginner triathlete training
+
+	* triathlon training schedule
+
+	* sprint triathlon training schedule
+
+	* triathlon training schedule for beginners
+
+	* beginner triathlon training schedule
+
+	* triathlon training schedule free
+
+	* mini triathlon training schedule
+
+	* triathlon training for beginners
+
+	* triathlon for beginners
+
+	* marathon training for beginners
+
+	* running schedule for beginners
+
+	* running program for beginners
+
+	* triathlon bikes for beginners
+
+	* ironman triathlon training
+
+	* ironman triathlon training program
+
+	* iron man training
+
+	* iron man triathlon training
+
+	* ironman 70.3 training program
+
+	* 70.3 training plans
+
+	* triathlete
+
+	* triathlons
+
+	* duathlon
+
+	* how to run faster
+
+	* tri newbies
+
+	* 10k training schedule
+
+	* cycling training schedule
+
+	* training schedule for 5k
+
+	* running programs
+
+	* running schedule
+
+	* running coach
+
+	* beginners running program
+
+	* running programme
+
+	* running exercises
+
+	* running schedules
+
+	* running plans
+
+	* beginners running schedule
+
+	* train for a marathon
+
+	* marathon guide
+
+	* training marathon
+
+	* marathon running schedule
+
+	* running training plans
+
+
+			</div>
+			<!-- /Content -->
+		</div>
+
 
   <!-- /Center column -->
   <div class="clear"></div>
