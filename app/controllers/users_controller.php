@@ -280,11 +280,12 @@ class UsersController extends AppController {
 						/*
 						$language = Configure::read('Config.language');
 						
-						$sql = "SELECT myrecommendation FROM users WHERE myrecommendations = '' AND yourlanguage = '" . $language . "'";
+						$sql = "SELECT myrecommendation FROM users WHERE myrecommendation = '' AND yourlanguage = '" . $language . "'";
 						$user_recommendations = $this->User->query( $sql );
 						
-						$this->Session->save( 'recommendations', serialize($user_recommendations) );
+						$this->Session->write( 'recommendations', serialize($user_recommendations) );
 						*/
+						
 						echo '<script language="JavaScript">top.location.href="/trainer/trainingplans/view/";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
 						// doesn't work with facebook login - session get's lost
 						//$this->redirect('/trainingplans/view/');
@@ -364,13 +365,16 @@ class UsersController extends AppController {
 						$results['User']['last_login'] = date("Y-m-d H:i:s");
 						$this->Session->write('last_login', $results['User']['last_login']);
 	
+						/*
 						$locale = Configure::read('Config.language');
 						$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
 						$user_recommendations = $this->User->query( $sql );
 									
 						$this->Session->write( 'recommendations', serialize($user_recommendations) );
 						
-						if ( isset( $user_recommendations ) ) $this->set('recommendations', $user_recommendations);
+						if ( isset( $user_recommendations ) ) 
+								$this->set('recommendations', $user_recommendations);
+						*/
 												
 						$this->redirect('/trainingplans/view');
 					} else

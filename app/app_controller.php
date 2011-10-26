@@ -101,6 +101,7 @@ class AppController extends Controller {
 				$this->loadModel('User');
 						
 				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
+				echo $sql;
 				$user_recommendations = $this->User->query( $sql );
 						
 				$this->Session->write( 'recommendations', serialize($user_recommendations) );
@@ -109,7 +110,10 @@ class AppController extends Controller {
 				$user_recommendations = unserialize( $this->Session->read('recommendations'));
 			}
 			
-			if ( isset( $user_recommendations ) ) $this->set('recommendations', $user_recommendations);
+			if ( isset( $user_recommendations ) ) { 
+					$this->set('recommendations', $user_recommendations);
+			}
+
             $this->set('locale', $locale);
             $this->Session->write('Config.language', $locale);
             $this->set('session_userid', $this->Session->read('session_userid'));
