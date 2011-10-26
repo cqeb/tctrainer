@@ -31,37 +31,24 @@ google_ad_height = 90;
 
 </div>
 
-<div class="box">
+<div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
 <b><?php __('Recommendation'); ?></b>
 <br /><br />
 <?php echo $this->element('referral'); ?>
 </div>
 
-<div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
-<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FTriCoreTraining%2F150997251602079&amp;width=200&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=250" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:250px;" allowTransparency="true"></iframe>
+<div class="box">
 
 <?php if ( isset( $userobject ) && $userobject['admin'] == '1' ) { ?>
+<b>Admin (only for admin)</b>
 <br /><br />
 <ul>
-	<li><a href="/trainer/users/list_users"><?php __('Administrate users'); ?></a></li>
-<?php 
-if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $userobject ) && $userobject['admin'] == 1 )
-{
-?>
-	<li><a href="#/trainer/starts/index/en/u:TRANSACTIONID">Redirect workout (u)</a></li> 
-	<li><a href="/trainer/starts/index/en/ur:<?php echo base64_encode("1"); ?>">Redirect no Money (ur):1</a></li> 
-	<li><a href="/trainer/starts/index/en/urm:<?php echo base64_encode("1"); ?>">Redirect Money (urm):1</a></li>
-	<li><a href="/trainer/starts/index/en/c:<?php echo base64_encode("@gentics.com"); ?>">Company:@gentics.com</a></li>
-<?php
-}
-?>
-        
+	<li><a href="/trainer/users/list_users"><?php __('Administrate users'); ?></a></li>      
 </ul>
 <?php } ?>
   
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-</div>
-<div class="box last">
+
 <b>Debugging (only localhost)</b>
 <br /><br />
 <ul>
@@ -69,6 +56,11 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $userobject ) && $userobject
         <li><a target="_blank" href="/phpmyadmin/"><?php __('PHPMyAdmin'); ?></a></li>
         <li><a target="_blank" href="/trainer/starts/fill_my_database"><?php __('Fill my database'); ?></a></li>
         <li><a target="_blank" href="/trainer/trainingplans/get?debug=1">DEBUG Trainingplan</a></li>
+		<li><a href="#/trainer/starts/index/en/u:TRANSACTIONID">Redirect workout (u)</a></li> 
+		<li><a href="/trainer/starts/index/en/ur:<?php echo base64_encode("1"); ?>">Redirect no Money (ur):1</a></li> 
+		<li><a href="/trainer/starts/index/en/urm:<?php echo base64_encode("1"); ?>">Redirect Money (urm):1</a></li>
+		<li><a href="/trainer/starts/index/en/c:<?php echo base64_encode("@gentics.com"); ?>">Company:@gentics.com</a></li>
+        
 </ul>
 <?php } ?>
 

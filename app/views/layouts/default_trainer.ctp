@@ -54,9 +54,13 @@ $url = Configure::read('App.serverUrl');
 	<div class="container_12 main">
 		<!-- Left column -->
 		<div class="grid_3 left">
-			<div class="box navigation last">
+			<div class="box navigation">
 			<?php //__('Navigation');?>
                <?php echo $this->element('subnavigation_all'); ?>
+			</div>
+			
+			<div class="box last">
+			   <?php echo $this->element('adbox'); ?>
 			</div>
 		</div>
 		<!-- /Left column -->
