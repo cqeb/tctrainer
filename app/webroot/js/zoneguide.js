@@ -1,1 +1,88 @@
-ZoneGuide={runZones:[.66,.84,.91,.96,1],bikeZones:[.66,.8,.89,.93,1],rlth:0,blth:0,getTable:function(a,b,c,d){this.rlth=a;this.blth=b;var e='<div id="zoneguide">';if(d){e+='<img class="pointer" src="/trainer/img/zones/pointer.png">'}e+="<table>"+"<tr>"+"<th>"+c.sport+"</th>"+"<th>"+c.zone+" 1</th>"+"<th>"+c.zone+" 2</th>"+"<th>"+c.zone+" 3</th>"+"<th>"+c.zone+" 4</th>"+"<th>"+c.zone+" 5</th>"+"</tr>"+'<tr class="run">'+"<td>"+c.run+"</td>";for(var f=1;f<=5;f++){e+=this.getZoneTD("run",f)}e+="</tr>";e+='<tr class="bike">'+"<td>"+c.bike+"</td>";for(var f=1;f<=5;f++){e+=this.getZoneTD("bike",f)}e+="</tr></table></div>";return e},getZoneTD:function(a,b){var c,d;if(a=="run"){c=parseInt(this.runZones[b-1]*this.rlth+1);if(b<5){d=parseInt(this.runZones[b]*this.rlth)}else{d="max"}}else if(a=="bike"){c=parseInt(this.bikeZones[b-1]*this.blth+1);if(b<5){d=parseInt(this.bikeZones[b]*this.blth)}else{d="max"}}return'<td class="zone'+b+'">'+c+"-"+d+"</td>"},attach:function(){var a=jQuery("#zoneguide");jQuery("span.zone").mouseover(function(b){var c=jQuery(this);var d=c.text().substr(c.text().search(/\d/),1);a.find(".highlight").removeClass("highlight");if(c.parent().parent().hasClass("run")){a.find(".run td.zone"+d).addClass("highlight")}else if(c.parent().parent().hasClass("bike")){a.find(".bike td.zone"+d).addClass("highlight")}var e=c.offset();e.left+=66;e.top+=24;a.css("top",e.top).css("left",e.left).fadeIn()}).mouseleave(function(){a.fadeOut("fast")})}}
+/**
+ * this class will calculate workout stats for an athlete
+ */
+WorkoutStats = {
+	/**
+	 * approximate kcals as done in unitcalc
+	 * @param sex the athletes sex (may be m or f)
+	 * @param weight in kilograms
+	 * @param age in years
+	 * @param duration in SECONDS!
+	 * @param hr average heart rate
+	 */
+	calcKcal : function (sex, weight, age, duration, hr) {
+		var ret;
+		if (sex == 'm') {
+			ret = Math.round(
+				( -55.0969 + 0.6309 * hr + 0.1988 * weight + 0.2017 * age ) 
+				/ 
+				4.1845 * duration / 60
+			);
+		} else {
+			ret = Math.round(
+				( -20.4022 + 0.4472 * hr + 0.1263 * weight + 0.074 * age )
+				/
+				4.1845 * duration / 60
+			);
+		}
+		
+		// as negative values may occur on extremely low pulse values, 
+		// we'll cap them with 0
+		if (ret < 0) {
+			ret = 0;
+		}
+		
+		if (isNaN(ret)) {
+			return 0;
+		}
+		
+		return ret;
+	},
+	
+	/**
+	 * will calculate the average speed with
+	 * two floating point precision
+	 * @param distance
+	 * @param time (should be hours)
+	 */
+	calcSpeed : function (distance, time) {
+		// convert , to .
+		distance = parseFloat(distance.replace(',', '.'));
+		var spd = distance / time;
+		if (isNaN(spd)) {
+			spd = 0;
+		}
+		return spd.toFixed(2);
+	},
+	
+	/**
+	 * calculate trimp points for a workout
+	 * 
+	 * @param int average heart rate for that workout
+	 * @param int training time in minutes
+	 * @param array training zones 1-5 as an array, starting with index 0
+	 * @see Athlete::calcTrimp
+	 */
+	calcTrimp : function (avgHr, minutes, zones) {
+		var factor = 0;
+		avgHR = parseInt(avgHr);
+		// if there is no proper hr given, we'll use zone 2.
+		if (avgHr <= 0) {
+			avgHr = zones[1];
+		}
+		
+		if (avgHr < zones[1]) {
+			factor = 1;
+		} else if (avgHr < zones[2]) {
+			factor = 1.1;
+		} else if (avgHr < zones[3]) {
+			factor = 1.2;
+		} else if (avgHr < zones[4]) {
+			factor = 2.2;
+		} else {
+			factor = 4.5;
+		}
+		
+		return parseInt(minutes * factor);
+	}
+};
