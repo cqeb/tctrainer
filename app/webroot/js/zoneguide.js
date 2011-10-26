@@ -1,88 +1,120 @@
 /**
- * this class will calculate workout stats for an athlete
+ * Generates a table of Zones, which then can be highlighted
  */
-WorkoutStats = {
-	/**
-	 * approximate kcals as done in unitcalc
-	 * @param sex the athletes sex (may be m or f)
-	 * @param weight in kilograms
-	 * @param age in years
-	 * @param duration in SECONDS!
-	 * @param hr average heart rate
-	 */
-	calcKcal : function (sex, weight, age, duration, hr) {
-		var ret;
-		if (sex == 'm') {
-			ret = Math.round(
-				( -55.0969 + 0.6309 * hr + 0.1988 * weight + 0.2017 * age ) 
-				/ 
-				4.1845 * duration / 60
-			);
-		} else {
-			ret = Math.round(
-				( -20.4022 + 0.4472 * hr + 0.1263 * weight + 0.074 * age )
-				/
-				4.1845 * duration / 60
-			);
-		}
+ZoneGuide = {
+		/**
+		 * basic zone factors
+		 */
+		runZones : [0.66, 0.84, 0.91, 0.96, 1],
+		bikeZones : [0.66, 0.80, 0.89, 0.93, 1],
 		
-		// as negative values may occur on extremely low pulse values, 
-		// we'll cap them with 0
-		if (ret < 0) {
-			ret = 0;
-		}
+		/**
+		 * lactate threshold values
+		 */
+		rlth : 0, // run
+		blth : 0, // bike
 		
-		if (isNaN(ret)) {
-			return 0;
-		}
+		/**
+		 * generate the zone table
+		 * @param rlth run lactate threshold
+		 * @param blth bike lactate threshold
+		 * @param i18n object like
+		 * 	{
+		 * 		type : "Type",
+		 * 		zone : "Zone",
+		 * 		run : "Run",
+		 * 		bike : "Bike"
+		 *  }
+		 * @param guideStyle enable guide style for use in trainingplan
+		 * @return html table
+		 */
+		getTable : function(rlth, blth, i18n, guideStyle) {
+			this.rlth = rlth;
+			this.blth = blth;
+			
+			var html = '<div id="zoneguide">';
+			if (guideStyle) {
+				html += '<img class="pointer" src="/trainer/img/zones/pointer.png">';
+			}
+			html += '<table>' +
+				// header
+				'<tr>' +
+					'<th>' + i18n.sport + '</th>' +
+					'<th>' + i18n.zone + ' 1</th>' +
+					'<th>' + i18n.zone + ' 2</th>' +
+					'<th>' + i18n.zone + ' 3</th>' +
+					'<th>' + i18n.zone + ' 4</th>' +
+					'<th>' + i18n.zone + ' 5</th>' +
+				'</tr>' +
+				// run zones
+				'<tr class="run">' +
+					'<td>' + i18n.run + '</td>';
+			for (var zone=1; zone<=5;zone++) {
+				html += this.getZoneTD('run', zone);
+			}
+			html += '</tr>';
+
+			// bike zones
+			html += '<tr class="bike">' +
+				'<td>' + i18n.bike + '</td>';
+			for (var zone=1; zone<=5;zone++) {
+				html += this.getZoneTD('bike', zone);
+			}
+			html += '</tr></table></div>';
+			return html;
+		},
 		
-		return ret;
-	},
-	
-	/**
-	 * will calculate the average speed with
-	 * two floating point precision
-	 * @param distance
-	 * @param time (should be hours)
-	 */
-	calcSpeed : function (distance, time) {
-		// convert , to .
-		distance = parseFloat(distance.replace(',', '.'));
-		var spd = distance / time;
-		if (isNaN(spd)) {
-			spd = 0;
-		}
-		return spd.toFixed(2);
-	},
-	
-	/**
-	 * calculate trimp points for a workout
-	 * 
-	 * @param int average heart rate for that workout
-	 * @param int training time in minutes
-	 * @param array training zones 1-5 as an array, starting with index 0
-	 * @see Athlete::calcTrimp
-	 */
-	calcTrimp : function (avgHr, minutes, zones) {
-		var factor = 0;
-		avgHR = parseInt(avgHr);
-		// if there is no proper hr given, we'll use zone 2.
-		if (avgHr <= 0) {
-			avgHr = zones[1];
-		}
+		/**
+		 * retrieve zone definition for a given sport
+		 * @param sport type of sport. may be "run" or "bike"
+		 * @param zone number
+		 * @return zone definition like "105-126"
+		 */
+		getZoneTD : function(sport, zone) {
+			var min, max;
+			if (sport == "run") {
+				min = parseInt((this.runZones[zone - 1] * this.rlth) + 1);
+				if (zone < 5) {
+					max = parseInt(this.runZones[zone] * this.rlth);
+				} else {
+					max = "max";
+				}
+			} else if (sport == "bike") {
+				min = parseInt((this.bikeZones[zone - 1] * this.blth) + 1);
+				if (zone < 5) {
+					max = parseInt(this.bikeZones[zone] * this.blth);
+				} else {
+					max = "max";
+				}
+			}
+			return '<td class="zone' + zone + '">' + min + '-' + max + '</td>';
+		},
 		
-		if (avgHr < zones[1]) {
-			factor = 1;
-		} else if (avgHr < zones[2]) {
-			factor = 1.1;
-		} else if (avgHr < zones[3]) {
-			factor = 1.2;
-		} else if (avgHr < zones[4]) {
-			factor = 2.2;
-		} else {
-			factor = 4.5;
+		/**
+		 * attaches the zone guide to zone definition spans
+		 */
+		attach : function() {
+			var zg = jQuery('#zoneguide');
+			jQuery('span.zone').mouseover(function (e) {
+				var o = jQuery(this);
+				// highlight zone
+				var zone = o.text().substr(o.text().search(/\d/), 1);
+				// remove all other highlights first
+				zg.find('.highlight').removeClass('highlight');
+				if (o.parent().parent().hasClass("run")) {
+					zg.find('.run td.zone' + zone).addClass('highlight');
+				} else if (o.parent().parent().hasClass("bike")) {
+					zg.find('.bike td.zone' + zone).addClass('highlight');
+				}
+				// reposition
+				var pos = o.offset();
+				pos.left += 66;
+				pos.top += 24;
+				zg.css('top', pos.top)
+					.css('left', pos.left)
+					.fadeIn();
+			}).mouseleave(function () {
+				zg.fadeOut('fast');
+			});
 		}
-		
-		return parseInt(minutes * factor);
-	}
-};
+}
