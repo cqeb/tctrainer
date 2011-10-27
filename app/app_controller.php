@@ -101,7 +101,6 @@ class AppController extends Controller {
 				$this->loadModel('User');
 						
 				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
-				echo $sql;
 				$user_recommendations = $this->User->query( $sql );
 						
 				$this->Session->write( 'recommendations', serialize($user_recommendations) );
