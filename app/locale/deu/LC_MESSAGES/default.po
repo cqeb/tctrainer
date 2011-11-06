@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "POT-Creation-Date: 2011-08-30 23:07+0200\n"
-"PO-Revision-Date: 2011-08-30 23:11+0100\n"
+"PO-Revision-Date: 2011-11-06 01:13+0100\n"
 "Last-Translator: Herbert Rotznig <pokersite@gmx.at>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -1473,8 +1473,8 @@ msgid "Do fast repeats for 1 swimming lane lengths at maximum effort, and recove
 msgstr "Schwimme mit hoher Frequenz und maximaler Belastung über eine Länge. Erhole dich danach für 1 Minute. Konzentriere dich dabei auf deine Schwimmtechnik, auch, wenn deine Arme bereits ermüden. Wiederhole über eine Distanz von maximal 300 Metern."
 
 #: \core\workouts\swimworkout.class.php:104
-msgid "Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous."
-msgstr "Schwimme in einem Fluss oder See."
+msgid "Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous. If this is not possible, swim with your suit in an indoor pool."
+msgstr "Schwimme in einem Fluss oder See. Nimm einen Partner mit und schwimme nie alleine im Freiwasser. Wenn dies nicht möglich ist, dann nimm deinen Schwimmanzug und trainiere im Pool."
 
 #: \core\workouts\swimworkout.class.php:107
 msgid "Use this workout to bring your paddles for endurance sets."

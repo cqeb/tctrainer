@@ -101,7 +101,7 @@ class SwimWorkout extends Workout {
 				return __('Do fast repeats for 1 swimming lane lengths at maximum effort, and recover for 1 minute between intervals. Focus on technique, even when fatigue sets in. Repeat to a maximum of 300 meters/yards.', true);
 				break;
 			case Workout::F1:
-				return __('Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous.', true);
+				return __('Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous. If this is not possible, swim with your suit in an indoor pool.', true);
 				break;
 			case Workout::F2:
 				return __('Use this workout to bring your paddles for endurance sets.', true);

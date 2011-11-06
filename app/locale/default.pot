@@ -1472,7 +1472,7 @@ msgid "Do fast repeats for 1 swimming lane lengths at maximum effort, and recove
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:104
-msgid "Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous."
+msgid "Swim in open water. Remember to bring a partner, as swimming in open water is more dangerous. If this is not possible, swim with your suit in an indoor pool."
 msgstr ""
 
 #: \core\workouts\swimworkout.class.php:107
