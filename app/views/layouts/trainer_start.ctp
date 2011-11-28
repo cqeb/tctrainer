@@ -123,9 +123,8 @@ $(document).ready(function() {
 <div class="container_12 main">
 	<!-- Center column -->
 	<div class="grid_12 center">
-
 		<!-- Content -->
-		<div class="box" style="padding-bottom: 18px; height: 285px;">
+		<div class="box" style="padding-bottom: 0px; height: 285px; margin-bottom:15px; ">
 			<div id="signup">
 				<h1><?php __('Gain speed, lose weight!'); ?></h1>
 				<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?></p>
@@ -143,19 +142,18 @@ $(document).ready(function() {
 		</div>
 		<!-- /Content -->
 	</div>
-
-    
+	
     <div class="grid_3">
-    	<div class="box">
+    	<div class="box last">
 	        <?php __("You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"); ?>
         </div>
-    	<div class="box">
+    	<div class="box last">
 	        <?php __("You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"); ?>
         </div>
     </div>
     
     <div class="grid_9">
-    	<div class="box features">
+    	<div class="box features last">
     		<div>
     			<a href="/trainer/img/startpage-feature-track-big.jpg"><img src="/trainer/img/startpage-feature-track.jpg" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"/></a>
     			<p><?php __('Log your trainings, manage your competitions, and also keep track of your weight.');?></p>

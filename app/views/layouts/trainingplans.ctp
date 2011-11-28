@@ -83,7 +83,7 @@
 		
       	<!-- Training hour distribution -->
 		<div class="grid_2 avgweekly">
-      		<div class="box last">
+      		<div class="box">
       			<label for="avg"><?php __('Training Hours'); ?></label>
       			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#avg').focus()" title="<?php __('Edit');?>">
       			<input type="text" name="avg" id="avg" title="<?php __('These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected.'); ?>"/>
@@ -95,7 +95,7 @@
       	</div>
       	
       	<div class="grid_4 distribution">
-      		<div class="box last">
+      		<div class="box">
 	      		<label><?php __('Workout Balance'); ?> <a href="javascript:TrainingPlanner.resetWorkoutBalance();" class="reset"><?php __('reset'); ?></a></label>
       			<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>"></div>
       		</div>
@@ -109,23 +109,25 @@
     			<a id="guide" href="javascript:;" title=""><?php __('Beginner\'s guide to your training'); ?></a>
       		</div>
 
-<?php if ( isset( $userobject ) && $userobject['level'] == 'freemember' ) { ?>
+<?php //if ( isset( $userobject ) && $userobject['level'] == 'freemember' ) { ?>
       		
       		<div class="box last">
+
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
-/* Content middle 2 */
-google_ad_slot = "6926088674";
-google_ad_width = 200;
-google_ad_height = 200;
+/* Adbox Trainingplan 2011-11 */
+google_ad_slot = "5831944002";
+google_ad_width = 336;
+google_ad_height = 280;
 //-->
 </script>
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
+
 			</div>
 
-<?php } ?>
+<?php //} ?>
 
       	</div>
 

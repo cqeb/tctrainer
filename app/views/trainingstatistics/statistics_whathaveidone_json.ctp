@@ -36,7 +36,7 @@ for ( $i = 0; $i <= $maxweeks; $i++ )
 		 if ( $i != ($maxweeks) ) $labels_output .= ","; 
 	} 
 	
-	echo $statistics->x_axis( __('Time', true), $labels_output, round( count( $weeks ) / 8 ), '', $maxweeks );
+	echo $statistics->x_axis( __('Time', true), $labels_output, 1, /*round( count( $weeks ) / 8 ),*/ '', $maxweeks );
 
 	echo $statistics->chart_bgcolor();
 

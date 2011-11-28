@@ -19,6 +19,9 @@
 
 <br /><br />
 
+<?php
+/**
+
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
 google_ad_slot = "8666894126";
@@ -28,13 +31,22 @@ google_ad_height = 90;
 </script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
+**/
+?>
 
 </div>
 
 <div class="box<?php if ( $_SERVER['HTTP_HOST'] != 'localhost') { ?> last<?php } ?>">
+<?php
+/**
 <b><?php __('Recommendation'); ?></b>
 <br /><br />
 <?php echo $this->element('referral'); ?>
+**/
+?>
+
+<iframe src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Fpages%2FTriCoreTraining%2F150997251602079&amp;width=200&amp;colorscheme=light&amp;show_faces=true&amp;stream=false&amp;header=false&amp;height=250" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:250px;" allowTransparency="true"></iframe>
+
 </div>
 
 <div class="box">
