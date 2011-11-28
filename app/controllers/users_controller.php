@@ -289,6 +289,8 @@ class UsersController extends AppController {
 						echo '<script language="JavaScript">top.location.href="/trainer/trainingplans/view/";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
 						// doesn't work with facebook login - session get's lost
 						//$this->redirect('/trainingplans/view/');
+					} else {
+						echo __('Sorry, your user is not active. Please contact our', true) . ' <a href="mailto:support@tricoretraining.com">Support</a>. <a href="/trainer/">&raquo; Home</a>';
 					}
 				} else
 				{
