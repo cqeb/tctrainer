@@ -322,10 +322,14 @@ class MesoCyclePhaseTableProvider {
 				// this is a post-long-distance-recovery week
 				// so keep it VERY short
 				$table[$week]["time"] = 90;
-				$forceRecovery = 1;
 			} else if ($forceRecovery == 1) {
 				$table[$week]["time"] = intval($table[$week]["time"] * 0.5);
-				$forceRecovery = 0;
+			}
+			if ($forceRecovery > 0) {
+				$table[$week]["recovery"] = 1;
+				$phaseKey .= "_RECOVERY";
+				$factorKey = 0;
+				$forceRecovery--;
 			}
 		}
 	}
