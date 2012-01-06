@@ -144,6 +144,31 @@ class ProviderComponent extends Object {
 		$html = "<h1>" . __("Week", true) . " " . 
 			$this->Unitcalc->check_date($genWeek->format("Y-m-d")) . 
 			"</h1>";
+		
+		switch (substr($phase['phase'],0,4)) {
+			case "PREP":
+				$phaseName = __('Preparative Training', true);
+				break;
+			case "BUIL":
+				$phaseName = __('Progressive Training', true);
+				break;
+			case "PEAK":
+				$phaseName = __('Peak Training', true);
+				break;
+			case "RACE":
+				$phaseName = __('Race Week', true);
+				break;
+			case "BASE":
+			default:
+				$phaseName = __('Basic Training', true);
+				break;
+		}
+		$html .= '<p id="phaseinfo">' . $phaseName;
+		if ($phase['recovery']) {
+			$html .= ' (' . __('Recovery Week', true) . ')';
+		}
+		$html .= "</p>";
+		//var_dump( $phase );
 		$html .= WorkoutRenderer::render($workouts, $this->getAthlete());
 		
 		// also attach time and workout settings

@@ -330,3 +330,8 @@ a.reset {
 	-webkit-box-shadow: none;
 }
 
+#phaseinfo {
+	font-size: 12px;
+	position: absolute;
+	margin-top: -18px;
+}
