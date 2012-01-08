@@ -115,8 +115,8 @@
 
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
-/* Adbox Trainingplan 2011-11 */
-google_ad_slot = "5831944002";
+/* Trainingplan */
+google_ad_slot = "0542425027";
 google_ad_width = 336;
 google_ad_height = 280;
 //-->
