@@ -151,20 +151,20 @@ if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 
 }
 	
-Configure::write('price_eur', '"9.90","26.90","49.90","94.90"');
-Configure::write('price_eur_month', '"9.90","8.97","8.32","7.91"');
+Configure::write('price_eur', '"4.90","13.90","24.90","39.90"');
+Configure::write('price_eur_month', '"4.90","4.63","4.15","3.26"');
 
-Configure::write('price_usd', '"14.90","39.90","74.90","139.90"');
-Configure::write('price_usd_month', '"14.90","13.30","12.48","11.66"');
+Configure::write('price_usd', '"4.90","13.90","24.90","39.90"');
+Configure::write('price_usd_month', '"4.90","4.63","4.15","3.26"');
 
 Configure::write('tct_price_eur', '"0.10","0.30","0.60","1.20"');
-Configure::write('tct_price_eur_month', '"9.90","8.97","8.32","7.91"');
+Configure::write('tct_price_eur_month', '"4.90","4.63","4.15","3.26"');
 
-Configure::write('company_price_eur', '"6.90","18.80","34.90","65.90"');
-Configure::write('company_price_eur_month', '"6.90","6.27","5.82","5.49"');
+Configure::write('company_price_eur', '"3.90","9.90","18.90","34.90"');
+Configure::write('company_price_eur_month', '"3.90","3.30","3.15","2.91"');
 
-Configure::write('company_price_usd', '"9.90","27.90","51.90","97,90"');
-Configure::write('company_price_usd_month', '"9.90","9.30","8.65","8.16"');
+Configure::write('company_price_usd', '"3.90","9.90","18.90","34,90"');
+Configure::write('company_price_usd_month', '"3.90","3.30","3.15","2.91"');
 
 Configure::write('company_emails', '"@gentics.com","@nullzeit.at","@s-itsolutions.at","@erstebank.at","@erstegroup.com","@immorent.com","@sparkasse.at","@s-zv.at"');
 
@@ -349,7 +349,6 @@ Configure::write('Acl.database', 'default');
  *
  */
 Cache::config('default', array('engine' => 'File'));
-
 
 
 ?>

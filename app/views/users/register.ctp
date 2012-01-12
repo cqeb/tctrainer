@@ -185,7 +185,7 @@ echo $form->input('tos',
 
 // calculate FREE training period
 $paid_from = date( "Y-m-d", time() );
-//$paid_to = date( "Y-m-d", time() + (30*24*60*60) );
+$paid_to = date( "Y-m-d", time() + (90*24*60*60) );
 //currently - free registration
 $paid_to = '2012-12-31';
 

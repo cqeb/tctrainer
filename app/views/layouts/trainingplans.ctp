@@ -115,8 +115,8 @@
 
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
-/* Trainingplan */
-google_ad_slot = "0542425027";
+/* Trainingplan 2 */
+google_ad_slot = "5197962760";
 google_ad_width = 336;
 google_ad_height = 280;
 //-->

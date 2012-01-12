@@ -764,7 +764,6 @@ class UsersController extends AppController {
 	          $this->Session->write('register_userid', $this->User->id);
 	
 	          $this->Session->write('flash',__('Registration finished',true));
-	          $this->Session->write('flash',__('Registration finished',true));
 	          $this->redirect(array('action' => 'register_finish'));
 	      } else
 	      {
