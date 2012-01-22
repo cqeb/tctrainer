@@ -488,10 +488,12 @@ class StatisticshandlerComponent extends Object {
             // get for given timestamp the week (number) and year
             $start_year = date('o', $start_ts);
             $start_week = date('W', $start_ts);
+
             if ( $start_week == 53 ) { $start_week = "01"; $start_year += 1; }
 			
             $end_year = date('o', $end_ts);
             $end_week = date('W', $end_ts);
+			
             if ( $end_week == 53 ) { $end_week = 1; $end_year += 1; }
 
             // what if the period defined goes until next year
@@ -515,6 +517,7 @@ class StatisticshandlerComponent extends Object {
                if ( $sportstype ) $sql .= " AND sportstype = '" . $sportstype . "' ";
                $sql .= "group by week order by week asc";
 
+
                $trainings = $Trainingstatistic->query( $sql );
                $lastentry = count($trainings);
                $minweek = $trainings[0][0]['week'];
@@ -523,23 +526,25 @@ class StatisticshandlerComponent extends Object {
                for ( $i = 0; $i < count( $trainings ); $i++ )
                {
                    $week = $trainings[$i][0]['week'];
+               	   
+               	   //echo $i . "-" . $week . "<br>";
+				   
+				   // there's a week yyyy00 :(
+				   // we go automatically to week 01
 				   if ( substr( $week, 4, 2 ) == '00' ) 
 				   {
-				   	   $j = $i - 1;
-				   	   if ( isset ( $trainings[$j][0]['week'] ) )
-					   { 
-				   	   	   $previous_week = $trainings[$j][0]['week'];
-		                   $trainings2[$previous_week]['sumdistance'] += round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
-		                   $trainings2[$previous_week]['sumduration'] += round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
-		                   $trainings2[$previous_week]['sumtrainings'] += $trainings[$i][0]['count'];
-					   }
-				   } else
-				   {
-				   	   unset($previous_week);
-	                   $trainings2[$week]['sumdistance'] = round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
-	                   $trainings2[$week]['sumduration'] = round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
-	                   $trainings2[$week]['sumtrainings'] = $trainings[$i][0]['count'];
+				   		$week = substr( $week, 0, 4 ) . '01';
+						//echo "$week" . "<br>";
+				   	   	   //$previous_week = $trainings[$j][0]['week'];
+		                   //$trainings2[$previous_week]['sumdistance'] += round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
+		                   //$trainings2[$previous_week]['sumduration'] += round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
+		                   //$trainings2[$previous_week]['sumtrainings'] += $trainings[$i][0]['count'];
 				   }
+
+			   	   //unset($previous_week);
+                   $trainings2[$week]['sumdistance'] = round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
+                   $trainings2[$week]['sumduration'] = round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
+                   $trainings2[$week]['sumtrainings'] = $trainings[$i][0]['count'];
 				   
                    // make graph a little bit higher with max values
 				   // special case :)

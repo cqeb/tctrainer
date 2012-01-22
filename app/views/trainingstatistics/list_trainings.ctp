@@ -63,14 +63,13 @@ $twitterurl = '/trainer/trainingstatistics/url_redirect/type:twitter/distance:'.
 ?>
     
 <nowrap>
+<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
+<a class="help2" title="<?php __('Tell your friends on Facebook about your great workout!'); ?>" target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
+<a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
+
 <?php if ( isset( $training['workout_link'] ) && trim($training['workout_link']) != '' && $training['workout_link'] != 'http://' ) { ?>
 <a href="<?php echo $training['workout_link']; ?>" target="_blank"><img alt="<?php __('Link to workout'); ?>" width="18" src="/trainer/img/icon_external.gif" /></a>
 <?php } ?>
-
-<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
-
-<a class="help2" title="<?php __('Tell your friends on Facebook about your great workout!'); ?>" target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
-<a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
 
 </nowrap>
 

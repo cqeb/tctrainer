@@ -1,3 +1,4 @@
+
 <?php
 
 if ( $export == true )
@@ -52,8 +53,6 @@ if ( $export == true )
     	<td class="tableTd"><?php __('Burnt'); ?></td>
 </tr>
 <?php
-
-pr($trainings);
 
     for ( $i = 0; $i < count( $trainings ); $i++ )
     {
@@ -175,6 +174,8 @@ echo $form->submit(__('Export',true), array('name' => 'excel', 'div' => false));
     <th><?php __('TRIMP'); ?></th>
 </tr>
 <?php
+
+sort($sumdata['collected_sportstypes']);
 
 for ( $j = 0; $j < count( $sumdata['collected_sportstypes'] ); $j++ )
 {
