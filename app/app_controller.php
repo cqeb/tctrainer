@@ -66,7 +66,9 @@ class AppController extends Controller {
             if ($this->RequestHandler->isXml()) {}
             if ($this->RequestHandler->isRss()) {}
             if ($this->RequestHandler->isAtom()) {}
-            if ($this->RequestHandler->isMobile()) {}
+            if ($this->RequestHandler->isMobile()) {
+            	$mobile = true;
+            }
             if ($this->RequestHandler->isWap()) {}
 
             /**

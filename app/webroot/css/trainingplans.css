@@ -211,6 +211,11 @@ table.workouts td.sport, table.workouts td.duration, table.workouts td.trimp {
 	margin: 1px;
 }
 
+.mesocycle .BASE1, .mesocycle .BASE2, .mesocycle .BASE3 { background-color: #CCFF99 }
+.mesocycle .BUILD1, .mesocycle .BUILD2, .mesocycle .BUILD3 { background-color: #66CCFF }
+.mesocycle .PEAK { background-color: #FFCC33 }
+.mesocycle .RACE { background-color: #339933 }
+
 a.reset {
 	position: relative;
 	display: none;

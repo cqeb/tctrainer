@@ -73,6 +73,8 @@ class TrainingplansController extends AppController {
 		$this->set('advancedFeatures', $this->Provider->getAthlete()->isAdvancedFeatures());
 		$this->set('rlth', $this->Provider->getAthlete()->getThreshold());
 		$this->set('blth', $this->Provider->getAthlete()->getBikeThreshold());
+		
+		$this->set('mesocycles', $this->Provider->renderMesoCycle($now, $u["id"]));
 	}
 	
 	/**

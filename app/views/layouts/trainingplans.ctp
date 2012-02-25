@@ -109,10 +109,18 @@
     			<a id="guide" href="javascript:;" title=""><?php __('Beginner\'s guide to your training'); ?></a>
       		</div>
 
+
 <?php //if ( isset( $userobject ) && $userobject['level'] == 'freemember' ) { ?>
       		
       		<div class="box last">
+<style>
+</style>
+<h2><?php __('Your mesocycle of the next weeks'); ?></h2>
+<?php
 
+echo $mesocycles;
+
+?>
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
 /* Trainingplan 2 */

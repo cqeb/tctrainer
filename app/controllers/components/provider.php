@@ -268,17 +268,18 @@ class ProviderComponent extends Object {
 	}
 	 
 	public function renderMesoCycle($date, $athleteId) {
-		$res = $this->DB->query("SELECT time, phase, 
+		$res = $this->DB->query("SELECT time, date, phase, 
 			(SELECT MAX(time) FROM mesocyclephases WHERE date >= '$date' AND athlete_id = $athleteId) max
 			FROM mesocyclephases WHERE date >= '$date' AND athlete_id = $athleteId LIMIT 10");
 		
 		$html = "<div class='mesocycle'>";
 		while (list($k, $v) = each($res)) {
 			$h = intval($v["time"] / 4 );
+			$w = intval(400/count($res));
 			$p = intval(($v["max"] - $v["time"]) / 4);
 			$html .= '<div style="height: ' . $h . 
-				'px; margin-top: ' . $p . 'px">' . 
-				$v["phase"] . '</div>';
+				'px; width: ' . $w . 'px; margin-top: ' . $p . 'px; size:4px;" class="' . $v["phase"] . '">' . 
+				$v["phase"] . '<br />' . intval($v["time"]/60) . ' h</div>';
 		}
 		$html .= "</div>";
 		return $html;
