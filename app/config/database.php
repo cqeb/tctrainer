@@ -90,6 +90,8 @@ class DATABASE_CONFIG {
 	);
 **/
 
+if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+{
 	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
@@ -99,5 +101,18 @@ class DATABASE_CONFIG {
 		'database' => 'trainer',
 		'prefix' => '',
 	);
+} else
+{
+	var $default = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'root',
+		'password' => 'phai6oWo',
+		'database' => 'trainer',
+		'prefix' => '',
+	);
+
+}
 }
 ?>
