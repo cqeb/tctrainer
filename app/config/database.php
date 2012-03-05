@@ -76,43 +76,33 @@
  * database.  Uses database default.
  *
  */
-class DATABASE_CONFIG {
-
-/**
-	var $default = array(
-		'driver' => 'mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'cakephp_blog',
-		'prefix' => '',
-	);
-**/
-
-if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 {
-	var $default = array(
-		'driver' => 'mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => '',
-		'database' => 'trainer',
-		'prefix' => '',
-	);
+
+        class DATABASE_CONFIG {
+        	var $default = array(
+        		'driver' => 'mysql',
+        		'persistent' => false,
+        		'host' => 'localhost',
+        		'login' => 'root',
+        		'password' => '',
+        		'database' => 'trainer',
+        		'prefix' => '',
+        	);
+        }
+
 } else
 {
-	var $default = array(
-		'driver' => 'mysql',
-		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => 'phai6oWo',
-		'database' => 'trainer',
-		'prefix' => '',
-	);
-
-}
+        class DATABASE_CONFIG {
+        	var $default = array(
+        		'driver' => 'mysql',
+        		'persistent' => false,
+        		'host' => 'localhost',
+        		'login' => 'root',
+        		'password' => 'phai6oWo',
+        		'database' => 'trainer',
+        		'prefix' => '',
+        	);
+        }
 }
 ?>
