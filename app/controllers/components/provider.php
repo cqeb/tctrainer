@@ -23,6 +23,8 @@ require_once ROOT . DS . APP_DIR . '/core/workouts/swimworkout.class.php';
 require_once ROOT . DS . APP_DIR . '/core/workouts/bikeworkout.class.php';
 require_once ROOT . DS . APP_DIR . '/core/workouts/runworkout.class.php';
 require_once ROOT . DS . APP_DIR . '/core/renderers/workoutrenderer.class.php';
+require_once ROOT . DS . APP_DIR . '/config/database.php';
+
 
 class ProviderComponent extends Object {
 	public $components = array('Session', 'Unitcalc');
@@ -36,8 +38,8 @@ class ProviderComponent extends Object {
 	 * @param unknown_type $settings not needed
 	 */
 	public function initialize($controller, $settings) {
-		// TODO omg change this!!!
-		$this->DB = new Database("root", "", "trainer", "localhost");
+                $config = new DATABASE_CONFIG();
+                $this->DB = new Database($config->default['login'],$config->default['password'],$config->default['database'],$config->default['host']);
 	}
 	
 	/**
