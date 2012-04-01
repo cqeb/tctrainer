@@ -24,7 +24,7 @@ echo "<br /><br />";
 echo __('Lastname') . ': ' . $user['lastname']; 
 echo "<br /><br />";
 
-echo __('Email') . ' <a href="mailto' . $user['email'] . '">' . $user['email'] . '</a>';
+echo __('Email') . ' <a href="mailto:' . $user['email'] . '">' . $user['email'] . '</a>';
 echo "<br /><br />";
  
 echo __('Created') . ': ' . $user['created']; 

@@ -118,6 +118,10 @@
          border-bottom: 4px solid #edc913;
       }
 
+      td.mainbar p img.none {
+         border-bottom: 0px;
+      }
+
       td.mainbar p.more {
          padding: 0 0 10px 0;
       }

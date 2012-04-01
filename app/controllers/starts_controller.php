@@ -34,9 +34,11 @@ class StartsController extends AppController
 		if ( isset( $this->params['named']['code'] ) ) 
 		{
 			$this->code = $this->params['named']['code'];
+			
 			$this->Session->write('Config.language', $this->code);
 			Configure::write('Config.language',$this->code);
             $this->set('locale', $this->code);
+			//die();
 		}
 			
 		if ( isset( $language ) && $language != '' && ( strlen( $language ) == 2 ) )
@@ -44,6 +46,10 @@ class StartsController extends AppController
 			
 			if ( $language == 'de' ) 
 				$this->code = 'deu';
+			elseif ( $language == 'zh' )
+				$this->code = 'zho';
+			elseif ( $language == 'fr' )
+				$this->code = 'fra';
 			else 
 				$this->code = 'eng';
 				
@@ -127,7 +133,6 @@ class StartsController extends AppController
 			
 		} elseif ( $this->Session->read('session_userid') )
             $this->redirect('/trainingplans/view');
-     
 
 	}
   
@@ -166,7 +171,10 @@ class StartsController extends AppController
 		    $this->redirect($this->referer());
 	    } else
 		{ 
-	        $this->redirect(array('controller' => 'starts', 'action' => 'index', 'code' => $this->code));
+	        //$this->redirect(array('controller' => 'starts', 'action' => 'index', 'code' => $this->code));
+	        $redirect_url = '/starts/index/code:'.$this->code;
+			$this->redirect($redirect_url);
+			die();
 	    }
 
 	}

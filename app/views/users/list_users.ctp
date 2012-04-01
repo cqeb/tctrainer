@@ -65,12 +65,12 @@ echo $form->input('user_' . $user['id'],
 ));
 ?></td>
     <td>
-    <?php if ( $user['deactivated'] == 1 ) echo '<strike>'; echo $user['firstname'] . ' ' . $user['lastname']; if ( $user['deactivated'] == 1 ) echo '</strike>'; ?><br />
+    <?php if ( $user['deactivated'] == 1 ) echo '<strike>'; if ( $user['activated'] != 1 ) echo '<i>'; echo $user['firstname'] . ' ' . $user['lastname']; if ( $user['activated'] != 1 ) echo '</i>'; if ( $user['deactivated'] == 1 ) echo '</strike>'; ?><br />
     <?php 
     if ( isset( $usertrainings[$userid]['lasttraining'] ) ) {
-    	 echo $usertrainings[$userid]['lasttraining']; echo ' ('; echo $usertrainings[$userid]['sumtrainings']; echo ')'; 
+    	echo $usertrainings[$userid]['lasttraining']; echo ' ('; echo $usertrainings[$userid]['sumtrainings']; echo ')'; 
     } else {
-    echo '<span style="color:red">no trainings</span>'; 
+    	echo '<span style="color:red">no trainings</span>'; 
 	} 
 	?>
     </td>

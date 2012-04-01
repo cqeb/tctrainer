@@ -31,11 +31,13 @@ class StatisticshandlerComponent extends Object {
 					
             } else
             {
+
                $start_array = $data['Trainingstatistic']['fromdate'];
                $end_array   = $data['Trainingstatistic']['todate'];
                $return['start'] = $start_array['year'] . '-' . $start_array['month'] . '-' . $start_array['day'];
                $return['end'] = $end_array['year'] . '-' . $end_array['month'] . '-' . $end_array['day'];
             }
+
 			return $return;
 	
 	}
@@ -637,7 +639,8 @@ class StatisticshandlerComponent extends Object {
             $Trainingplans = $Trainingstatistic->query( $sql );
 
 			// in case there are less trainings in tp then set new start date
-            $start = $Trainingplans[0]['m']['week'];
+            if ( isset( $Trainingplans[0]['m']['week'] ) )
+            	$start = $Trainingplans[0]['m']['week'];
 
             $sumdata_tp['collected_sportstypes'] = array();
             $sumdata_tp['duration'] = array();

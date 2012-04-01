@@ -3,8 +3,8 @@
 class UsersController extends AppController {
 	var $name = 'Users';
 
-	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Provider', 'Xmlhandler', 'Sendmailhandler');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Flowplayer', 'Unitcalc');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Flowplayer', 'Unitcalc', 'Statistics');
+	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Provider', 'Xmlhandler', 'Sendmailhandler', 'Statisticshandler');
 
 	var $paginate = array(
        'User' => array(
@@ -1869,6 +1869,13 @@ class UsersController extends AppController {
 		 				}
 		 			}
 
+					// show current trimp traffic light
+					
+					// calculate status for competition
+					// calculate success of last week's training
+            		$unit = $this->Unitcalc->get_unit_metric();
+			
+
 					$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
 					$results = $this->Trainingstatistic->query($sql);
 					//if ( $debug == true ) echo $sql . "<br />\n";
@@ -1880,12 +1887,123 @@ class UsersController extends AppController {
 					{
 						$text_for_mail_training .= __("don't be lazy!", true) . ' ' .  
 							__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
-							'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true); 
+							'/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true) . "<br /><br />"; 
 		 
 						if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
 					}
+					
+            		$results['User'] = $u;
+					$session_userid = $u['id'];
+
+					// automatic default date chooser
+					$choosedates = $this->Statisticshandler->choose_daterange( $results, array(), 'competition_date' );
+			
+					// set form-fields of search form
+					$this->data['Trainingstatistic']['fromdate'] = $start = $choosedates['start'];
+					$this->data['Trainingstatistic']['todate'] = $end = $choosedates['end'];
+								
+					if ( $this->Trainingstatistic && $session_userid && $start && $end )
+					{  
+						$return = $this->Statisticshandler->get_competition( $this->Trainingstatistic, $session_userid, "", $start, $end, $this->data );
+						if ( isset( $return ) && is_array( $return ) )
+						{
+				            $text_for_mail_training .= "<b>" . __("Status of your season's training",true) . "</b><br />"; 
+				            //echo 'start ' . $return['start'];
+							//echo 'end ' . $return['end'];
+							//echo 'sumdata ' . $return['sumdata'];
+							//if ( $return['color'] ) $text_for_mail_training .= "<span style='background:" . $return['color'] . "'>";
+							$text_for_mail_training .= " " . $return['total_trimp'] . " " . __('of',true) . " " . 
+								$return['total_trimp_tp'] . " " . __('Trimps',true) . " (" . $return['trafficlight_percent'] . " %) ";
+							//if ( $return['color'] ) $text_for_mail_training .= "</span>";
+							$color = $return['color'];
+							
+							if ( isset( $color ) ) 
+							{
+									// bought with gentics account at istockphotos 3480031_thumbnail.jpg 2012-03-31
+									$block = '<span style="width:10px;background:' . $color . '">&nbsp;&nbsp;&nbsp;</span>&nbsp;';
+									$block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
+																			
+									if ( $color == 'red' )
+									{ 
+										$text_for_mail_training .= ($block);
+									}
+									if ( $color == 'orange' )
+									{
+										$text_for_mail_training .= ($block).($block);
+									}
+									if ( $color == 'green' )
+									{ 
+										$text_for_mail_training .= ($block).($block).($block);
+									}
+							}
+							
+							$text_for_mail_training .= "<br /><br />";
+							
+						}
+						
+						// last weeks training compared planned to real
+						
+						// one week before
+						$start = date('Y-m-d', time() - 8*24*3600);
+						$end = date('Y-m-d', time());
+						
+						if ( $session_userid )
+						{
+								$sql = "SELECT sum(trimp) AS strimp FROM trainingstatistics WHERE user_id = " . $session_userid . " AND " . 
+		                        	"(date BETWEEN '" . $start . "' AND '" . $end . "')";
+								$results_real = $this->Trainingstatistic->query($sql);
+								if ( $results_real[0][0]['strimp'] ) 
+									$sum_real = $results_real[0][0]['strimp'];
+								else
+									$sum_real = 0;
+								
+								$sql = "SELECT sum(trimp) AS strimp FROM scheduledtrainings WHERE athlete_id = " . $session_userid . " AND " .
+		            				"(week BETWEEN '" . $start . "' AND '" . $end . "')";
+								$results_planned = $this->Trainingstatistic->query($sql);
+								if ( $results_planned[0][0]['strimp'] ) 
+									$sum_planned = $results_planned[0][0]['strimp'];
+								else
+									$sum_planned = 0;
+									
+								if ( $sum_planned > 0 ) {
+									$training_week_percentage = round( $sum_real / $sum_planned * 100 );
+									
+									if ( $training_week_percentage < 80 || $training_week_percentage > 110 )
+										$color = 'orange';
+									if ( $training_week_percentage < 60 || $training_week_percentage > 120 )
+										$color = 'red';
+									if ( $training_week_percentage >= 80 && $training_week_percentage <= 110 )
+										$color = 'green';	
+								} else
+								{
+									$training_week_percentage = 0;
+									$color = 'red';
+								}	
+									
+								$text_for_mail_training .= "<b>" . __("Status of your week's training",true) . "</b><br />";
+								//if ( isset( $color ) ) $text_for_mail_training .= "<span style='background:" . $color . "'>";
+								$text_for_mail_training .= $sum_real . " " . __('of', true) . " " . $sum_planned . " " . __('Trimps', true);
+								$text_for_mail_training .= " (" . $training_week_percentage . " %) ";
+								//if ( isset( $color ) ) $text_for_mail_training .= "</span>";
+								
+								if ( isset( $color ) ) 
+								{
+										$block = '<span style="width:10px;background:' . $color . '">&nbsp;&nbsp;&nbsp;</span>&nbsp;';
+										$block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
+																			if ( $color == 'red' )
+											$text_for_mail_training .= ($block);
+										if ( $color == 'orange' )
+											$text_for_mail_training .= ($block).($block);
+										if ( $color == 'green' )
+											$text_for_mail_training .= ($block).($block).($block);
+								}
+																
+								$text_for_mail_training .= "<br /><br />";
+						}
+					}
+					
 	
-			  } 
+			    } 
 
 			      // check name + address
 			      if ( !$u['firstname'] ) 
@@ -2136,6 +2254,9 @@ class UsersController extends AppController {
 		$this->set('user', $user);
 	    $this->set('subject', $subject);
 	    $this->set('mcontent', $content);
+		
+		// REMOVE
+		//echo $content; die();
 
 		$this->Email->template = $template; // note no '.ctp'
 

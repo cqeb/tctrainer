@@ -42,7 +42,12 @@ class AppController extends Controller {
 			} else
                 Configure::write('Config.language',$this->Session->read('Config.language'));
 
-          	$locale = Configure::read('Config.language');
+//echo $this->Session->read('Config.language');
+//echo Configure::read('Config.language');
+
+          	$locale = $language = Configure::read('Config.language');
+
+//echo $locale;
 
             if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath))
             {
@@ -114,6 +119,7 @@ class AppController extends Controller {
 			if ( isset( $user_recommendations ) ) { 
 					$this->set('recommendations', $user_recommendations);
 			}
+
 
             $this->set('locale', $locale);
             $this->Session->write('Config.language', $locale);

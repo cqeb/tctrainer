@@ -58,4 +58,5 @@ define('RATIO_DUATHLON', '40,60'); // bike run
  * to prevent browser caching
  */
 define('VERSION', '1.0.7');
+
 ?>
