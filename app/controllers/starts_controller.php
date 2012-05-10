@@ -43,13 +43,20 @@ class StartsController extends AppController
 			
 		if ( isset( $language ) && $language != '' && ( strlen( $language ) == 2 ) )
 		{
+            // http://www.loc.gov/standards/iso639-2/php/code_list.php
 			
 			if ( $language == 'de' ) 
 				$this->code = 'deu';
 			elseif ( $language == 'zh' )
-				$this->code = 'zho';
+				$this->code = 'chi';
 			elseif ( $language == 'fr' )
-				$this->code = 'fra';
+				$this->code = 'fre';
+            elseif ( $language == 'is' )
+                $this->code == 'ice';
+            elseif ( $language == 'ro' )
+                $this->code == 'ron';
+            elseif ( $language == 'pl' )
+                $this->code == 'pol';
 			else 
 				$this->code = 'eng';
 				
@@ -58,15 +65,15 @@ class StartsController extends AppController
             $this->set('locale', $this->code);
 		}
 		
-      	if ( isset( $this->params['named']['u'] ) ) 
-      	{
-      		$transaction_id = $this->params['named']['u'];
+        if ( isset( $this->params['named']['u'] ) ) 
+        {
+            $transaction_id = $this->params['named']['u'];
 			
 			// information is saved in transactions
 			$this->loadModel('Transaction');
 	
 			$transaction_content = $this->Transactionhandler->handle_transaction( $this->Transaction, $transaction_id, 'read' );
-    		$dt = unserialize($transaction_content['sm_recommend']);
+            $dt = unserialize($transaction_content['sm_recommend']);
 			
 			$distance = $dt['distance'];
 			$duration = $dt['duration'];
@@ -92,8 +99,8 @@ class StartsController extends AppController
 			
 			$this->Session->write('recommendation_userid', $results['User']['id']);
 					
-      	} elseif ( isset( $this->params['named']['ur'] ) ) 
-      	{
+        } elseif ( isset( $this->params['named']['ur'] ) ) 
+        {
  			$userid = base64_decode( $this->params['named']['ur'] );
 			$this->loadModel('User');
 			$results = $this->User->findById( $userid );
@@ -101,9 +108,9 @@ class StartsController extends AppController
 			$this->set('userinfo', $results['User']);
 			$this->Session->write('recommendation_userid', $results['User']['id']);
 			
-		// these users get money for new users
-      	} elseif ( isset( $this->params['named']['urm'] ) ) 
-      	{
+        // these users get money for new users
+        } elseif ( isset( $this->params['named']['urm'] ) ) 
+        {
  			$userid = base64_decode( $this->params['named']['urm'] );
 			$this->loadModel('User');
 			$results = $this->User->findById( $userid );
@@ -132,7 +139,7 @@ class StartsController extends AppController
 			}
 			
 		} elseif ( $this->Session->read('session_userid') )
-            $this->redirect('/trainingplans/view');
+                        $this->redirect('/trainingplans/view');
 
 	}
   

@@ -32,8 +32,8 @@ class UsersController extends AppController {
 
 	function index()
 	{
-      $this->checkSession();
-      $this->set('statusbox', 'statubox');    
+        $this->checkSession();
+        $this->set('statusbox', 'statubox');    
 	}
 	
 	function list_users()
@@ -212,7 +212,8 @@ class UsersController extends AppController {
 	function login_facebook()
 	{
 
-			$app_id = 132439964636;
+			// Facebook auth 
+            $app_id = 132439964636;
 			$app_secret = "500f333152751fea132b669313052120";
 			
 			if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
@@ -1742,28 +1743,28 @@ class UsersController extends AppController {
 			if ( $debug == true ) echo "<br />written language " . $user['yourlanguage'];
 			Configure::write('Config.language', $user['yourlanguage']);
 
-      		if ( $debug == true ) 
+                        if ( $debug == true ) 
 			{
-      			echo "<br />\n" . $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . "(" . $user['email'] . ")<br />\n";
+                                echo "<br />\n" . $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . "(" . $user['email'] . ")<br />\n";
 				echo "notifications " . $user['notifications'] . "<br />\n";
 				echo "deactivated " . $user['deactivated']  . "<br />\n";
 				echo "activated " . $user['activated'] . "<br />\n";
 				echo "language " . $user['yourlanguage'] . "<br />\n";
-      		}
+                        }
       
 			if ( $user['yourlanguage'] == 'deu' )
 				$this->blognews = $blognews_de['html'];
 			else
 				$this->blognews = $blognews_en['html'];
 				
-      		if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
+                        if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 			{
 				$misc['counter'] = $i;
 				$this->_advanced_checks( $user, $check_on_day, $debug, $misc );
 			} else
 			{
-      			if ( date('w', time()) == $check_on_day )
-               		$this->_advanced_checks( $user, $check_on_day, $debug );
+                                if ( date('w', time()) == $check_on_day )
+                                $this->_advanced_checks( $user, $check_on_day, $debug );
 			}  
 			if ( $debug == true ) echo "<hr />";
 		}
@@ -1873,7 +1874,7 @@ class UsersController extends AppController {
 					
 					// calculate status for competition
 					// calculate success of last week's training
-            		$unit = $this->Unitcalc->get_unit_metric();
+                                        $unit = $this->Unitcalc->get_unit_metric();
 			
 
 					$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
@@ -1892,7 +1893,7 @@ class UsersController extends AppController {
 						if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
 					}
 					
-            		$results['User'] = $u;
+                                        $results['User'] = $u;
 					$session_userid = $u['id'];
 
 					// automatic default date chooser
@@ -1907,8 +1908,8 @@ class UsersController extends AppController {
 						$return = $this->Statisticshandler->get_competition( $this->Trainingstatistic, $session_userid, "", $start, $end, $this->data );
 						if ( isset( $return ) && is_array( $return ) )
 						{
-				            $text_for_mail_training .= "<b>" . __("Status of your season's training",true) . "</b><br />"; 
-				            //echo 'start ' . $return['start'];
+                                                        $text_for_mail_training .= "<b>" . __("Status of your season's training",true) . "</b><br />"; 
+                                                        //echo 'start ' . $return['start'];
 							//echo 'end ' . $return['end'];
 							//echo 'sumdata ' . $return['sumdata'];
 							//if ( $return['color'] ) $text_for_mail_training .= "<span style='background:" . $return['color'] . "'>";
@@ -1950,7 +1951,7 @@ class UsersController extends AppController {
 						if ( $session_userid )
 						{
 								$sql = "SELECT sum(trimp) AS strimp FROM trainingstatistics WHERE user_id = " . $session_userid . " AND " . 
-		                        	"(date BETWEEN '" . $start . "' AND '" . $end . "')";
+                                                                "(date BETWEEN '" . $start . "' AND '" . $end . "')";
 								$results_real = $this->Trainingstatistic->query($sql);
 								if ( $results_real[0][0]['strimp'] ) 
 									$sum_real = $results_real[0][0]['strimp'];
@@ -1958,7 +1959,7 @@ class UsersController extends AppController {
 									$sum_real = 0;
 								
 								$sql = "SELECT sum(trimp) AS strimp FROM scheduledtrainings WHERE athlete_id = " . $session_userid . " AND " .
-		            				"(week BETWEEN '" . $start . "' AND '" . $end . "')";
+                                                                "(week BETWEEN '" . $start . "' AND '" . $end . "')";
 								$results_planned = $this->Trainingstatistic->query($sql);
 								if ( $results_planned[0][0]['strimp'] ) 
 									$sum_planned = $results_planned[0][0]['strimp'];
@@ -2003,7 +2004,7 @@ class UsersController extends AppController {
 					}
 					
 	
-			    } 
+                                } 
 
 			      // check name + address
 			      if ( !$u['firstname'] ) 
@@ -2160,48 +2161,50 @@ class UsersController extends AppController {
 				
 				  if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
 				  {
-				      $mailsubjectarr[] = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com message for you!', true);
-				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('your training plan needs you!', true);
-				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('please read this notice from TriCoreTraining.com for you!', true);
-				      $mailsubjectarr[] = __('Gain speed, lose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is your motto!', true);
-				      $mailsubjectarr[] = $u['firstname'] . ' - ' . __('TriCoreTraining.com needs you!', true);
+                                           $mailsubjectarr[] = __('Aloha', true) . ' ' . $u['firstname'] . ' - ' . __('TriCoreTraining.com message for you!', true);
+                                           $mailsubjectarr[] = $u['firstname'] . ' - ' . __('your training plan needs you!', true);
+                                           $mailsubjectarr[] = $u['firstname'] . ' - ' . __('please read this notice from TriCoreTraining.com for you!', true);
+                                           $mailsubjectarr[] = __('Gain speed, lose weight', true) . ' ' . $u['firstname'] . ' - ' . __('this is your motto!', true);
+                                           $mailsubjectarr[] = $u['firstname'] . ' - ' . __('TriCoreTraining.com needs you!', true);
 		
-					  $whichsb = rand( 0, 4 );
-					  $mailsubject = $mailsubjectarr[$whichsb];
+                                           $whichsb = rand( 0, 4 );
+                                           $mailsubject = $mailsubjectarr[$whichsb];
 					  
-				      $template = 'standardmail';
+                                           $template = 'standardmail';
 		
-				      $content .= "<br />\n";
+                                           $content .= "<br />\n";
 				      
-				      if ( $text_for_mail_training )
-				      {
-				      		$content = $text_for_mail_training . '<br /><br />' . "\n\n";		
-				      }
+                                           if ( $text_for_mail_training )
+                                           {
+                                                        $content = $text_for_mail_training . '<br /><br />' . "\n\n";		
+                                           }
+
+                                           $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b> '; 
+                                           $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Click here, print it and use it!', true) . '</a>' . "\n";
+                                           $content .= "<br /><br />\n\n";	
 		
-					  $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b> '; 
-					  $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Click here, print it and use it!', true) . '</a>' . "\n";
-					  $content .= "<br /><br />\n\n";	
-		
-					  if ( $text_for_mail_premium )
-					  {
-					  		$content .= $text_for_mail_premium . '<br /><br />' . "\n\n";
-					  }		      
-		
-					  $content .= __('Some magazine articles',true) . ":<br />\n" . 
-					  	'<p><ul>' . $this->blognews . '</ul></p>' . "\n\n";
-					    	 			  
-						if ( $text_for_mail ) 
-					    {
-					      		$content .= '<p>' . 
-					      		'<b>' . __('There is something to update in your profile.', true) . "</b><br />\n" . 
-					      		'<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
-						}
-				  		
-						if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
-							echo $u['yourlanguage'] . ' ' . $misc['counter'] . ' ' . $mailsubject;
-							
-					    $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
-			  	}
+                                           if ( $text_for_mail_premium )
+                                           {
+                                                                $content .= $text_for_mail_premium . '<br /><br />' . "\n\n";
+                                           }		      
+
+                                           $content .= __('Some magazine articles',true) . ":<br />\n" . 
+                                                    '<p><ul>' . $this->blognews . '</ul></p>' . "\n\n";
+
+                                           if ( $text_for_mail ) 
+                                           {
+                                                        $content .= '<p>' . 
+                                                        '<b>' . __('There is something to update in your profile.', true) . "</b><br />\n" . 
+                                                        '<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
+                                           }
+
+                                           if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+                                                        echo $u['yourlanguage'] . ' ' . $misc['counter'] . ' ' . $mailsubject;
+
+                                           // check again :)
+                                           if ( $u['notifications'] != 1 ) 
+                                                        $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
+                                    }
 			 } 
 	}
 

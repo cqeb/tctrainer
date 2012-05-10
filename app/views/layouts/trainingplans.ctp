@@ -1,6 +1,13 @@
 <!DOCTYPE html>
-<html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
-<head>
+<html lang="<?php 
+    if ( $locale == 'deu' ) echo 'de'; 
+    else if ( $locale == 'zho' ) echo 'zh';
+    else if ( $locale == 'fra' ) echo 'fr';
+    else if ( $locale == 'isl' ) echo 'is';
+    else if ( $locale == 'ron' ) echo 'ro';
+    else if ( $locale == 'pol' ) echo 'pl';
+    else echo 'en'; 
+?>"><head>
     <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
 <?php
     $url = Configure::read('App.serverUrl');

@@ -1,0 +1,13 @@
+----------------------------------------------------------------<br>\nobject not in POST ## <br>
+----------------------------------------------------------------<br>\nobject in POST ok 1fd3782517dbffec7a5083283215b489 ## <br>
+Success, wrote content to file (/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/garmin/cache/course.1fd3782517dbffec7a5083283215b489.txt) ## <br>
+----------------------------------------------------------------<br>\nobject in POST ok 43c96b451c31260c1069e199353d9fb2 ## <br>
+Success, wrote content to file (/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/garmin/cache/course.43c96b451c31260c1069e199353d9fb2.txt) ## <br>
+----------------------------------------------------------------<br>\nobject in POST ok 6a20cca78109266ca296ce25e8f5c644 ## <br>
+Success, wrote content to file (/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/garmin/cache/course.6a20cca78109266ca296ce25e8f5c644.txt) ## <br>
+----------------------------------------------------------------<br>\nobject in POST ok 106d07aea2d37dd85e3f32718ce457fb ## <br>
+Success, wrote content to file (/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/garmin/cache/course.106d07aea2d37dd85e3f32718ce457fb.txt) ## <br>
+----------------------------------------------------------------<br>\nobject in POST ok 6a634698d6c5598a8cbbb5a438b91c9e ## <br>
+Success, wrote content to file (/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/garmin/cache/course.6a634698d6c5598a8cbbb5a438b91c9e.txt) ## <br>
+----------------------------------------------------------------<br>\nobject not in POST ## <br>
+----------------------------------------------------------------<br>\nobject not in POST ## <br>

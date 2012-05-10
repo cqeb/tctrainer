@@ -1,0 +1,3 @@
+22:11:20: /Applications/XAMPP/xamppfiles/htdocs/trainer/app/locale/isl/LC_MESSAGES/default.po:6: invalid nplurals value
+22:11:20: /Applications/XAMPP/xamppfiles/htdocs/trainer/app/locale/isl/LC_MESSAGES/default.po:6: field `Language-Team' still has initial default value
+22:11:20: /Volumes/Poedit/Poedit.app/Contents/MacOS/msgfmt: found 2 fatal errors

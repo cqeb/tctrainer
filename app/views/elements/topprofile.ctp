@@ -11,24 +11,32 @@
 <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout')); ?> 
  | 
 <?php } ?>
-<!--
-<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>"><?php __('Blog'); ?></a>
-  |
--->
+
 <?php if ( $locale != 'eng' || $locale == '' ) { ?>
-<?php echo $html->link(__('English', true),array('controller' => 'starts', 'action' => 'index', 'code' => "eng")) . ' | '; ?>
+<?php echo $html->link('English',array('controller' => 'starts', 'action' => 'index', 'code' => "eng")) . ' | '; ?>
 <?php } ?>
 <?php if ( $locale != 'deu' ) { ?>
-<?php echo $html->link(__('Deutsch', true),array('controller' => 'starts', 'action' => 'index', 'code' => "deu")) . ' | '; ?>
+<?php echo $html->link('Deutsch',array('controller' => 'starts', 'action' => 'index', 'code' => "deu")) . ' | '; ?>
 <?php } ?>
-<?php if ( $locale != 'fra' ) { ?>
-<?php echo $html->link(__('Francais', true),array('controller' => 'starts', 'action' => 'index', 'code' => "fra")) . ' | '; ?>
+<?php if ( $locale != 'fre' ) { ?>
+<?php echo $html->link('Francais',array('controller' => 'starts', 'action' => 'index', 'code' => "fre")) . ' | '; ?>
 <?php } ?>
-<!--
-<?php if ( $locale != 'zho' ) { ?>
-<?php echo $html->link(__('Chinese', true),array('controller' => 'starts', 'action' => 'index', 'code' => "zho")) . ' | '; ?>
+<?php if ( $locale != 'chi' ) { ?>
+<?php echo $html->link(__('中国的', true),array('controller' => 'starts', 'action' => 'index', 'code' => "chi")) . ' | '; ?>
 <?php } ?>
--->
+<?php if ( $locale != 'ice' ) { ?>
+<?php echo $html->link(__('íslenskur', true),array('controller' => 'starts', 'action' => 'index', 'code' => "ice")) . ' | '; ?>
+<?php } ?>
+
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost') { ?>
+<?php if ( $locale != 'ron' ) { ?>
+<?php echo $html->link(__('Român', true),array('controller' => 'starts', 'action' => 'index', 'code' => "ron")) . ' | '; ?>
+<?php } ?>
+<?php if ( $locale != 'pol' ) { ?>
+<?php echo $html->link(__('Polski', true),array('controller' => 'starts', 'action' => 'index', 'code' => "pol")) . ' | '; ?>
+<?php } ?>
+
+<?php } ?>
 </b>
 
 </div> 

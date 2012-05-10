@@ -6,3 +6,4 @@
 /app/tmp/logs/error.log
 /app/tmp/.project
 /.buildpath
+/nbproject/private/

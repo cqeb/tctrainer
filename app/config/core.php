@@ -40,16 +40,16 @@
  */
 if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) )
 { 
-	Configure::write('debug', 2);
 	/**
 	 * Defines the default error type when using the log() function. Used for
 	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
 	 */
 	define('LOG_ERROR', 2);
+	Configure::write('debug', 2);
+
 } else 
 {
-	define('LOG_ERROR', 0);
-	
+	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
 }
 
@@ -90,14 +90,14 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 	
 	} else {
 			
-    	// Klaus-M. config
-    	
-    	// this is the path-information - I know the variable is not named correctly :) (so please without host-info)
-    	// rename this variable
-    	Configure::write('App.serverUrl', '/trainer');
-    	// Domain with protocol and NO trailing slash
-    	Configure::write('App.hostUrl', 'http://localhost');
-    	Configure::write('App.uploadDir', 'C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\webroot\files\\');
+        // Klaus-M. config
+
+        // this is the path-information - I know the variable is not named correctly :) (so please without host-info)
+        // rename this variable
+        Configure::write('App.serverUrl', '/trainer');
+        // Domain with protocol and NO trailing slash
+        Configure::write('App.hostUrl', 'http://localhost');
+        Configure::write('App.uploadDir', 'C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\webroot\files\\');
     
     }
 
