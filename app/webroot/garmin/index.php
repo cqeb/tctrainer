@@ -35,14 +35,15 @@
 			postActivityHandler: function(activityXml, display) {
 				var timedate = new Date();
 				var timems = timedate.getMilliseconds();
-				new Ajax.Request('/trainer/garmin/garmin_post.php?timems='+timems, {
+				new Ajax.Request('/trainer/trainingstatistics/garmin_import?timems='+timems, {
   					method: 'post',
   					parameters: {activities: activityXml},
 					onComplete: function(response) {
 						alert('workout added.');
 					}
   				});
-				$('activity').innerHTML += '<hr/><pre>'+activityXml.escapeHTML()+'</pre>';
+                $('activity').innerHTML += '<hr/><pre>Workout imported.</pre>';
+//				$('activity').innerHTML += '<hr/><pre>'+activityXml.escapeHTML()+'</pre>';
 				pausecomp(1000);
 			}
 		});
@@ -62,7 +63,10 @@ function pausecomp(millis)
 <body onload="load()">
 
 	<h2>Upload Selected Fitness Activities</h2>
-	if you have problems, try <a target="_blank" href="http://connect.garmin.com/transfer/upload">this page</a> first.<br />
+	if you have problems, try <a target="_blank" href="http://connect.garmin.com/transfer/upload">this page</a> first.<br /><br />
+
+    <a href="javascript:window.close();">CLOSE WINDOW</a> after finishing your GARMIN imports.
+    <br /><br />
 
 	<table border="0" cellpadding="4" cellspacing="0" width="100%">
 		<tr>
@@ -70,7 +74,7 @@ function pausecomp(millis)
 				<div id="garminDisplay"></div>
 			</td>
 		</tr>
-		<tr>
+        <tr>
 			<td>
 				<div id="activity"></div>
 			</td>

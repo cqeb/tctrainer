@@ -1444,21 +1444,21 @@ class UsersController extends AppController {
 			$this->set('user', $this->data['User']);
 
 			//pr($this->data);
-		  if ($this->User->save( $this->data, array(
-         'validate' => true,
-         'fieldList' => array(
-         'unit', 'unitdate', 'yourlanguage'
-         ) ) ) )
-         {
-         	$this->Session->write('flash',__('Metric information saved.',true));
-         	$this->Session->write('session_unit', $this->data['User']['unit']);
-         	$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-         	$statusbox = 'statusbox ok';
-         } else
-         {
-         	$statusbox = 'statusbox error';
-         	$this->Session->write('flash',__('Some errors occured.',true));
-         }
+            if ($this->User->save( $this->data, array(
+                'validate' => true,
+                'fieldList' => array(
+                'unit', 'unitdate', 'yourlanguage'
+                ) ) ) )
+                {
+                        $this->Session->write('flash',__('Metric information saved.',true));
+                        $this->Session->write('session_unit', $this->data['User']['unit']);
+                        $this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+                        $statusbox = 'statusbox ok';
+                } else
+                {
+                        $statusbox = 'statusbox error';
+                        $this->Session->write('flash',__('Some errors occured.',true));
+                }
 		}
 		$this->set('statusbox', $statusbox);
 	}
@@ -1743,21 +1743,21 @@ class UsersController extends AppController {
 			if ( $debug == true ) echo "<br />written language " . $user['yourlanguage'];
 			Configure::write('Config.language', $user['yourlanguage']);
 
-                        if ( $debug == true ) 
+            if ( $debug == true ) 
 			{
-                                echo "<br />\n" . $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . "(" . $user['email'] . ")<br />\n";
+                echo "<br />\n" . $user['id'] . ' ' . $user['firstname'] . ' ' . $user['lastname'] . "(" . $user['email'] . ")<br />\n";
 				echo "notifications " . $user['notifications'] . "<br />\n";
 				echo "deactivated " . $user['deactivated']  . "<br />\n";
 				echo "activated " . $user['activated'] . "<br />\n";
 				echo "language " . $user['yourlanguage'] . "<br />\n";
-                        }
+            }
       
 			if ( $user['yourlanguage'] == 'deu' )
 				$this->blognews = $blognews_de['html'];
 			else
 				$this->blognews = $blognews_en['html'];
 				
-                        if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
+            if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 			{
 				$misc['counter'] = $i;
 				$this->_advanced_checks( $user, $check_on_day, $debug, $misc );

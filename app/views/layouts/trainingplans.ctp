@@ -169,27 +169,28 @@ $(document).ready(function() {
  		bike : "<?php echo __('Bike',true); ?>"
  	}, true));
 
+    /** quotes are important for French! **/
     $("#guide").click(function() {
 		$.fancybox([
 			{
 				'href'	: '/trainer/img/guide/01_trainingplan.jpg',
-				'title'	: '<?php __('1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum.'); echo '<br />'; __('2. Change your available time, if necessary.'); echo '<br />'; __('3. Change your sports balance, if necessary.'); echo '<br />'; __('Click on the right side of the image to go to the next step.'); echo '<br />'; ?>'
+				'title'	: "<?php __('1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum.'); echo '<br />'; __('2. Change your available time, if necessary.'); echo '<br />'; __('3. Change your sports balance, if necessary.'); echo '<br />'; __('Click on the right side of the image to go to the next step.'); echo '<br />'; ?>"
 			},
 			{
 				'href'	: '/trainer/img/guide/02_competition.jpg',
-				'title'	: '<?php __('Add your important competitions to get an improved training plan based on your sport goals.'); ?>'
+				'title'	: "<?php __('Add your important competitions to get an improved training plan based on your sport goals.'); ?>"
 			},
 			{
 				'href'	: '/trainer/img/guide/03_settings.jpg',
-				'title'	: '<?php __('If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones.'); ?>'
+				'title'	: "<?php __('If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones.'); ?>"
 			},
 			{
 				'href'	: '/trainer/img/guide/04_workout.jpg',
-				'title'	: '<?php __('Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook.'); ?>'
+				'title'	: "<?php __('Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook.'); ?>"
 			},
 			{
 				'href'	: '/trainer/img/guide/05_statistics.jpg',
-				'title'	: '<?php __('Analyse the results of your training with the most important graphs and statistics.'); ?>'
+				'title'	: "<?php __('Analyse the results of your training with the most important graphs and statistics.'); ?>"
 			}
 		], {
 			'padding'			: 0,

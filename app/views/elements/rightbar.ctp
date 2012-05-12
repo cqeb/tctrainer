@@ -7,14 +7,14 @@
 <br /><br />
 <?php } ?>
 -->
-<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
+<a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>">&raquo; <?php __('TriCoreTraining Blog'); ?></a>
 <br /><br />
-<a href="/blog/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>category/faq/">&raquo; <?php __('FAQs'); ?></a>
+<a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>category/faq/">&raquo; <?php __('FAQs'); ?></a>
 
 <?php if ( isset( $session_userid ) ) { ?>
 <br /><br />
 <?php __('Send this link to your friends'); ?>:<br />
-<a href="/trainer/starts/index/<?php if ( $locale != 'eng' || $locale == '' ) { ?>de/<?php } else { ?>en/<?php } ?>ur:<?php echo base64_encode($userobject['id']); ?>/">&raquo; <?php __('Invite your friends'); ?></a>
+<a href="/trainer/starts/index/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>ur:<?php echo base64_encode($userobject['id']); ?>/">&raquo; <?php __('Invite your friends'); ?></a>
 <?php } ?>
 
 <br /><br />

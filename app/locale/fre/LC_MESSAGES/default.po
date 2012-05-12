@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TriCoreTraining - Reaklab translation 0.9\n"
 "POT-Creation-Date: 2012-02-25 08:39+0100\n"
-"PO-Revision-Date: 2012-05-10 08:27+0100\n"
+"PO-Revision-Date: 2012-05-12 16:37+0100\n"
 "Last-Translator: KMS\n"
 "Language-Team: Reaklab - French <contact@reaklab.com>\n"
 "MIME-Version: 1.0\n"
@@ -29,7 +29,7 @@ msgstr "Sorry, incorrect session data."
 #: \controllers\competitions_controller.php:106
 #: \controllers\trainingstatistics_controller.php:454;1086
 msgid "Sorry. This is not your entry!"
-msgstr "Sorry, this is not your entry!"
+msgstr "Désolé, ce n'est pas votre entrée!"
 
 # triathlon / running / biking season (normally a year)
 #: \controllers\competitions_controller.php:225
@@ -51,7 +51,7 @@ msgstr "La compétition a été supprimée."
 # user wants to cancel
 #: \controllers\payments_controller.php:70
 msgid "Registered cancellation request."
-msgstr "Your cancellation request has been registered."
+msgstr "Votre demande d'annulation a été enregistrée."
 
 #: \controllers\payments_controller.php:305
 msgid "No Transaction-ID defined - something is wrong - sorry."
@@ -163,7 +163,7 @@ msgstr ""
 #: \controllers\payments_controller.php:540
 #: \controllers\users_controller.php:1003
 msgid "contact our support"
-msgstr "You canceled the payment transaction. If this was not intended, please repeat the payment process again. If you have any other problems please \"contact our support\""
+msgstr "contacter notre support"
 
 #: \controllers\payments_controller.php:603
 msgid "TriCoreTraining Invoice"
@@ -498,7 +498,7 @@ msgstr "votre ami a souscrit!"
 
 #: \controllers\users_controller.php:749
 msgid "wants to become an athlete too. Maybe you do workouts together?"
-msgstr "wants to become an athlete too. Maybe you can do workouts together?"
+msgstr "veut devenir un athlète aussi. Peut-être que vous faites des séances d'entraînement ensemble?"
 
 #: \controllers\users_controller.php:750
 msgid "After he/she buys a PREMIUM membership, you receive 3 month PREMIUM membership as a \"Thank you\" for FREE."
@@ -612,7 +612,7 @@ msgstr "Vous devez perdre au maximum"
 # You should at maximum loose 2 kilogramms per month.
 #: \controllers\users_controller.php:1259
 msgid "per month."
-msgstr "You should lose a maximum of 2 kilograms per month."
+msgstr "par mois"
 
 #: \controllers\users_controller.php:1294
 msgid "Your target weight is not ok. Your goals would bring your BMI to a critical"
@@ -2259,7 +2259,7 @@ msgstr "Gagnez de la vitesse, perdez du poids!"
 
 #: \views\layouts\trainer_start.ctp:130
 msgid "TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!"
-msgstr "TriCoreTraining vous apporte des plans d'entraînement <strong>professionnels</strong>, mais <strong>amusants et simples</strong> pour <strong>améliorer</strong> vos compétences en <strong>course</strong>, <strong>vélo</strong> ou thriathlon!"
+msgstr "TriCoreTraining vous apporte des plans d'entraînement <strong>professionnels</strong>, mais <strong>amusants et simples</strong> pour <strong>améliorer</strong> vos compétences en <strong>course</strong>, <strong>vélo</strong> ou triathlon!"
 
 #: \views\layouts\trainer_start.ctp:131
 msgid "Sign up now"
@@ -2646,12 +2646,12 @@ msgstr "Ne plus être PREMIUM"
 # BEFORE you cancel, please tell us here why you want to cancel or get in contact with us
 #: \views\payments\unsubscribe_triplans.ctp:22
 msgid "BEFORE you cancel, please tell us here why you want to cancel or get in"
-msgstr "Please let us know why you have chosen to cancel (your account). We would love to hear from you about how we can improve our service. Please get in"
+msgstr "Avant d'annuler, s'il vous plaît nous dire ici pourquoi vous souhaitez annuler ou mettre en"
 
 # BEFORE you cancel, please tell us here why you want to cancel or get in contact with us
 #: \views\payments\unsubscribe_triplans.ctp:22
 msgid "contact with us"
-msgstr "in touch with us"
+msgstr "en contact avec nous"
 
 #: \views\payments\unsubscribe_triplans.ctp:22
 msgid "we want to make you HAPPY again!"
@@ -2808,7 +2808,7 @@ msgstr "Lier l'entraînement"
 
 #: \views\trainingstatistics\edit_training.ctp:184
 msgid "Add a link for your workout. You might want to check out www.runmap.net or www.bikemap.net for mapping your workouts!"
-msgstr "Ajouter un lien vers votre activité. Peut-être devriez vous consulter nos partenaires runmao.net et bikemap.net pour créer les cartes localisées de vos activités!"
+msgstr "Ajouter un lien vers votre activité. Peut-être devriez vous consulter nos partenaires runmap.net et bikemap.net pour créer les cartes localisées de vos activités!"
 
 #: \views\trainingstatistics\import_workout.ctp:11
 msgid "Check import data und confirm import!"
@@ -3063,7 +3063,7 @@ msgstr "Poids moyen"
 
 #: \views\trainingstatistics\statistics_trimp.ctp:15
 msgid "These graphs show you your short term (ATL) and long term training load (CTL). How exhausted you are (training load of the last 7 days) and fit you are (training load of last 42 days)."
-msgstr "Ces graphiques vous indiquent votre charge d'entraînement à court terme (ATL) et long terme (CTL). Ils vous montrent à quel point vous êtes fatigué (en se basant sur la charge d'entraînement des 7 derniers jours) et votre niveau de santé (en se basant sur votre charge d'entraînement sur les derniers 42 jours)/"
+msgstr "Ces graphiques vous indiquent votre charge d'entraînement à court terme (ATL) et long terme (CTL). Ils vous montrent à quel point vous êtes fatigué (en se basant sur la charge d'entraînement des 7 derniers jours) et votre niveau de santé (en se basant sur votre charge d'entraînement sur les derniers 42 jours)."
 
 #: \views\trainingstatistics\statistics_trimp.ctp:76
 msgid "Grade of fitness (Chronic Training Load)"
@@ -3297,7 +3297,7 @@ msgstr "1. Faites une activité-test afin de définir votre niveau d'acide lacti
 
 #: \views\users\edit_traininginfo.ctp:71
 msgid "2. Do a lactate threshold test with your doctor."
-msgstr "2. Faites un test \"acide lactique\" chez votre médecin."
+msgstr "2. Faites un test acide lactique chez votre médecin."
 
 #: \views\users\edit_traininginfo.ctp:73
 msgid "Read more in our blog."

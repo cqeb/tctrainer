@@ -91,6 +91,7 @@ echo $form->input('lactatethreshold',
 ));
 ?>
 <div class="statusbox error" id="errorblth"></div>
+<br />
 <?php
 echo $form->input('bikelactatethreshold',
                    array(
@@ -202,11 +203,11 @@ function check_lth() {
 
     if ( isNaN(lth) || lth > 220 || lth < 120 ) {
     	\$('#errorlth').show();
-        \$('#errorlth').html('
+        \$('#errorlth').html("
 EOG;
 $this->js_addon .= __('Your lactate threshold is not valid! Should be between 220 and 120.',true);
 $this->js_addon .= <<<EOH
-');
+");
     } else {
     	\$('#errorlth').hide();
     }
@@ -214,11 +215,11 @@ $this->js_addon .= <<<EOH
 	// check bike lactate threshold
     if ( isNaN(blth) || blth > 220 || blth < 120 ) {
     	\$('#errorblth').show();
-        \$('#errorblth').html('
+        \$('#errorblth').html("
 EOH;
 $this->js_addon .= __('Your bike lactate threshold is not valid! Should be between 220 and 120.',true);
 $this->js_addon .= <<<EOH
-');
+");
 	} else {
     	\$('#errorblth').hide();
     }

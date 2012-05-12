@@ -38,7 +38,11 @@ class StartsController extends AppController
 			$this->Session->write('Config.language', $this->code);
 			Configure::write('Config.language',$this->code);
             $this->set('locale', $this->code);
-			//die();
+            /*
+            echo "starts ";
+            echo $this->Session->read('Config.language');
+            */
+            
 		}
 			
 		if ( isset( $language ) && $language != '' && ( strlen( $language ) == 2 ) )
@@ -64,7 +68,20 @@ class StartsController extends AppController
 			Configure::write('Config.language',$this->code);
             $this->set('locale', $this->code);
 		}
-		
+        
+        $session_userid = $this->Session->read('session_userid');
+
+        if ( isset( $session_userid ) ) 
+        {
+            $this->checkSession();
+
+            $this->User->id = $session_userid;
+            $this->data = $this->User->read();
+        
+            // UPDATE yourlanguage field
+            if ( isset($this->code) ) $this->User->savefield('yourlanguage', $this->code, false);
+        }
+        
         if ( isset( $this->params['named']['u'] ) ) 
         {
             $transaction_id = $this->params['named']['u'];
@@ -139,7 +156,9 @@ class StartsController extends AppController
 			}
 			
 		} elseif ( $this->Session->read('session_userid') )
-                        $this->redirect('/trainingplans/view');
+        {
+            $this->redirect('/trainingplans/view');
+        }
 
 	}
   

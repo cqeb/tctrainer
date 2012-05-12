@@ -22,11 +22,12 @@ class AppController extends Controller {
 	   	function beforeFilter()
         {
 			
-			// if user is from AUT or GER - change language to German
-			$language = $this->Session->read('Config.language');
+            $language = $this->Session->read('Config.language');
             
+			// if user is from AUT or GER - change language to German
             if ( !isset( $language ) )
 			{
+                echo "exit";die();
 				if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
 				else
@@ -36,22 +37,23 @@ class AppController extends Controller {
 			
 				if ( isset( $yourlocation->country_code ) && ( $yourlocation->country_code == 'DE' || $yourlocation->country_code == 'AT' ) )
 				{
-                                        Configure::write('Config.language','deu');
+                    Configure::write('Config.language','deu');
 				} else
                 {
-                                        Configure::write('Config.language','eng');
+                    Configure::write('Config.language','eng');
                 }
 			} else
-            {
-                Configure::write('Config.language',$this->Session->read('Config.language'));
+            {                
+                Configure::write('Config.language',$language);
+                
             }
             
-                    //echo $this->Session->read('Config.language');
-                    //echo Configure::read('Config.language');
+            //echo $this->Session->read('Config.language');
+            //echo Configure::read('Config.language');
 
-                  	$locale = $language = Configure::read('Config.language');
-
-                    //echo $locale;
+            $locale = $language = Configure::read('Config.language');
+            
+            //echo $locale;
 
                         if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath))
                         {
