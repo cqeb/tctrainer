@@ -1099,108 +1099,123 @@ function edit_training($id = null) {
     function garmin_import()
     {                                                       
 
-                                                       $this->checkSession();
-                                                       
-                                                       $session_userid = $this->Session->read('session_userid');
+           $this->checkSession();
+           
+           $session_userid = $this->Session->read('session_userid');
 
-                                                       $mainpath = $_SERVER['DOCUMENT_ROOT'] . '/trainer/app/webroot/garmin/';
-                                                       
-                                                       include( $mainpath . 'xml2array.php' );
-                                                       
-                                                       $filename = $mainpath . 'cache/course.' . md5( serialize( $_POST ) ) . '.txt';
-                                                       
-                                                       $logfile  = $mainpath . 'cache/garminlog.txt';
-                                                       
-                                                       $logcontent = '----------------------------------------------------------------<br>';
-                                                       unset( $tdata ); 
-                                                       
-                                                       if ( isset( $_POST ) ) 
-                                                       {
-                                                        
-                                                            if ( isset( $_POST['activities'] ) ) 
-                                                            {
-                                                                $somecontent = xml2array( $_POST['activities'] );
-                                                                // Problem if there are more laps
-                                                                $tarray = $somecontent['TrainingCenterDatabase']['Activities']['Activity']['Lap'];
-                                                                $tdata['time'] = round( $tarray['TotalTimeSeconds']/60, 1);
-                                                                $tdata['distance'] = round( $tarray['DistanceMeters']/1000, 1);
-                                                                $tdata['hr'] = $tarray['AverageHeartRateBpm']['Value'];
-                                                                $tdata['date'] = date('Y-m-d H:i', strtotime($somecontent['TrainingCenterDatabase']['Activities']['Activity']['Id'])) . "<br>";
-                                                                
-                                                                $logcontent .= "object in POST ok " . md5( serialize( $_POST ) ) . " ## <br>\n";
-                                                            } else {
-                                                                //$somecontent = serialize($_POST);
-                                                                $somecontent = "";
-                                                                $logcontent .= "object not in POST ## <br>\n";
-                                                            }
-                                                       }
-                                                       
-                                                       if ( $somecontent != '' ) 
-                                                       {
-                                                       
-                                                            // In our example we're opening $filename in append mode.
-                                                            // The file pointer is at the bottom of the file hence
-                                                            // that's where $somecontent will go when we fwrite() it.
-                                                            if (!$handle = fopen($filename, 'w')) 
-                                                            {
-                                                                $logcontent .= "Cannot open file ($filename) ## <br>\n";
-                                                                exit;
-                                                            }
-                                                       
-                                                            // Write $somecontent to our opened file.
-                                                            if (fwrite($handle, $somecontent) === FALSE) 
-                                                            {
-                                                                $logcontent .= "Can not write to file ($filename) ## <br>\r\n";
-                                                                exit;
-                                                            }
-                                                       
-                                                            $logcontent .= "Success, wrote content to file ($filename) ## <br>\r\n";
-                                                       
-                                                            fclose($handle);
-                                                       
-                                                       }                                                       
-                                                                                                              
-                                                       if (!$loghandle = fopen($logfile, 'a')) 
-                                                       {
-                                                            echo "Cannot open logcontent ## <br>\r\n";
-                                                            exit;
-                                                       }
-                                                       
-                                                       if (fwrite($loghandle, $logcontent) === FALSE) 
-                                                       {
-                                                            echo "Cannot write to logcontent ## <br>\r\n";
-                                                            exit;
-                                                       }
-                                                       
-                                                       fclose($loghandle);
-                                                       
-                                                       
-                                                       /**
-                                                       // security check - don't view workouts of other users
-                                                       if ( isset( $tdata ) )
-                                                       {
-                                                            $result = $this->Trainingstatistic->find ('all', 
-                                                                                                 array('conditions' => 
-                                                                                                       array( 'and' => 
-                                                                                                             array( 'id' => $id, 'user_id' => $session_userid ) 
-                                                                                                             ) 
-                                                                                                       )
-                                                                                                 );
-                                                       
-                                                            if ( isset( $result[0] ) )
-                                                            {
-                                                                    $this->data = $result[0];
-                                                            } else
-                                                            {
-                                                                    $this->Session->write('flash',__('Sorry. This is not your entry!', true));
-                                                                    $this->set('statusbox', 'statusbox error');
-                                                                    $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
-                                                            }
-                                                       }
-                                                       **/
-                                                       
-                                                       $this->set('logcontent', $logcontent);
-                                                       //$this->redirect(array('action'=>'list_trainings'));                                                       
+           $mainpath = $_SERVER['DOCUMENT_ROOT'] . '/trainer/app/webroot/garmin/';
+           
+           include( $mainpath . 'xml2array.php' );
+           
+           $filename = $mainpath . 'cache/course.' . md5( serialize( $_POST ) ) . '.txt';
+           
+           $logfile  = $mainpath . 'cache/garminlog.txt';
+           
+           $logcontent = '----------------------------------------------------------------<br>';
+           unset( $tdata ); 
+           
+           if ( isset( $_POST ) ) 
+           {
+            
+                if ( isset( $_POST['activities'] ) ) 
+                {
+                    $somecontent = xml2array( $_POST['activities'] );
+                    // Problem if there are more laps
+                    $tarray = $somecontent['TrainingCenterDatabase']['Activities']['Activity']['Lap'];
+                    $tdata['time'] = round( $tarray['TotalTimeSeconds']/60, 1);
+                    $tdata['distance'] = round( $tarray['DistanceMeters']/1000, 1);
+                    $tdata['hr'] = $tarray['AverageHeartRateBpm']['Value'];
+                    $tdata['date'] = date('Y-m-d H:i', strtotime($somecontent['TrainingCenterDatabase']['Activities']['Activity']['Id'])) . "<br>";
+                    
+                    $logcontent .= "object in POST ok " . md5( serialize( $_POST ) ) . " ## <br>\n";
+                } else {
+                    //$somecontent = serialize($_POST);
+                    $somecontent = "";
+                    $logcontent .= "object not in POST ## <br>\n";
+                }
+           }
+           
+           if ( $somecontent != '' ) 
+           {
+           
+                // In our example we're opening $filename in append mode.
+                // The file pointer is at the bottom of the file hence
+                // that's where $somecontent will go when we fwrite() it.
+                if (!$handle = fopen($filename, 'w')) 
+                {
+                    $logcontent .= "Cannot open file ($filename) ## <br>\n";
+                    exit;
+                }
+           
+                // Write $somecontent to our opened file.
+                if (fwrite($handle, $somecontent) === FALSE) 
+                {
+                    $logcontent .= "Can not write to file ($filename) ## <br>\r\n";
+                    exit;
+                }
+           
+                $logcontent .= "Success, wrote content to file ($filename) ## <br>\r\n";
+           
+                fclose($handle);
+           
+           }                                                       
+                                                                  
+           if (!$loghandle = fopen($logfile, 'a')) 
+           {
+                echo "Cannot open logcontent ## <br>\r\n";
+                exit;
+           }
+           
+           if (fwrite($loghandle, $logcontent) === FALSE) 
+           {
+                echo "Cannot write to logcontent ## <br>\r\n";
+                exit;
+           }
+           
+           fclose($loghandle);
+           
+           
+           /**
+            
+            user_id
+            name
+            date (date)
+            sportstype
+            workouttype
+            distance
+            duration
+            avg_pulse
+            avg_speed
+            trimp
+            kcal
+            location
+            weight
+            
+           // security check - don't view workouts of other users
+           if ( isset( $tdata ) )
+           {
+                $result = $this->Trainingstatistic->find ('all', 
+                                                     array('conditions' => 
+                                                           array( 'and' => 
+                                                                 array( 'id' => $id, 'user_id' => $session_userid ) 
+                                                                 ) 
+                                                           )
+                                                     );
+           
+                if ( isset( $result[0] ) )
+                {
+                        $this->data = $result[0];
+                } else
+                {
+                        $this->Session->write('flash',__('Sorry. This is not your entry!', true));
+                        $this->set('statusbox', 'statusbox error');
+                        $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
+                }
+           }
+           **/
+           
+           $this->set('logcontent', $logcontent);
+           //$this->redirect(array('action'=>'list_trainings'));                                                       
         
     }
 }

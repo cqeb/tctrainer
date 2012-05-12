@@ -27,7 +27,6 @@ class AppController extends Controller {
 			// if user is from AUT or GER - change language to German
             if ( !isset( $language ) )
 			{
-                echo "exit";die();
 				if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
 				else
@@ -53,61 +52,59 @@ class AppController extends Controller {
 
             $locale = $language = Configure::read('Config.language');
             
-            //echo $locale;
+            if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath))
+            {
+                //echo VIEWS . $locale . DS . $this->viewPath;
+                // e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp
+                $this->viewPath = $locale . DS . $this->viewPath;
+            }
 
-                        if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath))
-                        {
-                            //echo VIEWS . $locale . DS . $this->viewPath;
-                            // e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp
-                            $this->viewPath = $locale . DS . $this->viewPath;
-                        }
+            if ($this->RequestHandler->isAjax())
+            {
+                // set debug level
+                Configure::write('debug', 0);
+                // TODO (B) do we need to optimize CACHE-settings in header?
+                $this->header('Pragma: no-cache');
+                $this->header('Cache-control: no-cache');
+                $this->header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+                $this->disableCache();
+            }
 
-                        if ($this->RequestHandler->isAjax())
-                        {
-                            // set debug level
-                            Configure::write('debug', 0);
-                            // TODO (B) do we need to optimize CACHE-settings in header?
-                            $this->header('Pragma: no-cache');
-                            $this->header('Cache-control: no-cache');
-                            $this->header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-                            $this->disableCache();
-                        }
+            if ($this->RequestHandler->isSSL()) {}
+            if ($this->RequestHandler->isXml()) {}
+            if ($this->RequestHandler->isRss()) {}
+            if ($this->RequestHandler->isAtom()) {}
+            if ($this->RequestHandler->isMobile()) {
+                $mobile = true;
+            }
+            if ($this->RequestHandler->isWap()) {}
 
-                        if ($this->RequestHandler->isSSL()) {}
-                        if ($this->RequestHandler->isXml()) {}
-                        if ($this->RequestHandler->isRss()) {}
-                        if ($this->RequestHandler->isAtom()) {}
-                        if ($this->RequestHandler->isMobile()) {
-                            $mobile = true;
-                        }
-                        if ($this->RequestHandler->isWap()) {}
-
-                        /**
-                        $this-RequestHandler->setContent();
-                        javascript text/javascript
-                        js text/javascript
-                        json application/json
-                        css text/css
-                        html text/html,
-                        text text/plain
-                        txt text/plain
-                        csv application/vnd.ms-excel, text/plain
-                        form application/x-www-form-urlencoded
-                        file multipart/form-data
-                        xhtml application/xhtml+xml, application/xhtml, text/xhtml
-                        xhtml-mobile application/vnd.wap.xhtml+xml
-                        xml application/xml, text/xml
-                        rss application/rss+xml
-                        atom application/atom+xml
-                        amf application/x-amf
-                        wap text/vnd.wap.wml, text/vnd.wap.wmlscript, image/vnd.wap.wbmp
-                        wml text/vnd.wap.wml
-                        wmlscript text/vnd.wap.wmlscript
-                        wbmp image/vnd.wap.wbmp
-                        pdf application/pdf
-                        zip application/x-zip
-                        tar application/x-tar
-                        **/
+            /**
+            $this-RequestHandler->setContent();
+            javascript text/javascript
+            js text/javascript
+            json application/json
+            css text/css
+            html text/html,
+            text text/plain
+            txt text/plain
+            csv application/vnd.ms-excel, text/plain
+            form application/x-www-form-urlencoded
+            file multipart/form-data
+            xhtml application/xhtml+xml, application/xhtml, text/xhtml
+            xhtml-mobile application/vnd.wap.xhtml+xml
+            xml application/xml, text/xml
+            rss application/rss+xml
+            atom application/atom+xml
+            amf application/x-amf
+            wap text/vnd.wap.wml, text/vnd.wap.wmlscript, image/vnd.wap.wbmp
+            wml text/vnd.wap.wml
+            wmlscript text/vnd.wap.wmlscript
+            wbmp image/vnd.wap.wbmp
+            pdf application/pdf
+            zip application/x-zip
+            tar application/x-tar
+            **/
 
             if ( !$this->Session->read('recommendations') )
 			{
