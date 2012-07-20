@@ -1708,7 +1708,7 @@ class UsersController extends AppController {
 
 	function check_notifications()
 	{
-		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.46.255.219' ) 
+		if ( $_SERVER['REMOTE_ADDR'] != '::1' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.46.255.219' ) 
 					die('No access!');
 	
 		$timer['start'] = time();
@@ -1760,11 +1760,12 @@ class UsersController extends AppController {
             if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 			{
 				$misc['counter'] = $i;
-				$this->_advanced_checks( $user, $check_on_day, $debug, $misc );
+				if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug, $misc );
+                
 			} else
 			{
-                                if ( date('w', time()) == $check_on_day )
-                                $this->_advanced_checks( $user, $check_on_day, $debug );
+                if ( date('w', time()) == $check_on_day )
+                if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug );
 			}  
 			if ( $debug == true ) echo "<hr />";
 		}
@@ -1874,7 +1875,7 @@ class UsersController extends AppController {
 					
 					// calculate status for competition
 					// calculate success of last week's training
-                                        $unit = $this->Unitcalc->get_unit_metric();
+                    $unit = $this->Unitcalc->get_unit_metric();
 			
 
 					$sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
@@ -1893,7 +1894,7 @@ class UsersController extends AppController {
 						if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
 					}
 					
-                                        $results['User'] = $u;
+                    $results['User'] = $u;
 					$session_userid = $u['id'];
 
 					// automatic default date chooser
@@ -1906,10 +1907,11 @@ class UsersController extends AppController {
 					if ( $this->Trainingstatistic && $session_userid && $start && $end )
 					{  
 						$return = $this->Statisticshandler->get_competition( $this->Trainingstatistic, $session_userid, "", $start, $end, $this->data );
+                        
 						if ( isset( $return ) && is_array( $return ) )
 						{
-                                                        $text_for_mail_training .= "<b>" . __("Status of your season's training",true) . "</b><br />"; 
-                                                        //echo 'start ' . $return['start'];
+                            $text_for_mail_training .= "<b>" . __("Status of your season's training",true) . " (" . $start . " - " . $end . ")</b><br />"; 
+                            //echo 'start ' . $return['start'];
 							//echo 'end ' . $return['end'];
 							//echo 'sumdata ' . $return['sumdata'];
 							//if ( $return['color'] ) $text_for_mail_training .= "<span style='background:" . $return['color'] . "'>";
@@ -1945,7 +1947,7 @@ class UsersController extends AppController {
 						// last weeks training compared planned to real
 						
 						// one week before
-						$start = date('Y-m-d', time() - 8*24*3600);
+						$start = date('Y-m-d', time() - 6*24*3600);
 						$end = date('Y-m-d', time());
 						
 						if ( $session_userid )
@@ -1981,7 +1983,7 @@ class UsersController extends AppController {
 									$color = 'red';
 								}	
 									
-								$text_for_mail_training .= "<b>" . __("Status of your week's training",true) . "</b><br />";
+								$text_for_mail_training .= "<b>" . __("Status of your week's training",true) . " (" . $start . " - " . $end . ")</b><br />";
 								//if ( isset( $color ) ) $text_for_mail_training .= "<span style='background:" . $color . "'>";
 								$text_for_mail_training .= $sum_real . " " . __('of', true) . " " . $sum_planned . " " . __('Trimps', true);
 								$text_for_mail_training .= " (" . $training_week_percentage . " %) ";
