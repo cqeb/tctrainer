@@ -103,6 +103,19 @@ class TrainingstatisticsController extends AppController {
 	          $importdata = unserialize(urldecode($this->data['Trainingstatistic']['hiddenimportfile']));
 	        }
 	
+              if ( count($importdata) < 2 ) {
+                  if ( is_array( $importdata ) ) {
+                      $importdata = implode("",$importdata);
+                      $importdata = explode("\r",$importdata);
+                  }
+              }
+              if ( count($importdata) < 2 ) {
+                  if ( is_array( $importdata ) ) {
+                      $importdata = implode("",$importdata);
+                      $importdata = explode("\r\n",$importdata);
+                  }
+              }
+              
 	        if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
 	        {
 	            $this->Session->write('flash',__('No import data found!', true));
