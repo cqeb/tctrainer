@@ -7,8 +7,8 @@
 	/*border: 2px outset #3D3A21;*/
 	height: 390px;
 	width: 390px;
-	background: #FFFFFF url(garmin-white.gif) no-repeat 12px 12px;
-	/*background: #DDE3D6 url("/image/main/upload/garmin.jpg") no-repeat 12px 12px;*/
+	background: #FFFFFF url(/trainer/garmin/device/style/garmin-white.gif) no-repeat 12px 12px;
+	/*background: #DDE3D6 url("/trainer/garmin/device/style/garmin.jpg") no-repeat 12px 12px;*/
 	padding: 3px;
 	border:1px solid #B4CFEC;
 	position: relative;
@@ -53,7 +53,7 @@
 }
 
 #deviceSelectBox {
-   	background: url(choose_bg.png) no-repeat;
+   	background: url(/trainer/garmin/device/style/choose_bg.png) no-repeat;
 	width: 259px;
 	height: 101px;
 	position: absolute;
@@ -193,7 +193,7 @@
 	height: 51px;
 	margin: 0;
 	padding: 0;
-	background: url(button_bg.jpg) no-repeat 0 top;
+	background: url(/trainer/garmin/device/style/button_bg.jpg) no-repeat 0 top;
 	color: #fff;
 	font-size: 16px;
 }
@@ -205,7 +205,7 @@
 	text-align: center;
 	width: 259px;
 	height: 51px;
-	background: url(button_bg.jpg) no-repeat 0 top;
+	background: url(/trainer/garmin/device/style/button_bg.jpg) no-repeat 0 top;
 	color: #fff;
 	font-size: 16px;
 	position:absolute;
@@ -214,11 +214,11 @@
 }
 
 #readDataButton:hover, #readSelectedButton:hover {
-	background: url(button_bg.jpg) no-repeat 0 bottom;
+	background: url(/trainer/garmin/device/style/button_bg.jpg) no-repeat 0 bottom;
 }
 
 #readDataButton:active, #readSelectedButton:active {
-	background: url(button_bg.jpg) no-repeat 0 top;
+	background: url(/trainer/garmin/device/style/button_bg.jpg) no-repeat 0 top;
 }
 
 

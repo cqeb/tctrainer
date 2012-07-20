@@ -80,16 +80,27 @@ class TrainingstatisticsController extends AppController {
 	        {
 	          $return = $this->_save_file($csv_file, $userid, "file", "import");
 	          //if (!$return['error']) echo $return['destination'];
-	
-	          $importfile = $_SERVER['DOCUMENT_ROOT'] . $return['destination'];
-	          $importfile = str_replace( '/', '\\', $importfile);
-	          $importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);
+                
+                $app_backslash = Configure::read('App.Dirbackslash');
+
+                $importfile = Configure::read('App.uploadDir') . 'imports/' . $return['filename'];
+                
+	          if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+              {
+                  if ( isset( $app_backslash ) && $app_backslash == true ) 
+                        $importfile = str_replace( '/', '\\', $importfile);
+                  //$importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);                  
+              } else
+              {
+                  //$importfile = str_replace( 'files/', 'app/webroot/files/', $importfile);                  
+              }
 	  
 	          $importdata = file( $importfile );
 	
 	        } else
 	        {
-	          $importdata = unserialize($this->data['Trainingstatistic']['hiddenimportfile']);
+                //pr($this->data['Trainingstatistic']['hiddenimportfile']);
+	          $importdata = unserialize(urldecode($this->data['Trainingstatistic']['hiddenimportfile']));
 	        }
 	
 	        if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
@@ -351,10 +362,12 @@ class TrainingstatisticsController extends AppController {
 	            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	        }  
 	
-	        $this->data['Trainingstatistic']['hiddenimportfile'] = serialize($newimportfilearray);
+            //pr(urldecode(urlencode(serialize($newimportfilearray))));
+                                                                      
+	        $this->data['Trainingstatistic']['hiddenimportfile'] = urlencode(serialize($newimportfilearray));
 	        
 	        $this->set('importdata', $importdata);
-	        $this->set('newimportfile', serialize($newimportfile));
+	        $this->set('newimportfile', urlencode(serialize($newimportfile)));
 	        $this->set('outputfile', $outputfile);
 	
 	      }
@@ -376,7 +389,7 @@ class TrainingstatisticsController extends AppController {
     $filesize_accepted_images = 200000;
 
     // none
-    $type_accepted_files = array("application/vnd.ms-excel");
+    $type_accepted_files = array("application/vnd.ms-excel","text/csv");
     $filesize_accepted_files = 300000;
 
     if ( $type == "image" )
@@ -412,8 +425,10 @@ class TrainingstatisticsController extends AppController {
 
           if ( move_uploaded_file( $file['tmp_name'], $destination ) )
           {
+                                                                                                                                         
             //unlink($file['tmp_name']);
             $return['destination'] = $weburl;
+            $return['filename'] = $new_name;
             $return['error'] = '';
             return $return;
           }
@@ -1023,8 +1038,8 @@ function edit_training($id = null) {
             $this->set('length_unit', $unit['length']);
    }
 
-	function url_redirect($id = null, $userid = null)
-	{
+   function url_redirect($id = null, $userid = null)
+   {
         $this->checkSession();
 		
 		$transaction_id = '';
@@ -1060,7 +1075,7 @@ function edit_training($id = null) {
 		
 		$this->autoRender = false;
 		
-	}
+   }
 
    function delete($id)
    {
@@ -1098,16 +1113,20 @@ function edit_training($id = null) {
 
     function garmin_import()
     {                                                       
-
-           $this->checkSession();
+           $debug = true;                                            
+           $this->layout = "ajaxrequests";
+           if ( $debug == true ) echo "before check" . "<br>";
+           //$this->checkSession();
            
            $session_userid = $this->Session->read('session_userid');
-
+           if ( $debug == true ) echo "userid: " . $session_userid . "<br>";
            $mainpath = $_SERVER['DOCUMENT_ROOT'] . '/trainer/app/webroot/garmin/';
            
            include( $mainpath . 'xml2array.php' );
-           
-           $filename = $mainpath . 'cache/course.' . md5( serialize( $_POST ) ) . '.txt';
+           $key = serialize( $_POST );
+           $key_md5 = md5( $key );
+                                                       
+           $filename = $mainpath . 'cache/course.' . $key_md5 . '.txt';
            
            $logfile  = $mainpath . 'cache/garminlog.txt';
            
@@ -1116,22 +1135,30 @@ function edit_training($id = null) {
            
            if ( isset( $_POST ) ) 
            {
-            
                 if ( isset( $_POST['activities'] ) ) 
                 {
                     $somecontent = xml2array( $_POST['activities'] );
                     // Problem if there are more laps
                     $tarray = $somecontent['TrainingCenterDatabase']['Activities']['Activity']['Lap'];
+                    if ( $debug == true ) 
+                    {
+                            print_r( $tarray );
+                            echo "<br><br>";
+                            echo $tarray['TotalTimeSeconds'] . ' Sec.<br>';
+                            echo $tarray['DistanceMeters'] . ' m.<br>';
+                            echo $tarray['AverageHeartRateBpm'] . '<br>';
+                            echo $somecontent['TrainingCenterDatabase']['Activities']['Activity']['Id'] . '<br>';
+                    }
                     $tdata['time'] = round( $tarray['TotalTimeSeconds']/60, 1);
                     $tdata['distance'] = round( $tarray['DistanceMeters']/1000, 1);
                     $tdata['hr'] = $tarray['AverageHeartRateBpm']['Value'];
                     $tdata['date'] = date('Y-m-d H:i', strtotime($somecontent['TrainingCenterDatabase']['Activities']['Activity']['Id'])) . "<br>";
-                    
-                    $logcontent .= "object in POST ok " . md5( serialize( $_POST ) ) . " ## <br>\n";
+                    print_r( $tdata );
+                    $logcontent .= "Object in POST - ok (" . $key_md5 . ")<br>\n";
                 } else {
-                    //$somecontent = serialize($_POST);
+
                     $somecontent = "";
-                    $logcontent .= "object not in POST ## <br>\n";
+                    $logcontent .= "Object NOT in POST - not ok<br>\n";
                 }
            }
            

@@ -4730,7 +4730,7 @@ Garmin.DeviceDisplayDefaultOptions =
 	 * 
 	 * which is an animated loader image.  You can customize this to be text instead of an image by not using the image tags.   
 	 * @type String  */
-	statusCellProcessingImg: '<img src="/garmin/device/style/ajax-loader.gif" width="15" height="15" />',
+	statusCellProcessingImg: '<img src="/trainer/garmin/device/style/ajax-loader.gif" width="15" height="15" />',
 	/** Status text to display when the plugin is sending data to a remote server.  @type String  */
 	sendingDataToServer: "Sending data from #{deviceName} to server...",
 	/** Error message to display when there is an error getting the HTTP response back from the HTTP request.  @type String  */

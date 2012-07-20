@@ -39,12 +39,12 @@
   					method: 'post',
   					parameters: {activities: activityXml},
 					onComplete: function(response) {
-						alert('workout added.');
+						alert('Garmin workout imported.');
 					}
   				});
-                $('activity').innerHTML += '<hr/><pre>Workout imported.</pre>';
-//				$('activity').innerHTML += '<hr/><pre>'+activityXml.escapeHTML()+'</pre>';
-				pausecomp(1000);
+//                $('activity').innerHTML += '<hr/><pre>Workout imported.</pre>';
+				$('activity').innerHTML += '<hr/><pre>'+activityXml.escapeHTML()+'</pre>';
+				//pausecomp(1000);
 			}
 		});
 	}

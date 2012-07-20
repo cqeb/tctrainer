@@ -97,8 +97,10 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
         Configure::write('App.serverUrl', '/trainer');
         // Domain with protocol and NO trailing slash
         Configure::write('App.hostUrl', 'http://localhost');
-        Configure::write('App.uploadDir', 'C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\webroot\files\\');
-    
+        //Configure::write('App.uploadDir', 'C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\webroot\files\\');
+        Configure::write('App.uploadDir', '/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/files/');
+        Configure::write('App.Dirbackslash', false);
+        
     }
 
 	// Paypal payment email
