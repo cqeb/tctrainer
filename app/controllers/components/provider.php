@@ -328,7 +328,7 @@ class ProviderComponent extends Object {
 			AND user_id = " . $this->getAthlete()->getId());
 		if ($r[0]['c'] > 0) {
 			// there are earlier entries - do not purge
-			return false;
+			//return false;
 		}			
 
 		// select if same entry already exists and nothing important changed
@@ -347,7 +347,7 @@ class ProviderComponent extends Object {
 			AND user_id = " . $this->getAthlete()->getId());
 		if ($r[0]['c'] > 0) {
 			// there is an earlier entry - do not purge
-			return false;
+			//return false;
 		}
 		
 		// it seems all checks failed, so we have to purge
