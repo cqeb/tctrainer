@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css?v=<?php echo VERSION; ?>" />
-
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.responsive.css?v=<?php echo VERSION; ?>" />
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>
@@ -120,14 +120,13 @@
 <?php //if ( isset( $userobject ) && $userobject['level'] == 'freemember' ) { ?>
       		
       		<div class="box last">
-<style>
-</style>
 <h2><?php __('Your mesocycle of the next weeks'); ?></h2>
 <?php
 
 echo $mesocycles;
 
 ?>
+<div class="ads">
 <script type="text/javascript"><!--
 google_ad_client = "ca-pub-1221279145141294";
 /* Trainingplan 2 */
@@ -139,7 +138,7 @@ google_ad_height = 280;
 <script type="text/javascript"
 src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script>
-
+</div>
 			</div>
 
 <?php //} ?>

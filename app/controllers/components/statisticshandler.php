@@ -619,8 +619,8 @@ class StatisticshandlerComponent extends Object {
 			}
 
             /**
-            planned trainings
-			- CHECK with CLEMENS
+             planned trainings
+			       - CHECK with CLEMENS
             **/
 			$sql = "SELECT s.duration AS duration, m.date AS week, s.athlete_id AS user_id, s.sport AS sportstype,
 			m.time AS time, m.usertime AS usertime, IF (s.trimp IS NULL, IF (m.usertime > 0, m.usertime * 1.1, m.time * 1.1), trimp) trimp

@@ -20,27 +20,26 @@ class AppController extends Controller {
 	   	var $components = array('Session', 'RequestHandler');
 
 	   	function beforeFilter()
-        {
+      {
 			
             $language = $this->Session->read('Config.language');
             
-			// if user is from AUT or GER - change language to German
+			      // if user is from AUT or GER - change language to German
             if ( !isset( $language ) )
-			{
-				if ( $_SERVER['HTTP_HOST'] == 'localhost' )
-					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
-				else
-					$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
+			      {
+      				if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+      					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+      				else
+      					$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
 					
-				$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+      				$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
 			
-				if ( isset( $yourlocation->country_code ) && ( $yourlocation->country_code == 'DE' || $yourlocation->country_code == 'AT' ) )
-				{
-                    Configure::write('Config.language','deu');
-				} else
-                {
-                    Configure::write('Config.language','eng');
-                }
+      				if ( isset( $yourlocation->country_code ) && ( $yourlocation->country_code == 'DE' || $yourlocation->country_code == 'AT' ) )
+      				{
+                          Configure::write('Config.language','deu');
+      				} else {
+                          Configure::write('Config.language','eng');
+              }
 			} else
             {                
                 Configure::write('Config.language',$language);
@@ -107,7 +106,7 @@ class AppController extends Controller {
             **/
 
             if ( !$this->Session->read('recommendations') )
-			{
+			      {
 				$this->loadModel('User');
 						
 				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
@@ -188,13 +187,13 @@ class AppController extends Controller {
             		    // if not correct, send to login page
                         if ( ( !$results || $results['User']['id'] != $session_userid ) )
                         {
-                                $this->Session->delete('session_useremail');
+                              $this->Session->delete('session_useremail');
                              	$this->Session->delete('session_userid');
                              	$this->Cookie->delete('tct_auth');
                              	$this->Cookie->delete('tct_auth_blog');
-                                $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
-                                $this->redirect('/users/login');
-                                exit();
+                              $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
+                              $this->redirect('/users/login');
+                              exit();
                         } else
                         {  
                              $this->Session->write('session_userid', $results['User']['id']);
@@ -203,7 +202,7 @@ class AppController extends Controller {
                              $this->Session->write('Config.language', $results['User']['yourlanguage']);
                              $this->set('userobject', $results['User']);
                         }
-	        }
+	               }
 
             $this->set('session_userid', $session_userid);
 

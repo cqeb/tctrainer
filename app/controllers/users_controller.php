@@ -2156,7 +2156,7 @@ class UsersController extends AppController {
 					  }
 		
 				      $text_for_mail_premium =  
-						__('Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 3 coffees a month again, please', true) . ' ' .
+						__('Your PREMIUM membership is over. If you want to get your professional, interactive training coach for 2 coffees a month again, please', true) . ' ' .
 						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('subscribe', true) . '</a>' . "\n";
 						'<br /><br />' . "\n\n" . __('Gain speed, lose weight');
 				  }

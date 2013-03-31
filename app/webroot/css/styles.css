@@ -588,3 +588,12 @@ a.reset:hover {
 .help2 {
 	cursor: help;
 }
+
+#chart1, #chart2 {
+	width:680px;
+	height:400px;
+}
+
+.legend table {
+	width:150px;
+}

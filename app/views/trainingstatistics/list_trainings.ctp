@@ -37,7 +37,7 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
     <th><?php echo $paginator->sort(__('Sport',true), 'sportstype'); ?></th>
     <th><?php echo $paginator->sort(__('Distance',true), 'distance'); ?></th>
     <th><?php echo $paginator->sort(__('Duration',true), 'duration'); ?></th>
-    <th><?php __('Action'); ?></th>
+    <th class="listaction"><?php __('Action'); ?></th>
 </tr>
 
 <?php 
@@ -58,7 +58,7 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
     <td><?php $stype = $training['sportstype']; __($stype); ?></td>
     <td><?php $distance = $unitcalc->check_distance($training['distance'], 'show'); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
     <td><?php $duration = $unitcalc->seconds_to_time($training['duration']); echo $duration; ?></td>
-    <td>
+    <td class="listaction">
 <?php 
 
 $facebookurl = '/trainer/trainingstatistics/url_redirect/type:facebook/distance:'.

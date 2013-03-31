@@ -232,7 +232,7 @@ TrainingPlanner = {
 			}
 			
 			// update weekly training hours
-			if (workoutSettings.usertime > 0) {
+			if ( workoutSettings.usertime > 0 ) {
 				$('#week').val(TimeParser.format(workoutSettings.usertime) + 'h');
 			} else {
 				$('#week').val(TimeParser.format(workoutSettings.time) + 'h');

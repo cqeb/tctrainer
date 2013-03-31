@@ -26,7 +26,9 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css?v=<?php echo VERSION; ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css?v=<?php echo VERSION; ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css?v=<?php echo VERSION; ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.responsive.css?v=<?php echo VERSION; ?>" />
+
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>
@@ -38,9 +40,19 @@
 
     <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.min.js?v=<?php echo VERSION; ?>"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.min.js?v=<?php echo VERSION; ?>"></script>
+    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.min.js?v=<?php echo VERSION; ?>"></script>
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/excanvas.min.js"></script><![endif]-->
+    <script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/jquery.flot.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/jquery.flot.resize.js"></script>      
 
 <?php echo $scripts_for_layout; ?>
+
+<script type="JavaScript">
+$(document).ready(function() {
+    $(document).scrollTop( $(".content").offset().top );  
+};
+</script>
+
 
 </head>
 <body>
@@ -61,12 +73,12 @@
   <div class="container_12 main">
     <!-- Left column -->
     <div class="grid_3 left">
-      <div class="box navigation">
+      <div id="navigation" class="box navigation">
       <?php //__('Navigation');?>
                <?php echo $this->element('subnavigation_all'); ?>
       </div>
       
-      <div class="box">
+      <div id="ads" class="box last">
                <?php echo $this->element('adbox'); ?>
       </div>
     </div>
