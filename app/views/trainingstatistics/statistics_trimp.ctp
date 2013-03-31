@@ -75,6 +75,23 @@ if ( count( $trainingdatas ) > 0 )
 
 <h2><?php __('Grade of fitness (Chronic Training Load)'); ?></h2>
 
+<div id="chart1"></div>
+
+<?php
+$js_url_flot1 = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/' . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:chronic/?flot=true&chart=chart1';
+?>
+
+<script type="text/javascript" src="<?php echo $js_url_flot1; ?>"></script>
+
+
+<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<br /><br />
+Debugging: (only localhost)<br />
+<a href="<?php echo $js_url_flot1; ?>" target="_blank"><?php echo $js_url_flot1; ?></a>
+<?php } ?>
+
+<br /><br />
+
 <?php
 
 $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/';
@@ -88,7 +105,7 @@ echo $ofc->createflash('my_chart2','680','400',$jsonurl . 'stype:' . $sportstype
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 <br /><br />
 Debugging: (only localhost)<br />
-<a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:chronic'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
 <br /><br />

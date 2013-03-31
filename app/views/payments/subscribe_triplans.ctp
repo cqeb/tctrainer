@@ -1,24 +1,24 @@
 
-                   <h1><?php __('Subscribe TriCoreTraining PREMIUM membership'); ?></h1>
+       <h1><?php __('Subscribe TriCoreTraining PREMIUM membership'); ?></h1>
 
-                   <?php echo $this->element('js_error'); ?>
+       <?php echo $this->element('js_error'); ?>
 
-                   <?php //echo $form->create('User', array('action' => 'edit_metric', 'type' => 'file')); ?>
-                   <fieldset>
-                   <legend><?php __('Gain speed, lose weight'); ?></legend>
+       <?php //echo $form->create('User', array('action' => 'edit_metric', 'type' => 'file')); ?>
+       <fieldset>
+       <legend><?php __('Gain speed, lose weight'); ?></legend>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
+       <?php if ($session->read('flash')) { ?>
+       <div class="<?php echo $statusbox; ?>">
+       <?php echo $session->read('flash'); $session->delete('flash'); ?>
+       </div><br />
+       <?php } ?>
 
-                   <div class="statusbox ok">
-                   <?php echo __('Your current membership is valid from', true) . ' ' . $paid_from . ' ' . __('to', true) . ' ' . $paid_to; ?>.
-                   <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>
-                   </div>
+       <div class="statusbox ok">
+       <?php echo __('Your current membership is valid from', true) . ' ' . $paid_from . ' ' . __('to', true) . ' ' . $paid_to; ?>.
+       <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>
+       </div>
 
-                   <br />
+       <br />
 
 <?php
 
@@ -62,6 +62,7 @@ $price12pm[$currency] = $price_month_array_split[3];
     </a>
     </td>
 </tr>
+<!--//
 <tr class="odd">
     <td colspan="3">
     <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
@@ -80,6 +81,7 @@ $price12pm[$currency] = $price_month_array_split[3];
     </a>
     </td>
 </tr>
+//-->
 <tr class="odd">
     <td colspan="3">
     <a href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">

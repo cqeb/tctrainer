@@ -51,7 +51,7 @@ if ( isset( $userinfo ) )
 if ( isset( $companyinfo ) ) 
 {
 			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of membership costs!', true) . '</h1><p>' . 
-			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 3 coffees a month.", true) . 
+			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 2 coffees a month.", true) . 
 			'<br /><br />' . __('Yours', true) . ', Klaus-M. (' . __('founder of', true) . ') ' . __('TriCoreTraining', true) . '<br /><br />' . 
 			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>';
 
@@ -74,6 +74,7 @@ if ( isset( $companyinfo ) )
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css?v=<?php echo VERSION; ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.responsive.css?v=<?php echo VERSION; ?>" />
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>

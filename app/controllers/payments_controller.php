@@ -101,24 +101,24 @@ class PaymentsController extends AppController {
             $session_userid = $results['User']['id'];
 
             $this->loadModel('User');
-			$this->User->id = $session_userid;
-			$results = $this->data = $this->User->read();
+      			$this->User->id = $session_userid;
+      			$results = $this->data = $this->User->read();
 
             // debugging paypal - we do not use yet.
             if ( 1 == 2 && $_SERVER['HTTP_HOST'] == 'localhost' ) 
             	$testing = 'sandbox.';
-			else 
-				$testing = '';
+      			else 
+      				$testing = '';
 
             $timeinterval = $this->params['named']['t'];
 			
             if ( !$timeinterval ) $timeinterval = 1;
 			
-			$currency = $this->Unitcalc->currency_for_country($results['User']['country']);
-			
-			$price_array = $this->Unitcalc->get_prices( null, $currency, $results['User'] );
-			$price_array_split = $price_array[$currency]['total'];
-			$price_month_array_split = $price_array[$currency]['month'];
+      			$currency = $this->Unitcalc->currency_for_country($results['User']['country']);
+      			
+      			$price_array = $this->Unitcalc->get_prices( null, $currency, $results['User'] );
+      			$price_array_split = $price_array[$currency]['total'];
+      			$price_month_array_split = $price_array[$currency]['month'];
 
            	$price_array = array( '1' => $price_array_split[0], '3' => $price_array_split[1], '6' => $price_array_split[2], '12' => $price_array_split[3] );
             

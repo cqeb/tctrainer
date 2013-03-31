@@ -1,0 +1,321 @@
+/*
+* 960 Responsive Grid
+* Copyright 2012, Tyler Wolff
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 12/10/2012
+*/
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+/* Styles */
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+/* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+/* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+/* Styles */
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {
+/* Styles */
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {
+/* Styles */
+}
+
+/* iPhone 4 ----------- */
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
+/* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 1824px) {
+
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+
+  body {
+    max-width: 300px;
+  }
+
+  .container_12,
+  .container_16 {
+    width: 300px;
+  }
+
+  .container_12 .grid_1,
+  .container_12 .grid_2,
+  .container_12 .grid_3,
+  .container_12 .grid_4,
+  .container_12 .grid_5,
+  .container_12 .grid_6,
+  .container_12 .grid_7,
+  .container_12 .grid_8,
+  .container_12 .grid_9,
+  .container_12 .grid_10,
+  .container_12 .grid_11,
+  .container_12 .grid_12,
+  .container_12 .grid_13,
+  .container_12 .grid_14,
+  .container_12 .grid_15,
+  .container_12 .grid_16 {
+    margin: 0;
+    width: 300px;
+  }
+
+  .container_12 .prefix_1,
+  .container_12 .prefix_2,
+  .container_12 .prefix_3,
+  .container_12 .prefix_4,
+  .container_12 .prefix_5,
+  .container_12 .prefix_6,
+  .container_12 .prefix_7,
+  .container_12 .prefix_8,
+  .container_12 .prefix_9,
+  .container_12 .prefix_10,
+  .container_12 .prefix_11,
+  .container_12 .prefix_12,
+  .container_12 .prefix_13,
+  .container_12 .prefix_14,
+  .container_12 .prefix_15 {
+    padding-left: 0;
+  }
+
+  .container_12 .suffix_1,
+  .container_12 .suffix_2,
+  .container_12 .suffix_3,
+  .container_12 .suffix_4,
+  .container_12 .suffix_5,
+  .container_12 .suffix_6,
+  .container_12 .suffix_7,
+  .container_12 .suffix_8,
+  .container_12 .suffix_9,
+  .container_12 .suffix_10,
+  .container_12 .suffix_11,
+  .container_12 .suffix_12,
+  .container_12 .suffix_13,
+  .container_12 .suffix_14,
+  .container_12 .suffix_15 {
+    padding-right: 0;
+  }
+
+  .container_12 .push_1,
+  .container_12 .push_2,
+  .container_12 .push_3,
+  .container_12 .push_4,
+  .container_12 .push_5,
+  .container_12 .push_6,
+  .container_12 .push_7,
+  .container_12 .push_8,
+  .container_12 .push_9,
+  .container_12 .push_10,
+  .container_12 .push_11,
+  .container_12 .push_12,
+  .container_12 .push_13,
+  .container_12 .push_14,
+  .container_12 .push_15,
+  .container_12 .pull_1,
+  .container_12 .pull_2,
+  .container_12 .pull_3,
+  .container_12 .pull_4,
+  .container_12 .pull_5,
+  .container_12 .pull_6,
+  .container_12 .pull_7,
+  .container_12 .pull_8,
+  .container_12 .pull_9,
+  .container_12 .pull_10,
+  .container_12 .pull_11,
+  .container_12 .pull_12,
+  .container_12 .pull_13,
+  .container_12 .pull_14,
+  .container_12 .pull_15 {
+    left: 0;
+  }
+
+  .grid_3.left .box.last, .grid_3.right .box {
+    display:none;
+  }
+
+  .container_12.footer {
+    padding: 15px 15px 40px 15px;
+    width: 270px;
+  }
+  .container_12.footer .grid_3 {
+    width: 270px;
+  }
+
+  .grid_12.navigation {
+    margin-top:75px;
+  }
+
+  .header .navigation ul {
+    margin-left:0px;
+  }
+  .header .navigation ul li {
+    clear:both;
+  }
+  .header .navigation {
+    height:100%;
+  }
+  .header .navigation ul li a {
+    height:100%;
+  }
+  div.input {
+    height:50px;
+  }
+  input[type=checkbox] {
+    float:left;
+    display:block;
+    margin-left:0px;
+    position:relative;
+  }
+  .grid_6 .box.last {
+    /**display:none;**/
+  }
+
+  #plan {
+    width:100%;
+  }
+
+  #workoutlink input, #TrainingstatisticWorkoutLink {
+    width:50%;
+  }
+
+  .ui-button-text-only .ui-button-text {
+    padding:0px;
+  }
+  
+  div.sportworkoutlabels {
+    width:50px;
+    padding:5px;
+  }
+
+  .sportworkoutlabels label {
+    font-size:100%;
+  }
+
+  .sportworkout .swimworkouttypes select, .sportworkout .runworkouttypes select, .sportworkout .bikeworkouttypes select {
+    width:50%;
+  }
+
+  .sportworkout {
+    width:200px;
+    padding:5px;
+    padding-right:0px;
+  }
+
+
+  #CourseName input, #workoutlink input {
+    width:60%;
+  }
+
+  .ads {
+    display:none;
+  }
+  .wrap {
+    float:none;
+  }
+
+  .wrap.distance, .wrap.avg_pulse {
+    float:left;
+  }
+
+  table#stats {
+    width:95%;
+    margin-right:5px;
+  }
+
+  #comment textarea {
+    width:95%;
+  }
+  
+  .listaction {
+    display:none;
+  }
+
+  object {
+    width:100%;
+  }
+
+  #zrt_ads_frame1 {
+    display:none;
+  }
+
+  .error-message {
+    margin-top:0px;
+  }
+
+  label {
+    display:block;
+  }
+
+  #zoneguide table {
+    font-size:80%;
+  }
+
+  #gmap {
+    margin:0px;
+  }
+
+  table.workouts, .content table {
+    font-size:80%;
+    width:80%;
+  }
+  
+  table.workouts td {
+    padding:3px;
+  }
+
+  .workouts .type button {
+    width:20px;
+    height:20px;
+    padding:0px;
+    float:left;
+    margin-top:-10px;
+    display:block;
+    margin-left:75px;
+    
+  }
+
+  .mesocycle {
+    margin-bottom:400px;
+  }
+
+  #chart1, #chart2 {
+    width:288px;
+    height:180px;
+  }
+
+}
