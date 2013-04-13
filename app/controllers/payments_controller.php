@@ -620,6 +620,7 @@ class PaymentsController extends AppController {
             $mailHost = Configure::read('App.mailHost');
             $mailUser = Configure::read('App.mailUser');
             $mailPassword = Configure::read('App.mailPassword');
+            $mailDelivery = Configure::read('App.mailDelivery');
 
             $this->Email->smtpOptions = array(
                                       'port'=>$mailPort,
@@ -630,7 +631,7 @@ class PaymentsController extends AppController {
                                       'client' => 'smtp_helo_hostname'
                                       );
             /* Set delivery method */
-            $this->Email->delivery = 'smtp';
+            $this->Email->delivery = $mailDelivery;
             /* Do not pass any args to send() */
             $this->Email->send();
 
@@ -661,6 +662,7 @@ class PaymentsController extends AppController {
          $mailHost = Configure::read('App.mailHost');
          $mailUser = Configure::read('App.mailUser');
          $mailPassword = Configure::read('App.mailPassword');
+         $mailDelivery = Configure::read('App.mailDelivery');
 
          $this->Email->smtpOptions = array(
               'port'=>$mailPort,
@@ -671,7 +673,7 @@ class PaymentsController extends AppController {
               'client' => 'smtp_helo_hostname'
               );
          /* Set delivery method */
-         $this->Email->delivery = 'smtp';
+         $this->Email->delivery = $mailDelivery;
          /* Do not pass any args to send() */
          $this->Email->send();
 
@@ -716,6 +718,7 @@ class PaymentsController extends AppController {
 		$mailHost = Configure::read('App.mailHost');
 		$mailUser = Configure::read('App.mailUser');
 		$mailPassword = Configure::read('App.mailPassword');
+    $mailDelivery = Configure::read('App.mailDelivery');
 
 		$this->Email->smtpOptions = array(
 	        'port'=>$mailPort,
@@ -727,7 +730,7 @@ class PaymentsController extends AppController {
         );
 
 	    /* Set delivery method */
-	    $this->Email->delivery = 'smtp';
+	    $this->Email->delivery = $mailDelivery;
 	    /* Do not pass any args to send() */
 	    $this->Email->send();
 	    /* Check for SMTP errors. */
