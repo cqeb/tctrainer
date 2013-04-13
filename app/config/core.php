@@ -117,6 +117,7 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 	Configure::write('App.mailHost', 'mail.gmx.net');
 	Configure::write('App.mailUser', 'cqeb@gmx.net');
 	Configure::write('App.mailPassword', 'finger99');
+	Configure::write('App.mailDelivery', 'smtp');	
 
 } else
 {
@@ -147,9 +148,10 @@ if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 	Configure::write('App.mailFrom', 'TriCoreTraining <support@tricoretraining.com>');
 	Configure::write('App.mailAdmin', 'support@tricoretraining.com');
 	Configure::write('App.mailPort', '25');
-	Configure::write('App.mailHost', 'localhost');
+	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
 	Configure::write('App.mailUser', '');
 	Configure::write('App.mailPassword', '');
+	Configure::write('App.mailDelivery', 'mail');
 
 }
 	

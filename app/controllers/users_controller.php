@@ -1623,6 +1623,7 @@ class UsersController extends AppController {
 		$mailHost = Configure::read('App.mailHost');
 		$mailUser = Configure::read('App.mailUser');
 		$mailPassword = Configure::read('App.mailPassword');
+        $mailDelivery = Configure::read('App.mailDelivery');
 
 		$this->Email->smtpOptions = array(
         'port'=>$mailPort,
@@ -1633,7 +1634,7 @@ class UsersController extends AppController {
         'client'=>'smtp_helo_hostname'
         );
         /* Set delivery method */
-        $this->Email->delivery = 'smtp';
+        $this->Email->delivery = $mailDelivery;
 		//pr($this->Email);
         /* Do not pass any args to send() */
         $this->Email->send();
@@ -1679,6 +1680,7 @@ class UsersController extends AppController {
 		$mailHost = Configure::read('App.mailHost');
 		$mailUser = Configure::read('App.mailUser');
 		$mailPassword = Configure::read('App.mailPassword');
+        $mailDelivery = Configure::read('App.mailDelivery');
 
 		$this->Email->smtpOptions = array(
         'port'=>$mailPort,
@@ -1689,7 +1691,7 @@ class UsersController extends AppController {
         'client'=>'smtp_helo_hostname'
         );
         /* Set delivery method */
-        $this->Email->delivery = 'smtp';
+        $this->Email->delivery = $mailDelivery;
         /* Do not pass any args to send() */
         $this->Email->send();
         /* Check for SMTP errors. */
@@ -2273,6 +2275,7 @@ class UsersController extends AppController {
 		$mailHost = Configure::read('App.mailHost');
 		$mailUser = Configure::read('App.mailUser');
 		$mailPassword = Configure::read('App.mailPassword');
+        $mailDelivery = Configure::read('App.mailDelivery');
 
 		$this->Email->smtpOptions = array(
 	        'port'=>$mailPort,
@@ -2284,7 +2287,7 @@ class UsersController extends AppController {
         );
 
 	    /* Set delivery method */
-	    $this->Email->delivery = 'smtp';
+	    $this->Email->delivery = $mailDelivery;
 	    /* Do not pass any args to send() */
 	    $this->Email->send();
 	    /* Check for SMTP errors. */
