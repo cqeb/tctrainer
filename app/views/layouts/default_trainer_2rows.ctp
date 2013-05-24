@@ -42,8 +42,12 @@
     <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.min.js?v=<?php echo VERSION; ?>"></script>
     <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/excanvas.min.js"></script><![endif]-->
+<!--
     <script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/jquery.flot.js"></script>
-    <script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/jquery.flot.resize.js"></script>      
+    <script language="javascript" type="text/javascript" src="<?php echo $url; ?>/js/jquery.flot.resize.js"></script>  
+-->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    
 
 <?php echo $scripts_for_layout; ?>
 

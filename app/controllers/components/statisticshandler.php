@@ -61,14 +61,14 @@ class StatisticshandlerComponent extends Object {
 	{
             $start_calc = $this->Unitcalc->date_plus_days( $start, $timeperiod*(-1) );
 
-			$startday_ts = strtotime( $start_calc );
-			$endday_ts = strtotime( $end );						
+			      $startday_ts = strtotime( $start_calc );
+			      $endday_ts = strtotime( $end );						
             
             if ( $endday_ts > time() ) 
             {
             	 $endday_ts = time(); 
             	 $end = date( "Y-m-d", time() ); 
-			}
+			      }
             
             $diff_dates = $this->Unitcalc->diff_dates( $start_calc, $end );
 
@@ -98,8 +98,8 @@ class StatisticshandlerComponent extends Object {
             }
 
             /**
-			 * CHECK with CLEMENS
-			 */
+			       * CHECK with CLEMENS
+			      */
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
                 "athlete_id = $userid AND ";
@@ -172,35 +172,35 @@ class StatisticshandlerComponent extends Object {
                 }
             }
 
-			// removed this temporarily
-			/*
-			for ( $e = 0; $e < count( $trimp_tl_done ); $e++ )
-			{
-				$trimp_tl_done[$e] = round($trimp_tl_done[$e] / $timeperiod);
-				$trimp_tl_planned[$e] = round($trimp_tl_planned[$e] / $timeperiod);
-			}
+      			// removed this temporarily
+      			/*
+      			for ( $e = 0; $e < count( $trimp_tl_done ); $e++ )
+      			{
+      				$trimp_tl_done[$e] = round($trimp_tl_done[$e] / $timeperiod);
+      				$trimp_tl_planned[$e] = round($trimp_tl_planned[$e] / $timeperiod);
+      			}
 
-			if ( isset( $max_unit ) )
-				$max_unit = round( ( $max_unit * 1.1 ) / $timeperiod );
-			else
-				$max_unit = 50;
-            //if ( isset( $max_unit ) && $max_unit < 1 ) $max_unit = 50;
-			*/
-			$max_unit = round( $max_unit * 1.1 );
-			
-            // for the graph we need the days in reverse order
-            $trimp_tl_done = array_reverse($trimp_tl_done);
-            $trimp_tl_planned = array_reverse($trimp_tl_planned);
-            $trimp_dates = array_reverse($trimp_dates);
+      			if ( isset( $max_unit ) )
+      				$max_unit = round( ( $max_unit * 1.1 ) / $timeperiod );
+      			else
+      				$max_unit = 50;
+                  //if ( isset( $max_unit ) && $max_unit < 1 ) $max_unit = 50;
+      			*/
+      			$max_unit = round( $max_unit * 1.1 );
+      			
+                  // for the graph we need the days in reverse order
+                  $trimp_tl_done = array_reverse($trimp_tl_done);
+                  $trimp_tl_planned = array_reverse($trimp_tl_planned);
+                  $trimp_dates = array_reverse($trimp_dates);
 
-			$return['start'] = $start;			
-            $return['end'] = $end;
-			$return['max_unit'] = $max_unit;
-            $return['trimp_tl_done'] = $trimp_tl_done;
-            $return['trimp_tl_planned'] = $trimp_tl_planned;
-            $return['trimp_dates'] = $trimp_dates;
+      			$return['start'] = $start;			
+                  $return['end'] = $end;
+      			$return['max_unit'] = $max_unit;
+                  $return['trimp_tl_done'] = $trimp_tl_done;
+                  $return['trimp_tl_planned'] = $trimp_tl_planned;
+                  $return['trimp_dates'] = $trimp_dates;
 
-			return $return;		
+      			return $return;		
 	}
 
 	function get_formcurve( $Trainingstatistic, $userid, $sportstype, $start, $end )
@@ -536,20 +536,21 @@ class StatisticshandlerComponent extends Object {
 				   if ( substr( $week, 4, 2 ) == '00' ) 
 				   {
 				   		$week = substr( $week, 0, 4 ) . '01';
-						//echo "$week" . "<br>";
-				   	   	   //$previous_week = $trainings[$j][0]['week'];
-		                   //$trainings2[$previous_week]['sumdistance'] += round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
-		                   //$trainings2[$previous_week]['sumduration'] += round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
-		                   //$trainings2[$previous_week]['sumtrainings'] += $trainings[$i][0]['count'];
+						  //echo "$week" . "<br>";
+				   	  //$previous_week = $trainings[$j][0]['week'];
+		          //$trainings2[$previous_week]['sumdistance'] += round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
+		          //$trainings2[$previous_week]['sumduration'] += round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
+		          //$trainings2[$previous_week]['sumtrainings'] += $trainings[$i][0]['count'];
 				   }
 
-			   	   //unset($previous_week);
-                   $trainings2[$week]['sumdistance'] = round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
-                   $trainings2[$week]['sumduration'] = round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
-                   $trainings2[$week]['sumtrainings'] = $trainings[$i][0]['count'];
+ 	         //unset($previous_week);
+           $trainings2[$week]['sumdistance'] = round( $this->Unitcalc->check_distance( $trainings[$i][0]['sumdistance'], 'show', 'single' ), 2 );
+           $trainings2[$week]['sumduration'] = round( ( $trainings[$i][0]['sumduration'] / 3600 ), 2 );
+           $trainings2[$week]['sumtrainings'] = $trainings[$i][0]['count'];
+   
+           // make graph a little bit higher with max values
 				   
-                   // make graph a little bit higher with max values
-				   // special case :)
+           // special case :)
 				   if ( isset( $previous_week ) )
 				   {
 	                   if ( $trainings2[$previous_week]['sumdistance'] > $maxdistance ) $maxdistance = $trainings2[$previous_week]['sumdistance'] * 1.1;
@@ -559,9 +560,9 @@ class StatisticshandlerComponent extends Object {
 	                   if ( isset( $trainings2 ) && $trainings2[$week]['sumdistance'] > $maxdistance ) $maxdistance = $trainings2[$week]['sumdistance'] * 1.1;
 	                   if ( isset( $trainings2 ) && $trainings2[$week]['sumduration'] > $maxduration ) $maxduration = $trainings2[$week]['sumduration'] * 1.1;
 				   }				   
-               }
+           }
 
-			   $maxduration = round( $maxduration );
+			     $maxduration = round( $maxduration );
 
                // go through all weeks - in case you have weeks without trainings you have to set them to 0
                for( $i = 0; $i <= $weeks_between_dates; $i++ )

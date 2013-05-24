@@ -72,5 +72,20 @@ class TransactionhandlerComponent extends Object {
             return true;
    }
 
+   function _decrypt_data( $text ) {
+
+       $text = base64_decode(base64_decode($text));
+       
+       return $text;
+   }
+
+   function _encrypt_data( $text ) {
+
+       $text = base64_encode(base64_encode($text));
+
+       return $text;
+
+   }
+
 }
 ?>

@@ -28,7 +28,8 @@
 .avgweekly img.edit {
 	cursor: pointer;
 	position: absolute;
-	margin-left: -9px;
+	/**margin-left: -9px;**/
+	margin-left: 45px;
 	padding-top: 9px; 	
 }
 

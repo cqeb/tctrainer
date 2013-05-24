@@ -21,7 +21,6 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
       {
-			
             $language = $this->Session->read('Config.language');
             
 			      // if user is from AUT or GER - change language to German
@@ -40,7 +39,7 @@ class AppController extends Controller {
       				} else {
                           Configure::write('Config.language','eng');
               }
-			} else
+      			} else
             {                
                 Configure::write('Config.language',$language);
                 
@@ -107,22 +106,21 @@ class AppController extends Controller {
 
             if ( !$this->Session->read('recommendations') )
 			      {
-				$this->loadModel('User');
-						
-				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
-				$user_recommendations = $this->User->query( $sql );
-						
-				$this->Session->write( 'recommendations', serialize($user_recommendations) );
-			} else
-			{
-				$user_recommendations = unserialize( $this->Session->read('recommendations'));
-			}
+        				$this->loadModel('User');
+        						
+        				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
+        				$user_recommendations = $this->User->query( $sql );
+        						
+        				$this->Session->write( 'recommendations', serialize($user_recommendations) );
+      			} else
+      			{
+        				$user_recommendations = unserialize( $this->Session->read('recommendations'));
+      			}
 			
-			if ( isset( $user_recommendations ) ) 
+	       		if ( isset( $user_recommendations ) ) 
             { 
-					$this->set('recommendations', $user_recommendations);
-			}
-
+					      $this->set('recommendations', $user_recommendations);
+			      }
 
             $this->set('locale', $locale);
             $this->Session->write('Config.language', $locale);
@@ -158,7 +156,7 @@ class AppController extends Controller {
 						   
                            $this->Session->write('flash',__("Sorry, your session has expired or you're not logged in.", true));
                            $this->redirect('/users/login');
-		                   exit();
+		                       exit();
                       } else
                       {
                            $session_useremail = $cookie['email'];
@@ -204,9 +202,9 @@ class AppController extends Controller {
                         }
 	               }
 
-            $this->set('session_userid', $session_userid);
+                 $this->set('session_userid', $session_userid);
 
-	  }
+	     }
 
 }
 

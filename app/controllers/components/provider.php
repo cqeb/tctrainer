@@ -45,17 +45,20 @@ class ProviderComponent extends Object {
 	/**
 	 * retrieve the athlete
 	 */
-	public function getAthlete() {
+	public function getAthlete( $athlete_id = null ) {
+
 		if (!$this->athlete) {		
 			$this->athlete = new Athlete($this->DB, $this->Session->read('userobject'));
+			if ( !$this->athlete->isValid() ) echo "test";
 		}
+
 		return $this->athlete;
 	}
 	
 	/**
 	 * get a plan
 	 */
-	public function getPlan() {
+	public function getPlan($html_output = true) {
 		// cut preview time to a maximum of 3 weeks
 		if (array_key_exists('o', $_GET) && intval($_GET['o']) > 3 && !$this->getAthlete()->isAdvancedFeatures()) {
 			$_GET['o'] == 3;
@@ -72,6 +75,7 @@ class ProviderComponent extends Object {
 					$('#loader, #toggleDesc, #prev, #next').hide();
 				</script>";
 		}
+		
 
 		// start benchmark timer		
 		$timerStart = microtime(true);
@@ -165,12 +169,13 @@ class ProviderComponent extends Object {
 				$phaseName = __('Basic Training', true);
 				break;
 		}
+
 		$html .= '<p id="phaseinfo">' . $phaseName;
 		if ($phase['recovery']) {
 			$html .= ' (' . __('Recovery Week', true) . ')';
 		}
 		$html .= "</p>";
-		//var_dump( $phase );
+		
 		$html .= WorkoutRenderer::render($workouts, $this->getAthlete());
 		
 		// also attach time and workout settings
@@ -179,7 +184,14 @@ class ProviderComponent extends Object {
 		// add generate time
 		$benchmarkTime = microtime(true) - $timerStart;
 		$html .= "\n<!-- generated in {$benchmarkTime}s -->\n";
-		return $html;
+
+
+		if ( $html_output != true ) {
+			WorkoutRenderer::render_events($workouts, $this->getAthlete(), $time, $phase, $genWeek);
+			//print_r($workouts);
+			//return $workouts;
+		} else
+			return $html;			
 	}
 	
 	/**

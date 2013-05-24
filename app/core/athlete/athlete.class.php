@@ -89,6 +89,7 @@ class Athlete {
 	 * @param array $user user data from session
 	 */
 	public function __construct($DB, $user) {
+
 		if (!$user["id"]) {
 			return false;
 		}
@@ -104,8 +105,7 @@ class Athlete {
 			throw new Exception("Invalid user object provided when instantiating athlete");		
 		}
 		
-		$this->DB = $DB;
-		
+		$this->DB = $DB;	
 		
 		// initialize the athlete
 		$this->id = $user["id"];
@@ -118,14 +118,16 @@ class Athlete {
 		$this->threshold = $user["lactatethreshold"];
 		$this->bikethreshold = $user["bikelactatethreshold"];
 		$this->sport = $user["typeofsport"];
-		if (array_key_exists('paid_to', $user)) {
-			$this->valid = (($user['paid_to'] > date('Y-m-d') && $user['tos'] === '1'));
-		} else {
-			$this->valid = false;
-		}
 		
 		if (array_key_exists('advanced_features', $user)) {
 			$this->advancedFeatures = ($user["advanced_features"] == "1");
+		}
+
+		if (array_key_exists('paid_to', $user) ) {
+			$this->valid = (($user['paid_to'] > date('Y-m-d') && $user['tos'] === '1'));
+			if ( isset( $this->advancedFeatures ) )  $this->valid = true;
+		} else {
+			$this->valid = false;
 		}
 
 		// initialize his schedule

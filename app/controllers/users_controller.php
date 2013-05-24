@@ -77,6 +77,7 @@ class UsersController extends AppController {
 	function edit_user($id = null, $setuser = null)
 	{
       		$this->checkSession();
+
 			if ( isset( $this->params['named']['setuser'] ) ) $setuser = $this->params['named']['setuser'];
             $statusbox = 'statusbox';
 
@@ -211,7 +212,6 @@ class UsersController extends AppController {
 
 	function login_facebook()
 	{
-
 			// Facebook auth 
             $app_id = 132439964636;
 			$app_secret = "500f333152751fea132b669313052120";
@@ -1710,7 +1710,7 @@ class UsersController extends AppController {
 
 	function check_notifications()
 	{
-		if ( $_SERVER['REMOTE_ADDR'] != '::1' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.46.255.219' ) 
+		if ( $_SERVER['REMOTE_ADDR'] != '::1' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '72.167.232.26' ) 
 					die('No access!');
 	
 		$timer['start'] = time();
@@ -1721,7 +1721,7 @@ class UsersController extends AppController {
 		$debug = true;
 		
 		if ( $debug == true )
-			echo "start language " . Configure::read('Config.language') . "<br />";
+			echo "start language " . Configure::read('Config.language') . " " . date('Y-m-d H:i:s', time()) . "<br />";
 			
 	    $this->layout = 'plain';
 	    // Sun = 0
@@ -2183,8 +2183,12 @@ class UsersController extends AppController {
                                                         $content = $text_for_mail_training . '<br /><br />' . "\n\n";		
                                            }
 
-                                           $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b> '; 
+                                           $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b><br />'; 
                                            $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Click here, print it and use it!', true) . '</a>' . "\n";
+                                           $content .= "<br /><br />\n\n";	
+                                           
+                                           $key_add = "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
+                                           $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/get_events/?utm_source=tricoretraining.com&utm_medium=newsletter' . $key_add . '" target="_blank">&raquo; ' . __('Add workouts to your calendar (.ics)!', true) . '</a>' . "\n";
                                            $content .= "<br /><br />\n\n";	
 		
                                            if ( $text_for_mail_premium )
@@ -2258,13 +2262,14 @@ class UsersController extends AppController {
 		if ( isset( $to_user['name'] ) ) 
 			$this->set('to_name', $to_user['name']);
 		
+		// put athlete_key encrypted to mail
+		$ath_id_key = $this->Transactionhandler->_encrypt_data($user['id']);
+
 		$this->set('user', $user);
 	    $this->set('subject', $subject);
 	    $this->set('mcontent', $content);
+	    $this->set('ath_id_key', $ath_id_key);
 		
-		// REMOVE
-		//echo $content; die();
-
 		$this->Email->template = $template; // note no '.ctp'
 
 		//Send as 'html', 'text' or 'both' (default is 'text')
@@ -2299,6 +2304,34 @@ class UsersController extends AppController {
 	    //sleep(5); 
 	}
 
+	function stop_notification()
+	{
+		//if ( !isset( $_GET['key'] ) ) 
+
+		$this->layout = "plain";
+		Configure::write('debug', 0);
+
+		$session_userid = $this->Transactionhandler->_decrypt_data($_GET['key']);
+
+    	if ( isset($session_userid) ) {
+    		$this->User->id = $session_userid;
+    
+			$this->data = $this->User->read();
+
+			$this->set('UserID', $this->User->id);
+			$this->data['User']['notifications'] = 1;
+
+			$test = $this->User->save( $this->data, array(
+			      'validate' => false,
+			      'fieldList' => array( 'notifications') ) );
+
+			$statusbox = __('Notifications stopped.');
+		} else
+			$statusbox = __('Not valid.');
+
+		$this->set('statusbox', $statusbox);
+
+	}
 
 }
 

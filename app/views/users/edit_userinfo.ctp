@@ -158,12 +158,14 @@ echo $form->textarea('myrecommendation',
 
 echo "<br /><br />";
 
+if ( isset( $userobject ) ) {
 ?>
 <div>
 <b><?php __('My profile image'); ?> (<a target="_blank" href="http://www.gravatar.com">gravatar.com</a>)</b><br /><br />
 <img width="69" height="69" alt="<?php echo $userobject['firstname'] . ' ' . $userobject['lastname']; ?>" src="http://0.gravatar.com/avatar/<?php echo md5( $userobject['email'] ); ?>?s=69&d=identicon" />
 </div><br />
 <?php
+}
 
 echo $form->submit(__('Save', true));
 echo "<br />";

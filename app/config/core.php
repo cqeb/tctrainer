@@ -116,7 +116,7 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 	Configure::write('App.mailPort', '25');
 	Configure::write('App.mailHost', 'mail.gmx.net');
 	Configure::write('App.mailUser', 'cqeb@gmx.net');
-	Configure::write('App.mailPassword', 'finger99');
+	Configure::write('App.mailPassword', 'finger98');
 	Configure::write('App.mailDelivery', 'smtp');	
 
 } else

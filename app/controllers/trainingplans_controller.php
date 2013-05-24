@@ -7,17 +7,19 @@ class TrainingplansController extends AppController {
 	var $useTable = false;
 		
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc');
-	var $components = array('Email', 'Cookie', 'RequestHandler', 'Provider', 'Session');
+	var $components = array('Email', 'Cookie', 'RequestHandler', 'Provider', 'Session','Transactionhandler');
 
 	function beforeFilter()
 	{
 		parent::beforeFilter();
 		$this->layout = 'trainingplans';
-		$this->checkSession();
+		//$this->checkSession();
 	}
 
 	// view your training plan
 	function view() {
+        $this->checkSession();
+
 		$week = new DateInterval("P7D");
 
 		if (isset($_GET['d'])) {
@@ -59,6 +61,7 @@ class TrainingplansController extends AppController {
 		
 		// fill the info section
 		$schedule = $this->Provider->getAthlete()->getSchedule();
+
 		if ($schedule && count($schedule->getRaces()) == 0) {
 			$this->set('info', '<div class="statusbox"><p>' . 
 			__("You might want to add some competitions to refine your training plan.", true) . 
@@ -81,6 +84,8 @@ class TrainingplansController extends AppController {
 	 * ajax call for retrieving plans 
 	 */
 	function get() {
+        $this->checkSession();
+
 		$this->layout = 'plain';
 		if (!isset($_GET["debug"])) {
 			Configure::write('debug', 0);
@@ -93,6 +98,8 @@ class TrainingplansController extends AppController {
 	 * set an average training time via ajax
 	 */
 	function set_avg() {
+        $this->checkSession();
+
 		$this->layout = 'plain';
 		if ($this->Provider->getAthlete()->setTrainingTime($_POST["time"])) {
 			$this->set('res', 'ok');
@@ -106,6 +113,8 @@ class TrainingplansController extends AppController {
 	 * requires get parameters sport (like BIKE, RUN), time (in minutes) and hr (average heart rate)
 	 */
 	function calc_trimp() {
+        $this->checkSession();
+
 		$this->layout = 'plain';
 		Configure::write('debug', 0);
 		$this->set('res',
@@ -119,10 +128,40 @@ class TrainingplansController extends AppController {
 	 * persist workout settings such as time and ratio to database
 	 */ 
 	function save_workout_settings() {
+        $this->checkSession();
+
 		$this->layout = 'plain';
 		Configure::write('debug', 0);
 		$this->set('data', $this->Provider->saveWorkoutSettings($_POST));
 	}
+
+	function get_events() {
+		// do not check
+        //$this->checkSession();		
+
+		if ( !isset( $_GET['key'] ) )
+			$this->checkSession();
+		else {
+			$ath_id = $_GET['key'];
+			$ath_id = $this->Transactionhandler->_decrypt_data( $ath_id );
+			$this->loadModel('User');
+	        $results = $this->User->findById( $ath_id );
+	        $user_object = $results['User'];
+	        // TODO not secure
+	        $this->Session->write('userobject', $user_object);
+		}
+
+		
+		$this->layout = 'plain';
+
+		Configure::write('debug', 0);
+		if ( $this->Provider ) {
+			$this->Provider->getPlan(false);
+		} else
+			echo "ERROR: no Provider set.";
+	}
+
+
 }
 
 ?>
