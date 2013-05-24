@@ -57,6 +57,160 @@ class WorkoutRenderer {
 	}
 
 	/**
+	 * save weekdays in database
+	 * @param 
+	 */
+	private function inject_weekdays($workouts, $athlete, $time, $phase, $genWeek) {
+
+		$j = 1;
+		$weekdays = array();
+		$startDayTS = time() - ( ( gmdate("w", time()) - 1 ) * 86400 );
+		// if there are more than 7 workouts, only 1 day recovery, otherwise 2 days per week
+		if ( count( $workouts ) > 7 ) $recovery_days = 1;
+		else $recovery_days = 2;
+
+		// TODO IMPROVEMENT - do not inject the same sportstype on the same day
+		foreach ($workouts as $k => $w) {
+
+			if ( $recovery_days == 1 ) {
+				// start with Sunday
+				switch ($j) {
+					case 1:
+						$dayInt = 7; break;
+					case 2:
+						$dayInt = 6; break;
+					case 3:
+						$dayInt = 5; break;
+					case 4:
+						$dayInt = 1; break;
+					case 5:				
+						$dayInt = 2; break;
+					case 6:
+						$dayInt = 4; $j = 0; break;
+				}
+
+			} else {
+				// start with Sunday
+				switch ($j) {
+					case 1:
+						$dayInt = 7; break;
+					case 2:
+						$dayInt = 6; break;
+					case 3:
+						$dayInt = 5; break;
+					case 4:
+						$dayInt = 2; break;
+					case 5:
+						$dayInt = 3; $j = 0; break;
+				}
+
+			}
+			$w->getWeekdaydate = gmdate('Ymd', $startDayTS + ( ( ( $dayInt - 1 ) * 86400 ) ) );
+			$w->getWeekdaydateTS = $startDayTS;
+			$w->phase = $phase['phase'];
+
+			if ( isset($weekdays[$dayInt]) ) 
+				$weekdays[$dayInt] .= WorkoutRenderer::renderIcal($w);
+			else
+				$weekdays[$dayInt] = WorkoutRenderer::renderIcal($w);
+
+			// TODO UPDATE weekday in database
+			// TODO insert days with recovery as ical events
+			
+
+			$j++;
+		}
+
+		ksort($weekdays);
+		
+		return $weekdays;
+
+	}
+
+	/**
+	 * render a list of workouts in ical
+	 * @param array $workouts array of workouts to be rendered
+	 * @param Athlete $athlete
+	 */
+	public static function render_events($workouts, $athlete, $time, $phase, $genWeek) {
+		// overall training length
+		$length = 0;
+		$trimps = 0;
+		$ical_events = "";
+		
+		$weekdays = WorkoutRenderer::inject_weekdays($workouts, $athlete, $time, $phase, $genWeek);
+
+		foreach ($weekdays as $k => $w) {
+
+			//$length += $w->getDuration();
+			//$trimps += $w->getTRIMP();
+			$ical_events .= $w;
+
+		}
+		
+		$icals = 
+"BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//hacksw/handcal//NONSGML v1.0//EN
+" . $ical_events . "
+END:VCALENDAR";
+
+		
+		//set correct content-type-header
+		header('Content-type: text/calendar; charset=utf-8');
+		header('Content-Disposition: inline; filename=tricoretraining.ics');
+		
+		echo $icals;
+		exit;
+		//return true;
+	}
+
+	/** 
+	 * render ical 
+	 */
+	private function renderIcal(Workout $w) {
+
+			$ical = "";
+
+			$durationHr = self::formatTime($w->getDuration());
+			$workout_summary = __($w->getSport(), true) . " " . $durationHr . "h - " . __($w->getTypeLabel(), true);
+			$workout_description = "TRIMPs: " . $w->getTRIMP() . " (" . __($w->getCategory(), true) . ") " . 
+				$w->getShortCategory() . " - " . $w->getCategoryDescription() . " " . 
+				$w->getDescription() . " " . __('Track workouts',true) . " http://www.tricoretraining.com/trainer/trainingstatistics/edit_training";
+			if ($w->isLsd()) {
+				$workout_description .= "" . __('This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them.', true); 
+			}
+
+			$yy = gmdate( 'Y', $w->getWeekdaydateTS );
+			$mm = gmdate( 'm', $w->getWeekdaydateTS );
+			$dd = gmdate( 'd', $w->getWeekdaydateTS );
+
+			$endtime = mktime(0, 0, 0, $mm, $dd, $yy);
+
+			//echo self::renderCheckButton($w, $athlete, $durationHr) . "<br />";
+			$startdate = $w->getWeekdaydate; // YYYYMMDD
+			$starttime = "063000";
+			$enddate = $w->getWeekdaydate; // YYYYMMDD
+			$endtime = 6.5*3600+($w->getDuration()*60)+$endtime;
+			$endtime = gmdate('His', $endtime);
+
+			// md5(uniqid(mt_rand(), true))
+			$ical = "
+BEGIN:VEVENT
+UID:" . md5(time().$startdate.$workout_summary) . "@tricoretraining.com
+TZID:Europe/Vienna
+DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
+DTSTART;TZID=Europe/Vienna:" . $startdate . "T" . $starttime . "Z
+DTEND;TZID=Europe/Vienna:" . $enddate . "T" . $endtime . "Z
+SUMMARY:" . $workout_summary . "
+STATUS:CONFIRMED
+DESCRIPTION:" . $workout_description . "
+END:VEVENT
+";
+			return $ical;
+	}
+
+	/**
 	 * render the mark as done button
 	 * @param Workout $w
 	 */

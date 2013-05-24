@@ -58,7 +58,7 @@
             <tr>
                <td align="center" class="footer">
                   <p><span style="font-weight: bold;"><?php __('TriCoreTraining and TriCoreTraining.com'); ?></span> <?php __('are registered trademarks'); ?>.</p>
-                  <p><a href="http://www.tricoretraining.com?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank"><?php __('TriCoreTraining Association'); ?></a>, Gonzagagasse 11/25, A-1010 <?php __('Vienna'); ?>, <?php __('Phone'); ?> +43 699 1 630 15 24, <a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a></p>
+                  <p><a href="http://www.tricoretraining.com?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank"><?php __('TriCoreTraining Association'); ?></a>, <br />Gonzagagasse 11/25, A-1010 <?php __('Vienna'); ?>, <?php __('Phone'); ?> +43 699 1 630 15 24, <br /><a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a></p>
                </td>
             </tr>
          </table>

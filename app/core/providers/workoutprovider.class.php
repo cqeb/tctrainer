@@ -128,7 +128,7 @@ abstract class WorkoutProvider {
 				array_pop($this->workouts);
 			}
 			
-			// TODO maybe we should readd the cleared points to the time budget?
+			// TODO maybe we should read the cleared points to the time budget?
 			
 			// since we just deleted the last workout we have to return false
 			return false;
