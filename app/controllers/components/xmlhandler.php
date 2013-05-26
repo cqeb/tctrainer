@@ -10,7 +10,7 @@ class XmlhandlerComponent extends Object {
 	  if ( isset( $xmlurl ) )
 	  {	
 		  $doc = new DOMDocument();
-		  @$doc->load($xmlurl);
+		  @	$doc->load($xmlurl);
 		  $arrFeeds = array();
 		  $htmlFeeds = $textFeeds = '';
 		  $i = 0;

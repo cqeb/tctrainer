@@ -69,89 +69,117 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 
       echo $form->end();
 
-if ( count( $trainingdatas ) > 0 )
-{
-?>
 
-<h2><?php __('Grade of fitness (Chronic Training Load)'); ?></h2>
-
-<?php
-
-$js_url_graph_ctl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/' . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:chronic/?flot=true&chart=chart1';
-
-$charttitle1 = __('TRIMP planned', true);
-$charttitle2 = __('TRIMP trained', true);
 $chart_haxis = __('Sum', true) . ' ' . __('Trimps', true);
 $chart_vaxis = __('Time', true);
-$chart_bgcolor = '#FFFFFF';
+
 $chart_color1 = '#06FF02';
 $chart_color2 = '#F1AD28';
 
+if ( count( $trainingdatas ) > 0 )
+{
 ?>
 
 <script type="text/javascript">
 
       google.load('visualization', '1', {packages: ['corechart']});
 
-      function drawVisualization() {
-          /**
-          jQuery(document).ready($.getJSON('<?php echo $js_url_graph_ctl; ?>', function (json) {
+      function getJSONdata( jsonurl, chart ) { 
+          jQuery.ajax({
+              url: jsonurl,
+              type: 'POST',
+              success: function (data, textStatus, jqXHR) {
+                //alert(data.toString());
+                //alert(textStatus.toString());
+                //alert(jqXHR.responseText);
 
-              console.log( "JSON Data: test"  );
-          }));
+                var data = jQuery.parseJSON(jqXHR.responseText);
+                var graphdata = [['<?php __('Time');?>', '<?php __('TRIMP planned'); ?>', '<?php __('TRIMP trained'); ?>']];
+                
+                jQuery.each(data.results, function(i, jsonobj) {
+                    graphdata.push([jsonobj.tcttime, jsonobj.tctdata1, jsonobj.tctdata2,]);
+                });
+                
+                drawVisualization(graphdata, chart);
+              }, error: function (data, textStatus, jqXHR) { 
+                //alert(textStatus); 
+                console.log( "JSON Data: ERROR"  );
+              }
+          });            
+      }
 
-          var data = google.visualization.arrayToDataTable(json);
+      function drawVisualization(jsdata, chart) {
+          console.log(jsdata);
+          //jsdata = jsdata_title.concat(jsdata);
+          
+          var data = google.visualization.arrayToDataTable( jsdata );
         
           // Create and draw the visualization.
-          var ac = new google.visualization.AreaChart(document.getElementById('chart1'));
+          var ac = new google.visualization.AreaChart(document.getElementById(chart));
        
+          // read size of div - write in variable and set here
           ac.draw(data, {
             //title : 'A vs. C',
             //isStacked: true,
-            colors: ['<?php echo $chart_color1; ?>', '<?php echo $chart_color2; ?>', '<?php echo $chart_color1; ?>'],
+            colors: ['<?php echo $chart_color1; ?>', '<?php echo $chart_color2; ?>'],
             pointSize: 0,
             width: 680,
             height: 500,
             legend: { position: 'top' },
+            chartArea: {'width': '80%', 'height': '65%'},
             vAxis: { title: "<?php echo $chart_haxis; ?>",  
               slantedText:true, slantedTextAngle:45 },
             hAxis: { title: "<?php echo $chart_vaxis; ?>" }
           });
-          **/
-        //}); // jQuery GET
       }
       
-      google.setOnLoadCallback(drawVisualization);
-    </script>
+</script>
+
+<h2><?php __('Grade of fitness (Chronic Training Load)'); ?></h2>
+
+<?php
+
+$js_url_graph_ctl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/' . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:chronic/?chart=chart1';
+
+?>
+<script language="JavaScript">
+function get_ctl() {
+  getJSONdata('<?php echo $js_url_graph_ctl; ?>', 'chart1');
+}
+
+google.setOnLoadCallback(get_ctl);
+</script>
 
 <div id="chart1"></div>
 
-<br /><br /><br /><br />
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-<br /><br />
+<br /><br /><br /><br /><br /><br />
 Debugging: (only localhost)<br />
 <a href="<?php echo $js_url_graph_ctl; ?>" target="_blank"><?php echo $js_url_graph_ctl; ?></a>
 <?php } ?>
 
 <br /><br />
 
-
 <h2><?php __('Grade of fatigue (Acute Training Load)'); ?></h2>
 
 <?php
 
-$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/';
-
-echo $ofc->createflash('my_chart1','680','400',$jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute');
+$js_url_graph_atl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_trimp_json/' . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute/?chart=chart2';
 
 ?>
+<script language="JavaScript">
+function get_atl() {
+  getJSONdata('<?php echo $js_url_graph_atl; ?>','chart2');
+}
 
-<div id="my_chart1"></div>
+google.setOnLoadCallback(get_atl);
+</script>
+<div id="chart2"></div>
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-<br /><br />
+<br /><br /><br /><br /><br /><br />
 Debugging: (only localhost)<br />
-<a href="<?php echo $jsonurl . 'stype:' . $sportstype . '/start:' . $start . '/end:' . $end . '/gtype:acute'; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<a href="<?php echo $js_url_graph_atl; ?>" target="_blank"><?php echo $js_url_graph_atl; ?></a>
 <?php } ?>
 
 <?php 

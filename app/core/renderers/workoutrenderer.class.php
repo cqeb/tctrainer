@@ -116,7 +116,6 @@ class WorkoutRenderer {
 
 			// TODO UPDATE weekday in database
 			// TODO insert days with recovery as ical events
-			
 
 			$j++;
 		}
@@ -197,7 +196,7 @@ END:VCALENDAR";
 			// md5(uniqid(mt_rand(), true))
 			$ical = "
 BEGIN:VEVENT
-UID:" . md5(time().$startdate.$workout_summary) . "@tricoretraining.com
+UID:" . md5($startdate.$workout_summary) . "@tricoretraining.com
 TZID:Europe/Vienna
 DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
 DTSTART;TZID=Europe/Vienna:" . $startdate . "T" . $starttime . "Z

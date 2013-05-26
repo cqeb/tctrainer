@@ -2187,7 +2187,7 @@ class UsersController extends AppController {
                                            $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/view/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">&raquo; ' . __('Click here, print it and use it!', true) . '</a>' . "\n";
                                            $content .= "<br /><br />\n\n";	
                                            
-                                           $key_add = "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
+                                           $key_add = "&athlete_id=" . $u['id'] . "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
                                            $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/get_events/?utm_source=tricoretraining.com&utm_medium=newsletter' . $key_add . '" target="_blank">&raquo; ' . __('Add workouts to your calendar (.ics)!', true) . '</a>' . "\n";
                                            $content .= "<br /><br />\n\n";	
 		
@@ -2269,6 +2269,7 @@ class UsersController extends AppController {
 	    $this->set('subject', $subject);
 	    $this->set('mcontent', $content);
 	    $this->set('ath_id_key', $ath_id_key);
+	    $this->set('athlete_id', $user['id']);
 		
 		$this->Email->template = $template; // note no '.ctp'
 
@@ -2311,10 +2312,8 @@ class UsersController extends AppController {
 		$this->layout = "plain";
 		Configure::write('debug', 0);
 
-		$session_userid = $this->Transactionhandler->_decrypt_data($_GET['key']);
-
-    	if ( isset($session_userid) ) {
-    		$this->User->id = $session_userid;
+		if ( $_GET['key'] == $this->Transactionhandler->_encrypt_data($_GET['athlete_id'] ) ) {
+    		$this->User->id = $_GET['athlete_id'];
     
 			$this->data = $this->User->read();
 
