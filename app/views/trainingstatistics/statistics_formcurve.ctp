@@ -81,29 +81,94 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 
       echo $form->end();
 
+$chart_haxis = __('min/' . $unit['length'], true);
+$chart_vaxis = __('Time', true);
+
+$chart_color1 = '#06FF02';
+//$chart_color2 = '#F1AD28';
+
 ?>
 
 <br />
 
+<script type="text/javascript">
+
+      google.load('visualization', '1', {packages: ['corechart']});
+
+      function getJSONdata( jsonurl, chart ) { 
+          jQuery.ajax({
+              url: jsonurl,
+              type: 'POST',
+              success: function (data, textStatus, jqXHR) {
+                //alert(data.toString());
+                //alert(textStatus.toString());
+                //alert(jqXHR.responseText);
+
+                var data = jQuery.parseJSON(jqXHR.responseText);
+                var graphdata = [['<?php __('Time');?>', '<?php __('Formcurve'); ?>']];
+                
+                jQuery.each(data.results, function(i, jsonobj) {
+                    graphdata.push([jsonobj.tcttime, jsonobj.tctdata1]);
+                });
+                
+                drawVisualization(graphdata, chart);
+              }, error: function (data, textStatus, jqXHR) { 
+                //alert(textStatus); 
+                console.log( "JSON Data: ERROR"  );
+              }
+          });            
+      }
+
+      function drawVisualization(jsdata, chart) {
+          console.log(jsdata);
+          //jsdata = jsdata_title.concat(jsdata);
+          
+          var data = google.visualization.arrayToDataTable( jsdata );
+        
+          // Create and draw the visualization.
+          var ac = new google.visualization.AreaChart(document.getElementById(chart));
+       
+          // read size of div - write in variable and set here
+          ac.draw(data, {
+            //title : 'A vs. C',
+            //isStacked: true,
+            colors: ['<?php echo $chart_color1; ?>'],
+            pointSize: 0,
+            width: 680,
+            height: 500,
+            legend: { position: 'top' },
+            chartArea: {'width': '80%', 'height': '65%'},
+            vAxis: { title: "<?php echo $chart_haxis; ?>",  
+              slantedText:true, slantedTextAngle:45 },
+            hAxis: { title: "<?php echo $chart_vaxis; ?>" }
+          });
+      }
+      
+</script>
 <h2><?php __('Formcurve'); ?></h2>
 
 <?php
 
 if ( $searchfilter && count($testworkoutsfilter) > 0 )
 {
-  $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_formcurve_json/';
 
-  echo $ofc->createflash('my_chart1','680','400',$jsonurl.'searchfilter:' . $searchfilter . '/type:' . '/start:' . $start . '/end:' . $end);
+  $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_formcurve_json/'.'searchfilter:' . $searchfilter . '/type:' . '/start:' . $start . '/end:' . $end;
 
 ?>
+<script language="JavaScript">
+function get_formcurve() {
+  getJSONdata('<?php echo $jsonurl; ?>','chart1');
+}
 
-<div id="my_chart1"></div>
+google.setOnLoadCallback(get_formcurve);
+</script>
+<div id="chart1"></div>
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-<br /><br />
+<br /><br /><br /><br /><br /><br />
 Debugging: (only localhost)<br />
 
-<a href="<?php echo $jsonurl.'searchfilter:' . $searchfilter . '/type:' . '/start:' . $start . '/end:' . $end; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<a href="<?php echo $jsonurl ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
 <?php

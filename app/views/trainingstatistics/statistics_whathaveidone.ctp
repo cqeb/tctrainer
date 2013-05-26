@@ -160,10 +160,68 @@ echo $form->submit(__('Export',true), array('name' => 'excel', 'div' => false));
 
       echo $form->end();
 
+$chart_haxis = __('Time', true);
+
+$chart_color1 = '#06FF02';
+$chart_color2 = '#F1AD28';
+
 ?>
 
 <br />
+<script type="text/javascript">
 
+      google.load('visualization', '1', {packages: ['corechart']});
+
+      function getJSONdata( jsonurl, chart, chart_vaxis ) { 
+          jQuery.ajax({
+              url: jsonurl,
+              type: 'POST',
+              success: function (data, textStatus, jqXHR) {
+                //alert(data.toString());
+                //alert(textStatus.toString());
+                //alert(jqXHR.responseText);
+
+                var data = jQuery.parseJSON(jqXHR.responseText);
+                var graphdata = [['<?php __('Time');?>', chart_vaxis ]];
+
+                jQuery.each(data.results, function(i, jsonobj) {
+                    graphdata.push([jsonobj.tcttime, jsonobj.tctdata1]);
+                });
+                
+                drawVisualization(graphdata, chart, chart_vaxis );
+              }, error: function (data, textStatus, jqXHR) { 
+                //alert(textStatus); 
+                console.log( "JSON Data: ERROR"  );
+              }
+          });            
+      }
+
+      function drawVisualization(jsdata, chart, chart_vaxis) {
+          console.log(jsdata);
+          //jsdata = jsdata_title.concat(jsdata);
+          
+          var data = google.visualization.arrayToDataTable( jsdata );
+        
+          // Create and draw the visualization.
+          var ac = new google.visualization.AreaChart(document.getElementById(chart));
+       
+          // read size of div - write in variable and set here
+          ac.draw(data, {
+            //title : 'A vs. C',
+            //isStacked: true,
+            colors: ['<?php echo $chart_color1; ?>', '<?php echo $chart_color2; ?>'],
+            pointSize: 0,
+            width: 680,
+            height: 500,
+            legend: { position: 'top' },
+            chartArea: {'width': '80%', 'height': '65%'},
+            vAxis: { title: chart_vaxis,  
+              slantedText:true, slantedTextAngle:45 },
+            hAxis: { title: "<?php echo $chart_haxis; ?>"}
+          });
+      }
+      
+</script>
 <h2><?php __('Season Statistics'); ?></h2>
 
 <table width="100%">
@@ -212,8 +270,17 @@ for ( $j = 0; $j < count( $sumdata['collected_sportstypes'] ); $j++ )
 if ( count( $trainings ) > 0 ) 
 {
     
-  $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-  echo $ofc->createflash('my_chart1','680','400',$jsonurl.'type:distance/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
+  $jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/' .
+    'type:distance/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype;
+?>
+<script language="JavaScript">
+function get_distance() {
+  getJSONdata('<?php echo $jsonurl; ?>','chart1','<?php echo $length_unit; ?>');
+}
+
+google.setOnLoadCallback(get_distance);
+</script>
+<?php
 
 } else
 {
@@ -222,12 +289,12 @@ if ( count( $trainings ) > 0 )
 
 ?>
 
-<div id="my_chart1"></div>
+<div id="chart1"></div>
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $jsonurl ) ) { ?>
-<br /><br />
+<br /><br /><br /><br /><br /><br />
 Debugging: (only localhost)<br />
-<a href="<?php echo $jsonurl.'type:distance/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<a href="<?php echo $jsonurl; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
 <br /><br />
@@ -239,9 +306,17 @@ Debugging: (only localhost)<br />
 if ( count( $trainings ) > 0 ) 
 {
     
-	$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/';
-	echo $ofc->createflash('my_chart2','680','400',$jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype);
+	$jsonurl = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingstatistics/statistics_whathaveidone_json/' .
+	'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype;
+?>
+<script language="JavaScript">
+function get_duration() {
+  getJSONdata('<?php echo $jsonurl; ?>','chart2','<?php __('hours'); ?>');
+}
 
+google.setOnLoadCallback(get_duration);
+</script>
+<?php
 } else
 {
   __('No Chart data.');
@@ -249,12 +324,12 @@ if ( count( $trainings ) > 0 )
 
 ?>
 
-<div id="my_chart2"></div>
+<div id="chart2"></div>
 
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $jsonurl ) ) { ?>
-<br /><br />
+<br /><br /><br /><br /><br /><br />
 Debugging: (only localhost)<br />
-<a href="<?php echo $jsonurl.'type:duration/start:' . $start . '/end:' . $end . '/sportstype:' . $post_sportstype; ?>" target="_blank"><?php echo $jsonurl; ?></a>
+<a href="<?php echo $jsonurl; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
 <?php

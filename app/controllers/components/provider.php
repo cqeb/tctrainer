@@ -183,13 +183,11 @@ class ProviderComponent extends Object {
 		
 		// add generate time
 		$benchmarkTime = microtime(true) - $timerStart;
-		$html .= "\n<!-- generated in {$benchmarkTime}s -->\n";
+		//$html .= "\n<!-- generated in {$benchmarkTime}s -->\n";
 
 
 		if ( $html_output != true ) {
 			WorkoutRenderer::render_events($workouts, $this->getAthlete(), $time, $phase, $genWeek);
-			//print_r($workouts);
-			//return $workouts;
 		} else
 			return $html;			
 	}

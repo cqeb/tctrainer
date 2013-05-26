@@ -142,16 +142,15 @@ class TrainingplansController extends AppController {
 		if ( !isset( $_GET['key'] ) )
 			$this->checkSession();
 		else {
-			$ath_id = $_GET['key'];
-			$ath_id = $this->Transactionhandler->_decrypt_data( $ath_id );
-			$this->loadModel('User');
-	        $results = $this->User->findById( $ath_id );
-	        $user_object = $results['User'];
-	        // TODO not secure
-	        $this->Session->write('userobject', $user_object);
+			if ( $_GET['key'] == $this->Transactionhandler->_encrypt_data( $_GET['athlete_id'] ) ) {
+				$this->loadModel('User');
+		        $results = $this->User->findById( $_GET['athlete_id'] );
+		        $user_object = $results['User'];
+		        $this->Session->write('userobject', $user_object);
+		    } else
+		    	$this->checkSession();
 		}
 
-		
 		$this->layout = 'plain';
 
 		Configure::write('debug', 0);

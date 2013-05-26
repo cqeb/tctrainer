@@ -809,6 +809,8 @@ function edit_training($id = null) {
 			$this->Session->write( 'formcurve_date_to', $end );
 			$this->Session->write( 'formcurve_search', $searchfilter );
 
+            $unit = $this->Unitcalc->get_unit_metric();
+
             $this->set('start', $start);
             $this->set('end', $end);
             //$this->set('sportstype', $this->data['Trainingstatistic']['sportstype']);
@@ -816,6 +818,7 @@ function edit_training($id = null) {
             $this->set('testworkoutsfilter', $testworkoutsfilter);
             $this->set('length_unit', $unit['length']);
             $this->set('statusbox', $statusbox);
+            $this->set('unit', $unit);
 
    }
 
@@ -919,6 +922,7 @@ function edit_training($id = null) {
             $this->set('trainings', $trainings);
             //$this->set('length_unit', $unit['length']);
             $this->set('statusbox', $statusbox);
+            $this->set('weight_unit', $unit['weight']);
 
    }
 
@@ -959,6 +963,7 @@ function edit_training($id = null) {
 				$this->set('maxweight', $return['maxweight']);
 				$this->set('step', 5);
 				$this->set('weeks', $return['weeks']);
+				$this->set('weeks_ts', $return['weeks_ts']);
 				$this->set('trainings2', $return['train']);
 				$this->set('weight_unit', $unit['weight']);
 			}
@@ -1043,6 +1048,8 @@ function edit_training($id = null) {
             $this->set('end', $return['end']);
             $this->set('maxweeks', $return['weeks_between_dates']);
             $this->set('weeks', $return['weeks']);
+            $this->set('weeks2', $return['weeks2']);
+
             $this->set('trainings2', $return['trainings2']);
 			//$this->set('trainings2_competitor', $return_competitor['trainings2']);
             $this->set('stype', $return['type']);
