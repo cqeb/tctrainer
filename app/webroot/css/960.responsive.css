@@ -318,4 +318,11 @@
     height:180px;
   }
 
+  .avgweekly img.edit {
+    margin-left: -22px;
+  }  
+
+  .workouts .type button, .type span.category, .mesocycle, .colhide {
+    display:none;
+  }
 }

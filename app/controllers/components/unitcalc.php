@@ -79,28 +79,31 @@ class UnitcalcComponent extends Object {
             if ( is_numeric( $amount ) )
             {
 	              $session_userobject = $this->Session->read('userobject');
-				  $locale = $session_userobject['yourlanguage'];
+				        $locale = $session_userobject['yourlanguage'];
 				  
 	              if (  $session_userobject['unit'] == 'imperial' )
 	              {
-	                 if ( $mode == 'show' ) $convert = 'km_mi';
+	                 if ( $mode == 'show' ) 
+                        $convert = 'km_mi';
 	                 else
-	                     $convert = 'mi_km';
-	
-	                 $amount_array['amount'] = $this->convert_metric( $amount, $convert );
+	                      $convert = 'mi_km';
+
+	                 $amount_array['amount'] = $this->convert_metric( $amount, $convert, 1 );
 	                 $amount_array['unit'] = 'mi';
 	              } else
 	              {
-	                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-	                  else $amount_array['amount'] = $amount;
-	
-	                  $amount_array['unit'] = 'km';
+	                 if ( $mode == 'show' ) 
+                        $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+	                 else 
+                        $amount_array['amount'] = $amount;
+
+	                 $amount_array['unit'] = 'km';
 	              }
 	
-				  if ( $locale == 'ger' || $excel == 'excel' )
-				  { 
-				  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
-				  }
+      				  if ( $locale == 'ger' || $excel == 'excel' )
+      				  { 
+      				  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+      				  }
 				  	
 	              if ( $ret == 'single' )
 	                 return $amount_array['amount'];
@@ -119,29 +122,34 @@ class UnitcalcComponent extends Object {
             if ( is_numeric( $amount ) )
             {
               $session_userobject = $this->Session->read('userobject');
-			  $locale = $session_userobject['yourlanguage'];
+              $locale = $session_userobject['yourlanguage'];
+              
               if (  $session_userobject['unit'] == 'imperial' )
               {
-                 if ( $mode == 'show' ) $convert = 'kg_lbs';
+                 if ( $mode == 'show' ) 
+                    $convert = 'kg_lbs';
                  else
-                     $convert = 'lbs_kg';
+                    $convert = 'lbs_kg';
 
                  $amount_array['amount'] = $this->convert_metric( $amount, $convert );
                  $amount_array['unit'] = 'lbs';
               } else
               {
-                  if ( $mode == 'show' ) $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  else $amount_array['amount'] = $amount;
+                  if ( $mode == 'show' ) 
+                      $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  else 
+                      $amount_array['amount'] = $amount;
+                  
                   $amount_array['unit'] = 'kg';
               }
 			  
-			  if ( $locale == 'ger' || $excel == 'excel' ) 
-			  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+			        if ( $locale == 'ger' || $excel == 'excel' ) 
+			  		      $amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
 			
               if ( $ret == 'single' )
-                 return $amount_array['amount'];
+                  return $amount_array['amount'];
               else
-                 return $amount_array;
+                  return $amount_array;
             } else
                 return false;
    }
@@ -151,7 +159,6 @@ class UnitcalcComponent extends Object {
    **/
    function check_height( $amount, $mode = 'show', $ret = 'both' )
    {
-
             if ( is_numeric( $amount ) )
             {
 		
@@ -165,10 +172,10 @@ class UnitcalcComponent extends Object {
                  } else
                      $convert = 'ft_cm';
 
-				 $amount = $this->convert_metric( $amount, $convert );
-                 //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                 $amount_array['amount'] = $amount;
-                 $amount_array['unit'] = 'ft';
+				          $amount = $this->convert_metric( $amount, $convert );
+                  //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                  $amount_array['amount'] = $amount;
+                  $amount_array['unit'] = 'ft';
               } else
               {
                   if ( $mode == 'show' ) 
@@ -366,20 +373,18 @@ class UnitcalcComponent extends Object {
    {
             $session_userobject = $this->Session->read('userobject');
 			
-			$session_unidate = '';
+			      $session_unidate = '';
+
             if ( isset( $session_unitdate_overwrite ) && $session_unitdate_overwrite != '' ) 
-            	$session_unitdate = $session_unitdate_overwrite;
-				
-			else
-			{
-				$session_unitdate = $session_userobject['unitdate'];
-			}
+            	   $session_unitdate = $session_unitdate_overwrite;
+				    else
+				         $session_unitdate = $session_userobject['unitdate'];
 			
             if ( $session_unitdate == '' ) 
-            	$session_unitdate = $this->Session->read('session_unitdate');
+            	  $session_unitdate = $this->Session->read('session_unitdate');
 				
             if ( $session_unitdate == '' )
-				$session_unitdate = 'yyyymmdd'; 
+				        $session_unitdate = 'yyyymmdd'; 
 			
             $return = "";
 
@@ -388,6 +393,7 @@ class UnitcalcComponent extends Object {
             {
                $date_split_fromtime = split( ' ', $date );
                $date_split = split( '-', $date_split_fromtime[0] );
+
                switch ( $session_unitdate )
                {
                       case "ddmmyyyy":
@@ -420,13 +426,13 @@ class UnitcalcComponent extends Object {
                       case "yyyymmdd":
                       $date_split = split( '-', $date );
                       if ( count( $date_split ) == 3 )
-					  {
-	                      // in case you get a wrong format
-	                      $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
-					  } else
-					  {
-					  		$return = 0;
-					  }
+					            {
+	                       // in case you get a wrong format
+	                       $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
+					            } else
+					            {
+					  		         $return = 0;
+					            }        
                       break;
                }
 

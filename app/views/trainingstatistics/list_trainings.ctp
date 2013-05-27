@@ -24,7 +24,7 @@ __('SWIM workout', true);
 if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 {
 ?>
-                   <a href="/trainer/garmin/" target="_new"><button onClick="javascript:_new.location.href='/trainer/garmin/'" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
+                   <a href="/trainer/trainingstatistics/garmin_read" target="_new"><button onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
 <?php
 }
 ?>
@@ -56,7 +56,7 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
 <tr>
     <td><a <?php if ( isset( $training['name'] ) && $training['name'] != '' ) echo 'class="help2" title="' . $training['name'] . '"'; ?>" href="/trainer/trainingstatistics/edit_training/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><?php echo $unitcalc->check_date($training['date']); ?></a><?php echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
     <td><?php $stype = $training['sportstype']; __($stype); ?></td>
-    <td><?php $distance = $unitcalc->check_distance($training['distance'], 'show'); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
+    <td align="right"><?php $distance = $unitcalc->check_distance($training['distance'], 'show'); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
     <td><?php $duration = $unitcalc->seconds_to_time($training['duration']); echo $duration; ?></td>
     <td class="listaction">
 <?php 

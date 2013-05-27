@@ -60,331 +60,333 @@ class TrainingstatisticsController extends AppController {
 	
 	    if ( !empty($this->data) )
 	    {
-	      $this->set('UserID', $this->User->id);
+	      	  $this->set('UserID', $this->User->id);
 	
-	      if ( isset( $this->data['Trainingstatistic']['import_csv_upload'] ) )
-	      {
-	            $csv_file = $this->data['Trainingstatistic']['import_csv_upload'];
-	
-	      } elseif ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
-	      {
-	            $csv_file_data = $this->data['Trainingstatistic']['hiddenimportfile'];
-	      }
+		      if ( isset( $this->data['Trainingstatistic']['import_csv_upload'] ) )
+		      {
+		            $csv_file = $this->data['Trainingstatistic']['import_csv_upload'];
+		
+		      } elseif ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
+		      {
+		            $csv_file_data = $this->data['Trainingstatistic']['hiddenimportfile'];
+		      }
 	      
-	      if ( isset( $csv_file['tmp_name'] ) || $this->data['Trainingstatistic']['hiddenimportfile'] )
-	      {
-	
-	        $userid = $this->User->id;
-	
-	        if ( isset( $csv_file['tmp_name'] ) )
-	        {
-	          $return = $this->_save_file($csv_file, $userid, "file", "import");
-	          //if (!$return['error']) echo $return['destination'];
-                
-                $app_backslash = Configure::read('App.Dirbackslash');
+		      if ( isset( $csv_file['tmp_name'] ) || $this->data['Trainingstatistic']['hiddenimportfile'] )
+		      {
+		
+		        $userid = $this->User->id;
+		
+		        if ( isset( $csv_file['tmp_name'] ) )
+		        {
+		            $return = $this->_save_file($csv_file, $userid, "file", "import");
+		            //if (!$return['error']) echo $return['destination'];
+            
+	                $app_backslash = Configure::read('App.Dirbackslash');
 
-                $importfile = Configure::read('App.uploadDir') . 'imports/' . $return['filename'];
+	                $importfile = Configure::read('App.uploadDir') . 'imports/' . $return['filename'];
                 
-	          if ( $_SERVER['HTTP_HOST'] == 'localhost' )
-              {
-                  if ( isset( $app_backslash ) && $app_backslash == true ) 
-                        $importfile = str_replace( '/', '\\', $importfile);
-                  //$importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);                  
-              } else
-              {
-                  //$importfile = str_replace( 'files/', 'app/webroot/files/', $importfile);                  
-              }
+					if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+			      	{
+			          	if ( isset( $app_backslash ) && $app_backslash == true ) 
+			                $importfile = str_replace( '/', '\\', $importfile);
+                  		//$importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);                  
+              		} else
+              		{
+                  		//$importfile = str_replace( 'files/', 'app/webroot/files/', $importfile);                  
+              		}
 	  
-	          $importdata = file( $importfile );
+	          		$importdata = file( $importfile );
 	
-	        } else
-	        {
-                //pr($this->data['Trainingstatistic']['hiddenimportfile']);
-	          $importdata = unserialize(urldecode($this->data['Trainingstatistic']['hiddenimportfile']));
-	        }
+	        	} else
+	        	{
+                	//pr($this->data['Trainingstatistic']['hiddenimportfile']);
+	          		$importdata = unserialize(urldecode($this->data['Trainingstatistic']['hiddenimportfile']));
+	        	}
 	
-              if ( count($importdata) < 2 ) {
-                  if ( is_array( $importdata ) ) {
-                      $importdata = implode("",$importdata);
-                      $importdata = explode("\r",$importdata);
-                  }
-              }
-              if ( count($importdata) < 2 ) {
-                  if ( is_array( $importdata ) ) {
-                      $importdata = implode("",$importdata);
-                      $importdata = explode("\r\n",$importdata);
-                  }
-              }
+              	if ( count($importdata) < 2 ) {
+                  	if ( is_array( $importdata ) ) {
+                    	$importdata = implode("",$importdata);
+                    	$importdata = explode("\r",$importdata);
+                  	}
+              	}
+
+              	if ( count($importdata) < 2 ) {
+                  	if ( is_array( $importdata ) ) {
+                      	$importdata = implode("",$importdata);
+                      	$importdata = explode("\r\n",$importdata);
+                  	}
+              	}
               
-	        if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
-	        {
-	            $this->Session->write('flash',__('No import data found!', true));
-	            $this->set('statusbox', $statusbox);
-	            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
-	            die();
-	        }
+		        if ( !isset( $importdata ) || ( count($importdata) < 2 ) )  
+		        {
+		            $this->Session->write('flash',__('No import data found!', true));
+		            $this->set('statusbox', $statusbox);
+		            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
+		            die();
+		        }
 	
-	        $check_sport = array( 'RUN', 'BIKE', 'SWIM' );
+	        	$check_sport = array( 'RUN', 'BIKE', 'SWIM' );
 	
-	        foreach ( $importdata as $key => $value )
-	        {
+	        	foreach ( $importdata as $key => $value )
+	        	{
+	              	if ( $key > 0 ) 
+	              	{
+	                	$import_error = '';
+	                	if ( !$this->Unitcalc->is_utf8($value) ) 
+	                		$value = utf8_encode( $value );
 	
-	              if ( $key > 0 ) 
-	              {
-	                $import_error = '';
-	                if ( !$this->Unitcalc->is_utf8($value) ) $value = utf8_encode( $value );
+	                	$idl = split( ";", $value ); // importdatalines
+						if ( isset( $idl[0] ) ) $importdate = $importdate_orig = $idl[0];
+						else $importdate = '';
+						
+						if ( isset( $idl[1] ) ) $importsport = $importsport_orig = $idl[1];
+						else $importsport = '';
+						
+						if ( isset( $idl[2] ) ) $importdistance = $importdistance_orig = $idl[2];
+						else $importdistance = '';
+						
+						if ( isset( $idl[3] ) ) $importduration = $importduration_orig = $idl[3];
+						else $importduration = '';
+						
+						if ( isset( $idl[4] ) ) $importheartrate = $idl[4];
+						else $importheartrate = '';
+						
+						/*
+						if ( isset( $idl[5] ) ) $importtestworkout = $idl[5];
+						else $importtestworkout = '';
+						*/
+						
+						if ( isset( $idl[5] ) ) $importname = $importname_orig = $idl[5];
+						else $importname = '';
+						
+						if ( isset( $idl[6] ) ) $importweight = $idl[6];
+						else $importweight = '';
+						
+						if ( isset( $idl[7] ) ) $importcomment = $idl[7];
+						else $importcomment = '';
+						
+						if ( isset( $idl[8] ) ) $importcompetition = $idl[8];
+						else $importcompetition = '';
+		
+						if ( isset( $idl[9] ) ) $importlocation = $idl[9];
+						else $importlocation = '';
+						
+						if ( isset( $idl[10] ) ) $importworkoutlink = $idl[10];
+						else $importworkoutlink = '';
+		
+		                if ( strtotime( $importdate ) )
+		                { 
+		                      $importdate = $this->Unitcalc->check_date( $importdate, 'save' );
+		                      if ( !is_numeric( strtotime( $importdate ) ) ) 
+		                      {
+		                          $import_error = '<br />' . __('Date', true) . ' ' . __('is not valid!', true);
+		                          $importdate = '';
+		                      }
+		                } else
+		                { 
+		                      $import_error = '<br />' . __('Date', true) . ' ' . __('is not valid!', true);
+		                      $importdate = '';
+		                }
 	
-	                $idl = split( ";", $value ); // importdatalines
-					if ( isset( $idl[0] ) ) $importdate = $importdate_orig = $idl[0];
-					else $importdate = '';
-					
-					if ( isset( $idl[1] ) ) $importsport = $importsport_orig = $idl[1];
-					else $importsport = '';
-					
-					if ( isset( $idl[2] ) ) $importdistance = $importdistance_orig = $idl[2];
-					else $importdistance = '';
-					
-					if ( isset( $idl[3] ) ) $importduration = $importduration_orig = $idl[3];
-					else $importduration = '';
-					
-					if ( isset( $idl[4] ) ) $importheartrate = $idl[4];
-					else $importheartrate = '';
-					
-					/*
-					if ( isset( $idl[5] ) ) $importtestworkout = $idl[5];
-					else $importtestworkout = '';
-					*/
-					
-					if ( isset( $idl[5] ) ) $importname = $importname_orig = $idl[5];
-					else $importname = '';
-					
-					if ( isset( $idl[6] ) ) $importweight = $idl[6];
-					else $importweight = '';
-					
-					if ( isset( $idl[7] ) ) $importcomment = $idl[7];
-					else $importcomment = '';
-					
-					if ( isset( $idl[8] ) ) $importcompetition = $idl[8];
-					else $importcompetition = '';
-	
-					if ( isset( $idl[9] ) ) $importlocation = $idl[9];
-					else $importlocation = '';
-					
-					if ( isset( $idl[10] ) ) $importworkoutlink = $idl[10];
-					else $importworkoutlink = '';
-	
-	                if ( strtotime( $importdate ) )
-	                { 
-	                      $importdate = $this->Unitcalc->check_date( $importdate, 'save' );
-	                      if ( !is_numeric( strtotime( $importdate ) ) ) 
-	                      {
-	                          $import_error = '<br />' . __('Date', true) . ' ' . __('is not valid!', true);
-	                          $importdate = '';
-	                      }
-	                } else
-	                { 
-	                      $import_error = '<br />' . __('Date', true) . ' ' . __('is not valid!', true);
-	                      $importdate = '';
-	                }
-	
-	                if ( isset( $importsport ) && in_array( strtoupper($importsport), $check_sport ))
-	                {
-	                      $importsport =  strtoupper($importsport);
-	                } else
-	                {
-	                      if ( isset( $importsport ) ) $missingsport = ' (' . $importsport . ')';
-	                      else $missingsport = '';
-	                                        
-	                      $import_error .= '<br />' . __('Sport', true) . ' ' . __('is not valid!', true) . $missingsport;
-	                      $importsport = '';
-	                }
+		                if ( isset( $importsport ) && in_array( strtoupper($importsport), $check_sport ))
+		                {
+		                      $importsport =  strtoupper($importsport);
+		                } else
+		                {
+		                      if ( isset( $importsport ) ) $missingsport = ' (' . $importsport . ')';
+		                      else $missingsport = '';
+		                                        
+		                      $import_error .= '<br />' . __('Sport', true) . ' ' . __('is not valid!', true) . $missingsport;
+		                      $importsport = '';
+		                }
 	                
-	                if ( isset( $importdistance ) ) 
-	                      $importdistance = str_replace( ',', '.', $importdistance );
-	                if ( isset( $importdistance ) && is_numeric( $importdistance ) )
-	                { 
-	                      $importdistance = $this->Unitcalc->check_distance( $importdistance, 'save', 'single' );
-	                } else
-	                {
-	                      $import_error .= '<br />' . __('Distance', true) . ' ' . __('is not valid!', true);
-	                      $importdistance = '';
-	                }
+		                if ( isset( $importdistance ) ) 
+		                      $importdistance = str_replace( ',', '.', $importdistance );
+		                if ( isset( $importdistance ) && is_numeric( $importdistance ) )
+		                { 
+		                      $importdistance = $this->Unitcalc->check_distance( $importdistance, 'save', 'single' );
+		                } else
+		                {
+		                      $import_error .= '<br />' . __('Distance', true) . ' ' . __('is not valid!', true);
+		                      $importdistance = '';
+		                }
 	                
-	                if ( isset( $importduration ) ) 
-	                {
-	                    $importdurationarray = split( ':', $importduration );
-	                
-	                    if ( is_numeric($importdurationarray[0]) && is_numeric($importdurationarray[1]) && is_numeric($importdurationarray[2]) )
-	                    {
-	                          $importduration = $this->Unitcalc->time_to_seconds($importduration);
-	                    } else
-	                    {
-	                          $import_error .= '<br />' . __('Duration', true) . ' ' . __('is not valid!', true);
-	                          $importduration = '';
-	                    }
-	                } else
-	                {
-	                    $import_error .= '<br />' . __('Duration', true) . ' ' . __('is not valid!', true);
-	                    $importduration = '';
-	                }                
+		                if ( isset( $importduration ) ) 
+		                {
+		                    $importdurationarray = split( ':', $importduration );
+		                
+		                    if ( is_numeric($importdurationarray[0]) && is_numeric($importdurationarray[1]) && is_numeric($importdurationarray[2]) )
+		                    {
+		                          $importduration = $this->Unitcalc->time_to_seconds($importduration);
+		                    } else
+		                    {
+		                          $import_error .= '<br />' . __('Duration', true) . ' ' . __('is not valid!', true);
+		                          $importduration = '';
+		                    }
+		                } else
+		                {
+		                    $import_error .= '<br />' . __('Duration', true) . ' ' . __('is not valid!', true);
+		                    $importduration = '';
+		                }                
 	
-	                if ( isset( $importheartrate ) && is_numeric($importheartrate) )
-	                {
-	                      //$importheartrate = $importdatalines[5];
-	                } else
-	                {
-	                      $import_error .= '<br />' . __('Avg. heart rate', true) . ' ' . __('is not valid!', true);
-	                      $importheartrate = '';
-	                }
+		                if ( isset( $importheartrate ) && is_numeric($importheartrate) )
+		                {
+		                      //$importheartrate = $importdatalines[5];
+		                } else
+		                {
+		                      $import_error .= '<br />' . __('Avg. heart rate', true) . ' ' . __('is not valid!', true);
+		                      $importheartrate = '';
+		                }
 	                
-	                /*
-					if ( isset( $importtestworkout ) && strtoupper($importtestworkout) == 'YES' ) 
-	                      $importtestworkout = 1;
-	                else
-	                      $importtestworkout = 0;
-					*/
+		                /*
+						if ( isset( $importtestworkout ) && strtoupper($importtestworkout) == 'YES' ) 
+		                      $importtestworkout = 1;
+		                else
+		                      $importtestworkout = 0;
+						*/
 	                      
-	                if ( isset( $importcompetition ) && strtoupper($importcompetition) == 'YES' ) 
-	                      $importcompetition = 1;
-	                else
-	                      $importcompetition = 0;
+		                if ( isset( $importcompetition ) && strtoupper($importcompetition) == 'YES' ) 
+		                      $importcompetition = 1;
+		                else
+		                      $importcompetition = 0;
+		                
+		                if ( isset( $importcomment ) ) 
+		                      $importcomment = str_replace( '"', '', $importcomment );
+		                else 
+		                      $importcomment = '';
+		                
+		                if ( isset( $importlocation ) && strlen( $importlocation ) > 1 ) 
+		                      $importlocation = $importlocation;
+		                else 
+		                      $importlocation = '';
 	                
-	                if ( isset( $importcomment ) ) 
-	                      $importcomment = str_replace( '"', '', $importcomment );
-	                else 
-	                      $importcomment = '';
-	                
-	                if ( isset( $importlocation ) && strlen( $importlocation ) > 1 ) 
-	                      $importlocation = $importlocation;
-	                else 
-	                      $importlocation = '';
-	                
-	                if ( isset( $importweight ) ) 
-	                		$importweight = str_replace( ',', '.', $importweight );
-	
-	                if ( isset( $importweight ) && is_numeric( $importweight ) )
-	                { 
-	                      $importweight = $this->Unitcalc->check_weight( $importweight, 'save', 'single' );
-	                } elseif ( isset( $importweight ) && $importweight == '' )
-	                {
-	                      $importweight = '';
-	                } else 
-	                {
-	                      $import_error .= '<br />' . __('Weight', true) . ' ' . __('is not valid!', true);
-	                      $importweight = '';     
-	                }
-	
-	                if ( isset( $import_error ) && $import_error == '' ) 
-	                {
-	                  	$sql = "SELECT * FROM trainingstatistics WHERE user_id = $session_userid AND " .
-	                      "date = '" . $importdate . "' AND sportstype = '" . $importsport . "' AND " .
-	                      "duration = " . $importduration;
-	                  	$checktrainingdata = $this->Trainingstatistic->query( $sql );
-	                  	if ( count($checktrainingdata) > 0 ) 
-	                  		$import_error .= '<br />' . __('Workout already existing!', true);
-	                }
+		                if ( isset( $importweight ) ) 
+		                		$importweight = str_replace( ',', '.', $importweight );
+		
+		                if ( isset( $importweight ) && is_numeric( $importweight ) )
+		                { 
+		                      $importweight = $this->Unitcalc->check_weight( $importweight, 'save', 'single' );
+		                } elseif ( isset( $importweight ) && $importweight == '' )
+		                {
+		                      $importweight = '';
+		                } else 
+		                {
+		                      $import_error .= '<br />' . __('Weight', true) . ' ' . __('is not valid!', true);
+		                      $importweight = '';     
+		                }
+		
+		                if ( isset( $import_error ) && $import_error == '' ) 
+		                {
+		                  	$sql = "SELECT * FROM trainingstatistics WHERE user_id = $session_userid AND " .
+		                      "date = '" . $importdate . "' AND sportstype = '" . $importsport . "' AND " .
+		                      "duration = " . $importduration;
+		                  	$checktrainingdata = $this->Trainingstatistic->query( $sql );
+		                  	
+		                  	if ( count($checktrainingdata) > 0 ) 
+		                  		$import_error .= '<br />' . __('Workout already existing!', true);
+		                }
 	                                                      
-	if ( isset( $import_error ) && $import_error == '' ) 
-	{
+						if ( isset( $import_error ) && $import_error == '' ) 
+						{	
+							$newimportfilearray[] = $value; 
 	  
-		  $newimportfilearray[] = $value; 
-	  
-		  if ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
-		  {
+						  	if ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
+						  	{
 		    
-		      $data['avg_pulse'] = $importheartrate;
-		      $data['duration'] = $importduration;
-		      $data['birthday'] = $results['User']['birthday'];
-		      $data['weight'] = $importweight;
-		      $data['gender'] = $results['User']['gender'];
-		      
-		      // calculate kcal for workout    
-		      $kcal = $this->Unitcalc->calc_kcal( $data );
-		      
-		      $time_in_zones = "";
-		      $trimp = round(
-		          $this->Unitcalc->calc_trimp( 
-		            $importduration/60, 
-		            $importheartrate, 
-		            $time_in_zones, 
-		            $results['User']['lactatethreshold'],
-		            $importsport 
-		            )
-		      );
+							      $data['avg_pulse'] = $importheartrate;
+							      $data['duration'] = $importduration;
+							      $data['birthday'] = $results['User']['birthday'];
+							      $data['weight'] = $importweight;
+							      $data['gender'] = $results['User']['gender'];
+							      
+							      // calculate kcal for workout    
+							      $kcal = $this->Unitcalc->calc_kcal( $data );
+							      
+							      $time_in_zones = "";
+							      $trimp = round(
+							          $this->Unitcalc->calc_trimp( 
+							            $importduration/60, 
+							            $importheartrate, 
+							            $time_in_zones, 
+							            $results['User']['lactatethreshold'],
+							            $importsport 
+							            )
+							      );
 		
-		      $avg_speed = round( ( $importdistance / ( $importduration / 3600 ) ), 2); 
+		      					  $avg_speed = round( ( $importdistance / ( $importduration / 3600 ) ), 2); 
 		
-		      $sql = "INSERT INTO trainingstatistics (id, user_id, name, date, sportstype, distance, 
-		        duration, avg_pulse, avg_speed, trimp, kcal, location, weight, comment, 
-		        competition, workout_link, created, modified) VALUES (" .
-		        "null, " . 
-		        $session_userid . ",'" . 
-		        $importname . "', '" . 
-		        $importdate . "', '" .
-		        $importsport . "', '" .
-		        $importdistance . "', '" .
-		        $importduration . "', '" .
-		        $importheartrate . "', '" .
-		        $avg_speed . "', '" .
-		        $trimp . "', '" .
-		        $kcal . "', '" .
-		        $importlocation . "', '" .
-		        $importweight . "', '" .
-		        $importcomment . "', '" .
-		        //$importtestworkout . "', '" .
-		        $importcompetition . "', '" .
-		        $importworkoutlink . "', '" .
-		        date( 'Y-m-d H:i:s', time() ) . "', '" .
-		        date( 'Y-m-d H:i:s', time() ) . "')";
+							      $sql = "INSERT INTO trainingstatistics (id, user_id, name, date, sportstype, distance, 
+							        duration, avg_pulse, avg_speed, trimp, kcal, location, weight, comment, 
+							        competition, workout_link, created, modified) VALUES (" .
+							        "null, " . 
+							        $session_userid . ",'" . 
+							        $importname . "', '" . 
+							        $importdate . "', '" .
+							        $importsport . "', '" .
+							        $importdistance . "', '" .
+							        $importduration . "', '" .
+							        $importheartrate . "', '" .
+							        $avg_speed . "', '" .
+							        $trimp . "', '" .
+							        $kcal . "', '" .
+							        $importlocation . "', '" .
+							        $importweight . "', '" .
+							        $importcomment . "', '" .
+							        //$importtestworkout . "', '" .
+							        $importcompetition . "', '" .
+							        $importworkoutlink . "', '" .
+							        date( 'Y-m-d H:i:s', time() ) . "', '" .
+							        date( 'Y-m-d H:i:s', time() ) . "')";
 		
-		      $sqlreturn = $this->Trainingstatistic->query( $sql );
+		      						$sqlreturn = $this->Trainingstatistic->query( $sql );
 		
-		  }
+							}
 	     
-	}
+						}
 	
-	$yesno[0] = __('No', true);
-	$yesno[1] = __('Yes', true);
+						$yesno[0] = __('No', true);
+						$yesno[1] = __('Yes', true);
 	
-	if ( isset( $import_error ) && $import_error == '' )
-	{ 
-		  $outputfile .= '<tr>' . 
-			  '<td>' . $importdate_orig . '</td>' .
-			  '<td>' . $importname_orig . '</td>' . 
-			  '<td>' . __($importsport_orig, true) . '</td>' . 
-			  '<td>' . $importdistance_orig . '</td>' . 
-			  '<td>' . $importduration_orig . '</td>' . 
-			  '<td style="color:green;font-weight:bold;">' . __('ok', true) . '</td>' .
-			  '</tr>';
-	} else
-	{
-		  $outputfile .= '<tr>' .
-		    '<td>' . substr( $importdate_orig, 0, 10 ) . '</td>' . 
-		    '<td colspan="4" style="color:red;"><b>' . __('Error', true) . '!</b>' . $import_error . '</td>' .
-		    '<td style="color:red;font-weight:bold;">' . __('not ok', true) . '</td>' .
-		    '</tr>';
-	}
+						if ( isset( $import_error ) && $import_error == '' )
+						{ 
+							  $outputfile .= '<tr>' . 
+								  '<td>' . $importdate_orig . '</td>' .
+								  '<td>' . $importname_orig . '</td>' . 
+								  '<td>' . __($importsport_orig, true) . '</td>' . 
+								  '<td>' . $importdistance_orig . '</td>' . 
+								  '<td>' . $importduration_orig . '</td>' . 
+								  '<td style="color:green;font-weight:bold;">' . __('ok', true) . '</td>' .
+								  '</tr>';
+						} else
+						{
+							  $outputfile .= '<tr>' .
+							    '<td>' . substr( $importdate_orig, 0, 10 ) . '</td>' . 
+							    '<td colspan="4" style="color:red;"><b>' . __('Error', true) . '!</b>' . $import_error . '</td>' .
+							    '<td style="color:red;font-weight:bold;">' . __('not ok', true) . '</td>' .
+							    '</tr>';
+						}
 	
-	              }  
-	        }
+	            	}  
+	        	}
 	
-	        if ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
-	        {
-	            $this->Session->write('flash',__('Import of workouts finished!', true));
-	            $this->set('statusbox', $statusbox);
-	            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
-	        }  
+		        if ( isset( $this->data['Trainingstatistic']['hiddenimportfile'] ) )
+		        {
+		            $this->Session->write('flash',__('Import of workouts finished!', true));
+		            $this->set('statusbox', $statusbox);
+		            $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
+		        }  
 	
-            //pr(urldecode(urlencode(serialize($newimportfilearray))));
+            	//pr(urldecode(urlencode(serialize($newimportfilearray))));
                                                                       
-	        $this->data['Trainingstatistic']['hiddenimportfile'] = urlencode(serialize($newimportfilearray));
-	        
-	        $this->set('importdata', $importdata);
-	        $this->set('newimportfile', urlencode(serialize($newimportfile)));
-	        $this->set('outputfile', $outputfile);
+		        $this->data['Trainingstatistic']['hiddenimportfile'] = urlencode(serialize($newimportfilearray));
+		        
+		        $this->set('importdata', $importdata);
+		        $this->set('newimportfile', urlencode(serialize($newimportfile)));
+		        $this->set('outputfile', $outputfile);
 	
-	      }
+	      	}
 	    }
+	    
 	    $this->set('statusbox', $statusbox);
   }
 
@@ -1131,140 +1133,245 @@ function edit_training($id = null) {
             $this->redirect(array('action'=>'list_trainings'));
 	}
 
+
+    function garmin_read()
+    {               
+		$this->layout = 'default_trainer';
+		$this->checkSession();
+
+		$session_userid = $this->Session->read('session_userid');
+	}
+    
+    function garmin_import_final()
+    {                                                       
+		$this->layout = 'default_trainer_2rows';
+		$this->checkSession();
+
+		$session_userid = $this->Session->read('session_userid');
+		
+		foreach ( $this->data['Trainingstatistic'] as $key => $val ) {
+			$workout = explode('###',base64_decode($val));
+
+			if ( is_array( $workout ) && count( $workout ) > 1 ) {
+
+			      $sql = "INSERT INTO trainingstatistics (id, user_id, name, date, sportstype, distance, 
+			        duration, avg_pulse, avg_speed, trimp, kcal, location, weight, comment, 
+			        competition, workout_link, created, modified) VALUES (" .
+			        "null, " . 
+			        $session_userid . ",'" . 
+			        $workout[2] . "', '" . 
+			        $workout[1] . "', '" .
+			        $workout[4] . "', '" .
+			        $workout[3] . "', '" .
+			        $workout[5] . "', '" .
+			        $workout[7] . "', '" .
+			        $workout[6] . "', '" .
+			        $workout[8] . "', '" .
+			        $workout[9] . "', '" .
+			        $workout[10] . "', '" .
+			        $workout[11] . "', '" .
+			        $workout[12] . "', '" .
+			        $workout[13] . "', '" .
+			        $workout[14] . "', '" .
+			        date( 'Y-m-d H:i:s', time() ) . "', '" .
+			        date( 'Y-m-d H:i:s', time() ) . "')";
+
+					$sqlreturn = $this->Trainingstatistic->query( $sql );
+			}
+		}
+
+        $this->set('statusbox', 'statusbox');
+        $this->Session->write('flash',__('Garmin workouts imported.',true));
+        $this->redirect(array('action'=>'list_trainings'));
+
+		$this->autoRender = false;
+	}
+
     function garmin_import()
     {                                                       
-           $debug = true;                                            
-           $this->layout = "ajaxrequests";
-           if ( $debug == true ) echo "before check" . "<br>";
-           //$this->checkSession();
-           
-           $session_userid = $this->Session->read('session_userid');
-           if ( $debug == true ) echo "userid: " . $session_userid . "<br>";
-           $mainpath = $_SERVER['DOCUMENT_ROOT'] . '/trainer/app/webroot/garmin/';
-           
-           include( $mainpath . 'xml2array.php' );
-           $key = serialize( $_POST );
-           $key_md5 = md5( $key );
-                                                       
-           $filename = $mainpath . 'cache/course.' . $key_md5 . '.txt';
-           
-           $logfile  = $mainpath . 'cache/garminlog.txt';
-           
-           $logcontent = '----------------------------------------------------------------<br>';
-           unset( $tdata ); 
-           
-           if ( isset( $_POST ) ) 
-           {
-                if ( isset( $_POST['activities'] ) ) 
-                {
-                    $somecontent = xml2array( $_POST['activities'] );
-                    // Problem if there are more laps
-                    $tarray = $somecontent['TrainingCenterDatabase']['Activities']['Activity']['Lap'];
-                    if ( $debug == true ) 
-                    {
-                            print_r( $tarray );
-                            echo "<br><br>";
-                            echo $tarray['TotalTimeSeconds'] . ' Sec.<br>';
-                            echo $tarray['DistanceMeters'] . ' m.<br>';
-                            echo $tarray['AverageHeartRateBpm'] . '<br>';
-                            echo $somecontent['TrainingCenterDatabase']['Activities']['Activity']['Id'] . '<br>';
-                    }
-                    $tdata['time'] = round( $tarray['TotalTimeSeconds']/60, 1);
-                    $tdata['distance'] = round( $tarray['DistanceMeters']/1000, 1);
-                    $tdata['hr'] = $tarray['AverageHeartRateBpm']['Value'];
-                    $tdata['date'] = date('Y-m-d H:i', strtotime($somecontent['TrainingCenterDatabase']['Activities']['Activity']['Id'])) . "<br>";
-                    print_r( $tdata );
-                    $logcontent .= "Object in POST - ok (" . $key_md5 . ")<br>\n";
-                } else {
+		// http://www.ciscomonkey.net/gc-to-dm-export/
+		// http://sergeykrasnov.ru/subsites/dev/garmin-connect-statisics/
 
-                    $somecontent = "";
-                    $logcontent .= "Object NOT in POST - not ok<br>\n";
-                }
-           }
-           
-           if ( $somecontent != '' ) 
-           {
-           
-                // In our example we're opening $filename in append mode.
-                // The file pointer is at the bottom of the file hence
-                // that's where $somecontent will go when we fwrite() it.
-                if (!$handle = fopen($filename, 'w')) 
-                {
-                    $logcontent .= "Cannot open file ($filename) ## <br>\n";
-                    exit;
-                }
-           
-                // Write $somecontent to our opened file.
-                if (fwrite($handle, $somecontent) === FALSE) 
-                {
-                    $logcontent .= "Can not write to file ($filename) ## <br>\r\n";
-                    exit;
-                }
-           
-                $logcontent .= "Success, wrote content to file ($filename) ## <br>\r\n";
-           
-                fclose($handle);
-           
-           }                                                       
-                                                                  
-           if (!$loghandle = fopen($logfile, 'a')) 
-           {
-                echo "Cannot open logcontent ## <br>\r\n";
-                exit;
-           }
-           
-           if (fwrite($loghandle, $logcontent) === FALSE) 
-           {
-                echo "Cannot write to logcontent ## <br>\r\n";
-                exit;
-           }
-           
-           fclose($loghandle);
-           
-           
-           /**
-            
-            user_id
-            name
-            date (date)
-            sportstype
-            workouttype
-            distance
-            duration
-            avg_pulse
-            avg_speed
-            trimp
-            kcal
-            location
-            weight
-            
-           // security check - don't view workouts of other users
-           if ( isset( $tdata ) )
-           {
-                $result = $this->Trainingstatistic->find ('all', 
-                                                     array('conditions' => 
-                                                           array( 'and' => 
-                                                                 array( 'id' => $id, 'user_id' => $session_userid ) 
-                                                                 ) 
-                                                           )
-                                                     );
-           
-                if ( isset( $result[0] ) )
-                {
-                        $this->data = $result[0];
-                } else
-                {
-                        $this->Session->write('flash',__('Sorry. This is not your entry!', true));
-                        $this->set('statusbox', 'statusbox error');
-                        $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
-                }
-           }
-           **/
-           
-           $this->set('logcontent', $logcontent);
-           //$this->redirect(array('action'=>'list_trainings'));                                                       
-        
-    }
+		$this->layout = 'default_trainer_2rows';
+		$this->checkSession();
+
+		$session_userid = $this->Session->read('session_userid');
+
+		// Set your username and password for Garmin Connect here.
+		
+		$username = $this->data['Trainingstatistic']['username'];
+		$password = $this->data['Trainingstatistic']['password'];
+		$limit = $this->data['Trainingstatistic']['amount'];
+		if ( !isset( $limit ) ) $limit = 5;
+		$urlGCLogin    = 'http://connect.garmin.com/signin';
+		$urlGCSearch   = 'http://connect.garmin.com/proxy/activity-search-service-1.2/json/activities?';
+		$urlGCActivity = 'http://connect.garmin.com/proxy/activity-service-1.3/gpx/activity/';
+
+		// Initially, we need to get a valid session cookie, so we pull the login page.
+		$return = $this->curl( $urlGCLogin );
+		// Now we'll actually login
+		$return = $this->curl( $urlGCLogin . '?login=login&login:signInButton=Sign%20In&javax.faces.ViewState=j_id1&login:loginUsernameField='.$username.'&login:password='.$password.'&login:rememberMe=on');
+
+		// Now we search GC for the latest activity.
+		// We support calling multiples from command line if specified,
+		// otherwise, only pull the last activity.
+
+		$search_opts = array(
+			'start' => 0,
+			'limit' => $limit
+			);
+
+		// Call the search
+		$result = $this->curl( $urlGCSearch . http_build_query( $search_opts ) );
+
+		// Decode our results
+		$json = json_decode( $result );
+
+		// Make sure they're valid
+		if ( ! $json ) {
+			echo "Error: ";	
+			switch(json_last_error()) {
+				case JSON_ERROR_DEPTH:
+					echo ' - Maximum stack depth exceeded';
+					break;
+				case JSON_ERROR_CTRL_CHAR:
+					echo ' - Unexpected control character found';
+					break;
+				case JSON_ERROR_SYNTAX:
+					echo ' - Syntax error, malformed JSON';
+					break;
+			}
+			echo PHP_EOL;
+			var_dump( $result );
+			//die();
+		} else
+		{
+			// Pull out just the list of activites
+			$activities = $json->{'results'}->{'activities'};
+			$activities_view = array();
+
+			$results = $this->Session->read('userobject');
+			//print_r($results); echo "<hr>";
+			// Process each activity.
+
+			// TODO first we have to display the workouts and show checkbox, then import it after user interaction
+			foreach ( $activities as $a ) {
+					//print_r($a->{'activity'}->{'activitySummary'}); die();
+
+					// be aware to save it in the right unit !!
+					$import['userid'] = $results['id'];
+					
+					// TODO reformat
+					$import['date'] = date( 'Y-m-d', strtotime( $a->{'activity'}->{'activitySummary'}->{'BeginTimestamp'}->{'value'} ) );
+					
+					$import['name'] = 'Garmin workout ' . $import['date'];
+
+					// in what format we have to save??
+					$import['distance'] = round( $a->{'activity'}->{'activitySummary'}->{'SumDistance'}->{'value'}, 1);
+
+					// We guess the type of sport
+					if ( $import['distance'] < 3 ) $import['sport'] = 'SWIM';
+					elseif ( $import['distance'] > 25 ) $import['sport'] = 'BIKE';
+					else $import['sport'] = 'RUN';
+
+					// you never know :) maybe I get it in meters
+					if ( $import['distance'] > 1000 ) $import['distance'] = round( ( $import['distance'] / 1000 ), 1 );
+
+					$import['duration'] = round( $a->{'activity'}->{'activitySummary'}->{'SumDuration'}->{'value'} );
+                    if ( isset( $a->{'activity'}->{'activitySummary'}->{'WeightedMeanMovingSpeed'}->{'value'} ) )
+                    	$import['avg_speed'] = round( $a->{'activity'}->{'activitySummary'}->{'WeightedMeanSpeed'}->{'value'}, 1 );
+                    else
+                    	$import['avg_speed'] = round( ( ( $import['distance'] * 1000 ) / $import['duration'] ), 1);
+					
+					if ( isset( $a->{'activity'}->{'activitySummary'}->{'WeightedMeanHeartRate'}->{'value'} ) ) {
+						$import['heartrate'] = $a->{'activity'}->{'activitySummary'}->{'WeightedMeanHeartRate'}->{'value'};
+					} else
+					{
+						if ( $import['sport'] == "SWIM" ) {
+							$factor = 0.85;
+						} else {
+							$factor = 0.89;
+						}
+						$import['heartrate'] = round( $results['lactatethreshold'] * $factor );
+					}
+
+					$time_in_zones = "";
+				    $trimp = round(
+				          $this->Unitcalc->calc_trimp( 
+				            $import['duration']/60, 
+				            $import['heartrate'], 
+				            $time_in_zones, 
+				            $results['lactatethreshold'],
+				            $import['sport'] 
+				            )
+				    );
+
+				    $import['trimp'] = $trimp;
+					if ( isset( $a->{'activity'}->{'activitySummary'}->{'SumEnergy'}->{'value'} ) ) 
+							$import['kcal'] = round( $a->{'activity'}->{'activitySummary'}->{'SumEnergy'}->{'value'}, 0 );
+					else
+							$import['kcal'] = 0;
+
+					$import['location'] = '';
+
+					if ( isset( $results['weight'] ) ) 
+						$import['weight'] = round( $results['weight'], 1);
+					else
+						$import['weight'] = 0;
+
+					$import['comment'] = '';
+					$import['competition'] = 0;
+					$import['workoutlink'] = '';
+					$import['importeddate'] = date( 'Y-m-d H:i:s', time() );
+					$activities_view[] = $import;
+			}
+			$this->set('activities_view', $activities_view);
+		}
+  }
+
+function curl( $url, $post = array(), $head = array(), $opts = array() )
+{
+	$cookie_file = '/tmp/cookies.txt';
+	$ch = curl_init();
+
+	//curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
+	curl_setopt( $ch, CURLOPT_URL, $url );
+	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );	
+	curl_setopt( $ch, CURLOPT_ENCODING, "gzip" );
+	curl_setopt( $ch, CURLOPT_COOKIEFILE, $cookie_file );
+	curl_setopt( $ch, CURLOPT_COOKIEJAR, $cookie_file );
+	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+
+	foreach ( $opts as $k => $v ) {
+		curl_setopt( $ch, $k, $v );
+	}
+
+	if ( count( $post ) > 0 ) {
+		// POST mode
+		curl_setopt( $ch, CURLOPT_POST, 1 );
+		curl_setopt( $ch, CURLOPT_POSTFIELDS, $post );
+	}
+	else {
+		curl_setopt( $ch, CURLOPT_HTTPHEADER, $head );
+		curl_setopt( $ch, CURLOPT_CRLF, 1 );
+	}
+
+	$success = curl_exec( $ch );
+
+	if ( curl_errno( $ch ) !== 0 ) {
+		throw new Exception( sprintf( '%s: CURL Error %d: %s', __CLASS__, curl_errno( $ch ), curl_error( $ch ) ) );
+	}
+
+	if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 200 ) {
+		if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 201 ) {
+			throw new Exception( sprintf( 'Bad return code(%1$d) for: %2$s', curl_getinfo( $ch, CURLINFO_HTTP_CODE ), $url ) );
+		}
+	}
+
+	curl_close( $ch );
+	return $success;
+}
+
 }
 
 ?>
