@@ -58,7 +58,7 @@ $(document).ready(function() {
 </script>
 
 </head>
-<body>
+<body <?php if ( isset( $this->onLoad ) ) { echo 'onLoad="'. $this->onLoad . '"'; } ?>>
 	<!-- Header -->
 	<div class="container_12 header">
 		<div class="grid_12 branding">

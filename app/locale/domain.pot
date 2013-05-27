@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2013-03-23 15:34+0100\n"
+"POT-Creation-Date: 2013-05-27 23:12+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,13 +14,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /cake/tests/test_app/views/pages/extract.ctp:10
+#: /cake/tests/test_app/views/pages/extract.ctp:10;10
 msgid "You have %d new message (domain)."
 msgid_plural "You have %d new messages (domain)."
 msgstr[0] ""
 msgstr[1] ""
 
-#: /cake/tests/test_app/views/pages/extract.ctp:11
+#: /cake/tests/test_app/views/pages/extract.ctp:11;11
 msgid "You deleted %d message (domain)."
 msgid_plural "You deleted %d messages (domain)."
 msgstr[0] ""

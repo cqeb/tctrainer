@@ -51,6 +51,10 @@ class UnitcalcHelper extends AppHelper {
    {
         return UnitcalcComponent::get_prices( $country, $currency, $userobject );
    }
+   function get_unit_metric()
+   {
+        return UnitcalcComponent::get_unit_metric();
+   }
 
 }
 ?>
