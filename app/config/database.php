@@ -95,13 +95,13 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 {
         class DATABASE_CONFIG {
         	var $default = array(
-        		'driver' => 'mysql',
-        		'persistent' => false,
-        		'host' => 'localhost',
-        		'login' => 'root',
-        		'password' => 'phai6oWo',
-        		'database' => 'trainer',
-        		'prefix' => '',
+                        'driver' => 'mysql',
+                        'persistent' => false,
+                        'host' => 'tcttrainer.db.10829392.hostedresource.com',
+                        'login' => 'tcttrainer',
+                        'password' => 'Finger99!',
+                        'database' => 'tcttrainer',
+                        'prefix' => '',
         	);
         }
 }
