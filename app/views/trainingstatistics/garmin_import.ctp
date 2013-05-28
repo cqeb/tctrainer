@@ -24,7 +24,7 @@
                       <th class='colhide'><?php __('Trimp'); ?></th>
                       <th class='colhide'><?php __('Kcal'); ?></th>
                       <!--<th><?php __('Location'); ?></th>-->
-                      <th class='colhide'><?php __('Weight'); ?></th>
+                      <!--th class='colhide'><?php __('Weight'); ?></th-->
                       <!--<th><?php __('Comment'); ?></th>-->
                       <!--<th><?php __('Competition'); ?></th>-->
                       <!--<th><?php __('Workoutlink'); ?></th>-->
@@ -57,7 +57,7 @@ foreach ( $activities_view as $key => $workout )
     echo "  <td class='colhide'>" . $workout['trimp'] . "</td>";
     echo "  <td class='colhide'>" . $workout['kcal'] . "</td>";
     //echo "  <td>" . $workout['location'] . "</td>";
-    echo "  <td class='colhide'>" . $this->Unitcalc->check_weight($workout['weight'],'show','single') . " " . $unit['weight'] . "</td>";
+    //echo "  <td class='colhide'>" . $this->Unitcalc->check_weight($workout['weight'],'show','single') . " " . $unit['weight'] . "</td>";
     //echo "  <td>" . $workout['comment'] . "</td>";
     //echo "  <td>" . $workout['competition'] . "</td>";
     //echo "  <td>" . $workout['workoutlink'] . "</td>";
