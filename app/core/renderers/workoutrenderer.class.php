@@ -184,23 +184,24 @@ END:VCALENDAR";
 			$mm = gmdate( 'm', $w->getWeekdaydateTS );
 			$dd = gmdate( 'd', $w->getWeekdaydateTS );
 
-			$endtime = mktime(0, 0, 0, $mm, $dd, $yy);
+			$endtime_orig = gmmktime(0, 0, 0, $mm, $dd, $yy);
 
 			//echo self::renderCheckButton($w, $athlete, $durationHr) . "<br />";
 			$startdate = $w->getWeekdaydate; // YYYYMMDD
 			$starttime = "063000";
 			$enddate = $w->getWeekdaydate; // YYYYMMDD
-			$endtime = 6.5*3600+($w->getDuration()*60)+$endtime;
+			$endtime = 6.5*3600+($w->getDuration()*60)+$endtime_orig;
 			$endtime = gmdate('His', $endtime);
 
+			// DTSTART;TZID=Europe/Vienna:" . $startdate . "T" . $starttime . "Z
 			// md5(uniqid(mt_rand(), true))
 			$ical = "
 BEGIN:VEVENT
 UID:" . md5($startdate.$workout_summary) . "@tricoretraining.com
 TZID:Europe/Vienna
 DTSTAMP:" . gmdate('Ymd').'T'. gmdate('His') . "Z
-DTSTART;TZID=Europe/Vienna:" . $startdate . "T" . $starttime . "Z
-DTEND;TZID=Europe/Vienna:" . $enddate . "T" . $endtime . "Z
+DTSTART:" . $startdate . "T" . $starttime . "Z
+DTEND:" . $enddate . "T" . $endtime . "Z
 SUMMARY:" . $workout_summary . "
 STATUS:CONFIRMED
 DESCRIPTION:" . $workout_description . "

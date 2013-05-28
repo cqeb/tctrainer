@@ -89,10 +89,10 @@ class TrainingstatisticsController extends AppController {
 			      	{
 			          	if ( isset( $app_backslash ) && $app_backslash == true ) 
 			                $importfile = str_replace( '/', '\\', $importfile);
-                  		//$importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);                  
+                  			//$importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);                  
               		} else
               		{
-                  		//$importfile = str_replace( 'files/', 'app/webroot/files/', $importfile);                  
+                  			//$importfile = str_replace( 'files/', 'app/webroot/files/', $importfile);                  
               		}
 	  
 	          		$importdata = file( $importfile );
@@ -1331,7 +1331,7 @@ function edit_training($id = null) {
 
 function curl( $url, $post = array(), $head = array(), $opts = array() )
 {
-	$cookie_file = '/tmp/cookies.txt';
+	$cookie_file = Configure::read('App.uploadDir') . '/cookies.txt';
 	$ch = curl_init();
 
 	//curl_setopt( $ch, CURLOPT_VERBOSE, 1 );

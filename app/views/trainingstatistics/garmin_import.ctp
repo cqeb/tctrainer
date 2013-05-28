@@ -39,7 +39,7 @@ foreach ( $activities_view as $key => $workout )
     echo "<tr>";
     echo "  <td>";
     echo $this->Form->checkbox('workout'.$i, array(
-        'style' => 'margin-left:0px',
+        'style' => 'margin-left:0px;position:relative;',
         'value' => base64_encode(implode($workout, '###')),
         'hiddenField' => 'N',
     ));
