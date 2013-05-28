@@ -20,14 +20,7 @@ __('SWIM workout', true);
                    
                    <a href="/trainer/trainingstatistics/import_workout"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
 
-<?php
-if ( $_SERVER['HTTP_HOST'] == 'localhost' )
-{
-?>
                    <a href="/trainer/trainingstatistics/garmin_read" target="_new"><button onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
-<?php
-}
-?>
 
                    <br /><br />
 
