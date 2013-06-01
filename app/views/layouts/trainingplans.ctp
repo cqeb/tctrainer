@@ -114,6 +114,8 @@
       	<div class="grid_6">
       		<div class="box">
     			<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?><br /><br />
+    			<a href="/trainer/payments/subscribe_triplans"><b><?php __('PREMIUM Upgrade'); ?></b></a>
+    				<br /><br />
     			<a id="guide" href="javascript:;" title=""><?php __('Beginner\'s guide to your training'); ?></a>
       		</div>
 
