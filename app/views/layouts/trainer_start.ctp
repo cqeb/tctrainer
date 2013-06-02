@@ -142,10 +142,10 @@ $(document).ready(function() {
 			<iframe id="facebook" src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode('http://www.facebook.com/pages/TriCoreTraining/150997251602079'); ?>&amp;layout=standard&amp;show_faces=false&amp;width=280&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=40" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 
 			<div class="teaserimages">
-				<img src="/trainer/img/start/start-1.jpg" alt="" />
-				<img src="/trainer/img/start/start-2.jpg" alt="" />
-				<img src="/trainer/img/start/start-3.jpg" alt="" />
-				<img src="/trainer/img/start/start-4.jpg" alt="" />
+				<img class="startimage" src="/trainer/img/start/start-1.jpg" alt="" />
+				<img class="startimage" src="/trainer/img/start/start-2.jpg" alt="" />
+				<img class="startimage" src="/trainer/img/start/start-3.jpg" alt="" />
+				<img class="startimage" src="/trainer/img/start/start-4.jpg" alt="" />
 			</div>
 			<div class="clear"></div>
 		</div>
