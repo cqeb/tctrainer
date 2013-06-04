@@ -2244,7 +2244,7 @@ class UsersController extends AppController {
 		if ( !isset( $to_user['name'] ) ) $to_user['name'] = __('athlete', true);
 		
 		// DEBUG send to admin 
-		if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
+		if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' || $_GET['debug'] == true )
 		{ 
 		  		$to_user['email'] = 'klaus@tricoretraining.com';
 		}

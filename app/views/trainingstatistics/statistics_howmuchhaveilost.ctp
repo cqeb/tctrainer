@@ -98,15 +98,20 @@ $chart_color2 = '#F1AD28';
         
           // Create and draw the visualization.
           var ac = new google.visualization.AreaChart(document.getElementById(chart));
-       
+
+          var graph_width = 680;
+          var graph_height = 500;
+
+          if ( window.innerWidth <= 320 ) { graph_width = 270; graph_height = 300; }
+
           // read size of div - write in variable and set here
           ac.draw(data, {
             //title : 'A vs. C',
             //isStacked: true,
             colors: ['<?php echo $chart_color1; ?>', '<?php echo $chart_color2; ?>'],
             pointSize: 0,
-            width: 680,
-            height: 500,
+            width: graph_width,
+            height: graph_height,
             legend: { position: 'top' },
             chartArea: {'width': '80%', 'height': '65%'},
             vAxis: { title: "<?php echo $chart_haxis; ?>",  
@@ -145,12 +150,15 @@ google.setOnLoadCallback(get_weight);
 
 <div id="chart1"></div>
 
+<!--
 <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
 <br /><br /><br /><br /><br /><br />
 Debugging: (only localhost)<br />
-
 <a target="_blank" href="<?php echo $jsonurl; ?>"><?php echo $jsonurl; ?></a>
 <?php } ?>
+-->
+
+<br /><br /><br /><br /><br /><br /><br /><br />
 
 <?php
 
