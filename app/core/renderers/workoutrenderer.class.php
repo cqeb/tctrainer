@@ -64,7 +64,10 @@ class WorkoutRenderer {
 
 		$j = 1;
 		$weekdays = array();
-		$startDayTS = time() - ( ( gmdate("w", time()) - 1 ) * 86400 );
+	
+		//$startDayTS = $startdate_ts - ( ( gmdate("w", $startdate_ts) - 1 ) * 86400 );
+		$startDayTS = $genWeek->format('U');
+
 		// if there are more than 7 workouts, only 1 day recovery, otherwise 2 days per week
 		if ( count( $workouts ) > 7 ) $recovery_days = 1;
 		else $recovery_days = 2;
