@@ -2188,7 +2188,7 @@ class UsersController extends AppController {
                                            $content .= "<br /><br />\n\n";	
                                            
                                            $key_add = "&athlete_id=" . $u['id'] . "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
-                                           $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/get_events/?utm_source=tricoretraining.com&utm_medium=newsletter' . $key_add . '" target="_blank">&raquo; ' . __('Add workouts to your calendar (.ics)!', true) . '</a>' . "\n";
+                                           $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/trainingplans/get_events/?o=1&utm_source=tricoretraining.com&utm_medium=newsletter' . $key_add . '" target="_blank">&raquo; ' . __('Add workouts to your calendar (.ics)!', true) . '</a>' . "\n";
                                            $content .= "<br /><br />\n\n";	
 		
                                            if ( $text_for_mail_premium )
