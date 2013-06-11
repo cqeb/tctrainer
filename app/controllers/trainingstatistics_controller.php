@@ -1266,13 +1266,10 @@ function edit_training($id = null) {
 					
 					$import['name'] = 'Garmin workout ' . $import['date'];
 
-					// in what format we have to save??
-					$import['distance'] = round( $a->{'activity'}->{'activitySummary'}->{'SumDistance'}->{'value'}, 1);
-
-					// We guess the type of sport
-					if ( $import['distance'] < 3 ) $import['sport'] = 'SWIM';
-					elseif ( $import['distance'] > 25 ) $import['sport'] = 'BIKE';
-					else $import['sport'] = 'RUN';
+					if ( isset( $a->{'activity'}->{'activitySummary'}->{'SumDistance'}->{'value'} ) ) 
+						$import['distance'] = round( $a->{'activity'}->{'activitySummary'}->{'SumDistance'}->{'value'}, 1);
+					else
+						$import['distance'] = 0;
 
 					// you never know :) maybe I get it in meters
 					if ( $import['distance'] > 1000 ) $import['distance'] = round( ( $import['distance'] / 1000 ), 1 );
@@ -1282,6 +1279,14 @@ function edit_training($id = null) {
                     	$import['avg_speed'] = round( $a->{'activity'}->{'activitySummary'}->{'WeightedMeanSpeed'}->{'value'}, 1 );
                     else
                     	$import['avg_speed'] = round( ( ( $import['distance'] * 1000 ) / $import['duration'] ), 1);
+
+					// We guess the type of sport
+					if ( $import['distance'] < 3 ) 
+							$import['sport'] = 'SWIM';
+					elseif ( $import['avg_speed'] > 15 || $import['distance'] > 25 ) 
+							$import['sport'] = 'BIKE';
+					else 
+							$import['sport'] = 'RUN';
 					
 					if ( isset( $a->{'activity'}->{'activitySummary'}->{'WeightedMeanHeartRate'}->{'value'} ) ) {
 						$import['heartrate'] = $a->{'activity'}->{'activitySummary'}->{'WeightedMeanHeartRate'}->{'value'};

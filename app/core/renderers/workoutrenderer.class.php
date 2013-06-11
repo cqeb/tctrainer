@@ -65,6 +65,7 @@ class WorkoutRenderer {
 		$j = 1;
 		$weekdays = array();
 	
+		// get start of training week
 		//$startDayTS = $startdate_ts - ( ( gmdate("w", $startdate_ts) - 1 ) * 86400 );
 		$startDayTS = $genWeek->format('U');
 
@@ -73,6 +74,7 @@ class WorkoutRenderer {
 		else $recovery_days = 2;
 
 		// TODO IMPROVEMENT - do not inject the same sportstype on the same day
+		// TODO IMPROVEMENT - do not inject at the same time!
 		foreach ($workouts as $k => $w) {
 
 			if ( $recovery_days == 1 ) {
@@ -108,8 +110,11 @@ class WorkoutRenderer {
 				}
 
 			}
+
+			// get date of training day
 			$w->getWeekdaydate = gmdate('Ymd', $startDayTS + ( ( ( $dayInt - 1 ) * 86400 ) ) );
-			$w->getWeekdaydateTS = $startDayTS;
+			$w->getWeekdaydateTS = $startDayTS + ( ( ( $dayInt - 1 ) * 86400 ) );
+
 			$w->phase = $phase['phase'];
 
 			if ( isset($weekdays[$dayInt]) ) 
