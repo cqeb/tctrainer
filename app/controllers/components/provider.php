@@ -49,7 +49,6 @@ class ProviderComponent extends Object {
 
 		if (!$this->athlete) {		
 			$this->athlete = new Athlete($this->DB, $this->Session->read('userobject'));
-			if ( !$this->athlete->isValid() ) echo "test";
 		}
 
 		return $this->athlete;
