@@ -168,6 +168,17 @@
     display:none;
   }
 
+<<<<<<< HEAD
+=======
+  .startimage {
+    width: 270px;
+  }
+
+  #signup {
+    margin: 0px 0px 0px 0px;
+  }
+  
+>>>>>>> 1aacad9cf883fe9bcedc5688f0a9468772c6b024
   .container_12.footer {
     padding: 15px 15px 40px 15px;
     width: 270px;
