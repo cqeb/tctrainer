@@ -214,6 +214,8 @@ $(document).ready(function() {
     <?php echo $this->element('footerend'); ?>
 	<!-- /Footer End -->
 
+<script>var _spinnakr_site_id='287071521';(function(d,t,a){var g=d.createElement(t), s=d.getElementsByTagName(t)[0];g[a]=a;g.src='//s5.spn.ee/js/so.js'; s.parentNode.insertBefore(g,s)}(document,'script','async'));</script>
+
 
 </body>
 </html>

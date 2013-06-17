@@ -1154,34 +1154,37 @@ function edit_training($id = null) {
 
 			if ( is_array( $workout ) && count( $workout ) > 1 ) {
 
-			      $sql = "INSERT INTO trainingstatistics (id, user_id, name, date, sportstype, distance, 
-			        duration, avg_pulse, avg_speed, trimp, kcal, location, weight, comment, 
+			      $sql = "INSERT INTO trainingstatistics (id, user_id, date, name, distance, 
+			        duration, avg_speed, sportstype, avg_pulse, trimp, kcal, location, weight, comment, 
 			        competition, workout_link, created, modified) VALUES (" .
 			        "null, " . 
 			        $session_userid . ",'" . 
-			        $workout[2] . "', '" . 
-			        $workout[1] . "', '" .
-			        $workout[4] . "', '" .
-			        $workout[3] . "', '" .
-			        $workout[5] . "', '" .
-			        $workout[7] . "', '" .
-			        $workout[6] . "', '" .
-			        $workout[8] . "', '" .
-			        $workout[9] . "', '" .
-			        $workout[10] . "', '" .
-			        $workout[11] . "', '" .
-			        $workout[12] . "', '" .
-			        $workout[13] . "', '" .
-			        $workout[14] . "', '" .
+			        $workout[1] . "', '" . //date
+			        $workout[2] . "', '" . //name
+			        $workout[3] . "', '" . //distance
+			        $workout[4] . "', '" . //duration
+			        $workout[5] . "', '" . //avgspeed
+			        $workout[6] . "', '" . //sporttype
+			        $workout[7] . "', '" . //heartrate
+			        $workout[8] . "', '" . //trimp
+			        $workout[9] . "', '" . //kcal
+			        $workout[10] . "', '" . //location
+			        $workout[11] . "', '" . //weight
+			        $workout[12] . "', '" . //comment
+			        $workout[13] . "', '" . //competition
+			        $workout[14] . "', '" . //workoutlink
 			        date( 'Y-m-d H:i:s', time() ) . "', '" .
 			        date( 'Y-m-d H:i:s', time() ) . "')";
 
 					$sqlreturn = $this->Trainingstatistic->query( $sql );
+
+
 			}
 		}
 
         $this->set('statusbox', 'statusbox');
         $this->Session->write('flash',__('Garmin workouts imported.',true));
+    
         $this->redirect(array('action'=>'list_trainings'));
 
 		$this->autoRender = false;
@@ -1208,9 +1211,10 @@ function edit_training($id = null) {
 		$urlGCActivity = 'http://connect.garmin.com/proxy/activity-service-1.3/gpx/activity/';
 
 		// Initially, we need to get a valid session cookie, so we pull the login page.
-		$return = $this->curl( $urlGCLogin );
+		$return1 = $this->curl( $urlGCLogin );
+
 		// Now we'll actually login
-		$return = $this->curl( $urlGCLogin . '?login=login&login:signInButton=Sign%20In&javax.faces.ViewState=j_id1&login:loginUsernameField='.$username.'&login:password='.$password.'&login:rememberMe=on');
+		$return2 = $this->curl( $urlGCLogin . '?login=login&login:signInButton=Sign%20In&javax.faces.ViewState=j_id1&login:loginUsernameField='.$username.'&login:password='.$password); //.'&login:rememberMe=off');
 
 		// Now we search GC for the latest activity.
 		// We support calling multiples from command line if specified,
@@ -1224,11 +1228,21 @@ function edit_training($id = null) {
 		// Call the search
 		$result = $this->curl( $urlGCSearch . http_build_query( $search_opts ) );
 
+		if ( $result == 'Error' )
+		{
+			echo "Sorry, an error happened. Please go back and check your user and password. ";
+			echo "If this does not help, please contact support@tricoretraining.com. "; 
+			echo "<br>";
+			echo "Go to http://connect.garmin.com and sign out there. Maybe this helps.";
+			die();
+		}
+
+
 		// Decode our results
 		$json = json_decode( $result );
 
 		// Make sure they're valid
-		if ( ! $json ) {
+		if ( !$json ) {
 			echo "Error: ";	
 			switch(json_last_error()) {
 				case JSON_ERROR_DEPTH:
@@ -1242,12 +1256,13 @@ function edit_training($id = null) {
 					break;
 			}
 			echo PHP_EOL;
-			var_dump( $result );
+			//var_dump( $result );
 			//die();
 		} else
 		{
 			// Pull out just the list of activites
 			$activities = $json->{'results'}->{'activities'};
+			//print_r($activities); die();
 			$activities_view = array();
 
 			$results = $this->Session->read('userobject');
@@ -1256,13 +1271,12 @@ function edit_training($id = null) {
 
 			// TODO first we have to display the workouts and show checkbox, then import it after user interaction
 			foreach ( $activities as $a ) {
-					//print_r($a->{'activity'}->{'activitySummary'}); die();
 
 					// be aware to save it in the right unit !!
 					$import['userid'] = $results['id'];
 					
 					// TODO reformat
-					$import['date'] = date( 'Y-m-d', strtotime( $a->{'activity'}->{'activitySummary'}->{'BeginTimestamp'}->{'value'} ) );
+					$import['date'] = gmdate( 'Y-m-d', strtotime( $a->{'activity'}->{'activitySummary'}->{'BeginTimestamp'}->{'value'} ) );
 					
 					$import['name'] = 'Garmin workout ' . $import['date'];
 
@@ -1275,6 +1289,7 @@ function edit_training($id = null) {
 					if ( $import['distance'] > 1000 ) $import['distance'] = round( ( $import['distance'] / 1000 ), 1 );
 
 					$import['duration'] = round( $a->{'activity'}->{'activitySummary'}->{'SumDuration'}->{'value'} );
+                    
                     if ( isset( $a->{'activity'}->{'activitySummary'}->{'WeightedMeanMovingSpeed'}->{'value'} ) )
                     	$import['avg_speed'] = round( $a->{'activity'}->{'activitySummary'}->{'WeightedMeanSpeed'}->{'value'}, 1 );
                     else
@@ -1326,8 +1341,13 @@ function edit_training($id = null) {
 
 					$import['comment'] = '';
 					$import['competition'] = 0;
-					$import['workoutlink'] = '';
+					if ( isset( $a->{'activity'}->{'activityId'} ) 
+						$import['workoutlink'] = 'http://connect.garmin.com/activity/' . $a->{'activity'}->{'activityId'};
+					else
+						$import['workoutlink'] = '';
+
 					$import['importeddate'] = date( 'Y-m-d H:i:s', time() );
+
 					$activities_view[] = $import;
 			}
 			$this->set('activities_view', $activities_view);
@@ -1336,7 +1356,9 @@ function edit_training($id = null) {
 
 function curl( $url, $post = array(), $head = array(), $opts = array() )
 {
-	$cookie_file = Configure::read('App.uploadDir') . '/cookies.txt';
+	$session_userid = $this->Session->read('session_userid');
+
+	$cookie_file = Configure::read('App.uploadDir') . '/cookies_' . $session_userid . '.txt';
 	$ch = curl_init();
 
 	//curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
@@ -1364,12 +1386,14 @@ function curl( $url, $post = array(), $head = array(), $opts = array() )
 	$success = curl_exec( $ch );
 
 	if ( curl_errno( $ch ) !== 0 ) {
-		throw new Exception( sprintf( '%s: CURL Error %d: %s', __CLASS__, curl_errno( $ch ), curl_error( $ch ) ) );
+		//throw new Exception( sprintf( '%s: CURL Error %d: %s', __CLASS__, curl_errno( $ch ), curl_error( $ch ) ) );
+		return "Error";
 	}
 
 	if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 200 ) {
 		if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 201 ) {
-			throw new Exception( sprintf( 'Bad return code(%1$d) for: %2$s', curl_getinfo( $ch, CURLINFO_HTTP_CODE ), $url ) );
+			//throw new Exception( sprintf( 'Bad return code(%1$d) for: %2$s', curl_getinfo( $ch, CURLINFO_HTTP_CODE ), $url ) );
+			return "Error";
 		}
 	}
 

@@ -54,6 +54,7 @@ echo $form->input('amount', array(
            'after' => '',
            'between' => '',
            'class' => 'required',
+           'default' => 5,
            /**'label' => __('Number of workouts to import', true)**/
            'options' => array(
                      '1' => 1,
