@@ -1341,7 +1341,7 @@ function edit_training($id = null) {
 
 					$import['comment'] = '';
 					$import['competition'] = 0;
-					if ( isset( $a->{'activity'}->{'activityId'} ) 
+					if ( isset( $a->{'activity'}->{'activityId'} ) )
 						$import['workoutlink'] = 'http://connect.garmin.com/activity/' . $a->{'activity'}->{'activityId'};
 					else
 						$import['workoutlink'] = '';

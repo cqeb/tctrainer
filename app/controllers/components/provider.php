@@ -78,8 +78,9 @@ class ProviderComponent extends Object {
 
 		// start benchmark timer		
 		$timerStart = microtime(true);
-		
-		$genWeek = DateTimeHelper::getWeekStartDay(new DateTime());
+
+		$timezone = new DateTimeZone('UTC');
+		$genWeek = DateTimeHelper::getWeekStartDay(new DateTime('now',$timezone));
 
 		if (isset($_GET['o'])) {
 			$offset = intval($_GET['o']) * 7;

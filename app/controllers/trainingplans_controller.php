@@ -21,17 +21,19 @@ class TrainingplansController extends AppController {
         $this->checkSession();
 
 		$week = new DateInterval("P7D");
+		$timezone = new DateTimeZone('UTC');
 
 		if (isset($_GET['d'])) {
 			$now = $_GET['d'];
-			$prev = new DateTime($_GET['d']);
-			$next = new DateTime($_GET['d']);
+			$prev = new DateTime($_GET['d'],$timezone);
+			$next = new DateTime($_GET['d'],$timezone);
 		} else {
-			$now = new DateTime();
-			$now = $now->format("Y-m-d");
-			$next = DateTimeHelper::getWeekStartDay(new DateTime());
-			$prev = DateTimeHelper::getWeekStartDay(new DateTime());
+			$now = new DateTime('now',$timezone);
+			$now = $now->format("Y-m-d H:i");
+			$next = DateTimeHelper::getWeekStartDay(new DateTime('now',$timezone));
+			$prev = DateTimeHelper::getWeekStartDay(new DateTime('now',$timezone));
 		}
+		//print_r($now);die();
 		
 		$prev->sub($week);
 		$next->add($week);
