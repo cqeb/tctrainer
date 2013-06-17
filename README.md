@@ -1,4 +1,0 @@
-tctrainer
-=========
-
-TCT Trainer
