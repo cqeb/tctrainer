@@ -33,12 +33,12 @@ class PaymentsController extends AppController {
             // maybe user has not added his country yet.
             if ( !$currency ) $currency = 'EUR';
 
-			if ( strtotime( $results['User']['paid_to'] ) < time() )
-			{
-                       $this->User->id = $session_userid;
-                       $this->User->savefield('level', 'freemember', false);
-					   $results['User']['level'] = 'freemember';
-			}
+			      if ( strtotime( $results['User']['paid_to'] ) < time() )
+			      {
+                 $this->User->id = $session_userid;
+                 $this->User->savefield('level', 'freemember', false);
+					       $results['User']['level'] = 'freemember';
+			      }
 				
             $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
             $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));
@@ -383,7 +383,7 @@ class PaymentsController extends AppController {
 								  {
 								  		if ( strtotime( $results_user['User']['paid_to'] ) < time() ) 
 								  				$paid_f_new = date( 'Y-m-d', time() );
-										else  
+										  else  
 												$paid_f_new = $results_user['User']['paid_to'];
 												
                                   		$this->data['Payment']['paid_from'] = $transactions['pay_paid_new_from'] = $paid_f_new;

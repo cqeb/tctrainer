@@ -124,8 +124,8 @@ class Athlete {
 		}
 
 		if (array_key_exists('paid_to', $user) ) {
-			$this->valid = (($user['paid_to'] > date('Y-m-d') && $user['tos'] === '1'));
-			if ( isset( $this->advancedFeatures ) )  $this->valid = true;
+			$this->valid = ((strtotime($user['paid_to']) > time() && $user['tos'] == "1"));
+			if ( $this->advancedFeatures == "1" )  $this->valid = true;
 		} else {
 			$this->valid = false;
 		}
