@@ -1,22 +1,27 @@
 <script type="text/javascript" src="/trainer/js/zoneguide.js"></script>
 
-<h1><?php __('Settings'); ?></h1>
 
-<?php echo $this->element('js_error'); ?>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Settings'); ?></h1></div>
+        
+        <div class="panel-body">
 
-<?php 
-echo $form->create('User', 
-	array('action' => 'edit_traininginfo', 'type' => 'file'));
-?>
-<fieldset>
-<legend><?php __('Fill in your training information'); ?></legend>
+        <?php echo $this->element('js_error'); ?>
 
-<?php if ($session->read('flash')) { ?>
-<div class="<?php echo $statusbox; ?>">
-<?php echo $session->read('flash'); $session->delete('flash'); ?>
-</div><br />
-<?php } ?>
+        <?php 
+        echo $form->create('User', array('action' => 'edit_traininginfo', 'type' => 'file', 'class' => 'form-horizontal'));
+        ?>
 
+        <fieldset>
+        <legend><?php __('Fill in your training information'); ?></legend>
+
+        <?php if ($session->read('flash')) { ?>
+        <div class="<?php echo $statusbox; ?>">
+        <?php echo $session->read('flash'); $session->delete('flash'); ?>
+        </div><br />
+        <?php } ?>
+
+<div class="form-group">
 <?php
 echo $form->hidden('id');
 echo $form->hidden('birthday');
@@ -26,13 +31,19 @@ $sporttype_array = $sports;
 echo $form->input('typeofsport',
                   array(
                   'legend' => false,
-                  'class' => 'required',
+                  'class' => 'required form-control',
                   'label' => __('Sport', true),
                   'before' => '',
                   'after' => '',
                   'between' => '',
                   'options' => $sporttype_array
 ));
+
+?>
+</div>
+
+<div class="form-group">
+<?php
 
 echo $form->input('weeklyhours',
      array(
@@ -41,7 +52,7 @@ echo $form->input('weeklyhours',
      'between' => '',
      'maxLength' => 255,
      'default' => '10',
-     'class' => 'required',
+     'class' => 'required form-control',
      'error' => array( 
           'numeric' => __('Enter your weekly training hours', true),
           'greater' => __('Must be at least 0 hours',true),
@@ -52,18 +63,23 @@ echo $form->input('weeklyhours',
 ));
 
 ?>
-<span id="weeklyhours"></span>
 
-<br />
+<div class="alert" id="weeklyhours"></div>
+
+</div>
+
+<div class="form-group">
+
 <a name="zones"></a><h3><?php __('Zones'); ?></h3>
 
-<div class="statusbox error" id="errorlth"></div>
+<div class="alert alert-danger" id="errorlth"></div>
+
 <?php
 
 if ( $locale == 'deu' ) $language = 'de';
 else $language = 'en';
  
-$help_lth = ' <a class="help" title="' .
+$help_lth = ' <a class="help badge" title="' .
 __('How to define your lactate threshold?', true) .
 '<br />' . 
 __('1. Do your test-workouts to define your lactate threshold.', true) .
@@ -78,7 +94,7 @@ echo $form->input('lactatethreshold',
                    'before' => '',
                    'after' => $help_lth,
                    'between' => '',
-                   'class' => 'required',
+                   'class' => 'required form-control',
                    'maxLength' => 255,
                    'error' => array( 
                       'numeric' => __('Enter your current run lactate threshold',true),
@@ -90,15 +106,16 @@ echo $form->input('lactatethreshold',
                    'label' => __('Run lactate threshold', true)
 ));
 ?>
-<div class="statusbox error" id="errorblth"></div>
-<br />
+<div class="alert alert-danger" id="errorblth"></div>
+
 <?php
+
 echo $form->input('bikelactatethreshold',
                    array(
                    'before' => '',
                    'after' => $help_lth,
                    'between' => '',
-                   'class' => 'required',
+                   'class' => 'required form-control',
                    'maxLength' => 255,
                    'error' => array( 
                       'numeric' => __('Enter your current bike lactate threshold',true),
@@ -109,14 +126,17 @@ echo $form->input('bikelactatethreshold',
                    'label' => __('Bike lactate threshold', true)
 ));
 ?>
+<br />
 
-<br />
 <div id="zones"></div>
-<br />
+
+</div>
+
+<div class="form-group">
 <?php
 
-$help_rookie = '&nbsp;&nbsp;&nbsp;&nbsp;<span class="help" title="' .
-__("You're training for competitions and do regular sports for the first time?", true) .
+$help_rookie = '&nbsp;&nbsp;&nbsp;&nbsp;<span class="help badge" title="' .
+__("You're doing training for competitions and doing regular sports for the first time?", true) .
 '">?</span>';
 
 echo $form->input('rookie',
@@ -125,7 +145,7 @@ echo $form->input('rookie',
                   'after' => $help_rookie,
                   'between' => '',
                   'class' => 'required',
-                  'label' => '',
+                  'label' => false,
                   'legend' => false,
                   'type' => 'checkbox',
                   //'multiple' => false,
@@ -142,10 +162,11 @@ $tos_link .= 'terms-of-service-2/" target="_blank">' .
 
 echo $form->input('tos',
                   array(
-                  'before' => __("You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true) . '<br />' . $tos_link,
+                  'before' => __("You agree to our terms and conditions and confirm that you're healthy enough for your training? If not, you HAVE TO talk to your doctor before starting your training!", true) . '<br /><br />' . $tos_link,
                   'after' => '',
                   'between' => '',
                   'legend' => false,
+                  'error' => array( 'wrap' => 'div', 'class' => 'alert alert-danger', 'notempty' => __('You must agree to use this service', true)),
                   'label' => '',
                   'type' => 'checkbox',
                   'class' => 'required',
@@ -156,10 +177,12 @@ echo $form->input('tos',
                   )
 ));
 
-echo '<br /><br />';
-echo '<br /><br />';
+?>
+</div>
 
-echo $form->submit(__('Save',true));
+<?php
+
+echo $form->submit(__('Save',true), array('class'=>'btn btn-primary'));
 
 ?>
                  <br />
@@ -169,7 +192,8 @@ echo $form->submit(__('Save',true));
 <?php
       echo $form->end();
 ?>
-
+        </div>
+      </div>
 <?php
 
 $this->js_addon = <<<EOE
@@ -238,12 +262,13 @@ function setwhrs(val)
       
       if ( \$('#UserWeeklyhours').val() != '' )
       {
+          \$('#weeklyhours').show();
           var whrs = \$('#UserWeeklyhours').val();
 EOH;
 
 $this->js_addon .= '
-          var whrsmsg = "<br />' . __('Weekly training load varies between', true) . '"+" "+Math.round(whrs*0.7)+" "+"' .
-            __('and', true) . '"+" "+Math.round(whrs*1.5)+" ' . __('hours',true).'.<br />"';
+          var whrsmsg = "' . __('Weekly training load varies between', true) . '"+" "+Math.round(whrs*0.7)+" "+"' .
+            __('and', true) . '"+" "+Math.round(whrs*1.5)+" ' . __('hours',true).'."';
 
 $this->js_addon .= <<<EOH
                       
@@ -261,7 +286,7 @@ $this->js_addon .= <<<EOH
         // display zones-table
         if ( lth != '' )
         {
-                jQuery('#zones').html(ZoneGuide.getTable(
+          jQuery('#zones').html(ZoneGuide.getTable(
 					jQuery('#UserLactatethreshold').val(),
 					jQuery('#UserBikelactatethreshold').val(),
 					zgi18n));
@@ -307,7 +332,7 @@ $this->js_addon .= <<<EOH
         
         setwhrs();
         jQuery('#UserLactatethreshold, #UserBikelactatethreshold')
-			.blur(function() {
+        .blur(function() {
 				if (jQuery(this).val() != '') {
     	        	check_lth();
         	    }
@@ -318,6 +343,7 @@ $this->js_addon .= <<<EOH
         //\$('a[rel*=facebox]').facebox();
 		
 		\$('.help').tipTip();
+    \$('#weeklyhours').hide();
 
 });
 

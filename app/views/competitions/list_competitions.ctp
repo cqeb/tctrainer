@@ -1,26 +1,29 @@
-<h1><?php __('Competitions'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Competitions'); ?></h1></div>
+        
+        <div class="panel-body">
 
-<?php echo $this->element('js_error'); ?>
+        <?php echo $this->element('js_error'); ?>
 
-<fieldset>
-<legend><?php __('Manage your competitions!'); ?></legend>
+        <fieldset>
+        <legend><?php __('Manage your competitions!'); ?></legend>
 
-<?php if ($session->read('flash')) { ?>
-<div class="<?php echo $statusbox; ?>">
-<?php echo $session->read('flash'); $session->delete('flash'); ?>
-</div><br />
-<?php } ?>
-<button onClick="javascript:top.location.href='/trainer/competitions/edit_competition'" value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button>
-<br /><br />
+        <?php if ($session->read('flash')) { ?>
+        <div class="<?php echo $statusbox; ?>">
+        <?php echo $session->read('flash'); $session->delete('flash'); ?>
+        </div><br />
+        <?php } ?>
+        <button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/competitions/edit_competition'" value="<?php __('Add competition'); ?>"><?php __('Add competition'); ?></button>
+        <br /><br />
 
-<table>
-<tr>
-     <th><?php echo $paginator->sort(__('Prio',true), 'important'); ?></th>
-     <th><?php echo $paginator->sort(__('Date',true), 'competitiondate'); ?></th>
-     <th><?php echo $paginator->sort(__('Sport',true), 'sportstype'); ?></th>
-     <th><?php echo $paginator->sort(__('Name',true), 'name'); ?></th>
-     <th></th>
-</tr>
+        <table class="table table-striped table-bordered table-condensed">
+        <tr>
+             <th><?php echo $paginator->sort(__('Prio',true), 'important'); ?></th>
+             <th><?php echo $paginator->sort(__('Date',true), 'competitiondate'); ?></th>
+             <th><?php echo $paginator->sort(__('Sport',true), 'sportstype'); ?></th>
+             <th><?php echo $paginator->sort(__('Name',true), 'name'); ?></th>
+             <th></th>
+        </tr>
 <?php 
 if ( count( $competitions ) < 1 ) {
 ?>
@@ -64,6 +67,10 @@ foreach ($competitions as $competition) {
 <?php echo $paginator->numbers( array( 'seperator' => '|' ) ); ?>
 
 </fieldset>
+
+  </div>
+</div>
+
 <script type="text/javascript">
 $(document).ready(function() {
         $('.rmCompetition').tipTip({ defaultPosition : 'top' });

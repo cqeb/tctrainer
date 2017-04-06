@@ -1,51 +1,46 @@
+<?php
 
-                   <h1><?php __('Subscribe TriCoreTraining-memberships'); ?></h1>
+$currency = 'EUR';
+$userobject = null;
+$price_array = $unitcalc->get_prices( null, $currency, $userobject );
+$price_array_split = $price_array[$currency]['total'];
+$price_month_array_split = $price_array[$currency]['month'];
 
-                   <?php echo $this->element('js_error'); ?>
+?>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Subscribe TriCoreTraining Memberships'); ?></h1></h1></div>
+        
+        <div class="panel-body">
 
-                   <?php //echo $form->create('User', array('action' => 'edit_metric', 'type' => 'file')); ?>
-                   <fieldset>
-                   <legend><?php __('Gain speed, lose weight'); ?>!</legend>
+           <?php echo $this->element('js_error'); ?>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
+           <fieldset>
+           <legend><?php __('Gain speed, lose weight'); ?>!</legend>
+
+           <?php if ($session->read('flash')) { ?>
+           <div class="<?php echo $statusbox; ?>">
+           <?php echo $session->read('flash'); $session->delete('flash'); ?>
+           </div><br />
+           <?php } ?>
 
 
-<table summary="<?php __('All possible subscriptions'); ?>">
-<!--<caption><?php __('SUBSCRIPTIONS'); ?></caption>-->
+<table summary="<?php __('All possible subscriptions'); ?>" class="table table-striped table-bordered table-condensed">
+<caption><?php __('SUBSCRIPTIONS'); ?></caption>
 <colgroup>
           <col class="colA">
           <col class="colB">
           <col class="colC">
 </colgroup>
 <thead>
-<!--
-<tr>
-    <th colspan="3" class="table-head"><?php __('SUBSCRIPTIONS'); ?></th>
-</tr>
--->
 <tr>
     <th><?php __('Features'); ?></th>
-    <th style="width:25%"><?php __('Premium'); ?></th>
-    <th style="width:25%"><?php __('Free'); ?></th>
+    <th style="width:25%"><?php __('PREMIUM'); ?></th>
+    <th style="width:25%"><?php __('FREE'); ?></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-    <td><?php __('Magazine'); ?> - <?php __('Blog'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr>
-    <td><?php __('Community'); ?></td>
-    <td style="text-align:center">X</td>
-    <td style="text-align:center">X</td>
-</tr>
-<tr class="odd">
-    <td><?php __('Settings'); ?></td>
+    <td><?php __('Personal Settings'); ?></td>
     <td style="text-align:center">X</td>
     <td style="text-align:center">X</td>
 </tr>
@@ -60,27 +55,40 @@
     <td style="text-align:center">X</td>
 </tr>
 <tr>
-    <td><?php __('Statistics'); ?></td>
+    <td><?php __('Workout Statistics'); ?></td>
     <td style="text-align:center">X</td>
     <td style="text-align:center">X</td>
 </tr>
 <tr class="odd">
-    <td><b><?php __('Interactive training plan'); ?></b></td>
+    <td><b><?php __('Interactive trainingplan'); ?></b></td>
     <td style="text-align:center"><b>X</b></td>
     <td style="text-align:center"><b><?php __('No'); ?></b></td>
 </tr>
 <tr>
     <td colspan="3">&nbsp;</td>
 </tr>
-<?php
+<tr class="odd">
+    <td><?php __('MONTHLY'); ?></td>
+    <td style="">    
+    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
+    <b>1 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b> 
+    <?php __('for ONLY'); ?> <?php echo $price_array_split[0]; echo ' ' . $currency; ?>   
+    </a>
+    </td>
+    <td style="text-align:center"></td>
+</tr>
+<tr class="odd">
+    <td><?php __('YEARLY'); ?></td>
+    <td style="">    
+    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
+    <b>12 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b> 
+    <?php __('for ONLY'); ?> <?php echo $price_array_split[3]; echo ' ' . $currency; ?>  
+    </a>
+    </td>
+    <td style="text-align:center"></td>
+</tr>
 
-$currency = 'EUR';
-$userobject = null;
-$price_array = $unitcalc->get_prices( null, $currency, $userobject );
-$price_array_split = $price_array[$currency]['total'];
-$price_month_array_split = $price_array[$currency]['month'];
-
-?>
+<!--//
 <tr>
     <td colspan="3">
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
@@ -89,7 +97,6 @@ $price_month_array_split = $price_array[$currency]['month'];
     </a>
     </td>
 </tr>
-<!--//
 <tr class="odd">
     <td colspan="3">
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
@@ -106,7 +113,6 @@ $price_month_array_split = $price_array[$currency]['month'];
     </a>
     </td>
 </tr>
-//-->
 <tr class="odd">
     <td colspan="3">
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
@@ -115,6 +121,7 @@ $price_month_array_split = $price_array[$currency]['month'];
     </a>
     </td>
 </tr>
+//-->
 </tbody>
 </table>
 
@@ -124,25 +131,14 @@ __('Signup FREE and get training plans for triathlon, biking and running for 3 m
 
 ?>
 <br /><br />
-<a href="/trainer/users/register"><button onClick="javascript:top.location.href='/trainer/users/register' value="<?php __('Signup FREE'); ?>"><?php __('Signup FREE'); ?></button></a>
 
-<!--
-
-<img alt="<?php __('PAYPAL - secure payment solutions'); ?>" src="<?php echo Configure::read('App.serverUrl'); ?>/img/paypal_logo.gif" />
-
-<?php __('What is PAYPAL? It is a reputable and well-known payment solution provider (owned by e-Bay) and provides creditcard/payment
-solutions for websites. You send your necessary confidential payment information via a secure connection (128-bit encrypted SSL-connection)
-and provide these confidential data only to PAYPAL and NOT to us (we only receive your payment).'); ?>
-<br /><br />
-<?php __('Your trial period will be added if you subscribe to a PREMIUM membership.'); ?>
-<br />
--->
+<a href="/trainer/users/register"><button class="btn btn-default" onClick="javascript:top.location.href='/trainer/users/register' value="<?php __('Signup FREE'); ?>"><?php __('Signup FREE'); ?></button></a>
 
                 </fieldset>
 
-<?php
-      //echo $form->end();
-?>
+        </div>
+    </div>
+
 
 <?php
 

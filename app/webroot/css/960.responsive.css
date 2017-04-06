@@ -56,9 +56,14 @@
 
 }
 
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+/* Styles */
+
+}
 
 /* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 360px) {
+@media only screen and (max-width : 320px) {
 /* Styles */
 
   body {

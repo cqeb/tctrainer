@@ -13,11 +13,18 @@ class StartsController extends AppController
 	function beforeFilter()
 	{
   		parent::beforeFilter();
-  		$this->layout = 'trainer_start';
+  		$this->layout = 'default_trainer';
+	}
+
+	function all_bootstrap ()
+	{
+		$this->layout = 'all_bootstrap';
 	}
 
 	function index( $language = '' )
 	{
+  		$this->layout = 'trainer_start';
+
       	$this->set("title_for_layout", __('the interactive, online training plan service for run, bike and triathlon athletes ', true));
       	
 		/*
@@ -51,6 +58,7 @@ class StartsController extends AppController
 			
 			if ( $language == 'de' ) 
 				$this->code = 'deu';
+/**
 			elseif ( $language == 'zh' )
 				$this->code = 'chi';
 			elseif ( $language == 'fr' )
@@ -61,6 +69,7 @@ class StartsController extends AppController
                 $this->code == 'ron';
             elseif ( $language == 'pl' )
                 $this->code == 'pol';
+**/
 			else 
 				$this->code = 'eng';
 				
@@ -164,13 +173,12 @@ class StartsController extends AppController
   
 	function error404()
 	{
-    	$this->layout = 'default_trainer';
+		header("HTTP/1.0 404 Not Found");
 	}
   
 	function features()
 	{
-    	$this->layout = 'default_trainer';
-		$this->set('statusbox', 'statusbox');
+		$this->set('statusbox', 'alert');
 	}
 
 	function change_language()
@@ -207,8 +215,7 @@ class StartsController extends AppController
 	
 	function coupon( $partner = '' )
 	{
-		$statusbox = 'statusbox';
-	    $this->layout = 'default_trainer';
+		$statusbox = 'alert';
 
 		if (empty($this->data))
 		{
@@ -222,7 +229,7 @@ class StartsController extends AppController
 			{
 				$this->Session->write('recommendation_userid', $this->data['Start']['partner'] . '-' . __('coupon', true) . ':' . $this->data['Start']['coupon']);
 				
-				$statusbox = 'statusbox ok';
+				$statusbox = 'alert alert-success';
 				$this->Session->write('flash',__('Coupon code saved.', true) . 
 					' <a href="/trainer/users/register/">' . __('Please register now!', true) . '</a>');				
 
@@ -230,7 +237,7 @@ class StartsController extends AppController
 					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From:support@tricoretraining.com');
 			} else
 			{
-				$statusbox = 'statusbox error';
+				$statusbox = 'alert alert-danger';
 				$this->Session->write('flash',__('Please add the valid coupon code!', true));				
 			}   
 		}		
@@ -238,16 +245,5 @@ class StartsController extends AppController
 		$this->set('statusbox', $statusbox);
 	}
 
-	function fill_my_database()
-	{
-      $this->checkSession();
-	  $userobject = $this->Session->read('userobject');
-	  
-      if ( isset( $userobject['admin'] ) )
-	  {
-		      $this->autoRender = false;            
-		      $this->Filldatabase->prefill($this->Start);
-	  }      
-	}
 }
 ?>

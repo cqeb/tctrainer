@@ -1,21 +1,23 @@
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Statistics'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <h1><?php __('Statistics'); ?></h1>
+           <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_howmuchhaveilost','class' => 'form-horizontal')); ?>
+           <fieldset>
+           <legend><?php __('How much have I lost?'); ?></legend>
 
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_howmuchhaveilost')); ?>
-                   <fieldset>
-                   <legend><?php __('How much have I lost?'); ?></legend>
+           <?php if ($session->read('flash')) { ?>
+           <div class="<?php echo $statusbox; ?>">
+           <?php echo $session->read('flash'); $session->delete('flash'); ?>
+           </div><br />
+           <?php } ?>
+           
+           <?php __('This statistics shows you your weight-history and the way to your weight targets.'); ?>
+           <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
+           <br /><br />
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
-                   
-                   <?php __('This statistics shows you your weight-history and the way to your weight targets.'); ?>
-                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
-                   <br /><br />
-
-                   <div>
+<div class="form-group">
 <?php
 
 echo $form->input('fromdate',
@@ -24,35 +26,44 @@ echo $form->input('fromdate',
                     'before' => '',
                     'after' => '',
                     'between' => '',
+                    'class' => 'form-control',
                     'label' => __('From', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
                     //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
+?>
+</div>
 
+<div class="form-group">
+<?php
 echo $form->input('todate',
                     array(
                     'type' => 'date',
                     'before' => '',
                     'after' => '',
                     'between' => '',
+                    'class' => 'form-control',
                     'label' => __('To', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
                     //'error' => array('wrap' => 'div', 'style' => 'color:red')
 ));
                   
-/** not finished **/
 echo $form->hidden('id');
 echo $form->hidden('user_id');
-
-echo $form->submit(__('Display',true), array('name' => 'display', 'class' => 'none'));
 ?>
-                   </div>
+<br />
+<?php 
+echo $form->submit(__('Display',true), array('name' => 'display', 'class' => 'btn btn-primary'));
+?>
+</div>
                    </fieldset>
 <?php
       echo $form->end();
+?>
 
+<?php
 $chart_haxis = $weight_unit;
 $chart_vaxis = __('Time', true);
 
@@ -61,7 +72,6 @@ $chart_color2 = '#F1AD28';
 
 ?>
 
-<br />
 <script type="text/javascript">
 
       google.load('visualization', '1', {packages: ['corechart']});
@@ -99,11 +109,29 @@ $chart_color2 = '#F1AD28';
           // Create and draw the visualization.
           var ac = new google.visualization.AreaChart(document.getElementById(chart));
 
-          var graph_width = 680;
-          var graph_height = 500;
+          var graph_width = 700;
+          var graph_height = 490;
 
-          if ( window.innerWidth <= 320 ) { graph_width = 270; graph_height = 300; }
+          if ( window.innerWidth <= 1200 ) { 
+            graph_width = 550; 
+            graph_height = 450; 
+          }   
 
+          if ( window.innerWidth <= 992 ) { 
+            graph_width = 350; 
+            graph_height = 350; 
+          }   
+
+          if ( window.innerWidth <= 768 ) { 
+            graph_width = 500; 
+            graph_height = 400; 
+          }   
+
+          if ( window.innerWidth <= 400 ) { 
+            graph_width = 270; 
+            graph_height = 300; 
+          }  
+          
           // read size of div - write in variable and set here
           ac.draw(data, {
             //title : 'A vs. C',
@@ -121,6 +149,7 @@ $chart_color2 = '#F1AD28';
       }
       
 </script>
+
 <h2><?php __('Weight Statistics'); ?></h2>
 
 <?php
@@ -156,9 +185,12 @@ google.setOnLoadCallback(get_weight);
 Debugging: (only localhost)<br />
 <a target="_blank" href="<?php echo $jsonurl; ?>"><?php echo $jsonurl; ?></a>
 <?php } ?>
--->
 
 <br /><br /><br /><br /><br /><br /><br /><br />
+-->
+
+        </div>
+      </div>
 
 <?php
 

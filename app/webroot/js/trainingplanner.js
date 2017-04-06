@@ -219,6 +219,7 @@ TrainingPlanner = {
 
 		// add time to prevent caching
 		var url = this.url + "/trainingplans/get?o=" + this.offset + "&t=" + (new Date().getTime()); 
+		//alert(url);
 
 		// request the plan
 		$.get(url, function (data) {

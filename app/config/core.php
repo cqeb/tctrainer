@@ -47,10 +47,15 @@ if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' ||
 	define('LOG_ERROR', 2);
 	Configure::write('debug', 2);
 
+	if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) {
+		$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/test.tricoretraining.com/';
+	}
+
 } else 
 {
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
+	$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
 }
 
 /**
@@ -77,30 +82,16 @@ Configure::write('App.encoding', 'UTF-8');
 // local configuration
 if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 {
-  
-	if (function_exists( 'gethostname' ) && gethostname() === "Main") {
-		
-		// Clemens' config
-		
-		Configure::write('App.serverUrl', '/trainer');
-		Configure::write('App.uploadDir', 'D:\clemens\Documents\Projects\xampp\htdocs\trainer\app\webroot\files\\');
-		// Domain with protocol and NO trailing slash
-		Configure::write('App.hostUrl', 'http://localhost');
-	
-	} else {
-			
-        // Klaus-M. config
-        // this is the path-information - I know the variable is not named correctly :) (so please without host-info)
-        // rename this variable
-        Configure::write('App.serverUrl', '/trainer');
-        // Domain with protocol and NO trailing slash
-        Configure::write('App.hostUrl', 'http://localhost');
-        //Configure::write('App.uploadDir', 'C:\Users\kms\Documents\XAMPP\xampp\htdocs\trainer\app\webroot\files\\');
-        Configure::write('App.uploadDir', '/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/files/');
-        Configure::write('App.Dirbackslash', false);
-        
-    }
-
+ 	
+    // Klaus-M. config
+    // this is the path-information - I know the variable is not named correctly :) (so please without host-info)
+    // rename this variable
+    Configure::write('App.serverUrl', '/trainer');
+    // Domain with protocol and NO trailing slash
+    Configure::write('App.hostUrl', 'http://localhost');
+    Configure::write('App.uploadDir', '/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/files/');
+    Configure::write('App.Dirbackslash', false);
+ 
 	// Paypal payment email
 	//Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
 	Configure::write('App.paymentemail', 'payment@tricoretraining.com');
@@ -109,12 +100,12 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 	 * mail sending options
 	 */
 	
-	Configure::write('App.mailFrom', 'TriCoreTraining <cqeb@gmx.net>');
+	Configure::write('App.mailFrom', 'TriCoreTraining <tricoretrainingtest@gmail.com>');
 	Configure::write('App.mailAdmin', 'klaus@tricoretraining.com');
-	Configure::write('App.mailPort', '25');
-	Configure::write('App.mailHost', 'mail.gmx.net');
-	Configure::write('App.mailUser', 'cqeb@gmx.net');
-	Configure::write('App.mailPassword', 'finger98');
+	Configure::write('App.mailPort', '587');
+	Configure::write('App.mailHost', 'smtp.gmail.com');
+	Configure::write('App.mailUser', 'tricoretrainingtest@gmail.com');
+	Configure::write('App.mailPassword', 'finger99');
 	Configure::write('App.mailDelivery', 'smtp');	
 
 } else
@@ -124,20 +115,19 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 	// rename this variable
 	Configure::write('App.serverUrl', '/trainer');
 
-if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
-{
-	// Domain with protocol and NO trailing slash
-	Configure::write('App.hostUrl', 'http://test.tricoretraining.com');
-	//Configure::write('App.uploadDir', '/var/www/vhosts/www.tricoretraining.com/trainer/app/webroot/files/');
-	Configure::write('App.uploadDir', '/home/content/92/10829392/html/test.tricoretraining.com/trainer/app/webroot/files/');
-} else
-{
-	// Domain with protocol and NO trailing slash
-	Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
-	//Configure::write('App.uploadDir', '/var/www/vhosts/www.tricoretraining.com/trainer/app/webroot/files/');
-	Configure::write('App.uploadDir', '/home/content/92/10829392/html/tricoretraining.com/trainer/app/webroot/files/');
-	
-}
+	if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
+	{
+		// Domain with protocol and NO trailing slash
+		Configure::write('App.hostUrl', 'http://test.tricoretraining.com');
+		Configure::write('App.uploadDir', '/home/content/92/10829392/html/test.tricoretraining.com/trainer/app/webroot/files/');
+	} else
+	{
+		// Domain with protocol and NO trailing slash
+		Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
+		Configure::write('App.uploadDir', '/home/content/92/10829392/html/tricoretraining.com/trainer/app/webroot/files/');
+		
+	}
+
 	// Paypal payment email
 	Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 

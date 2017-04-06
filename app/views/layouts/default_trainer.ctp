@@ -1,130 +1,150 @@
 <!DOCTYPE html>
 <html lang="<?php 
     if ( $locale == 'deu' ) echo 'de'; 
-    else if ( $locale == 'zho' ) echo 'zh';
-    else if ( $locale == 'fra' ) echo 'fr';
-    else if ( $locale == 'isl' ) echo 'is';
-    else if ( $locale == 'ron' ) echo 'ro';
-    else if ( $locale == 'pol' ) echo 'pl';
     else echo 'en'; 
-    ?>">
-    <head>
-	<title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-<?php
-$url = Configure::read('App.serverUrl');
-    echo $html->charset();
-    ?>
-<?php echo $html->meta('icon'); ?>
+?>">
 
-<?php echo $this->element('metanavigation'); ?>
+<head>
+    <title><?php
+if ( isset( $title ) ) 
+	echo 'TriCoreTraining.com' . ' ' . $title;
+else	
+	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
+?></title>
 
-	<link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
+    <?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css?v=<?php echo VERSION; ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css?v=<?php echo VERSION; ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css?v=<?php echo VERSION; ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css?v=<?php echo VERSION; ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css?v=<?php echo VERSION; ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css?v=<?php echo VERSION; ?>" />
-<?php if ( 1 == 1 ) { ?>
-	<link rel="stylesheet" type="text/css" href="/trainer/css/edittraining.css?v=<?php echo VERSION; ?>" />
-	<script type="text/javascript" src="/trainer/js/workoutstats.js?v=<?php echo VERSION; ?>"></script>
-	<script type="text/javascript" src="/trainer/js/timeparser.js?v=<?php echo VERSION; ?>"></script>      	
-<?php } ?>
+    <?php echo $html->meta('icon'); ?>
 
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.responsive.css?v=<?php echo VERSION; ?>" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>
-<?php } else { ?>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-<?php } ?>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.min.js?v=<?php echo VERSION; ?>"></script>
+    <?php echo $this->element('metanavigation'); ?>
 
-    <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.min.js?v=<?php echo VERSION; ?>"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.min.js?v=<?php echo VERSION; ?>"></script>
+	<?php echo $this->element('header'); ?>
 
+	<?php echo $scripts_for_layout; ?>
 
-
-<?php echo $scripts_for_layout; ?>
+<!--
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-57-precomposed.png">
+-->
 
 <script type="JavaScript">
 $(document).ready(function() {
     $(document).scrollTop( $(".content").offset().top );  
 };
 </script>
+	
+	<link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
 </head>
+
 <body <?php if ( isset( $this->onLoad ) ) { echo 'onLoad="'. $this->onLoad . '"'; } ?>>
-	<!-- Header -->
-	<div class="container_12 header">
-		<div class="grid_12 branding">
-		  <a href="<?php echo Configure::read('App.serverUrl'); ?>">
-			<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining" title="TriCoreTraining" />
-		  </a>
-		  <?php echo $this->element('topprofile'); ?>
-		</div>
-		<div class="grid_12 navigation">
-                <?php if ( isset( $userobject ) ) echo $this->element('topnavigation_private'); else echo $this->element('topnavigation_public'); ?>
-		</div>
-	</div>
-	<!-- /Header -->
-	<!-- Main -->
-	<div class="container_12 main">
-		<!-- Left column -->
-		<div class="grid_3 left">
-			<div id="navigation" class="box navigation">
-			<?php //__('Navigation');?>
-               <?php echo $this->element('subnavigation_all'); ?>
-			</div>
-			
-			<div id="ads" class="box last">
-			   <?php echo $this->element('adbox'); ?>
-			</div>
-		</div>
-		<!-- /Left column -->
-		
-		<!-- Center column -->
-  		<div class="grid_6 center">
-			<!-- Content -->
-			<div class="box content last">
-				<?php echo $content_for_layout; ?>
-				<div class="clear"></div>
-			</div>
-			<!-- /Content -->
-		</div>
-		<!-- /Center column -->
-		
-		<!-- Right column -->
-		<div class="grid_3 right">
+  
+<!-- MAIN WRAPPER class="wrapper" max-width="1110px"-->
+<div class="wrapper">
 
-			<?php echo $this->element('rightbar'); ?>
+<header>	
+
+    <!-- PAGE-HEADER-->	
+	<!-- NAVBAR-->
+	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<div class="container">
+	  	<!-- Brand and toggle get grouped for better mobile display -->
+	  	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand navbar-brand-small" href="/trainer/">
+		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com Logo"></a>
+	  	</div>
+
+		<?php echo $this->element('subnavigation_all'); ?>
+
+		</div><!-- /.navbar-collapse --> 
+	</div>	
+	</nav>
+
+
+</header>
+<!-- /PAGE-HEADER-->
+
+<article>
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-xs-12 col-sm-7 col-md-8 col-lg-8">
+		
+<?php echo $content_for_layout; ?>
 
 		</div>
-		<!-- /Right column -->
-	</div>
-	<div class="clear"></div>
-	<!-- /Main -->
+		<div class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
+
+<?php echo $this->element('rightbar'); ?>
+
+		</div>
 	
-<!--//
-	<div class="container_12">
-	<?php //echo $cakeDebug; ?>
-    </div>
--->
+	</div>
+
+</div>
+</article>
 
 	<!-- Footer -->
-    <?php echo $this->element('footer'); ?>
+	<?php echo $this->element('footer'); ?>
 	<!-- /Footer -->
 
-	<?php if ( isset( $this->js_addon ) ) echo $this->js_addon; ?>
+</div>
 
-	<!-- Footer End -->
-    <?php echo $this->element('footerend'); ?>
-	<!-- /Footer End -->
+<!-- Placed at the end of the document so the pages load faster -->
 
-<script>var _spinnakr_site_id='287071521';(function(d,t,a){var g=d.createElement(t), s=d.getElementsByTagName(t)[0];g[a]=a;g.src='//s5.spn.ee/js/so.js'; s.parentNode.insertBefore(g,s)}(document,'script','async'));</script>
+
+<?php if ( isset( $this->js_addon ) ) echo $this->js_addon; ?>
+
+<script>
+jQuery(document).ready(function(){
+	jQuery('#topnav').localScroll(3000);
+	jQuery('#startbtn').localScroll(2000);
+	//.parallax(xPosition, speedFactor, outerHeight) options:
+	//xPosition - Horizontal position of the element
+	//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+	//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+	jQuery('#parallax-bg').parallax("50%", 0.1);
+	//jQuery('#Section-1').parallax("50%", 0.3);
+	//jQuery('#Section-2').parallax("50%", 0.1);
+	//jQuery('#foot-sec').parallax("50%", 0.1);
+
+})
+</script>
+
+<script>
+//hide menu after click on mobile
+jQuery('.navbar .nav > li > a').click(function(){
+		jQuery('.nav-collapse.navbar-responsive-collapse.in').removeClass('in').addClass('collapse').css('height', '0');
+
+		});
+</script>
+
+<!-- NICE Scroll plugin -->
+<script>
+//scroll bar custom
+jQuery(document).ready(
+  function() {  
+    jQuery("html").niceScroll({cursorcolor:"#333"});
+  }
+);
+</script>
+<script>
+ //$('.carousel').carousel({interval:5000});
+</script>
+
+<?php echo $this->element('footerend'); ?>
+
 </body>
 </html>

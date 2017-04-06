@@ -85,8 +85,8 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
         		'persistent' => false,
         		'host' => 'localhost',
         		'login' => 'root',
-        		'password' => '',
-        		'database' => 'trainer',
+        		'password' => 'finger99',
+        		'database' => 'trainer2',
         		'prefix' => '',
         	);
         }

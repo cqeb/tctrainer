@@ -1,16 +1,20 @@
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Error (404) - file not found!'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <h1><?php __('Error (404) - file not found!'); ?></h1>
+             <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $this->element('js_error'); ?>
+             <fieldset>
+             <legend><?php __('Gain speed, lose weight'); ?></legend>
 
-                   <fieldset>
-                   <legend><?php __('Gain speed, lose weight'); ?></legend>
+             <div class="alert alert-danger">
+             <?php __('Mysteries of the universe - where did this page go? Who knows ... '); ?>
+             </div><br />
+             </fieldset>
 
-                   <div class="statusbox error">
-                   <?php __('Mysteries of the universe - where did this page go? Who knows ... '); ?>
-                   </div><br />
-                   </fieldset>
-
+        </div>
+      </div>
 <?php
 
       $this->js_addon = <<<EOE

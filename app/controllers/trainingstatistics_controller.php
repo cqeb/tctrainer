@@ -3,7 +3,7 @@
 class TrainingstatisticsController extends AppController {
    var $name = 'Trainingstatistics';
 
-   var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc', 'Unitcalc', 'Xls', 'Statistics');
+   var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc', 'Xls', 'Statistics');
    var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Statisticshandler', 'Transactionhandler', 'Provider');
 
    var $paginate = array(
@@ -18,15 +18,15 @@ class TrainingstatisticsController extends AppController {
    function beforeFilter()
    {
             parent::beforeFilter();
-            $this->layout = 'default_trainer_2rows';
+            $this->layout = 'default_trainer';
    }
 
    // list all trainings
    function list_trainings()
    {
             $this->checkSession();
-            $this->layout = 'default_trainer';
-            $statusbox = 'statusbox';
+            //$this->layout = 'default_trainer';
+            $statusbox = 'alert';
             $session_userid = $this->Session->read('session_userid');
 
             $this->paginate = array(
@@ -39,13 +39,13 @@ class TrainingstatisticsController extends AppController {
             
             $this->set('trainingstatistics', $trainingstatistics);
             $this->set('statusbox', $statusbox);
-  }
+  	}
 
-  function import_workout()
-  {
+  	function import_workout()
+  	{
 	    $this->set("title_for_layout", __('Import workouts',true));
 	    $this->checkSession();
-	    $statusbox = 'statusbox';
+	    $statusbox = 'alert';
 	
 	    $newimportfile = '';
 	    $newimportfilearray[] = '';
@@ -388,7 +388,7 @@ class TrainingstatisticsController extends AppController {
 	    }
 	    
 	    $this->set('statusbox', $statusbox);
-  }
+  	}
 
   /** protect method by adding _ in front of the name **/
   function _save_file($file, $userid, $type = "image", $addthis = "")
@@ -459,9 +459,10 @@ class TrainingstatisticsController extends AppController {
     //$extension = substr($value[0]['name'] , strrpos($value[0]['name'] , '.') +1);
   }
 
-function edit_training($id = null) {
+  function edit_training($id = null) {
+
 		$this->checkSession();
-	  	$this->layout = 'default_trainer';
+	  	//$this->layout = 'default_trainer';
 	  	$this->set('js_addon','');
 	  	$unit = $this->Unitcalc->get_unit_metric();
 	  	$statusbox = '';
@@ -470,7 +471,7 @@ function edit_training($id = null) {
 	  	$results['User'] = $this->Session->read('userobject');
 
 	  	if ( empty($this->data) ) {
-	  		$statusbox = 'statusbox';
+	  		$statusbox = 'alert';
 	  		// security check - don't view workouts of other users
 	  		if ( $id ) {
 	  			$result = $this->Trainingstatistic->find ('all',
@@ -500,7 +501,7 @@ function edit_training($id = null) {
 	  		$this->data['Trainingstatistic']['weight'] = round( $this->Unitcalc->check_weight( $results['User']['weight'], 'show', 'single' ), 1);
 	
 	  	} else {
-	  		$statusbox = 'statusbox';
+	  		$statusbox = 'alert';
 	
 	  		// check for metric / unit
 	  		if ( isset( $this->data['Trainingstatistic']['distance'] ) ) {
@@ -556,9 +557,7 @@ function edit_training($id = null) {
 	  				// calculate kcal for workout
 	  				$this->data['Trainingstatistic']['kcal'] =
 	  				$this->Unitcalc->calc_kcal( $data );
-	  			}
-	
-	  			
+	  			}  			
 	  		}
 	
 	  		$this->data['Trainingstatistic']['user_id'] = $session_userid;
@@ -585,7 +584,7 @@ function edit_training($id = null) {
 	  			$this->set('statusbox', $statusbox);
 	  			$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	  		} else {
-	  			$statusbox = 'statusbox error';
+	  			$statusbox = 'alert alert-danger';
 	  			$this->Session->write('flash',__('Some errors occured',true));
 	  		}
 	
@@ -681,7 +680,7 @@ function edit_training($id = null) {
             $this->checkSession();
             $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
-            $statusbox = 'statusbox ok';
+            $statusbox = 'alert alert-success';
 
             $results['User'] = $this->Session->read('userobject');
             $session_userid = $results['User']['id'];
@@ -856,7 +855,7 @@ function edit_training($id = null) {
    }
 
    /** 
-   Can I finish my important competition?
+   * Can I finish my important competition?
    **/
 
    function statistics_competition()
@@ -878,6 +877,9 @@ function edit_training($id = null) {
 
 			$return = $this->Statisticshandler->get_competition( $this->Trainingstatistic, $session_userid, "", $start, $end, $this->data );
 
+			$return2 = $this->Statisticshandler->get_reward( $this->Trainingstatistic, $results['User'] );
+
+            $this->set('return2', $return2);
             $this->set('start', $return['start']);
             $this->set('end', $return['end']);
             $this->set('sumdata', $return['sumdata']);
@@ -890,7 +892,7 @@ function edit_training($id = null) {
    }
 
    /**
-   How much have I lost?
+   * How much have I lost?
    **/
    function statistics_howmuchhaveilost()
    {
@@ -1121,14 +1123,14 @@ function edit_training($id = null) {
                else
                {
                   $this->Session->write('flash',__('Sorry. This is not your entry!', true));
-                  $this->set('statusbox', 'statusbox error');
+                  $this->set('statusbox', 'alert alert-danger');
                   $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
                }
             }
 
             $this->Trainingstatistic->delete($id);
             
-            $this->set('statusbox', 'statusbox');
+            $this->set('statusbox', 'alert');
             $this->Session->write('flash',__('Workout deleted.',true));
             $this->redirect(array('action'=>'list_trainings'));
 	}
@@ -1136,7 +1138,7 @@ function edit_training($id = null) {
 
     function garmin_read()
     {               
-		$this->layout = 'default_trainer';
+		//$this->layout = 'default_trainer';
 		$this->checkSession();
 
 		$session_userid = $this->Session->read('session_userid');
@@ -1144,7 +1146,7 @@ function edit_training($id = null) {
     
     function garmin_import_final()
     {                                                       
-		$this->layout = 'default_trainer_2rows';
+		//$this->layout = 'default_trainer_2rows';
 		$this->checkSession();
 
 		$session_userid = $this->Session->read('session_userid');
@@ -1177,12 +1179,10 @@ function edit_training($id = null) {
 			        date( 'Y-m-d H:i:s', time() ) . "')";
 
 					$sqlreturn = $this->Trainingstatistic->query( $sql );
-
-
 			}
 		}
 
-        $this->set('statusbox', 'statusbox');
+        $this->set('statusbox', 'alert');
         $this->Session->write('flash',__('Garmin workouts imported.',true));
     
         $this->redirect(array('action'=>'list_trainings'));
@@ -1195,7 +1195,7 @@ function edit_training($id = null) {
 		// http://www.ciscomonkey.net/gc-to-dm-export/
 		// http://sergeykrasnov.ru/subsites/dev/garmin-connect-statisics/
 
-		$this->layout = 'default_trainer_2rows';
+		//$this->layout = 'default_trainer_2rows';
 		$this->checkSession();
 
 		$session_userid = $this->Session->read('session_userid');

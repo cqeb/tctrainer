@@ -1,44 +1,46 @@
 <?php
 
 class TrainingplansController extends AppController {
+
 	var $name = 'Trainingplans';
 
 	var $uses = array();
 	var $useTable = false;
 		
-	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session');
 	var $components = array('Email', 'Cookie', 'RequestHandler', 'Provider', 'Session','Transactionhandler');
 
-	function beforeFilter()
-	{
+	function beforeFilter() {
 		parent::beforeFilter();
 		$this->layout = 'trainingplans';
-		//$this->checkSession();
 	}
 
 	// view your training plan
 	function view() {
+
         $this->checkSession();
 
 		$week = new DateInterval("P7D");
 		$timezone = new DateTimeZone('UTC');
 
+		//if ( isset( $_GET['d'] ) ) echo "<!--" . $_GET['d'] . "-->";
+
 		if (isset($_GET['d'])) {
 			$now = $_GET['d'];
-			$prev = new DateTime($_GET['d'],$timezone);
-			$next = new DateTime($_GET['d'],$timezone);
+			$prev = new DateTime($_GET['d'], $timezone);
+			$next = new DateTime($_GET['d'], $timezone);
 		} else {
 			$now = new DateTime('now',$timezone);
 			$now = $now->format("Y-m-d H:i");
 			$next = DateTimeHelper::getWeekStartDay(new DateTime('now',$timezone));
 			$prev = DateTimeHelper::getWeekStartDay(new DateTime('now',$timezone));
 		}
-		//print_r($now);die();
-		
+
 		$prev->sub($week);
 		$next->add($week);
 		
 		$u = $this->Session->read('userobject');
+
 		$usersport = '';
 		// build list of user sports
 		switch ($this->Provider->getMultisportType($u['typeofsport'])) {
@@ -58,6 +60,7 @@ class TrainingplansController extends AppController {
 				throw new Exception('Unkown user sport ' . $u['typeofsport']);
 				break;
 		}
+
 		$this->set('usersport', $usersport);
 		$this->set('weeklyhours', $u['weeklyhours']);
 		
@@ -65,7 +68,7 @@ class TrainingplansController extends AppController {
 		$schedule = $this->Provider->getAthlete()->getSchedule();
 
 		if ($schedule && count($schedule->getRaces()) == 0) {
-			$this->set('info', '<div class="statusbox"><p>' . 
+			$this->set('info', '<div class="alert"><p>' . 
 			__("You might want to add some competitions to refine your training plan.", true) . 
 			'</p><button onclick="javascript:document.location=\'/trainer/competitions/list_competitions\'">' .
 			__("Add competition", true) . 
@@ -86,6 +89,7 @@ class TrainingplansController extends AppController {
 	 * ajax call for retrieving plans 
 	 */
 	function get() {
+
         $this->checkSession();
 
 		$this->layout = 'plain';
@@ -93,6 +97,7 @@ class TrainingplansController extends AppController {
 			Configure::write('debug', 0);
 		}
 		$html = $this->Provider->getPlan();
+
 		$this->set('plan', $html);
 	}
 	
@@ -100,6 +105,7 @@ class TrainingplansController extends AppController {
 	 * set an average training time via ajax
 	 */
 	function set_avg() {
+
         $this->checkSession();
 
 		$this->layout = 'plain';
@@ -115,6 +121,7 @@ class TrainingplansController extends AppController {
 	 * requires get parameters sport (like BIKE, RUN), time (in minutes) and hr (average heart rate)
 	 */
 	function calc_trimp() {
+
         $this->checkSession();
 
 		$this->layout = 'plain';
@@ -130,6 +137,7 @@ class TrainingplansController extends AppController {
 	 * persist workout settings such as time and ratio to database
 	 */ 
 	function save_workout_settings() {
+
         $this->checkSession();
 
 		$this->layout = 'plain';
@@ -137,7 +145,11 @@ class TrainingplansController extends AppController {
 		$this->set('data', $this->Provider->saveWorkoutSettings($_POST));
 	}
 
+	/**
+	 * get workouts as events for your calendar
+	 */ 
 	function get_events() {
+
 		// do not check
         //$this->checkSession();		
 
@@ -160,6 +172,42 @@ class TrainingplansController extends AppController {
 			$this->Provider->getPlan(false);
 		} else
 			echo "ERROR: no Provider set.";
+	}
+
+	/**
+	 * check former training plans whether they exist
+	 */ 	
+	function check_trainingplans() {
+
+		// secure access
+		if ( $_SERVER['REMOTE_ADDR'] != '::1' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.142.159.226' && isset( $_GET['access'] ) && $_GET['access'] != 'mikau2345$' ) 
+					die('No access!');
+				
+		$_SESSION = array();
+		$this->Session->destroy();
+		$this->layout = 'plain';
+		Configure::write('Session.start', false);
+		$debug = true;
+
+		$start = 0;
+
+		$sql = "SELECT * FROM users ORDER BY id";
+
+		// DEBUG
+		if ( isset( $_GET['debug'] ) ) $sql .= " LIMIT 1";
+		//print_r($this->User);
+		$users_results = $this->User->query($sql);
+
+		$count_results = count( $users_results );
+
+		//if ( isset( $_GET['end'] ) && $_GET['end'] < $count_results ) $count_results = $_GET['end'];
+			
+		for ( $i = $start; $i < $count_results; $i++ )
+		{
+			$user = $users_results[$i]['users'];
+
+			$this->Provider->checkPlanForUser( $user );
+		}
 	}
 
 

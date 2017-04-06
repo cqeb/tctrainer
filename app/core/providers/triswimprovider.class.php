@@ -12,8 +12,11 @@ class TriSwimProvider extends WorkoutProvider {
 	 * @see WorkoutProvider::generateLSDWorkout()
 	 */
 	protected function generateLSDWorkout(Race $ldRace) {
-		$duration = SwimWorkout::$LSD_TIMES[$this->athlete->getLevel()]
-			[$ldRace->getWeeksTillRaceday($this->generateWeek)];
+		$duration = 0;
+
+		if ( isset( SwimWorkout::$LSD_TIMES[$this->athlete->getLevel()][$ldRace->getWeeksTillRaceday($this->generateWeek)] ) )
+				$duration = SwimWorkout::$LSD_TIMES[$this->athlete->getLevel()][$ldRace->getWeeksTillRaceday($this->generateWeek)];
+
 		if ($duration == 0) {
 			return false;
 		}

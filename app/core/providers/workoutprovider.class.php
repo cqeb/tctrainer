@@ -95,6 +95,7 @@ abstract class WorkoutProvider {
 	 * @return boolean false if no workouts can be added anymore, true if everything is fine
 	 */
 	protected function addWorkout(Workout $workout, $checkTime=true) {
+
 		// there is no budget left, so we won't add this workout
 		if ($checkTime && $this->workoutDurations >= $this->timeBudget) {
 			throw new Exception("Not enough timeBudget left to add workout");
@@ -201,10 +202,15 @@ abstract class WorkoutProvider {
 	 * @param DateTime $week generate the workout for a given week which starts at date
 	 * @return unknown_type
 	 */
-	public final function generate(DateTime $week) {
+	public final function generate(DateTime $week, $check_historic = true) {
+
 		$this->generateWeek = $week;
+
+		// TODO now every request is generated - no caching
+		$check_historic = false;
+
 		// if an old generate week is referred we'll just load from the database
-		if ($week < DateTimeHelper::getWeekStartDay(new DateTime())) {
+		if ($week < DateTimeHelper::getWeekStartDay(new DateTime()) && $check_historic == true) {
 			$this->historic = true;
 			return $this->loadWorkouts();
 		}
@@ -223,7 +229,7 @@ abstract class WorkoutProvider {
 				$this->addWorkout($lsdWorkout, false);
 			}
 		}
-		
+
 		// add a test workout if this is a recovery week
 		if ($this->phase["recovery"]) {
 			$testWorkout = $this->generateTestWorkout();
@@ -238,11 +244,15 @@ abstract class WorkoutProvider {
 		);
 
 		$i = 0;
+		//echo "timeBudget: " . $this->timeBudget . "<br>";
+		//echo "workoutDuration: " . $this->workoutDurations . "<br>";
+
 		while ($this->timeBudget > $this->workoutDurations) {
 			$i++;
 			$type = $wType->next();
 			$duration = $this->getDuration($type, $nextA->getType());
 			$this->addWorkout($this->newWorkout($type, $duration));
+
 			if ($i == 100) {
 				throw new Exception("Provider generated 100 Workouts - " .
 					"looks like an endless loop");
@@ -251,6 +261,7 @@ abstract class WorkoutProvider {
 
 		// finally persist the sequences
 		$wType->save();
+
 		return $this->workouts;
 	}
 	
@@ -259,6 +270,7 @@ abstract class WorkoutProvider {
 	 * will not generate any additional workouts
 	 */
 	private function loadWorkouts() {
+
 		$res = $this->DB->query("SELECT type, duration, lsd FROM scheduledtrainings
 			WHERE athlete_id = " . $this->athlete->getId() . "
 			AND week = '" . $this->generateWeek->format('Y-m-d') . "'
@@ -275,13 +287,18 @@ abstract class WorkoutProvider {
 	 * stores generated workouts back to the database
 	 */
 	public function save() {
+
+		//print_r($this->workouts);
+		//print_r($this->historic);
+
 		if (count($this->workouts) == 0 || $this->historic) {
 			return false;
 		}
+
 		$week = $this->generateWeek->format("Y-m-d");
 
 		$sql = "INSERT INTO scheduledtrainings (athlete_id, week, sport, type, duration, lsd, trimp) VALUES\n";
-		
+
 		$sqlArr = array();
 		reset($this->workouts);
 		while (list($k, $w) = each($this->workouts)) {
@@ -293,6 +310,8 @@ abstract class WorkoutProvider {
 		}
 		
 		$sql .= implode(",\n", $sqlArr);
+
+		//echo "<br><br>" . $sql . "<br><br>";
 
 		// delete old entries first
 		$delSql = "DELETE FROM scheduledtrainings WHERE athlete_id = " .

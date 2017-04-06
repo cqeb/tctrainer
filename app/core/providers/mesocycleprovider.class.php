@@ -33,17 +33,50 @@ class MesoCycleProvider {
 	 * @param DateTime $week offset week from which to start
 	 */
 	public function __construct($DB, Athlete $athlete, DateTime $week) {
+
 		$this->DB = $DB;
 		$this->athlete = $athlete;
 		
 		// initialize the provider from the database
+		/*
 		$res = $this->DB->query("SELECT date, phase, time, usertime, ratio, recovery 
 			FROM mesocyclephases 
 			WHERE athlete_id = " . $this->athlete->getId() . "
 			AND date >= '" . $week->format("Y-m-d") . "' 
 			ORDER BY date ASC");
+		*/
+
+		// KMS changed this - check if mesocyle for current week exists!! - in former clause it was enough to have any result in the future
+		$res = $this->DB->query("SELECT date, phase, time, usertime, ratio, recovery 
+			FROM mesocyclephases 
+			WHERE athlete_id = " . $this->athlete->getId() . "
+			AND date = '" . $week->format("Y-m-d") . "' 
+			ORDER BY date ASC");
+
 		if ($res) {
-			while(list($k, $data) = each($res)) {
+
+		} else {
+			// if there is no existing mesocycle create one
+			$this->generate($week);
+			$this->store();
+		}
+
+		/*
+		$res2 = $this->DB->query("SELECT date, phase, time, usertime, ratio, recovery 
+			FROM mesocyclephases 
+			WHERE athlete_id = " . $this->athlete->getId() . "
+			AND date >= '" . $week->format("Y-m-d") . "' 
+			ORDER BY date ASC");
+		*/
+
+	// remove date filter
+		$res2 = $this->DB->query("SELECT date, phase, time, usertime, ratio, recovery 
+			FROM mesocyclephases 
+			WHERE athlete_id = " . $this->athlete->getId() . " 
+			ORDER BY date ASC");
+
+		if ($res2) {
+			while(list($k, $data) = each($res2)) {
 				// normalize ratio
 				$ratio = $data["ratio"];
 				if ($ratio == '') {
@@ -57,6 +90,7 @@ class MesoCycleProvider {
 					"ratio" => $ratio,
 					"recovery" => ($data["recovery"] == "1")
 				);
+
 				if (!$this->firstKey) {
 					$this->firstKey = $data["date"];
 				}
@@ -66,6 +100,7 @@ class MesoCycleProvider {
 			$this->generate($week);
 			$this->store();
 		}
+
 	}
 	
 	/**
@@ -108,7 +143,9 @@ class MesoCycleProvider {
 		
 		// now replace the phase table keys by the appropriate week start days
 		reset($phaseTable);
+
 		$newPhaseTable = array();
+
 		$week = new DateInterval("P7D");
 		//unset($this->firstKey);
 		while (list($k,$phase) = each($phaseTable)) {
@@ -122,6 +159,7 @@ class MesoCycleProvider {
 		
 		// TODO now is the time to check if there is another A race past to this one
 		$this->phaseTable = $newPhaseTable;
+
 		return $this->phaseTable;
 	}
 	
@@ -133,16 +171,19 @@ class MesoCycleProvider {
 	 * @return int training time in minutes
 	 */
 	public function getTrainingTime(DateTime $date, $sport=NULL) {
+
 		$dStr = $date->format("Y-m-d");
+
 		if (array_key_exists($dStr, $this->phaseTable)) {
-			if ($this->phaseTable[$dStr]["usertime"]) {
+
+			if (isset( $this->phaseTable[$dStr]["usertime"] ) && $this->phaseTable[$dStr]["usertime"]  > 0 ) {
 				// return user specific settings
 				$time = $this->phaseTable[$dStr]["usertime"];
 			} else {
 				// or basic setting
 				$time = $this->phaseTable[$dStr]["time"];
 			}
-			
+
 			if ($sport) {
 				$ratio = $this->calcRatio($sport, $dStr);
 				// round to nearest 5

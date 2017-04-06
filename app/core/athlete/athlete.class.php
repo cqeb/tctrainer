@@ -70,7 +70,7 @@ class Athlete {
 	 * terms of service 
 	 * @var boolean
 	 */
-	protected $valid;
+	protected $valid = 0;
 	
 	/**
 	 * marks an user with elevated privileges
@@ -120,14 +120,20 @@ class Athlete {
 		$this->sport = $user["typeofsport"];
 		
 		if (array_key_exists('advanced_features', $user)) {
-			$this->advancedFeatures = ($user["advanced_features"] == "1");
+			 if ($user["advanced_features"] == "1") $this->advancedFeatures = 1; 
+			 else $this->advancedFeatures = 0;
 		}
-
+		
 		if (array_key_exists('paid_to', $user) ) {
-			$this->valid = ((strtotime($user['paid_to']) > time() && $user['tos'] == "1"));
-			if ( $this->advancedFeatures == "1" )  $this->valid = true;
+			//if ( (strtotime($user['paid_to']) > strtotime(date('Y-m-d'))) && $user['tos'] === '1') 
+			if ( strtotime($user['paid_to']) > strtotime(date('Y-m-d',time()) ) ) 
+				{ $this->valid = 1; 	}
+			/*else 
+				$this->valid = false;*/
+
+			if ( isset( $this->advancedFeatures ) && $this->advancedFeatures == 1 ) { $this->valid = 1; }
 		} else {
-			$this->valid = false;
+			$this->valid = 0;
 		}
 
 		// initialize his schedule

@@ -1,58 +1,73 @@
-<h1><?php __("Create your account"); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __("Create your account"); ?></h1></div>
+        
+        <div class="panel-body">
 
-<?php echo $this->element('js_error'); ?>
+        <?php echo $this->element('js_error'); ?>
 
-<?php echo $form->create('User', array('action' => 'register')); ?>
+        <?php echo $form->create('User', array('action' => 'register', 'class' => 'form-horizontal')); ?>
 
-<fieldset>
-<legend><?php 
-__('Get your trainingplans FREE for 3 months. Then, invest less than 2 cups of coffee worth per month for your interactive coach.'); 
-//echo '<br /><br />';
-//__('Get your training plans for FREE. Train for your best race ever!');
-?></legend>
+        <fieldset>
+        <legend>
+          <?php __('Get your trainingplans FREE for 3 months. Then, invest less than 2 cups of coffee worth per month for your interactive coach.'); ?>
+        </legend>
 
-<?php if ($session->read('flash')) { ?>
-<div class="<?php echo $statusbox; ?>">
-<?php echo $session->read('flash'); $session->delete('flash'); ?>
-</div>
-<br />
-<?php } ?>
+        <?php if ($session->read('flash')) { ?>
+        <div class="<?php echo $statusbox; ?>">
+        <?php echo $session->read('flash'); $session->delete('flash'); ?>
+        </div><br />
+        <?php } ?>
 
-<?php if ( !isset( $session_userid ) ) { ?>
-<a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
-<?php } ?>
+        <?php if ( !isset( $session_userid ) ) { ?>
+        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
+        <?php } ?>
 
+        <br /><br /><b><?php __('or'); ?></b><br /><br />
+
+<div class="form-group">
 <?php
-echo '<br /><br /><b>';
-__('or'); 
-echo '</b><br /><br />';
-
 
 echo $form->input('firstname',
      array(
-     'class' => 'required',
+     'class' => 'required form-control',
      'maxLength' => 255,
      'error' => array(
           'length' => __('Minimum 2 characters long',true), 
-          'notempty' => __('Enter your firstname',true)
+          'notempty' => __('Enter your firstname',true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'          
      ),
-     'label' => __('Firstname', true)
+     'label' => array(__('Firstname', true), 'class' => 'control-label')
 ));
+
+?>
+</div>
+
+<div class="form-group">
+<?php
 
 echo $form->input('lastname',
      array(
-     'class' => 'required',
+     'class' => 'required form-control',
      'maxLength' => 255,
      'error' => array(
           'length' => __('Minimum 2 characters long',true), 
-          'notempty' => __('Enter your lastname',true)
+          'notempty' => __('Enter your lastname',true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'          
      ),
-     'label' => __('Lastname', true)
+     'label' => array(__('Lastname', true), 'class' => 'control-label')
 ));
+
+?>
+</div>
+
+<div class="form-group">
+<?php
 
 echo $form->input('gender',
      array(
-     'class' => 'required',
+     'class' => 'required checkbox',
      'before' => '<label for="gender">' . __('Gender', true) . '</label>',
      'legend' => false,
      'default' => 'm',
@@ -61,63 +76,88 @@ echo $form->input('gender',
      'options' => array('m' => __('male', true), 'f' => __('female', true))
 ));
 
+?>
+</div>
+
+<?php
+
 if ( isset( $companyemail ) )
 {
-	echo "<div class='statusbox'>";
+	echo "<div class='alert'>";
 	__('Please use your company email for registration to receive your company discount!');
-	/*
 	echo ' ';
 	__('Your email must end with');
 	echo ' ' . $companyemail;
-	*/
 	echo "</div><br />";
 }
 
+?>
+
+<div class="form-group">
+
+<?php
+
 echo $form->input('email',
      array(
-     'class' => 'required',
+     'class' => 'required form-control',
      'maxLength' => 255,
      'label' => __('E-mail', true),
      'error' => array( 
-          'notempty' => __('Enter your e-mail', true)
+          'notempty' => __('Enter your e-mail', true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'          
      ),
 ));
 
-
 echo $form->hidden('emailcheck');
+
 ?>
+</div>
+
 <span id="usernameLoading"><img src="<?php echo Configure::read('App.serverUrl'); ?>/img/indicator.gif" alt="Ajax Indicator" /></span>
 <span id="usernameResult">
 
 <?php
 if ($form->isFieldError('emailcheck'))
 {
-   echo "<div class=\"error-message\">";
+   echo "<div class=\"text-danger\">";
    __('Your e-mail is already in use!');
-   echo "</div>";
+   echo "</div><br />";
    //echo $form->error('emailcheck');
 }
 
 ?>
 </span>
 
+<div class="form-group">
+
 <?php
 
 echo $form->input('password',
      array(
-     'class' => 'required',
+     'class' => 'required form-control',
      'type' => 'password',
      'maxLength' => 255,
      'error' => array(
           'length' => __('Minimum 4 characters long',true), 
-          'notempty' => __('Enter a password',true)
+          'notempty' => __('Enter a password',true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'          
      ),
      'label' => __('Password', true)
 ));
 
+?>
+</div>
+
+<div class="form-group">
+
+<?php
+
 echo $form->input('birthday',
      array(
-     'class' => 'required',
+     'class' => 'required form-control',
+     'style' => 'width:100px',
      'minYear' => '1930',
      'maxYear' => date( 'Y', time() )-15,
      'label' => __('Birthday', true),
@@ -125,31 +165,36 @@ echo $form->input('birthday',
 ));
 
 ?>
-<br /><br />
+</div>
+
+<div class="form-group">
 <?php 
 echo $form->input('typeofsport',
      array(
-     'class' => 'required',
+     'class' => 'required form-control',
      'label' => __('Main sport', true),
      'error' => array( 
-          'notempty' => __('Choose your type of sport',true) 
+          'notempty' => __('Choose your type of sport',true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'
      ),
      'options' => array_merge(array('' => __('pick yours', true)), $sports)
 ));
-
 
 echo $form->hidden('lactatethreshold');
 echo $form->hidden('bikelactatethreshold');
 echo $form->hidden('weeklyhours');
 
 ?>
-<span id="weeklyhours"></span>
+</div>
+
+<div class="alert alert-info" id="weeklyhours"></div>
+
+<div class="form-group">
 
 <?php
 
-$help_rookie = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="help" title="' .
-__("You're training for competitions and do regular sports for the first time?", true) .
-'" href="#">?</a>';
+$help_rookie = ' <a class="help badge" title="' . __("You do regular sports for the first time?", true) . '" href="#">?</a>';
 
 echo $form->input('rookie',
                   array(
@@ -167,11 +212,12 @@ echo $form->input('rookie',
 ));
 
 ?>
-<br />
+</div>
 
+<div class="form-group">
 <b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!"); ?></b>  
 <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
-<br /><br />
+</div>
 
 <?php
 
@@ -180,7 +226,9 @@ echo $form->input('tos',
      'type' => 'checkbox',
      'label' => __('I agree', true),
      'error' => array( 
-          'notempty' => __("You HAVE TO agree to our terms and conditions! That's the way you protect our rights :).", true)
+          'notempty' => __("You HAVE TO agree to our terms and conditions! That's the way you protect our rights :).", true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'          
      )
 ));
 
@@ -198,10 +246,16 @@ echo $form->hidden('inviter');
 // for facebook login
 echo $form->hidden('activated');
 
-echo $form->submit(__('Register',true));
+echo $form->submit(__('Register',true), array('class'=>'btn btn-primary'));
 
 echo $form->end();
 
+?>
+
+  </div>
+</div>
+
+<?php
       $this->js_addon = <<<EOE
 
 <script type="text/javascript">
@@ -213,13 +267,12 @@ function finishAjax(id, response) {
 }
 
 function setwhrs(whrs) {
-      //\$('#UserWeeklyhours')//var whrs = \$('#UserWeeklyhours').val();
-  
+      \$('#weeklyhours').show();
       if ( whrs != '' ) {
 EOE;
 $this->js_addon .= '
-          var whrsmsg = "<br />' . __('Weekly training load varies between', true) . '"+" "+Math.round(whrs*0.7)+" "+"' .
-            __('and', true) . '"+" "+Math.round(whrs*1.5)+" ' . __('hours',true).'.<br /><br />"';
+          var whrsmsg = "' . __('Weekly training load varies between', true) . '"+" "+Math.round(whrs*0.7)+" "+"' .
+            __('and', true) . '"+" "+Math.round(whrs*1.5)+" ' . __('hours',true).'."';
 $this->js_addon .= <<<EOE
                       
           //alert(whrsmsg);
@@ -287,7 +340,6 @@ EOE;
                        checkuseremail: \$('#UserEmail').val(),
                        checkuserid: \$('#UserId').val()
                    	}, function(response){
-                       //\$('#usernameResult').fadeOut();
                        setTimeout("finishAjax('usernameResult', '"+escape(response)+"')", 400);
                    	});
               }
@@ -309,6 +361,7 @@ EOE;
 	});
   
 	\$('.help').tipTip();
+  \$('#weeklyhours').hide();
 });
 </script>
 EOF;

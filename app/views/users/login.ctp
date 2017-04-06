@@ -1,56 +1,60 @@
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Enter the World of TriCoreTraining.com'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <h1><?php __('Enter the World of TriCoreTraining.com'); ?></h1>
-
-                   <?php echo $this->element('js_error'); ?>
+          <?php echo $this->element('js_error'); ?>
 
 <?php 
-
 // LOGOUT
-if ( $session_userid && $session_useremail ) 
-{ 
-
-?>
-                   <?php //echo $form->create('User', array('action' => 'login'));?>
+if ( $session_userid && $session_useremail ) { ?>
                    <fieldset>
                    <legend><?php __('You are logged in and want to leave?'); ?></legend>
 
                    <?php echo $html->link(__('Logout', true), array('controller' => 'users', 'action' => 'logout')); ?>
 
                    </fieldset>
-                   <?php //echo $form->end();?>
-
 <?php } else { ?>
-                   <?php echo $form->create('User', array('action' => 'login'));?>
+                   <?php echo $form->create('User', array('action' => 'login', 'class' => 'form-horizontal' )); ?>
                    <fieldset>
                    <legend><?php __('Log in and start forming your body'); ?></legend>
 
                    <?php if ($session->read('flash')) { ?>
-                   <div class="statusbox error">
+                   <div class="alert alert-danger">
                    <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
 
-<?php if ( !isset( $session_userid ) ) { ?>
-<a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
-<?php } ?>
+<div class="form-group">
+
+        <?php if ( !isset( $session_userid ) ) { ?>
+        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a> &nbsp;&nbsp; <b><?php __('or'); ?></b><br />
+        <?php } ?>
+  
+</div>
+
+<div class="form-group">
 
 <?php
-echo '<br /><br /><b>';
-__('or'); 
-echo '</b><br /><br />';
 
 echo $form->input('email',
      array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
      'maxLength' => 255,
-     'class' => 'required',
-     'label' => __('E-mail', true),
+     'class' => 'required form-control',
+     'label' => array('class' => 'control-label', 'text' => __('E-mail', true)),
      'error' => array( 
-          'notempty' => __('You have to enter an e-mail', true)
+          'notempty' => __('You have to enter an e-mail', true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'
      ) 
 ));
+?>
+
+</div>
+
+<div class="form-group">
+
+<?php
 
 echo $form->input('password',
      array(
@@ -58,27 +62,36 @@ echo $form->input('password',
      'after' => '',
      'between' => '',
      'maxLength' => 255,
-     'class' => 'required',
-     'label' => __('Password', true),
+     'class' => 'required form-control',
+     'label' => array('class' => 'control-label', 'text' => __('Password', true)),
      'error' => array( 
-        'notempty' => __('You have to enter a password', true) 
+        'notempty' => __('You have to enter a password', true),
+        'wrap' => 'div', 
+        'class' => 'text-danger'         
      ) 
 ));
 
 ?>
-<br />
-<?php
-		   echo $form->input('remember_me', array('label' => __('Remember me', true), 'type' => 'checkbox'));
-?>
+  
+    <div class="checkbox">
+    <?php
+    		   echo $form->input('remember_me', array('before' => '', 'after' => '', 'label' => __('Remember me', true), 'type' => 'checkbox'));
+    ?>
+    </div>
 
-                   <?php echo $form->end(__('Sign In', true));?>
+</div>
+                  <?php echo $this->Form->submit(__('Sign In', true), array('class'=>'btn btn-primary')); ?>
 
-                   </fieldset>
+                  </fieldset>
+                  <?php echo $form->end();?>
 
-<?php echo $html->link(__("Can't remember your password?", true),array('controller' => 'users', 'action' => 'password_forgotten'))?>
-
-<br /><br /><br />
-
+    <br />
+    <?php echo $html->link(__("Can't remember your password?", true),array('controller' => 'users', 'action' => 'password_forgotten'))?>
+    <br /><br />
 
 <?php } ?>
+
+        </div>
+      </div>
+
 

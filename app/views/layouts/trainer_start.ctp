@@ -1,27 +1,21 @@
-<!DOCTYPE html>
-<html lang="<?php 
-    if ( $locale == 'deu' ) echo 'de'; 
-    else if ( $locale == 'zho' ) echo 'zh';
-    else if ( $locale == 'fra' ) echo 'fr';
-    else if ( $locale == 'isl' ) echo 'is';
-    else if ( $locale == 'ron' ) echo 'ro';
-    else if ( $locale == 'pol' ) echo 'pl';
-    else echo 'en'; 
-?>">
-<head>
-    <title><?php
+<?php
 
-if ( isset( $title ) ) 
-	echo 'TriCoreTraining.com' . ' ' . $title;
-else	
-	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
-	
+// get currencies
+$currency = 'EUR';
+$userobject = null;
+$price_array = $unitcalc->get_prices( null, $currency, $userobject );
+$price_array_split = $price_array[$currency]['total'];
+$price_month_array_split = $price_array[$currency]['month'];
+
+if ( $currency == 'EUR' ) { $currency_show = '€'; } else { $currency_show = '$'; }
+
+// get discount
 if ( isset( $userinfo ) ) 
 {
 		$facebox_content = '';
 			
 		// create text for facebox with workout
-		if ( $distance ) 
+		if ( isset( $distance ) ) 
 		{
 			
 			$facebox_content = '<br /><h1>' . __('My TriCoreTraining.com workout!', true) . '</h1><p>' . 
@@ -32,8 +26,6 @@ if ( isset( $userinfo ) )
 			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 
-        	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';
-
 		// user recommended our service
 		} else
 		{
@@ -42,8 +34,6 @@ if ( isset( $userinfo ) )
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
 			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
-
-        	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';		
 		}
 		
 }
@@ -54,168 +44,453 @@ if ( isset( $companyinfo ) )
 			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 2 coffees a month.", true) . 
 			'<br /><br />' . __('Yours', true) . ', Klaus-M. (' . __('founder of', true) . ') ' . __('TriCoreTraining', true) . '<br /><br />' . 
 			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>';
-
-        	$facebox_content = 'jQuery.facebox("' . $facebox_content . '");';		
 }
 
-?></title>
-    <?php $url = Configure::read('App.serverUrl'); echo $html->charset(); ?>
-    <?php echo $html->meta('icon'); ?>
+if ( isset( $facebox_content ) ) {
+	$facebox_content = "
+	jQuery.magnificPopup.open({
+	    items: {
+	      src: \"<div class='white-popup-block'>" . $facebox_content . "</div>\"
+	    },
+	    type: 'inline'
+	});
+	";
+}
 
-    <?php echo $this->element('metanavigation'); ?>
+?><!DOCTYPE html>
+<html lang="<?php 
+    if ( $locale == 'deu' ) echo 'de'; 
+    else echo 'en'; 
+?>">
 
-    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
+<head>
+	<title><?php
+if ( isset( $title ) ) 
+	echo 'TriCoreTraining.com' . ' ' . $title;
+else	
+	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
+	?></title>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/start.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.responsive.css?v=<?php echo VERSION; ?>" />
+<?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>
-<?php } else { ?>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-<?php } ?>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.min.js?v=<?php echo VERSION; ?>"></script>
+	<?php echo $html->meta('icon'); ?>
 
-    <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.min.js?v=<?php echo VERSION; ?>"></script>
-    <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+
+<?php echo $this->element('metanavigation'); ?>
+
+	<link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
+
+<?php echo $this->element('header'); ?>
+
+	<link href="<?php echo $url; ?>/css/styles.css" rel="stylesheet">
 
 <?php echo $scripts_for_layout; ?>
 
-<script type="text/javascript">
-// image fader
-$(document).ready(function() {
-	var $teasers = $(".teaserimages").children("img");
-	var tcount = $teasers.length;
-	var last = tcount - 1;
-	
-	setInterval(function() {
-		$($teasers[last]).fadeOut();
-		var r = Math.floor(Math.random() * tcount);
-
-		if (r == last && r < (tcount - 1)) {
-			r++;
-		} else if (r == last && r == (tcount - 1)) {
-			r = 0;
-		}
-		$($teasers[r]).fadeIn();
-		last = r;
-	}, 6000);
-	
-   $('.box.last.features a').fancybox();
-});
-</script>
-
+	<link rel="canonical" href="http://www.tricoretraining.com" />
+<!--
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-57-precomposed.png">
+-->	
 </head>
+
 <body>
-<!-- Header -->
-<div class="container_12 header">
-	<div class="grid_12 branding">
-		<a href="<?php echo Configure::read('App.serverUrl'); ?>">
-			<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com" title="TriCoreTraining.com" />
-		</a>
-     <?php echo $this->element('topprofile'); ?>
+  
+<!-- MAIN WRAPPER class="wrapper" max-width="1110px"-->
+<div class="wrapper">
+
+<header>	
+
+    <!-- PAGE-HEADER-->	
+	<!-- NAVBAR-->
+	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<div class="container">
+	  	<!-- Brand and toggle get grouped for better mobile display -->
+	  	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		  <span class="sr-only"><?php __('Toggle navigation', false); ?></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand navbar-brand-small" href="/trainer/">
+		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com Logo"></a>
+	  	</div>
+
+		<?php echo $this->element('subnavigation_all'); ?>
+
+		</div><!-- /.navbar-collapse --> 
+	</div>	
+	</nav>
+
+
+</header>
+<!-- /PAGE-HEADER-->
+
+<article>
+<div class="container">
+
+         <div class="panel">
+            <div class="panel-heading"><h1><?php __('TriCoreTraining.com - Online Trainingplans for Triathlon, Run and Bike'); ?></h1></div>
+				<div class="panel-body">
+					<div id="carousel-example-generic" class="carousel slide bs-docs-carousel-example">
+						<ol class="carousel-indicators">
+							<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+							<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+							<!--<li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>-->
+						</ol>
+						<div class="carousel-inner">
+
+							<div class="item active">
+							    <img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-1.jpg" alt="<?php __('Gain speed, lose weight!'); ?>">
+								<div class="carousel-caption">
+									<h3><?php __('Gain speed, lose weight!'); ?></h3>
+									<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?>
+										<br />
+									<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+								</div>
+							</div>
+							<div class="item">
+								<img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-2.jpg" alt="<?php __('Job, Family, no time?'); ?>">
+								<div class="carousel-caption">
+									<h3><?php __('Job, Family, no time?'); ?></h3>
+									<p><?php __('You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you\'ve come to the right place.</b>'); ?>
+										<br />
+										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+									</p>
+								</div>
+							</div>
+							<div class="item">
+								<img width="125%" class="img-responsive"src="<?php echo $url; ?>/img/start/start-3.jpg" alt="<?php __('Enjoy your training'); ?>">
+								<div class="carousel-caption">
+									<h3><?php __('Enjoy your training'); ?></h3>
+									<p> <?php __('You want to finish your first marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>'); ?>
+										<br />
+										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+									</p>
+								</div>
+							</div>
+							<!--
+							<div class="item">
+								<img width="125%" class="img-responsive"src="<?php echo $url; ?>/img/start/start-4.jpg" alt="<?php __(''); ?>">
+								<div class="carousel-caption">
+									<h3>First slide label</h3>
+									<p>Nulla vitae elit libero, a pharetra augue mollis interdum.
+										<br />
+										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+									</p>
+								</div>
+							</div>
+							-->
+						</div>
+						<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+							<span class="icon-prev"></span>
+						</a>
+						<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+							<span class="icon-next"></span>
+						</a>
+					</div>
+
+				</div><a name="howitworks"></a>
+        </div>
+
+		<div class="panel">
+			<div class="col-12 col-lg-12 panel-heading text-center">
+				<h3><?php __('HOW IT WORKS?'); ?></h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-lg-12">
+            		<?php echo $this->element('startcontent'); ?>
+            	</div>
+            </div>
+        </div>
+  		<a name="features"></a>
+</div>
+
+<div class="container">
+
+	<div class="panel text-center">
+		<div class="col-12 col-lg-12 panel-heading text-center">
+<!--		<div class="panel-heading">-->
+			<h3><?php __('FEATURES'); ?></h3>
+<!--		</div>-->
+		</div>
+		<div class="panel-body">
+			<div class="row">
+	      	<!-- START THE FEATURETTES -->
+			<div class="col-lg-12">
+
+		      <hr class="featurette-divider">
+
+		      <div class="row featurette">
+		        <div class="col-md-7">
+		          <h2 class="featurette-heading"><?php __('Get individual training plans');?><span class="text-muted"></span></h2>
+		          <p class="lead"><?php __('Receive individual training plans based on your workouts and upcoming competitions.');?></p>
+		        </div>
+		        <div class="col-md-5">
+		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-plans-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-plans-big.png" data-src="holder.js/500x500/auto" alt="<?php __('Get individual training plans');?>" title="<?php __('Get individual training plans');?>"></a>
+		        </div>
+		      </div>
+
+		      <hr class="featurette-divider">
+
+		      <div class="row featurette">
+		        <div class="col-md-5">
+		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-stats-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-stats-big.png" data-src="holder.js/500x500/auto" alt="<?php __('Analyze your workouts');?>" title="<?php __('Analyze your workouts');?>"></a>
+		        </div>
+		        <div class="col-md-7">
+		          <h2 class="featurette-heading"><?php __('Analyze your workouts');?><span class="text-muted"></span></h2>
+		          <p class="lead"><?php __('Use detailed statistics to assess yor fitness and gain even more from your workouts.');?></p>
+		        </div>
+		      </div>
+
+		      <hr class="featurette-divider">
+
+		      <div class="row featurette">
+		        <div class="col-md-7">
+		          <h2 class="featurette-heading"><?php __('Track your trainings');?><span class="text-muted"></span></h2>
+		          <p class="lead"><?php __('Log your trainings, manage your competitions, and also keep track of your weight.');?></p>
+		        </div>
+		        <div class="col-md-5">
+		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-track-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-track-big.png" data-src="holder.js/500x500/auto" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"></a>
+		        </div>
+		      </div>
+
+		      <hr class="featurette-divider">
+
+		      <!-- /END THE FEATURETTES -->
+  			</div>
+  			</div>
+		</div><a name="references"></a>
 	</div>
-	<div class="grid_12 navigation">
-		<?php echo $this->element('topnavigation_public'); ?>
+
+</div>
+
+<div class="container">
+	<div class="panel">
+		<div class="col-12 col-lg-12 panel-heading text-center">
+			<h3><?php __('WHAT PEOPLE SAY ABOUT'); ?> TRICORETRAINING.COM</h3>
+		</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-lg-6">
+				<div class="row">
+				<div class="col-xs-12 col-sm-4 col-lg-3 hidden-xs text-right">
+					<img class="img-circle" src="<?php echo $url; ?>/img/profile_nicor.jpg" alt="Nicolaus Reimer, <?php __('reference for'); ?> TriCoreTraining" style="width: 75px; height: 75px;">
+				</div>
+					<div class="col-xs-12 col-sm-8 col-lg-9">
+						<blockquote>
+						  <p><?php __('TriCoreTraining helped me in my training for my Ironmans and many other races. Thank you.'); ?></p>
+						  <small>Nicolaus Reimer, 39, six times Ironman <cite title="Source Title"></cite></small>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-lg-6">
+				<div class="row">
+				<div class="col-xs-12 col-sm-4 col-lg-3 hidden-xs text-right">
+					<img class="img-circle" src="<?php echo $url; ?>/img/profile_klausms.jpg" alt="Klaus-M. Schremser, <?php __('reference for'); ?> TriCoreTraining" style="width: 75px; height: 75px;">
+				</div>
+					<div class="col-xs-12 col-sm-8 col-lg-9">
+						<blockquote>
+						  <p><?php __('I lost 8 kilograms while I did my TriCoreTraining training for two Half-Ironmans a year'); ?></p>
+						  <small>Klaus-M. Schremser, 38, Triathlete since 2003 <cite title="Source Title"></cite></small>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-lg-6">
+				<div class="row">
+				<div class="col-xs-12 col-sm-4 col-lg-3 hidden-xs text-right">
+					<img class="img-circle" src="<?php echo $url; ?>/img/profile_bernhardr.jpg" alt="Bernhard Riegler,  <?php __('reference for'); ?> TriCoreTraining" style="width: 75px; height: 75px;">
+				</div>
+					<div class="col-xs-12 col-sm-8 col-lg-9">
+						<blockquote>
+						  <p><?php __('I am a rookie at triathlon, but now I go for Ironman Austria with TriCoreTraining - great!'); ?></p>
+						  <small>Bernhard Riegler, 32, Triathlon rookie<cite title="Source Title"></cite></small>
+						</blockquote>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-lg-6">
+				<div class="row">
+				<div class="col-xs-12 col-sm-4 col-lg-3 hidden-xs text-right">
+					<img class="img-circle" src="<?php echo $url; ?>/img/profile_clemensp.jpg" alt="Clemens Prerovsky,  <?php __('reference for'); ?> TriCoreTraining" style="width: 75px; height: 75px;">
+				</div>
+					<div class="col-xs-12 col-sm-8 col-lg-9">
+						<blockquote>
+						  <p><?php __('My marathon time is down to 3 hours 27 minutes. Thanks to TriCoreTraining and its training plans.'); ?></p>
+						  <small>Clemens Prerovsky, 34, 2 times Ironman <cite title="Source Title"></cite></small>
+						</blockquote>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div><a name="newsletter"></a>
 	</div>
 </div>
-<!-- /Header -->
-<!-- Main -->
-<div class="container_12 main">
-	<!-- Center column -->
-	<div class="grid_12 center">
-		<!-- Content -->
-		<div class="box" style="padding-bottom: 0px; height: 285px; margin-bottom:15px; ">
-			<div id="signup">
-				<h1><?php __('Gain speed, lose weight!'); ?></h1>
-				<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?></p>
-				<a href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a>
-			</div>
-			<iframe id="facebook" src="http://www.facebook.com/plugins/like.php?href=<?php echo urlencode('http://www.facebook.com/pages/TriCoreTraining/150997251602079'); ?>&amp;layout=standard&amp;show_faces=false&amp;width=280&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=40" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
 
-			<div class="teaserimages">
-				<img class="startimage" src="/trainer/img/start/start-1.jpg" alt="" />
-				<img class="startimage" src="/trainer/img/start/start-2.jpg" alt="" />
-				<img class="startimage" src="/trainer/img/start/start-3.jpg" alt="" />
-				<img class="startimage" src="/trainer/img/start/start-4.jpg" alt="" />
+<?php echo $this->element('newsletter'); ?>
+
+<div class="container">
+	<div class="jumbotron">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-lg-12 text-center">
+						<a name="pricing"></a><h2><?php __('Choose your plan &amp; pricing'); ?></h2>
+						<p></p>
+					</div>
+				</div>
 			</div>
-			<div class="clear"></div>
-		</div>
-		<!-- /Content -->
+    </div>
+</div>
+
+<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="text-center"><i class="icon-fullscreen"></i> <?php __('FREE PLAN'); ?></h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+							<p class="lead text-success" style="font-size:40px"><strong><?php echo $currency_show; ?> 0</strong></p>
+						</div>
+					</div>
+					<ul class="list-group list-group-flush text-center">
+							<li class="list-group-item"><?php __('Workout diary', false); ?></li>
+							<li class="list-group-item"><?php __('Training statistics', false); ?></li>
+							<li class="list-group-item"><?php __('Personal settings', false); ?></li>
+							<li class="list-group-item"><?php __('Track goals', false); ?></li>
+							<li class="list-group-item"><?php __('Mobile + Tablet usage', false); ?></li>
+							<li class="list-group-item"><?php __('Knowledgebase', false); ?></li>
+							<li class="list-group-item"><?php __('No Training Plan', false); ?></li>
+						</ul>
+				</div>
+			<div class="panel-footer">
+					<a class="btn btn-success btn-block" href="/trainer/users/register"><?php __('Register NOW', false); ?></a>
+			</div>
+		  </div>
+        </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="text-center"><i class="icon-fullscreen"></i> <?php __('MONTHLY PLAN'); ?></h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+							<p class="lead text-info" style="font-size:40px"><strong><?php echo $currency . ' ' . $price_array_split[0]; ?></strong></p>
+						</div>
+
+					</div>
+						<ul class="list-group list-group-flush text-center">
+							<li class="list-group-item"><?php __('Workout diary', false); ?></li>
+							<li class="list-group-item"><?php __('Training statistics', false); ?></li>
+							<li class="list-group-item"><?php __('Personal settings', false); ?></li>
+							<li class="list-group-item"><?php __('Track goals', false); ?></li>
+							<li class="list-group-item"><?php __('Mobile + Tablet usage', false); ?></li>
+							<li class="list-group-item"><?php __('Knowledgebase', false); ?></li>
+							<li class="list-group-item"><b><?php __('Interactive', false); ?> <?php __('Training Plan', false); ?></b></li>
+						</ul>
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-info btn-block" href="/trainer/users/register"><?php __('Register NOW', false); ?></a>
+				</div>
+			</div> 
+	   </div>
+        <div class="col-xs-12 col-sm-4 col-lg-4">
+			<div class="panel panel-danger">
+				<div class="panel-heading">
+					<h3 class="text-center"><i class="icon-fullscreen"></i> <?php __('YEARLY PLAN'); ?></h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+							<p class="lead text-danger" style="font-size:40px"><strong><?php echo $currency . ' ' . $price_array_split[3]; ?></strong></p>
+						</div>
+					</div>
+						<ul class="list-group list-group-flush text-center">
+							<li class="list-group-item"><?php __('Workout diary', false); ?></li>
+							<li class="list-group-item"><?php __('Training statistics', false); ?></li>
+							<li class="list-group-item"><?php __('Personal settings', false); ?></li>
+							<li class="list-group-item"><?php __('Track goals', false); ?></li>
+							<li class="list-group-item"><?php __('Mobile + Tablet usage', false); ?></li>
+							<li class="list-group-item"><?php __('Knowledgebase', false); ?></li>
+							<li class="list-group-item"><b><?php __('Interactive', false); ?> <?php __('Training Plan', false); ?></b></li>
+						</ul>
+				</div>
+				<div class="panel-footer">
+					<a class="btn btn-danger btn-block" href="/trainer/users/register"><?php __('Register NOW', false); ?></a>
+				</div>
+			</div> 
+	   </div>
 	</div>
-	
-    <div class="grid_3">
-    	<div class="box last">
-	        <?php __("You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you've come to the right place.</b>"); ?>
-        </div>
-    	<div class="box last">
-	        <?php __("You want to finish your first Marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>"); ?>
-        </div>
-    </div>
-    
-    <div class="grid_9">
-    	<div class="box features last">
-    		<div>
-    			<a href="/trainer/img/startpage-feature-track-big.jpg"><img src="/trainer/img/startpage-feature-track.jpg" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"/></a>
-    			<p><?php __('Log your trainings, manage your competitions, and also keep track of your weight.');?></p>
-    		</div>
-    		<div>
-    			<a href="/trainer/img/startpage-feature-stats-big.jpg"><img src="/trainer/img/startpage-feature-stats.jpg" alt="<?php __('Analyze your workouts');?>" title="<?php __('Analyze your workouts');?>"/></a>
-    			<p><?php __('Use detailed statistics to assess yor fitness and gain even more from your workouts.');?></p>
-    		</div>
-    		<div style="padding-right: 0px;">
-    			<a href="/trainer/img/startpage-feature-plans-big.jpg"><img src="/trainer/img/startpage-feature-plans.jpg" alt="<?php __('Get individual training plans');?>" title="<?php __('Get individual training plans');?>"/></a>
-    			<p><?php __('Receive individual training plans based on your workouts and upcoming competitions.');?></p>
-    		</div>
-    	</div>
-    </div>
-
-
- 		<div class="grid_12 center">
-
-			<!-- Content -->
-			<div class="box last">
-
-<?php echo $this->element('startcontent'); ?>
-
-			</div>
-			<!-- /Content -->
-		</div>
-
-
-  <!-- /Center column -->
-  <div class="clear"></div>
-  <!-- /Main -->
+</div>
+</article>
 
 	<!-- Footer -->
 	<?php echo $this->element('footer'); ?>
 	<!-- /Footer -->
-	
-	<script type="text/javascript">
-	/** initiate JQuery **/
-	
-	$(document).ready(function() {
-	
-        // facebox box
-	    //$('a[rel*=facebox]').facebox();
-		<?php if ( isset( $facebox_content ) ) echo $facebox_content; ?>
-	});
-	</script>
 
-	<!-- Footer End -->
-    <?php echo $this->element('footerend'); ?>
-	<!-- /Footer End -->
+</div>
 
-<script>var _spinnakr_site_id='287071521';(function(d,t,a){var g=d.createElement(t), s=d.getElementsByTagName(t)[0];g[a]=a;g.src='//s5.spn.ee/js/so.js'; s.parentNode.insertBefore(g,s)}(document,'script','async'));</script>
+<script type="text/javascript">
+/** initiate JQuery **/
 
+$(document).ready(function() {
+	<?php if ( isset( $facebox_content ) ) echo $facebox_content; ?>
+});
+</script>
+
+<script>
+jQuery(document).ready(function(){
+	jQuery('#topnav').localScroll(3000);
+	jQuery('#startbtn').localScroll(2000);
+	//.parallax(xPosition, speedFactor, outerHeight) options:
+	//xPosition - Horizontal position of the element
+	//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+	//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+	jQuery('#parallax-bg').parallax("50%", 0.1);
+	//jQuery('#Section-1').parallax("50%", 0.3);
+	//jQuery('#Section-2').parallax("50%", 0.1);
+	//jQuery('#foot-sec').parallax("50%", 0.1);
+
+})
+</script>
+
+<script>
+//hide menu after click on mobile
+jQuery('.navbar .nav > li > a').click(function(){
+		jQuery('.nav-collapse.navbar-responsive-collapse.in').removeClass('in').addClass('collapse').css('height', '0');
+
+		});
+</script>
+
+<!-- NICE Scroll plugin -->
+<script>
+//scroll bar custom
+	jQuery(document).ready(
+  function() {  
+    jQuery("html").niceScroll({cursorcolor:"#333"});
+  }
+);
+</script>
+<script>
+ jQuery('.carousel').carousel({interval:5000});
+</script>
+
+<?php echo $this->element('footerend'); ?>
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-548497ef4596dc15" async="async"></script>
 
 </body>
 </html>

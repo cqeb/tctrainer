@@ -3,9 +3,12 @@
 $searchfilter = base64_encode( $searchfilter );
 
 ?>
-                   <h1><?php __('Statistics'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Statistics'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_formcurve')); ?>
+                   <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_formcurve','class' => 'form-horizontal')); ?>
                    <fieldset>
                    <legend><?php __('How fast am I?'); ?></legend>
 
@@ -20,7 +23,7 @@ $searchfilter = base64_encode( $searchfilter );
                    <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/how-can-i-test-if-i-became-faster/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
-                   <div>
+<div class="form-group">
 <?php
 
 for ( $i = 0; $i < count( $testworkoutsfilter ); $i++ )
@@ -41,6 +44,7 @@ echo $form->input('search',
                   'before' => '',
                   'after' => '',
                   'between' => '',
+                  'class' => 'form-control',
                   'options' => $searchname
                   ));
 
@@ -50,6 +54,7 @@ echo $form->input('fromdate',
                   'before' => '',
                   'after' => '',
                   'between' => '',
+                  'class' => 'form-control',
                   'label' => __('From', true),
                   'minYear' => date('Y',time())-5,
                   'maxYear' => date('Y',time())
@@ -62,6 +67,7 @@ echo $form->input('todate',
                   'before' => '',
                   'after' => '',
                   'between' => '',
+                  'class' => 'form-control',
                   'label' => __('To', true),
                   'minYear' => date('Y',time())-5,
                   'maxYear' => date('Y',time())+1
@@ -72,7 +78,10 @@ echo $form->input('todate',
 echo $form->hidden('id');
 echo $form->hidden('user_id');
 
-echo $form->submit(__('Display',true), array('name' => 'display'));
+?>
+<br />
+<?php
+echo $form->submit(__('Display',true), array('name' => 'display','class'=>'btn btn-primary'));
 
 ?>
                    </div>
@@ -80,6 +89,9 @@ echo $form->submit(__('Display',true), array('name' => 'display'));
 <?php
 
       echo $form->end();
+?>
+
+<?php
 
 $chart_haxis = __('min/' . $unit['length'], true);
 $chart_vaxis = __('Time', true);
@@ -88,8 +100,6 @@ $chart_color1 = '#06FF02';
 //$chart_color2 = '#F1AD28';
 
 ?>
-
-<br />
 
 <script type="text/javascript">
 
@@ -128,10 +138,29 @@ $chart_color1 = '#06FF02';
           // Create and draw the visualization.
           var ac = new google.visualization.AreaChart(document.getElementById(chart));
 
-          var graph_width = 680;
-          var graph_height = 500;
+          var graph_width = 700;
+          var graph_height = 490;
 
-          if ( window.innerWidth <= 320 ) { graph_width = 270; graph_height = 300; }       
+          if ( window.innerWidth <= 1200 ) { 
+            graph_width = 550; 
+            graph_height = 450; 
+          }   
+
+          if ( window.innerWidth <= 992 ) { 
+            graph_width = 350; 
+            graph_height = 350; 
+          }   
+
+          if ( window.innerWidth <= 768 ) { 
+            graph_width = 650; 
+            graph_height = 550; 
+          }   
+
+          if ( window.innerWidth <= 400 ) { 
+            graph_width = 270; 
+            graph_height = 300; 
+          }   
+
           // read size of div - write in variable and set here
           ac.draw(data, {
             //title : 'A vs. C',
@@ -176,9 +205,9 @@ google.setOnLoadCallback(get_formcurve);
 Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
--->
 
 <br /><br /><br /><br /><br /><br /><br /><br />
+-->
 
 <?php
 
@@ -189,9 +218,10 @@ Debugging: (only localhost)<br />
 }
 ?>
 
+        </div>
+      </div>
 
 <?php
-
 
       $this->js_addon = '';
 

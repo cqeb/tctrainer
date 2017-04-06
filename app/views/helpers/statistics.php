@@ -2,7 +2,7 @@
 
 class StatisticsHelper extends AppHelper {
 	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc');
-	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc', 'Unitcalc', 'Xls');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc', 'Xls');
 
 	function beforeRender() 
 	{

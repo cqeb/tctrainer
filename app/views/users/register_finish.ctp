@@ -1,23 +1,26 @@
-
-                   <h1><?php __('Registration finished');?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Registration finished');?></h1></div>
+        
+        <div class="panel-body">
 
                    <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $form->create('User', array('action' => 'add_step3')); ?>
+                   <?php echo $form->create('User', array('action' => 'add_step3', 'class' => 'form-horizontal')); ?>
 
                    <fieldset>
                    <legend><?php __('Thank your for registering at TriCoreTraining.com.'); ?></legend>
 
                     <?php if ( $session->read('flash') ) { ?>
-                    <div class="statusbox ok">
+                    <div class="alert alert-success">
                     <?php echo $session->read('flash'); $session->delete('flash');  ?>
                     </div>
                     <br />
                     <?php } ?>
 
+<div class="form-group">
 <?php
                    if ( $smtperrors != '' )
-                     echo '<div class="errormessage">' . $smtperrors . '</div>';
+                     echo '<div class="alert alert-danger">' . $smtperrors . '</div>';
 ?>
 
                    <?php __('PLEASE do not forget to activate your account! Thank you and happy training!'); ?>
@@ -28,14 +31,10 @@
                    <br /><br />
                    For DEBUGGING (only localhost):
                    <br />
-
-<?php
-
-echo $html->link(__('Activate', true), array('controller' => 'users', 'action' => 'activate', 'transaction_id' => $transaction_id));
-
-?>
+                   <?php echo $html->link(__('Activate', true), array('controller' => 'users', 'action' => 'activate', 'transaction_id' => $transaction_id)); ?>
                   <br />
                   <?php } ?>
+</div>
                   
                   </fieldset>
 
@@ -43,6 +42,8 @@ echo $html->link(__('Activate', true), array('controller' => 'users', 'action' =
       echo $form->end();
 ?>
 
+        </div>
+      </div>
 <?php
 
       $this->js_addon = <<<EOE

@@ -4,11 +4,14 @@ $yesno[1] = __('Yes', true);
 $yesno[0] = __('No', true);
 
 ?>
-                   <h1><?php __('List users'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('List users'); ?></h1></div>
+        
+        <div class="panel-body">
 
                    <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $form->create('User', array('action' => 'send_message')); ?>
+                   <?php echo $form->create('User', array('action' => 'send_message','class' => 'form-horizontal')); ?>
                    <fieldset> 
                    <legend><?php __('Administrate our users!'); ?></legend>
 
@@ -18,9 +21,10 @@ $yesno[0] = __('No', true);
                    </div><br />
                    <?php } ?>
 
+
 <?php echo $paginator->numbers(); ?>
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
 <tr>
     <th><?php echo $paginator->sort(__('ID',true), 'id'); ?></th>
     <th><?php echo $paginator->sort(__('Name',true), 'lastname'); ?></th>
@@ -92,11 +96,14 @@ echo $form->input('user_' . $user['id'],
                  </fieldset>
 <?php
 
-	echo $form->submit(__('Send message',true));
+	echo $form->submit(__('Send message',true),array('class' => 'btn btn-primary'));
 
 	echo $form->end();
 
 ?>
+
+        </div>
+      </div>
 
 <?php
 

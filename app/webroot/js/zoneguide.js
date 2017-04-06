@@ -36,7 +36,7 @@ ZoneGuide = {
 			if (guideStyle) {
 				html += '<img class="pointer" src="/trainer/img/zones/pointer.png">';
 			}
-			html += '<table>' +
+			html += '<table class="table table-striped table-bordered table-condensed">' +
 				// header
 				'<tr>' +
 					'<th>' + i18n.sport + '</th>' +

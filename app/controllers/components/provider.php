@@ -27,19 +27,28 @@ require_once ROOT . DS . APP_DIR . '/config/database.php';
 
 
 class ProviderComponent extends Object {
-	public $components = array('Session', 'Unitcalc');
-	public $helpers = array('Session');
+	//public $components = array('Session', 'Unitcalc');
+	//public $helpers = array('Session');
+
+	// enhanced by KMS
+   	public $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Statisticshandler', 'Provider');
+  	public $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc', 'Statistics');
+
 	private $DB;
 	private $athlete;
-	
+	// changed by kms because I could not access this variable from controller
+	/*
+	public $DB;
+	public $athlete;
+	*/
 	/**
 	 * initializes the provider component
 	 * @param unknown_type $controller not needed
 	 * @param unknown_type $settings not needed
 	 */
 	public function initialize($controller, $settings) {
-                $config = new DATABASE_CONFIG();
-                $this->DB = new Database($config->default['login'],$config->default['password'],$config->default['database'],$config->default['host']);
+        $config = new DATABASE_CONFIG();
+        $this->DB = new Database($config->default['login'],$config->default['password'],$config->default['database'],$config->default['host']);
 	}
 	
 	/**
@@ -57,16 +66,25 @@ class ProviderComponent extends Object {
 	/**
 	 * get a plan
 	 */
-	public function getPlan($html_output = true) {
+	public function getPlan($html_output = true, $user = null, $notSun = null, $o = 0) {
+		
+		if ( $o > 0 ) $_GET['o'] = $o;
+
+		if ( $user != null ) {
+			$this->athlete = new Athlete($this->DB, $user);
+		}
+
 		// cut preview time to a maximum of 3 weeks
 		if (array_key_exists('o', $_GET) && intval($_GET['o']) > 3 && !$this->getAthlete()->isAdvancedFeatures()) {
 			$_GET['o'] == 3;
 		}
 		
-		if (!$this->getAthlete()->isValid()) {
-			return '<div class="statusbox error"><p>' .
+		if ($this->getAthlete()->isValid() == 1) {
+			
+		} else {
+			return '<div class="alert alert-danger"><p>' .
 				__("Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions.", true) . 
-				'</p><button onclick="document.location=\'/trainer/payments/subscribe_triplans\'">' .
+				'</p><br /><button onclick="document.location=\'/trainer/payments/subscribe_triplans\'">' .
 				__('Become PREMIUM', true) . 
 				'</button></div>' . 
 				"<script type=\"text/javascript\">
@@ -75,7 +93,6 @@ class ProviderComponent extends Object {
 				</script>";
 		}
 		
-
 		// start benchmark timer		
 		$timerStart = microtime(true);
 
@@ -97,7 +114,8 @@ class ProviderComponent extends Object {
 
 		// now generate workouts
 		$phase = $mcp->getPhase($genWeek);
-		
+
+/*		
 		$swimWorkouts = array();
 		$bikeWorkouts = array();
 		$runWorkouts = array();
@@ -146,12 +164,14 @@ class ProviderComponent extends Object {
 		
 		// link workouts to completed trainings
 		$workouts = $this->linkWorkouts($workouts, $genWeek);
-		
-		$html = "<h1>" . __("Week", true) . " " . 
-			$this->Unitcalc->check_date($genWeek->format("Y-m-d")) . 
-			"</h1>";
+*/
+		$workouts = $this->generatePlan(null, $genWeek);
+
+		$html = "";
+		$html .= "<h2>" . __("Week", true) . " " . $this->Unitcalc->check_date($genWeek->format("Y-m-d")) . "</h2>";
 		
 		switch (substr($phase['phase'],0,4)) {
+
 			case "PREP":
 				$phaseName = __('Preparative Training', true);
 				break;
@@ -168,15 +188,17 @@ class ProviderComponent extends Object {
 			default:
 				$phaseName = __('Basic Training', true);
 				break;
-		}
 
-		$html .= '<p id="phaseinfo">' . $phaseName;
+		}
+		//echo $phase['phase'];
+
+		$html .= '<br /><h3 id="phaseinfo">' . $phaseName;
 		if ($phase['recovery']) {
 			$html .= ' (' . __('Recovery Week', true) . ')';
 		}
-		$html .= "</p>";
+		$html .= "</h3>";
 		
-		$html .= WorkoutRenderer::render($workouts, $this->getAthlete());
+		$html .= WorkoutRenderer::render($workouts, $this->getAthlete(), $notSun);
 		
 		// also attach time and workout settings
 		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->getAthlete()->getId()); 
@@ -191,6 +213,183 @@ class ProviderComponent extends Object {
 			return $html;			
 	}
 	
+	/*
+	generatePlan creates a plan for a week 
+	*/
+	function generatePlan($date, $genWeekVal, $retValues = true, $inject_weekdays = false) {
+
+		if ( $date == null ) $date = 'now';
+
+		$timezone = new DateTimeZone('UTC');
+		
+		if ( !isset( $genWeekVal ) ) 
+			$genWeek = DateTimeHelper::getWeekStartDay(new DateTime($date, $timezone));
+		else
+			$genWeek = $genWeekVal;
+
+		$genWeek->add(new DateInterval("P0D"));
+
+		// generate mesocycle
+		$mcp = new MesoCycleProvider($this->DB, $this->getAthlete(), clone $genWeek);
+
+		$time = $mcp->getTrainingTime($genWeek);
+
+		// now generate workouts
+		$phase = $mcp->getPhase($genWeek);
+
+		//print_r($phase);
+		//echo "Phase: " . $phase;
+
+		$swimWorkouts = array();
+		$bikeWorkouts = array();
+		$runWorkouts = array();
+		
+		switch($this->getMultisportType($this->getAthlete()->getSport())) {
+			case 'TRIATHLON':
+				$tsp = new TriSwimProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'SWIM'), $phase);
+				$swimWorkouts = $tsp->generate($genWeek);
+				$tsp->save(); 
+			
+				$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
+				$bikeWorkouts = $tbp->generate($genWeek);
+				$tbp->save(); 
+
+				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$runWorkouts = $trp->generate($genWeek);	
+				$trp->save();
+				break;
+
+            case 'DUATHLON':
+            	$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
+				$bikeWorkouts = $tbp->generate($genWeek);
+				$tbp->save();
+				
+				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$runWorkouts = $trp->generate($genWeek);
+				$trp->save();
+				break;
+
+			case 'RUN':
+				$trp = new TriRunProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'RUN'), $phase);
+				$runWorkouts = $trp->generate($genWeek);
+				$trp->save();
+				break;
+
+			case 'BIKE':
+            	$tbp = new TriBikeProvider($this->DB, $this->getAthlete(), $mcp->getTrainingTime($genWeek, 'BIKE'), $phase);
+				$bikeWorkouts = $tbp->generate($genWeek);
+				$tbp->save();
+				break;
+
+			default:
+				break;
+		}
+		
+		//print_r( $this->getMultisportType($this->getAthlete()->getSport()) );
+		//print_r( $swimWorkouts );
+
+		$workouts = array_merge($swimWorkouts, $bikeWorkouts, $runWorkouts);
+
+		// sort those workouts by trimp
+		uasort($workouts, 'ProviderComponent::sortWorkouts');
+		
+		// link workouts to completed trainings
+		$workouts = $this->linkWorkouts($workouts, $genWeek);
+
+		// export only as area
+		//if ( $inject_weekdays == true ) {
+			$workouts = $sortedWorkouts = WorkoutRenderer::inject_weekdays($workouts, $this->getAthlete(), $time, $phase, $genWeek, true);
+			foreach ($sortedWorkouts as $days => $workout) {
+				//print_r($workout);
+				/*
+				$sql = "UPDATE schedulestrainings SET wday = '" . date("Y-m-d", $workout->getWeekdaydateTS) . " WHERE athlete_id = " . 
+					$this->getAthlete()->getId() . " AND week = '" . $workout->date . "' AND sport = '" . $workout->sport . "' AND type = '" .
+					$workout->type . "' AND duration = '" . $workout->duration . "' AND trimp = '" . $workout->trimp . "' AND lsd = '" .
+					$workout->lsd . "'";
+				*/
+				//echo $sql . "<br><br>";
+			}
+		//}
+
+		if ( $retValues == true ) return $workouts;
+	}
+
+	/**
+	* checks whether a plan was created for an user also in past and adds weekday
+	*/
+	function checkPlanForUser( $userobject ) {
+
+		echo "User: " . $userobject['id'] . "<br>\n";
+
+		// get current season
+        $unit = $this->Unitcalc->get_unit_metric();
+        $results['User'] = $userobject;
+        $session_userid = $results['User']['id'];
+        $this->data = array();
+
+        // how many weeks in the future should we create training plans
+        $weeksToCreate = 5;
+
+        // create athlete with userobject
+        $this->athlete = new Athlete($this->DB, $userobject);
+
+		// automatic default date chooser
+		$choosedates = $this->Statisticshandler->choose_daterange( $results, $this->data, 'trimp_date' );
+
+		// set form-fields of search form
+		$this->data['Trainingstatistic']['fromdate'] = $start = $choosedates['start'];
+		$this->data['Trainingstatistic']['todate'] = $end = $choosedates['end'];
+
+		// check week where training was generated
+		/*
+		$sql = "SELECT week FROM scheduledtrainings WHERE athlete_id = " . $this->athlete->getId() . " AND week > '" . $start . 
+			"' GROUP BY week ORDER by week ASC";
+		*/
+		$sql = "SELECT DISTINCT week FROM scheduledtrainings WHERE athlete_id = " . $this->athlete->getId() . " AND week > '" . $start . 
+			"' ORDER by week ASC";
+		//echo $sql . "<br>";
+		$trainings = $this->DB->query( $sql );
+		//print_r($trainings);
+
+		if (count($trainings) === 0) {
+			return false;
+		}
+
+		$timezone = new DateTimeZone('UTC');
+		// Today
+		$weekNow = DateTimeHelper::getWeekStartDay(new DateTime('now',$timezone));
+		$j = 0;
+
+		// first week of training
+		$weekStart = new DateTime($trainings[0]['week'], $timezone);
+
+		$diff = $weekNow->diff( $weekStart );
+		// diff in weeks between beginn and now
+		$maxRepeat = intval(round(($diff->days/7))+$weeksToCreate);
+
+		//echo $maxRepeat . "<br>";
+
+		// go through all weeks from start to now
+		for ( $i = 0; $i <= $maxRepeat; $i++ ) {
+
+			// add week to start week
+			if ( $i != 0 ) $weekStart->add(new DateInterval("P7D"));
+
+			if ( isset( $trainings[$j]['week'] ) && $trainings[$j]['week'] != $weekStart->format('Y-m-d') ) {
+				// create Plan for this week
+				echo "create plan for " . $weekStart->format('Y-m-d') . "<br>\n";
+				$this->generatePlan( $weekStart->format('Y-m-d'), null, false );
+			} else {
+				echo "plan exists for " . $weekStart->format('Y-m-d') . "<br>\n";
+				$j++;
+			}
+		}
+
+		// add weekday for each week
+		// save
+
+	}
+
 	/**
 	 * link trainings from the plan to completed trainings of this week
 	 * @param array $workouts array of workouts in the plan
@@ -198,19 +397,21 @@ class ProviderComponent extends Object {
 	 * @return array of workouts with reference to a completed training
 	 */
 	private function linkWorkouts($workouts, $week) {
+
 		$trainings = $this->DB->query("SELECT id, sportstype, workouttype
 			FROM trainingstatistics
 			WHERE date >= '" . $week->format("Y-m-d") . "' 
 			AND date < DATE_ADD('" . $week->format("Y-m-d") . "', INTERVAL 1 WEEK)
 			AND workouttype != ''
 			AND user_id = " . $this->athlete->getId());
-		
+
 		if (count($trainings) === 0) {
 			return $workouts;
 		}
 		
 		// now match registered trainings to workouts
 		reset($workouts);
+
 		while (list($k, $w) = each(&$workouts)) {
 			reset($trainings);
 			while (list($l, $t) = each($trainings)) {
@@ -281,7 +482,7 @@ class ProviderComponent extends Object {
 	public function renderMesoCycle($date, $athleteId) {
 		$res = $this->DB->query("SELECT time, date, phase, 
 			(SELECT MAX(time) FROM mesocyclephases WHERE date >= '$date' AND athlete_id = $athleteId) max
-			FROM mesocyclephases WHERE date >= '$date' AND athlete_id = $athleteId LIMIT 10");
+			FROM mesocyclephases WHERE date >= '$date' AND athlete_id = $athleteId LIMIT 7");
 		
 		$html = "<div class='mesocycle'>";
 		while (list($k, $v) = each($res)) {
@@ -331,6 +532,7 @@ class ProviderComponent extends Object {
 	 * @return false if nothing was purged 
 	 */
 	public function smartPurgeOnSave($date, $type) {
+
 		// check if earlier entry exists
 		$r = $this->DB->query("SELECT COUNT(*) c FROM competitions 
 			WHERE competitiondate < '$date'
@@ -394,6 +596,7 @@ class ProviderComponent extends Object {
 	 * only meant to be called from Provider::smartPurge()
 	 */
 	private function purge() {
+
 		$date = DateTimeHelper::getWeekStartDay(new DateTime())->format("Y-m-d");
 		$this->DB->query("DELETE FROM mesocyclephases WHERE date >= '$date' 
 			AND athlete_id = " . $this->getAthlete()->getId());

@@ -1,6 +1,6 @@
 <?php if ( $locale == 'deu' ) { ?>
 
-				<h2>Wie es funktioniert?</h2>
+				<!--<h2>Wie es funktioniert?</h2>-->
 
 <p>
 <b>TriCoreTraining ist ein kostenloses, interaktives Online-Ausdauersport-Training-Service (Laufen, Radfahren, Triathlon) für Athleten</b>,
@@ -24,7 +24,7 @@ Genug Vorteile für Dich? Einfach anmelden!
 
 <?php } else if ( $locale == 'eng' ) { ?>
 
-				<h2>How it works?</h2>
+				<!--<h2>How it works?</h2>-->
 
 <p>
 <b>TriCoreTraining is a free, interactive online endurance sport training service (running, biking, triathlon) for athletes</b> 
@@ -36,7 +36,7 @@ Our motto is “Gain speed, loose weight“.
 You're right here, if you 
 <br />
 <ul>
-<li>looking for an online marathon training service / software / coach</li>
+<li>are looking for an online marathon training service / software / coach</li>
 <li>want to train with an online triathlon training service / software / coach</li>
 <li>are searching for half marathon running schedules</li>
 <li>want to finish an Ironman / Half-Ironman</li>

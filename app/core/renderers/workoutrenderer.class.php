@@ -10,49 +10,71 @@ class WorkoutRenderer {
 	 * @param array $workouts array of workouts to be rendered
 	 * @param Athlete $athlete
 	 */
-	public static function render($workouts, $athlete) {
+	public static function render($workouts, $athlete, $notSun) {
+
+		$todaysWeekday = date('l', time());
+
 		$html = "<table class=\"workouts\">";
 		// overall training length
 		$length = 0;
 		$trimps = 0;
+		$count_workouts = 0;
+
 		foreach ($workouts as $k => $w) {
-			if ($w->isLsd()) {
-				$star = '<img src="/trainer/img/star.gif" class="lsd" title="'
-					. __('This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them.', true) 
-					. '"/> ';
-			} else {
-				$star = false;
-			}
+			$dayofweek = date('l', $w->getWeekdaydateTS);
 			$durationHr = self::formatTime($w->getDuration());
-			$html .= "
-<tr>
-	<td class=\"sport\">" . __($w->getSport(), true) . "</td>
-	<td class=\"type " . $w->getShortCategory() . "\">
-		$star" . __($w->getTypeLabel(), true) . "<br />
-		<span class=\"category br\" title=\"" .
-			$w->getCategoryDescription() .		 
-			"\">" . __($w->getCategory(), true) . "</span>
-			" . self::renderCheckButton($w, $athlete, $durationHr) . "
-	<td class=\"duration\">" . $durationHr . "<small>h</small></td>
-	<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
-</tr>
-<tr>
-	<td class=\"description " . strtolower($w->getSport()) . "\" colspan=\"4\">
-		<div>
-			" . $w->getDescription() . "
-		</div>
-	</td>
-</tr>";
-			$length += $w->getDuration();
-			$trimps += $w->getTRIMP();
+
+			if ( !isset( $notSun ) || ( $todaysWeekday == $dayofweek ) ) {
+				if ($w->isLsd()) {
+					$star = '<img src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/star.gif" class="lsd" title="'
+						. __('This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them.', true) 
+						. '"/> ';
+				} else {
+					$star = false;
+				}
+
+				$html .= "
+				<tr>
+					<td class=\"sport\">" . __($w->getSport(), true) . "<br>(" . __($dayofweek, true) . ")</td>
+					<td class=\"type " . $w->getShortCategory() . "\">
+						$star" . __($w->getTypeLabel(), true) . "<br />
+						<span class=\"category br\" title=\"" .
+							$w->getCategoryDescription() .		 
+							"\">" . __($w->getCategory(), true) . "</span>
+							" . self::renderCheckButton($w, $athlete, $durationHr) . "
+					<td class=\"duration\">" . $durationHr . "<small>h</small></td>
+					<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
+				</tr>
+				<tr>
+					<td class=\"description " . strtolower($w->getSport()) . "\" colspan=\"4\">
+						<div>
+							" . $w->getDescription() . "
+
+						</div>
+					</td>
+				</tr>";
+				$length += $w->getDuration();
+				$trimps += $w->getTRIMP();
+				$count_workouts++;
+			}
 		}
 		
-		$html .= "<tr><td class=\"nobg\"></td><td class=\"nobg\"></td>
-	<td class=\"duration sum\">" . self::formatTime($length) . "<small>h</small></td>
-	<td class=\"trimp sum\">" . $trimps . "<small>TRIMPs</small></td>
-</tr>";
+		$html .= "
+		<tr><td class=\"nobg\"></td><td class=\"nobg\"></td>
+			<td class=\"duration sum\">" . self::formatTime($length) . "<small>h</small></td>
+			<td class=\"trimp sum\">" . $trimps . "<small>TRIMPs</small></td>
+		</tr>";
 		
 		$html .= "\n</table>";
+
+		if ( isset( $notSun ) && $count_workouts == 0 ) {
+				$html = "<table class=\"workouts\">";
+				$html .= "
+				<tr><td class=\"nobg\"></td><td class=\"nobg\"></td>
+					<td class=\"duration sum\">" . __('Today there are no workouts to plan. Rest, rest, rest.', true) . "</td>
+				</tr>";
+				$html .= "</table>";			
+		}
 		return $html;
 	}
 
@@ -60,11 +82,12 @@ class WorkoutRenderer {
 	 * save weekdays in database
 	 * @param 
 	 */
-	private function inject_weekdays($workouts, $athlete, $time, $phase, $genWeek) {
+	public function inject_weekdays($workouts, $athlete, $time, $phase, $genWeek, $exportpure = false) {
 
 		$j = 1;
 		$weekdays = array();
-	
+		$weekdays2 = array();
+
 		// get start of training week
 		//$startDayTS = $startdate_ts - ( ( gmdate("w", $startdate_ts) - 1 ) * 86400 );
 		$startDayTS = $genWeek->format('U');
@@ -75,6 +98,7 @@ class WorkoutRenderer {
 
 		// TODO IMPROVEMENT - do not inject the same sportstype on the same day
 		// TODO IMPROVEMENT - do not inject at the same time!
+		
 		foreach ($workouts as $k => $w) {
 
 			if ( $recovery_days == 1 ) {
@@ -117,20 +141,33 @@ class WorkoutRenderer {
 
 			$w->phase = $phase['phase'];
 
-			if ( isset($weekdays[$dayInt]) ) 
+			if ( isset($weekdays[$dayInt]) ) {
 				$weekdays[$dayInt] .= WorkoutRenderer::renderIcal($w);
-			else
+				//echo $dayInt . "<br>\n";
+			} else {
 				$weekdays[$dayInt] = WorkoutRenderer::renderIcal($w);
-
-			// TODO UPDATE weekday in database
-			// TODO insert days with recovery as ical events
+				//echo $dayInt . " existiert noch nicht<br>\n";				
+			}
+				
+			// for pure export
+			$weekdays2[$dayInt][] = $w;
 
 			$j++;
 		}
 
-		ksort($weekdays);
+		ksort($weekdays);		
+		ksort($weekdays2);
 		
-		return $weekdays;
+		for ( $m = 1; $m <= 7; $m++ ) {
+				for ( $z = 0; $z < count( $weekdays2[$m] ); $z++ ) {
+					$weekdays3[] = $weekdays2[$m][$z];
+				}
+		}
+
+		$weekdays2 = $weekdays3;
+
+		if ( $exportpure == true ) return $weekdays2;
+		else return $weekdays;
 
 	}
 
@@ -161,8 +198,7 @@ VERSION:2.0
 PRODID:-//hacksw/handcal//NONSGML v1.0//EN
 " . $ical_events . "
 END:VCALENDAR";
-
-		
+	
 		//set correct content-type-header
 		header('Content-type: text/calendar; charset=utf-8');
 		header('Content-Disposition: inline; filename=tricoretraining.ics');

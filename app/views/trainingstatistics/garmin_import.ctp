@@ -1,35 +1,37 @@
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Import workouts'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <h1><?php __('Import workouts'); ?></h1>
+         <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $this->element('js_error'); ?>
+         <?php echo $form->create('Trainingstatistic', array('action' => 'garmin_import_final','class' => 'form-horizontal')); ?>
+         <fieldset>
+         <legend><?php __('Add your Garmin workouts from connect.garmin.com to your TriCoreTraining logbook'); ?></legend>
 
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'garmin_import_final')); ?>
-                   <fieldset>
-                   <legend><?php __('Add your Garmin workouts from connect.garmin.com to your TriCoreTraining logbook'); ?></legend>
+         <?php if ($session->read('flash')) { ?>
+         <div class="<?php echo $statusbox; ?>"></div><br />
+         <?php } ?>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>"></div><br />
-                   <?php } ?>
-
-                   <table width="100" border="1">
-                    <tr>
-                      <th><?php __('X'); ?></th>
-                      <th><?php __('Date'); ?></th>
-                      <!--<th><?php __('Name'); ?></th>-->
-                      <th><?php __('Sport'); ?></th>
-                      <th><?php __('Distance'); ?></th>
-                      <th><?php __('Duration'); ?></th>
-                      <th class='colhide'><?php __('AVG Speed'); ?></th>
-                      <th class='colhide'><?php __('Heartrate'); ?></th>
-                      <th class='colhide'><?php __('Trimp'); ?></th>
-                      <th class='colhide'><?php __('Kcal'); ?></th>
-                      <!--<th><?php __('Location'); ?></th>-->
-                      <!--th class='colhide'><?php __('Weight'); ?></th-->
-                      <!--<th><?php __('Comment'); ?></th>-->
-                      <!--<th><?php __('Competition'); ?></th>-->
-                      <!--<th><?php __('Workoutlink'); ?></th>-->
-                      <!--<th><?php __('Imported on'); ?></th>-->
-                    </tr>
+         <table class="table table-striped table-bordered table-condensed" border="1">
+          <tr>
+            <th><?php __('X'); ?></th>
+            <th><?php __('Date'); ?></th>
+            <!--<th><?php __('Name'); ?></th>-->
+            <th><?php __('Sport'); ?></th>
+            <th><?php __('Distance'); ?></th>
+            <th><?php __('Duration'); ?></th>
+            <th class='colhide'><?php __('AVG Speed'); ?></th>
+            <th class='colhide'><?php __('Heartrate'); ?></th>
+            <th class='colhide'><?php __('Trimp'); ?></th>
+            <th class='colhide'><?php __('Kcal'); ?></th>
+            <!--<th><?php __('Location'); ?></th>-->
+            <!--th class='colhide'><?php __('Weight'); ?></th-->
+            <!--<th><?php __('Comment'); ?></th>-->
+            <!--<th><?php __('Competition'); ?></th>-->
+            <!--<th><?php __('Workoutlink'); ?></th>-->
+            <!--<th><?php __('Imported on'); ?></th>-->
+          </tr>
 <?php 
 
 $unit = $this->Unitcalc->get_unit_metric();
@@ -71,11 +73,17 @@ foreach ( $activities_view as $key => $workout )
 //print_r($activities_view); 
 
 ?>
-                </table>
+        </table>
 
-                 </fieldset>
-                 <?php echo $form->submit(__('Import',true)); ?>
-                 <?php echo $form->end(); ?>
+       </fieldset>
+       
+       <?php echo $form->submit(__('Import',true),array('class' => 'btn btn-primary')); ?>
+
+       <?php echo $form->end(); ?>
+
+        </div>
+      </div>
+
 
 <?php                       
       $this->js_addon = <<<EOE

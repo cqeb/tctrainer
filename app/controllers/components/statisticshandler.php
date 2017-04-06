@@ -2,7 +2,7 @@
 
 class StatisticshandlerComponent extends Object {
 	
-	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc', 'Unitcalc', 'Xls');
+	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc', 'Xls');
 	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc');
 	
 	var $paginate = array(
@@ -16,6 +16,7 @@ class StatisticshandlerComponent extends Object {
 
 	function choose_daterange( $results, $data, $session_value )
 	{
+
             $season = $this->Unitcalc->get_season( $results, null );
 			
             if ( empty( $data['Trainingstatistic']['fromdate'] ) )
@@ -24,46 +25,46 @@ class StatisticshandlerComponent extends Object {
                //$return['end']   = $season['end'];
                $return['end'] = date( 'Y-m-d', time() );
 			   
-			   if ( $this->Session->read( $session_value . '_from' ) ) 
-			   		$return['start'] = $this->Session->read( $session_value . '_from' );
-			   if ( $this->Session->read( $session_value . '_to' ) ) 
-			   		$return['end'] = $this->Session->read( $session_value . '_to' );
+			         if ( $this->Session->read( $session_value . '_from' ) ) 
+			   		      $return['start'] = $this->Session->read( $session_value . '_from' );
+			         if ( $this->Session->read( $session_value . '_to' ) ) 
+			   		      $return['end'] = $this->Session->read( $session_value . '_to' );
 					
             } else
             {
-
                $start_array = $data['Trainingstatistic']['fromdate'];
                $end_array   = $data['Trainingstatistic']['todate'];
                $return['start'] = $start_array['year'] . '-' . $start_array['month'] . '-' . $start_array['day'];
                $return['end'] = $end_array['year'] . '-' . $end_array['month'] . '-' . $end_array['day'];
             }
 
-			return $return;
-	
+			     return $return;
 	}
 
 	function get_trimps( $Trainingstatistic, $userid, $sportstype, $start, $end )
 	{
 		
 		    // get all data from this time period for this user
-            // where duration > 0 
-            $sql = "SELECT duration, trimp, date FROM trainingstatistics WHERE
-                   user_id = $userid AND ";
-            if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
-            $sql .= "( date BETWEEN '" . $start . "' AND '" . $end . "' ) ";
-            $sql .= "AND duration > 0 ";
-            $sql .= "ORDER BY date ASC";
-            $trainingdata = $Trainingstatistic->query( $sql );
-			return $trainingdata;
+        // where duration > 0 
+        $sql = "SELECT duration, trimp, date FROM trainingstatistics WHERE
+               user_id = $userid AND ";
+        if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
+        $sql .= "( date BETWEEN '" . $start . "' AND '" . $end . "' ) ";
+        $sql .= "AND duration > 0 ";
+        $sql .= "ORDER BY date ASC";
+        $trainingdata = $Trainingstatistic->query( $sql );
+
+  			return $trainingdata;
 	}
 
 	function get_trimps_json( $timeperiod, $sportstype, $graphtype, $start, $end, $userid, $Trainingstatistic )
 	{
+            // http://www.flammerouge.je/factsheets/trainstress.htm
             $start_calc = $this->Unitcalc->date_plus_days( $start, $timeperiod*(-1) );
 
 			      $startday_ts = strtotime( $start_calc );
 			      $endday_ts = strtotime( $end );						
-            
+
             if ( $endday_ts > time() ) 
             {
             	 $endday_ts = time(); 
@@ -72,19 +73,23 @@ class StatisticshandlerComponent extends Object {
             
             $diff_dates = $this->Unitcalc->diff_dates( $start_calc, $end );
 
-            // real training data (tracks)
+            // real training data (tracked workouts)
             $sql = "SELECT duration, trimp, date FROM trainingstatistics WHERE
                    user_id = $userid AND ";
             if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
             $sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ";
             $sql .= "ORDER BY date ASC";
+            //echo $sql . "<br>";
             $trainingdata = $Trainingstatistic->query( $sql );
+
+            //echo count($trainingdata);
 
             // go through all trainings in trainingsstatistics
             for ( $i = 0; $i < count( $trainingdata ); $i++ )
             {
                   $dt = $trainingdata[$i]['trainingstatistics'];
                   $date_string = split( ' ', $dt['date'] );
+
                   $day = $date_string[0];
 
                   // cumulate all trimp per day
@@ -98,7 +103,7 @@ class StatisticshandlerComponent extends Object {
             }
 
             /**
-			       * CHECK with CLEMENS
+			       * track scheduled / planned workouts
 			      */
             $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
                 sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
@@ -106,6 +111,8 @@ class StatisticshandlerComponent extends Object {
             if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND ";
             $sql .= "( week BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
                         
+            //echo $sql . "<br>";
+
             $scheduled_trainingdata = $Trainingstatistic->query( $sql );
 
             // go through all planned trainings
@@ -113,6 +120,7 @@ class StatisticshandlerComponent extends Object {
             {
                   $dt = $scheduled_trainingdata[$i]['scheduledtrainings'];
                   $date_string = split( ' ', $dt['date'] );
+                  // week day in trainingplan - always Monday :(
                   $day = $date_string[0];
 
                   // cumulate all trimp per day
@@ -123,52 +131,80 @@ class StatisticshandlerComponent extends Object {
                   {
                        $trimp_planned[$day] = ( $dt['trimp'] );
                   }
-
+            }
+            foreach ( $trimp_planned as $date => $trimp ) {
+                $startday = strtotime($date);
+                $trimp_per_day = round($trimp / 7);
+                for ( $k = 0; $k < 7; $k++ ) {
+                    $weekday = $startday + (86400 * $k);
+                    $weekday = date( 'Y-m-d', $weekday);
+                    $trimp_planned[$weekday] = $trimp_per_day;
+                    //echo $weekday . " = " . $trimp_per_day . "<br>";
+                }
+                //echo $trimp; echo "<br>";
             }
 
             // TODO (B) limit period of difference to x days?
             //if ( $diff_dates > 60 ) $diff_dates = 60;
-
             $max_unit = 0;
+
+            //echo $diff_dates . "<br>";
             for ( $i = 0; $i < $diff_dates; $i++ )
             {
-                // go through all days in this period
+                // go through all days in this period from now to past
+                // go each day back
                 $rightday_ts = $endday_ts - ( 86400 * $i );
                 $rightday = date( 'Y-m-d', $rightday_ts );
 
+                // if day is not available, set with 0
                 if ( !isset( $trimp_done[$rightday] ) ) $trimp_done[$rightday] = 0;
                 //else $trimp_done[$rightday] = $trimp_done[$rightday];
 
                 if ( !isset( $trimp_planned[$rightday] ) ) $trimp_planned[$rightday] = 0;
                 //else $trimp_planned[$rightday] = $trimp_planned[$rightday];
 
+                // save date for this day where we went back
                 $trimp_dates[$i] = $rightday;
 
                 if ( $graphtype == 'chronic' )
                 {
                   // CTL
-                  if ( $i <= $timeperiod ) $startpoint = 0;
-                  else $startpoint = $i - $timeperiod;
+                  // item in clause is smaller then period (42)
+                  if ( $i <= $timeperiod ) 
+                      $startpoint = 0;
+                  else 
+                      $startpoint = $i - $timeperiod;
 
+                  //echo $i . ' - ' . $startpoint . "<br>";
                 } elseif ( $graphtype == 'acute' )
                 {
                   // ATL
-                  if ( $i <= $timeperiod ) $startpoint = 0;
-                  else $startpoint = $i - $timeperiod;
+                  if ( $i <= $timeperiod ) 
+                      $startpoint = 0;
+                  else 
+                      $startpoint = $i - $timeperiod;
                 }
 
                 // calculate all trimp for CTL or ATL timeperiod back in the past per day
                 for ( $j = $startpoint; $j <= $i; $j++ )
                 {
-                    if ( !isset( $trimp_tl_done[$j] ) ) $trimp_tl_done[$j] = 0;
+                    // here we insert the trained trimps of the logbook
+                    if ( !isset( $trimp_tl_done[$j] ) ) 
+                          $trimp_tl_done[$j] = 0;
+                    
                     $trimp_tl_done[$j] += $trimp_done[$rightday];
 
-                    // here we insert the planned trimp of the trainingplan
-                    if ( !isset( $trimp_tl_planned[$j] ) ) $trimp_tl_planned[$j] = 0;
+                    if ( $trimp_tl_done[$j] > $max_unit ) 
+                          $max_unit = $trimp_tl_done[$j];
+
+                    // here we insert the planned trimps of the trainingplan
+                    if ( !isset( $trimp_tl_planned[$j] ) ) 
+                          $trimp_tl_planned[$j] = 0;
+
                     $trimp_tl_planned[$j] += $trimp_planned[$rightday];
                     
-                    if ( $trimp_tl_planned[$j] > $max_unit ) $max_unit = $trimp_tl_planned[$j];
-                    if ( $trimp_tl_done[$j] > $max_unit ) $max_unit = $trimp_tl_done[$j];
+                    if ( $trimp_tl_planned[$j] > $max_unit ) 
+                          $max_unit = $trimp_tl_planned[$j];
                 }
             }
 
@@ -186,21 +222,36 @@ class StatisticshandlerComponent extends Object {
       				$max_unit = 50;
                   //if ( isset( $max_unit ) && $max_unit < 1 ) $max_unit = 50;
       			*/
+
       			$max_unit = round( $max_unit * 1.1 );
-      			
-                  // for the graph we need the days in reverse order
-                  $trimp_tl_done = array_reverse($trimp_tl_done);
-                  $trimp_tl_planned = array_reverse($trimp_tl_planned);
-                  $trimp_dates = array_reverse($trimp_dates);
+      			//echo "max_unit: " . $max_unit . "<br>";
+
+            if ( isset( $_GET['debug'] ) ) {
+              for ( $i = 0; $i < count( $trimp_tl_done ); $i++ )
+              {
+                  echo $trimp_dates[$i] . "<br>";
+                  echo "trimp_tl_done: " . $trimp_tl_done[$i] . "<br>";
+                  echo "trimp_tl_planned: " . $trimp_tl_planned[$i] . "<br>";
+
+              }
+            }
+
+            // for the graph we need the days in reverse order
+            $trimp_tl_done = array_reverse($trimp_tl_done);
+            $trimp_tl_planned = array_reverse($trimp_tl_planned);
+            $trimp_dates = array_reverse($trimp_dates);
 
       			$return['start'] = $start;			
-                  $return['end'] = $end;
+            $return['end'] = $end;
       			$return['max_unit'] = $max_unit;
-                  $return['trimp_tl_done'] = $trimp_tl_done;
-                  $return['trimp_tl_planned'] = $trimp_tl_planned;
-                  $return['trimp_dates'] = $trimp_dates;
+            $return['trimp_tl_done'] = $trimp_tl_done;
+            $return['trimp_tl_planned'] = $trimp_tl_planned;
+            $return['trimp_dates'] = $trimp_dates;
 
-      			return $return;		
+      			if ( isset( $_GET['debug'] ) ) 
+                return false;
+            else 
+                return $return;		
 	}
 
 	function get_formcurve( $Trainingstatistic, $userid, $sportstype, $start, $end )
@@ -436,15 +487,15 @@ class StatisticshandlerComponent extends Object {
 
 	function get_statistics( $Trainingstatistic, $userid, $sportstype, $start, $end )
 	{
-            // select trainingsdata
-            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND date BETWEEN '" .
-                $start . "' AND '" . $end . "' ORDER BY date";
-            $trainings = $Trainingstatistic->query( $sql );
+      // select trainingsdata
+      $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND date BETWEEN '" .
+          $start . "' AND '" . $end . "' ORDER BY date";
+      $trainings = $Trainingstatistic->query( $sql );
 
-            $sumdata['collected_sportstypes'] = array();
-            $sumdata['duration'] = array();
-            $sumdata['distance'] = array();
-            $sumdata['trimp'] = array();
+      $sumdata['collected_sportstypes'] = array();
+      $sumdata['duration'] = array();
+      $sumdata['distance'] = array();
+      $sumdata['trimp'] = array();
 
 			$last_entry = count( $trainings ) - 1;
 			
@@ -452,24 +503,24 @@ class StatisticshandlerComponent extends Object {
 			{
 				$start = $trainings[0]['trainingstatistics']['date'];
 				$end = $trainings[$last_entry]['trainingstatistics']['date'];
-				
-	            // collect them, accumulate per sportstype
-	            for ( $i = 0; $i < count( $trainings ); $i++ )
-	            {
-	                  $dt = $trainings[$i]['trainingstatistics'];
-	                  $sportstype = strtoupper($dt['sportstype']);
-	                  if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
-	                  {
-	                       $sumdata['collected_sportstypes'][] = strtoupper($sportstype);
-	                       $sumdata['duration'][$sportstype] = 0;
-	                       $sumdata['distance'][$sportstype] = 0;
-	                       $sumdata['trimp'][$sportstype] = 0;
-	                  }
 	
-	                  $sumdata['duration'][$sportstype] += ( $dt['duration'] );
-	                  $sumdata['distance'][$sportstype] += $dt['distance'];
-	                  $sumdata['trimp'][$sportstype] += $dt['trimp'];
-	            }
+        // collect them, accumulate per sportstype
+        for ( $i = 0; $i < count( $trainings ); $i++ )
+        {
+              $dt = $trainings[$i]['trainingstatistics'];
+              $sportstype = strtoupper($dt['sportstype']);
+              if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
+              {
+                   $sumdata['collected_sportstypes'][] = strtoupper($sportstype);
+                   $sumdata['duration'][$sportstype] = 0;
+                   $sumdata['distance'][$sportstype] = 0;
+                   $sumdata['trimp'][$sportstype] = 0;
+              }
+
+              $sumdata['duration'][$sportstype] += ( $dt['duration'] );
+              $sumdata['distance'][$sportstype] += $dt['distance'];
+              $sumdata['trimp'][$sportstype] += $dt['trimp'];
+        }
 				$return['sumdata'] = $sumdata;
 				$return['trainings'] = $trainings;
 				$return['start'] = $start;
@@ -609,154 +660,302 @@ class StatisticshandlerComponent extends Object {
 
 	function get_competition( $Trainingstatistic, $userid, $sportstype, $start, $end, $data )
 	{
-            if ( isset( $data['Trainingstatistic']['sportstype'] ) ) $sportstype = $data['Trainingstatistic']['sportstype'];
+        if ( isset( $data['Trainingstatistic']['sportstype'] ) ) $sportstype = $data['Trainingstatistic']['sportstype'];
 
-            $total_trimp = 0;
-            $total_trimp_tp = 0;
+        $total_trimp = 0;
+        $total_trimp_tp = 0;
 
-            $sql = "SELECT min(week) as mindate FROM scheduledtrainings WHERE " . 
-                "athlete_id = $userid AND ";
-            if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
-            $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY mindate ASC";
-            $start_tp = $Trainingstatistic->query( $sql );
+        $sql = "SELECT min(week) as mindate FROM scheduledtrainings WHERE " . 
+            "athlete_id = $userid AND ";
+        if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
+        $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY mindate ASC";
+        $start_tp = $Trainingstatistic->query( $sql );
 
-			// if your training plans start later than tracking - you have to re-set the start date
-			if ( count( $start_tp ) > 0 )
-			{
-				$maxstart = $start_tp[0][0]['mindate'];
-				if ( strtotime( $maxstart ) > strtotime( $start ) )
-					$start = $maxstart;
-			}
+  			// if your training plans start later than tracking - you have to re-set the start date
+  			if ( count( $start_tp ) > 0 )
+  			{
+  				$maxstart = $start_tp[0][0]['mindate'];
+  				if ( strtotime( $maxstart ) > strtotime( $start ) )
+  					$start = $maxstart;
+  			}
 
-            /**
-             planned trainings
-			       - CHECK with CLEMENS
-            **/
-			$sql = "SELECT s.duration AS duration, m.date AS week, s.athlete_id AS user_id, s.sport AS sportstype,
-			m.time AS time, m.usertime AS usertime, IF (s.trimp IS NULL, IF (m.usertime > 0, m.usertime * 1.1, m.time * 1.1), trimp) trimp
-			FROM mesocyclephases m LEFT JOIN scheduledtrainings s ON s.athlete_id = m.athlete_id AND s.week = m.date
-			WHERE m.athlete_id = " . $userid . " AND ";
-            if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
-            $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY date ASC";
+        /**
+        * planned trainings
+	      * - CHECK with CLEMENS
+        **/
+  			$sql = "SELECT s.duration AS duration, m.date AS week, s.athlete_id AS user_id, s.sport AS sportstype,
+  			m.time AS time, m.usertime AS usertime, IF (s.trimp IS NULL, IF (m.usertime > 0, m.usertime * 1.1, m.time * 1.1), trimp) trimp
+  			FROM mesocyclephases m LEFT JOIN scheduledtrainings s ON s.athlete_id = m.athlete_id AND s.week = m.date
+  			WHERE m.athlete_id = " . $userid . " AND ";
+        if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
+        $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY date ASC";
 
 /*
-            $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
-                sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
-                "athlete_id = $userid AND ";
-            if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
-            $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY date ASC";
+        $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
+            sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
+            "athlete_id = $userid AND ";
+        if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND "; 
+        $sql .= "( week BETWEEN '" . $start . "' AND '" . $end . "' ) ORDER BY date ASC";
 */
-            $Trainingplans = $Trainingstatistic->query( $sql );
+        $Trainingplans = $Trainingstatistic->query( $sql );
 
-			// in case there are less trainings in tp then set new start date
-            if ( isset( $Trainingplans[0]['m']['week'] ) )
-            	$start = $Trainingplans[0]['m']['week'];
+	      // in case there are less trainings in tp then set new start date
+        if ( isset( $Trainingplans[0]['m']['week'] ) )
+        	   $start = $Trainingplans[0]['m']['week'];
 
-            $sumdata_tp['collected_sportstypes'] = array();
-            $sumdata_tp['duration'] = array();
-            $sumdata_tp['distance'] = array();
-            $sumdata_tp['trimp'] = array();
+        $sumdata_tp['collected_sportstypes'] = array();
+        $sumdata_tp['duration'] = array();
+        $sumdata_tp['distance'] = array();
+        $sumdata_tp['trimp'] = array();
 
-            for ( $i = 0; $i < count( $Trainingplans ); $i++ )
+        for ( $i = 0; $i < count( $Trainingplans ); $i++ )
+        {
+            if ( isset( $Trainingplans[$i]['scheduledtrainings'] ) )
+              	$dt = $Trainingplans[$i]['scheduledtrainings'];
+    				else
+    				{
+    				  $dt = $Trainingplans[$i];
+    				  $dt['trimp'] = $dt[0]['trimp'];
+    				  $dt['duration'] = $dt['s']['duration'];
+    				  $dt['sportstype'] = $dt['s']['sportstype'];
+    				}				  
+		  
+            $sportstype_set = $dt['sportstype'];
+            if ( !in_array( $sportstype, $sumdata_tp['collected_sportstypes'] ) )
             {
-                if ( isset( $Trainingplans[$i]['scheduledtrainings'] ) )
-                  	$dt = $Trainingplans[$i]['scheduledtrainings'];
-				else
-				{
-				  $dt = $Trainingplans[$i];
-				  $dt['trimp'] = $dt[0]['trimp'];
-				  $dt['duration'] = $dt['s']['duration'];
-				  $dt['sportstype'] = $dt['s']['sportstype'];
-				}				  
-				  
-                  $sportstype_set = $dt['sportstype'];
-                  if ( !in_array( $sportstype, $sumdata_tp['collected_sportstypes'] ) )
-                  {
-                       $sumdata_tp['collected_sportstypes'][] = $sportstype_set;
-                       $sumdata_tp['duration'][$sportstype_set] = 0;
-                       $sumdata_tp['distance'][$sportstype_set] = 0;
-                       $sumdata_tp['trimp'][$sportstype_set] = 0;
-                  }
-
-                  $sumdata_tp['duration'][$sportstype_set] += $dt['duration'];
-                 
-                  if ( $dt['trimp'] )
-                  {
-                       $sumdata_tp['trimp'][$sportstype_set] += ( $dt['trimp'] );
-                       $total_trimp_tp += ( $dt['trimp'] );
-                  }
+                 $sumdata_tp['collected_sportstypes'][] = $sportstype_set;
+                 $sumdata_tp['duration'][$sportstype_set] = 0;
+                 $sumdata_tp['distance'][$sportstype_set] = 0;
+                 $sumdata_tp['trimp'][$sportstype_set] = 0;
             }
 
-            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND ";
-            if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
-            $sql .= "(date BETWEEN '" . $start . "' AND '" . $end . "') ORDER BY date";
-
-            $trainings = $Trainingstatistic->query( $sql );
-
-            $sumdata['collected_sportstypes'] = array();
-            $sumdata['duration'] = array();
-            $sumdata['distance'] = array();
-            $sumdata['trimp'] = array();
-
-            // go through all trainings of period defined
-            for ( $i = 0; $i < count( $trainings ); $i++ )
+            $sumdata_tp['duration'][$sportstype_set] += $dt['duration'];
+           
+            if ( $dt['trimp'] )
             {
-                  $dt = $trainings[$i]['trainingstatistics'];
-                  $sportstype_set = $dt['sportstype'];
-                  // reset array per sportstype
-                  if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
-                  {
-                       $sumdata['collected_sportstypes'][] = $sportstype_set;
-                       $sumdata['duration'][$sportstype_set] = 0;
-                       $sumdata['distance'][$sportstype_set] = 0;
-                       $sumdata['trimp'][$sportstype_set] = 0;
-                  }
-
-                  // cummulate values per sportstype
-                  $sumdata['duration'][$sportstype_set] += $dt['duration'];
-
-                  if ( $dt['trimp'] > 0 )
-                  {
-                       $sumdata['trimp'][$sportstype_set] += ( $dt['trimp'] );
-                       $total_trimp += ( $dt['trimp'] );
-                  }
+                 $sumdata_tp['trimp'][$sportstype_set] += ( $dt['trimp'] );
+                 $total_trimp_tp += ( $dt['trimp'] );
             }
+        }
 
-            if ( $sportstype ) 
-            {
-                    if ( isset( $sumdata['trimp'][$sportstype] ) ) 
-                        $total_trimp = $sumdata['trimp'][$sportstype];
-                    else
-                        $total_trimp = 0;
+        $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND ";
+        if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
+        $sql .= "(date BETWEEN '" . $start . "' AND '" . $end . "') ORDER BY date";
+
+        $trainings = $Trainingstatistic->query( $sql );
+
+        $sumdata['collected_sportstypes'] = array();
+        $sumdata['duration'] = array();
+        $sumdata['distance'] = array();
+        $sumdata['trimp'] = array();
+
+        // go through all trainings of period defined
+        for ( $i = 0; $i < count( $trainings ); $i++ )
+        {
+              $dt = $trainings[$i]['trainingstatistics'];
+              $sportstype_set = $dt['sportstype'];
+              // reset array per sportstype
+              if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
+              {
+                   $sumdata['collected_sportstypes'][] = $sportstype_set;
+                   $sumdata['duration'][$sportstype_set] = 0;
+                   $sumdata['distance'][$sportstype_set] = 0;
+                   $sumdata['trimp'][$sportstype_set] = 0;
+              }
+
+              // cummulate values per sportstype
+              $sumdata['duration'][$sportstype_set] += $dt['duration'];
+
+              if ( $dt['trimp'] > 0 )
+              {
+                   $sumdata['trimp'][$sportstype_set] += ( $dt['trimp'] );
+                   $total_trimp += ( $dt['trimp'] );
+              }
+        }
+
+        if ( $sportstype ) 
+        {
+                if ( isset( $sumdata['trimp'][$sportstype] ) ) 
+                    $total_trimp = $sumdata['trimp'][$sportstype];
+                else
+                    $total_trimp = 0;
+                
+                if ( isset( $sumdata_tp['trimp'][$sportstype] ) ) 
+                    $total_trimp_tp = $sumdata_tp['trimp'][$sportstype];
+                else
+                    $total_trimp_tp = 0;
+        }
+
+        if ( $total_trimp_tp > 0 )
+           $trafficlight = ( $total_trimp / $total_trimp_tp );
+        else
+           $trafficlight = 0;
+
+        $trafficlight_percent = round ( ( $trafficlight * 100 ), 1 );
+
+        // define colors for traffic light
+        if ( $trafficlight >= 0.8 && $trafficlight <= 1.1 ) $color = "green";
+        elseif ( ( $trafficlight >= 0.6 && $trafficlight < 0.8 ) || ( $trafficlight > 1.1 & $trafficlight <= 1.2 ) ) $color = "orange";
+        else $color = "red";
+
+        $return['start'] = $start;
+        $return['end'] = $end;
+        $return['sumdata'] = $sumdata;
+        $return['total_trimp'] = $total_trimp;
+        $return['total_trimp_tp'] = $total_trimp_tp;
+        $return['color'] = $color;
+        $return['trafficlight_percent'] = $trafficlight_percent;
+	
+	      return $return;
+    }
+
+    /**
+    *
+    */
+    function get_reward( $Trainingstatistic, $userP ) {
+
+          $last_workout_limit = 15;
+          $text_for_mail_training = '';
+          $debug = false;
+
+          $user['User'] = $userP;
+
+          $userid = $session_userid = $user['User']['id'];
+
+          // calculate success of last week's training
+          $unit = $this->Unitcalc->get_unit_metric();
+      
+          $sql = "SELECT max(date) AS ldate FROM trainingstatistics WHERE user_id = " . $userid;
+          $results = $Trainingstatistic->query($sql);
+          //if ( $debug == true ) echo $sql . "<br />\n";
+      
+          $last_training = strtotime($results[0][0]['ldate']);
+          $diff_time = time() - ( 86400 * $last_workout_limit );
+      
+          /*
+          if ( $diff_time > $last_training )
+          {
+              $text_for_mail_training .= __("don't be lazy!", true) . ' ' .  
+                __('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .        
+                '/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true) . "<br /><br />"; 
+       
+              if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
+          }
+          */
+        
+          // automatic default date chooser
+          //$choosedates = $this->choose_daterange( $results, array(), 'competition_date' );
+          $choosedates = $this->choose_daterange( $user, array(), 'competition_date' );
+
+          // set form-fields of search form
+          $this->data['Trainingstatistic']['fromdate'] = $start = $choosedates['start'];
+          $this->data['Trainingstatistic']['todate'] = $end = $choosedates['end'];
+                
+          if ( $Trainingstatistic && $session_userid && $start && $end )
+          {  
+              $return = $this->get_competition( $Trainingstatistic, $session_userid, "", $start, $end, $this->data );
+                          
+              // deactivated
+              if ( isset( $return ) && is_array( $return ) && 1 == 2 )
+              {
+                  $text_for_mail_training .= "<b>" . __("Status of your season's training",true) . " (" . $start . " - " . $end . ")</b><br />"; 
+                  //echo 'start ' . $return['start'];
+                  //echo 'end ' . $return['end'];
+                  //echo 'sumdata ' . $return['sumdata'];
+                  //if ( $return['color'] ) $text_for_mail_training .= "<span style='background:" . $return['color'] . "'>";
+                  $text_for_mail_training .= " " . $return['total_trimp'] . " " . __('of',true) . " " . 
+                  $return['total_trimp_tp'] . " " . __('Trimps',true) . " (" . $return['trafficlight_percent'] . " %) ";
+                  //if ( $return['color'] ) $text_for_mail_training .= "</span>";
+                  $color = $return['color'];
+                
+                  if ( isset( $color ) ) 
+                  {
+                      // bought with gentics account at istockphotos 3480031_thumbnail.jpg 2012-03-31
+                      $block = '<span style="width:10px;background:' . $color . '">&nbsp;&nbsp;&nbsp;</span>&nbsp;';
+                      $block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
+                                          
+                      if ( $color == 'red' )
+                      { 
+                        $text_for_mail_training .= ($block);
+                      }
+                      if ( $color == 'orange' )
+                      {
+                        $text_for_mail_training .= ($block).($block);
+                      }
+                      if ( $color == 'green' )
+                      { 
+                        $text_for_mail_training .= ($block).($block).($block);
+                      }
+                  }
+                
+                  $text_for_mail_training .= "<br /><br />";
+              }
+            
+              // last weeks training compared planned to real
+              // one week before
+              $start = date('Y-m-d', time() - 6*24*3600);
+              $end = date('Y-m-d', time());
+              
+              if ( $session_userid )
+              {
+                  $sql = "SELECT sum(trimp) AS strimp FROM trainingstatistics WHERE user_id = " . $session_userid . " AND " . 
+                          "(date BETWEEN '" . $start . "' AND '" . $end . "')";
+                  $results_real = $Trainingstatistic->query($sql);
+
+                  if ( $results_real[0][0]['strimp'] ) 
+                    $sum_real = $results_real[0][0]['strimp'];
+                  else
+                    $sum_real = 0;
+                  
+                  $sql = "SELECT sum(trimp) AS strimp FROM scheduledtrainings WHERE athlete_id = " . $session_userid . " AND " .
+                          "(week BETWEEN '" . $start . "' AND '" . $end . "')";
+                  $results_planned = $Trainingstatistic->query($sql);
+
+                  if ( $results_planned[0][0]['strimp'] ) 
+                    $sum_planned = $results_planned[0][0]['strimp'];
+                  else
+                    $sum_planned = 0;
                     
-                    if ( isset( $sumdata_tp['trimp'][$sportstype] ) ) 
-                        $total_trimp_tp = $sumdata_tp['trimp'][$sportstype];
-                    else
-                        $total_trimp_tp = 0;
+                  if ( $sum_planned > 0 ) {
+                    $training_week_percentage = round( $sum_real / $sum_planned * 100 );
+                    
+                    if ( $training_week_percentage < 80 || $training_week_percentage > 110 )
+                      $color = 'orange';
+                    if ( $training_week_percentage < 60 || $training_week_percentage > 120 )
+                      $color = 'red';
+                    if ( $training_week_percentage >= 80 && $training_week_percentage <= 110 )
+                      $color = 'green'; 
+                  } else
+                  {
+                    $training_week_percentage = 0;
+                    $color = 'red';
+                  } 
+                    
+                  $text_for_mail_training .= "<b>" . __("Status of your week's training",true) . " (" . $start . " - " . $end . ")</b><br />";
+                  //if ( isset( $color ) ) $text_for_mail_training .= "<span style='background:" . $color . "'>";
+                  $text_for_mail_training .= $sum_real . " " . __('of', true) . " " . $sum_planned . " " . __('Trimps', true);
+                  $text_for_mail_training .= " (" . $training_week_percentage . " %) ";
+                  //if ( isset( $color ) ) $text_for_mail_training .= "</span>";
+                  
+                  if ( isset( $color ) ) 
+                  {
+                      $block = '<span style="width:10px;background:' . $color . '">&nbsp;&nbsp;&nbsp;</span>&nbsp;';
+                      $block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
+                                        if ( $color == 'red' )
+                        $text_for_mail_training .= ($block);
+                      if ( $color == 'orange' )
+                        $text_for_mail_training .= ($block).($block);
+                      if ( $color == 'green' )
+                        $text_for_mail_training .= ($block).($block).($block);
+                  }
+                                  
+                  $text_for_mail_training .= "<br /><br />";
+              }
             }
- 
-            if ( $total_trimp_tp > 0 )
-               $trafficlight = ( $total_trimp / $total_trimp_tp );
-            else
-               $trafficlight = 0;
 
-            $trafficlight_percent = round ( ( $trafficlight * 100 ), 1 );
+            return $text_for_mail_training;
 
-            // define colors for traffic light
-            if ( $trafficlight >= 0.8 && $trafficlight <= 1.1 ) $color = "green";
-            elseif ( ( $trafficlight >= 0.6 && $trafficlight < 0.8 ) || ( $trafficlight > 1.1 & $trafficlight <= 1.2 ) ) $color = "orange";
-            else $color = "red";
-		
-            $return['start'] = $start;
-            $return['end'] = $end;
-            $return['sumdata'] = $sumdata;
-            $return['total_trimp'] = $total_trimp;
-            $return['total_trimp_tp'] = $total_trimp_tp;
-            $return['color'] = $color;
-            $return['trafficlight_percent'] = $trafficlight_percent;
-			
-			return $return;
-	}
+    }
 }
 
 ?>

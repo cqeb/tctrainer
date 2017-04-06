@@ -1,9 +1,11 @@
-
-                   <h1><?php __('Send message'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Send message'); ?></h1></div>
+        
+        <div class="panel-body">
 
                    <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $form->create('User', array('action' => 'send_message')); ?>
+                   <?php echo $form->create('User', array('action' => 'send_message','class' => 'form-horizontal')); ?>
 
                    <fieldset>
                    <legend><?php __('Send messages to specific users'); ?></legend>
@@ -16,8 +18,8 @@
 
 <a href="/trainer/users/list_users">&raquo; <?php __('List users'); ?></a><br /><br />
 
+<div class="form-group">
 <?php
-
 
 if ( isset( $users_to_send ) ) 
 {
@@ -32,7 +34,10 @@ if ( isset( $users_to_send ) )
 	
 	echo $form->hidden('users_to_send', array('value' => serialize($users_to_send)));
 }
-
+?>
+</div>
+<div class="form-group">
+<?php
 if ( !isset( $noform ) )
 {
 	echo $form->input('subject',
@@ -41,7 +46,7 @@ if ( !isset( $noform ) )
 	     'after' => '',
 	     'between' => '',
 	     'maxLength' => 255,
-	     'class' => 'required',
+	     'class' => 'required form-control',
 	     'label' => __('Subject', true)
 	));
 
@@ -56,18 +61,23 @@ if ( !isset( $noform ) )
 	
 	
 	echo "<br /><br />";
-	echo $form->submit(__('Send', true));
+	echo $form->submit(__('Send', true),array('class' => 'btn btn-primary'));
 	echo "<br />";
 }
 
 echo $form->hidden('submitted',array('value' => 1));
 
 ?>
+</div>
+
                  </fieldset>
 
 <?php
       echo $form->end();
 ?>
+
+        </div>
+      </div>
 
 <?php
 

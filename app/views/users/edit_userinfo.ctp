@@ -1,9 +1,11 @@
-
-                   <h1><?php __('Settings'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Settings'); ?></h1></div>
+        
+        <div class="panel-body">
 
                    <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $form->create('User', array('action' => 'edit_userinfo')); ?>
+                   <?php echo $form->create('User', array('action' => 'edit_userinfo','class' => 'form-horizontal')); ?>
                    <fieldset>
                    <legend><?php __('Fill in your personal information'); ?></legend>
 
@@ -13,7 +15,7 @@
                    </div><br />
                    <?php } ?>
 
-                   <!--<h2><?php __('User profile'); ?></h2>-->
+<div class="form-group">
 
 <?php
 
@@ -25,7 +27,7 @@ echo $form->input('firstname',
      'after' => '',
      'between' => '',
      'maxLength' => 255,
-     'class' => 'required',
+     'class' => 'required form-control',
      'error' => array(
           'length' => __('Minimum of two characters',true), 
           'notempty' => __('Enter your firstname',true)
@@ -33,12 +35,18 @@ echo $form->input('firstname',
      'label' => __('Firstname', true)
 ));
 
+?>
+</div>
+
+<div class="form-group">
+<?php
+
 echo $form->input('lastname',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',
+     'class' => 'required form-control',
      'maxLength' => 255,
      'error' => array(
           'length' => __('Minimum of two characters',true), 
@@ -47,12 +55,18 @@ echo $form->input('lastname',
      'label' => __('Lastname', true)
 ));
 
+?>
+</div>
+
+<div class="form-group">
+<?php
+
 echo $form->input('gender',
      array(
-     'before' => __('Gender', true),
+     'before' => '<label for="gender">' . __('Gender', true) . '</label>',
      'after' => '',
      'between' => '',
-     'class' => 'required',
+     'class' => 'required checkbox',
      'legend' => false,
      'default' => 'm',
      'type' => 'radio',
@@ -60,12 +74,18 @@ echo $form->input('gender',
      'options' => array('m' => __('male', true), 'f' => __('female', true))
 ));
 
+?>
+</div>
+
+<div class="form-group">
+<?php
+
 echo $form->input('email',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',
+     'class' => 'required form-control',
      'maxLength' => 255,
      'label' => __('E-mail', true),
      'error' => array( 
@@ -78,6 +98,9 @@ echo $form->input('email',
 <span id="usernameLoading"><img src="<?php echo Configure::read('App.serverUrl'); ?>/img/indicator.gif" alt="Ajax Indicator" /></span>
 <span id="usernameResult"></span>
 
+</div>
+
+<div class="form-group">
 <?php
 
 echo $form->input('birthday',
@@ -85,51 +108,19 @@ echo $form->input('birthday',
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',
+     'class' => 'required form-control',
      'minYear' => '1930',
      'maxYear' => '1995',
      'label' => __('Birthday', true)
 ));
 
-/**
-we handle that with mailchimp.com
 
-echo $form->input('newsletter',
-                  array(
-                  'before' => 'Newsletter',
-                  'after' => '',
-                  'between' => '',
-                  'legend' => false,
-                  'type' => 'radio',
-                  'multiple' => false,
-                  'default' => '1',
-                  'options' => array(
-                  '1' => 'Yes',
-                  '0' => 'No'
-     )
-));
-
-echo $form->input('youknowus',
-                  array(
-                  'legend' => false,
-                  'label' => 'From where do you know us?',
-                  'before' => '',
-                  'after' => '',
-                  'between' => '',
-                  'options' => array(
-                                'Google' => 'Search engine (i.e. Google)',
-                                'Friends' => 'Friends (Word by mouth)',
-                                'Competition' => 'Competition (Ads)',
-                                'Magazine' => 'Magazine, newspaper',
-                                'Ads' => 'Online Ads (Banner)',
-                                'Newsletter' => 'Newsletter',
-                                'Other' => 'Other'
-                  )));
-**/
 ?>
+</div>
 
-<br />
+<div class="form-group">
 <?php
+
 echo $form->input('notifications',
                   array(
                   'before' => __('Stop notifying me', true),
@@ -146,9 +137,15 @@ echo $form->input('notifications',
                   )
 ));
 
-echo '<div class="statusbox">';
+?>
+</div>
+
+<div class="form-group">
+<?php
+
+echo '<div class="alert alert-info">';
 __('We would be very happy if you write a review (recommendation) about TriCoreTraining.com. Thank you.');
-echo '</div><br />';
+echo '</div>';
 echo $form->textarea('myrecommendation',
                   array(
                   'rows' => '5',
@@ -156,7 +153,12 @@ echo $form->textarea('myrecommendation',
            ));
 
 
-echo "<br /><br />";
+echo "<br />";
+
+?>
+</div>
+
+<?php
 
 if ( isset( $userobject ) ) {
 ?>
@@ -167,80 +169,19 @@ if ( isset( $userobject ) ) {
 <?php
 }
 
-echo $form->submit(__('Save', true));
+echo $form->submit(__('Save', true),array('class' => 'btn btn-primary'));
+
 echo "<br />";
 
 ?>
-
-<!--
-<hr />
-<h3><?php __('Contact data'); ?></h3>
-
-<?php
-
-echo $form->input('address',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'label' => __('Address', true)
-));
-
-echo $form->input('zip',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'label' => __('ZIP', true)
-));
-
-echo $form->input('city',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'label' => __('City', true)
-));
-
-echo $form->input('country',
-     array(
-     'legend' => false,
-     'label' => __('Country', true),
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'options' => $countries
-));
-
-echo $form->input('phonemobile',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'label' => __('Phone', true)
-));
-
-echo $form->hidden('id');
-echo $form->hidden('emailcheck');
-?>
-<br />
-<?php
-
-echo $form->submit(__('Save', true));
-
-?>
-                 <br />
--->
 
                  </fieldset>
 
 <?php
       echo $form->end();
 ?>
+    </div>
+  </div>
 
 <?php
 

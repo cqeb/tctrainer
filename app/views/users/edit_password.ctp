@@ -1,17 +1,21 @@
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Settings'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <h1><?php __('Settings'); ?></h1>
+         <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $this->element('js_error'); ?>
+         <?php echo $form->create('User', array('action' => 'edit_password', 'type' => 'file', 'class' => 'form-horizontal')); ?>
+         <fieldset>
+         <legend><?php __('Secure your training service!'); ?></legend>
 
-                   <?php echo $form->create('User', array('action' => 'edit_password', 'type' => 'file')); ?>
-                   <fieldset>
-                   <legend><?php __('Secure your training service!'); ?></legend>
+         <?php if ($session->read('flash')) { ?>
+         <div class="<?php echo $statusbox; ?>">
+         <?php echo $session->read('flash'); $session->delete('flash'); ?>
+         </div><br />
+         <?php } ?>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
+<div class="form-group">
 
 <?php
 
@@ -23,12 +27,19 @@ echo $form->input('password',
      'between' => '',
      'maxLength' => 255,
      'legend' => false,
-     'class' => 'required',
+     'class' => 'required form-control',
      'label' => __('Password', true),
      'error' => array( 
         'notempty' => __('Enter a password', true)
      )
 ));
+
+?>
+</div>
+
+<div class="form-group">
+
+<?php
 
 echo $form->input('passwordapprove',
      array(
@@ -38,31 +49,22 @@ echo $form->input('passwordapprove',
      'between' => '',
      'maxLength' => 255,
      'legend' => false,
-     'class' => 'required',
+     'class' => 'required form-control',
      'label' => __('Repeat password',true),
      'error' => array( 
         'notempty' => __('Repeat password', true)
      )
 ));
 
-/** not finished **/
-
 echo $form->hidden('id');
 
-/**
-echo $form->hidden('passwordcheck');
-if ($form->isFieldError('passwordcheck')){
-    echo $form->error('passwordcheck');
-}
-**/
-
 ?>
-<div class="statusbox error" id="PWNotMatch"><?php if ( isset( $errormessage ) ) { echo $errormessage; } ?></div>
+<br /><div class="alert alert-danger" id="PWNotMatch"><?php if ( isset( $errormessage ) ) { echo $errormessage; } ?></div>
+</div>
 
-<br />
 <?php
 
-echo $form->submit(__('Save',true));
+echo $form->submit(__('Save',true),array('class' => 'btn btn-primary'));
 
 ?>
                  <br />
@@ -73,9 +75,12 @@ echo $form->submit(__('Save',true));
       echo $form->end();
 ?>
 
+        </div>
+      </div>
+
 <?php
 
-      $this->js_addon = <<<EOE
+$this->js_addon = <<<EOE
 <script type="text/javascript">
 
 \$.fn.passwordStrength = function( options ){
@@ -192,14 +197,14 @@ if ( !isset( $errormessage ) )
 
                 if ( val1 == val2 ) {
                    \$('#PWNotMatch').html(pwokmessage);
-                   \$('#PWNotMatch').removeClass("statusbox error");
-                   \$('#PWNotMatch').addClass("statusbox ok");
+                   \$('#PWNotMatch').removeClass("alert alert-danger");
+                   \$('#PWNotMatch').addClass("alert alert-success");
                    \$('#UserPasswordcheck').val("1");
                    return true;
                 } else {
                    \$('#PWNotMatch').html(pwerrormessage);
-                   \$('#PWNotMatch').removeClass("statusbox ok");
-                   \$('#PWNotMatch').addClass("statusbox error");
+                   \$('#PWNotMatch').removeClass("alert alert-success");
+                   \$('#PWNotMatch').addClass("alert alert-danger");
                    \$('#UserPasswordcheck').val("0");
     	           return false;
                 }

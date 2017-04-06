@@ -1,19 +1,21 @@
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Settings'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <h1><?php __('Settings'); ?></h1>
+         <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $this->element('js_error'); ?>
+         <?php echo $form->create('User', array('action' => 'edit_images', 'type' => 'file', 'class' => 'form-horizontal')); ?>
+         <fieldset>
+         <legend><?php __('Show us your beauty!'); ?></legend>
 
-                   <?php echo $form->create('User', array('action' => 'edit_images', 'type' => 'file')); ?>
-                   <fieldset>
-                   <legend><?php __('Show us your beauty!'); ?></legend>
+         <?php if ($session->read('flash')) { ?>
+         <div class="<?php echo $statusbox; ?>">
+         <?php echo $session->read('flash'); $session->delete('flash'); ?>
+         </div><br />
+         <?php } ?>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
-                   
-                   <!--<h2><?php __('Images'); ?></h2>-->
+<div class="form-group">
 
 <?php
 
@@ -38,8 +40,6 @@ if ( $myimage_show && $myimage_show != 'image' )
 
 echo "<br /><br />";
 
-//echo $form->input('myimage2', array( 'type' => 'file' ));
-
 __('Bike image (max. of 200 kilobytes)');
 
 echo "<br />";
@@ -58,8 +58,11 @@ if ( $mybike_show ) {
 <?php
 }
 ?>
+</div>
 
 <br /><br />
+<div class="form-group">
+
 <?php echo __('Trainingsphilosophy'); ?>
 <br />
 
@@ -70,7 +73,11 @@ echo $form->textarea('mytrainingsphilosophy',
            'cols' => '45'
            ));
 ?>
+</div>
+
 <br /><br />
+
+<div class="form-group">
 <?php echo __('What I think about TriCoreTraining?'); ?>
 <br />
 <?php 
@@ -80,19 +87,19 @@ echo $form->textarea('myrecommendation',
            'cols' => '45'
            ));
 
-/** not finished **/
 
 echo $form->hidden('id');
 echo $form->hidden('mybike');
 echo $form->hidden('myimage');
 
 ?>
+</div>
 
 <br /><br />
 
 <?php
 
-echo $form->submit(__('Save',true));
+echo $form->submit(__('Save',true),array('class' => 'btn btn-primary'));
 
 ?>
                  <br />
@@ -102,6 +109,9 @@ echo $form->submit(__('Save',true));
 <?php
       echo $form->end();
 ?>
+
+        </div>
+      </div>
 
 <?php
 

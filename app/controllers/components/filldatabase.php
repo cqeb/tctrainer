@@ -13,6 +13,7 @@ class FilldatabaseComponent extends Object
 
   function prefill($model)
   {
+
       $number['users'] = 100;
       $number['competitions'] = 10;
       $number['tracks'] = 500;
@@ -45,18 +46,18 @@ class FilldatabaseComponent extends Object
             $arr_idx = rand(0,3);
             $sport = $sports_arr[$arr_idx];            
 
-            $sql = "INSERT INTO users VALUES (
-            null, 'Klaus-M. " . $i . "', 'Prerovsky $i', '$gender', 
-            'phone', 'address', 'zip', 'city', 'AT', 
-            'tri" . $i . "@schremser.com', '1', '1975-11-26', md5('finger'), 
-            1, $randHR, " . $randHR*0.85 . ", 'youknowus', 
-            1, 'philo', '$sport', 0, $weight,
-            '', 1, '', $height, '1', 
-            '$unit', '$unitdate', 0, 0, 
-            $rookie, $traininglevel, $weeklyhours, 
-            'FRI', 1, 0, 'ger', 'image', 'bikeimage', 
-            'freemember', '". date('Y-m-d', time()) . "', '" . date('Y-m-d', time()+86400*90) . "',
-            0, 'cancelreason', '" .  date('Y-m-d', time()) . "', '" .  date('Y-m-d', time()) . "')";
+            $sql = "INSERT INTO users (id, firstname, lastname, gender, phonemobile, address, zip, city, country, email, emailcheck, birthday, 
+              password, passwordcheck, maximumheartrate, lactatethreshold, bikelactatethreshold, youknowus, newsletter, notifications, 
+              mytrainingsphilosophy, myrecommendation, typoofsport, tos, weight, targetweight, targetweightcheck, targetweightdate, 
+              height, coldestmonth, unit, unitdate, publicprofile, publictrainings, rookie, traininglevel, weeklyhours, dayofheaviesttraining,
+              activated, deactivated, yourlanguage, myimage, mybike, level, paid_from, paid_to, inviter, canceled, cancellation_reason, 
+              advanced_features, admin, created, modified)
+              VALUES (
+              null, 'Klaus-M. " . $i . "', 'Prerovsky $i', '$gender', 'phone', 'address', 'zip', 'city', 'AT', 'tri" . $i . "@schremser.com', '1', 
+              '1975-11-26', md5('finger'), 1, $randHR, " . $randHR*0.85 . ", " . $randHR*0.80 . ", 'youknowus', 1, 1, 
+              'philo', '', '$sport', 1, $weight, '', 1, '', $height, '1', '$unit', '$unitdate', 0, 0, $rookie, $traininglevel, $weeklyhours, 'FRI', 
+              1, 0, 'ger', 'image', 'bikeimage', 'freemember', '". date('Y-m-d', time()) . "', '" . date('Y-m-d', time()+86400*90) . "', '', 
+              0, 'cancelreason', 0, 0, '" .  date('Y-m-d', time()) . "', '" .  date('Y-m-d', time()) . "')";
             //echo $sql . "<br>";
                  
             $model->query( $sql );

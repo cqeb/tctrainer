@@ -1,5 +1,7 @@
-
-                   <h1><?php __('Secure Paypal Payment Notification'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Secure Paypal Payment Notification'); ?></h1></div>
+        
+        <div class="panel-body">
 
                    <?php echo $this->element('js_error'); ?>
 
@@ -10,20 +12,18 @@
                    <?php } ?>
 
                    <?php if ( $error != '' ) { ?>
-                   <div class="statusbox error">
+                   <div class="alert alert-danger">
                    <?php echo $error; ?>
                    </div><br />
                    <?php } ?>
 
-                   <?php //echo $form->create('Payment', array('action' => 'initiate')); ?>
                    <fieldset>
                    <legend><?php __('Initiate Payment'); ?></legend>
 
                    </fieldset>
 
-<?php
-                   //echo $form->end();
-?>
+        </div>
+      </div>
 
 <?php
 

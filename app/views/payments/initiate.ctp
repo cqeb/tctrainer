@@ -1,15 +1,16 @@
-                   <h1><?php echo $timeinterval . ' '; __('month PREMIUM membership'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php echo $timeinterval . ' '; __('month PREMIUM membership'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <fieldset>
-                   <legend><?php __('Initiate Payment'); ?></legend>
+           <fieldset>
+           <legend><?php __('Initiate Payment'); ?></legend>
 
-
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="statusbox">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
-
+           <?php if ($session->read('flash')) { ?>
+           <div class="alert">
+           <?php echo $session->read('flash'); $session->delete('flash'); ?>
+           </div><br />
+           <?php } ?>
 
 <?php
 
@@ -30,40 +31,39 @@ __('By clicking the SUBSCRIBE button you also accept these terms and conditions 
 echo ' ';
 
 ?>
-<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
+            <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 
-<br /><br />
+            <br /><br />
 <?php 
 
 if ( $error == 'address' )
 {
 ?>
 
-<hr />
+            <hr />
 
-<?php echo $form->create('User', array('action' => 'edit_address')); ?>
-<fieldset>
-<legend><?php __('Fill in your personal information'); ?></legend>
+            <?php echo $form->create('User', array('action' => 'edit_address','class' => 'form-horizontal')); ?>
+            <fieldset>
+            <legend><?php __('Fill in your personal information'); ?></legend>
 
-<?php if ($session->read('flash')) { ?>
-<div class="<?php echo $statusbox; ?>">
-<?php echo $session->read('flash'); $session->delete('flash'); ?>
-</div><br />
-<?php } ?>
+            <?php if ($session->read('flash')) { ?>
+            <div class="<?php echo $statusbox; ?>">
+            <?php echo $session->read('flash'); $session->delete('flash'); ?>
+            </div><br />
+            <?php } ?>
 
-<div class="statusbox error">
-<?php 
+            <div class="alert alert-danger">
+            <?php 
 
-__('Sorry, but we miss your address which we need for your invoice. Please be kind and add it now.');
+            __('Sorry, but we miss your address which we need for your invoice. Please be kind and add it now.');
 
-/*
-echo $html->link(__('Add address',true),array('controller' => 'users', 'action' => 'edit_userinfo', 'id' => $session_userid));
-*/
+            ?>
+            </div>
 
-?>
-</div>
+            <br /><br />
 
-<br /><br />
+<div class="form-group">
+
 <?php
 
 echo $form->hidden('id');
@@ -73,31 +73,40 @@ echo $form->input('address',
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',     
+     'class' => 'required form-control',     
      'maxLength' => 255,
      'label' => __('Address', true)
 ));
-
+?>
+</div>
+<div class="form-group">
+<?php
 echo $form->input('zip',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',     
+     'class' => 'required form-control',     
      'maxLength' => 255,
      'label' => __('ZIP', true)
 ));
-
+?>
+</div>
+<div class="form-group">
+<?php
 echo $form->input('city',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',     
+     'class' => 'required form-control',     
      'maxLength' => 255,
      'label' => __('City', true)
 ));
-
+?>
+</div>
+<div class="form-group">
+<?php
 echo $form->input('country',
      array(
      'legend' => false,
@@ -105,37 +114,38 @@ echo $form->input('country',
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',     
+     'class' => 'required form-control',     
      'options' => $countries
 ));
-
+?>
+</div>
+<div class="form-group">
+<?php
 echo $form->input('phonemobile',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
-     'class' => 'required',     
+     'class' => 'required form-control',     
      'maxLength' => 255,
      'label' => __('Phone', true)
 ));
 
-/** not finished **/
-
 echo $form->hidden('id');
 echo $form->hidden('emailcheck');
-//echo $form->hidden('passwordcheck');
 
 ?>
+</div>
 <br /><br />
 
 <?php
 
-echo $form->submit(__('Save', true));
+echo $form->submit(__('Save', true),array('class' => 'btn btn-primary'));
 
 ?>
                  <br />
 
-                 </fieldset>
+                 <!--</fieldset>-->
 
 <?php
       echo $form->end();
@@ -150,7 +160,7 @@ EOE;
 {
 ?>
 
-            <div class="statusbox error">
+            <div class="alert alert-danger">
             <?php __('You can just buy a new subscription if your subscription-period is less than 90 days. Sorry.'); ?>
             </div>
 
@@ -229,6 +239,11 @@ if ( $days_to_end > 0 ) { ?>
 <?php } ?>
 
                  </fieldset>
+
+
+        </div>
+      </div>
+
 <?php
 
       $this->js_addon = "";

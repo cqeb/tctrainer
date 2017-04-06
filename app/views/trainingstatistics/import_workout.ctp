@@ -1,11 +1,13 @@
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Import workouts'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <h1><?php __('Import workouts'); ?></h1>
+         <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $this->element('js_error'); ?>
-
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'import_workout', 'type' => 'file')); ?>
-                   <fieldset>
-                   <legend><?php
+         <?php echo $form->create('Trainingstatistic', array('action' => 'import_workout', 'type' => 'file', 'class' => 'form-horizontal')); ?>
+         <fieldset>
+         <legend><?php
                    
 if ( isset( $newimportfile ) )
     __('Check import data und confirm import!');
@@ -14,11 +16,11 @@ else
 	 
 ?></legend>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
+         <?php if ($session->read('flash')) { ?>
+         <div class="<?php echo $statusbox; ?>">
+         <?php echo $session->read('flash'); $session->delete('flash'); ?>
+         </div><br />
+         <?php } ?>
                    
 <?php
 
@@ -39,13 +41,13 @@ if ( !isset( $newimportfile ) )
     
     echo "<br /><br />";
     
-    echo $form->submit(__('Import workouts',true));
+    echo $form->submit(__('Import workouts',true),array('class' => 'btn btn-primary'));
 
 } else
 {
-    echo '<div class="statusbox">'; 
-    echo $form->submit(__('Confirm import', true), array( 'div' => false ) );
-	echo '&nbsp;&nbsp;'; 
+    echo '<div class="alert">'; 
+    echo $form->submit(__('Confirm import', true), array('div' => false,'class' => 'btn btn-primary') );
+	  echo '&nbsp;&nbsp;'; 
     echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
     echo '</div>';
     echo $form->hidden('hiddenimportfile');
@@ -60,7 +62,8 @@ if ( !isset( $newimportfile ) )
 if ( isset( $outputfile ) ) {
   
 ?>
-<table border="0">
+
+<table class="table table-striped table-bordered table-condensed" border="0">
 <tr>
 <th><?php __('Date'); ?></th>
 <th><?php __('Name'); ?></th>
@@ -72,8 +75,8 @@ if ( isset( $outputfile ) ) {
 <?php echo $outputfile; ?>
 </table>
 <?php
-    echo '<div class="statusbox">';
-    echo $form->submit(__('Confirm import', true));
+    echo '<div class="alert">';
+    echo $form->submit(__('Confirm import', true),array('class' => 'btn btn-primary'));
 	/*
 	echo '&nbsp;&nbsp;'; 
     echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
@@ -89,7 +92,11 @@ if ( isset( $outputfile ) ) {
 <?php
       
       echo $form->end();
+?>
+        </div>
+      </div>
 
+<?php
       $this->js_addon = <<<EOE
 <script type="text/javascript">
 

@@ -1,160 +1,218 @@
 <!DOCTYPE html>
 <html lang="<?php 
     if ( $locale == 'deu' ) echo 'de'; 
-    else if ( $locale == 'zho' ) echo 'zh';
-    else if ( $locale == 'fra' ) echo 'fr';
-    else if ( $locale == 'isl' ) echo 'is';
-    else if ( $locale == 'ron' ) echo 'ro';
-    else if ( $locale == 'pol' ) echo 'pl';
     else echo 'en'; 
-?>"><head>
-    <title>TriCoreTraining.com <?php echo $title_for_layout; ?></title>
-<?php
-    $url = Configure::read('App.serverUrl');
-    echo $html->charset();
-?>
+?>">
+
+<head>
+    <title><?php
+if ( isset( $title ) ) 
+	echo 'TriCoreTraining.com' . ' ' . $title;
+else	
+	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
+?></title>
+
+    <?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
+
     <?php echo $html->meta('icon'); ?>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
 
     <?php echo $this->element('metanavigation'); ?>
 
-    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
+	<?php echo $this->element('header'); ?>
 
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/text.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/styles.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/facebox.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.css" />
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css?v=<?php echo VERSION; ?>" />
-    <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/tipTip.css?v=<?php echo VERSION; ?>" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.responsive.css?v=<?php echo VERSION; ?>" />
-
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
-	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>
-<?php } else { ?>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
-<?php } ?>
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js"></script>
-<!--
-    <script type="text/javascript" src="<?php echo $url; ?>/js/jquery-fluid16.min.js?v=<?php echo VERSION; ?>"></script>
-
-    <script type="text/javascript" src="<?php echo $url; ?>/js/facebox.min.js?v=<?php echo VERSION; ?>"></script>
--->
-    <script type="text/javascript" src="<?php echo $url; ?>/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
-	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery.tipTip.min.js?v=<?php echo VERSION; ?>"></script>
-
-    <script type="text/javascript" src="<?php echo $url; ?>/js/timeparser.js?v=<?php echo VERSION; ?>"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/trainingplanner.js?v=<?php echo VERSION; ?>"></script>
     <script type="text/javascript" src="<?php echo $url; ?>/js/zoneguide.js?v=<?php echo VERSION; ?>"></script>
 
-<?php echo $scripts_for_layout; ?>
+	<?php echo $scripts_for_layout; ?>
+
+<!--
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-57-precomposed.png">
+-->
+
+<script type="JavaScript">
+$(document).ready(function() {
+    $(document).scrollTop( $(".content").offset().top );  
+};
+</script>
+	
+	<link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
 
 </head>
-<body>
-	<!-- Header -->
-	<div class="container_12 header">
-		<div class="grid_12 branding">
-			<a href="<?php echo Configure::read('App.serverUrl'); ?>">
-				<img src="<?php echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining" title="TriCoreTraining" />
-			</a>
-      <?php echo $this->element('topprofile'); ?>
-		</div>
-		<div class="grid_12 navigation">
-      <?php if ( isset( $userobject ) ) echo $this->element('topnavigation_private'); else echo $this->element('topnavigation_public'); ?>
-		</div>
-	</div>
-	<!-- /Header -->
-	
-	<!-- Main -->
-	<div class="container_12 main">
-		<!-- Center column -->
-  		<div class="grid_6 center">
-			<!-- Content -->
-			<div class="box content last">
-				<?php echo $content_for_layout; ?>
-				<div class="clear"></div>
+
+<body <?php if ( isset( $this->onLoad ) ) { echo 'onLoad="'. $this->onLoad . '"'; } ?>>
+  
+<!-- MAIN WRAPPER class="wrapper" max-width="1110px"-->
+<div class="wrapper">
+
+<header>	
+
+    <!-- PAGE-HEADER-->	
+	<!-- NAVBAR-->
+	<nav class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+	<div class="container">
+	  	<!-- Brand and toggle get grouped for better mobile display -->
+	  	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+		  <span class="sr-only">Toggle navigation</span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		  <span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand navbar-brand-small" href="/trainer/">
+		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com Logo"></a>
+	  	</div>
+
+		<?php echo $this->element('subnavigation_all'); ?>
+
+		</div><!-- /.navbar-collapse --> 
+	</div>	
+	</nav>
+
+</header>
+<!-- /PAGE-HEADER-->
+
+<article>
+<div class="container">
+
+	<div class="row">
+
+		<div class="col-xs-12 col-sm-6 col-md-7 col-lg-7">
+	    <div class="panel">
+			<div class="panel-heading"><h1><?php __('Training Plan'); ?></h1></div>
+	        <div class="panel-body">
+
+			<?php echo $content_for_layout; ?>
+
 			</div>
-			<!-- /Content -->
 		</div>
-		<!-- /Center column -->
+		</div>
 		
-		<!-- Right column -->
-		<div class="grid_6 center">
-			<div class="box info">
+		<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+		<div class="panel">
+	        <div class="panel-body">
+
+			<div class="info">
 				<?php echo $info; ?>
-				<div class="clear"></div>
 	      	</div>
-		</div>
-		<!-- /Right column -->
-		
-      	<!-- Training hour distribution -->
-		<div class="grid_2 avgweekly">
-      		<div class="box">
-      			<label for="avg"><?php __('Training Hours'); ?></label>
-      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#avg').focus()" title="<?php __('Edit');?>">
-      			<input type="text" name="avg" id="avg" title="<?php __('These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected.'); ?>"/>
-      			<label for="week"><?php __('This Week'); ?></label>
-      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#week').focus()" title="<?php __('Edit');?>">
-      			<input type="text" name="week" id="week" title="<?php __('This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week.'); ?>"/>
-      			<a href="javascript:TrainingPlanner.resetWeeklyHours();" class="reset"><?php __('reset'); ?></a>
-      		</div>
-      	</div>
-      	
-      	<div class="grid_4 distribution">
-      		<div class="box">
-	      		<label><?php __('Workout Balance'); ?> <a href="javascript:TrainingPlanner.resetWorkoutBalance();" class="reset"><?php __('reset'); ?></a></label>
-      			<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>"></div>
-      		</div>
-      	</div>
-     
-       	
-	<!-- /Training hour distribution -->
 
-      	<div class="grid_6">
-      		<div class="box">
-    			<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?> (<?php echo $html->link(__('Next',true),array('controller' => 'trainingplans', 'action' => 'get_events?o=1'))?>)<br /><br />
-    			<a href="/trainer/payments/subscribe_triplans"><b><?php __('PREMIUM Upgrade'); ?></b></a>
-    				<br /><br />
-    			<a id="guide" href="javascript:;" title=""><?php __('Beginner\'s guide to your training'); ?></a>
-      		</div>
+	      	<div class="distribution">
+	      		<div class="box">
+		      		<label><?php __('Workout Balance'); ?> <a href="javascript:TrainingPlanner.resetWorkoutBalance();" class="reset"><?php __('reset'); ?></a></label>
+	      			<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>">
+	      				</div>
+	      		</div>
+	      		<br /><br /><br /><br />
+	      	</div>
+     		
+     		</div>
 
+     	</div>
+		<div class="panel">
+	        <div class="panel-body">
 
-<?php //if ( isset( $userobject ) && $userobject['level'] == 'freemember' ) { ?>
-      		
-      		<div class="box last">
-<h2><?php __('Your mesocycle of the next weeks'); ?></h2>
-<?php
+	      	<!-- Training hour distribution -->
+			<div class="avgweekly">
+	      		<div class="box">
+	      			<label for="avg"><?php __('Training Hours'); ?></label>
+	      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#avg').focus()" title="<?php __('Edit');?>">
+	      			<input type="text" name="avg" id="avg" title="<?php __('These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected.'); ?>"/>
+	      			<label for="week"><?php __('This Week'); ?></label>
+	      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#week').focus()" title="<?php __('Edit');?>">
+	      			<input type="text" name="week" id="week" title="<?php __('This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week.'); ?>"/>
+	      			<a href="javascript:TrainingPlanner.resetWeeklyHours();" class="reset"><?php __('reset'); ?></a>
+	      		</div>
+	      	</div>
 
-echo $mesocycles;
+	      	</div>
+	    </div>
 
-?>
-<div class="ads">
-<script type="text/javascript"><!--
-google_ad_client = "ca-pub-1221279145141294";
-/* Trainingplan 2 */
-google_ad_slot = "5197962760";
-google_ad_width = 336;
-google_ad_height = 280;
-//-->
-</script>
-<script type="text/javascript"
-src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script>
-</div>
+		<div class="panel">
+	        <div class="panel-body">
+
+			<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?> (<?php echo $html->link(__('Next',true),array('controller' => 'trainingplans', 'action' => 'get_events?o=1'))?>)<br /><br />
+			
+			<!--//
+			<?php //if ( $this->getAthlete()->isValid() == 0 ) { ?>
+			<?php if ( 1 == 1 ) { ?>
+			<a class="btn btn-primary" href="/trainer/payments/subscribe_triplans"><b><?php __('Upgrade to PREMIUM'); ?></b></a>
+				<br /><br />
+			<?php } ?>
+			//-->
+			
+			<a id="guide" href="#" title=""><?php __('Beginner\'s guide to your training'); ?></a>
+
+			<h3><?php __('Your mesocycle of the next weeks'); ?></h3>
+			<?php
+
+			echo $mesocycles;
+
+			?>
+			<div class="spacerr"></div>
 			</div>
-
-<?php //} ?>
-
-      	</div>
-
-	</div>
-	<div class="clear"></div>
-	<!-- /Main -->
+	        </div>
+		</div>
+		
+		</div>
 	
+	</div>
+
+</div>
+</article>
+
 	<!-- Footer -->
 	<?php echo $this->element('footer'); ?>
 	<!-- /Footer -->
+
+</div>
+
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+<?php if ( isset( $this->js_addon ) ) echo $this->js_addon; ?>
+
+<script>
+jQuery(document).ready(function(){
+	jQuery('#topnav').localScroll(3000);
+	jQuery('#startbtn').localScroll(2000);
+	//.parallax(xPosition, speedFactor, outerHeight) options:
+	//xPosition - Horizontal position of the element
+	//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+	//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+	jQuery('#parallax-bg').parallax("50%", 0.1);
+	//jQuery('#Section-1').parallax("50%", 0.3);
+	//jQuery('#Section-2').parallax("50%", 0.1);
+	//jQuery('#foot-sec').parallax("50%", 0.1);
+
+})
+</script>
+
+<script>
+//hide menu after click on mobile
+jQuery('.navbar .nav > li > a').click(function(){
+		jQuery('.nav-collapse.navbar-responsive-collapse.in').removeClass('in').addClass('collapse').css('height', '0');
+
+		});
+</script>
+
+<!-- NICE Scroll plugin -->
+<script>
+//scroll bar custom
+	jQuery(document).ready(
+  function() {  
+    jQuery("html").niceScroll({cursorcolor:"#333"});
+  }
+);
+</script>
+<script>
+ //$('.carousel').carousel({interval:5000});
+</script>
 
 <script language="JavaScript" type="text/javascript">
 // initialize the view
@@ -171,51 +229,35 @@ $(document).ready(function() {
  		bike : "<?php echo __('Bike',true); ?>"
  	}, true));
 
-    /** quotes are important for French! **/
-    $("#guide").click(function() {
-		$.fancybox([
-			{
-				'href'	: '/trainer/img/guide/01_trainingplan.jpg',
-				'title'	: "<?php __('1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum.'); echo '<br />'; __('2. Change your available time, if necessary.'); echo '<br />'; __('3. Change your sports balance, if necessary.'); echo '<br />'; __('Click on the right side of the image to go to the next step.'); echo '<br />'; ?>"
-			},
-			{
-				'href'	: '/trainer/img/guide/02_competition.jpg',
-				'title'	: "<?php __('Add your important competitions to get an improved training plan based on your sport goals.'); ?>"
-			},
-			{
-				'href'	: '/trainer/img/guide/03_settings.jpg',
-				'title'	: "<?php __('If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones.'); ?>"
-			},
-			{
-				'href'	: '/trainer/img/guide/04_workout.jpg',
-				'title'	: "<?php __('Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook.'); ?>"
-			},
-			{
-				'href'	: '/trainer/img/guide/05_statistics.jpg',
-				'title'	: "<?php __('Analyse the results of your training with the most important graphs and statistics.'); ?>"
-			}
-		], {
-			'padding'			: 0,
-			'transitionIn'		: 'none',
-			'transitionOut'		: 'none',
-			'titlePosition' 	: 'over',
-			'titleFormat'       : function(title, currentArray, currentIndex, currentOpts) {
-		    	return '<span id="fancybox-title-over">' + title + ' (<?php __('Step'); ?> ' +  (currentIndex + 1) + ' / ' + currentArray.length + ')</span>';
-			},
-			'changeFade'        : 0
-		});
+
+	jQuery('#guide').magnificPopup({
+	    items: [
+				{
+					'src'	: "<div class='white-popup-block'><img class='responsiveimage' alt='' src='/trainer/img/guide/01_trainingplan.jpg'><?php __('1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum.'); echo '<br />'; __('2. Change your available time, if necessary.'); echo '<br />'; __('3. Change your sports balance, if necessary.'); echo '<br />'; __('Click on the right side of the image to go to the next step.'); echo '<br /></div>'; ?>"
+				},
+				{
+					'src'	: "<div class='white-popup-block'><img class='responsiveimage' alt='' src='/trainer/img/guide/02_competition.jpg'><?php __('Add your important competitions to get an improved training plan based on your sport goals.'); ?></div>"
+				},
+				{
+					'src'	: "<div class='white-popup-block'><img class='responsiveimage' alt='' src='/trainer/img/guide/03_settings.jpg'><?php __('If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones.'); ?></div>"
+				},
+				{
+					'src'	: "<div class='white-popup-block'><img class='responsiveimage' alt='' src='/trainer/img/guide/04_workout.jpg'><?php __('Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook.'); ?></div>"
+				},
+				{
+					'src'	: "<div class='white-popup-block'><img class='responsiveimage' alt='' src='/trainer/img/guide/05_statistics.jpg'><?php __('Analyse the results of your training with the most important graphs and statistics.'); ?></div>"
+				}
+		],
+	    gallery: {
+	      enabled: true
+	    },
+	    type: 'inline' // this is default type
 	});
-
-
 });
-
 </script>
 
-	<!-- Footer End -->
-    <?php echo $this->element('footerend'); ?>
-	<!-- /Footer End -->
 
-<script>var _spinnakr_site_id='287071521';(function(d,t,a){var g=d.createElement(t), s=d.getElementsByTagName(t)[0];g[a]=a;g.src='//s5.spn.ee/js/so.js'; s.parentNode.insertBefore(g,s)}(document,'script','async'));</script>
+<?php echo $this->element('footerend'); ?>
 
 </body>
 </html>

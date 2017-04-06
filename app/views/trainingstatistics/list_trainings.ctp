@@ -3,7 +3,10 @@ __('RUN workout', true);
 __('BIKE workout', true);
 __('SWIM workout', true);
 ?>
-                   <h1><?php __('Track workouts'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Track workouts'); ?></h1></div>
+        
+        <div class="panel-body">
 
                    <?php echo $this->element('js_error'); ?>
 
@@ -16,15 +19,17 @@ __('SWIM workout', true);
                    </div><br />
                    <?php } ?>
 
-                   <a href="/trainer/trainingstatistics/edit_training"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/edit_training"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
                    
-                   <a href="/trainer/trainingstatistics/import_workout"><button onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/import_workout"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+<!--
 
-                   <a href="/trainer/trainingstatistics/garmin_read"><button onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
+                   <a href="/trainer/trainingstatistics/garmin_read"><button class="btn btn-primary"  onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
+-->
 
                    <br /><br />
 
-<table>
+<table class="table table-striped table-bordered table-condensed">
 <tr>
     <th><?php echo $paginator->sort(__('Date',true), 'date'); ?></th>
     <th><?php echo $paginator->sort(__('Sport',true), 'sportstype'); ?></th>
@@ -88,6 +93,9 @@ $twitterurl = '/trainer/trainingstatistics/url_redirect/type:twitter/distance:'.
       echo $form->end();
 
 ?>
+  </div>
+</div>
+
 <!--
 <?php 
 __('Mon');

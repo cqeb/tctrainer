@@ -23,5 +23,7 @@ $count_referrals = count( $referral_text ) - 1;
 $rand_number = rand( 0, $count_referrals );
 ?>
 
+<!--
 <div style="float:left; margin: 10px;"><img width="69" height="69" alt="<?php echo $referral_name[$rand_number]; ?>" src="http://0.gravatar.com/avatar/<?php echo md5( $referral_email[$rand_number] ); ?>?s=69&d=identicon" /></div>
+-->
 <div><i>"<?php echo $referral_text[$rand_number]; ?>"</i> (<?php echo $referral_name[$rand_number]; ?>)</div>

@@ -564,7 +564,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   take a given date and return the start and end of a season
+   * take a given date and return the start and end of a season
    **/
    function get_season( $userdata, $sentdata )
    {
@@ -575,8 +575,8 @@ class UnitcalcComponent extends Object {
                   $sentdata['Competition']['competitiondate']['year'] = date('Y', time());
                }
 
-			   if ( $userdata['User']['coldestmonth'] < 10 )
-			   		$userdata['User']['coldestmonth'] = '0' . $userdata['User']['coldestmonth'];
+			         if ( $userdata['User']['coldestmonth'] < 10 )
+			   		      $userdata['User']['coldestmonth'] = '0' . $userdata['User']['coldestmonth'];
 					
                $seasonstartmonth = $seasonendmonth = $userdata['User']['coldestmonth'];
                $compmonth = $sentdata['Competition']['competitiondate']['month'];

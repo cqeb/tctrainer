@@ -2,7 +2,7 @@
 
 class XmlhandlerComponent extends Object {
 	
-   var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Ofc', 'Unitcalc', 'Xls');
+   var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc', 'Xls');
    var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc');
 
    function readrss($xmlurl, $output = 'array', $amount = 2, $utm_medium = 'newsletter' )

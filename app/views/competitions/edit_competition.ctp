@@ -5,22 +5,25 @@
             $this->addScript('gmaps_jquery', $javascript->link('jquery.gmap-1.1.0'));
 
 ?>
-                   <h1><?php __('Competitions'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Competitions'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <?php echo $form->create('Competition', array('action' => 'edit_competition')); ?>
-                   <fieldset>
-                   <legend><?php __('Manage goals for your training.'); ?></legend>
+           <?php echo $form->create('Competition', array('action' => 'edit_competition','class' => 'form-horizontal')); ?>
+           <fieldset>
+           <legend><?php __('Manage goals for your training.'); ?></legend>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash');  ?>
-                   </div><br />
-                   <?php } ?>
+           <?php if ($session->read('flash')) { ?>
+           <div class="<?php echo $statusbox; ?>">
+           <?php echo $session->read('flash'); $session->delete('flash');  ?>
+           </div><br />
+           <?php } ?>
 
-                   <!--<?php echo $html->link(__('Back to your competitions list',true),array('controller' => 'competitions', 'action' => 'list_competitions')); ?>-->
-                   <a href="http://www.trimapper.com" target="_blank">&raquo; <?php __('Where are triathlons worldwide?'); ?></a>
-                   <br /><br />
+           <a href="http://www.trimapper.com" target="_blank">&raquo; <?php __('Where are triathlons worldwide?'); ?></a>
+           <br /><br />
 
+<div class="form-group">
 <?php
 
 echo $form->input('competitiondate',
@@ -30,29 +33,17 @@ echo $form->input('competitiondate',
      'between' => '',
      'minYear' => date('Y',time()),
      'maxYear' => date('Y',time())+5,
-     'class' => 'required',
+     'class' => 'required form-control',
      'error' => array( 
         'competitiondate' => __('Enter a valid date', true) 
       ),
      'label' => __('Date', true)
 ));
+?>
+</div>
 
-/**
-echo $form->input('important',
-       array(
-       'before' => __('Important', true),
-       'after' => '',
-       'between' => '',
-       'legend' => false,
-       'type' => 'radio',
-       'multiple' => false,
-       'default' => '1',
-       'options' => array(
-                 '1' => __('Yes', true),
-                 '0' => __('No', true),
-       )
-));
-**/
+<div class="form-group">
+<?php
 
 $sporttype_array = $sports;
 
@@ -63,10 +54,14 @@ echo $form->input('sportstype',
       'after' => '',
       'between' => '',
       'options' => $sporttype_array,
-      'class' => 'required',
+      'class' => 'required form-control',
       'label' => __('Sport', true)
       ));
+?>
+</div>
 
+<div class="form-group">
+<?php
 
 echo $form->input('name',
      array(
@@ -74,17 +69,25 @@ echo $form->input('name',
      'after' => '',
      'between' => '',
      'maxLength' => 255,
-     'class' => 'required',
+     'class' => 'required form-control',
      'error' => array( 
         'notempty' => __('Enter a name for the competition', true) 
      ),
      'label' => __('Name of competition', true)
      ));
 
-echo '<br />';
-__('You should only define 3 important competitions per year!');
-echo '<br /><br />';
+?>
+</div>
 
+<div class="alert alert-info">
+
+<?php __('You should only define 3 important competitions per year!'); ?>
+</div>
+
+<div class="form-group">
+  <div class="checkbox">
+
+<?php
 echo $form->input('important',
        array(
        'label' => __('Important', true),
@@ -98,12 +101,18 @@ echo $form->input('important',
                  '0' => __('No', true),
        )
 ));
+?>
+  </div>
+</div>
 
+<div class="form-group">
+<?php
 echo $form->input('location',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
+     'class' => 'form-control',
      'maxLength' => 255,
      //'default' => __('City, Country', true),
      'label' => __('Location', true)
@@ -113,124 +122,23 @@ echo $form->input('location',
 
               <div id="gmap"></div>
 
-
-<!--//
-<br />
-
-<div id="swim">
-<?php
-echo $form->input('swim_distance',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Swim distance (' . $length_unit . ')', true)
-));
-
-echo $form->input('swim_time',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Time for swim distance (HH:MM:SS)', true)
-));
-?>
 </div>
 
-<div id="run_duathlon">
 <?php
-echo $form->input('duathlonrun_distance',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Run distance (Duathlon) (' . $length_unit . ')', true)
-));
-
-echo $form->input('duathlonrun_time',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Time for run distance (duathlon) (HH:MM:SS)', true)
-));
-?>
-</div>
-
-<div id="bike">
-<?php
-echo $form->input('bike_distance',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Bike distance (' . $length_unit . ')', true)
-));
-
-echo $form->input('bike_time',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Time for bike distance (HH:MM:SS)', true)
-));
-?>
-</div>
-
-<div id="run">
-<?php
-echo $form->input('run_distance',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Run distance (' . $length_unit . ')', true)
-));
-
-echo $form->input('run_time',
-     array(
-     'before' => '',
-     'after' => '',
-     'between' => '',
-     'maxLength' => 255,
-     'error' => array('wrap' => 'div', 'style' => 'color:red'),
-     'label' => __('Time for run distance (HH:MM:SS)', true)
-));
-
-?>
-</div>
-//-->
-
-<?php
-
-/** not finished **/
 
 echo $form->hidden('id');
 
-echo $form->submit(__('Save',true));
+echo $form->submit(__('Save',true), array('class'=>'btn btn-primary'));
 
 ?>
-
                  </fieldset>
-
 
 <?php
       echo $form->end();
 ?>
+
+  </div>
+</div>
 
 <?php
 

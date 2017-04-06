@@ -10,23 +10,26 @@
     #traffic-light-speed { width: 31px; }
 </style>
 
-                   <h1><?php __('Statistics'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Statistics'); ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_competition')); ?>
-                   <fieldset>
-                   <legend><?php __('What have I done?'); ?></legend>
+           <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_competition','class' => 'form-horizontal')); ?>
+           <fieldset>
+           <legend><?php __('What have I done?'); ?></legend>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
+           <?php if ($session->read('flash')) { ?>
+           <div class="<?php echo $statusbox; ?>">
+           <?php echo $session->read('flash'); $session->delete('flash'); ?>
+           </div><br />
+           <?php } ?>
 
-                   <?php __('This statistic shows you whether you can finish your next competition. The signal light leads you the way.'); ?> 
-                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/do-i-have-trained-enough-for-my-competition/"><?php __('Explanation on these statistics in our blog?'); ?></a>
-                   <br /><br />
+           <?php __('This statistic shows you whether you can finish your next competition. The signal light leads you the way.'); ?> 
+           <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/do-i-have-trained-enough-for-my-competition/"><?php __('Explanation on these statistics in our blog?'); ?></a>
+           <br /><br />
 
-                   <div>
+<div class="form-group">
 <?php
 
 echo $form->input('sportstype',
@@ -36,6 +39,7 @@ echo $form->input('sportstype',
                   'before' => '',
                   'after' => '',
                   'between' => '',
+                  'class' => 'form-control',
                   'options' => array(
                                  '' => __('All', true),
                                  'RUN' => __('Run', true),
@@ -46,17 +50,20 @@ echo $form->input('sportstype',
                                  //'MISC' => __('Misc', true)
                                  )));
 
-/** not finished **/
-
 echo $form->hidden('id');
 echo $form->hidden('user_id');
+?>
 
-echo $form->submit(__('Display',true), array('name' => 'display'));
+<br />
+
+<?php
+
+echo $form->submit(__('Display',true), array('name' => 'display','class' => 'btn btn-primary'));
 
 ?>
-             </div>
+</div>
 
-<br /><br />
+<br />
 <!-- 
 thanks to 
 http://www.rodpetrovic.com/jquery/behavior/
@@ -108,7 +115,21 @@ if ( !isset( $total_trimp_tp ) || $total_trimp_tp == 0 )
     ?>
     </td>
 </tr>
+<tr>
+    <td colspan="2">&nbsp;</td>
+</tr>
+<tr>
+    <td></td>
+    <td>
+<?php
+      print_r($return2);
+?>
+    </td>
+</tr>      
 </table>
+
+<br /><br />
+
 <?php
 }
 ?>
@@ -119,6 +140,9 @@ if ( !isset( $total_trimp_tp ) || $total_trimp_tp == 0 )
       echo $form->end();
 
 ?>
+
+        </div>
+      </div>
 
 <?php
 

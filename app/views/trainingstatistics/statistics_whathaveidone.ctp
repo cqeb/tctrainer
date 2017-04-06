@@ -1,4 +1,3 @@
-
 <?php
 
 if ( $export == true )
@@ -28,6 +27,7 @@ if ( $export == true )
     		font-weight: bolder;
     	}
     </style>
+
 </head>
 <body>
 <table>
@@ -61,23 +61,23 @@ if ( $export == true )
   			echo '<tr>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_date($dt['date'], 'show', 'single').'</td>';
   			echo '   <td class="tableTdContent">'.$dt['sportstype'].'</td>';
-        	echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single', 'excel').'</td>';
+        echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['distance'], 'show', 'single', 'excel').'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->seconds_to_time($dt['duration']).'</td>';
   			echo '   <td class="tableTdContent">'.$dt['avg_pulse'].'</td>';
-  		if ( $userobject['advanced_features'] ) {
-  			echo '   <td class="tableTdContent">'.$yesno[$dt['competition']].'</td>';
-		}
+  		  if ( $userobject['advanced_features'] ) {
+  			 echo '   <td class="tableTdContent">'.$yesno[$dt['competition']].'</td>';
+		    }
   			//echo '   <td class="tableTdContent">'.$yesno[$dt['testworkout']].'</td>';
-        	echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
-        	echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
+        echo '   <td class="tableTdContent">'.$dt['name'].'</td>';
+        echo '   <td class="tableTdContent">'.str_replace("\n", "", str_replace("\r", "", $dt['comment'])).'</td>';
   			echo '   <td class="tableTdContent">'.$unitcalc->check_weight($dt['weight'], 'show', 'single', 'excel').'</td>';
-  		if ( $userobject['advanced_features'] ) {
-  			echo '   <td class="tableTdContent">'.$dt['location'].'</td>';
-        	echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
-		}
+  		  if ( $userobject['advanced_features'] ) {
+  			 echo '   <td class="tableTdContent">'.$dt['location'].'</td>';
+         echo '   <td class="tableTdContent">'.$dt['workout_link'].'</td>';
+		    }
   			echo '   <td class="tableTdContent">'.$dt['trimp'].'</td>';
-        	echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['avg_speed'], 'show', 'single', 'excel').'</td>';
-        	echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
+        echo '   <td class="tableTdContent">'.$unitcalc->check_distance($dt['avg_speed'], 'show', 'single', 'excel').'</td>';
+        echo '   <td class="tableTdContent">'.$dt['kcal'].'</td>';
   			echo '</tr>';
     }
 ?>
@@ -89,9 +89,12 @@ if ( $export == true )
 } else
 {
 ?>
-                   <h1><?php __('Statistics'); echo " " . $post_sportstype; ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Statistics'); echo " " . $post_sportstype; ?></h1></div>
+        
+        <div class="panel-body">
 
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_whathaveidone')); ?>
+                   <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_whathaveidone', 'class' => 'form-horizontal')); ?>
                    <fieldset>
                    <legend><?php __('What have I achieved?'); ?></legend>
 
@@ -105,7 +108,7 @@ if ( $export == true )
                    <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
-                   <div>
+<div class="form-group">
 <?php
 
 echo $form->input('sportstype',
@@ -115,6 +118,7 @@ echo $form->input('sportstype',
                   'before' => '',
                   'after' => '',
                   'between' => '',
+                  'class' => 'form-control',
                   'options' => array(
                                  '' => __('All', true),
                                  'RUN' => __('Run', true),
@@ -128,6 +132,7 @@ echo $form->input('fromdate',
                     'before' => '',
                     'after' => '',
                     'between' => '',
+                    'class' => 'form-control',
                     'label' => __('From', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
@@ -139,20 +144,23 @@ echo $form->input('todate',
                     'before' => '',
                     'after' => '',
                     'between' => '',
+                    'class' => 'form-control',
                     'label' => __('To', true),
                     'minYear' => date('Y',time())-5,
                     'maxYear' => date('Y',time())
 ));
                   
-/** not finished **/
 echo $form->hidden('id');
 echo $form->hidden('user_id');
+?>
+<br />
+<?php
 
-echo $form->submit(__('Display',true), array('name' => 'display', 'div' => false));
+echo $form->submit(__('Display',true), array('name' => 'display', 'div' => false, 'class' => 'btn btn-primary'));
 
 echo '&nbsp;&nbsp;';
 
-echo $form->submit(__('Export',true), array('name' => 'excel', 'div' => false));
+echo $form->submit(__('Export',true), array('name' => 'excel', 'div' => false, 'class' => 'btn btn-primary'));
 ?>
                    </div>
                    </fieldset>
@@ -205,11 +213,29 @@ $chart_color2 = '#F1AD28';
           // Create and draw the visualization.
           var ac = new google.visualization.AreaChart(document.getElementById(chart));
        
-          var graph_width = 680;
-          var graph_height = 500;
+          var graph_width = 700;
+          var graph_height = 490;
 
-          if ( window.innerWidth <= 320 ) { graph_width = 270; graph_height = 300; }
+          if ( window.innerWidth <= 1200 ) { 
+            graph_width = 550; 
+            graph_height = 450; 
+          }   
 
+          if ( window.innerWidth <= 992 ) { 
+            graph_width = 350; 
+            graph_height = 350; 
+          }   
+
+          if ( window.innerWidth <= 768 ) { 
+            graph_width = 650; 
+            graph_height = 550; 
+          }   
+
+          if ( window.innerWidth <= 400 ) { 
+            graph_width = 270; 
+            graph_height = 300; 
+          }  
+          
           // read size of div - write in variable and set here
           ac.draw(data, {
             //title : 'A vs. C',
@@ -230,7 +256,7 @@ $chart_color2 = '#F1AD28';
 
 <h2><?php __('Season Statistics'); ?></h2>
 
-<table width="100%">
+<table width="100%" class="table table-striped table-bordered table-condensed">
 <tr>
     <th><?php __('Sport'); ?></th>
     <th><?php __('Sum'); ?></th>
@@ -267,7 +293,6 @@ for ( $j = 0; $j < count( $sumdata['collected_sportstypes'] ); $j++ )
 ?>
 
 </table>
-<!--</div>-->
 
 <h2><?php __('Distance Statistics'); ?></h2>
 
@@ -303,9 +328,9 @@ google.setOnLoadCallback(get_distance);
 Debugging: (only localhost)<br />
 <a href="<?php echo $jsonurl; ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
--->
 
 <br /><br /><br /><br /><br /><br /><br /><br />
+-->
 
 <h2><?php __('Duration Statistics'); ?></h2>
 
@@ -335,15 +360,11 @@ google.setOnLoadCallback(get_duration);
 <div id="chart2"></div>
 
 <!--
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $jsonurl ) ) { ?>
-<br /><br /><br /><br /><br /><br />
-Debugging: (only localhost)<br />
-<a href="<?php echo $jsonurl; ?>" target="_blank"><?php echo $jsonurl; ?></a>
-<?php } ?>
+<br /><br /><br /><br /><br /><br /><br /><br />
 -->
 
-<br /><br /><br /><br /><br /><br /><br /><br />
-
+        </div>
+      </div>
 
 <?php
 

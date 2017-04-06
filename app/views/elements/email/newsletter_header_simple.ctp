@@ -9,6 +9,7 @@
          margin: 0;
          padding: 0;
          font-size: 14px;
+         color: #4c4c4c;
          font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
       }
 
@@ -159,6 +160,30 @@
          color: #6cb9ce;
       }
 
+      table.workouts td {
+         font-size: 14px;
+         background-color: #FFFFFF;
+         font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
+      }
+      table.workouts td.sport {
+         font-weight: bold;
+      }
+      table.workouts td.description {
+         font-size: 12px;
+         padding-bottom: 10px;
+         padding-top: 10px;
+      }
+      table.workouts td.trimp, table.workouts td.duration {
+         align-items: flex-start;
+         text-align: center;
+         cursor: default;
+         color: buttontext;
+         padding: 2px 6px 3px;
+         border: 2px outset buttonface;
+         box-sizing: border-box;
+      }
+      button { display:none; }
+      
    </style>
 
 </head>
@@ -170,8 +195,11 @@
 
          <table width="580" border="0" cellspacing="0" cellpadding="0" class="main">
             <tr>
-               <td height="90" valign="bottom" align="left" class="header">
-                  <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/header.gif" width="580" height="90" alt="TriCoreTraining.com" />
+               <td height="90" valign="bottom" align="center">
+                  <p><br />
+                  <!--<img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/header.gif" width="580" height="90" alt="TriCoreTraining.com" />-->
+                  <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo" />
+                  </p>
                </td>
             </tr>
             <tr>
@@ -186,3 +214,4 @@
                      <tr align="left" rowspan="3" valign="top">
 
                         <td width="580" valign="top" class="mainbar" align="left">
+                           

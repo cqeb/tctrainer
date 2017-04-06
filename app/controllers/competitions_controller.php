@@ -32,7 +32,7 @@ class CompetitionsController extends AppController {
 
    function list_competitions()
    {
-            $statusbox = 'statusbox';
+            $statusbox = 'alert';
             $create_dummy = '';
 
             $session_userid = $this->Session->read('session_userid');
@@ -74,7 +74,7 @@ class CompetitionsController extends AppController {
    {
             $this->set('js_addon','');
             $error = '';
-            $statusbox = 'statusbox';
+            $statusbox = 'alert';
 
             $session_userid = $this->Session->read('session_userid');
             $results['User'] = $this->Session->read('userobject');
@@ -104,7 +104,7 @@ class CompetitionsController extends AppController {
                        } else
                        {
                           $this->Session->write('flash',__('Sorry. This is not your entry!', true));
-                          $this->set('statusbox', 'statusbox error');
+                          $this->set('statusbox', 'alert alert-danger');
                           $this->redirect(array('controller' => 'Competitions', 'action' => 'list_competitions'));
                        }
                      }
@@ -217,13 +217,14 @@ class CompetitionsController extends AppController {
                // SPECIAL ERRORCHECKING
                // get important events - check if there are only 3 in a season
                if ( !isset($id) )
-			   {
+			         {
 	               $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND important = 1 AND competitiondate BETWEEN '" .
 	                    $season['start'] . "' AND '" . $season['end'] . "'";
 	               $Comps_important = $this->Competition->query( $sql );
 	               if ( count( $Comps_important ) > 2 && $this->data['Competition']['important'] == 1 )
 	                    $error = __('Sorry, only a maximum of 3 important events in a season are useful.', true);
                }
+
                $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND competitiondate BETWEEN '" .
                     $season['start'] . "' AND '" . $season['end'] . "' AND competitiondate >= '" . date( 'Y-m-d', time() ) . "'";
                $Comps = $this->Competition->query( $sql );
@@ -242,7 +243,7 @@ class CompetitionsController extends AppController {
                     	$this->data["Competition"]["competitiondate"]["year"] . '-' . $this->data["Competition"]["competitiondate"]["month"] . '-' . $this->data["Competition"]["competitiondate"]["day"],
                     	$this->data["Competition"]["sportstype"]
                     );
-               		if ($this->Competition->save( $this->data, array('validate' => true)))
+               		  if ($this->Competition->save( $this->data, array('validate' => true)))
                     {
                           $this->Session->write('flash',__('Competition saved.',true));
                           $this->redirect(array('action' => 'list_competitions', $this->User->id));
@@ -250,7 +251,7 @@ class CompetitionsController extends AppController {
                } else
                {
 
-                     $statusbox = 'statusbox error';
+                     $statusbox = 'alert alert-danger';
                      $this->Session->write('flash',$error);
                }
             }
@@ -280,7 +281,7 @@ class CompetitionsController extends AppController {
    function delete($id) 
    {
             $this->Provider->smartPurgeOnDelete($id);
-   			$this->Competition->delete($id);
+   			    $this->Competition->delete($id);
             $this->Session->write('flash',__('The competition has been deleted.', true));
             $this->redirect(array('action'=>'list_competitions'));
    }

@@ -5,11 +5,16 @@
    <style type="text/css" media="screen">
 
       body {
-         background-color: #e6e6e6;
+         /*background-color: #e6e6e6;*/
+         background-color: #ffffff;
          margin: 0;
          padding: 0;
          font-size: 14px;
+         color: #4c4c4c;
          font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
+         max-width:550px;
+         margin-left: auto;
+         margin-right: auto;          
       }
 
       ol {
@@ -159,6 +164,29 @@
          color: #6cb9ce;
       }
 
+      table.workouts td {
+         font-size: 14px;
+         background-color: #FFFFFF;
+         font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
+      }
+      table.workouts td.sport {
+         font-weight: bold;
+      }
+      table.workouts td.description {
+         font-size: 12px;
+         padding-bottom: 10px;
+         padding-top: 10px;
+      }
+      table.workouts td.trimp, table.workouts td.duration {
+         align-items: flex-start;
+         text-align: center;
+         cursor: default;
+         color: buttontext;
+         padding: 2px 6px 3px;
+         border: 2px outset buttonface;
+         box-sizing: border-box;
+      }
+      button { display:none; }
    </style>
 
 </head>
@@ -168,21 +196,24 @@
    <tr>
       <td align="center" valign="top">
 
-         <table width="580" border="0" cellspacing="0" cellpadding="0" class="main">
+         <table width="100%" border="0" cellspacing="0" cellpadding="0" class="main">
             <tr>
-               <td height="90" valign="bottom" align="left" class="header">
-                  <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/header.gif" width="580" height="90" alt="TriCoreTraining.com" />
+               <td height="90" valign="bottom" align="center">
+                  <p><br />
+                  <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo" />
+                  </p>
                </td>
             </tr>
             <tr>
                <td align="center">
 
-                  <table width="550" cellspacing="0" cellpadding="4">
+                  <table width="100%" cellspacing="0" cellpadding="4">
                      <tr>
-                        <td height="5" width="192"></td>
+                        <td height="5"></td>
                         <td></td>
                         <td class="date"><p><?php date('YYYY-mm-dd', time()); ?></p></td>
                      </tr>
                      <tr align="left" rowspan="3" valign="top">
 
-                        <td width="330" valign="top" class="mainbar" align="left">
+                        <td width="100%" valign="top" class="mainbar" align="left">
+                           

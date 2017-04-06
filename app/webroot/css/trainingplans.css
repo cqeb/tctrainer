@@ -39,7 +39,7 @@
 }
 
 .sporttime {
-	width: 78px;
+	width: 88px;
 	margin-right: 15px;
 	float: left;
 	border: 1px solid #999999;
@@ -88,7 +88,7 @@ table.workouts td {
 
 .workouts .sport {
 	font-weight: bold;
-	width: 30px;
+	/*width: 30px;*/
 	background: #efefef;
 	text-shadow: white 1px 1px 1px;
 	text-align: center;
@@ -104,7 +104,7 @@ table.workouts td {
 	vertical-align: top;
 	border: 1px solid #999;
 	border-width: 1px 0 1px 0;
-   background: white /**url(../img/lightgrey-fade.png) repeat-x top left**/;
+   	background: white /**url(../img/lightgrey-fade.png) repeat-x top left**/;
 	text-shadow: 1px 1px 1px white;
 }
 
@@ -133,7 +133,7 @@ table.workouts td.description div {
 	border: 1px solid #aaaaaa;
 	border-top-width: 0px;
 	margin-top: -5px;
-	display: bock;
+	display: block;
 	font-size: 12px;
 }
 
@@ -176,12 +176,12 @@ table.workouts td.description div {
 	text-shadow: 1px 1px 1px white;
 	font-weight: bold;
 	font-size: 16px;
-	width: 40px;
+	/*width: 40px;*/
 	text-align: right;
 }
 
 .workouts .trimp {
-	width: 70px;
+	/*width: 70px;*/
 	border: 1px solid #999;
 	border-width: 1px 1px 1px 0;
 	border-radius: 0px 2px 2px 0px;	
@@ -246,7 +246,7 @@ a.reset {
 }
 
 #plan {
-	width: 430px;	
+	/*width: 430px;	*/
 }
 
 .workouts .description button {
@@ -319,8 +319,9 @@ a.reset {
 /* check buttons for workouts */
 .workouts .type button {
 /*  	position: absolute;*/
-	margin-left: 173px;
-	margin-top: -14px;
+/*	margin-left: 173px;*/
+/*	margin-top: -14px;*/
+	float: right;
 	width: 30px;
 	height: 30px;
 	color: grey;
@@ -338,7 +339,7 @@ a.reset {
 }
 
 #phaseinfo {
-	font-size: 12px;
+	font-size: 20px;
 	position: absolute;
 	margin-top: -18px;
 }

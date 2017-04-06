@@ -1,9 +1,11 @@
-
-                  <h1><?php __('Upload Selected Garmin Workouts'); ?></h1>
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Upload Selected Garmin Workouts'); ?></h1></div>
+        
+        <div class="panel-body">
 
                   <?php echo $this->element('js_error'); ?>
 
-                  <?php echo $form->create('Trainingstatistic', array('action' => 'garmin_import')); ?>
+                  <?php echo $form->create('Trainingstatistic', array('action' => 'garmin_import','class' => 'form-horizontal')); ?>
                   <fieldset>
                   <legend></legend>
 
@@ -15,6 +17,9 @@
                   <?php __('Upload them first, and then enter your garmin username and password. We do not save them!'); ?>
 
                   <br /><br />
+                  <div style="color:red;">SORRY. NOT WORKING YET :(</div><br />
+
+<div class="form-group">                  
 <?php
 
 echo $form->input('username',
@@ -23,7 +28,7 @@ echo $form->input('username',
      'after' => '',
      'between' => '',
      'maxLength' => 255,
-     'class' => 'required',
+     'class' => 'required form-control',
 /**
      'error' => array(
           'length' => __('Minimum of two characters',true), 
@@ -32,14 +37,18 @@ echo $form->input('username',
 **/
      'label' => __('Garmin Connect Username', true)
 ));
+?>
+</div>
 
+<div class="form-group">
+<?php
 echo $form->input('password',
      array(
      'before' => '',
      'after' => '',
      'between' => '',
      'maxLength' => 255,
-     'class' => 'required',
+     'class' => 'required form-control',
 /**
      'error' => array(
           'length' => __('Minimum of two characters',true), 
@@ -48,12 +57,16 @@ echo $form->input('password',
 **/
      'label' => __('Garmin Connect Password', true)
 ));
+?>
+</div>
 
+<div class="form-group">
+<?php 
 echo $form->input('amount', array(
            'before' => '',
            'after' => '',
            'between' => '',
-           'class' => 'required',
+           'class' => 'required form-control',
            'default' => 5,
            /**'label' => __('Number of workouts to import', true)**/
            'options' => array(
@@ -65,13 +78,19 @@ echo $form->input('amount', array(
                      '25' => 25
            )));
 
-echo $form->submit(__('Get activities', true));
+echo '<br />';
+
+echo $form->submit(__('Get activities', true),array('class' => 'btn btn-primary'));
 
 ?>
+</div>
 
     </fieldset>
 
     <?php echo $form->end(); ?>
+
+        </div>
+      </div>
 
 <?php     
 

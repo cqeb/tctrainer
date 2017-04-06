@@ -22,7 +22,9 @@ class AppController extends Controller {
 	   	function beforeFilter()
       {
             $language = $this->Session->read('Config.language');
-            
+
+/*
+// removed by KMS           
 			      // if user is from AUT or GER - change language to German
             if ( !isset( $language ) )
 			      {
@@ -42,11 +44,13 @@ class AppController extends Controller {
       			} else
             {                
                 Configure::write('Config.language',$language);
-                
             }
-            
+*/            
             //echo $this->Session->read('Config.language');
             //echo Configure::read('Config.language');
+
+            if ( isset( $language ) && $language != '' )  Configure::write('Config.language',$language); 
+            else  Configure::write('Config.language','eng');
 
             $locale = $language = Configure::read('Config.language');
             
@@ -126,7 +130,6 @@ class AppController extends Controller {
             $this->Session->write('Config.language', $locale);
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
-
      }
 
      function checkSession()
@@ -199,13 +202,12 @@ class AppController extends Controller {
                              $this->Session->write('userobject', $results['User']);
                              $this->Session->write('Config.language', $results['User']['yourlanguage']);
                              $this->set('userobject', $results['User']);
+                             $this->Cookie->write('tct_auth_blog', "true", $encrypt = false, $expires = null);
                         }
 	               }
 
                  $this->set('session_userid', $session_userid);
-
 	     }
-
 }
 
 ?>

@@ -11,6 +11,8 @@
 
  <p><?php echo $mcontent; ?></p>
                            
- <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/stop_notification/<?php if ( isset( $ath_id_key ) ) echo "&athlete_id=" . $athlete_id . "&key=" . $ath_id_key; ?>"><?php __('Stop sending me notifications!'); ?></a></p>
+ 
+ <br />
+ <p class="more"><i><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/stop_notification/<?php if ( isset( $ath_id_key ) ) echo "&athlete_id=" . $athlete_id . "&key=" . $ath_id_key; ?>"><?php __('Stop sending me notifications!'); ?></a></i></p>
   
 <?php echo $this->element('email/newsletter_footer'); ?>

@@ -1,9 +1,11 @@
-
-                   <h1><?php __('Settings'); ?></h1>
-
+      <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __('Settings'); ?></h1></div>
+        
+        <div class="panel-body">
+                   
                    <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $form->create('User', array('action' => 'edit_user')); ?>
+                   <?php echo $form->create('User', array('action' => 'edit_user','class' => 'form-horizontal')); ?>
                    <fieldset>
                    <legend><?php __('User profile'); ?></legend>
 
@@ -12,8 +14,12 @@
                    <?php echo $session->read('flash'); $session->delete('flash'); ?>
                    </div><br />
                    <?php } ?>
+
                    <?php echo $html->link(__('Back to list of users',true), array('controller' => 'users', 'action' => 'list_users'), null) ?>
-					<br /><br />
+					         <br /><br />
+
+<div class="form-group">
+
 <?php
 
 echo $form->hidden('id');
@@ -30,24 +36,40 @@ echo "<br /><br />";
 echo __('Created') . ': ' . $user['created']; 
 echo "<br /><br />";
 
+?>
+</div>
+
+<div class="form-group">
+<?php
+
 echo $form->input('paid_from',
      array(
-     'class' => 'required'
+     'class' => 'required form-control'
 ));
 echo "<br /><br />";
 
+?>
+</div>
+
+<div claas="form-group">
+<?php
 echo $form->input('paid_to',
      array(
-     'class' => 'required'
+     'class' => 'required form-control'
 ));
 echo "<br /><br />";
 
+?>
+</div>
+
+<div class="form-group">
+<?php
 echo $form->input('activated',
                   array(
                   'before' => __('Activated', true),
                   'after' => '',
                   'between' => '',
-                  'class' => 'required',
+                  'class' => 'required form-control',
                   'label' => '',
                   'legend' => false,
                   'type' => 'checkbox',
@@ -57,12 +79,17 @@ echo $form->input('activated',
                   )
 ));
 
+?>
+</div>
+
+<div class="form-group">
+<?php
 echo $form->input('deactivated',
                   array(
                   'before' => __('Deactivate user', true),
                   'after' => '',
                   'between' => '',
-                  'class' => 'required',
+                  'class' => 'required form-control',
                   'label' => '',
                   'legend' => false,
                   'type' => 'checkbox',
@@ -71,12 +98,17 @@ echo $form->input('deactivated',
                             '0' => __('No',true)
                   )
 ));
+?>
+</div>
+
+<div class="form-group">
+<?php
 echo $form->input('canceled',
                   array(
                   'before' => __('Canceled', true),
                   'after' => '',
                   'between' => '',
-                  'class' => 'required',
+                  'class' => 'required form-control',
                   'label' => '',
                   'legend' => false,
                   'type' => 'checkbox',
@@ -85,12 +117,17 @@ echo $form->input('canceled',
                             '0' => __('No',true)
                   )
 ));
+?>
+</div>
+
+<div class="form-group">
+<?php
 echo $form->input('advanced_features',
                   array(
                   'before' => __('Beta', true),
                   'after' => '',
                   'between' => '',
-                  'class' => 'required',
+                  'class' => 'required form-control',
                   'label' => '',
                   'legend' => false,
                   'type' => 'checkbox',
@@ -100,12 +137,17 @@ echo $form->input('advanced_features',
                   )
 ));
 
+?>
+</div>
+
+<div class="form-group">
+<?php
 echo $form->input('notifications',
                   array(
                   'before' => __('Stop notifying', true),
                   'after' => '',
                   'between' => '',
-                  'class' => 'required',
+                  'class' => 'required form-control',
                   'label' => '',
                   'legend' => false,
                   'type' => 'checkbox',
@@ -115,6 +157,10 @@ echo $form->input('notifications',
                   )
 ));
 
+?>
+</div>
+
+<?php
 
 /** not finished **/
 
@@ -125,7 +171,7 @@ echo $form->hidden('id');
 
 <?php
 
-echo $form->submit(__('Save', true));
+echo $form->submit(__('Save', true),array('class' => 'btn btn-primary'));
 
 ?>
                  <br />
@@ -136,6 +182,8 @@ echo $form->submit(__('Save', true));
       echo $form->end();
 ?>
 
+        </div>
+      </div>
 <?php
 
       $this->js_addon = <<<EOE

@@ -11,8 +11,11 @@ class TriBikeProvider extends WorkoutProvider {
 	 * @see WorkoutProvider::generateLSDWorkout()
 	 */
 	protected function generateLSDWorkout(Race $ldRace) {
-		$duration = BikeWorkout::$LSD_TIMES[$this->athlete->getLevel()]
-			[$ldRace->getWeeksTillRaceday($this->generateWeek)];
+		$duration = 0;
+
+		if ( isset( BikeWorkout::$LSD_TIMES[$this->athlete->getLevel()][$ldRace->getWeeksTillRaceday($this->generateWeek)] ) )
+			$duration = BikeWorkout::$LSD_TIMES[$this->athlete->getLevel()][$ldRace->getWeeksTillRaceday($this->generateWeek)];
+		
 		if ($duration == 0) {
 			return false;
 		}
