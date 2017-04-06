@@ -1,0 +1,198 @@
+
+    body {
+        padding-top: 70px;
+        padding-bottom: 0px;
+        background-color: rgba(0,0,0, 0.1);
+    }
+
+	.wrapper {
+		/*max-width:1210px;*/
+		display:block;
+		margin-right:auto;
+		margin-left:auto;	
+	}
+	
+	.sub {
+		padding:30px 0px 30px;
+	}
+	
+	h1 {
+		font-size: 32.5px;
+	}
+		
+	.thumbnail {
+		margin-bottom:30px;
+	}
+	
+	.thumbnail img {
+		min-width:100%;
+	}
+
+	footer {
+		padding-top:40px;
+		margin-top:40px;
+		border-top:1px solid #dedede;
+		background:rgba(0,0,0, 0.7);
+		color:#fff;
+		padding-bottom:30px;
+	}
+
+	.related-projects {
+		padding-top:20px;
+		margin-top:20px;		
+	}
+
+	.responsiveimage {
+		max-width: 600px;
+	}
+
+	.navbar-small {
+		font-size: 13px;
+		padding: 0px 0px;
+	} 
+
+	.form-controll-small {
+		font-size: 13px;
+		height: 100%;
+	}
+
+	.btn-small {
+		font-size: 13px;
+	}
+
+	.navbar-brand-small {	
+		padding-top: 0px;
+		padding-bottom: 0px;
+	}
+
+	.item {
+		display: block;
+	    margin-left: auto;
+	    margin-right: auto 		
+	}
+
+	.date {
+		width:50%;
+	}
+
+	.date .form-control {
+		display: inline;
+		width: auto;
+	}
+
+	.white-popup-block {
+		background: #FFF;
+		padding: 20px 30px;
+		text-align: left;
+		max-width: 650px;
+		margin: 40px auto;
+		position: relative;
+	}	
+
+	.spacerr {
+		height:200px;
+	}
+
+	@media (min-width: 992px) and (max-width: 1200px) {
+		.navbar, .wrapper {
+			max-width: 1000px;
+			margin-right:auto;
+			margin-left:auto;
+		}
+		.spacerr {
+			height:400px;
+		}
+
+	}
+	
+	@media(min-width: 768px) and (max-width: 992px) {
+		.navbar, .wrapper {
+			max-width: 760px;
+			margin-right:auto;
+			margin-left:auto;
+		}
+		.responsiveimage {
+			max-width: 450px;
+		}	
+		.form-control, .alert, textarea {
+			width: 90%;
+		}
+		.spacerr {
+			height:400px;
+		}		
+	}
+	
+	@media (max-width: 992px) {
+		.navbar .btn-navbar {
+			margin-top:20px;
+		}	
+		.responsiveimage {
+			max-width: 450px;
+		}		
+		/** TODO **/
+		.workouts .sport {
+			width: 10%;
+		}
+		.workouts .type {
+			width: 40%;
+		}
+		.workouts .duration {
+			width: 20%;
+		}
+		.workouts .trimp {
+			width: 20%;
+		}
+		.form-control, .alert, textarea {
+			width: 50%;
+		}
+		.input-group .form-control {
+			width: 70%;
+		}
+		.button-right {
+			float:right;
+		}
+		.spacerr {
+			height:400px;
+		}		
+	}
+	
+	@media (max-width: 767px) {
+		.container {
+			/**
+			padding-right:20px;
+			padding-left:20px;
+			**/
+		}
+		body {
+			padding-top:0px;
+		}
+		.responsiveimage {
+			max-width: 450px;
+		}
+		.form-control, .alert, textarea {
+			width: 90%;
+		}	
+		.spacerr {
+			height:200px;
+		}
+		.panel-heading { margin-top: 100px; }		
+	}	
+
+	@media (max-width: 530px) {
+		.responsiveimage {
+			max-width: 300px;
+		}
+		.form-control, .alert, textarea {
+			width: 40%;
+		}
+		.input-group .form-control {
+			width: 50%;
+		}
+		.button-right {
+			float:right;
+		}
+		.spacerr {
+			height:400px;
+		}
+		.panel-heading { margin-top: 100px; }
+	}
