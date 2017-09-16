@@ -64,6 +64,7 @@ else
  </head>
 
 <body <?php if ( isset( $this->onLoad ) ) { echo 'onLoad="'. $this->onLoad . '"'; } ?>>
+<?php echo $this->element('tracker'); ?>
   
 <!-- MAIN WRAPPER class="wrapper" max-width="1110px"-->
 <div class="wrapper">

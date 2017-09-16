@@ -13,6 +13,11 @@ if ( isset( $_GET['open'] ) )
 	<script type="text/javascript" src="/trainer/js/swfobject.js"></script>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR5VT3V"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <?php
 
 if ( isset( $_GET['entry'] ) )

@@ -30,6 +30,11 @@ if ( $export == true )
 
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR5VT3V"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <table>
 <tr id="titles">
 		<td class="tableTd"><?php __('Date'); ?></td>

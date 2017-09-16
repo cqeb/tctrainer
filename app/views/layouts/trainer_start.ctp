@@ -98,7 +98,8 @@ else
 </head>
 
 <body>
-  
+<?php echo $this->element('tracker'); ?>
+
 <!-- MAIN WRAPPER class="wrapper" max-width="1110px"-->
 <div class="wrapper">
 

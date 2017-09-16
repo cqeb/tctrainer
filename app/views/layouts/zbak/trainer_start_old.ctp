@@ -115,6 +115,8 @@ $(document).ready(function() {
 
 </head>
 <body>
+<?php echo $this->element('tracker'); ?>
+
 <!-- Header -->
 <div class="container_12 header">
 	<div class="grid_12 branding">

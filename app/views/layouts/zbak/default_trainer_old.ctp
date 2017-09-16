@@ -59,6 +59,8 @@ $(document).ready(function() {
 
 </head>
 <body <?php if ( isset( $this->onLoad ) ) { echo 'onLoad="'. $this->onLoad . '"'; } ?>>
+<?php echo $this->element('tracker'); ?>
+
 	<!-- Header -->
 	<div class="container_12 header">
 		<div class="grid_12 branding">
