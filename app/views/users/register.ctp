@@ -19,7 +19,7 @@
         <?php } ?>
 
         <?php if ( !isset( $session_userid ) ) { ?>
-        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a>
+        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/fb_signup.png"></a>
         <?php } ?>
 
         <br /><br /><b><?php __('or'); ?></b><br /><br />
