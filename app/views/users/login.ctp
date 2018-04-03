@@ -28,7 +28,7 @@ if ( $session_userid && $session_useremail ) { ?>
 <div class="form-group">
 
         <?php if ( !isset( $session_userid ) ) { ?>
-        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a> &nbsp;&nbsp; <b><?php __('or'); ?></b><br />
+<!--        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/loginfb.png"></a> &nbsp;&nbsp; <b><?php __('or'); ?></b><br />-->
         <?php } ?>
   
 </div>

@@ -57,7 +57,7 @@
   <?php } ?>
 
   <?php echo $html->link(__('Sign In',true),array('controller' => 'users', 'action' => 'login'), array('class' => 'btn btn-warning btn-small')); ?>
-  <?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook/', array('class' => 'btn btn-warning btn-small')); ?>
+<!--  <?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook/', array('class' => 'btn btn-warning btn-small')); ?>-->
 
 </form>
 
