@@ -1,7 +1,7 @@
 
-<?php __('Aloha'); ?> Admin,
+<?php __('Hi'); ?> Admin,
 
-<?php __('some notification arrived.'); ?>
+<?php __('some notifications arrived.'); ?>
 
 <?php
 

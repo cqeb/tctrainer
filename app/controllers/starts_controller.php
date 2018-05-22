@@ -231,14 +231,14 @@ class StartsController extends AppController
 				
 				$statusbox = 'alert alert-success';
 				$this->Session->write('flash',__('Coupon code saved.', true) . 
-					' <a href="/trainer/users/register/">' . __('Please register now!', true) . '</a>');				
+					' <a href="/trainer/users/register/">' . __('Please signup right now!', true) . '</a>');				
 
-				if ( $_SERVER['HTTP_HOST'] != 'local.tricoretraining.com' ) 
+				if ( $_SERVER['HTTP_HOST'] != LOCALHOST ) 
 					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From:support@tricoretraining.com');
 			} else
 			{
 				$statusbox = 'alert alert-danger';
-				$this->Session->write('flash',__('Please add the valid coupon code!', true));				
+				$this->Session->write('flash',__('Please add a valid coupon code!', true));				
 			}   
 		}		
 		$this->set('partner', $partner);

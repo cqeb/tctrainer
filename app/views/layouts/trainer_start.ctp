@@ -62,39 +62,29 @@ if ( isset( $facebox_content ) ) {
     if ( $locale == 'deu' ) echo 'de'; 
     else echo 'en'; 
 ?>">
-
 <head>
 	<title><?php
 if ( isset( $title ) ) 
-	echo 'TriCoreTraining' . ' ' . $title;
+	echo 'TriCoreTraining - ' . ' ' . $title;
 else	
-	echo 'TriCoreTraining' . ' ' . $title_for_layout;
+	echo 'TriCoreTraining - ' . ' ' . $title_for_layout;
 	?></title>
 
-<?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
-
+	<?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
 	<?php echo $html->meta('icon'); ?>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 
-<?php echo $this->element('metanavigation'); ?>
-
-	<!--link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" /-->
-
-<?php echo $this->element('header'); ?>
+	<?php echo $this->element('metanavigation'); ?>
+	<?php echo $this->element('header'); ?>
 
 	<link href="<?php echo $url; ?>/css/styles.css" rel="stylesheet">
 
-<?php echo $scripts_for_layout; ?>
+	<?php echo $scripts_for_layout; ?>
 
 	<link rel="canonical" href="https://tricoretraining.com" />
-<!--
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-72-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-57-precomposed.png">
--->	
+
 </head>
 
 <body>

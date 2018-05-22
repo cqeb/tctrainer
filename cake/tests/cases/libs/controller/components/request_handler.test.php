@@ -518,7 +518,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 		unset($_SERVER['HTTPS']);
 		$this->assertFalse($this->RequestHandler->isSSL());
 
-		$_ENV['SCRIPT_URI'] = 'https://local.tricoretraining.com/';
+		$_ENV['SCRIPT_URI'] = 'https://localhost/';
 		$s = $_SERVER;
 		$_SERVER = array();
 		$this->assertTrue($this->RequestHandler->isSSL());
@@ -612,7 +612,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  * @return void
  */
 	function testClientProperties() {
-		$_SERVER['HTTP_HOST'] = 'local.tricoretraining.com:80';
+		$_SERVER['HTTP_HOST'] = LOCALHOST.':80';
 		$this->assertEqual($this->RequestHandler->getReferer(), 'localhost');
 		$_SERVER['HTTP_HOST'] = null;
 		$_SERVER['HTTP_X_FORWARDED_HOST'] = 'cakephp.org';

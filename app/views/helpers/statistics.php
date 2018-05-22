@@ -9,7 +9,7 @@ class StatisticsHelper extends AppHelper {
 	
 	}
 
-/**
+/*
 	function chart_settings( $chart_title, $color, $fill, $showtype = 'mid-slide', $type = 'area', $tip = '<br>#x_label#', $tipreplace = '' )
 	{
 		$chart_tip = $chart_title;
@@ -34,7 +34,7 @@ class StatisticsHelper extends AppHelper {
 		
 		return $default_settings;
 	}
-**/
+*/
 
 	function y_axis( $stroke = 1, $max, $min = 0, $steps = 1, $legend )
 	{
@@ -104,7 +104,7 @@ class StatisticsHelper extends AppHelper {
 		return $chart_xaxis;
 	}
 
-/**	
+/*	
 	function chart_title( $title )
 	{
 
@@ -116,8 +116,8 @@ class StatisticsHelper extends AppHelper {
 		return $chart_title;
 		
 	}
-**/	
-/**
+*/	
+/*
 	function chart_bgcolor()
 	{
 
@@ -126,7 +126,7 @@ class StatisticsHelper extends AppHelper {
 	    ';
 		return $chart_bgcolor;
 	}
-**/
+*/
 
 	function trimp_values( $values, $start )
 	{

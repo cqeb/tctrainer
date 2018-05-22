@@ -4,12 +4,12 @@
  <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00" width="100%">
     <tr>
        <td>
-          <h2><?php __('Aloha'); ?> Admin,</h2>
+          <h2><?php __('Hi'); ?> Admin,</h2>
        </td>
     </tr>
  </table>
 
- <p><i><?php __('some notification arrived.'); ?></i></p>
+ <p><i><?php __('some notifications arrived.'); ?></i></p>
  <p>
 <font color="red"><?php
 

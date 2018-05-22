@@ -1,7 +1,7 @@
 
 <?php echo $this->element('email/newsletter_header'); ?>
 
-<?php __('Aloha'); ?> <?php echo $to_name; ?>,
+<?php __('Hi'); ?> <?php echo $to_name; ?>,
 
 <?php echo strip_tags( $mcontent ); ?>
                            

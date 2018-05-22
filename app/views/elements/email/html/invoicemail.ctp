@@ -4,29 +4,31 @@
  <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00" width="100%">
     <tr>
        <td>
-          <h2><?php __('Aloha'); ?> <?php echo $user['User']['firstname']; ?>,</h2>
+          <h2><?php __('Hi'); ?> <?php echo $user['User']['firstname']; ?>,</h2>
        </td>
     </tr>
  </table>
 
- <p><i><?php __('thanks for your trust in TriCoreTraining.com.'); ?></i></p>
+ <p><i><?php __('thanks for trusting TriCoreTraining.'); ?></i></p>
 
 <p>
 
 <!--<div style="margin: 0px;" class="block" id="tables">-->
 
-<b>TriCoreTraining - <?php __('Club'); ?></b><br />
-Gonzagagasse 11/25<br />
-A-1010 <?php __('Vienna, Austria'); ?>
+<b>TriCoreTraining</b><br />
+Klaus-M. Schremser GmbH,<br />
+Gruene Gasse 35,<br />
+A-2351 Wiener Neudorf, <?php __('Austria'); ?><br />
+https://tricoretraining.com<br />
 <br /><br />
 <b><?php echo $user['User']['firstname'] . ' ' . $user['User']['lastname']; ?></b><br />
 <?php echo $user['User']['address']; ?><br />
 <?php echo $user['User']['zip'] . '-' . $user['User']['city'] . ', ' . $user['User']['country']; ?>
 <br /><br />
 
-<table class="main" summary="TriCoreTraining.com <?php __('Invoice'); ?>">
+<table class="main" summary="TriCoreTraining <?php __('Invoice'); ?>">
 <caption>
-TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?><br />
+TriCoreTraining <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?><br />
 <?php __('Date'); echo ':'; ?> <?php echo $created; ?>
 </caption>
 <colgroup>
@@ -36,7 +38,7 @@ TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invo
 </colgroup>
 <thead>
 <tr class="tab">
-    <th colspan="3" class="table-head">TriCoreTraining-<?php __('plan'); ?></th>
+    <th colspan="3" class="table-head">TriCoreTraining <?php __('plan'); ?></th>
 </tr>
 <tr class="tab">
     <th class="tab"><?php __('Product'); ?></th>
@@ -66,7 +68,7 @@ TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invo
  
 <!--<p class="more"><?php __('Please'); ?> <a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/<?php echo $transaction_id?>"><?php __('Continue to train.'); ?></a></p>-->
 
-<p><?php __('No VAT included, because as a club we are not allowed to charge VAT!'); ?></p>
+<p><?php __('20% VAT included!'); ?></p>
 <br />
 
 <?php echo $this->element('email/newsletter_footer'); ?>

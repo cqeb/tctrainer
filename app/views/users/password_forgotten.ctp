@@ -64,9 +64,9 @@ if ( $status != 'sent' )
                  <?php echo $form->end();?>
 
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) { ?>
 <br /><br />
-For DEBUGGING (only local.tricoretraining.com):
+For DEBUGGING (only localhost):
 <a href="<?php echo Configure::read('App.serverUrl'); ?>/users/password_reset/transaction_id:<?php echo $transaction_id?>">click to reset your password</a>
 <br /><br />
 <?php } ?>

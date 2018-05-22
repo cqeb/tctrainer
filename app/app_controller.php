@@ -28,7 +28,7 @@ class AppController extends Controller {
 			      // if user is from AUT or GER - change language to German
             if ( !isset( $language ) )
 			      {
-      				if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' )
+      				if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
       					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
       				else
       					$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];

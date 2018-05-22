@@ -19,10 +19,10 @@ class FlowplayerHelper extends AppHelper {
            if ( $swffile != '' )
            {
                  $output = '
-<a href="' . Configure::read('App.serverUrl') . '/flowplayer/videos/' . $swffile . '" style="display:block;width:' . $swfwidth . 'px;height:' . $swfheight . 'px" id="player"></a>
-<script>
-			flowplayer("player", "' . Configure::read('App.serverUrl') . '/flowplayer/flowplayer-3.1.5.swf");
-</script>
+                  <a href="' . Configure::read('App.serverUrl') . '/flowplayer/videos/' . $swffile . '" style="display:block;width:' . $swfwidth . 'px;height:' . $swfheight . 'px" id="player"></a>
+                  <script>
+                                    flowplayer("player", "' . Configure::read('App.serverUrl') . '/flowplayer/flowplayer-3.1.5.swf");
+                  </script>
                  ';
 
            }

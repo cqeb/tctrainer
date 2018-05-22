@@ -250,7 +250,7 @@ class PaymentsController extends AppController {
 
 			/*
 			 *
-			 * http://local.tricoretraining.com/trainer/payments/notify/lang:ger/?
+			 * http://localhost/trainer/payments/notify/lang:ger/?
 			 * cmd=_notify-validate&
 			 * mc_gross=0.10&
 			 * protection_eligibility=Ineligible&

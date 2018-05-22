@@ -2398,7 +2398,7 @@ class DispatcherTest extends CakeTestCase {
 				),
 				'No rewrite with path' => array(
 					'SERVER' => array(
-						'HTTP_HOST' => 'local.tricoretraining.com', 
+						'HTTP_HOST' => LOCALHOST, 
 						'DOCUMENT_ROOT' => '/Library/WebServer/Documents/officespace/app/webroot',
 						'SCRIPT_FILENAME' => '/Library/WebServer/Documents/officespace/app/webroot/index.php',
 						'QUERY_STRING' => '',

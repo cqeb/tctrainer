@@ -1789,13 +1789,13 @@ class UsersController extends AppController {
     
     	// select all users 
     	$sql = "SELECT * FROM users ORDER BY id";
-		if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) $sql .= " LIMIT 2";
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) $sql .= " LIMIT 2";
 		$results = $this->User->query($sql);
 
 		$output = '';
 
 		/*
-		if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) {
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
 			$blognews_de['html'] = $blognews_en['html'] = '';
 		} else {
 			$blognews_de = $this->Xmlhandler->readrss('http://feeds.feedburner.com/tricoretraining/DE', 'html');
@@ -1842,7 +1842,7 @@ class UsersController extends AppController {
 			*/
 
 			// if local testing, then send	
-            if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
+            if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 			{
 				$misc['counter'] = $i;
 				//if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug, $misc, 'notSun' );
@@ -2342,7 +2342,7 @@ class UsersController extends AppController {
                             '<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
                        }
 
-                       if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) {
+                       if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
                             if ( $debug == true ) { 
                             	echo "<br>Counter: " . $misc['counter'] . "<br>\nMailsubject: " . $mailsubject . "<br><br>\n";
                             }
@@ -2386,7 +2386,7 @@ class UsersController extends AppController {
 		if ( !isset( $to_user['name'] ) ) $to_user['name'] = __('athlete', true);
 		
 		// DEBUG send to admin 
-		if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' || $_GET['debug'] == true )
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' || $_GET['debug'] == true )
 		{ 
 		  		$to_user['email'] = 'klaus@tricoretraining.com';
 		}

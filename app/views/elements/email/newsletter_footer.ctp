@@ -24,7 +24,7 @@
                               </tr>
                            </table>
                            <p>
-                           <?php __('Aloha'); ?>, 
+                           <?php __('Hi'); ?>, 
                            <?php __("my name is"); ?> Klaus-M. <?php __("and I'm one of the founders of TriCoreTraining."); ?>
                            <?php __('If you need support, please'); ?> <a href="mailto:support@tricoretraining.com"><?php __('just ask me'); ?></a>.
                            <br /><br />
@@ -44,12 +44,12 @@
             <tr>
                <td align="center" class="footer">
                   <p>
-                    <a href="https://tricoretraining.com?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining</a>, <br />
+                    <a href="https://tricoretraining.com?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">
+                    TriCoreTraining</a> <br />
                     <?php __('Acquired by'); ?> Klaus-M. Schremser GmbH<br />
-                    Gruene Gasse 35, A-2351 <?php __('Wiener Neudorf'); ?>, 
-                    <?php __('Phone'); ?> +43 699 1 630 15 24, <br /
+                    Gruene Gasse 35, A-2351 Wiener Neudorf, <?php __('Austria'); ?><br />
                     ><a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a></p>
-                  <p><span style="font-weight: bold;"><?php __('TriCoreTraining and TriCoreTraining.com'); ?></span> <?php __('are registered trademarks'); ?>.</p>                  
+                  <p><span style="font-weight: bold;"><?php __('TriCoreTraining'); ?></span> <?php __('is a registered trademark'); ?>.</p>                  
                </td>
             </tr>
          </table>

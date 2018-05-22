@@ -20,7 +20,7 @@
            </div><br />
            <?php } ?>
 
-           <a href="http://www.trimapper.com" target="_blank">&raquo; <?php __('Where are triathlons worldwide?'); ?></a>
+           <a href="http://www.trimapper.com" target="_blank">&raquo; <?php __('Where are triathlon events worldwide?'); ?></a>
            <br /><br />
 
 <div class="form-group">
@@ -71,9 +71,9 @@ echo $form->input('name',
      'maxLength' => 255,
      'class' => 'required form-control',
      'error' => array( 
-        'notempty' => __('Enter a name for the competition', true) 
+        'notempty' => __('Give the race a name', true) 
      ),
-     'label' => __('Name of competition', true)
+     'label' => __('Name of race', true)
      ));
 
 ?>
@@ -81,7 +81,7 @@ echo $form->input('name',
 
 <div class="alert alert-info">
 
-<?php __('You should only define 3 important competitions per year!'); ?>
+<?php __('You should only define 3 important races per year!'); ?>
 </div>
 
 <div class="form-group">

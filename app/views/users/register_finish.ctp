@@ -29,9 +29,9 @@
                    <br /><br />
                    <!--<b><?php __('Your FREE membership is valid from'); ?> <?php echo $paid_from; ?> <?php __('to'); ?> <?php echo $paid_to; ?>.</b>-->
 
-                   <?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
+                   <?php if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) { ?>
                    <br /><br />
-                   For DEBUGGING (only local.tricoretraining.com):
+                   For DEBUGGING (only localhost):
                    <br />
                    <?php echo $html->link(__('Activate', true), array('controller' => 'users', 'action' => 'activate', 'transaction_id' => $transaction_id)); ?>
                   <br />

@@ -7,9 +7,9 @@
 <head>
     <title><?php
 if ( isset( $title ) ) 
-	echo 'TriCoreTraining.com' . ' ' . $title;
+	echo 'TriCoreTraining - ' . ' ' . $title;
 else	
-	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
+	echo 'TriCoreTraining - ' . ' ' . $title_for_layout;
 ?></title>
 
     <?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
@@ -23,8 +23,7 @@ else
 
     <?php echo $this->element('metanavigation'); ?>
 
-    <link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
-
+    <!--link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" /-->
 
 	<!-- Latest compiled and minified CSS BS 3.0. RC1-->
 	<link href="<?php echo $url; ?>/assets/css/theme.css" rel="stylesheet">

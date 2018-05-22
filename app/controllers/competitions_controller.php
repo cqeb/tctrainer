@@ -222,7 +222,7 @@ class CompetitionsController extends AppController {
 	                    $season['start'] . "' AND '" . $season['end'] . "'";
 	               $Comps_important = $this->Competition->query( $sql );
 	               if ( count( $Comps_important ) > 2 && $this->data['Competition']['important'] == 1 )
-	                    $error = __('Sorry, only a maximum of 3 important events in a season are useful.', true);
+	                    $error = __('You should not have more than 3 important events per season.', true);
                }
 
                $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND competitiondate BETWEEN '" .
@@ -235,7 +235,7 @@ class CompetitionsController extends AppController {
                $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND name = '" . $this->data['Competition']['name'] .
                       "' AND competitiondate = '" . $this->data['Competition']['competitiondate'] . "'";
                $Comps_already = $this->Competition->query( $sql );
-               if ( count( $Comps_already ) > 0 ) $error = __('Event already exists.',true);
+               if ( count( $Comps_already ) > 0 ) $error = __('This event already exists!',true);
 
                if ( $error == "" )
                {
@@ -246,7 +246,7 @@ class CompetitionsController extends AppController {
 
                		if ($this->Competition->save( $this->data, array('validate' => true)))
                     {
-                          $this->Session->write('flash',__('Competition saved.',true));
+                          $this->Session->write('flash',__('Race saved. Go for it.',true));
                           $this->redirect(array('action' => 'list_competitions', $this->User->id));
                     }
                } else
@@ -284,7 +284,7 @@ class CompetitionsController extends AppController {
    {
             $this->Provider->smartPurgeOnDelete($id);
    			$this->Competition->delete($id);
-            $this->Session->write('flash',__('Competition was deleted.', true));
+            $this->Session->write('flash',__('Race was deleted.', true));
             $this->redirect(array('action'=>'list_competitions'));
    }
 

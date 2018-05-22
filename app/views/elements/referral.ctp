@@ -1,6 +1,5 @@
 <?php
 
-//pr($recommendations);
 if ( isset( $recommendations ) && count( $recommendations ) > 0 && $recommendations[0] )
 {
 	foreach ( $recommendations as $key => $val )

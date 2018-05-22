@@ -1,12 +1,14 @@
 
-<?php __('Aloha'); ?> <?php echo $user['User']['firstname']; ?>,
+<?php __('Hi'); ?> <?php echo $user['User']['firstname']; ?>,
        
 
-<?php __('thanks for your trust in TriCoreTraining.com.'); ?>
+<?php __('thanks for trusting in TriCoreTraining.'); ?>
 
-*TriCoreTraining - <?php __('Club'); ?>*
-Gonzagagasse 11/25
-A-1010 <?php __('Vienna, Austria'); ?>
+*TriCoreTraining*
+<?php __('Acquired by'); ?> Klaus-M. Schremser GmbH
+Gruene Gasse 35
+A-2351 Wiener Neudorf, <?php __('Austria'); ?>
+https://tricoretraining.com
 
 
 *<?php echo $userobject['firstname'] . ' ' . $userobject['lastname']; ?>*
@@ -14,7 +16,7 @@ A-1010 <?php __('Vienna, Austria'); ?>
 <?php echo $userobject['zip'] . '-' . $userobject['city'] . ', ' . $userobject['country']; ?>
 
 
-*TriCoreTraining.com <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?> (<?php __('Date'); echo ':'; ?> <?php echo $created; ?>)*
+*TriCoreTraining <?php __('Invoice'); ?> <?php __('No.'); ?> <?php echo $invoice; ?> (<?php __('Date'); echo ':'; ?> <?php echo $created; ?>)*
 
 <?php __('Product'); ?> | <?php __('Interval'); ?>  | <?php __('Price'); ?>
 <?php __('Total'); ?>                                 <?php echo $currency . ' ' . $price; ?>

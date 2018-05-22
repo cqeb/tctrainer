@@ -1,12 +1,12 @@
       <div class="panel panel-default" id="forms">
-        <div class="panel-heading"><h1><?php __('Competitions'); ?></h1></div>
+        <div class="panel-heading"><h1><?php __('Races'); ?></h1></div>
         
         <div class="panel-body">
 
         <?php echo $this->element('js_error'); ?>
 
         <fieldset>
-        <legend><?php __('Manage your competitions!'); ?></legend>
+        <legend><?php __('Manage your races!'); ?></legend>
 
         <?php if ($session->read('flash')) { ?>
         <div class="<?php echo $statusbox; ?>">
@@ -29,7 +29,7 @@ if ( count( $competitions ) < 1 ) {
 ?>
 <tr>
    <td />
-   <td colspan="4"><br /><?php __('No competitions defined.'); ?></td>
+   <td colspan="4"><br /><?php __('No races defined.'); ?></td>
 </tr>
 <?php 
 }
@@ -47,7 +47,7 @@ foreach ($competitions as $competition) {
 ?>
 <tr>
    <td />
-   <td colspan="4"><b><?php __('Your next competition ...'); ?></b></td>
+   <td colspan="4"><b><?php __('Your next race ...'); ?></b></td>
 </tr>
 <?php
 	}

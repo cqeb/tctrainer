@@ -84,7 +84,7 @@ class TrainingstatisticsController extends AppController {
 
 						$importfile = Configure::read('App.uploadDir') . 'imports/' . $return['filename'];
 					
-						if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' )
+						if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 						{
 							if ( isset( $app_backslash ) && $app_backslash == true ) 
 								$importfile = str_replace( '/', '\\', $importfile);
@@ -724,10 +724,8 @@ class TrainingstatisticsController extends AppController {
    {
             $this->checkSession();
             $this->layout = "ajaxrequests";
-       	    $this->RequestHandler->setContent('js', null);
-            if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) Configure::write('debug', 1);
-			else Configure::write('debug', 0);
-
+			$this->RequestHandler->setContent('js', null);
+			   
             $session_userid = $this->Session->read('session_userid');
             $results['User'] = $this->Session->read('userobject');
 
@@ -824,10 +822,8 @@ class TrainingstatisticsController extends AppController {
      
             $this->layout = "ajaxrequests";
        	    $this->RequestHandler->setContent('js', null);
-            if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) Configure::write('debug', 1);
-			else Configure::write('debug', 0);
 
-            $this->set('js_addon','');
+		    $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
             $statusbox = '';
 
@@ -929,9 +925,7 @@ class TrainingstatisticsController extends AppController {
 			
 			$this->layout = "ajaxrequests";
 			$this->RequestHandler->setContent('js', null);
-			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) Configure::write('debug', 1);
-			else Configure::write('debug', 0);
-			
+
 			$this->set('js_addon','');
 			$unit = $this->Unitcalc->get_unit_metric();
 			$statusbox = '';
@@ -1024,8 +1018,6 @@ class TrainingstatisticsController extends AppController {
             $this->checkSession();
             $this->layout = "ajaxrequests";
             $this->RequestHandler->setContent('js', null);
-            if ( $_SERVER['HTTP_HOST'] == '' ) Configure::write('debug', 1);
-			else Configure::write('debug', 0);
 
             $this->set('js_addon','');
             $unit = $this->Unitcalc->get_unit_metric();
@@ -1074,7 +1066,7 @@ class TrainingstatisticsController extends AppController {
 		 
 		if ( $p['smtype'] == 'facebook' )
 		{
-			$socialmedia_url = 'http://www.facebook.com/sharer.php?u=http://tricoretraining.com' .  
+			$socialmedia_url = 'http://www.facebook.com/sharer.php?u=https://tricoretraining.com' .  
 				'/trainer/starts/index/u:' . $transaction_id;
 		} elseif ( $p['smtype'] == 'twitter' )
 		{
@@ -1082,7 +1074,7 @@ class TrainingstatisticsController extends AppController {
 			__('I did a', true) . ' ' . $p['distance'] . ' ' . $p['distance_unit'] . ' ' . 
 			__($p['sport'] . ' workout', true) . ' ' . __('in',true) . ' ' . $p['duration'] . 
 			' ' . __('hour(s)',true) . ' ' . __('with', true) . ' ' . 
-			'http://tricoretraining.com/?u=' . $transaction_id; 
+			'https://tricoretraining.com/?u=' . $transaction_id; 
 			
 			$socialmedia_url = 'http://twitter.com/?status=' . urldecode( substr( $twittertext, 0, 140 ) );
 		}
@@ -1113,7 +1105,7 @@ class TrainingstatisticsController extends AppController {
                   $this->data = $result[0];
                else
                {
-                  $this->Session->write('flash',__('Sorry. This is not your entry!', true));
+                  $this->Session->write('flash',__('Sorry. This is not your data set!', true));
                   $this->set('statusbox', 'alert alert-danger');
                   $this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
                }
@@ -1122,7 +1114,7 @@ class TrainingstatisticsController extends AppController {
             $this->Trainingstatistic->delete($id);
             
             $this->set('statusbox', 'alert');
-            $this->Session->write('flash',__('Workout deleted.',true));
+            $this->Session->write('flash',__('Workout d.',true));
             $this->redirect(array('action'=>'list_trainings'));
 	}
 

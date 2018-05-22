@@ -194,9 +194,9 @@ google.setOnLoadCallback(get_ctl);
 <div id="chart1"></div>
 
 <!--
-<?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) { ?>
 <br /><br /><br /><br /><br /><br />
-Debugging: (only local.tricoretraining.com)<br />
+Debugging: (only localhost)<br />
 <a href="<?php echo $js_url_graph_ctl; ?>" target="_blank"><?php echo $js_url_graph_ctl; ?></a>
 <?php } ?>
 
@@ -222,9 +222,9 @@ google.setOnLoadCallback(get_atl);
 <div id="chart2"></div>
 
 <!--
-<?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) { ?>
 <br /><br /><br /><br /><br /><br />
-Debugging: (only local.tricoretraining.com)<br />
+Debugging: (only localhost)<br />
 <a href="<?php echo $js_url_graph_atl; ?>" target="_blank"><?php echo $js_url_graph_atl; ?></a>
 <?php } ?>
 -->

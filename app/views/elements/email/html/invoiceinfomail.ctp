@@ -9,8 +9,8 @@
     </tr>
  </table>
 
- <p><i><?php __('Thank you for subscribing to TriCoreTraining-Plans for'); ?> <?php echo $timeinterval; ?> <?php __('months'); ?>.</i></p>
- <p><?php __('You will receive an invoice as soon as PAYPAL charges the subscription fee. This might happen after your trial-period expired.'); ?></p>
+ <p><i><?php __('Thank you for subscribing to TriCoreTraining plans for'); ?> <?php echo $timeinterval; ?> <?php __('months'); ?>.</i></p>
+ <p><?php __('You will receive an invoice as soon as the payment provider (PAYPAL) charges the subscription fee. This will happen after your trial-period expired.'); ?></p>
  <p>
  <?php __('Old period:'); ?> <?php echo $paid_from; ?> <?php __('to'); ?> <?php echo $paid_to; ?><br />
  <?php __('New period:'); ?> <?php echo $paid_new_from; ?> <?php __('to'); ?> <?php echo $paid_new_to; ?>

@@ -1,5 +1,5 @@
       <div class="panel panel-default" id="forms">
-        <div class="panel-heading"><h1><?php __('Show your payments'); ?></h1></div>
+        <div class="panel-heading"><h1><?php __('Display your previous payments'); ?></h1></div>
         
         <div class="panel-body">                   
 
@@ -12,8 +12,8 @@
              <?php } ?>
 
              <div class="alert">
-             <?php __('This list shows all your invoices for payments proceeded by PAYPAL. If you miss an invoice, please be aware
-             that you receive your invoice at the time your payment is proceeded.'); ?>
+             <?php __('This list displays all your invoices for payments proceeded by our payment provider. If you miss an invoice, please be aware
+             that you receive your invoice at the time your payment is processed.'); ?>
              </div><br />
 
              <?php echo $form->create('User', array('action' => '#','class' => 'form-horizontal'));?>
@@ -41,7 +41,7 @@
              {
              ?>
              <tr>
-                  <td></td><td colspan="4"><?php __('No payments available.'); ?></td>
+                  <td></td><td colspan="4"><?php __('No invoices available.'); ?></td>
              </tr>
              <?php  
              } 

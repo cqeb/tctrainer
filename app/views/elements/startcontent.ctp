@@ -1,6 +1,6 @@
 <?php if ( $locale == 'deu' ) { ?>
 
-				<!--<h2>Wie es funktioniert?</h2>-->
+<!--<h2>Wie es funktioniert?</h2>-->
 
 <p>
 <b>TriCoreTraining ist wie ein Online-Coach, der individuell für dich Trainingspläne für Laufen, 
@@ -25,7 +25,7 @@ Genug Vorteile für Dich? Melde dich einmal an!
 
 <?php } else if ( $locale == 'eng' ) { ?>
 
-				<!--<h2>How it works?</h2>-->
+<!--<h2>How it works?</h2>-->
 
 <p>
 <b>TriCoreTraining is a free, interactive online endurance sport training service (running, biking, triathlon) for athletes</b> 

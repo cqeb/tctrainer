@@ -180,9 +180,9 @@ google.setOnLoadCallback(get_weight);
 <div id="chart1"></div>
 
 <!--
-<?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) { ?>
 <br /><br /><br /><br /><br /><br />
-Debugging: (only local.tricoretraining.com)<br />
+Debugging: (only localhost)<br />
 <a target="_blank" href="<?php echo $jsonurl; ?>"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
