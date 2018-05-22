@@ -20,8 +20,12 @@
             </tr>
             <tr>
                <td align="center" class="footer">
-                  <p><a href="http://www.tricoretraining.com?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank"><?php __('TriCoreTraining Club'); ?></a>, <br />Gonzagagasse 11/25, A-1010 <?php __('Vienna'); ?>, <?php __('Phone'); ?> +43 699 1 630 15 24, <br /><a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a></p>
-                  <p><span style="font-weight: bold;"><?php __('TriCoreTraining and TriCoreTraining.com'); ?></span> <?php __('are registered trademarks'); ?>.</p>
+                  <p>
+                    <a href="https://tricoretraining.com?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">
+                    <?php __('Klaus-M. Schremser GmbH'); ?></a>, <br />Gruene Gasse 35, A-2351 <?php __('Wiener Neudorf'); ?>, <?php __('Phone'); ?> +43 699 1 630 15 24, <br /><a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a>
+                  </p>
+                  <p>
+                    <span style="font-weight: bold;"><?php __('TriCoreTraining and TriCoreTraining.com'); ?></span> <?php __('are registered trademarks'); ?>.</p>
                </td>
             </tr>
          </table>

@@ -38,23 +38,33 @@
  * In production mode, flash messages redirect after a time interval.
  * In development mode, you need to click the flash message to continue.
  */
-if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) )
+
+define('LOCALHOST', 'local.tricoretraining.com');
+define('TESTHOST', 'test.tricoretraining.com');
+
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 { 
 	/**
 	 * Defines the default error type when using the log() function. Used for
 	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
 	 */
+	define( 'DEBUG', true );
 	define('LOG_ERROR', 2);
 	Configure::write('debug', 2);
+	
 
-	if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' ) {
+	$_SERVER['DOCUMENT_ROOT'] = '/Applications/XAMPP/xamppfiles/htdocs/tricoretraining.com/';
+
+	if ( $_SERVER['HTTP_HOST'] == TESTHOST ) {
 		$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/test.tricoretraining.com/';
 	}
 
 } else 
 {
+	define( 'DEBUG', false );
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
+
 	$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
 }
 
@@ -62,6 +72,7 @@ if ( isset( $_SERVER['HTTP_HOST'] ) && ( $_SERVER['HTTP_HOST'] == 'localhost' ||
  * Application wide charset encoding
  */
 Configure::write('App.encoding', 'UTF-8');
+
 /**
  * To configure CakePHP *not* to use mod_rewrite and to
  * use CakePHP pretty URLs, remove these .htaccess
@@ -74,39 +85,33 @@ Configure::write('App.encoding', 'UTF-8');
  * And uncomment the App.baseUrl below:
  */
 
- /** 
-  * this is correct
-  * 
-  */
+Configure::write('App.uploadDir', $_SERVER['DOCUMENT_ROOT'] . 'trainer/app/webroot/files/');
+// Paypal payment email
+Configure::write('App.paymentemail', 'payment@tricoretraining.com');
+
+/**
+ * mail sending options
+ */
+	
+Configure::write('App.mailFrom', 'Klaus-M. from TriCoreTraining <support@tricoretraining.com>');
+Configure::write('App.mailAdmin', 'support@tricoretraining.com');
+Configure::write('App.mailPort', '25');
+/* CHANGE */
+Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
+Configure::write('App.mailUser', '');
+Configure::write('App.mailPassword', '');
+Configure::write('App.mailDelivery', 'mail');
 
 // local configuration
-if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 {
  	
-    // Klaus-M. config
-    // this is the path-information - I know the variable is not named correctly :) (so please without host-info)
     // rename this variable
     Configure::write('App.serverUrl', '/trainer');
     // Domain with protocol and NO trailing slash
-    Configure::write('App.hostUrl', 'http://localhost');
-    Configure::write('App.uploadDir', '/Applications/XAMPP/xamppfiles/htdocs/trainer/app/webroot/files/');
+    Configure::write('App.hostUrl', 'http://' . LOCALHOST);
+    
     Configure::write('App.Dirbackslash', false);
- 
-	// Paypal payment email
-	//Configure::write('App.paymentemail', 'paymentsandbox@tricoretraining.com');
-	Configure::write('App.paymentemail', 'payment@tricoretraining.com');
-
-	/**
-	 * mail sending options
-	 */
-	
-	Configure::write('App.mailFrom', 'TriCoreTraining <tricoretrainingtest@gmail.com>');
-	Configure::write('App.mailAdmin', 'klaus@tricoretraining.com');
-	Configure::write('App.mailPort', '587');
-	Configure::write('App.mailHost', 'smtp.gmail.com');
-	Configure::write('App.mailUser', 'tricoretrainingtest@gmail.com');
-	Configure::write('App.mailPassword', 'finger99');
-	Configure::write('App.mailDelivery', 'smtp');	
 
 } else
 {
@@ -115,33 +120,15 @@ if ( $_SERVER['HTTP_HOST'] == 'localhost' )
 	// rename this variable
 	Configure::write('App.serverUrl', '/trainer');
 
-	if ( $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
+	if ( $_SERVER['HTTP_HOST'] == TESTHOST )
 	{
 		// Domain with protocol and NO trailing slash
-		Configure::write('App.hostUrl', 'http://test.tricoretraining.com');
-		Configure::write('App.uploadDir', '/home/content/92/10829392/html/test.tricoretraining.com/trainer/app/webroot/files/');
+		Configure::write('App.hostUrl', 'http://' . TESTHOST);
 	} else
 	{
 		// Domain with protocol and NO trailing slash
-		Configure::write('App.hostUrl', 'http://www.tricoretraining.com');
-		Configure::write('App.uploadDir', '/home/content/92/10829392/html/tricoretraining.com/trainer/app/webroot/files/');
-		
+		Configure::write('App.hostUrl', 'https://tricoretraining.com');		
 	}
-
-	// Paypal payment email
-	Configure::write('App.paymentemail', 'payment@tricoretraining.com');
-
-	/**
-	 * mail sending options
-	 */
-	
-	Configure::write('App.mailFrom', 'TriCoreTraining <support@tricoretraining.com>');
-	Configure::write('App.mailAdmin', 'support@tricoretraining.com');
-	Configure::write('App.mailPort', '25');
-	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
-	Configure::write('App.mailUser', '');
-	Configure::write('App.mailPassword', '');
-	Configure::write('App.mailDelivery', 'mail');
 
 }
 	
@@ -160,7 +147,7 @@ Configure::write('company_price_eur_month', '"3.90","3.30","3.15","2.91"');
 Configure::write('company_price_usd', '"3.90","9.90","18.90","34,90"');
 Configure::write('company_price_usd_month', '"3.90","3.30","3.15","2.91"');
 
-Configure::write('company_emails', '"@gentics.com","@nullzeit.at","@s-itsolutions.at","@erstebank.at","@erstegroup.com","@immorent.com","@sparkasse.at","@s-zv.at"');
+Configure::write('company_emails', '"@gentics.com","@schremser.com"');
 
 /**
  * Uncomment the define below to use CakePHP admin routes.
@@ -177,7 +164,7 @@ Configure::write('company_emails', '"@gentics.com","@nullzeit.at","@s-itsolution
  * Turn off all caching application-wide.
  *
  */
-if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
  	Configure::write('Cache.disable', true);
 else
  	Configure::write('Cache.disable', true);
@@ -223,7 +210,7 @@ Configure::write('Session.save', 'php');
 /**
  * The name of CakePHP's session cookie.
  */
-Configure::write('Session.cookie', 'CAKEPHP');
+Configure::write('Session.cookie', 'TCTCOOKIE');
 
 // kms
 Configure::write('Session.path', '/');
@@ -342,7 +329,7 @@ Configure::write('Acl.database', 'default');
  *	));
  *
  */
-Cache::config('default', array('engine' => 'File'));
 
+Cache::config('default', array('engine' => 'File'));
 
 ?>

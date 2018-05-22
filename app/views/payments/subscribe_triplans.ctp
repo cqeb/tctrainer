@@ -24,7 +24,7 @@
 
 <?php
 
-if ( $pay_member == 'freemember' || $_SERVER['HTTP_HOST'] == 'localhost' )
+if ( $pay_member == 'freemember' || $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' )
 {
 
 ?>

@@ -8,7 +8,7 @@
                    <?php echo $form->create('User', array('action' => 'add_step3', 'class' => 'form-horizontal')); ?>
 
                    <fieldset>
-                   <legend><?php __('Thank your for registering at TriCoreTraining.com.'); ?></legend>
+                   <legend><?php __('Thank your for signing up on TriCoreTraining.'); ?></legend>
 
                     <?php if ( $session->read('flash') ) { ?>
                     <div class="alert alert-success">
@@ -22,14 +22,16 @@
                    if ( $smtperrors != '' )
                      echo '<div class="alert alert-danger">' . $smtperrors . '</div>';
 ?>
-
-                   <?php __('PLEASE do not forget to activate your account! Thank you and happy training!'); ?>
+<img alt="<?php __('Activate your account!'); ?>" src="/trainer/img/alert.png" />
+                   <b><?php __('PLEASE do not forget to activate your account!'); ?></b> 
+                   <br /><br />
+                   <?php __('Thank you and happy training!'); ?>
                    <br /><br />
                    <!--<b><?php __('Your FREE membership is valid from'); ?> <?php echo $paid_from; ?> <?php __('to'); ?> <?php echo $paid_to; ?>.</b>-->
 
-                   <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+                   <?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
                    <br /><br />
-                   For DEBUGGING (only localhost):
+                   For DEBUGGING (only local.tricoretraining.com):
                    <br />
                    <?php echo $html->link(__('Activate', true), array('controller' => 'users', 'action' => 'activate', 'transaction_id' => $transaction_id)); ?>
                   <br />

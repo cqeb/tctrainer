@@ -424,7 +424,7 @@ h2,
 }
 h3,
 .h3 {
-  font-size: 28px;
+  font-size: 22px;
 }
 h4,
 .h4 {
@@ -1612,6 +1612,7 @@ select.input-lg {
 textarea.input-lg {
   height: auto;
 }
+
 .has-warning .help-block,
 .has-warning .control-label {
   color: #f6bb42;
@@ -4534,7 +4535,8 @@ a.list-group-item.active > .badge,
   color: #ffffff;
   text-align: center;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  background-color:rgba(0,0,0, 0.2);
+  /* CHANGED */
+  background-color:rgba(0,0,0, 0.5);
   z-index:1;
   /* These three lines are for transparency in all browsers. */
   /*-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";

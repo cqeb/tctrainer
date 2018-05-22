@@ -3,23 +3,24 @@
 				<!--<h2>Wie es funktioniert?</h2>-->
 
 <p>
-<b>TriCoreTraining ist ein kostenloses, interaktives Online-Ausdauersport-Training-Service (Laufen, Radfahren, Triathlon) für Athleten</b>,
-die arbeiten (und vielleicht eine Familie haben, also wenig Zeit) und, die perfekt für Wettkämpfe oder ihre Sportziele vorbereitet sein wollen.
+<b>TriCoreTraining ist wie ein Online-Coach, der individuell für dich Trainingspläne für Laufen, 
+Radfahren oder Triathlon erstellt.</b>
+Das Service ist optimiert für Arbeitstätige, die auch Zeit mit ihrer Familie verbringen wollen.
 <br /><br />
-Unser Motto ist: "Werde schneller, verliere Gewicht".
+Unser Motto ist: <strong>"Erreiche dein Ziel mit einem Plan"</strong>.
 <br /><br />
-Du bist also richtig bei uns, wenn du  
+Du bist richtig bei uns, wenn du 
 <br />
 <ul>
-<li>nach einem Online Marathon Trainings-Service / Software / Coach suchst</li>
-<li>mit einem Online Triathlon Training Service / Software / Coach trainieren willst</li>
-<li>nach Lauf-Trainingsplänen für Halb-/Marathon suchst</li>
+<li>nach einem Trainingsplanner für Triathlon suchst</li>
+<li>nach einer Trainings-Software für Marathon oder Radrennen suchst</li>
+<li>einen günstigen Coach für Training brauchst</li>
+<li>einen Lauf-Trainingsplan für (Halb-)Marathon benötigst</li>
 <li>einen Ironman / Halb-Ironman finishen willst</li>
-<li>ein Sportanfänger bist und ein Trainingsprogramm brauchst</li>
-<li>Triathlon / Marathon / Laufen / Radfahren liebst</li>
-<li>Geld sparen und unsere freie/kostenlose Option des Online-Coachings nutzen willst</li>
+<li>ein Trainingsprogramm für Anfänger brauchst</li>
+<li>ein individuelles Online-Sport-Coaching suchst</li>
 </ul>
-Genug Vorteile für Dich? Einfach anmelden!
+Genug Vorteile für Dich? Melde dich einmal an!
 </p>
 
 <?php } else if ( $locale == 'eng' ) { ?>
@@ -31,7 +32,7 @@ Genug Vorteile für Dich? Einfach anmelden!
 who are working (maybe have a family, so you're limited in time) and want to be perfectly prepared 
 for their competitions or sport goals.
 <br /><br />
-Our motto is “Gain speed, loose weight“.
+Our motto is “Reach your goal with a plan“.
 <br /><br />
 You're right here, if you 
 <br />

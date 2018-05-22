@@ -1,11 +1,11 @@
 
 --
-<?php __('TriCoreTraining'); ?> - "<?php __('Gain speed, lose weight'); ?>"
-Gonzagagasse 11/25, A-1010 <?php __('Vienna'); ?>, <?php __('Austria'); ?>
+Klaus-M. Schremser GmbH
+Gruene Gasse 35, A-2351 Wiener Neudorf, <?php __('Austria'); ?>
 
 <?php __('Phone'); ?> +43 699 1 630 15 24
 support@tricoretraining.com
-http://www.tricoretraining.com
+https://tricoretraining.com
 
 <?php __('TriCoreTraining and TriCoreTraining.com'); ?> <?php __('are registered trademarks'); ?>.
 

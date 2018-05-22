@@ -2,7 +2,7 @@
 $url = '/trainer';
 ?>
 
-<?php if ( $_SERVER['HTTP_HOST'] != 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] != 'local.tricoretraining.com' ) { ?>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

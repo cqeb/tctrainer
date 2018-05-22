@@ -47,7 +47,7 @@ if ( $status != 'sent' )
 <?php      
       
       //create the reCAPTCHA form.
-      $recaptcha->display_form('echo');
+      //$recaptcha->display_form('echo');
       
       //hide an e-mail address
       //$recaptcha->hide_mail('tri@schremser.com','echo');
@@ -64,9 +64,9 @@ if ( $status != 'sent' )
                  <?php echo $form->end();?>
 
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
 <br /><br />
-For DEBUGGING (only localhost):
+For DEBUGGING (only local.tricoretraining.com):
 <a href="<?php echo Configure::read('App.serverUrl'); ?>/users/password_reset/transaction_id:<?php echo $transaction_id?>">click to reset your password</a>
 <br /><br />
 <?php } ?>

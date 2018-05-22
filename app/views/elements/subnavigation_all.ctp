@@ -12,7 +12,7 @@
                           <li><a href="/trainer/#howitworks"><?php __('What is'); ?> TriCoreTraining?</a></li>
                           <li><a href="/trainer/#features"><?php __('Features'); ?></a></li>
                           <li><a href="/trainer/#references"><?php __('References'); ?></a></li>
-                          <li><a href="/trainer/#newsletter"><?php __('Newsletter'); ?></a></li>                          
+                          <li><a href="/trainer/#newsletter">&raquo; <?php __('Get Training Hints'); ?></a></li>                          
                           <li><a href="/trainer/#pricing"><?php __('Pricing'); ?></a></li>
                           <li><a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>tricoretraining-the-interactive-online-training-coach-for-triathlon-running-biking/"><?php __('More about'); ?> TriCoreTraining</a></li>
                         </ul>
@@ -20,12 +20,12 @@
                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php __('How to start'); ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><?php echo $html->link(__('FREE Registration',true),array('controller' => 'users', 'action' => 'register'))?></li>
+                          <li><?php echo $html->link(__('Get started',true),array('controller' => 'users', 'action' => 'register'))?></li>
                           <li><?php echo $html->link(__('Sign in',true),array('controller' => 'users', 'action' => 'login'))?></li>
                         </ul>
                   </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php __('Blog'); ?><b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php __('FAQ'); ?> &amp; <?php __('Blog'); ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>"><?php __('Read our blog', false); ?></a></li>
                           <li><a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>category/news/"><?php __('News'); ?></a></li>

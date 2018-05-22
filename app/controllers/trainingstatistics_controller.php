@@ -85,7 +85,7 @@ class TrainingstatisticsController extends AppController {
 
 	                $importfile = Configure::read('App.uploadDir') . 'imports/' . $return['filename'];
                 
-					if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+					if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' )
 			      	{
 			          	if ( isset( $app_backslash ) && $app_backslash == true ) 
 			                $importfile = str_replace( '/', '\\', $importfile);
@@ -730,7 +730,7 @@ class TrainingstatisticsController extends AppController {
             $this->checkSession();
             $this->layout = "ajaxrequests";
        	    $this->RequestHandler->setContent('js', null);
-            if ( $_SERVER['HTTP_HOST'] == 'localhost' ) Configure::write('debug', 1);
+            if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) Configure::write('debug', 1);
 			else Configure::write('debug', 0);
 
             $session_userid = $this->Session->read('session_userid');
@@ -830,7 +830,7 @@ class TrainingstatisticsController extends AppController {
      
             $this->layout = "ajaxrequests";
        	    $this->RequestHandler->setContent('js', null);
-            if ( $_SERVER['HTTP_HOST'] == 'localhost' ) Configure::write('debug', 1);
+            if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) Configure::write('debug', 1);
 			else Configure::write('debug', 0);
 
             $this->set('js_addon','');
@@ -936,7 +936,7 @@ class TrainingstatisticsController extends AppController {
 			
 			$this->layout = "ajaxrequests";
 			$this->RequestHandler->setContent('js', null);
-			if ( $_SERVER['HTTP_HOST'] == 'localhost' ) Configure::write('debug', 1);
+			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) Configure::write('debug', 1);
 			else Configure::write('debug', 0);
 			
 			$this->set('js_addon','');
@@ -1032,7 +1032,7 @@ class TrainingstatisticsController extends AppController {
             $this->checkSession();
             $this->layout = "ajaxrequests";
             $this->RequestHandler->setContent('js', null);
-            if ( $_SERVER['HTTP_HOST'] == 'localhost' ) Configure::write('debug', 1);
+            if ( $_SERVER['HTTP_HOST'] == '' ) Configure::write('debug', 1);
 			else Configure::write('debug', 0);
 
             $this->set('js_addon','');

@@ -18,21 +18,21 @@ if ( isset( $userinfo ) )
 		if ( isset( $distance ) ) 
 		{
 			
-			$facebox_content = '<br /><h1>' . __('My TriCoreTraining.com workout!', true) . '</h1><p>' . 
+			$facebox_content = '<br /><h1>' . __('My TriCoreTraining workout!', true) . '</h1><p>' . 
 			__('I did a', true) . ' ' . $distance . ' ' . $distance_unit . ' ' . 
 			__($sport . ' workout', true) . ' ' . __('in',true) . ' ' . $duration . ' ' . 
-			__('hour(s)',true) . ' ' . __('with', true) . ' ' .	'TriCoreTraining.com' .	
+			__('hour(s)',true) . ' ' . __('with', true) . ' ' .	'TriCoreTraining' .	
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not register?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 
 		// user recommended our service
 		} else
 		{
-			$facebox_content = '<br /><h1>' . __('I LIKE TriCoreTraining.com!', true) . '</h1><p>' . 
-			__("Why don't YOU become a triathlon athlete too? Why not a marathon runner? I already did it! With TriCoreTraining.com.", true) .
+			$facebox_content = '<br /><h1>' . __('I LIKE TriCoreTraining!', true) . '</h1><p>' . 
+			__("Why don't you become a triathlon athlete too? Why not a marathon runner? TriCoreTraining is your coach.", true) .
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not register?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 		}
 		
@@ -40,10 +40,10 @@ if ( isset( $userinfo ) )
 
 if ( isset( $companyinfo ) ) 
 {
-			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of membership costs!', true) . '</h1><p>' . 
-			__("Register initially with your company email, try TriCoreTraining one month for free and then you will get a reduced PREMIUM membership which costs not more than 2 coffees a month.", true) . 
+			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of the membership fee!', true) . '</h1><p>' . 
+			__("Register initially with your company email, try out TriCoreTraining and then you will get a discounted PREMIUM membership.", true) . 
 			'<br /><br />' . __('Yours', true) . ', Klaus-M. (' . __('founder of', true) . ') ' . __('TriCoreTraining', true) . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills or lose weight, why not register?', true) . '</a></p>';
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a plan, why not register?', true) . '</a></p>';
 }
 
 if ( isset( $facebox_content ) ) {
@@ -66,9 +66,9 @@ if ( isset( $facebox_content ) ) {
 <head>
 	<title><?php
 if ( isset( $title ) ) 
-	echo 'TriCoreTraining.com' . ' ' . $title;
+	echo 'TriCoreTraining' . ' ' . $title;
 else	
-	echo 'TriCoreTraining.com' . ' ' . $title_for_layout;
+	echo 'TriCoreTraining' . ' ' . $title_for_layout;
 	?></title>
 
 <?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
@@ -80,7 +80,7 @@ else
 
 <?php echo $this->element('metanavigation'); ?>
 
-	<link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" />
+	<!--link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" /-->
 
 <?php echo $this->element('header'); ?>
 
@@ -88,7 +88,7 @@ else
 
 <?php echo $scripts_for_layout; ?>
 
-	<link rel="canonical" href="http://www.tricoretraining.com" />
+	<link rel="canonical" href="https://tricoretraining.com" />
 <!--
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-144-precomposed.png">
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $url; ?>/assets/ico/apple-touch-icon-114-precomposed.png">
@@ -118,7 +118,7 @@ else
 		  <span class="icon-bar"></span>
 		</button>
 		<a class="navbar-brand navbar-brand-small" href="/trainer/">
-		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com Logo"></a>
+		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo"></a>
 	  	</div>
 
 		<?php echo $this->element('subnavigation_all'); ?>
@@ -135,7 +135,11 @@ else
 <div class="container">
 
          <div class="panel">
-            <div class="panel-heading"><h1><?php __('TriCoreTraining.com - Online Trainingplans for Triathlon, Run and Bike'); ?></h1></div>
+			
+			<div class="panel-heading">
+				<h1><?php __('Reach Your GOAL With A Plan'); ?></h1>
+				<h3><?php __('for Triathlon, Running and Biking'); ?></h3>
+			</div>
 				<div class="panel-body">
 					<div id="carousel-example-generic" class="carousel slide bs-docs-carousel-example">
 						<ol class="carousel-indicators">
@@ -149,19 +153,19 @@ else
 							<div class="item active">
 							    <img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-1.jpg" alt="<?php __('Gain speed, lose weight!'); ?>">
 								<div class="carousel-caption">
-									<h3><?php __('Gain speed, lose weight!'); ?></h3>
-									<p><?php __('TriCoreTraining provides you with <b>professional</b>, yet <b>easy and fun</b> training plans to <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?>
-										<br />
-									<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+									<h3><?php __('Like Having A Coach!'); ?></h3>
+									<p><?php __('Get a <b>professional</b>, <b>online</b> training plan to <br/> <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?>
+										<br /><br />
+									<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Get Started');?><!--<em><?php __('it´s free!');?></em>--></a></p>
 								</div>
 							</div>
 							<div class="item">
-								<img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-2.jpg" alt="<?php __('Job, Family, no time?'); ?>">
+								<img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-2.jpg" alt="<?php __('Job, Family, No Time?'); ?>">
 								<div class="carousel-caption">
 									<h3><?php __('Job, Family, no time?'); ?></h3>
-									<p><?php __('You are an ambitious athlete who wants to get the most out of training, whilst juggling a full time job alongside keeping your family happy? <b>Then you\'ve come to the right place.</b>'); ?>
-										<br />
-										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+									<p><?php __('Be an ambitious athlete despite <b>a full time job and family time</b>.'); ?>
+										<br /><br />
+										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Get Started');?><!--<br /><em><?php __('it´s free!');?></em>--></a></p>
 									</p>
 								</div>
 							</div>
@@ -169,9 +173,9 @@ else
 								<img width="125%" class="img-responsive"src="<?php echo $url; ?>/img/start/start-3.jpg" alt="<?php __('Enjoy your training'); ?>">
 								<div class="carousel-caption">
 									<h3><?php __('Enjoy your training'); ?></h3>
-									<p> <?php __('You want to finish your first marathon, improve your personal best at Half Ironman distance, or just enjoy your morning run? <b>We help you to get even more out of your training!</b>'); ?>
-										<br />
-										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+									<p> <?php __('Want to finish a Half Ironman or marathon? <b>Get the most out of training!</b>'); ?>
+										<br /><br />
+										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Get Started');?><!--<br /><em><?php __('it´s free!');?></em>--></a></p>
 									</p>
 								</div>
 							</div>
@@ -182,7 +186,7 @@ else
 									<h3>First slide label</h3>
 									<p>Nulla vitae elit libero, a pharetra augue mollis interdum.
 										<br />
-										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Sign up now');?><br /><em><?php __('it´s free!');?></em></a></p>
+										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Get Started');?><br /><em><?php __('it´s free!');?></em></a></p>
 									</p>
 								</div>
 							</div>
@@ -195,13 +199,18 @@ else
 							<span class="icon-next"></span>
 						</a>
 					</div>
-
+				<?php /*
+				<div class="panel-heading">
+				<h1><?php __('Reach Your GOAL With A Trainingplan'); ?></h1>
+				<!--	<h2><?php __('for Triathlon, Run and Bike'); ?></h2>-->
+				</div>
+				*/ ?>
 				</div><a name="howitworks"></a>
         </div>
 
 		<div class="panel">
 			<div class="col-12 col-lg-12 panel-heading text-center">
-				<h3><?php __('HOW IT WORKS?'); ?></h3>
+				<h3><?php __('WHAT IS TRICORETRAINING?'); ?></h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -275,7 +284,7 @@ else
 <div class="container">
 	<div class="panel">
 		<div class="col-12 col-lg-12 panel-heading text-center">
-			<h3><?php __('WHAT PEOPLE SAY ABOUT'); ?> TRICORETRAINING.COM</h3>
+			<h3><?php __('WHAT PEOPLE SAY ABOUT'); ?> TRICORETRAINING</h3>
 		</div>
 	<div class="panel-body">
 		<div class="row">
@@ -343,7 +352,7 @@ else
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-lg-12 text-center">
-						<a name="pricing"></a><h2><?php __('Choose your plan &amp; pricing'); ?></h2>
+						<a name="pricing"></a><h2><?php __('Choose your plan'); ?></h2>
 						<p></p>
 					</div>
 				</div>
@@ -376,7 +385,7 @@ else
 						</ul>
 				</div>
 			<div class="panel-footer">
-					<a class="btn btn-success btn-block" href="/trainer/users/register"><?php __('Register NOW', false); ?></a>
+					<a class="btn btn-success btn-block" href="/trainer/users/register"><?php __('Get Started', false); ?></a>
 			</div>
 		  </div>
         </div>
@@ -403,7 +412,7 @@ else
 						</ul>
 				</div>
 				<div class="panel-footer">
-					<a class="btn btn-info btn-block" href="/trainer/users/register"><?php __('Register NOW', false); ?></a>
+					<a class="btn btn-info btn-block" href="/trainer/users/register"><?php __('Get Started', false); ?></a>
 				</div>
 			</div> 
 	   </div>
@@ -429,7 +438,7 @@ else
 						</ul>
 				</div>
 				<div class="panel-footer">
-					<a class="btn btn-danger btn-block" href="/trainer/users/register"><?php __('Register NOW', false); ?></a>
+					<a class="btn btn-danger btn-block" href="/trainer/users/register"><?php __('Get Started', false); ?></a>
 				</div>
 			</div> 
 	   </div>
@@ -491,7 +500,7 @@ jQuery('.navbar .nav > li > a').click(function(){
 <?php echo $this->element('footerend'); ?>
 
 <!-- Go to www.addthis.com/dashboard to customize your tools -->
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-548497ef4596dc15" async="async"></script>
+<!--script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-548497ef4596dc15" async="async"></script-->
 
 </body>
 </html>

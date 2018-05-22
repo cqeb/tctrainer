@@ -1,5 +1,5 @@
       <div class="panel panel-default" id="forms">
-        <div class="panel-heading"><h1><?php __('Enter the World of TriCoreTraining.com'); ?></h1></div>
+        <div class="panel-heading"><h1><?php __('Manage your plan!'); ?></h1></div>
         
         <div class="panel-body">
 

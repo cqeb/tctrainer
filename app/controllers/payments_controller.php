@@ -61,28 +61,29 @@ class PaymentsController extends AppController {
 
             if (!empty($this->data))
             {
-                       $this->User->id = $session_userid;
+                $this->User->id = $session_userid;
 
-                       $this->User->savefield('canceled', true, false);
-                       if ( isset( $this->data['Payment']['cancelation_reason'] ) ) $this->User->savefield('cancellation_reason', $this->data['Payment']['cancelation_reason'], false);
+                $this->User->savefield('canceled', true, false);
+                if ( isset( $this->data['Payment']['cancelation_reason'] ) ) $this->User->savefield('cancellation_reason', $this->data['Payment']['cancelation_reason'], false);
 
-                       $statusbox = 'alert alert-success';
-                       $this->Session->write('flash',__('Registered cancellation request.', true));
+                $statusbox = 'alert alert-success';
+                $this->Session->write('flash',__('Registered cancellation request.', true));
 
-                       // notification mail for admin
-                       if ( is_array( $results ) )
-                            $user = $results;
-                       else
-                            $user = array();
-                       $array = array();
-                       // do not translate
-                       $error = 'User ' . $session_userid . ' ' . $results['User']['firstname'] . ' ' . $results['User']['lastname'] . ' canceled membership.';
-                       $subject = 'TCT User canceled - bring her/him BACK';
+                // notification mail for admin
+                if ( is_array( $results ) )
+                    $user = $results;
+                else
+                    $user = array();
+        
+                $array = array();
+                // do not translate
+                $error = 'User ' . $session_userid . ' ' . $results['User']['firstname'] . ' ' . $results['User']['lastname'] . ' canceled membership.';
+                $subject = 'TCT User canceled - bring her/him BACK';
 
-                       $this->_sendNotification($user, $array, $error, $subject);
+                $this->_sendNotification($user, $array, $error, $subject);
 
-                       // sad but true - user canceled and now we send her/him to paypal
-                       $this->redirect('https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=payment@tricoretraining.com');
+                // sad but true - user canceled and now we send her/him to paypal
+                $this->redirect('https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=payment@tricoretraining.com');
             }
             $this->set('statusbox', $statusbox);
    }
@@ -104,7 +105,7 @@ class PaymentsController extends AppController {
     			$results = $this->data = $this->User->read();
 
           // debugging paypal - we do not use yet.
-          if ( 1 == 2 && $_SERVER['HTTP_HOST'] == 'localhost' ) 
+          if ( 1 == 2 && $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) 
           	$testing = 'sandbox.';
     			else 
     				$testing = '';
@@ -222,7 +223,7 @@ class PaymentsController extends AppController {
 				
 			$posturl = '?cmd=_notify-validate&' . $logurl;
 			$logtext = date('Y-m-d H:i:s', time()) . '|' . $tid_notice . '|' . $_SERVER['REMOTE_ADDR'] . '|' . $posturl . '|' . $_SERVER['REQUEST_URI'] . "\n\n";
-			if ( $_SERVER['HTTP_HOST'] != 'localhost' ) 
+			if ( $_SERVER['HTTP_HOST'] != 'local.tricoretraining.com' ) 
               mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Request', $logtext, 'From: server@tricoretraining.com' );
 
 			if ( isset( $this->params['named']['lang'] ) )
@@ -245,7 +246,7 @@ class PaymentsController extends AppController {
 
 			/*
 			 *
-			 * http://localhost/trainer/payments/notify/lang:ger/?
+			 * http://local.tricoretraining.com/trainer/payments/notify/lang:ger/?
 			 * cmd=_notify-validate&
 			 * mc_gross=0.10&
 			 * protection_eligibility=Ineligible&
@@ -301,21 +302,21 @@ class PaymentsController extends AppController {
 
         if ( !isset( $this->payment_tid ) || $this->payment_tid == '' )
         {
-                  $error = __('No Transaction-ID defined - something is wrong - sorry.') . ' ' . __('Contact our support', true) . ' - <a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a>.';
-                  $transactions = array();
+            $error = __('No Transaction-ID defined - something is wrong - sorry.') . ' ' . __('Contact our support', true) . ' - <a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a>.';
+            $transactions = array();
         } else
         {
-                  // load data from transaction
-                  $this->loadModel('Transaction');
-                  $transactions = $this->Transactionhandler->handle_transaction( $this->Transaction, $this->payment_tid, 'read' );
+            // load data from transaction
+            $this->loadModel('Transaction');
+            $transactions = $this->Transactionhandler->handle_transaction( $this->Transaction, $this->payment_tid, 'read' );
 
-                  $p_userid = $transactions['pay_userid'];
+            $p_userid = $transactions['pay_userid'];
 
-                  $results_user = $this->User->findById($p_userid);
-                  if ( !is_array( $results_user ) )
-                  {
-                             $error .= __('UserID',true) . ' ' . $p_userid . ' ' . __('was not found in database',true) . '.';
-                  }
+            $results_user = $this->User->findById($p_userid);
+            if ( !is_array( $results_user ) )
+            {
+                        $error .= __('UserID',true) . ' ' . $p_userid . ' ' . __('was not found in database',true) . '.';
+            }
         }
 
         if ( isset( $params['payment_status'] ) && $this->payment_tid && is_array( $results_user ) )
@@ -345,7 +346,8 @@ class PaymentsController extends AppController {
                   else
                       $return = implode( "", file( $posturl ) );
 
-					        if ( $_SERVER['HTTP_HOST'] != 'localhost' ) mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Answer', $return . "-" . $p_userid . "\n\n" . $logtext, 'From: server@tricoretraining.com' );
+                  if ( $_SERVER['HTTP_HOST'] != 'local.tricoretraining.com' ) 
+                    mail( 'klaus@tricoretraining.com', 'TCT: paypal.com Answer', $return . "-" . $p_userid . "\n\n" . $logtext, 'From: server@tricoretraining.com' );
 
                       if ( $return != 'VERIFIED' || $params['txn_type'] != 'subscr_payment')
                       {
@@ -428,13 +430,14 @@ class PaymentsController extends AppController {
 
                 													} else
                 													{
-              															$inviter_user = $this->User->findById( $inviter );
+                                            $inviter_user = $this->User->findById( $inviter );
+                                            // add 90 days to referrers
               															$paid_to = $this->Unitcalc->date_plus_days( $inviter_user['User']['paid_to'], 90);
               															$this->User->savefield('paid_to', $paid_to, false);
 
               															if ( is_array( $inviter_user ) )
               															{
-                																$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed to a PREMIUM membership!', true);
+                																$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed for a PREMIUM membership!', true);
                 																$template = 'standardmail';
                 																$content = __('great', true) . '. ' . $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' ' . __('bought a PREMIUM membership.', true);
                 																$content .= '<br /><br />' . __('You receive 3 month PREMIUM membership as a "Thank you" for FREE.', true);

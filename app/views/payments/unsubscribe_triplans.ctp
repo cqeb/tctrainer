@@ -43,9 +43,9 @@
                    echo $form->submit($button_url);
 ?>
 
-             <?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+             <?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
              <br /><br />
-             For Debugging (only localhost): PAYPAL - TEST<br />
+             For Debugging (only local.tricoretraining.com): PAYPAL - TEST<br />
              <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=payment@tricoretraining.com" _fcksavedurl="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=payment@tricoretraining.com"><img border="0" src="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_LG.gif" /></a>
              <br /><br />
              <?php } ?> 

@@ -426,13 +426,13 @@ class UnitcalcComponent extends Object {
                       case "yyyymmdd":
                       $date_split = split( '-', $date );
                       if ( count( $date_split ) == 3 )
-					            {
-	                       // in case you get a wrong format
-	                       $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
-					            } else
-					            {
-					  		         $return = 0;
-					            }        
+                        {
+                                // in case you get a wrong format
+                                $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
+                        } else
+                        {
+                                $return = 0;
+                        }        
                       break;
                }
 
@@ -482,9 +482,9 @@ class UnitcalcComponent extends Object {
     	return $this->Provider->getAthlete()->getZones($sport);
 	}
        
-   /**
+   /*
    this functions seems to be duplicate - damn!
-   **/
+   */
    function diff_dates( $date_from, $date_to )
    {
             //$date_to_string = $date_to['year'] . '-' . $date_to['month'] . '-' . $date_to['day'];
@@ -519,9 +519,9 @@ class UnitcalcComponent extends Object {
    }
 **/
 
-   /**
+   /*
    take given daten and add/subtract days
-   **/
+   */
    function date_plus_days( $date, $days )
    {
             // TODO (B) - replace with strtotime
@@ -541,9 +541,9 @@ class UnitcalcComponent extends Object {
             return $date_return;
    }
 
-   /**
+   /*
    some helper function - don't wanna explain that :)
-   **/
+   */
    function month_in_year( $month, $year )
    {
             if ( $month > 12 )

@@ -1,5 +1,6 @@
-      <div class="panel panel-default" id="forms">
-        <div class="panel-heading"><h1><?php __("Create your account"); ?></h1></div>
+
+    <div class="panel panel-default" id="forms">
+        <div class="panel-heading"><h1><?php __("Sign up for a plan"); ?></h1></div>
         
         <div class="panel-body">
 
@@ -9,8 +10,9 @@
 
         <fieldset>
         <legend>
-          <?php __('Get your trainingplans FREE for 3 months. Then, invest less than 2 cups of coffee worth per month for your interactive coach.'); ?>
+          <?php __('Receive your first trainingplans for free.'); ?>
         </legend>
+        
 
         <?php if ($session->read('flash')) { ?>
         <div class="<?php echo $statusbox; ?>">
@@ -19,7 +21,7 @@
         <?php } ?>
 
         <?php if ( !isset( $session_userid ) ) { ?>
-        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/fb_signup.png"></a>
+        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/fb-signup.jpg"></a>
         <?php } ?>
 
         <br /><br /><b><?php __('or'); ?></b><br /><br />
@@ -68,7 +70,7 @@ echo $form->input('lastname',
 echo $form->input('gender',
      array(
      'class' => 'required checkbox',
-     'before' => '<label for="gender">' . __('Gender', true) . '</label>',
+     'before' => '<label style="font-weight:bold;" class="gender" for="gender">' . __('Gender', true) . '</label>',
      'legend' => false,
      'default' => 'm',
      'type' => 'radio',
@@ -101,9 +103,9 @@ echo $form->input('email',
      array(
      'class' => 'required form-control',
      'maxLength' => 255,
-     'label' => __('E-mail', true),
+     'label' => __('Email', true),
      'error' => array( 
-          'notempty' => __('Enter your e-mail', true),
+          'notempty' => __('Enter your email', true),
           'wrap' => 'div', 
           'class' => 'text-danger'          
      ),
@@ -157,7 +159,7 @@ echo $form->input('password',
 echo $form->input('birthday',
      array(
      'class' => 'required form-control',
-     'style' => 'width:100px',
+     'style' => 'width:75px',
      'minYear' => '1930',
      'maxYear' => date( 'Y', time() )-15,
      'label' => __('Birthday', true),
@@ -172,7 +174,7 @@ echo $form->input('birthday',
 echo $form->input('typeofsport',
      array(
      'class' => 'required form-control',
-     'label' => __('Main sport', true),
+     'label' => __('Plans for which type of sport?', true),
      'error' => array( 
           'notempty' => __('Choose your type of sport',true),
           'wrap' => 'div', 
@@ -214,13 +216,15 @@ echo $form->input('rookie',
 ?>
 </div>
 
+<h3><?php __('Security of your personal data'); ?></h3>
+<?php __('The security of your personal data especially your health data are important to us. So we have to ask you to read these terms and agree to them. Thank you.'); ?> 
+<br /><br />
 <div class="form-group">
-<b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree. You also confirm that you have no medical inability to do sports!"); ?></b>  
+<b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree."); ?></b>  
 <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 </div>
 
 <?php
-
 echo $form->input('tos',
      array(
      'type' => 'checkbox',
@@ -231,10 +235,49 @@ echo $form->input('tos',
           'class' => 'text-danger'          
      )
 ));
+?>
+
+<div class="form-group">
+<b><?php __("You also confirm that you have no medical inability to do sports and that we can store personal health data."); ?></b> 
+<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>data-privacy-agreement/" target="_blank"><?php __("See chapter 26 in the data privacy agreement."); ?></a>
+</div>
+
+<?php
+echo $form->input('healthtos',
+     array(
+     'type' => 'checkbox',
+     'label' => __('I agree', true),
+     'error' => array( 
+          'notempty' => __("You HAVE TO agree to our health agreement!", true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'          
+     )
+));
+?>
+
+<div class="form-group">
+<b><?php __("You confirm that we are allowed to send you direct mails including newsletters on a regular base."); ?></b>
+</div>
+
+<?php
+echo $form->input('mailingtos',
+     array(
+     'type' => 'checkbox',
+     'label' => __('I agree', true),
+     'error' => array( 
+          'notempty' => __("You HAVE TO agree to our mailing agreement!", true),
+          'wrap' => 'div', 
+          'class' => 'text-danger'          
+     )
+));
+?>
+<br />
+
+<?php
 
 // calculate FREE training period
 $paid_from = date( "Y-m-d", time() );
-$paid_to = date( "Y-m-d", time() + (90*24*60*60) );
+$paid_to = date( "Y-m-d", time() + (TRIAL_PERIOD * 24 * 60 * 60) );
 //currently - free registration
 //$paid_to = '2012-12-31';
 
@@ -246,7 +289,7 @@ echo $form->hidden('inviter');
 // for facebook login
 echo $form->hidden('activated');
 
-echo $form->submit(__('Register',true), array('class'=>'btn btn-primary'));
+echo $form->submit(__('Sign up',true), array('class'=>'btn btn-primary'));
 
 echo $form->end();
 

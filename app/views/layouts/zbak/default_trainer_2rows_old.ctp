@@ -30,7 +30,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/960.responsive.css?v=<?php echo VERSION; ?>" />
 
 
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
 	<script type="text/javascript" src="<?php echo $url; ?>/js/jquery-1.6.4.min.js"></script>
 <?php } else { ?>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.4.min.js"></script>

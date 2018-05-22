@@ -24,8 +24,8 @@ class UsersController extends AppController {
   		$this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
   
   		// captcha keys
-  		$this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
-  		$this->Recaptcha->privatekey = "6LcW_goAAAAAAN3zO8KEcJiWsg9tbQd-0VJ68LPb";
+  		//$this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
+  		//$this->Recaptcha->privatekey = "6LcW_goAAAAAAN3zO8KEcJiWsg9tbQd-0VJ68LPb";
   
   		$this->js_addon = '';
 	}
@@ -273,7 +273,7 @@ class UsersController extends AppController {
             		$app_id = 132439964636;
 			$app_secret = "500f333152751fea132b669313052120";
 			
-			if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
+			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) 
 				$my_url = 'http://test.tricoretraining.com/facebook/login.php';
 			else
 				$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
@@ -281,7 +281,7 @@ class UsersController extends AppController {
 			if ( isset( $this->params['named']['fbuser'] ) ) 
 				$fbuser = $this->params['named']['fbuser'];
 
-			if ( $_SERVER['HTTP_HOST'] == 'localhost' && isset( $fbuser ) )
+			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' && isset( $fbuser ) )
 			{
 				$user = unserialize( base64_decode( $fbuser ) );
 			} else
@@ -492,12 +492,14 @@ class UsersController extends AppController {
 
 			// deactivate this if you're working offline
 			// captcha checks for your correct entry
+			/*
 			if( !$this->Recaptcha->valid($this->params['form']) )
 			{
 				$statusbox = 'alert alert-error';
 				$this->Session->write('flash',__('Sorry Captcha not correct!',true));
 				//$this->redirect('/users/password_forgotten');
 			}
+			*/
 
 			if ( $statusbox != 'alert alert-error' )
 			{
@@ -585,7 +587,7 @@ class UsersController extends AppController {
 		else
 			$inviter = '';
 
-		$this->set("title_for_layout", __('Create your account', true));		
+		$this->set("title_for_layout", __('Signup for your TriCoreTraining account', true));		
 		
 		
 	    $success = false;
@@ -606,7 +608,7 @@ class UsersController extends AppController {
 					$this->data['User']['email'] = $facebook_user['email'];
 					$this->data['User']['birthday'] = $facebook_user['birthday'];
 					
-					$this->Session->write('flash',__('We pre-filled your registration with your facebook userdata, please add all other information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as in your Facebook account.',true));
+					$this->Session->write('flash',__('We will use your profile from Facebook for your registration form, please add all missing information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as used in your Facebook account.',true));
 				}
 				
 				if ( preg_match( '/@/', $inviter ) || preg_match( '/company/', $inviter ))
@@ -618,8 +620,6 @@ class UsersController extends AppController {
 	    {
 	    	// tells you - user clicked back in browser :(
 	    	$session_register_userid_just_in_case = $this->Session->read('register_userid');
-	
-			// TODO (B) modernize this crap
 
 	    	// check email (if correct and not duplicate) at registration
 	    	if ( $this->data['User']['email'] && $this->data['User']['id'] )
@@ -664,7 +664,7 @@ class UsersController extends AppController {
 			http://freegeoip.net/xml/74.200.247.59
 			*/
 			
-			if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' )
 				$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
 			else
 				$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
@@ -776,6 +776,7 @@ class UsersController extends AppController {
 					$this->data['User']['activated'] = 1;
 			}
 			
+			// print_r($this->data);
 	      	if ( $this->User->save( $this->data, array(
 	           'validate' => true,
 	           'fieldList' => array(
@@ -786,7 +787,9 @@ class UsersController extends AppController {
 	               'bikelactatethreshold', 
 	               'maximumheartrate',
 	               'typeofsport', 
-	               'tos',
+				   'tos',
+				   'healthtos',
+				   'mailingtos',
 	               'country',
 	               'passwordcheck', 'emailcheck', 
 	               'paid_from', 'paid_to',
@@ -805,7 +808,7 @@ class UsersController extends AppController {
 						$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed!', true);
 						$template = 'standardmail';
 						$content = __('great', true) . '. ' . $this->data['User']['firstname'] . ' ' . $this->data['User']['lastname'] . ' ' . __('wants to become an athlete too. Maybe you do workouts together?', true);
-						$content .= '<br /><br />' . __('After he/she buys a PREMIUM membership, you receive 3 month PREMIUM membership as a "Thank you" for FREE.', true);
+						$content .= '<br /><br />' . __('After she/he purchases a PREMIUM membership you will receive a FREE 3 month PREMIUM membership as a "Thank you".', true);
 						
 						$this->_sendMail( $inviter_user, $subject, $template, $content, $this->data['User']['yourlanguage'], '' );
 					}
@@ -840,7 +843,7 @@ class UsersController extends AppController {
 
 	function register_finish()
 	{
-		$this->set("title_for_layout",__('Registration - Finished',true));
+		$this->set("title_for_layout", __('Registration finished',true));
 
 		if (empty($this->data))
 		{
@@ -1217,7 +1220,9 @@ class UsersController extends AppController {
 					//'dayofheaviesttraining',
 		        'weeklyhours', 'coldestmonth',
 		        'publicprofile', 'publictrainings', 
-		        'tos', 
+				'tos', 
+				'healthtos',
+				'mailingtos',
 		        'lactatethreshold',
 		        'bikelactatethreshold'
 	        	)))) {
@@ -1405,7 +1410,7 @@ class UsersController extends AppController {
 
 	function edit_images()
 	{
-		$this->set("title_for_layout", __('Change profile - images',true));		
+		$this->set("title_for_layout", __('Change profile image',true));		
 
 		$this->checkSession();
 		$statusbox = 'alert';
@@ -1669,7 +1674,7 @@ class UsersController extends AppController {
 
 		$this->Email->to = $User['User']['email'];
 		//$this->Email->bcc = array('secret@example.com');
-		$this->Email->subject = __('TriCoreTraining signup',true);
+		$this->Email->subject = __('We\'re so glad you start your training! 🏃‍♀️ 🏃',true);
 		$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 
@@ -1797,17 +1802,19 @@ class UsersController extends AppController {
     
     	// select all users 
     	$sql = "SELECT * FROM users ORDER BY id";
-		if ( $_SERVER['HTTP_HOST'] == 'localhost' ) $sql .= " LIMIT 2";
+		if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) $sql .= " LIMIT 2";
 		$results = $this->User->query($sql);
 
 		$output = '';
 
-		if ( $_SERVER['HTTP_HOST'] == 'localhost' ) {
+		/*
+		if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) {
 			$blognews_de['html'] = $blognews_en['html'] = '';
 		} else {
 			$blognews_de = $this->Xmlhandler->readrss('http://feeds.feedburner.com/tricoretraining/DE', 'html');
 			$blognews_en = $this->Xmlhandler->readrss('http://feeds.feedburner.com/tricoretraining/EN', 'html');
 		}
+		*/
 		
 		// with GET variable you can move startpoint of notifications
 		if ( isset( $_GET['start'] ) ) 
@@ -1840,13 +1847,15 @@ class UsersController extends AppController {
 				echo "Settings (language): " . $user['yourlanguage'] . "<br />\n";
             }
       
+			/*
 			if ( $user['yourlanguage'] == 'deu' )
 				$this->blognews = $blognews_de['html'];
 			else
 				$this->blognews = $blognews_en['html'];
-				
+			*/
+
 			// if local testing, then send	
-            if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
+            if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' )
 			{
 				$misc['counter'] = $i;
 				//if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug, $misc, 'notSun' );
@@ -2332,10 +2341,12 @@ class UsersController extends AppController {
                             $content .= $text_for_mail_premium . '<br /><br />' . "\n\n";
                        }		      
 
-                       if ( $this->blognews && 1 == 2 ) {
+                       /*
+						if ( $this->blognews && 1 == 2 ) {
                        		$content .= __('Some magazine articles',true) . ":<br />\n" . 
                             '<p><ul>' . $this->blognews . '</ul></p>' . "\n\n";
-                       }
+						}
+						*/	
 
                        if ( $text_for_mail ) 
                        {
@@ -2344,7 +2355,7 @@ class UsersController extends AppController {
                             '<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
                        }
 
-                       if ( $_SERVER['HTTP_HOST'] == 'localhost' ) {
+                       if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) {
                             if ( $debug == true ) { 
                             	echo "<br>Counter: " . $misc['counter'] . "<br>\nMailsubject: " . $mailsubject . "<br><br>\n";
                             }
@@ -2388,7 +2399,7 @@ class UsersController extends AppController {
 		if ( !isset( $to_user['name'] ) ) $to_user['name'] = __('athlete', true);
 		
 		// DEBUG send to admin 
-		if ( $_SERVER['HTTP_HOST'] == 'localhost' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' || $_GET['debug'] == true )
+		if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' || $_SERVER['HTTP_HOST'] == 'test.tricoretraining.com' || $_GET['debug'] == true )
 		{ 
 		  		$to_user['email'] = 'klaus@tricoretraining.com';
 		}

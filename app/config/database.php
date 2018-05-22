@@ -76,7 +76,7 @@
  * database.  Uses database default.
  *
  */
-if ( $_SERVER['HTTP_HOST'] == 'localhost' )
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 {
 
         class DATABASE_CONFIG {

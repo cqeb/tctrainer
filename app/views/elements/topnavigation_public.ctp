@@ -15,7 +15,7 @@ if ( isset( $this->params['action'] ) )
 
 <ul>
 	<li>
-		<?php echo $html->link(__('Signup FREE',true),array('controller' => 'users', 'action' => 'register'), array('class' => $class['register']))?>
+		<?php echo $html->link(__('Signup',true),array('controller' => 'users', 'action' => 'register'), array('class' => $class['register']))?>
 	</li>
 	<li>
 		<?php echo $html->link(__('Login',true),array('controller' => 'users', 'action' => 'login'), array('class' => $class['login']))?>
@@ -28,7 +28,7 @@ if ( isset( $this->params['action'] ) )
 	    <a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>"><?php __('Blog'); ?></a>
 	</li>
 	<li>
-		<a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img width="30" alt="TriCoreTraining.com Facebook Page" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" /></a>
+		<a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img width="30" alt="TriCoreTraining Facebook Page" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" /></a>
   	</li>
     <!--
   	<li>

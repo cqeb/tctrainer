@@ -1,4 +1,5 @@
 <?php
+
 /* SVN FILE: $Id: bootstrap.php,v 1.6 2010-09-23 08:38:05 clemens Exp $ */
 /**
  * Short description for file.
@@ -41,11 +42,6 @@
  *
  */
 
-if ( $_SERVER['HTTP_HOST'] == 'localhost' ) 
-{
-	define( 'DEBUG', true );
-}
-
 /**
  * default ratios
  * 
@@ -60,5 +56,11 @@ define('RATIO_DUATHLON', '40,60'); // bike run
  * to prevent browser caching
  */
 define('VERSION', '1.3');
+
+/**
+ * set days for trial period after signup
+ */
+define('TRIAL_PERIOD','15');
+
 
 ?>

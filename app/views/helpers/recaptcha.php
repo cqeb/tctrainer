@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * 
+ * 
+ * DEPRECATED v1!
+ */
 class RecaptchaHelper extends AppHelper {
 
 	var $helpers = array('form');

@@ -2,7 +2,7 @@
 
 /** 
  * 
- * testing
+ * Testing - fill database with massive data
  * 
  */
 
@@ -19,6 +19,9 @@ class FilldatabaseComponent extends Object
       $number['tracks'] = 500;
       $number['plannedtrainings'] = 500;
               
+      /**
+       * modify
+       */
       $model->query("DELETE FROM users WHERE id != 110");
       $model->query('DELETE FROM competitions WHERE user_id != 110');
       $model->query('DELETE FROM scheduledtrainings WHERE athlete_id != 110');
@@ -58,7 +61,6 @@ class FilldatabaseComponent extends Object
               'philo', '', '$sport', 1, $weight, '', 1, '', $height, '1', '$unit', '$unitdate', 0, 0, $rookie, $traininglevel, $weeklyhours, 'FRI', 
               1, 0, 'ger', 'image', 'bikeimage', 'freemember', '". date('Y-m-d', time()) . "', '" . date('Y-m-d', time()+86400*90) . "', '', 
               0, 'cancelreason', 0, 0, '" .  date('Y-m-d', time()) . "', '" .  date('Y-m-d', time()) . "')";
-            //echo $sql . "<br>";
                  
             $model->query( $sql );
             
@@ -79,7 +81,6 @@ class FilldatabaseComponent extends Object
                     date( 'Y-m-d', time()+86400*rand(-365,365)) . "','Competition $k','$sport',
                     null,null,null,null,null,null,null,null,$important, 'Vienna, Austria', 
                     '" . date('Y-m-d', time()) . "', '" . date('Y-m-d', time()) . "' )";
-               //echo $sql . "<br>";
                $model->query( $sql );
             }                
             for ( $l = 0; $l < $number['tracks']; $l++ )
@@ -97,7 +98,6 @@ class FilldatabaseComponent extends Object
                " . rand( 1800, 18000 ) . "," . rand( 130,220 ) . ",0,0,0,0,0,0, " . rand( 500, 3000 ) . ",
                0, '', " . rand( 65, 88 ) . ", 0, '', $testworkout, 0, '','','','',
                '" . date('Y-m-d', time()) . "', '" . date('Y-m-d', time()) . "' )";
-               //echo $sql . "<br>";
                $model->query( $sql );
             }
             for ( $m = 0; $m < $number['plannedtrainings']; $m++ )
@@ -109,7 +109,6 @@ class FilldatabaseComponent extends Object
                $sql = "INSERT INTO scheduledtrainings VALUES ( $userid, 
                '" . date( 'Y-m-d', time()+86400*rand(-365,365)) . "', '$sportst', '" . substr( $sportst, 0, 2 ) . "',
                " . ( round ( rand( 1800, 18000 ) / 60 ) ) . "," . rand( 500,3000 ) . ", 0)";
-               //echo $sql . "<br>";
                $model->query( $sql );
             }
       }

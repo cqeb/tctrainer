@@ -1,7 +1,7 @@
 <html>
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-   <title>TriCoreTraining.com</title>
+   <title>TriCoreTraining email message</title>
    <style type="text/css" media="screen">
 
       body {
@@ -91,7 +91,7 @@
 
       td.mainbar h2 {
          font-size: 18px;
-         background-color: #FFAE00;
+         /*background-color: #FFAE00;*/
          font-weight: bold;
          color: #ffffff;
          margin: 0;
@@ -139,7 +139,7 @@
       }
 
       td.sideheader h3 {
-         background-color: #FFAE00;
+         /** background-color: #FFAE00; */
          font-weight: bold;
          color: #ffffff;
          margin: 0;
@@ -194,25 +194,27 @@
 
 <table width="100%" cellspacing="10" cellpadding="0">
    <tr>
-      <td align="center" valign="top">
+      <td align="left" valign="top">
 
          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="main">
             <tr>
-               <td height="90" valign="bottom" align="center">
-                  <p><br />
-                  <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo" />
-                  </p>
+               <td  valign="bottom" align="left">
+                  
+                  <img width="50%" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo" />
+                  
                </td>
             </tr>
             <tr>
-               <td align="center">
+               <td align="left">
 
                   <table width="100%" cellspacing="0" cellpadding="4">
+                     <!--
                      <tr>
                         <td height="5"></td>
                         <td></td>
                         <td class="date"><p><?php date('YYYY-mm-dd', time()); ?></p></td>
                      </tr>
+                     -->
                      <tr align="left" rowspan="3" valign="top">
 
                         <td width="100%" valign="top" class="mainbar" align="left">

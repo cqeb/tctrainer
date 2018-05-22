@@ -95,7 +95,7 @@ class BasicsTest extends CakeTestCase {
 		$__SERVER = $_SERVER;
 		$__ENV = $_ENV;
 
-		$_SERVER['HTTP_HOST'] = 'localhost';
+		$_SERVER['HTTP_HOST'] = 'local.tricoretraining.com';
 		$this->assertEqual(env('HTTP_BASE'), '.localhost');
 
 		$_SERVER['HTTP_HOST'] = 'com.ar';

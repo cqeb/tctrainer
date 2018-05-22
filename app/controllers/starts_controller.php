@@ -58,7 +58,7 @@ class StartsController extends AppController
 			
 			if ( $language == 'de' ) 
 				$this->code = 'deu';
-/**
+/*
 			elseif ( $language == 'zh' )
 				$this->code = 'chi';
 			elseif ( $language == 'fr' )
@@ -69,7 +69,7 @@ class StartsController extends AppController
                 $this->code == 'ron';
             elseif ( $language == 'pl' )
                 $this->code == 'pol';
-**/
+*/
 			else 
 				$this->code = 'eng';
 				
@@ -233,7 +233,7 @@ class StartsController extends AppController
 				$this->Session->write('flash',__('Coupon code saved.', true) . 
 					' <a href="/trainer/users/register/">' . __('Please register now!', true) . '</a>');				
 
-				if ( $_SERVER['HTTP_HOST'] != 'localhost' ) 
+				if ( $_SERVER['HTTP_HOST'] != 'local.tricoretraining.com' ) 
 					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From:support@tricoretraining.com');
 			} else
 			{

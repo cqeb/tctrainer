@@ -200,9 +200,9 @@ google.setOnLoadCallback(get_formcurve);
 <div id="chart1"></div>
 
 <!--
-<?php if ( $_SERVER['HTTP_HOST'] == 'localhost' ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) { ?>
 <br /><br /><br /><br /><br /><br />
-Debugging: (only localhost)<br />
+Debugging: (only local.tricoretraining.com)<br />
 <a href="<?php echo $jsonurl ?>" target="_blank"><?php echo $jsonurl; ?></a>
 <?php } ?>
 
