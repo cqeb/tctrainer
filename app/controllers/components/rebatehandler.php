@@ -5,10 +5,11 @@ class RebatehandlerComponent extends Object {
    var $components = array('Session');
    var $helpers = array('Session');
 
+   // TODO get from config
    var $company_rebate = 
    			array( 
-   				'A1TA30P' => 'a1telekom.at',
-   				'TAG30P' => 'telekomaustria.com'
+   				//'A1TA30P' => 'a1telekom.at',
+   				//'TAG30P' => 'telekomaustria.com'
 			);
 			 
    function check_code( $code, $user )

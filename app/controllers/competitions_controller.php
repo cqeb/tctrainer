@@ -1,7 +1,7 @@
 <?php
 
 /**
-controller for managing all competitions
+* controller for managing all competitions
 **/
 
 class CompetitionsController extends AppController {
@@ -11,7 +11,7 @@ class CompetitionsController extends AppController {
    var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Provider');
 
 	/**
-	list all competitions with paging
+	* list all competitions with paging
 	**/
 
    var $paginate = array(
@@ -217,7 +217,7 @@ class CompetitionsController extends AppController {
                // SPECIAL ERRORCHECKING
                // get important events - check if there are only 3 in a season
                if ( !isset($id) )
-			         {
+			   {
 	               $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND important = 1 AND competitiondate BETWEEN '" .
 	                    $season['start'] . "' AND '" . $season['end'] . "'";
 	               $Comps_important = $this->Competition->query( $sql );
@@ -243,7 +243,8 @@ class CompetitionsController extends AppController {
                     	$this->data["Competition"]["competitiondate"]["year"] . '-' . $this->data["Competition"]["competitiondate"]["month"] . '-' . $this->data["Competition"]["competitiondate"]["day"],
                     	$this->data["Competition"]["sportstype"]
                     );
-               		  if ($this->Competition->save( $this->data, array('validate' => true)))
+
+               		if ($this->Competition->save( $this->data, array('validate' => true)))
                     {
                           $this->Session->write('flash',__('Competition saved.',true));
                           $this->redirect(array('action' => 'list_competitions', $this->User->id));
@@ -267,13 +268,14 @@ class CompetitionsController extends AppController {
    {
             // TODO (B) finish this function
             $userdata = $userdata['User'];
+
             for ( $i = 0; $i < count( $competitions ); $i++ )
             {
-                  /**
+                  /*
                   print_r( $competitions[$i]["competitions"] );
                   echo "<br /><br />";
                   print_r($userdata);
-                  **/
+                  */
                   // right now we do nothing here
             }
    }
@@ -281,8 +283,8 @@ class CompetitionsController extends AppController {
    function delete($id) 
    {
             $this->Provider->smartPurgeOnDelete($id);
-   			    $this->Competition->delete($id);
-            $this->Session->write('flash',__('The competition has been deleted.', true));
+   			$this->Competition->delete($id);
+            $this->Session->write('flash',__('Competition was deleted.', true));
             $this->redirect(array('action'=>'list_competitions'));
    }
 

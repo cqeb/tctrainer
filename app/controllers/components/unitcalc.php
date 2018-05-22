@@ -51,7 +51,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   get metric unit definitions for displaying
+   * get metric unit definitions for displaying
    **/
    function get_unit_metric()
    {
@@ -72,7 +72,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   check a distance to be saved and viewed in the correct metric
+   * check a distance to be saved and viewed in the correct metric
    **/
    function check_distance( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
@@ -115,7 +115,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   check a weight to be saved and viewed in the correct metric
+   * check a weight to be stored and viewed in the correct metric
    **/
    function check_weight( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
@@ -155,7 +155,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   check a height to be saved and viewed in the correct metric
+   * check a height to be stored and viewed in the correct metric
    **/
    function check_height( $amount, $mode = 'show', $ret = 'both' )
    {
@@ -166,16 +166,16 @@ class UnitcalcComponent extends Object {
 
               if (  $session_userobject['unit'] == 'imperial' )
               {
-                 if ( $mode == 'show' ) 
-                 {
-                 	$convert = 'cm_ft';
-                 } else
-                     $convert = 'ft_cm';
+                    if ( $mode == 'show' ) 
+                    {
+                        $convert = 'cm_ft';
+                    } else
+                        $convert = 'ft_cm';
 
-				          $amount = $this->convert_metric( $amount, $convert );
-                  //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  $amount_array['amount'] = $amount;
-                  $amount_array['unit'] = 'ft';
+				    $amount = $this->convert_metric( $amount, $convert );
+                    //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                    $amount_array['amount'] = $amount;
+                    $amount_array['unit'] = 'ft';
               } else
               {
                   if ( $mode == 'show' ) 
@@ -196,11 +196,11 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   calculate bmi and give back a status on your bmi
+   * calculate bmi and give back a status on your bmi
    **/
    function calculate_bmi( $weight, $height, $age )
    {
-            /**
+            /*
             BMI (Body mass index) Tabelle
             Age     underw. normal  overw.  really fat
             18-24  	<19  	19-24  	24-29  	29-39  	>39
@@ -211,7 +211,7 @@ class UnitcalcComponent extends Object {
             65+ 	<24 	24-29 	29-34 	34-44 	>44
 
             BMI = kg / m^2
-            **/
+            */
 
             $height = $height / 100; // must be in meters
             $bmi = $weight / ($height * $height);
@@ -238,7 +238,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   format a number in correct format
+   * format a number in correct format
    **/
    function format_number($number, $decimals = 0, $thousand_separator = '&nbsp;', $decimal_point = '.')
    {
@@ -250,7 +250,7 @@ class UnitcalcComponent extends Object {
             return strtr($tmp1, array(' ' => $thousand_separator, '.' => $decimal_point));
    }
    /**
-   is the send amount a correct decimal number?
+   * is the send amount a correct decimal number?
    **/
    function check_decimal( $amount )
    {
@@ -261,7 +261,6 @@ class UnitcalcComponent extends Object {
             //if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,2})?$~", $amount, $parts) )
             if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,100})?$~", $amount, $parts) )
             {
-                 //print_r($parts);
                  if ( !empty($parts['2']) )
                  {
                       $pre = preg_replace("~[".$parts['2']."]~", "", $parts['1']);
@@ -284,8 +283,8 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   a lot of date and time functions
-   time_from_to - what is the difference between 2 dates
+   * a lot of date and time functions
+   * time_from_to - what is the difference between 2 dates
    **/
    function time_from_to( $date_from, $date_to )
    {
@@ -303,7 +302,7 @@ class UnitcalcComponent extends Object {
             $date_to_ts = mktime( 0, 0, 0, $month, $day, $year );
 
             $diff['days'] = ($date_to_ts - $date_from_ts) / ( 3600 * 24 );
-            // TODO (B) 30 days =/= 1 month
+            // TODO 30 days =/= 1 month
             // that might not be correct :)
             $diff['months'] = $diff['days'] / 30;
 
@@ -311,7 +310,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   convert HH:MM:SS to seconds
+   * convert HH:MM:SS to seconds
    **/
    function time_to_seconds( $time )
    {
@@ -332,7 +331,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   convert seconds to HH:MM:SS
+   * convert seconds to HH:MM:SS
    **/
    function seconds_to_time( $seconds )
    {
@@ -348,7 +347,7 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   calculate age from birthday on
+   * calculate age from birthday on
    **/
    function how_old( $birthday )
    {
@@ -366,8 +365,8 @@ class UnitcalcComponent extends Object {
    }
 
    /**
-   show date in correct format (depending on your user profile)
-   save date in correct format
+   * show date in correct format (depending on your user profile)
+   * save date in correct format
    **/
    function check_date( $date, $mode = 'show', $session_unitdate_overwrite = '' )
    {
@@ -442,7 +441,6 @@ class UnitcalcComponent extends Object {
 
    /**
     * calculate trimp
-    *
     */
    function calc_trimp( $duration_total, $avg_pulse_total, $time_in_zones, $lth, $sport )
    {
@@ -499,7 +497,7 @@ class UnitcalcComponent extends Object {
             return $diff_in_days;
    }
 
-/**
+/*
    function date_plus_days( $date, $days, $calctype = 'plus' )
    {
             list($year, $month, $day) = explode("-", $date);
@@ -517,7 +515,7 @@ class UnitcalcComponent extends Object {
 
             return $date_return;
    }
-**/
+*/
 
    /*
    take given daten and add/subtract days
@@ -658,14 +656,14 @@ class UnitcalcComponent extends Object {
     */
    function coldestmonth_for_country( $country )
    {
-            /**
+            /*
             $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
 
             if ( in_array( $country, $eur_countries ) )
-                $currency = 'EUR';
+                xx
             else
-                $currency = 'USD';
-            **/
+                xx
+            */
             return '1';
    } 
 
@@ -675,14 +673,14 @@ class UnitcalcComponent extends Object {
     */
    function unit_for_country( $country, $type )
    {
-            /**
+            /*
             $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
 
             if ( in_array( $country, $eur_countries ) )
-                $currency = 'EUR';
+                xx
             else
-                $currency = 'USD';
-            **/
+                xx
+            */
             if ( $type == 'unitdate' )
                   return 'yyyymmdd';
             elseif ( $type == 'unit' )
@@ -877,40 +875,40 @@ class UnitcalcComponent extends Object {
      * weight is in kg
      * duration is in seconds
      */
-        /**
-        http://www.triathlontrainingblog.com/calculators/calories-burned-calculator-based-on-average-heart-rate/
-            
-            Based on the following formulas:
-            Using VO2max
-               Men: C/min = (-59.3954 + (-36.3781 + 0.271 x age + 0.394 x weight + 0.404 x VO2max + 0.634 x HR))/4.184
-               Women: C/min = (-59.3954 + (0.274 x age + 0.103 x weight + 0.380 x VO2max + 0.450 x HR)) / 4.184
-            
-            Without VO2max
-               Men: C/min = (-55.0969 + 0.6309 x HR + 0.1988 x weight + 0.2017 x age) / 4.184
-               Women: C/min = (-20.4022 + 0.4472 x HR + 0.1263 x weight + 0.074 x age) / 4.184
-            weight is in kg
-            */
+    /*
+    http://www.triathlontrainingblog.com/calculators/calories-burned-calculator-based-on-average-heart-rate/
+        
+    Based on the following formulas:
+    Using VO2max
+        Men: C/min = (-59.3954 + (-36.3781 + 0.271 x age + 0.394 x weight + 0.404 x VO2max + 0.634 x HR))/4.184
+        Women: C/min = (-59.3954 + (0.274 x age + 0.103 x weight + 0.380 x VO2max + 0.450 x HR)) / 4.184
+    
+    Without VO2max
+        Men: C/min = (-55.0969 + 0.6309 x HR + 0.1988 x weight + 0.2017 x age) / 4.184
+        Women: C/min = (-20.4022 + 0.4472 x HR + 0.1263 x weight + 0.074 x age) / 4.184
+    weight is in kg
+    */
 
     function calc_kcal( $data )
     {
-      $avgHR = $data['avg_pulse'];
-      $duration = $data['duration'];
-      $age = $this->how_old($data['birthday']);
-      $weight = $data['weight'];
+        $avgHR = $data['avg_pulse'];
+        $duration = $data['duration'];
+        $age = $this->how_old($data['birthday']);
+        $weight = $data['weight'];
 
-      // calculate kcal for workout
-      if ( $data['gender'] == 'm' )
-      {
-          $kcal = 
-            round(( -55.0969 + 0.6309 * $avgHR + 0.1988 * $weight + 0.2017 * $age ) / 4.1845
-            * $duration/60);
-      } else
-      {
-          $kcal = 
-            round((-20.4022 + 0.4472 * $avgHR + 0.1263 * $weight + 0.074 * $age ) / 4.1845
-            * $duration/60);
-      }
-      return $kcal;
+        // calculate kcal for workout
+        if ( $data['gender'] == 'm' )
+        {
+            $kcal = 
+                round(( -55.0969 + 0.6309 * $avgHR + 0.1988 * $weight + 0.2017 * $age ) / 4.1845
+                * $duration/60);
+        } else
+        {
+            $kcal = 
+                round((-20.4022 + 0.4472 * $avgHR + 0.1263 * $weight + 0.074 * $age ) / 4.1845
+                * $duration/60);
+        }
+        return $kcal;
     }
     
 }

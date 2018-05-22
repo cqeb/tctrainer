@@ -23,8 +23,6 @@ class TrainingplansController extends AppController {
 		$week = new DateInterval("P7D");
 		$timezone = new DateTimeZone('UTC');
 
-		//if ( isset( $_GET['d'] ) ) echo "<!--" . $_GET['d'] . "-->";
-
 		if (isset($_GET['d'])) {
 			$now = $_GET['d'];
 			$prev = new DateTime($_GET['d'], $timezone);

@@ -38,59 +38,54 @@ class UsersController extends AppController {
 
 	function add_subscriber($email = null, $firstname = null, $lastname = null) 
 	{
+			// http://stackoverflow.com/questions/5025455/some-basic-mailchimp-api-examples-required
+			// https://us3.admin.mailchimp.com/lists/settings/merge-tags?id=299149
 
-		// http://stackoverflow.com/questions/5025455/some-basic-mailchimp-api-examples-required
-		// https://us3.admin.mailchimp.com/lists/settings/merge-tags?id=299149
+			$req_path = ( ROOT . DS . APP_DIR . '/controllers/components/mailchimp.php' );
+			require_once $req_path;
 
-		$req_path = ( ROOT . DS . APP_DIR . '/controllers/components/mailchimp.php' );
+			// http://apidocs.mailchimp.com/api/2.0/lists/subscribe.php
+			// https://github.com/drewm/mailchimp-api
 
-		require_once $req_path;
+			// grab an API Key from http://admin.mailchimp.com/account/api/
+			$MailChimp = new MailChimp('38c3d174d45d89c64e46d6daf33fcd53-us3');
 
-		// http://apidocs.mailchimp.com/api/2.0/lists/subscribe.php
-		// https://github.com/drewm/mailchimp-api
+			// grab your List's Unique Id by going to http://admin.mailchimp.com/lists/
+			// Click the "settings" link for the list - the Unique Id is at the bottom of that page. 
+			$result = $MailChimp->call('lists/subscribe', array(
+				'id'                => 'b99533c86e',
+				'email'             => array( 'email' => $email ),
+				'merge_vars'        => array(
+					/**
+					*'FNAME'             => array( 'email' => $email ),
+					*'LNAME'             => array( 'email' => $email )
+					**/
+					//'MERGE2' => $_POST['name'] // MERGE name from list settings
+					// there MERGE fields must be set if required in list settings
+				),
+				'double_optin'      => false,
+				'update_existing'   => true,
+				'replace_interests' => false
+			));
 
-		// grab an API Key from http://admin.mailchimp.com/account/api/
-		$MailChimp = new MailChimp('38c3d174d45d89c64e46d6daf33fcd53-us3');
-
-		// grab your List's Unique Id by going to http://admin.mailchimp.com/lists/
-    	// Click the "settings" link for the list - the Unique Id is at the bottom of that page. 
-		$result = $MailChimp->call('lists/subscribe', array(
-		    'id'                => 'b99533c86e',
-		    'email'             => array( 'email' => $email ),
-		    'merge_vars'        => array(
-			    /**
-			    *'FNAME'             => array( 'email' => $email ),
-			    *'LNAME'             => array( 'email' => $email )
-			    **/
-		        //'MERGE2' => $_POST['name'] // MERGE name from list settings
-		        // there MERGE fields must be set if required in list settings
-		    ),
-		    'double_optin'      => false,
-		    'update_existing'   => true,
-		    'replace_interests' => false
-		));
-
-		if ( $result === false ) {
-		    // response wasn't even json
-		}
-		else if ( isset($result->status) && $result->status == 'error' ) {
-		    // Error info: $result->status, $result->code, $result->name, $result->error
-		}
-
-		//print_r($result);
-
+			if ( $result === false ) {
+				// response wasn't even json
+			}
+			else if ( isset($result->status) && $result->status == 'error' ) {
+				// Error info: $result->status, $result->code, $result->name, $result->error
+			}
 	}
 
 	function fill_my_database()
 	{
-      $this->checkSession();
-	  $userobject = $this->Session->read('userobject');
-	  
-      if ( isset( $userobject['admin'] ) )
-	  {
-		      $this->autoRender = false;            
-		      $this->Filldatabase->prefill($this->User);
-	  }      
+			$this->checkSession();
+			$userobject = $this->Session->read('userobject');
+			
+			if ( isset( $userobject['admin'] ) )
+			{
+					$this->autoRender = false;            
+					$this->Filldatabase->prefill($this->User);
+			}      
 	}
 
 	function list_users()
@@ -212,7 +207,6 @@ class UsersController extends AppController {
 
 					foreach( $userlist AS $key => $val )
 					{
-						//pr($val['users']);
 						$user = $val['users'];
 						$subject = $val['users']['firstname'] . ' - ' . $userdata['subject'];
 						$template = 'standardmessage';
@@ -231,8 +225,7 @@ class UsersController extends AppController {
 				} else
 				{
 					$statusbox = 'alert alert-danger';
-					$this->Session->write('flash',__('Error', true) . ' - ' . __('message not send', true));
-					
+					$this->Session->write('flash',__('Error', true) . ' - ' . __('message not send', true));	
 				}
 	
 			} elseif ( isset( $this->data ) )
@@ -244,8 +237,7 @@ class UsersController extends AppController {
 					if ( $val == 1 )
 					{
 						$userlist[] = str_replace( 'user_', '', $key );
-					}					
-					
+					}
 				}
 				
 				if ( isset( $userlist ) && is_array( $userlist ) )
@@ -262,26 +254,25 @@ class UsersController extends AppController {
 				}
 
 				$this->set('users_to_send', $users_to_send);
- 			} 
-			
+ 			}
 			$this->set('statusbox', $statusbox);
 	}
 
 	function login_facebook()
 	{
 			// Facebook auth 
-            		$app_id = 132439964636;
+            $app_id = 132439964636;
 			$app_secret = "500f333152751fea132b669313052120";
 			
-			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' ) 
-				$my_url = 'http://test.tricoretraining.com/facebook/login.php';
+			if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
+				$my_url = 'http://' . TESTHOST . '/facebook/login.php';
 			else
 				$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
 
 			if ( isset( $this->params['named']['fbuser'] ) ) 
 				$fbuser = $this->params['named']['fbuser'];
 
-			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' && isset( $fbuser ) )
+			if ( $_SERVER['HTTP_HOST'] == LOCALHOST && isset( $fbuser ) )
 			{
 				$user = unserialize( base64_decode( $fbuser ) );
 			} else
@@ -315,7 +306,6 @@ class UsersController extends AppController {
 			
 				if ( is_array( $results ) ) 
 				{
-			
 					// has user activated his profile and do WE not have deactivated user
 					if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
 					{
@@ -377,12 +367,10 @@ class UsersController extends AppController {
 	{
 	    if ( $this->Session->read('session_userid') ) 
 	    {
-	      $this->checkSession();
-	      $this->redirect('/trainingplans/view');
-
+			$this->checkSession();
+			$this->redirect('/trainingplans/view');
 	    } else
 	    {
-
 		  	$this->set("title_for_layout", __('Login', true));
 		  	$this->set('error', false);
 
@@ -409,8 +397,7 @@ class UsersController extends AppController {
 						// if you want to stay logged in, we have to write a cookie
 						if ( $this->data['User']['remember_me'] )
 						{
-							$this->Cookie->write('tct_auth', $cookie, false, '+52 weeks');
-							
+							$this->Cookie->write('tct_auth', $cookie, false, '+52 weeks');	
 						} else
 						{
 							$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 hour');
@@ -507,13 +494,13 @@ class UsersController extends AppController {
 				if ( !is_array($results) )
 				{
 					$statusbox = 'alert alert-error';
-					$this->Session->write('flash',__('E-mail was not found in database!',true));
+					$this->Session->write('flash',__('Email was not found in database!',true));
 				} else
 				{
 					$statusbox = 'alert';
 					$status = 'sent';
 					$this->_sendPasswordForgotten($results['User']['id']);
-					$this->Session->write('flash',__('Click link in e-mail to reset password!',true));
+					$this->Session->write('flash',__('Click link in email to reset password!',true));
 				}
 			}
 		}
@@ -578,8 +565,8 @@ class UsersController extends AppController {
 	{	  
 	    if ( $this->Session->read('session_userid') ) 
 	    {
-	      $this->checkSession();
-	      $this->redirect('/trainingplans/view');
+			$this->checkSession();
+			$this->redirect('/trainingplans/view');
 	    }
 
 		if ( $this->Session->read( 'recommendation_userid' ) ) 
@@ -595,26 +582,26 @@ class UsersController extends AppController {
 	    
 	    if (empty($this->data))
 	    {
-				if ( $this->Session->read('facebook_user') )
-				{
-					$facebook_user = unserialize( $this->Session->read('facebook_user') );
-					$this->data['User']['firstname'] = $facebook_user['firstname'];
-					$this->data['User']['lastname'] = $facebook_user['lastname'];
-					if ( $facebook_user['gender'] == 'female' )
-						$this->data['User']['gender'] = 'f';
-					else
-						$this->data['User']['gender'] = 'm';
+			if ( $this->Session->read('facebook_user') )
+			{
+				$facebook_user = unserialize( $this->Session->read('facebook_user') );
+				$this->data['User']['firstname'] = $facebook_user['firstname'];
+				$this->data['User']['lastname'] = $facebook_user['lastname'];
+				if ( $facebook_user['gender'] == 'female' )
+					$this->data['User']['gender'] = 'f';
+				else
+					$this->data['User']['gender'] = 'm';
 
-					$this->data['User']['email'] = $facebook_user['email'];
-					$this->data['User']['birthday'] = $facebook_user['birthday'];
-					
-					$this->Session->write('flash',__('We will use your profile from Facebook for your registration form, please add all missing information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as used in your Facebook account.',true));
-				}
+				$this->data['User']['email'] = $facebook_user['email'];
+				$this->data['User']['birthday'] = $facebook_user['birthday'];
 				
-				if ( preg_match( '/@/', $inviter ) || preg_match( '/company/', $inviter ))
-				{
-					$this->set('companyemail', $inviter);	
-				}
+				$this->Session->write('flash',__('We will use your profile from Facebook for your registration form, please add all missing information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your email to the same as used in your Facebook account.',true));
+			}
+			
+			if ( preg_match( '/@/', $inviter ) || preg_match( '/company/', $inviter ))
+			{
+				$this->set('companyemail', $inviter);	
+			}
 	      
 	    } else
 	    {
@@ -664,7 +651,7 @@ class UsersController extends AppController {
 			http://freegeoip.net/xml/74.200.247.59
 			*/
 			
-			if ( $_SERVER['HTTP_HOST'] == 'local.tricoretraining.com' )
+			if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 				$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
 			else
 				$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
@@ -684,7 +671,7 @@ class UsersController extends AppController {
 			$this->data['User']['unitdate'] = $this->Unitcalc->unit_for_country('DE', 'unitdate');;
 			$this->data['User']['yourlanguage'] = $this->Session->read('Config.language');
 			
-			// TODO (B)
+			// TODO (B) add some checks
 			$this->data['User']['passwordcheck'] = "1";
 			$this->data['User']['publicprofile'] = "0";
 			$this->data['User']['publictrainings'] = "0";
@@ -814,22 +801,22 @@ class UsersController extends AppController {
 					}
 				}
 
-	          // send user with activation link
-	          $tid = $this->_sendNewUserMail( $this->User->id );
-	
-	          // write imperial / metric to session and date-format
-	          $this->Session->write('session_unit', $this->data['User']['unit']);
-	          $this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-	
-	          $statusbox = 'alert-success';
-	          $this->Session->write('register_userid', $this->User->id);
-	
-	          $this->Session->write('flash',__('Registration finished',true));
-	          $this->redirect(array('action' => 'register_finish'));
+				// send user with activation link
+				$tid = $this->_sendNewUserMail( $this->User->id );
+		
+				// write imperial / metric to session and date-format
+				$this->Session->write('session_unit', $this->data['User']['unit']);
+				$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+		
+				$statusbox = 'alert-success';
+				$this->Session->write('register_userid', $this->User->id);
+		
+				$this->Session->write('flash',__('Registration finished',true));
+				$this->redirect(array('action' => 'register_finish'));
 	      } else
 	      {
-	          if ( isset( $password_unenc ) ) $this->data['User']['password'] = $password_unenc;
-	          //pr($this->User->invalidFields( ));
+				if ( isset( $password_unenc ) ) $this->data['User']['password'] = $password_unenc;
+				//pr($this->User->invalidFields( ));
 	      }
 	
 	      $statusbox = 'alert alert-danger';
@@ -972,17 +959,17 @@ class UsersController extends AppController {
 		// check whether email format is correct
 		if ( !eregi("^[a-z0-9]+([-_\.]?[a-z0-9])+@[a-z0-9]+([-_\.]?[a-z0-9])+\.[a-z]{2,4}$", $checkuseremail ))
 		{
-			  	$error_msg = '<div class="error-message">';
-			  	$error_msg .= __('Sorry, your e-mail is not correct!', true);
-		      	/**
-		      	* $error_msg .= ' ' . $checkuseremail . ' '; 
-				* $error_msg .= __('is not correct!', true);
-		      	**/
-		      	$error_msg .= '</div>';
-			
-				$this->set("emailcheck", $error_msg);
-				$this->set("emailcheck_var", "false");
-				return 0;
+			$error_msg = '<div class="error-message">';
+			$error_msg .= __('Sorry, your e-mail is not correct!', true);
+			/**
+			* $error_msg .= ' ' . $checkuseremail . ' '; 
+			* $error_msg .= __('is not correct!', true);
+			**/
+			$error_msg .= '</div>';
+		
+			$this->set("emailcheck", $error_msg);
+			$this->set("emailcheck_var", "false");
+			return 0;
 
 		} else
 		{
@@ -1049,21 +1036,21 @@ class UsersController extends AppController {
 
 				$this->Session->write('flash',__('You will receive regularly training schedules from TriCoreTraining.com. Start your sports career.',true));
         
-        if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
-        {
-          $this->Session->write('session_useremail', $results['User']['email']);
-          $this->Session->write('session_userid', $results['User']['id']);
-          $this->set('session_userid', $results['User']['id']);
+				if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
+				{
+				$this->Session->write('session_useremail', $results['User']['email']);
+				$this->Session->write('session_userid', $results['User']['id']);
+				$this->set('session_userid', $results['User']['id']);
 
-          // set "last_login" session equal to users last login time
-          $results['User']['last_login'] = date("Y-m-d H:i:s");
-          $this->Session->write('last_login', $results['User']['last_login']);
+				// set "last_login" session equal to users last login time
+				$results['User']['last_login'] = date("Y-m-d H:i:s");
+				$this->Session->write('last_login', $results['User']['last_login']);
 
-          // save last_login date
-          //$this->User->save($results);
-          //$this->Session->write('flash',__('Logged in. Welcome.', true));
-          $this->redirect('/trainingplans/view');
-        }
+				// save last_login date
+				//$this->User->save($results);
+				//$this->Session->write('flash',__('Logged in. Welcome.', true));
+				$this->redirect('/trainingplans/view');
+				}
 			} else
 			{
 				$this->Session->write('flash', __("Something went wrong - sorry. Maybe you're already activated?", true) . ' ' . __('If not', true) . ', <a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '.</a>');
@@ -1116,7 +1103,6 @@ class UsersController extends AppController {
 
 		} else
 		{
-
 			$this->set('UserID', $this->User->id);
 	
 			if ($this->User->save( $this->data, array(
@@ -1128,7 +1114,8 @@ class UsersController extends AppController {
 		          if ( $this->data['User']['email'] != $this->Session->read('session_useremail') )
 		          {
 		                $new_email = $this->data['User']['email'];
-		                $this->Session->write( 'session_useremail', $new_email );
+						$this->Session->write( 'session_useremail', $new_email );
+						
 		                if ( $this->Cookie->read('email') )
 		                {
 		                      $cookie = array();
@@ -1171,7 +1158,6 @@ class UsersController extends AppController {
 
 		} else
 		{
-
 			$this->set('UserID', $this->User->id);
 	
 			if ($this->User->save( $this->data, array(
@@ -1213,6 +1199,7 @@ class UsersController extends AppController {
 		} else 
 		{
 			$this->set('UserID', $this->User->id);
+
 			if ($this->User->save( $this->data, array(
 		        'validate' => true,
         		'fieldList' => array(
@@ -1226,17 +1213,17 @@ class UsersController extends AppController {
 		        'lactatethreshold',
 		        'bikelactatethreshold'
 	        	)))) {
-	        	$statusbox = 'alert alert-success';
-	        	$this->Session->write('flash',__('Traininginfo saved.', true));
-	        	// recalculate time track by updating athlete
-	        	$this->Provider->getAthlete()->setTrainingTime(
-	        		$this->data['User']['weeklyhours'] * 60
-	        	);
-	        } else 
-	        {
-	        	$this->Session->write('flash',__('Some errors occured.', true));
-	        	$statusbox = 'alert alert-danger';
-	        }
+					$statusbox = 'alert alert-success';
+					$this->Session->write('flash',__('Traininginfo saved.', true));
+					// recalculate time track by updating athlete
+					$this->Provider->getAthlete()->setTrainingTime(
+						$this->data['User']['weeklyhours'] * 60
+					);
+			} else 
+			{
+				$this->Session->write('flash',__('Some errors occured.', true));
+				$statusbox = 'alert alert-danger';
+			}
 		}
 		$this->set('statusbox', $statusbox);
 		$this->set('sports', $this->Unitcalc->get_sports());
@@ -1321,7 +1308,7 @@ class UsersController extends AppController {
 		              // maximum 2 kg per month
 		              if ( $weight_per_month_kg > 2 )
 		              {
-		                    $targetweighterror = __('You should at maximum lose', true) . ' ' .  
+		                    $targetweighterror = __('You should lose at maximum ', true) . ' ' .  
 		                        $this->Unitcalc->check_weight('2', 'show', 'single') . ' ' . $weight_unit . ' ' . 
 		                        __('per month.', true);
 		                    $this->data['User']['targetweightcheck'] = 1;
@@ -1374,7 +1361,7 @@ class UsersController extends AppController {
                  'targetweightdate', 'targetweightcheck'
            ) ) ) )
            {
-                 $this->Session->write('flash',__('Your settings are saved.',true).' '.$additional_message);
+                 $this->Session->write('flash',__('Settings are saved.',true).' '.$additional_message);
                  $statusbox = 'alert alert-success';
         
                  // convert back in case of error and no redirect
@@ -1559,13 +1546,13 @@ class UsersController extends AppController {
 	      if ( !$this->data['User']['password'] || !$this->data['User']['passwordapprove'] ||
 	           $this->data['User']['password'] != $this->data['User']['passwordapprove'] )
 	      {      
-	          $this->set('errormessage', __('No passwords entered or passwords do not match!', true) );
+	        	$this->set('errormessage', __('No passwords entered or passwords do not match!', true) );
 	      } else
 	      {
-	          $this->data['User']['password'] = md5($this->data['User']['password']);
-	          $this->data['User']['passwordcheck'] = 1;
+				$this->data['User']['password'] = md5($this->data['User']['password']);
+				$this->data['User']['passwordcheck'] = 1;
 	    
-	    			if ($this->User->save( $this->data, array(
+				if ($this->User->save( $this->data, array(
 	             'validate' => true,
 	             'fieldList' => array(
 	             'password', 'passwordcheck'
@@ -1630,8 +1617,8 @@ class UsersController extends AppController {
 	      	}
 	     } elseif ( $type == "file")
 	     {
-	      if ( in_array( $file['type'], $type_accepted_files ) )
-	      {
+			if ( in_array( $file['type'], $type_accepted_files ) )
+			{
 		        if ( $file['size'] < $filesize_accepted_files )
 		        {
 			          $new_name = $addthis . '_' . $userid . '_' . $file['name'];

@@ -1,7 +1,6 @@
 <?php
 // include all core components
-
-// TODO this is just plain ugly with cake - find a better solution for this
+// CP code
 require_once ROOT . DS . APP_DIR . '/core/athlete/athlete.class.php';
 require_once ROOT . DS . APP_DIR . '/core/helpers/database.class.php';
 require_once ROOT . DS . APP_DIR . '/core/helpers/datetimehelper.class.php';
@@ -27,20 +26,12 @@ require_once ROOT . DS . APP_DIR . '/config/database.php';
 
 
 class ProviderComponent extends Object {
-	//public $components = array('Session', 'Unitcalc');
-	//public $helpers = array('Session');
-
-	// enhanced by KMS
    	public $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Statisticshandler', 'Provider');
   	public $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc', 'Statistics');
 
 	private $DB;
 	private $athlete;
-	// changed by kms because I could not access this variable from controller
-	/*
-	public $DB;
-	public $athlete;
-	*/
+	
 	/**
 	 * initializes the provider component
 	 * @param unknown_type $controller not needed
@@ -190,7 +181,6 @@ class ProviderComponent extends Object {
 				break;
 
 		}
-		//echo $phase['phase'];
 
 		$html .= '<br /><h3 id="phaseinfo">' . $phaseName;
 		if ($phase['recovery']) {
@@ -237,9 +227,6 @@ class ProviderComponent extends Object {
 		// now generate workouts
 		$phase = $mcp->getPhase($genWeek);
 
-		//print_r($phase);
-		//echo "Phase: " . $phase;
-
 		$swimWorkouts = array();
 		$bikeWorkouts = array();
 		$runWorkouts = array();
@@ -285,9 +272,6 @@ class ProviderComponent extends Object {
 				break;
 		}
 		
-		//print_r( $this->getMultisportType($this->getAthlete()->getSport()) );
-		//print_r( $swimWorkouts );
-
 		$workouts = array_merge($swimWorkouts, $bikeWorkouts, $runWorkouts);
 
 		// sort those workouts by trimp
@@ -300,14 +284,12 @@ class ProviderComponent extends Object {
 		//if ( $inject_weekdays == true ) {
 			$workouts = $sortedWorkouts = WorkoutRenderer::inject_weekdays($workouts, $this->getAthlete(), $time, $phase, $genWeek, true);
 			foreach ($sortedWorkouts as $days => $workout) {
-				//print_r($workout);
 				/*
 				$sql = "UPDATE schedulestrainings SET wday = '" . date("Y-m-d", $workout->getWeekdaydateTS) . " WHERE athlete_id = " . 
 					$this->getAthlete()->getId() . " AND week = '" . $workout->date . "' AND sport = '" . $workout->sport . "' AND type = '" .
 					$workout->type . "' AND duration = '" . $workout->duration . "' AND trimp = '" . $workout->trimp . "' AND lsd = '" .
 					$workout->lsd . "'";
 				*/
-				//echo $sql . "<br><br>";
 			}
 		//}
 
@@ -347,9 +329,7 @@ class ProviderComponent extends Object {
 		*/
 		$sql = "SELECT DISTINCT week FROM scheduledtrainings WHERE athlete_id = " . $this->athlete->getId() . " AND week > '" . $start . 
 			"' ORDER by week ASC";
-		//echo $sql . "<br>";
 		$trainings = $this->DB->query( $sql );
-		//print_r($trainings);
 
 		if (count($trainings) === 0) {
 			return false;
@@ -367,8 +347,6 @@ class ProviderComponent extends Object {
 		// diff in weeks between beginn and now
 		$maxRepeat = intval(round(($diff->days/7))+$weeksToCreate);
 
-		//echo $maxRepeat . "<br>";
-
 		// go through all weeks from start to now
 		for ( $i = 0; $i <= $maxRepeat; $i++ ) {
 
@@ -385,9 +363,8 @@ class ProviderComponent extends Object {
 			}
 		}
 
-		// add weekday for each week
-		// save
-
+		// TODO add weekday for each week
+		// save in db
 	}
 
 	/**
@@ -412,7 +389,9 @@ class ProviderComponent extends Object {
 		// now match registered trainings to workouts
 		reset($workouts);
 
-		while (list($k, $w) = each(&$workouts)) {
+		// while (list($k, $w) = each(&$workouts)) {
+		// does not work in php 5.6
+		while (list($k, $w) = each($workouts)) {
 			reset($trainings);
 			while (list($l, $t) = each($trainings)) {
 				if ($t['sportstype'] === $w->getSport() &&
@@ -470,7 +449,6 @@ class ProviderComponent extends Object {
 		}
 		
 		// TODO handle invalid ratio values here!
-		
 		return "<script type=\"text/javascript\">var workoutSettings = {
 			time : " . $res[0]["time"] . ",
 			usertime : " . $res[0]["usertime"] . ",

@@ -1,9 +1,9 @@
 <?php
 
 /**
-save logs in database
-especially for PAYPAL integration
-**/
+* save logs in database
+* especially for PAYPAL integration
+*/
 
 class LoghandlerComponent extends Object {
    var $components = array('Session');
@@ -31,7 +31,7 @@ class LoghandlerComponent extends Object {
 			{
 				return false;
 			}
-/**
+/*
             $results = $model->findAllByTransaction($tid);
 
             for($i = 0; $i < count($results); $i++)
@@ -43,7 +43,7 @@ class LoghandlerComponent extends Object {
 
             if ( count( $results ) > 0 ) return $result;
             else return false;
-**/
+*/
 
    }
 

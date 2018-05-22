@@ -1,9 +1,10 @@
 <?php
 
-/**
-Recaptch for forms 
-third party component
-**/
+/*
+* Recaptch for forms 
+* third party component
+* DEPRECATED
+*/
 
 class RecaptchaComponent extends Object {
 	var $publickey = "";

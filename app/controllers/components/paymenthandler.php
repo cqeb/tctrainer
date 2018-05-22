@@ -1,9 +1,9 @@
 <?php
 
 /**
-create transactions for PAYPAL integration
-is for permanent information/data
-**/
+* create transactions for PAYPAL integration
+* this is for permanent information/data
+*/
 
 class PaymenthandlerComponent extends Object {
    var $components = array('Session');
@@ -12,7 +12,6 @@ class PaymenthandlerComponent extends Object {
    function handle_payment( $model, $tid = null, $mode = 'create', $key = '', $val = '' )
    {
             // create // add // read
-	          //$this->loadModel('Transaction');
 
             if ( $mode == 'create' )
             {

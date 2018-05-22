@@ -1,9 +1,9 @@
 <?php
 
-/**
-default transaction component
-for handling secure saving of parameters via transaction-key
-is for temporary information/data
+/*
+* default transaction component
+* for handling secure saving of parameters via transaction-key
+* is for temporary information/data
 **/
 
 class TransactionhandlerComponent extends Object {
@@ -13,11 +13,10 @@ class TransactionhandlerComponent extends Object {
    function handle_transaction( $model, $tid = null, $mode = 'create', $key = '', $val = '' )
    {
             // create // add // read
-	        //$this->loadModel('Transaction');
 
             // create transaction
             // if tid is already existing then create a new tid
-            // TODO (B)
+            // TODO
             if ( $mode == 'create' )
             {
                $tid = rand() . microtime();
@@ -74,22 +73,20 @@ class TransactionhandlerComponent extends Object {
 
    function _decrypt_data( $text ) {
 
-       $salt = Configure::read('Security.salt');
+            $salt = Configure::read('Security.salt');
 
-       $text = md5($text.$salt);
-       
-       return $text;
+            $text = md5($text.$salt);
+            
+            return $text;
    }
 
    function _encrypt_data( $text ) {
 
-       $salt = Configure::read('Security.salt');
+            $salt = Configure::read('Security.salt');
 
-       $text = md5($text.$salt);
-       
-       //$text = base64_encode(base64_encode($text));
-
-       return $text;
+            $text = md5($text.$salt);
+            
+            return $text;
 
    }
 

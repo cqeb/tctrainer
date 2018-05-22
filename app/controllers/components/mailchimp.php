@@ -1,7 +1,5 @@
 <?php
 
-//namespace Drewm;
-
 /**
  * Super-simple, minimum abstraction MailChimp API v2 wrapper
  * 
@@ -15,6 +13,7 @@
  * @author Drew McLellan <drew.mclellan@gmail.com> 
  * @version 1.1
  */
+
 class MailChimp
 {
 	private $api_key;
@@ -32,7 +31,6 @@ class MailChimp
 		$this->api_endpoint = str_replace('<dc>', $datacentre, $this->api_endpoint);
 	}
 
-
 	/**
 	 * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
 	 * @param  string $method The API method to call, e.g. 'lists/list'
@@ -43,7 +41,6 @@ class MailChimp
 	{
 		return $this->_raw_request($method, $args);
 	}
-
 
 	/**
 	 * Performs the underlying HTTP request. Not very exciting
