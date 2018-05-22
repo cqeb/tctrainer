@@ -669,8 +669,15 @@ class UsersController extends AppController {
 			$this->data['User']['coldestmonth'] = $this->Unitcalc->coldestmonth_for_country('DE');
 			$this->data['User']['unit'] = $this->Unitcalc->unit_for_country('DE', 'unit');
 			$this->data['User']['unitdate'] = $this->Unitcalc->unit_for_country('DE', 'unitdate');;
-			$this->data['User']['yourlanguage'] = $this->Session->read('Config.language');
+			// set default language
+			$this->data['User']['yourlanguage'] = 'eng';
 			
+			// overwrite language by session parameter
+			$session_language = $this->Session->read('Config.language');
+			if ( isset( $session_language ) ) {
+				$this->data['User']['yourlanguage'] = $session_language;
+			}
+
 			// TODO (B) add some checks
 			$this->data['User']['passwordcheck'] = "1";
 			$this->data['User']['publicprofile'] = "0";
@@ -1490,7 +1497,6 @@ class UsersController extends AppController {
 			$this->set('UserID', $this->User->id);
 			$this->set('user', $this->data['User']);
 
-			//pr($this->data);
             if ($this->User->save( $this->data, array(
                 'validate' => true,
                 'fieldList' => array(
@@ -1820,9 +1826,10 @@ class UsersController extends AppController {
 			// user object
 			$user = $results[$i]['users'];
 
-			if ( $debug == true ) echo "<br>\n" . "Language (initial): " . Configure::read('Config.language');
+			if ( $debug == true ) 
+				echo "<br>\n" . "Language (initial): " . Configure::read('Config.language');
 
-			// configure user's language as default
+			// go through all users and configure specific user's language as default
 			Configure::write('Config.language', $user['yourlanguage']);
 
             if ( $debug == true ) 
@@ -1957,9 +1964,9 @@ class UsersController extends AppController {
 					// compare 2 timestamps
 					if ( $diff_time > $last_training )
 					{
-						$text_for_mail_training .= __("great training week!", true) . ' ' .  
+						$text_for_mail_training .= __('great training week!', true) . ' ' .  
 							__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
-							'/trainingstatistics/list_trainings/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">TriCoreTraining (tricoretraining.com)</a> ' . 
+							'/trainingstatistics/list_trainings/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">TriCoreTraining</a> ' . 
 							__('and log your workouts - better now than later ⏱️!', true) . "<br /><br />"; 
 		 
 						if ( $debug == true ) 

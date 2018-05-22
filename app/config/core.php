@@ -48,11 +48,10 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 	 * Defines the default error type when using the log() function. Used for
 	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
 	 */
-	define( 'DEBUG', true );
+	define('DEBUG', true );
 	define('LOG_ERROR', 2);
 	Configure::write('debug', 2);
 	
-
 	$_SERVER['DOCUMENT_ROOT'] = '/Applications/XAMPP/xamppfiles/htdocs/tricoretraining.com/';
 
 	if ( $_SERVER['HTTP_HOST'] == TESTHOST ) {
@@ -92,7 +91,6 @@ Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 /**
  * mail sending options
  */
-	
 Configure::write('App.mailFrom', 'Klaus-M. from TriCoreTraining <support@tricoretraining.com>');
 Configure::write('App.mailAdmin', 'support@tricoretraining.com');
 Configure::write('App.mailPort', '25');
@@ -105,7 +103,6 @@ Configure::write('App.mailDelivery', 'mail');
 // local configuration
 if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 {
- 	
     // rename this variable
     Configure::write('App.serverUrl', '/trainer');
     // Domain with protocol and NO trailing slash
@@ -210,9 +207,8 @@ Configure::write('Session.save', 'php');
 /**
  * The name of CakePHP's session cookie.
  */
-Configure::write('Session.cookie', 'TCTCOOKIE');
+Configure::write('Session.cookie', 'CakePHP');
 
-// kms
 Configure::write('Session.path', '/');
 /**
  * Session time out time (in seconds).
@@ -281,26 +277,26 @@ Configure::write('Acl.database', 'default');
  * File storage engine.
  *
  *
-  	 Cache::config('default', array(
- 		'engine' => 'File', //[required]
- 		'duration'=> 3600, //[optional]
- 		'probability'=> 100, //[optional]
-  		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
-  		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
-  		'lock' => false, //[optional]  use file locking
-  		'serialize' => true //[optional]
- 	));
+ * 	 Cache::config('default', array(
+ *		'engine' => 'File', //[required]
+ *		'duration'=> 3600, //[optional]
+ *		'probability'=> 100, //[optional]
+ * 		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
+ * 		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
+ * 		'lock' => false, //[optional]  use file locking
+ * 		'serialize' => true //[optional]
+ *	));
  *
  *
  * APC (http://pecl.php.net/package/APC)
  *
  *
- Cache::config('default', array(
- 		'engine' => 'Apc', //[required]
- 		'duration'=> 3600, //[optional]
- 		'probability'=> 100, //[optional]
-  		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
- 	));
+ *	Cache::config('default', array(
+ * 		'engine' => 'Apc', //[required]
+ * 		'duration'=> 3600, //[optional]
+ * 		'probability'=> 100, //[optional]
+ *  		'prefix' => Inflector::slug(APP_DIR) . '_', //[optional]  prefix every cache file with this string
+ * 	));
  
  * 
  *  Xcache (http://xcache.lighttpd.net/)

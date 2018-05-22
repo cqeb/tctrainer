@@ -20,14 +20,37 @@ class AppController extends Controller {
 	   	var $components = array('Session', 'RequestHandler');
 
 	   	function beforeFilter()
-      {
-            $language = $this->Session->read('Config.language');
+        {
+            // user sets language       
+            if ( isset( $this->params['named']['code'] ) ) 
+            {
+                $this->code = $this->params['named']['code'];
+                
+                $this->Session->write('Config.language', $this->code);
+                // you have to set this to change the language of the app
+                Configure::write('Config.language',$this->code);
+                $this->set('locale', $this->code); 
+                $locale = $this->code;
+    
+            } else {
 
-/*
-// removed by KMS           
-			      // if user is from AUT or GER - change language to German
+                $language = $this->Session->read('Config.language');
+                // echo "app_controller - session language: " . $language . "<br>";
+                if (!isset($language)) {
+                    $language = 'eng';
+                }
+
+                Configure::write('Config.language', $language);
+                $this->set('locale', $language); 
+                $locale = $language;
+
+            }
+            
+            // print_r($this->Session);
+            /*
+            // if user is from AUT or GER - change language to German
             if ( !isset( $language ) )
-			      {
+			{
       				if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
       					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
       				else
@@ -40,20 +63,13 @@ class AppController extends Controller {
                           Configure::write('Config.language','deu');
       				} else {
                           Configure::write('Config.language','eng');
-              }
-      			} else
+                    }
+      		} else
             {                
                 Configure::write('Config.language',$language);
             }
-*/            
-            //echo $this->Session->read('Config.language');
-            //echo Configure::read('Config.language');
+            */
 
-            if ( isset( $language ) && $language != '' )  Configure::write('Config.language',$language); 
-            else  Configure::write('Config.language','eng');
-
-            $locale = $language = Configure::read('Config.language');
-            
             if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath))
             {
                 //echo VIEWS . $locale . DS . $this->viewPath;

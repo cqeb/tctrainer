@@ -10,7 +10,7 @@
 
         <fieldset>
         <legend>
-          <?php __('Receive your first trainingplans for free.'); ?>
+          <?php __('Receive your first training month for free. Deal?'); ?>
         </legend>
         
 

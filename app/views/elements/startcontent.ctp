@@ -20,7 +20,7 @@ Du bist richtig bei uns, wenn du
 <li>ein Trainingsprogramm für Anfänger brauchst</li>
 <li>ein individuelles Online-Sport-Coaching suchst</li>
 </ul>
-Genug Vorteile für Dich? Melde dich einmal an!
+Genug Vorteile für Dich? <a href="/trainer/users/register">Melde dich einmal an!</a>
 </p>
 
 <?php } else if ( $locale == 'eng' ) { ?>
@@ -32,7 +32,7 @@ Genug Vorteile für Dich? Melde dich einmal an!
 who are working (maybe have a family, so you're limited in time) and want to be perfectly prepared 
 for their competitions or sport goals.
 <br /><br />
-Our motto is “Reach your goal with a plan“.
+Our motto is “Reach Your Goal With A Plan“.
 <br /><br />
 You're right here, if you 
 <br />
@@ -46,7 +46,7 @@ You're right here, if you
 <li>want to save money and use your free option for online coaching</li>
 </ul>
 
-Enough advantages for you? Join us!
+Enough advantages for you? <a href="/trainer/users/register">Join us!</a>
 </p>
 
 <?php } ?>
