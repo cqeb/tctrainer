@@ -322,7 +322,7 @@ $(document).ready(function() {
                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e('How to start'); ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="/trainer/users/register"><?php _e('FREE Registration'); ?></a></li>
+                          <li><a href="/trainer/users/register"><?php _e('Get Started'); ?></a></li>
                           <li><a href="/trainer/users/login"><?php _e('Sign in'); ?></a></li>
                           <li style="padding-left: 20px;"><?php _e('Change to'); ?>:<li>
                           <li>
@@ -335,7 +335,7 @@ $(document).ready(function() {
                         </ul>
                   </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e('Blog'); ?><b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php _e('FAQ'); ?> &amp; <?php _e('Blog'); ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><a href="/blog/<?php echo $q_config['language']; ?>/"><?php _e('Read our blog'); ?></a></li>
 

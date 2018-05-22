@@ -79,8 +79,8 @@ class CakeTestCaseTest extends CakeTestCase {
  */
 	function setUp() {
 		$this->_debug = Configure::read('debug');
-		$this->Case =& new SubjectCakeTestCase();
-		$reporter =& new MockCakeHtmlReporter();
+		$this->Case = new SubjectCakeTestCase();
+		$reporter = new MockCakeHtmlReporter();
 		$this->Case->setReporter($reporter);
 		$this->Reporter = $reporter;
 	}
@@ -361,8 +361,8 @@ class CakeTestCaseTest extends CakeTestCase {
 		$result = $this->Case->testAction('/tests_apps/set_action', array('return' => 'vars'));
 		$this->assertEqual($result, array('var' => 'string'));
 
-		$db =& ConnectionManager::getDataSource('test_suite');
-		$fixture =& new PostFixture();
+		$db = ConnectionManager::getDataSource('test_suite');
+		$fixture = new PostFixture();
 		$fixture->create($db);
 
 		$result = $this->Case->testAction('/tests_apps_posts/add', array('return' => 'vars'));
@@ -406,7 +406,7 @@ class CakeTestCaseTest extends CakeTestCase {
 		$this->assertEqual(array_keys($result['data']), array('name', 'pork'));
 		$fixture->drop($db);
 
-		$db =& ConnectionManager::getDataSource('test_suite');
+		$db = ConnectionManager::getDataSource('test_suite');
 		$_backPrefix = $db->config['prefix'];
 		$db->config['prefix'] = 'cake_testaction_test_suite_';
 
@@ -414,9 +414,9 @@ class CakeTestCaseTest extends CakeTestCase {
 		$config['prefix'] = 'cake_testcase_test_';
 
 		ConnectionManager::create('cake_test_case', $config);
-		$db2 =& ConnectionManager::getDataSource('cake_test_case');
+		$db2 = ConnectionManager::getDataSource('cake_test_case');
 
-		$fixture =& new PostFixture($db2);
+		$fixture = new PostFixture($db2);
 		$fixture->create($db2);
 		$fixture->insert($db2);
 
@@ -432,10 +432,10 @@ class CakeTestCaseTest extends CakeTestCase {
 
 		$fixture->drop($db2);
 
-		$db =& ConnectionManager::getDataSource('test_suite');
+		$db = ConnectionManager::getDataSource('test_suite');
 
 		//test that drop tables behaves as exepected with testAction
-		$db =& ConnectionManager::getDataSource('test_suite');
+		$db = ConnectionManager::getDataSource('test_suite');
 		$_backPrefix = $db->config['prefix'];
 		$db->config['prefix'] = 'cake_testaction_test_suite_';
 
@@ -443,8 +443,8 @@ class CakeTestCaseTest extends CakeTestCase {
 		$config['prefix'] = 'cake_testcase_test_';
 
 		ConnectionManager::create('cake_test_case', $config);
-		$db =& ConnectionManager::getDataSource('cake_test_case');
-		$fixture =& new PostFixture($db);
+		$db = ConnectionManager::getDataSource('cake_test_case');
+		$fixture = new PostFixture($db);
 		$fixture->create($db);
 		$fixture->insert($db);
 
@@ -459,7 +459,7 @@ class CakeTestCaseTest extends CakeTestCase {
 		$this->assertTrue(in_array('cake_testaction_test_suite_posts', $tables));
 
 		$fixture->drop($db);
-		$db =& ConnectionManager::getDataSource('test_suite');
+		$db = ConnectionManager::getDataSource('test_suite');
 		$db->config['prefix'] = $_backPrefix;
 		$fixture->drop($db);
 	}
@@ -488,8 +488,8 @@ class CakeTestCaseTest extends CakeTestCase {
 			'controllers' => array(TEST_CAKE_CORE_INCLUDE_PATH . 'tests' . DS . 'test_app' . DS . 'controllers' . DS)
 		), true);
 
-		$Dispatcher =& new CakeTestDispatcher();
-		$Case =& new CakeDispatcherMockTestCase();
+		$Dispatcher = new CakeTestDispatcher();
+		$Case = new CakeDispatcherMockTestCase();
 
 		$Case->expectOnce('startController');
 		$Case->expectOnce('endController');

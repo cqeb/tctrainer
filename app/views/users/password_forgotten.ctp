@@ -8,7 +8,7 @@
              <?php echo $form->create('User', array('action' => 'password_forgotten', 'class' => 'form-horizontal'));?>
 
              <fieldset>
-             <legend><?php __('Enter your e-mail to reset your password.'); ?></legend>
+             <legend><?php __('Enter your email to reset your password.'); ?></legend>
 
              <?php if ($session->read('flash')) { ?>
              <div class="<?php echo $statusbox; ?>">
@@ -31,9 +31,9 @@ if ( $status != 'sent' )
            'between' => '',
            'maxLength' => 255,          
            'class' => 'required form-control',
-           'label' => array( 'class' => 'control-label', __('Your e-mail', true) ),
+           'label' => array( 'class' => 'control-label', __('Your email', true) ),
            'error' => array( 
-              'notempty' => __('You have to enter an e-mail', true),
+              'notempty' => __('You have to enter an email', true),
               'wrap' => 'span', 
               'class' => 'text-danger'
            )
@@ -49,7 +49,7 @@ if ( $status != 'sent' )
       //create the reCAPTCHA form.
       //$recaptcha->display_form('echo');
       
-      //hide an e-mail address
+      //hide an email address
       //$recaptcha->hide_mail('tri@schremser.com','echo');
 
 ?>

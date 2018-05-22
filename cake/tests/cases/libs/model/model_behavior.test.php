@@ -213,7 +213,7 @@ class TestBehavior extends ModelBehavior {
  * @return void
  */
 	function beforeDelete(&$model, $cascade = true) {
-		$settings =& $this->settings[$model->alias];
+		$settings = $this->settings[$model->alias];
 		if (!isset($settings['beforeDelete']) || $settings['beforeDelete'] == 'off') {
 			return parent::beforeDelete($model, $cascade);
 		}
@@ -241,7 +241,7 @@ class TestBehavior extends ModelBehavior {
  * @return void
  */
 	function afterDelete(&$model) {
-		$settings =& $this->settings[$model->alias];
+		$settings = $this->settings[$model->alias];
 		if (!isset($settings['afterDelete']) || $settings['afterDelete'] == 'off') {
 			return parent::afterDelete($model);
 		}
@@ -532,8 +532,8 @@ class BehaviorTest extends CakeTestCase {
  * @return void
  */
 	function testInvalidBehaviorCausingCakeError() {
-		$Apple =& new Apple();
-		$Apple->Behaviors =& new MockModelBehaviorCollection();
+		$Apple = new Apple();
+		$Apple->Behaviors = new MockModelBehaviorCollection();
 		$Apple->Behaviors->expectOnce('cakeError');
 		$Apple->Behaviors->expectAt(0, 'cakeError', array('missingBehaviorFile', '*'));
 		$this->assertFalse($Apple->Behaviors->attach('NoSuchBehavior'));
@@ -1051,7 +1051,7 @@ class BehaviorTest extends CakeTestCase {
  * @return void
  */
 	function testBehaviorTrigger() {
-		$Apple =& new Apple();
+		$Apple = new Apple();
 		$Apple->Behaviors->attach('Test');
 		$Apple->Behaviors->attach('Test2');
 		$Apple->Behaviors->attach('Test3');
@@ -1127,7 +1127,7 @@ class BehaviorTest extends CakeTestCase {
  * @return void
  */
 	function testBehaviorAttachAndDetach() {
-		$Sample =& new Sample();
+		$Sample = new Sample();
 		$Sample->actsAs = array('Test3' => array('bar'), 'Test2' => array('foo', 'bar'));
 		$Sample->Behaviors->init($Sample->alias, $Sample->actsAs);
 		$Sample->Behaviors->attach('Test2');

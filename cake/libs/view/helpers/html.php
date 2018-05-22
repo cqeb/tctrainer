@@ -236,7 +236,7 @@ class HtmlHelper extends AppHelper {
 		if ($inline) {
 			return $out;
 		} else {
-			$view =& ClassRegistry::getObject('view');
+			$view = ClassRegistry::getObject('view');
 			$view->addScript($out);
 		}
 	}
@@ -380,7 +380,7 @@ class HtmlHelper extends AppHelper {
 		if ($options['inline']) {
 			return $out;
 		} else {
-			$view =& ClassRegistry::getObject('view');
+			$view = ClassRegistry::getObject('view');
 			$view->addScript($out);
 		}
 	}
@@ -446,7 +446,7 @@ class HtmlHelper extends AppHelper {
 		if ($options['inline']) {
 			return $out;
 		} else {
-			$view =& ClassRegistry::getObject('view');
+			$view = ClassRegistry::getObject('view');
 			$view->addScript($out);
 		}
 	}
@@ -476,7 +476,7 @@ class HtmlHelper extends AppHelper {
 		if ($inline) {
 			return sprintf($this->tags['javascriptblock'], $attributes, $script);
 		} else {
-			$view =& ClassRegistry::getObject('view');
+			$view = ClassRegistry::getObject('view');
 			$view->addScript(sprintf($this->tags['javascriptblock'], $attributes, $script));
 			return null;
 		}

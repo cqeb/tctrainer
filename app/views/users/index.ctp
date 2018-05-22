@@ -1,5 +1,5 @@
       <div class="panel panel-default" id="forms">
-        <div class="panel-heading"><h1><?php __('TriCoreTraining'); ?></h1></div>
+        <div class="panel-heading"><h1>TriCoreTraining</h1></div>
         
         <div class="panel-body">
 
@@ -13,8 +13,8 @@
 
          <h2><?php __('Next steps to use TriCoreTraining'); ?></h2>
          <ol>
-           <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/competitions/list_competitions"><?php __('Define your competitions (goals)'); ?></a></li>
-           <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingplans/view"><?php __('Study and fulfill your training schedule'); ?></a></li>
+           <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/competitions/list_competitions"><?php __('Define your races (goals)'); ?></a></li>
+           <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingplans/view"><?php __('Go for your training plan'); ?></a></li>
            <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingstatistics/list_trainings"><?php __('Track your workouts'); ?></a></li>
            <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/trainingstatistics/statistics_whathaveidone"><?php __('Analyse your workouts'); ?></a></li>
            <li><a href="<?php echo Configure::read('App.hostUrl') . Configure::read('App.serverUrl'); ?>/users/edit_traininginfo"><?php __('Optimize your settings'); ?></a></li>

@@ -152,7 +152,7 @@ class XmlNode extends Object {
  * @return object XmlNode
  */
 	function &createNode($name = null, $value = null, $namespace = false) {
-		$node =& new XmlNode($name, $value, $namespace);
+		$node = new XmlNode($name, $value, $namespace);
 		$node->setParent($this);
 		return $node;
 	}
@@ -167,7 +167,7 @@ class XmlNode extends Object {
  * @return object XmlElement
  */
 	function &createElement($name = null, $value = null, $attributes = array(), $namespace = false) {
-		$element =& new XmlElement($name, $value, $attributes, $namespace);
+		$element = new XmlElement($name, $value, $attributes, $namespace);
 		$element->setParent($this);
 		return $element;
 	}
@@ -221,9 +221,9 @@ class XmlNode extends Object {
 		}
 
 		if (!empty($name)) {
-			$node =& $this->createElement($name);
+			$node = $this->createElement($name);
 		} else {
-			$node =& $this;
+			$node = $this;
 		}
 
 		$namespace = array();
@@ -278,7 +278,7 @@ class XmlNode extends Object {
 							if ($options['slug'] == true) {
 								$key = Inflector::slug(Inflector::underscore($key));
 							}
-							$tmp =& $node->createElement($key);
+							$tmp = $node->createElement($key);
 							if (!empty($val) || $val === 0 || $val === '0') {
 								$tmp->createTextNode($val);
 							}
@@ -331,7 +331,7 @@ class XmlNode extends Object {
  */
 	function name() {
 		if (!empty($this->namespace)) {
-			$_this =& XmlManager::getInstance();
+			$_this = XmlManager::getInstance();
 			if (!isset($_this->options['verifyNs']) || !$_this->options['verifyNs'] || in_array($this->namespace, array_keys($_this->namespaces))) {
 				return $this->namespace . ':' . $this->name;
 			}
@@ -362,8 +362,8 @@ class XmlNode extends Object {
 		if ($parent == null) {
 			unset($this->__parent);
 		} else {
-			$parent->children[] =& $this;
-			$this->__parent =& $parent;
+			$parent->children[] = $this;
+			$this->__parent = $parent;
 		}
 	}
 
@@ -428,7 +428,7 @@ class XmlNode extends Object {
 			if (func_num_args() >= 2) {
 				$attributes = func_get_arg(1);
 			}
-			$child =& $this->createNode($child, null, $attributes);
+			$child = $this->createNode($child, null, $attributes);
 		}
 
 		$child = $this->normalize($child, null, $options);
@@ -512,7 +512,7 @@ class XmlNode extends Object {
 		$count = count($this->children);
 		for ($i = 0; $i < $count; $i++) {
 			if ($this->children[$i]->name == $name) {
-				$nodes[] =& $this->children[$i];
+				$nodes[] = $this->children[$i];
 			}
 		}
 		return $nodes;
@@ -575,12 +575,12 @@ class XmlNode extends Object {
  * @access public
  */
 	function &document() {
-		$document =& $this;
+		$document = $this;
 		while (true) {
 			if (get_class($document) == 'Xml' || $document == null) {
 				break;
 			}
-			$document =& $document->parent();
+			$document = $document->parent();
 		}
 		return $document;
 	}
@@ -627,7 +627,7 @@ class XmlNode extends Object {
 				}
 			}
 
-			$parent =& $this->parent();
+			$parent = $this->parent();
 			if ($parent->name === '#document' && !empty($parent->namespaces)) {
 				foreach ($parent->namespaces as $key => $val) {
 					$val = str_replace('"', '\"', $val);
@@ -866,9 +866,9 @@ class Xml extends XmlNode {
 		parent::__construct('#document');
 
 		if ($options['root'] !== '#document') {
-			$Root =& $this->createNode($options['root']);
+			$Root = $this->createNode($options['root']);
 		} else {
-			$Root =& $this;
+			$Root = $this;
 		}
 
 		if (!empty($input)) {
@@ -927,7 +927,7 @@ class Xml extends XmlNode {
 		));
 
 		xml_parse_into_struct($this->__parser, $this->__rawData, $vals);
-		$xml =& $this;
+		$xml = $this;
 		$count = count($vals);
 
 		for ($i = 0; $i < $count; $i++) {
@@ -935,10 +935,10 @@ class Xml extends XmlNode {
 			$data += array('tag' => null, 'value' => null, 'attributes' => array());
 			switch ($data['type']) {
 				case "open" :
-					$xml =& $xml->createElement($data['tag'], $data['value'], $data['attributes']);
+					$xml = $xml->createElement($data['tag'], $data['value'], $data['attributes']);
 				break;
 				case "close" :
-					$xml =& $xml->parent();
+					$xml = $xml->parent();
 				break;
 				case "complete" :
 					$xml->createElement($data['tag'], $data['value'], $data['attributes']);
@@ -1141,7 +1141,7 @@ class Xml extends XmlNode {
  * @static
  */
 	function addGlobalNs($name, $url = null) {
-		$_this =& XmlManager::getInstance();
+		$_this = XmlManager::getInstance();
 		if ($ns = Xml::resolveNamespace($name, $url)) {
 			$_this->namespaces = array_merge($_this->namespaces, $ns);
 			return $ns;
@@ -1157,7 +1157,7 @@ class Xml extends XmlNode {
  * @return array
  */
 	function resolveNamespace($name, $url) {
-		$_this =& XmlManager::getInstance();
+		$_this = XmlManager::getInstance();
 		if ($url == null && isset($_this->defaultNamespaceMap[$name])) {
 			$url = $_this->defaultNamespaceMap[$name];
 		} elseif ($url == null) {
@@ -1190,7 +1190,7 @@ class Xml extends XmlNode {
  * @static
  */
 	function removeGlobalNs($name) {
-		$_this =& XmlManager::getInstance();
+		$_this = XmlManager::getInstance();
 		if (isset($_this->namespaces[$name])) {
 			unset($_this->namespaces[$name]);
 			unset($this->namespaces[$name]);
@@ -1228,7 +1228,7 @@ class Xml extends XmlNode {
  * @static
  */
 	function options($options = array()) {
-		$_this =& XmlManager::getInstance();
+		$_this = XmlManager::getInstance();
 		$_this->options = array_merge($_this->options, $options);
 		return $_this->options;
 	}
@@ -1453,7 +1453,7 @@ class XmlManager {
 		static $instance = array();
 
 		if (!$instance) {
-			$instance[0] =& new XmlManager();
+			$instance[0] = new XmlManager();
 		}
 		return $instance[0];
 	}

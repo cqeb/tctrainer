@@ -34,7 +34,7 @@ class ConnectionManagerTest extends CakeTestCase {
  * @return void
  */
 	function setUp() {
-		$this->ConnectionManager =& ConnectionManager::getInstance();
+		$this->ConnectionManager = ConnectionManager::getInstance();
 	}
 
 /**
@@ -212,7 +212,7 @@ class ConnectionManagerTest extends CakeTestCase {
 
 		$this->assertEqual($result, $name);
 
-		$source =& new StdClass();
+		$source = new StdClass();
 		$result = ConnectionManager::getSourceName($source);
 		$this->assertEqual($result, null);
 	}

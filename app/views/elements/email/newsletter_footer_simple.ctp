@@ -28,7 +28,7 @@
                     <a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a>
                   </p>
                   <p>
-                    <span style="font-weight: bold;"><?php __('TriCoreTraining'); ?></span> <?php __('is a registered trademark'); ?>.</p>
+                    <span style="font-weight: bold;">TriCoreTraining</span> <?php __('is a registered trademark'); ?>.</p>
                </td>
             </tr>
          </table>

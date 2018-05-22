@@ -350,7 +350,7 @@ class AuthComponent extends Object {
 		}
 
 		if ($loginAction == $url) {
-			$model =& $this->getModel();
+			$model = $this->getModel();
 			if (empty($controller->data) || !isset($controller->data[$model->alias])) {
 				if (!$this->Session->check('Auth.redirect') && !$this->loginRedirect && env('HTTP_REFERER')) {
 					$this->Session->write('Auth.redirect', $controller->referer(null, true));
@@ -412,12 +412,12 @@ class AuthComponent extends Object {
 		extract($this->__authType());
 		switch ($type) {
 			case 'controller':
-				$this->object =& $controller;
+				$this->object = $controller;
 			break;
 			case 'crud':
 			case 'actions':
 				if (isset($controller->Acl)) {
-					$this->Acl =& $controller->Acl;
+					$this->Acl = $controller->Acl;
 				} else {
 					trigger_error(__('Could not find AclComponent. Please include Acl in Controller::$components.', true), E_USER_WARNING);
 				}
@@ -725,7 +725,7 @@ class AuthComponent extends Object {
 		}
 
 		if ($key == null) {
-			$model =& $this->getModel();
+			$model = $this->getModel();
 			return array($model->alias => $this->Session->read($this->sessionKey));
 		} else {
 			$user = $this->Session->read($this->sessionKey);
@@ -819,7 +819,7 @@ class AuthComponent extends Object {
 		if (PHP5) {
 			$model = ClassRegistry::init($name);
 		} else {
-			$model =& ClassRegistry::init($name);
+			$model = ClassRegistry::init($name);
 		}
 
 		if (empty($model)) {
@@ -847,7 +847,7 @@ class AuthComponent extends Object {
 		} else {
 			$conditions = $this->userScope;
 		}
-		$model =& $this->getModel();
+		$model = $this->getModel();
 		if (empty($user)) {
 			$user = $this->user();
 			if (empty($user)) {
@@ -922,7 +922,7 @@ class AuthComponent extends Object {
 		}
 
 		if (is_array($data)) {
-			$model =& $this->getModel();
+			$model = $this->getModel();
 			
 			if(isset($data[$model->alias])) {
 				if (isset($data[$model->alias][$this->fields['username']]) && isset($data[$model->alias][$this->fields['password']])) {

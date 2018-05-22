@@ -1,0 +1,3 @@
+
+1. extract default.pot from app - cake/console/cake i18n extract
+2. translate with poedit

@@ -86,7 +86,7 @@ echo $form->input('gender',
 if ( isset( $companyemail ) )
 {
 	echo "<div class='alert'>";
-	__('Please use your company email for registration to receive your company discount!');
+	__('Please use your company email for signup to receive your company discount!');
 	echo ' ';
 	__('Your email must end with');
 	echo ' ' . $companyemail;
@@ -123,7 +123,7 @@ echo $form->hidden('emailcheck');
 if ($form->isFieldError('emailcheck'))
 {
    echo "<div class=\"text-danger\">";
-   __('Your e-mail is already in use!');
+   __('Your email is already in use!');
    echo "</div><br />";
    //echo $form->error('emailcheck');
 }
@@ -278,7 +278,7 @@ echo $form->input('mailingtos',
 // calculate FREE training period
 $paid_from = date( "Y-m-d", time() );
 $paid_to = date( "Y-m-d", time() + (TRIAL_PERIOD * 24 * 60 * 60) );
-//currently - free registration
+//currently - free signup
 //$paid_to = '2012-12-31';
 
 echo $form->input( 'paid_from', array('type' => 'hidden', 'value' => $paid_from));

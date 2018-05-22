@@ -58,7 +58,7 @@ class AclBehavior extends ModelBehavior {
 		if (PHP5) {
 			$model->{$type} = ClassRegistry::init($type);
 		} else {
-			$model->{$type} =& ClassRegistry::init($type);
+			$model->{$type} = ClassRegistry::init($type);
 		}
 		if (!method_exists($model, 'parentNode')) {
 			trigger_error(sprintf(__('Callback parentNode() not defined in %s', true), $model->alias), E_USER_WARNING);

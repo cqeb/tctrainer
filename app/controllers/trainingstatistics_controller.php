@@ -1114,7 +1114,7 @@ class TrainingstatisticsController extends AppController {
             $this->Trainingstatistic->delete($id);
             
             $this->set('statusbox', 'alert');
-            $this->Session->write('flash',__('Workout d.',true));
+            $this->Session->write('flash',__('Workout was removed.',true));
             $this->redirect(array('action'=>'list_trainings'));
 	}
 

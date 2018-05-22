@@ -39,7 +39,7 @@ class <?php echo $fullClassName; ?>TestCase extends CakeTestCase {
 
 <?php endif; ?>
 	function startTest() {
-		$this-><?php echo $className . ' =& ' . $construction; ?>
+		$this-><?php echo $className . ' = ' . $construction; ?>
 	}
 
 	function endTest() {

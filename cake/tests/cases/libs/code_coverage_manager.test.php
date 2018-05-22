@@ -66,7 +66,7 @@ class CodeCoverageManagerTest extends CakeTestCase {
 		if ($this->skipIf(PHP_SAPI == 'cli', 'Is cli, cannot run this test %s')) {
 			return;
 		}
-		$reporter =& new CakeHtmlReporter(null, array('group' => false, 'app' => false, 'plugin' => false));
+		$reporter = new CakeHtmlReporter(null, array('group' => false, 'app' => false, 'plugin' => false));
 
 		CodeCoverageManager::init(substr(md5(microtime()), 0, 5), $reporter);
 		CodeCoverageManager::report(false);
@@ -86,7 +86,7 @@ class CodeCoverageManagerTest extends CakeTestCase {
 		if ($this->skipIf(PHP_SAPI == 'cli', 'Is cli, cannot run this test %s')) {
 			return;
 		}
-		$reporter =& new CakeHtmlReporter(null, array('group' => false, 'app' => false, 'plugin' => false));
+		$reporter = new CakeHtmlReporter(null, array('group' => false, 'app' => false, 'plugin' => false));
 		$path = LIBS;
 		if (strpos(LIBS, ROOT) === false) {
 			$path = ROOT.DS.LIBS;
@@ -121,7 +121,7 @@ class CodeCoverageManagerTest extends CakeTestCase {
  * @return void
  */
 	function testGetTestObjectFileNameFromTestCaseFile() {
-		$manager =& CodeCoverageManager::getInstance();
+		$manager = CodeCoverageManager::getInstance();
 		$manager->reporter = new CakeHtmlReporter();
 
 		$expected = $manager->__testObjectFileFromCaseFile('models/some_file.test.php', true);
@@ -162,7 +162,7 @@ class CodeCoverageManagerTest extends CakeTestCase {
  * @return void
  */
 	function testOfHtmlDiffReport() {
-		$manager =& CodeCoverageManager::getInstance();
+		$manager = CodeCoverageManager::getInstance();
 		$code = <<<PHP
 /**
  * Set class
@@ -222,7 +222,7 @@ class CodeCoverageManagerTest extends CakeTestCase {
 					\$backtrace = debug_backtrace();
 					\$previousCall = strtolower(\$backtrace[1]['class'].'::'.\$backtrace[1]['function']);
 					if (\$previousCall != 'set::merge') {
-						\$r =& \$this->value;
+						\$r = \$this->value;
 						array_unshift(\$args, null);
 					}
 				}
@@ -427,7 +427,7 @@ PHP;
  * @return void
  */
 	function testArrayStrrpos() {
-		$manager =& CodeCoverageManager::getInstance();
+		$manager = CodeCoverageManager::getInstance();
 
 		$a = array(
 			'apples',
@@ -460,9 +460,9 @@ PHP;
  * @return void
  */
 	function testGetExecutableLines() {
-		$manager =& CodeCoverageManager::getInstance();
+		$manager = CodeCoverageManager::getInstance();
 		$code = <<<HTML
-			\$manager =& CodeCoverageManager::getInstance();
+			\$manager = CodeCoverageManager::getInstance();
 HTML;
 		$result = $manager->__getExecutableLines($code);
 		foreach ($result as $line) {
@@ -498,7 +498,7 @@ HTML;
  * @return void
  */
 	function testCalculateCodeCoverage() {
-		$manager =& CodeCoverageManager::getInstance();
+		$manager = CodeCoverageManager::getInstance();
 		$data = array(
 			'25' => array(100, 25),
 			'50' => array(100, 50),

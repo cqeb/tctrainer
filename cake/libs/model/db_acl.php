@@ -70,7 +70,7 @@ class AclNode extends AppModel {
  * @access public
  */
 	function node($ref = null) {
-		$db =& ConnectionManager::getDataSource($this->useDbConfig);
+		$db = ConnectionManager::getDataSource($this->useDbConfig);
 		$type = $this->alias;
 		$result = null;
 
@@ -139,7 +139,7 @@ class AclNode extends AppModel {
 			if (PHP5) {
 				$model = ClassRegistry::init(array('class' => $name, 'alias' => $name));
 			} else {
-				$model =& ClassRegistry::init(array('class' => $name, 'alias' => $name));
+				$model = ClassRegistry::init(array('class' => $name, 'alias' => $name));
 			}
 
 			if (empty($model)) {

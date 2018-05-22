@@ -7,5 +7,5 @@ Gruene Gasse 35, A-2351 Wiener Neudorf, <?php __('Austria'); ?>
 support@tricoretraining.com
 https://tricoretraining.com
 
-<?php __('TriCoreTraining'); ?> <?php __('is a registered trademark'); ?>.
+TriCoreTraining <?php __('is a registered trademark'); ?>.
 

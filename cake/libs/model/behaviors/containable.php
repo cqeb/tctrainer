@@ -123,7 +123,7 @@ class ContainableBehavior extends ModelBehavior {
 
 		$mandatory = array();
 		foreach ($containments['models'] as $name => $model) {
-			$instance =& $model['instance'];
+			$instance = $model['instance'];
 			$needed = $this->fieldDependencies($instance, $map, false);
 			if (!empty($needed)) {
 				$mandatory = array_merge($mandatory, $needed);
@@ -419,7 +419,7 @@ class ContainableBehavior extends ModelBehavior {
 	function containmentsMap($containments) {
 		$map = array();
 		foreach ($containments['models'] as $name => $model) {
-			$instance =& $model['instance'];
+			$instance = $model['instance'];
 			foreach ($this->types as $type) {
 				foreach ($instance->{$type} as $assoc => $options) {
 					if (isset($model['keep'][$assoc])) {

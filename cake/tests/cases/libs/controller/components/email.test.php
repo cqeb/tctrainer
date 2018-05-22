@@ -243,7 +243,7 @@ class EmailComponentTest extends CakeTestCase {
 		$this->_appEncoding = Configure::read('App.encoding');
 		Configure::write('App.encoding', 'UTF-8');
 
-		$this->Controller =& new EmailTestController();
+		$this->Controller = new EmailTestController();
 
 		restore_error_handler();
 		@$this->Controller->Component->init($this->Controller);
@@ -384,7 +384,7 @@ TEMPDOC;
 			return;
 		}
 
-		$connection =& new CakeSocket(array('protocol'=>'smtp', 'host' => 'localhost', 'port' => 25));
+		$connection = new CakeSocket(array('protocol'=>'smtp', 'host' => 'localhost', 'port' => 25));
 		$this->Controller->EmailTest->setConnectionSocket($connection);
 		$this->Controller->EmailTest->smtpOptions['timeout'] = 10;
 		$this->assertTrue($connection->connect());
@@ -730,7 +730,7 @@ HTMLBLOC;
 		}
 
 		$this->Controller->EmailTest->smtpOptions['timeout'] = 10;
-		$socket =& new CakeSocket(array_merge(array('protocol'=>'smtp'), $this->Controller->EmailTest->smtpOptions));
+		$socket = new CakeSocket(array_merge(array('protocol'=>'smtp'), $this->Controller->EmailTest->smtpOptions));
 		$this->Controller->EmailTest->setConnectionSocket($socket);
 
 		$this->assertTrue($this->Controller->EmailTest->getConnectionSocket());
@@ -781,7 +781,7 @@ HTMLBLOC;
  * @return void
  */
 	function testSendDebugWithNoSessions() {
-		$session =& $this->Controller->Session;
+		$session = $this->Controller->Session;
 		unset($this->Controller->Session);
 		$this->Controller->EmailTest->to = 'postmaster@localhost';
 		$this->Controller->EmailTest->from = 'noreply@example.com';

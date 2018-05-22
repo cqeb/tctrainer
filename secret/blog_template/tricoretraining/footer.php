@@ -10,7 +10,7 @@
         <h4 class="line3 center standart-h4title"><span><?php _e('Navigation'); ?></span></h4>
         <ul class="footer-links">
             <li><a href="/trainer/"><?php _e('Home'); ?></a></li>
-		    <li><a href="/blog/en/"><?php _e('Blog'); ?></a></li>
+		    <!--<li><a href="/blog/en/"><?php _e('Blog'); ?></a></li>-->
          	<li><?php _e('About'); ?> <a href="/blog/en/about/">TriCoreTraining</a></li>
          	<li><a href="/blog/en/terms-of-service-2/"><?php _e('Terms of Service'); ?></a></li>
         </ul>
@@ -19,7 +19,7 @@
     <div class="col-xs-6 col-sm-6 col-lg-3">
         <h4 class="line3 center standart-h4title"><span><?php _e('Contact'); ?></span></h4>
         <ul class="footer-links">
-			<li><a href="http://www.getsatisfaction.com/tricoretraining" target="_blank"><?php _e('Support'); ?></a></li>
+			<li><a href="mailto:support@tricoretraining.com"><?php _e('Support'); ?></a></li>
 		 	<li><a href="mailto:support@tricoretraining.com"><?php _e('Contact us'); ?></a></li>
 			<li><a href="/blog/en/imprint/"><?php _e('Imprint'); ?></a></li>
         </ul>
@@ -28,8 +28,8 @@
 	<div class="col-xs-6 col-sm-6 col-lg-3">
         <h4 class="line3 center standart-h4title"><span><?php _e('Useful Links'); ?></span></h4>
         <ul class="footer-links">
-			<li><a href="/trainer/starts/features"><?php _e('Triathlon Training'); ?></a></li>
-			<li><a href="/trainer/starts/features"><?php _e('Marathon Training'); ?></a></li>
+			<li><a href="/trainer/starts/features"><?php _e('Pricing'); ?></a></li>
+			<li><a href="/trainer/starts"><?php _e('Get Started'); ?></a></li>
 			<li><a href="/blog/en/my-1st-ironman-pain-is-temporary-pride-is-4ever/"><?php _e('My first Ironman'); ?></a></li>
         </ul>
     </div>
@@ -46,7 +46,7 @@
 		<ul class="footer-links">
 		 <li>Join us on <a href="http://www.facebook.com/#!/pages/TriCoreTraining/150997251602079" target="_blank"><?php _e('Facebook'); ?></a></li>
 		 <li>Follow us on <a href="http://www.twitter.com/tricoretraining/" target="_blank"><?php _e('Twitter'); ?></a></li>
-	 	 <li><a target="_blank" href="http://feeds.feedburner.com/tricoretraining/<?php echo strtoupper( $q_config['language'] ); ?>"><?php _e('RSS'); ?></a></li>
+	 	 <!--<li><a target="_blank" href="http://feeds.feedburner.com/tricoretraining/<?php echo strtoupper( $q_config['language'] ); ?>"><?php _e('RSS'); ?></a></li>-->
 
 		</ul>
     </div>

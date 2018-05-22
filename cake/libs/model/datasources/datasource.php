@@ -278,7 +278,7 @@ class DataSource extends Object {
 		$cache = $this->__cacheDescription($table);
 
 		if ($cache !== null) {
-			$this->__descriptions[$table] =& $cache;
+			$this->__descriptions[$table] = $cache;
 			return $cache;
 		}
 		return null;
@@ -468,7 +468,7 @@ class DataSource extends Object {
 		}
 
 		if ($data !== null) {
-			$this->__descriptions[$object] =& $data;
+			$this->__descriptions[$object] = $data;
 		}
 
 		$key = ConnectionManager::getSourceName($this) . '_' . $object;

@@ -55,7 +55,7 @@ class AclComponent extends Object {
 				trigger_error(sprintf(__('Could not find %s.', true), $name), E_USER_WARNING);
 			}
 		}
-		$this->_Instance =& new $name();
+		$this->_Instance = new $name();
 		$this->_Instance->initialize($this);
 	}
 
@@ -234,8 +234,8 @@ class DbAcl extends AclBase {
 		if (!class_exists('AclNode')) {
 			require LIBS . 'model' . DS . 'db_acl.php';
 		}
-		$this->Aro =& ClassRegistry::init(array('class' => 'Aro', 'alias' => 'Aro'));
-		$this->Aco =& ClassRegistry::init(array('class' => 'Aco', 'alias' => 'Aco'));
+		$this->Aro = ClassRegistry::init(array('class' => 'Aro', 'alias' => 'Aro'));
+		$this->Aco = ClassRegistry::init(array('class' => 'Aco', 'alias' => 'Aco'));
 	}
 
 /**
@@ -246,8 +246,8 @@ class DbAcl extends AclBase {
  * @access public
  */
 	function initialize(&$component) {
-		$component->Aro =& $this->Aro;
-		$component->Aco =& $this->Aco;
+		$component->Aro = $this->Aro;
+		$component->Aco = $this->Aco;
 	}
 
 /**

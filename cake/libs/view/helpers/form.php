@@ -106,7 +106,7 @@ class FormHelper extends AppHelper {
 		}
 
 		if (ClassRegistry::isKeySet($model)) {
-			$object =& ClassRegistry::getObject($model);
+			$object = ClassRegistry::getObject($model);
 		}
 
 		if (!empty($object)) {
@@ -193,7 +193,7 @@ class FormHelper extends AppHelper {
 	function create($model = null, $options = array()) {
 		$created = $id = false;
 		$append = '';
-		$view =& ClassRegistry::getObject('view');
+		$view = ClassRegistry::getObject('view');
 
 		if (is_array($model) && empty($options)) {
 			$options = $model;
@@ -209,9 +209,9 @@ class FormHelper extends AppHelper {
 		$models = ClassRegistry::keys();
 		foreach ($models as $currentModel) {
 			if (ClassRegistry::isKeySet($currentModel)) {
-				$currentObject =& ClassRegistry::getObject($currentModel);
+				$currentObject = ClassRegistry::getObject($currentModel);
 				if (is_a($currentObject, 'Model') && !empty($currentObject->validationErrors)) {
-					$this->validationErrors[Inflector::camelize($currentModel)] =& $currentObject->validationErrors;
+					$this->validationErrors[Inflector::camelize($currentModel)] = $currentObject->validationErrors;
 				}
 			}
 		}
@@ -375,7 +375,7 @@ class FormHelper extends AppHelper {
 		$this->setEntity(null);
 		$out .= $this->Html->tags['formend'];
 
-		$view =& ClassRegistry::getObject('view');
+		$view = ClassRegistry::getObject('view');
 		$view->modelScope = false;
 		return $out;
 	}
@@ -425,7 +425,7 @@ class FormHelper extends AppHelper {
  */
 	function __secure($field = null, $value = null) {
 		if (!$field) {
-			$view =& ClassRegistry::getObject('view');
+			$view = ClassRegistry::getObject('view');
 			$field = $view->entity();
 		} elseif (is_string($field)) {
 			$field = Set::filter(explode('.', $field), true);
@@ -775,7 +775,7 @@ class FormHelper extends AppHelper {
 			(!isset($options['options']) && in_array($options['type'], $types)) ||
 			(isset($magicType) && $options['type'] == 'text')
 		) {
-			$view =& ClassRegistry::getObject('view');
+			$view = ClassRegistry::getObject('view');
 			$varName = Inflector::variable(
 				Inflector::pluralize(preg_replace('/_id$/', '', $fieldKey))
 			);
@@ -1248,7 +1248,7 @@ class FormHelper extends AppHelper {
 	function file($fieldName, $options = array()) {
 		$options = array_merge($options, array('secure' => false));
 		$options = $this->_initInputField($fieldName, $options);
-		$view =& ClassRegistry::getObject('view');
+		$view = ClassRegistry::getObject('view');
 		$field = $view->entity();
 
 		foreach (array('name', 'type', 'tmp_name', 'error', 'size') as $suffix) {

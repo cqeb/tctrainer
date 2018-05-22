@@ -265,7 +265,7 @@ class DboMysqli extends DboMysqlBase {
 		if (isset($this->results) && is_resource($this->results) && $this->results != $results) {
 			mysqli_free_result($this->results);
 		}
-		$this->results =& $results;
+		$this->results = $results;
 		$this->map = array();
 		$numFields = mysqli_num_fields($results);
 		$index = 0;

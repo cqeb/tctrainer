@@ -156,7 +156,7 @@ class ClassRegistryTest extends CakeTestCase {
 		if (PHP5) {
 			$Tag = ClassRegistry::init('RegisterArticleTag');
 		} else {
-			$Tag =& ClassRegistry::init('RegisterArticleTag');
+			$Tag = ClassRegistry::init('RegisterArticleTag');
 		}
 		$this->assertTrue(is_a($Tag, 'RegisterArticleTag'));
 
@@ -168,7 +168,7 @@ class ClassRegistryTest extends CakeTestCase {
 		if (PHP5) {
 			$TagCopy = ClassRegistry::getObject('RegisterArticleTag');
 		} else {
-			$TagCopy =& ClassRegistry::getObject('RegisterArticleTag');
+			$TagCopy = ClassRegistry::getObject('RegisterArticleTag');
 		}
 
 		$this->assertTrue(is_a($TagCopy, 'RegisterArticleTag'));
@@ -177,14 +177,14 @@ class ClassRegistryTest extends CakeTestCase {
 		if (PHP5) {
 			$NewTag = ClassRegistry::init(array('class' => 'RegisterArticleTag', 'alias' => 'NewTag'));
 		} else {
-			$NewTag =& ClassRegistry::init(array('class' => 'RegisterArticleTag', 'alias' => 'NewTag'));
+			$NewTag = ClassRegistry::init(array('class' => 'RegisterArticleTag', 'alias' => 'NewTag'));
 		}
 		$this->assertTrue(is_a($Tag, 'RegisterArticleTag'));
 
 		if (PHP5) {
 			$NewTagCopy = ClassRegistry::init(array('class' => 'RegisterArticleTag', 'alias' => 'NewTag'));
 		} else {
-			$NewTagCopy =& ClassRegistry::init(array('class' => 'RegisterArticleTag', 'alias' => 'NewTag'));
+			$NewTagCopy = ClassRegistry::init(array('class' => 'RegisterArticleTag', 'alias' => 'NewTag'));
 		}
 
 		$this->assertNotIdentical($Tag, $NewTag);
@@ -202,14 +202,14 @@ class ClassRegistryTest extends CakeTestCase {
 		if (PHP5) {
 			$User = ClassRegistry::init(array('class' => 'RegisterUser', 'alias' => 'User', 'table' => false));
 		} else {
-			$User =& ClassRegistry::init(array('class' => 'RegisterUser', 'alias' => 'User', 'table' => false));
+			$User = ClassRegistry::init(array('class' => 'RegisterUser', 'alias' => 'User', 'table' => false));
 		}
 		$this->assertTrue(is_a($User, 'AppModel'));
 
 		if (PHP5) {
 			$UserCopy = ClassRegistry::init(array('class' => 'RegisterUser', 'alias' => 'User', 'table' => false));
 		} else {
-			$UserCopy =& ClassRegistry::init(array('class' => 'RegisterUser', 'alias' => 'User', 'table' => false));
+			$UserCopy = ClassRegistry::init(array('class' => 'RegisterUser', 'alias' => 'User', 'table' => false));
 		}
 		$this->assertTrue(is_a($UserCopy, 'AppModel'));
 		$this->assertIdentical($User, $UserCopy);
@@ -217,14 +217,14 @@ class ClassRegistryTest extends CakeTestCase {
 		if (PHP5) {
 			$Category = ClassRegistry::init(array('class' => 'RegisterCategory'));
 		} else {
-			$Category =& ClassRegistry::init(array('class' => 'RegisterCategory'));
+			$Category = ClassRegistry::init(array('class' => 'RegisterCategory'));
 		}
 		$this->assertTrue(is_a($Category, 'RegisterCategory'));
 
 		if (PHP5) {
 			$ParentCategory = ClassRegistry::init(array('class' => 'RegisterCategory', 'alias' => 'ParentCategory'));
 		} else {
-			$ParentCategory =& ClassRegistry::init(array('class' => 'RegisterCategory', 'alias' => 'ParentCategory'));
+			$ParentCategory = ClassRegistry::init(array('class' => 'RegisterCategory', 'alias' => 'ParentCategory'));
 		}
 		$this->assertTrue(is_a($ParentCategory, 'RegisterCategory'));
 		$this->assertNotIdentical($Category, $ParentCategory);
@@ -310,14 +310,14 @@ class ClassRegistryTest extends CakeTestCase {
 		if (PHP5) {
 			$PluginUser = ClassRegistry::init(array('class' => 'RegistryPlugin.RegisterUser', 'alias' => 'RegistryPluginUser', 'table' => false));
 		} else {
-			$PluginUser =& ClassRegistry::init(array('class' => 'RegistryPlugin.RegisterUser', 'alias' => 'RegistryPluginUser', 'table' => false));
+			$PluginUser = ClassRegistry::init(array('class' => 'RegistryPlugin.RegisterUser', 'alias' => 'RegistryPluginUser', 'table' => false));
 		}
 		$this->assertTrue(is_a($PluginUser, 'RegistryPluginAppModel'));
 
 		if (PHP5) {
 			$PluginUserCopy = ClassRegistry::getObject('RegistryPluginUser');
 		} else {
-			$PluginUserCopy =& ClassRegistry::getObject('RegistryPluginUser');
+			$PluginUserCopy = ClassRegistry::getObject('RegistryPluginUser');
 		}
 		$this->assertTrue(is_a($PluginUserCopy, 'RegistryPluginAppModel'));
 		$this->assertIdentical($PluginUser, $PluginUserCopy);

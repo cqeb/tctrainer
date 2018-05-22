@@ -117,7 +117,7 @@ class TestTask extends BakeTask {
 	function bake($type, $className) {
 		if ($this->typeCanDetectFixtures($type) && $this->isLoadableClass($type, $className)) {
 			$this->out(__('Bake is detecting possible fixtures..', true));
-			$testSubject =& $this->buildTestSubject($type, $className);
+			$testSubject = $this->buildTestSubject($type, $className);
 			$this->generateFixtureList($testSubject);
 		} elseif ($this->interactive) {
 			$this->getUserFixtures();
@@ -248,9 +248,9 @@ class TestTask extends BakeTask {
 		App::import($type, $class);
 		$class = $this->getRealClassName($type, $class);
 		if (strtolower($type) == 'model') {
-			$instance =& ClassRegistry::init($class);
+			$instance = ClassRegistry::init($class);
 		} else {
-			$instance =& new $class();
+			$instance = new $class();
 		}
 		return $instance;
 	}

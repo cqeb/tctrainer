@@ -25,7 +25,7 @@
  * @package       cake
  * @subpackage    cake.cake.libs
  */
-class String {
+class StringHelper {
 
 /**
  * Generate a random UUID
@@ -185,7 +185,7 @@ class String {
 /**
  * Replaces variable placeholders inside a $str with any given $data. Each key in the $data array
  * corresponds to a variable placeholder name in $str.
- * Example: `String::insert(':name is :age years old.', array('name' => 'Bob', '65'));`
+ * Example: `StringHelper::insert(':name is :age years old.', array('name' => 'Bob', '65'));`
  * Returns: Bob is 65 years old.
  *
  * Available $options are:
@@ -195,7 +195,7 @@ class String {
  * - escape: The character or string used to escape the before character / string (Defaults to `\`)
  * - format: A regex to use for matching variable placeholders. Default is: `/(?<!\\)\:%s/`
  *   (Overwrites before, after, breaks escape / clean)
- * - clean: A boolean or array with instructions for String::cleanInsert
+ * - clean: A boolean or array with instructions for StringHelper::cleanInsert
  *
  * @param string $str A string containing variable placeholders
  * @param string $data A key => val array where each key stands for a placeholder variable name
@@ -213,7 +213,7 @@ class String {
 		$format = $options['format'];
 		$data = (array)$data;
 		if (empty($data)) {
-			return ($options['clean']) ? String::cleanInsert($str, $options) : $str;
+			return ($options['clean']) ? StringHelper::cleanInsert($str, $options) : $str;
 		}
 
 		if (!isset($format)) {
@@ -232,7 +232,7 @@ class String {
 				$offset = $pos + strlen($val);
 				$str = substr_replace($str, $val, $pos, 1);
 			}
-			return ($options['clean']) ? String::cleanInsert($str, $options) : $str;
+			return ($options['clean']) ? StringHelper::cleanInsert($str, $options) : $str;
 		} else {
 			asort($data);
 
@@ -257,21 +257,21 @@ class String {
 		if (!isset($options['format']) && isset($options['before'])) {
 			$str = str_replace($options['escape'].$options['before'], $options['before'], $str);
 		}
-		return ($options['clean']) ? String::cleanInsert($str, $options) : $str;
+		return ($options['clean']) ? StringHelper::cleanInsert($str, $options) : $str;
 	}
 
 /**
- * Cleans up a String::insert() formated string with given $options depending on the 'clean' key in
+ * Cleans up a StringHelper::insert() formated string with given $options depending on the 'clean' key in
  * $options. The default method used is text but html is also available. The goal of this function
  * is to replace all whitespace and uneeded markup around placeholders that did not get replaced
- * by String::insert().
+ * by StringHelper::insert().
  *
  * @param string $str
  * @param string $options
  * @return string
  * @access public
  * @static
- * @see String::insert()
+ * @see StringHelper::insert()
  */
 	function cleanInsert($str, $options) {
 		$clean = $options['clean'];
@@ -300,7 +300,7 @@ class String {
 				$str = preg_replace($kleenex, $clean['replacement'], $str);
 				if ($clean['andText']) {
 					$options['clean'] = array('method' => 'text');
-					$str = String::cleanInsert($str, $options);
+					$str = StringHelper::cleanInsert($str, $options);
 				}
 				break;
 			case 'text':

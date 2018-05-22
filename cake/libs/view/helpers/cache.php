@@ -258,7 +258,7 @@ class CacheHelper extends AppHelper {
 			';
 		}
 
-		$file .= '$controller =& new ' . $this->controllerName . 'Controller();
+		$file .= '$controller = new ' . $this->controllerName . 'Controller();
 				$controller->plugin = $this->plugin = \''.$this->plugin.'\';
 				$controller->helpers = $this->helpers = unserialize(\'' . serialize($this->helpers) . '\');
 				$controller->base = $this->base = \'' . $this->base . '\';
@@ -286,9 +286,9 @@ class CacheHelper extends AppHelper {
 				$loadedHelpers = $this->_loadHelpers($loadedHelpers, $this->helpers);
 				foreach (array_keys($loadedHelpers) as $helper) {
 					$camelBackedHelper = Inflector::variable($helper);
-					${$camelBackedHelper} =& $loadedHelpers[$helper];
-					$this->loaded[$camelBackedHelper] =& ${$camelBackedHelper};
-					$this->{$helper} =& $loadedHelpers[$helper];
+					${$camelBackedHelper} = $loadedHelpers[$helper];
+					$this->loaded[$camelBackedHelper] = ${$camelBackedHelper};
+					$this->{$helper} = $loadedHelpers[$helper];
 				}
 				extract($this->viewVars, EXTR_SKIP);
 		?>';

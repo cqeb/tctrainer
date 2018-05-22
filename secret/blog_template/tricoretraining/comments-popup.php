@@ -59,7 +59,7 @@ if ( post_password_required($post) ) {  // and it doesn't match the cookie
 
 <?php if ( comments_open() ) { ?>
 <h2><?php _e('Leave a comment'); ?></h2>
-<p><?php _e('Line and paragraph breaks automatic, e-mail address never displayed, HTML allowed:'); ?> <code><?php echo allowed_tags(); ?></code></p>
+<p><?php _e('Line and paragraph breaks automatic, email address never displayed, HTML allowed:'); ?> <code><?php echo allowed_tags(); ?></code></p>
 
 <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform">
 <?php if ( $user_ID ) : ?>
@@ -72,7 +72,7 @@ if ( post_password_required($post) ) {  // and it doesn't match the cookie
 
 	<p>
 	  <input type="text" name="email" id="email" value="<?php echo esc_attr($comment_author_email); ?>" size="28" tabindex="2" />
-	   <label for="email"><?php _e('E-Mail'); ?></label>
+	   <label for="email"><?php _e('Email'); ?></label>
 	</p>
 
 	<p>

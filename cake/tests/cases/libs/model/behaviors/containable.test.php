@@ -45,9 +45,9 @@ class ContainableBehaviorTest extends CakeTestCase {
  * @access public
  */
 	function startTest() {
-		$this->User =& ClassRegistry::init('User');
-		$this->Article =& ClassRegistry::init('Article');
-		$this->Tag =& ClassRegistry::init('Tag');
+		$this->User = ClassRegistry::init('User');
+		$this->Article = ClassRegistry::init('Article');
+		$this->Tag = ClassRegistry::init('Tag');
 
 		$this->User->bindModel(array(
 			'hasMany' => array('Article', 'ArticleFeatured', 'Comment')
@@ -3191,7 +3191,7 @@ class ContainableBehaviorTest extends CakeTestCase {
  * @return void
  */
 	function testPaginate() {
-		$Controller =& new Controller();
+		$Controller = new Controller();
 		$Controller->uses = array('Article');
 		$Controller->passedArgs[] = '1';
 		$Controller->params['url'] = array();
@@ -3407,9 +3407,9 @@ class ContainableBehaviorTest extends CakeTestCase {
 
 		$this->assertTrue(empty($this->Article->hasMany['ArticlesTag']));
 		
-		$this->JoinA =& ClassRegistry::init('JoinA');
-		$this->JoinB =& ClassRegistry::init('JoinB');
-		$this->JoinC =& ClassRegistry::init('JoinC');
+		$this->JoinA = ClassRegistry::init('JoinA');
+		$this->JoinB = ClassRegistry::init('JoinB');
+		$this->JoinC = ClassRegistry::init('JoinC');
 		
 		$this->JoinA->Behaviors->attach('Containable');
 		$this->JoinB->Behaviors->attach('Containable');
@@ -3661,7 +3661,7 @@ class ContainableBehaviorTest extends CakeTestCase {
 			return;
 		}
 
-		$db =& ConnectionManager::getDataSource('test2');
+		$db = ConnectionManager::getDataSource('test2');
 		$this->_fixtures[$this->_fixtureClassMap['User']]->create($db);
 		$this->_fixtures[$this->_fixtureClassMap['User']]->insert($db);
 

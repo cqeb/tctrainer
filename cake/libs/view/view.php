@@ -389,7 +389,7 @@ class View extends Object {
 			$vars = array_merge($this->viewVars, $params);
 			foreach ($this->loaded as $name => $helper) {
 				if (!isset($vars[$name])) {
-					$vars[$name] =& $this->loaded[$name];
+					$vars[$name] = $this->loaded[$name];
 				}
 			}
 			$element = $this->_render($file, $vars, $loadHelpers);
@@ -516,7 +516,7 @@ class View extends Object {
 		}
 		$helpers = array_keys($this->loaded);
 		foreach ($helpers as $helperName) {
-			$helper =& $this->loaded[$helperName];
+			$helper = $this->loaded[$helperName];
 			if (is_object($helper)) {
 				if (is_subclass_of($helper, 'Helper')) {
 					$helper->{$callback}();
@@ -715,13 +715,13 @@ class View extends Object {
 
 			for ($i = count($helpers) - 1; $i >= 0; $i--) {
 				$name = $helperNames[$i];
-				$helper =& $loadedHelpers[$helpers[$i]];
+				$helper = $loadedHelpers[$helpers[$i]];
 
 				if (!isset($___dataForView[$name])) {
-					${$name} =& $helper;
+					${$name} = $helper;
 				}
-				$this->loaded[$helperNames[$i]] =& $helper;
-				$this->{$helpers[$i]} =& $helper;
+				$this->loaded[$helperNames[$i]] = $helper;
+				$this->{$helpers[$i]} = $helper;
 			}
 			$this->_triggerHelpers('beforeRender');
 			unset($name, $loadedHelpers, $helpers, $i, $helperNames, $helper);
@@ -748,7 +748,7 @@ class View extends Object {
 
 		if ($caching) {
 			if (is_a($this->loaded['cache'], 'CacheHelper')) {
-				$cache =& $this->loaded['cache'];
+				$cache = $this->loaded['cache'];
 				$cache->base = $this->base;
 				$cache->here = $this->here;
 				$cache->helpers = $this->helpers;
@@ -808,7 +808,7 @@ class View extends Object {
 						return false;
 					}
 				}
-				$loaded[$helper] =& new $helperCn($options);
+				$loaded[$helper] = new $helperCn($options);
 				$vars = array('base', 'webroot', 'here', 'params', 'action', 'data', 'theme', 'plugin');
 				$c = count($vars);
 
@@ -820,11 +820,11 @@ class View extends Object {
 					$loaded[$helper]->validationErrors = $this->validationErrors;
 				}
 				if (is_array($loaded[$helper]->helpers) && !empty($loaded[$helper]->helpers)) {
-					$loaded =& $this->_loadHelpers($loaded, $loaded[$helper]->helpers, $helper);
+					$loaded = $this->_loadHelpers($loaded, $loaded[$helper]->helpers, $helper);
 				}
 			}
 			if (isset($loaded[$parent])) {
-				$loaded[$parent]->{$helper} =& $loaded[$helper];
+				$loaded[$parent]->{$helper} = $loaded[$helper];
 			}
 		}
 		return $loaded;

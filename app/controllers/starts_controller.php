@@ -198,7 +198,7 @@ class StartsController extends AppController
 
 		Configure::write('Config.language',$this->code);
 		$this->Session->write('Config.language', $this->code);
-		$this->Session->write('flash',__('Language changed.',true));
+		$this->Session->write('flash',__('Language setting changed.',true));
 
 		if ( $this->referer() && $this->referer() != '/' )
 		{

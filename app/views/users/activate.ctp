@@ -10,7 +10,7 @@
                    </div><br />
 
                    <fieldset>
-                   <legend><?php __('Log in and start forming your body'); ?></legend>
+                   <legend><?php __('Sign in and start forming your body'); ?></legend>
 
                    <?php if ($session->read('flash')) { ?>
                    <div id="alert alert-success">
@@ -18,7 +18,7 @@
                    </div><br />
                    <?php } ?>
 
-                   <?php echo $html->link(__('Log into the world of TriCoreTraining.', true), array('controller' => 'users', 'action' => 'login')); ?>
+                   <?php echo $html->link(__('It\'s time to start your training with a goal.', true), array('controller' => 'users', 'action' => 'login')); ?>
                    
                    </fieldset>
 

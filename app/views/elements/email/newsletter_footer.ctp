@@ -49,7 +49,7 @@
                     <?php __('Acquired by'); ?> Klaus-M. Schremser GmbH<br />
                     Gruene Gasse 35, A-2351 Wiener Neudorf, <?php __('Austria'); ?><br />
                     ><a href="mailto:support@tricoretraining.com">support@tricoretraining.com</a></p>
-                  <p><span style="font-weight: bold;"><?php __('TriCoreTraining'); ?></span> <?php __('is a registered trademark'); ?>.</p>                  
+                  <p><span style="font-weight: bold;">TriCoreTraining</span> <?php __('is a registered trademark'); ?>.</p>                  
                </td>
             </tr>
          </table>

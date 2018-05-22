@@ -113,7 +113,7 @@ class Dispatcher extends Object {
 		if ($this->asset($url) || $this->cached($url)) {
 			return;
 		}
-		$controller =& $this->__getController();
+		$controller = $this->__getController();
 
 		if (!is_object($controller)) {
 			Router::setRequestInfo(array($this->params, array('base' => $this->base, 'webroot' => $this->webroot)));
@@ -153,12 +153,12 @@ class Dispatcher extends Object {
 		$controller->here = $this->here;
 		$controller->webroot = $this->webroot;
 		$controller->plugin = isset($this->params['plugin']) ? $this->params['plugin'] : null;
-		$controller->params =& $this->params;
-		$controller->action =& $this->params['action'];
+		$controller->params = $this->params;
+		$controller->action = $this->params['action'];
 		$controller->passedArgs = array_merge($this->params['pass'], $this->params['named']);
 
 		if (!empty($this->params['data'])) {
-			$controller->data =& $this->params['data'];
+			$controller->data = $this->params['data'];
 		} else {
 			$controller->data = null;
 		}
@@ -388,7 +388,7 @@ class Dispatcher extends Object {
 		}
 		$ctrlClass .= 'Controller';
 		if (class_exists($ctrlClass)) {
-			$controller =& new $ctrlClass();
+			$controller = new $ctrlClass();
 		}
 		return $controller;
 	}
@@ -539,7 +539,7 @@ class Dispatcher extends Object {
 					App::import('View', 'View', false);
 				}
 				$controller = null;
-				$view =& new View($controller);
+				$view = new View($controller);
 				$return = $view->renderCache($filename, getMicrotime());
 				if (!$return) {
 					ClassRegistry::removeObject('view');

@@ -50,13 +50,13 @@ class User extends AppModel {
                   'notempty' => array(
                           'rule' => 'email',
                           'required' => true
-                          //'message' => 'Enter your e-mail, please'
+                          //'message' => 'Enter your email, please'
                           ),
                         ),
           'emailcheck' => array(
                   'rule' => array('equalTo', '1'),
                   'required' => true
-                  //'message' => 'Your e-mail is not correct or is already registered. Use "password forgotten" to retrieve your password!'
+                  //'message' => 'Your email is not correct or is already registered. Use "password forgotten" to retrieve your password!'
                   ),
           'password' => array(
                   'length' => array(

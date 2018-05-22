@@ -155,7 +155,7 @@ class Scaffold extends Object {
  * @param array $params Parameters for scaffolding
  */
 	function __construct(&$controller, $params) {
-		$this->controller =& $controller;
+		$this->controller = $controller;
 
 		$count = count($this->__passedVars);
 		for ($j = 0; $j < $count; $j++) {
@@ -174,7 +174,7 @@ class Scaffold extends Object {
 			)));
 		}
 
-		$this->ScaffoldModel =& $this->controller->{$this->modelClass};
+		$this->ScaffoldModel = $this->controller->{$this->modelClass};
 		$this->scaffoldTitle = Inflector::humanize($this->viewPath);
 		$this->scaffoldActions = $controller->scaffold;
 		$title_for_layout = __('Scaffold :: ', true) . Inflector::humanize($this->action) . ' :: ' . $this->scaffoldTitle;

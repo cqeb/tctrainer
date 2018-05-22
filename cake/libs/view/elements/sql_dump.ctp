@@ -26,7 +26,7 @@ if ($noLogs):
 
 	$logs = array();
 	foreach ($sources as $source):
-		$db =& ConnectionManager::getDataSource($source);
+		$db = ConnectionManager::getDataSource($source);
 		if (!$db->isInterfaceSupported('getLog')):
 			continue;
 		endif;

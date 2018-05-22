@@ -47,7 +47,7 @@ class XmlHelper extends AppHelper {
  */
 	function __construct() {
 		parent::__construct();
-		$this->Xml =& new Xml();
+		$this->Xml = new Xml();
 		$this->Xml->options(array('verifyNs' => false));
 	}
 
@@ -131,14 +131,14 @@ class XmlHelper extends AppHelper {
 			$content = null;
 		}
 
-		$elem =& $this->Xml->createElement($name, $content, $attrib, $namespace);
+		$elem = $this->Xml->createElement($name, $content, $attrib, $namespace);
 		foreach ($children as $child) {
 			$elem->createElement($child);
 		}
 		$out = $elem->toString(array('cdata' => $cdata, 'leaveOpen' => !$endTag));
 
 		if (!$endTag) {
-			$this->XmlElement =& $elem;
+			$this->XmlElement = $elem;
 		}
 		return $out;
 	}
@@ -152,8 +152,8 @@ class XmlHelper extends AppHelper {
 	function closeElem() {
 		$elem = (empty($this->XmlElement)) ? $this->Xml : $this->XmlElement;
 		$name = $elem->name();
-		if ($parent =& $elem->parent()) {
-			$this->XmlElement =& $parent;
+		if ($parent = $elem->parent()) {
+			$this->XmlElement = $parent;
 		}
 		return '</' . $name . '>';
 	}
@@ -171,7 +171,7 @@ class XmlHelper extends AppHelper {
  */
 	function serialize($data, $options = array()) {
 		$options += array('attributes' => false, 'format' => 'attributes');
-		$data =& new Xml($data, $options);
+		$data = new Xml($data, $options);
 		return $data->toString($options + array('header' => false));
 	}
 }

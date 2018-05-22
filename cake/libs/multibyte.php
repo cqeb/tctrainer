@@ -296,7 +296,7 @@ class Multibyte extends Object {
 		static $instance = array();
 
 		if (!$instance) {
-			$instance[0] =& new Multibyte();
+			$instance[0] = new Multibyte();
 		}
 		return $instance[0];
 	}
@@ -813,7 +813,7 @@ class Multibyte extends Object {
  * @static
  */
 	function strtolower($string) {
-		$_this =& Multibyte::getInstance();
+		$_this = Multibyte::getInstance();
 		$utf8Map = Multibyte::utf8($string);
 
 		$length = count($utf8Map);
@@ -862,7 +862,7 @@ class Multibyte extends Object {
  * @static
  */
 	function strtoupper($string) {
-		$_this =& Multibyte::getInstance();
+		$_this = Multibyte::getInstance();
 		$utf8Map = Multibyte::utf8($string);
 
 		$length = count($utf8Map);

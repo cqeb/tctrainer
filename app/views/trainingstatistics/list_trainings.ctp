@@ -1,7 +1,8 @@
 <?php
-__('RUN workout', true);
-__('BIKE workout', true);
-__('SWIM workout', true);
+// for translation only
+__('run workout', true);
+__('bike workout', true);
+__('swim workout', true);
 ?>
       <div class="panel panel-default" id="forms">
         <div class="panel-heading"><h1><?php __('Track workouts'); ?></h1></div>

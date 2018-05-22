@@ -426,11 +426,11 @@ class PaymentsController extends AppController {
                                         $admin_user = $this->User->findByEmail( 'klaus@tricoretraining.com' );
                                         $inviter_user = $this->User->findById( $inviter );
 
-                                        $subject = __('TriCoreTraining', true) . ' - ' . __('affiliate gets money!', true);
+                                        $subject = __('TriCoreTraining', true) . ' - ' . __('affiliate receives bonus!', true);
                                         $template = 'standardmail';
                                         $content = $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' (' . $results_user['User']['id'] . ') ' . __('bought a PREMIUM membership. Thank you.', true);
                                         $content .= ' ';
-                                        $content .= $inviter_user['User']['firstname'] . ' ' . $inviter_user['User']['lastname'] . ' (' . $inviter_user['User']['id'] . ') ' . __('receives money.', true);
+                                        $content .= $inviter_user['User']['firstname'] . ' ' . $inviter_user['User']['lastname'] . ' (' . $inviter_user['User']['id'] . ') ' . __('receives bonus.', true);
                                         
                                         $this->_sendMail( $inviter_user, $subject, $template, $content, $results_user['User']['yourlanguage'], $admin_user['User'] );
 
@@ -443,16 +443,16 @@ class PaymentsController extends AppController {
 
                                         if ( is_array( $inviter_user ) )
                                         {
-                                            $subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed for a PREMIUM membership!', true);
+                                            $subject = __('Congratz - your friend subscribed for a PREMIUM membership!', true);
                                             $template = 'standardmail';
                                             $content = __('great', true) . '. ' . $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' ' . __('bought a PREMIUM membership.', true);
-                                            $content .= '<br /><br />' . __('You receive 3 month PREMIUM membership as a "Thank you" for FREE.', true);
+                                            $content .= '<br /><br />' . __('You receive 3 month PREMIUM membership for free as a "Thank you".', true);
                                             
                                             $this->_sendMail( $inviter_user, $subject, $template, $content, $results_user['User']['yourlanguage'], '' );
                                             
                                             $admin_user = $this->User->findByEmail( 'klaus@tricoretraining.com' );
 
-                                            $subject = __('TriCoreTraining', true) . ' - ' . __('affiliate gets money!', true);
+                                            $subject = __('TriCoreTraining', true) . ' - ' . __('affiliate receives bonus!', true);
                                             $template = 'standardmail';
                                             $content = $results_user['User']['firstname'] . ' ' . $results_user['User']['lastname'] . ' (' . $results_user['User']['id'] . ') ' . __('bought a PREMIUM membership. Thank you.', true);
                                             $content .= ' ';
@@ -549,8 +549,8 @@ class PaymentsController extends AppController {
 
       } elseif ( $action == 'c' )
       {
-         $error = __('You canceled the payment transaction. If this was not intended, do the payment process again. If something else
-         is not ok for you', true) . ', ' . '<a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '</a>';
+         $error = __('You canceled the payment transaction. If this was not intended, please do the payment process again. If something else
+         is not going ok for you', true) . ', ' . '<a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '</a>';
       }
 
       $session_userid = $this->Session->read('session_userid');

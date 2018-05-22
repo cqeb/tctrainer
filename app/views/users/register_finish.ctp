@@ -1,5 +1,5 @@
       <div class="panel panel-default" id="forms">
-        <div class="panel-heading"><h1><?php __('Registration finished');?></h1></div>
+        <div class="panel-heading"><h1><?php __('Signup finished');?></h1></div>
         
         <div class="panel-body">
 

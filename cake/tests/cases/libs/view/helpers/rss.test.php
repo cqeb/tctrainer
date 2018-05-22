@@ -34,11 +34,11 @@ class RssHelperTest extends CakeTestCase {
  * @return void
  */
 	function setUp() {
-		$this->Rss =& new RssHelper();
-		$this->Rss->Time =& new TimeHelper();
+		$this->Rss = new RssHelper();
+		$this->Rss->Time = new TimeHelper();
 		$this->Rss->beforeRender();
 
-		$manager =& XmlManager::getInstance();
+		$manager = XmlManager::getInstance();
 		$manager->namespaces = array();
 	}
 
@@ -60,7 +60,7 @@ class RssHelperTest extends CakeTestCase {
  */
 	function testAddNamespace() {
 		$this->Rss->addNs('custom', 'http://example.com/dtd.xml');
-		$manager =& XmlManager::getInstance();
+		$manager = XmlManager::getInstance();
 
 		$expected = array('custom' => 'http://example.com/dtd.xml');
 		$this->assertEqual($manager->namespaces, $expected);
@@ -89,7 +89,7 @@ class RssHelperTest extends CakeTestCase {
 	function testRemoveNamespace() {
 		$this->Rss->addNs('custom', 'http://example.com/dtd.xml');
 		$this->Rss->addNs('custom2', 'http://example.com/dtd2.xml');
-		$manager =& XmlManager::getInstance();
+		$manager = XmlManager::getInstance();
 
 		$expected = array('custom' => 'http://example.com/dtd.xml', 'custom2' => 'http://example.com/dtd2.xml');
 		$this->assertEqual($manager->namespaces, $expected);

@@ -23,16 +23,16 @@ if ( isset( $userinfo ) )
 			__($sport . ' workout', true) . ' ' . __('in',true) . ' ' . $duration . ' ' . 
 			__('hour(s)',true) . ' ' . __('with', true) . ' ' .	'TriCoreTraining' .	
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not register?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not sign up?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 
 		// user recommended our service
 		} else
 		{
 			$facebox_content = '<br /><h1>' . __('I LIKE TriCoreTraining!', true) . '</h1><p>' . 
-			__("Why don't you become a triathlon athlete too? Why not a marathon runner? TriCoreTraining is your coach.", true) .
+			__("Why don't you become a triathlon athlete too? Why not a marathon runner? TriCoreTraining is your interactive online coach.", true) .
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not register?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not sign up?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 		}
 		
@@ -152,7 +152,7 @@ else
 							<div class="item">
 								<img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-2.jpg" alt="<?php __('Job, Family, No Time?'); ?>">
 								<div class="carousel-caption">
-									<h3><?php __('Job, Family, no time?'); ?></h3>
+									<h3><?php __('Job, Family, No time?'); ?></h3>
 									<p><?php __('Be an ambitious athlete despite <b>a full time job and family time</b>.'); ?>
 										<br /><br />
 										<a class="btn btn-success" href="<?php echo Configure::read('App.serverUrl'); ?>/users/register/"><?php __('Get Started');?><!--<br /><em><?php __('it´s free!');?></em>--></a></p>

@@ -100,8 +100,8 @@ class I18n extends Object {
 	function &getInstance() {
 		static $instance = array();
 		if (!$instance) {
-			$instance[0] =& new I18n();
-			$instance[0]->l10n =& new L10n();
+			$instance[0] = new I18n();
+			$instance[0]->l10n = new L10n();
 		}
 		return $instance[0];
 	}
@@ -119,7 +119,7 @@ class I18n extends Object {
  * @access public
  */
 	function translate($singular, $plural = null, $domain = null, $category = 6, $count = null) {
-		$_this =& I18n::getInstance();
+		$_this = I18n::getInstance();
 		
 		if (strpos($singular, "\r\n") !== false) {
 			$singular = str_replace("\r\n", "\n", $singular);
@@ -199,7 +199,7 @@ class I18n extends Object {
  * @return void
  */
 	function clear() {
-		$self =& I18n::getInstance();
+		$self = I18n::getInstance();
 		$self->__domains = array();
 	}
 
@@ -378,7 +378,7 @@ class I18n extends Object {
 					$this->__domains[$domain][$this->__lang][$this->category][$msgid] = $msgstr;
 
 					if (isset($msgid_plural)) {
-						$this->__domains[$domain][$this->__lang][$this->category][$msgid_plural] =& $this->__domains[$domain][$this->__lang][$this->category][$msgid];
+						$this->__domains[$domain][$this->__lang][$this->category][$msgid_plural] = $this->__domains[$domain][$this->__lang][$this->category][$msgid];
 					}
 				}
 			}

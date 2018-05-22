@@ -30,8 +30,8 @@ if (!class_exists('Object')) {
 if (!class_exists('CakeLog')) {
 	require_once LIBS . 'cake_log.php';
 }
-if (!class_exists('String')) {
-	require_once LIBS . 'string.php';
+if (!class_exists('StringHelper')) {
+	require_once LIBS . 'stringhelper.php';
 }
 
 /**
@@ -184,7 +184,7 @@ class Debugger extends Object {
 		static $instance = array();
 		if (!empty($class)) {
 			if (!$instance || strtolower($class) != strtolower(get_class($instance[0]))) {
-				$instance[0] = & new $class();
+				$instance[0] = new $class();
 				if (Configure::read() > 0) {
 					Configure::version(); // Make sure the core config is loaded
 					$instance[0]->helpPath = Configure::read('Cake.Debugger.HelpPath');
@@ -193,7 +193,7 @@ class Debugger extends Object {
 		}
 
 		if (!$instance) {
-			$instance[0] =& new Debugger();
+			$instance[0] = new Debugger();
 			if (Configure::read() > 0) {
 				Configure::version(); // Make sure the core config is loaded
 				$instance[0]->helpPath = Configure::read('Cake.Debugger.HelpPath');
@@ -213,7 +213,7 @@ class Debugger extends Object {
  * @link http://book.cakephp.org/view/1191/Using-the-Debugger-Class
 */
 	function dump($var) {
-		$_this =& Debugger::getInstance();
+		$_this = Debugger::getInstance();
 		pr($_this->exportVar($var));
 	}
 
@@ -228,7 +228,7 @@ class Debugger extends Object {
  * @link http://book.cakephp.org/view/1191/Using-the-Debugger-Class
  */
 	function log($var, $level = LOG_DEBUG) {
-		$_this =& Debugger::getInstance();
+		$_this = Debugger::getInstance();
 		$source = $_this->trace(array('start' => 1)) . "\n";
 		CakeLog::write($level, "\n" . $source . $_this->exportVar($var));
 	}
@@ -249,7 +249,7 @@ class Debugger extends Object {
 			return;
 		}
 
-		$_this =& Debugger::getInstance();
+		$_this = Debugger::getInstance();
 
 		if (empty($file)) {
 			$file = '[internal]';
@@ -308,7 +308,7 @@ class Debugger extends Object {
 		if (Configure::read('log')) {
 			$tpl = $_this->_templates['log']['error'];
 			$options = array('before' => '{:', 'after' => '}');
-			CakeLog::write($level, String::insert($tpl, $data, $options));
+			CakeLog::write($level, StringHelper::insert($tpl, $data, $options));
 		}
 
 		if ($error == 'Fatal Error') {
@@ -336,7 +336,7 @@ class Debugger extends Object {
  * @link http://book.cakephp.org/view/1191/Using-the-Debugger-Class
  */
 	function trace($options = array()) {
-		$_this =& Debugger::getInstance();
+		$_this = Debugger::getInstance();
 		$defaults = array(
 			'depth'   => 999,
 			'format'  => $_this->_outputFormat,
@@ -395,7 +395,7 @@ class Debugger extends Object {
 				$trace['path'] = Debugger::trimPath($trace['file']);
 				$trace['reference'] = $reference;
 				unset($trace['object'], $trace['args']);
-				$back[] = String::insert($tpl, $trace, array('before' => '{:', 'after' => '}'));
+				$back[] = StringHelper::insert($tpl, $trace, array('before' => '{:', 'after' => '}'));
 			}
 		}
 
@@ -481,7 +481,7 @@ class Debugger extends Object {
  * @link http://book.cakephp.org/view/1191/Using-the-Debugger-Class
  */
 	function exportVar($var, $recursion = 0) {
-		$_this =& Debugger::getInstance();
+		$_this = Debugger::getInstance();
 		switch (strtolower(gettype($var))) {
 			case 'boolean':
 				return ($var) ? 'true' : 'false';
@@ -576,7 +576,7 @@ class Debugger extends Object {
  * @access protected
  */
 	function output($format = null, $strings = array()) {
-		$_this =& Debugger::getInstance();
+		$_this = Debugger::getInstance();
 		$data = null;
 
 		if (is_null($format)) {
@@ -664,7 +664,7 @@ class Debugger extends Object {
 				if (isset($detect[$key]) && empty($insert[$detect[$key]])) {
 					continue;
 				}
-				$links[$key] = String::insert($val, $insert, $insertOpts);
+				$links[$key] = StringHelper::insert($val, $insert, $insertOpts);
 			}
 		}
 
@@ -675,12 +675,12 @@ class Debugger extends Object {
 			if (is_array($$key)) {
 				$$key = join("\n", $$key);
 			}
-			$info .= String::insert($tpl[$key], compact($key) + $insert, $insertOpts);
+			$info .= StringHelper::insert($tpl[$key], compact($key) + $insert, $insertOpts);
 		}
 		$links = join(' | ', $links);
 		unset($data['context']);
 
-		echo String::insert($tpl['error'], compact('links', 'info') + $data, $insertOpts);
+		echo StringHelper::insert($tpl['error'], compact('links', 'info') + $data, $insertOpts);
 	}
 
 /**

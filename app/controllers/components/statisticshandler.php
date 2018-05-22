@@ -833,7 +833,7 @@ class StatisticshandlerComponent extends Object {
             {
                 $text_for_mail_training .= __("don't be lazy!", true) . ' ' .  
                     __('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .        
-                    '/trainingstatistics/list_trainings/?utm_source=tricoretraining.com&utm_medium=newsletter" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true) . "<br /><br />"; 
+                    '/trainingstatistics/list_trainings/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">TriCoreTraining.com</a> ' . __('and track your workouts - now!', true) . "<br /><br />"; 
         
                 if ( $debug == true ) echo "training statistics reminder sent.<br />\n";
             }

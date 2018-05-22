@@ -49,7 +49,7 @@ class CakeTestDispatcher extends Dispatcher {
  * @access public
  */
 	function testCase(&$testCase) {
-		$this->testCase =& $testCase;
+		$this->testCase = $testCase;
 	}
 
 /**
@@ -62,7 +62,7 @@ class CakeTestDispatcher extends Dispatcher {
  * @access protected
  */
 	function _invoke(&$controller, $params, $missingAction = false) {
-		$this->controller =& $controller;
+		$this->controller = $controller;
 
 		if (array_key_exists('layout', $params)) {
 			$this->controller->layout = $params['layout'];
@@ -234,10 +234,10 @@ class CakeTestCase extends UnitTestCase {
 			foreach ($list as $name) {
 				if ((is_array($params['fixturize']) && in_array($name, $params['fixturize'])) || $params['fixturize'] === true) {
 					if (class_exists($name) || App::import('Model', $name)) {
-						$object =& ClassRegistry::init($name);
+						$object = ClassRegistry::init($name);
 						//switch back to specified datasource.
 						$object->setDataSource($params['connection']);
-						$db =& ConnectionManager::getDataSource($object->useDbConfig);
+						$db = ConnectionManager::getDataSource($object->useDbConfig);
 						$db->cacheSources = false;
 
 						$models[$object->alias] = array(
@@ -254,7 +254,7 @@ class CakeTestCase extends UnitTestCase {
 				$this->_actionFixtures = array();
 
 				foreach ($models as $model) {
-					$fixture =& new CakeTestFixture($this->db);
+					$fixture = new CakeTestFixture($this->db);
 
 					$fixture->name = $model['model'] . 'Test';
 					$fixture->table = $model['table'];
@@ -263,11 +263,11 @@ class CakeTestCase extends UnitTestCase {
 
 					$fixture->create($this->db);
 					$fixture->insert($this->db);
-					$this->_actionFixtures[] =& $fixture;
+					$this->_actionFixtures[] = $fixture;
 				}
 
 				foreach ($models as $model) {
-					$object =& ClassRegistry::getObject($model['key']);
+					$object = ClassRegistry::getObject($model['key']);
 					if ($object !== false) {
 						$object->setDataSource('test_suite');
 						$object->cacheSources = false;
@@ -352,7 +352,7 @@ class CakeTestCase extends UnitTestCase {
 		$return = $params['return'];
 		$params = array_diff_key($params, array('data' => null, 'method' => null, 'return' => null));
 
-		$dispatcher =& new CakeTestDispatcher();
+		$dispatcher = new CakeTestDispatcher();
 		$dispatcher->testCase($this);
 
 		if ($return != 'result') {
@@ -365,7 +365,7 @@ class CakeTestCase extends UnitTestCase {
 			$result = ob_get_clean();
 
 			if ($return == 'vars') {
-				$view =& ClassRegistry::getObject('view');
+				$view = ClassRegistry::getObject('view');
 				$viewVars = $view->getVars();
 
 				$result = array();
@@ -715,14 +715,14 @@ class CakeTestCase extends UnitTestCase {
 		if ($testDbAvailable) {
 			// Try for test DB
 			restore_error_handler();
-			@$db =& ConnectionManager::getDataSource('test');
+			@$db = ConnectionManager::getDataSource('test');
 			set_error_handler('simpleTestErrorHandler');
 			$testDbAvailable = $db->isConnected();
 		}
 
 		// Try for default DB
 		if (!$testDbAvailable) {
-			$db =& ConnectionManager::getDataSource('default');
+			$db = ConnectionManager::getDataSource('default');
 			$_prefix = $db->config['prefix'];
 			$db->config['prefix'] = 'test_suite_';
 		}
@@ -731,7 +731,7 @@ class CakeTestCase extends UnitTestCase {
 		$db->config['prefix'] = $_prefix;
 
 		// Get db connection
-		$this->db =& ConnectionManager::getDataSource('test_suite');
+		$this->db = ConnectionManager::getDataSource('test_suite');
 		$this->db->cacheSources  = false;
 
 		ClassRegistry::config(array('ds' => 'test_suite'));
@@ -795,7 +795,7 @@ class CakeTestCase extends UnitTestCase {
 			if (isset($fixtureFile)) {
 				require_once($fixtureFile);
 				$fixtureClass = Inflector::camelize($fixture) . 'Fixture';
-				$this->_fixtures[$this->fixtures[$index]] =& new $fixtureClass($this->db);
+				$this->_fixtures[$this->fixtures[$index]] = new $fixtureClass($this->db);
 				$this->_fixtureClassMap[Inflector::camelize($fixture)] = $this->fixtures[$index];
 			}
 		}

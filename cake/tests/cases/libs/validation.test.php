@@ -108,7 +108,7 @@ class ValidationTest extends CakeTestCase {
  * @return void
  */
 	function setUp() {
-		$this->Validation =& Validation::getInstance();
+		$this->Validation = Validation::getInstance();
 		$this->_appEncoding = Configure::read('App.encoding');
 	}
 
