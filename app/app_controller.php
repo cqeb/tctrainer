@@ -81,7 +81,7 @@ class AppController extends Controller {
             }
             if ($this->RequestHandler->isWap()) {}
 
-            /**
+            /*
             $this-RequestHandler->setContent();
             javascript text/javascript
             js text/javascript
@@ -106,25 +106,25 @@ class AppController extends Controller {
             pdf application/pdf
             zip application/x-zip
             tar application/x-tar
-            **/
+            */
 
             if ( !$this->Session->read('recommendations') )
-			      {
-        				$this->loadModel('User');
-        						
-        				$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
-        				$user_recommendations = $this->User->query( $sql );
-        						
-        				$this->Session->write( 'recommendations', serialize($user_recommendations) );
-      			} else
-      			{
-        				$user_recommendations = unserialize( $this->Session->read('recommendations'));
-      			}
+			{
+                    $this->loadModel('User');
+                            
+                    $sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
+                    $user_recommendations = $this->User->query( $sql );
+                            
+                    $this->Session->write( 'recommendations', serialize($user_recommendations) );
+            } else
+            {
+                    $user_recommendations = unserialize( $this->Session->read('recommendations'));
+            }
 			
-	       		if ( isset( $user_recommendations ) ) 
+	       	if ( isset( $user_recommendations ) ) 
             { 
-					      $this->set('recommendations', $user_recommendations);
-			      }
+					$this->set('recommendations', $user_recommendations);
+			}
 
             $this->set('locale', $locale);
             $this->Session->write('Config.language', $locale);
@@ -188,24 +188,23 @@ class AppController extends Controller {
             		    // if not correct, send to login page
                         if ( ( !$results || $results['User']['id'] != $session_userid ) )
                         {
-                              $this->Session->delete('session_useremail');
-                             	$this->Session->delete('session_userid');
+                                $this->Session->delete('session_useremail');
+                                $this->Session->delete('session_userid');
                              	$this->Cookie->delete('tct_auth');
                              	$this->Cookie->delete('tct_auth_blog');
-                              $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
-                              $this->redirect('/users/login');
-                              exit();
+                                $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
+                                $this->redirect('/users/login');
+                                exit();
                         } else
                         {  
-                             $this->Session->write('session_userid', $results['User']['id']);
-                             $this->Session->write('session_useremail', $results['User']['email']);
-                             $this->Session->write('userobject', $results['User']);
-                             $this->Session->write('Config.language', $results['User']['yourlanguage']);
-                             $this->set('userobject', $results['User']);
-                             $this->Cookie->write('tct_auth_blog', "true", $encrypt = false, $expires = null);
+                                $this->Session->write('session_userid', $results['User']['id']);
+                                $this->Session->write('session_useremail', $results['User']['email']);
+                                $this->Session->write('userobject', $results['User']);
+                                $this->Session->write('Config.language', $results['User']['yourlanguage']);
+                                $this->set('userobject', $results['User']);
+                                $this->Cookie->write('tct_auth_blog', "true", $encrypt = false, $expires = null);
                         }
 	               }
-
                  $this->set('session_userid', $session_userid);
 	     }
 }

@@ -36,7 +36,7 @@ class Trainingstatistic extends AppModel {
                             'rule' => array('comparison', '>', 0)
                             ),
           ),
-          /**
+          /*
           'weight' => array(
                   'numeric' => array(
                             'rule' => 'numeric'

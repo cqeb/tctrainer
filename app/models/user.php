@@ -4,7 +4,7 @@ class User extends AppModel {
 	var $name = 'User';
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-	/**
+	/*
 	 var $belongsTo = array(
 	 'Group' => array('className' => 'Group',
 	 'foreignKey' => 'group_id',
@@ -14,14 +14,14 @@ class User extends AppModel {
 	 'counterCache' => ''),
 	 );
 	 var $hasMany = array ('Payment','Competition');
-	 **/
+	 */
 
-	/**
+	/*
 	 // I18N
 	 var $actsAs = array(
 	 'Translate'
 	 );
-	 **/
+	 */
 
 	var $validate = array(
           'firstname' => array(
@@ -80,13 +80,13 @@ class User extends AppModel {
                              //'message' => 'Enter your password, please'
                              ),
                           ),
-          /**
+          /*
           'passwordcheck' => array(
                    'rule' => array('equalTo', '1'),
                    'required' => true,
                    'message' => 'Your password check does not match!'
                    ),
-          **/
+          */
          'tos' => array(
                   'notempty' => array(
                       'rule' => array('equalTo', '1'),

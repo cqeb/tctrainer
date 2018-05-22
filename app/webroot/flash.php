@@ -1,6 +1,5 @@
 <?php
 
-
 if ( isset( $_GET['open'] ) )
 {
    header("Location:    /trainer/charts/" . $_GET['open'] );
@@ -24,16 +23,16 @@ if ( isset( $_GET['entry'] ) )
 {
 ?>
 <script type="text/javascript">
-                 swfobject.embedSWF("/trainer/swf/open-flash-chart.swf", "my_chart", "680", "500", "9.0.0", "/trainer/swf/expressInstall.swf", {"data-file":"http://<?php echo $_SERVER['HTTP_HOST']; ?>/trainer/charts/<?php echo $_GET['entry']; ?>"} );
-                 </script>
-                 <!--//
-                 You MUST urlencode any parameter you pass into swfobject, this includes the URL!
-                 In the example above there are no evil characters, but if your URL has a ? or & in it - urlencode it before passing it in.
+    swfobject.embedSWF("/trainer/swf/open-flash-chart.swf", "my_chart", "680", "500", "9.0.0", "/trainer/swf/expressInstall.swf", {"data-file":"http://<?php echo $_SERVER['HTTP_HOST']; ?>/trainer/charts/<?php echo $_GET['entry']; ?>"} );
+</script>
+<!--//
+You MUST urlencode any parameter you pass into swfobject, this includes the URL!
+In the example above there are no evil characters, but if your URL has a ? or & in it - urlencode it before passing it in.
 
-                 Note:
-                     * That the URL does not have an 'ofc=' variable in it.
-                     * This way of passing the URL to the data file is useful if you have more than one chart on a page.
-                 //-->
+Note:
+    * That the URL does not have an 'ofc=' variable in it.
+    * This way of passing the URL to the data file is useful if you have more than one chart on a page.
+//-->
 
 
 <div id="my_chart"></div>

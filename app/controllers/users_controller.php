@@ -24,8 +24,8 @@ class UsersController extends AppController {
   		$this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
   
   		// captcha keys
-  		//$this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
-  		//$this->Recaptcha->privatekey = "6LcW_goAAAAAAN3zO8KEcJiWsg9tbQd-0VJ68LPb";
+  		$this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
+  		$this->Recaptcha->privatekey = RECAPTCHA_PRIVATEKEY;
   
   		$this->js_addon = '';
 	}
@@ -48,7 +48,7 @@ class UsersController extends AppController {
 			// https://github.com/drewm/mailchimp-api
 
 			// grab an API Key from http://admin.mailchimp.com/account/api/
-			$MailChimp = new MailChimp('38c3d174d45d89c64e46d6daf33fcd53-us3');
+			$MailChimp = new MailChimp(MAILCHIMP_APIKEY);
 
 			// grab your List's Unique Id by going to http://admin.mailchimp.com/lists/
 			// Click the "settings" link for the list - the Unique Id is at the bottom of that page. 
@@ -262,7 +262,7 @@ class UsersController extends AppController {
 	{
 			// Facebook auth 
             $app_id = 132439964636;
-			$app_secret = "500f333152751fea132b669313052120";
+			$app_secret = FACEBOOK_APPSECRET;
 			
 			if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
 				$my_url = 'http://' . TESTHOST . '/facebook/login.php';

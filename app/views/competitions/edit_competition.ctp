@@ -1,6 +1,6 @@
 <?php
 
-            $GMAPS_API = 'ABQIAAAAilf2rpNqnwxzswbTSxpTKhR0vcTud5tngwSMB1bBY6nA3aJGXhRefbgF7FG4R1KtdAaVJ3x60UlI4Q';
+            $GMAPS_API = GMAPS_APIKEY;
             $this->addScript('gmaps_google', $javascript->link('http://maps.google.com/maps?file=api&amp;v=2&amp;key='.$GMAPS_API));
             $this->addScript('gmaps_jquery', $javascript->link('jquery.gmap-1.1.0'));
 
