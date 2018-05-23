@@ -1,0 +1,10 @@
+/app/config/database.php
+/app/config/bootstrap.php
+/.project
+/.settings
+/.buildpath
+/app/tmp/logs/debug.log
+/app/tmp/logs/error.log
+/app/tmp/.project
+/.buildpath
+/nbproject/private/
