@@ -21,6 +21,10 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
         {
+            $this->Session->write('language', 'de');
+           // echo "test" . $this->Session->read('language');
+//print_r($this->Session);
+
             // user sets language       
             if ( isset( $this->params['named']['code'] ) ) 
             {

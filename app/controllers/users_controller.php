@@ -1961,11 +1961,19 @@ class UsersController extends AppController {
 					// time between today and last training - limit 10 days
 					$diff_time = time() - ( 86400 * $last_workout_limit );
 			
+					$greeting_versions[] = __('how was your training week? I hope awesome.', true) . ' ';
+					$greeting_versions[] = __('you will make it! Go for the next week.', true) . ' ';
+					$greeting_versions[] = __('how do you feel? If things are not going smooth. Relax, start, continue.', true) . ' ';
+					$greeting_versions[] = __('persistence will make your life better too. So, go for the next training week.', true) . ' ';
+					$greeting_versions[] = __('only if you measure, you can achieve your goal. So let\'s do it', true) . ' ';
+
+					$one_version = rand(0, count($greeting_versions)-1);
+					$text_for_mail_training .= $greeting_versions[$one_version];
+						
 					// compare 2 timestamps
 					if ( $diff_time > $last_training )
 					{
 						$text_for_mail_training .= 
-							__('how was your training week? I hope awesome.', true) . ' ' . 
 							__('If you log your workouts, you get better training plans and reach your goal faster.', true) . 
 							'<br /><br />' .  
 							__('Go to your', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
@@ -1999,7 +2007,7 @@ class UsersController extends AppController {
 							else 
 								$lang = 'en';
 						
-							$text_for_mail_training .= '<b>*** ' . __('Your next race is only a few weeks away.', true) . '</b> ' . 
+							$text_for_mail_training .= '*** ' . __('Your next race is only a few weeks away.', true) . ' ' . 
 								'<a href="' . Configure::read('App.hostUrl') . 
 								'/blog/' . $lang . '/now-its-time-the-race-starts-soon/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . 
 								__('Read this blog post!', true) . '</a><br /><br />'; 
@@ -2013,7 +2021,7 @@ class UsersController extends AppController {
 							else 
 								$lang = 'en';
 						
-							$text_for_mail_training .= '<b style="background-color:lightblue">*** ' . __('Your next race is only a few days away. TriCoreTraining wishes you all the best!', true) . '</b> ' . 
+							$text_for_mail_training .= '<span style="background-color:lightblue">*** ' . __('Your next race is only a few days away. TriCoreTraining wishes you all the best!', true) . '</span> ' . 
 								'<a href="' . Configure::read('App.hostUrl') . 
 								'/blog/' . $lang . '/what-can-go-wrong-before-a-competition/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . 
 								__('Read this!', true) . '</a><br /><br />'; 
@@ -2321,7 +2329,7 @@ class UsersController extends AppController {
 							$trainingplan_content = $this->Provider->getPlan(true, $user, $notSun, 1);
 							// add training plan in mail for next week (1)
 							$content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b><br />'; 
-							$content .=  '<table width="50%"><tr><td>' . $trainingplan_content . "</td></tr></table><br /><br />";
+							$content .=  '<table width="100%"><tr><td>' . $trainingplan_content . "</td></tr></table><br /><br />";
 							// link to training schedule of next week
 							/*
 							$content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
@@ -2333,7 +2341,7 @@ class UsersController extends AppController {
 							$content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
 							'/trainingplans/get_events/?o=1&utm_source=tricoretrainingsystem&utm_medium=mailing' . $key_add . '" target="_blank">' .
 							'<button class="calendar" type="button">' . 
-						    __('Add workouts to your calendar (.ics)!', true) . '</button></a>' . "\n";
+						    __('Import training week to your personal calendar (.ics)!', true) . '</button></a>' . "\n";
 							$content .= "<br /><br />\n\n";	
 					   } elseif ( $text_for_mail_premium )
                        {

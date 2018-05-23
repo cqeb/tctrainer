@@ -24,6 +24,7 @@
 /**
  *  Get Cake's root directory
  */
+die("test");
 	define('APP_DIR', 'app');
 	define('DS', DIRECTORY_SEPARATOR);
 	define('ROOT', dirname(__FILE__));
@@ -52,4 +53,5 @@
 		define('APP_PATH', ROOT . DS . APP_DIR . DS);
 		define('CORE_PATH', CAKE_CORE_INCLUDE_PATH . DS);
 	}
+
 	require APP_DIR . DS . WEBROOT_DIR . DS . 'index.php';

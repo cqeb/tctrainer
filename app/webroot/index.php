@@ -27,6 +27,7 @@
 /**
  * Use the DS to separate the directories in other defines
  */
+
 	if (!defined('DS')) {
 		define('DS', DIRECTORY_SEPARATOR);
 	}
@@ -40,6 +41,7 @@
  * The full path to the directory which holds "app", WITHOUT a trailing DS.
  *
  */
+
 	if (!defined('ROOT')) {
 		define('ROOT', dirname(dirname(dirname(__FILE__))));
 	}
@@ -84,8 +86,11 @@
 	if (isset($_GET['url']) && $_GET['url'] === 'favicon.ico') {
 		return;
 	} else {
+		
 		$Dispatcher = new Dispatcher();
+		
 		$Dispatcher->dispatch();
+		
 	}
 	if (Configure::read() > 0) {
 		//echo "<!-- " . round(getMicrotime() - $TIME_START, 4) . "s -->";

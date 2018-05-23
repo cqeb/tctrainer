@@ -192,7 +192,7 @@
       table.workouts td.trimp, table.workouts td.duration .sum {
             font-weight: bold;
       }
-      button .calendar {
+      .calendar {
         background-color: #6cb9ce; /* Green */
         border: none;
         color: white;

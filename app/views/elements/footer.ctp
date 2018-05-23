@@ -26,7 +26,7 @@
         <h4 class="line3 center standart-h4title"><span><?php __('Useful Links'); ?></span></h4>
         <ul class="footer-links">
 			<li><?php echo $html->link(__('Pricing',true),array('controller' => 'starts', 'action' => 'features'))?></li>
-			<li><?php echo $html->link(__('Get Started',true),array('controller' => 'starts'))?></li>
+			<li><?php echo $html->link(__('Get Started',true),array('controller' => 'users', 'action' => 'register'))?></li>
 			<li><a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>my-1st-ironman-pain-is-temporary-pride-is-4ever/"><?php __('My first Ironman'); ?></a></li>
         </ul>
     </div>
@@ -50,3 +50,5 @@
    </div>
 </div><!-- CONTAINER FOOTER-->
 </footer>
+
+

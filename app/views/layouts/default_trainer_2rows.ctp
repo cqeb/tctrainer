@@ -103,12 +103,6 @@ else
   <div class="clear"></div>
   <!-- /Main -->
   
-<!--//
-	<div class="container_12">
-	<?php //echo $cakeDebug; ?>
-    </div>
--->
-  
   <!-- Footer -->
   <?php echo $this->element('footer'); ?>
   <!-- /Footer -->
