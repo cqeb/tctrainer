@@ -1790,7 +1790,7 @@ class UsersController extends AppController {
 	    $check_on_day = 0;
     
     	// select all users 
-		$sql = "SELECT * FROM users ORDER BY id";
+		$sql = "SELECT * FROM users WHERE email != '' ORDER BY id";
 		
 		// localhost only sends 20 emails
 		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
@@ -1964,10 +1964,14 @@ class UsersController extends AppController {
 					// compare 2 timestamps
 					if ( $diff_time > $last_training )
 					{
-						$text_for_mail_training .= __('great training week!', true) . ' ' .  
-							__('Go to', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
-							'/trainingstatistics/list_trainings/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">TriCoreTraining</a> ' . 
-							__('and log your workouts - better now than later ⏱️!', true) . "<br /><br />"; 
+						$text_for_mail_training .= 
+							__('how was your training week? I hope awesome.', true) . ' ' . 
+							__('If you log your workouts, you get better training plans and reach your goal faster.', true) . 
+							'<br /><br />' .  
+							__('Go to your', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
+							'/trainingstatistics/list_trainings/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' .
+							'TriCoreTraining ' . __('logbook', true) . '</a> ' . 
+							__('and track your workouts - better now than later ⏱️!', true) . "<br /><br />"; 
 		 
 						if ( $debug == true ) 
 							echo "No workouts logged - notify user.<br>\n";
@@ -2033,21 +2037,18 @@ class UsersController extends AppController {
 						if ( isset( $return ) && is_array( $return ) )
 						{
                             $text_for_mail_training .= "<b>" . __("Status of your season's training",true) . " (" . $start . " - " . $end . ")</b><br />"; 
-                            //echo 'start ' . $return['start'];
-							//echo 'end ' . $return['end'];
-							//echo 'sumdata ' . $return['sumdata'];
-							//if ( $return['color'] ) $text_for_mail_training .= "<span style='background:" . $return['color'] . "'>";
 							$text_for_mail_training .= " " . $return['total_trimp'] . " " . __('of',true) . " " . 
-								$return['total_trimp_tp'] . " " . __('Trimps',true) . " (" . $return['trafficlight_percent'] . " %) ";
-							//if ( $return['color'] ) $text_for_mail_training .= "</span>";
+							$return['total_trimp_tp'] . " " . __('Trimps',true) . " (" . $return['trafficlight_percent'] . "%) ";
+							
 							$color = $return['color'];
 							
 							if ( isset( $color ) ) 
 							{
 									// bought with gentics account at istockphotos 3480031_thumbnail.jpg 2012-03-31
 									$block = '<span style="width:10px;background:' . $color . '">&nbsp;&nbsp;&nbsp;</span>&nbsp;';
-									$block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
-																			
+									// $block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
+									$block = ' 🏆 ';
+
 									if ( $color == 'red' )
 									{ 
 										$text_for_mail_training .= ($block);
@@ -2074,7 +2075,7 @@ class UsersController extends AppController {
 						if ( $session_userid )
 						{
 								$sql = "SELECT sum(trimp) AS strimp FROM trainingstatistics WHERE user_id = " . $session_userid . " AND " . 
-                                                                "(date BETWEEN '" . $start . "' AND '" . $end . "')";
+                                        "(date BETWEEN '" . $start . "' AND '" . $end . "')";
 								$results_real = $this->Trainingstatistic->query($sql);
 								if ( $results_real[0][0]['strimp'] ) 
 									$sum_real = $results_real[0][0]['strimp'];
@@ -2113,8 +2114,9 @@ class UsersController extends AppController {
 								if ( isset( $color ) ) 
 								{
 									$block = '<span style="width:10px;background:' . $color . '">&nbsp;&nbsp;&nbsp;</span>&nbsp;';
-									$block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
-																		if ( $color == 'red' )
+									// $block = '<img class="none" alt="" src="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/img/trophy_' . $color . '_25x25.gif" />&nbsp;';
+									$block = ' 🏆 ';
+									if ( $color == 'red' )
 										$text_for_mail_training .= ($block);
 									if ( $color == 'orange' )
 										$text_for_mail_training .= ($block).($block);
@@ -2191,7 +2193,7 @@ class UsersController extends AppController {
 			          " " . '<a href="' . Configure::read('App.hostUrl') . 
 			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
 			      }
-			      		      
+
 			      // check for target weight
 			      if ( $u['targetweight'] && $u['targetweightdate'] )
 			      {
@@ -2251,9 +2253,9 @@ class UsersController extends AppController {
 				  // TODO (B) not yet implemented
 			      if ( !$u['myrecommendation'] )
 			      { 
-				          $text_for_mail .= '<a href="' . Configure::read('App.hostUrl') . 
-				          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('If you like TriCoreTraining, please tell it your friends 🧡!', true) . '</a>';
-				          $text_for_mail .= '<br /><br />';
+				          $text_for_mail .= '<li>' . __('If you like TriCoreTraining', true) . ', <a href="' . Configure::read('App.hostUrl') . 
+				          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('please tell it your friends 🧡!', true) . '</a>';
+				          $text_for_mail .= "</li>\n";
 			      }
 				  
 				  // check for medical limitations
@@ -2274,20 +2276,23 @@ class UsersController extends AppController {
 				      $text_for_mail .= '<li>' . __('Your account is not activated yet ⚠️ and so you haven\'t unlocked the immense training power. Please use your activation mail to ACTIVATE your account or contact our support. Thanks.', true) . "</li>\n";
 				  }   
 		
+				  $send_trainingplan = true;
+
 				  // premium membership is over, user has level "premiummember"
 				  if ( ( strtotime( $u['paid_to'] ) < time() ) )
 				  {
 				      if ( $u['level'] != 'freemember' )
 					  {
-					      // set level = paymember
+					      // set level = freemember
 					      $this->User->id = $u['id'];
 					      $this->User->savefield('level', 'freemember', false);
 					  }
-		
+					  $send_trainingplan = false;
+
 				      $text_for_mail_premium =  
 						__('Your PREMIUM membership has expired 😞. If you still want to receive professional, interactive training plans for the value of one coffee ☕ a month again', true) . ', ' .
-						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . __('SUBSCRIBE', true) . '</a>' . "\n";
-						'<br /><br />' . "\n\n" . __('Gain speed, lose weight');
+						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . __('Subscribe PREMIUM', true) . '</a>' . "\n";
+						'<br /><br />' . "\n\n"; // . __('Gain speed, lose weight');
 				  }
 				
 				  // mail-text with 5 subject variations
@@ -2312,28 +2317,29 @@ class UsersController extends AppController {
                             $content = $text_for_mail_training . '<br /><br />' . "\n\n";		
                        }
 
-					   // add training plan in mail for next week (1)
-					   $content .= $this->Provider->getPlan(true, $user, $notSun, 1) . "<br /><br />";
-
-                       /*
-                       // link to training schedule of next week
-                       $content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b><br />'; 
-                       $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
-                       '/trainingplans/view/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
-                       __('Click here, print it and use it!', true) . '</a>' . "\n";
-                       $content .= "<br /><br />\n\n";
-                       */
-
-                       $key_add = "&athlete_id=" . $u['id'] . "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
-                       $content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
-                       '/trainingplans/get_events/?o=1&utm_source=tricoretrainingsystem&utm_medium=mailing' . $key_add . '" target="_blank">&raquo; ' . 
-                       __('Add workouts to your calendar (.ics)!', true) . '</a>' . "\n";
-                       $content .= "<br /><br />\n\n";	
-
-                       if ( $text_for_mail_premium )
+					   if ( $send_trainingplan === true ) {
+							$trainingplan_content = $this->Provider->getPlan(true, $user, $notSun, 1);
+							// add training plan in mail for next week (1)
+							$content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b><br />'; 
+							$content .=  '<table width="50%"><tr><td>' . $trainingplan_content . "</td></tr></table><br /><br />";
+							// link to training schedule of next week
+							/*
+							$content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
+							'/trainingplans/view/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
+							__('Click here, print it and use it!', true) . '</a>' . "\n";
+							$content .= "<br /><br />\n\n";
+							*/
+							$key_add = "&athlete_id=" . $u['id'] . "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
+							$content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
+							'/trainingplans/get_events/?o=1&utm_source=tricoretrainingsystem&utm_medium=mailing' . $key_add . '" target="_blank">' .
+							'<button class="calendar" type="button">' . 
+						    __('Add workouts to your calendar (.ics)!', true) . '</button></a>' . "\n";
+							$content .= "<br /><br />\n\n";	
+					   } elseif ( $text_for_mail_premium )
                        {
                             $content .= $text_for_mail_premium . '<br /><br />' . "\n\n";
-                       }		      
+					   }
+					   // $content .= $u['paid_to'];
 
                        /*
 						if ( $this->blognews && 1 == 2 ) {
@@ -2345,7 +2351,7 @@ class UsersController extends AppController {
                        if ( $text_for_mail ) 
                        {
                             $content .= '<p>' . 
-                            '<b>' . __('There is something to update in your profile.', true) . "</b><br />\n" . 
+                            '<b>' . __('There is something to do:', true) . "</b><br />\n" . 
                             '<ul>' . $text_for_mail . '</ul>' . '</p>' . "\n\n";
                        }
 

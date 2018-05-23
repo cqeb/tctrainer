@@ -9,17 +9,17 @@ $yesno[0] = __('No', true);
         
         <div class="panel-body">
 
-                   <?php echo $this->element('js_error'); ?>
+            <?php echo $this->element('js_error'); ?>
 
-                   <?php echo $form->create('User', array('action' => 'send_message','class' => 'form-horizontal')); ?>
-                   <fieldset> 
-                   <legend><?php __('Administrate our users!'); ?></legend>
+            <?php echo $form->create('User', array('action' => 'send_message','class' => 'form-horizontal')); ?>
+            <fieldset> 
+            <legend><?php __('Administrate our users!'); ?></legend>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
+            <?php if ($session->read('flash')) { ?>
+            <div class="<?php echo $statusbox; ?>">
+            <?php echo $session->read('flash'); $session->delete('flash'); ?>
+            </div><br />
+            <?php } ?>
 
 
 <?php echo $paginator->numbers(); ?>

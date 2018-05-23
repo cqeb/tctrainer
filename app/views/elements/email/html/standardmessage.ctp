@@ -1,7 +1,7 @@
 
 <?php echo $this->element('email/newsletter_header_simple'); ?>
 
- <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00" width="100%">
+ <table cellspacing="0" width="100%">
     <tr>
        <td>
           <h2><?php echo $subject; ?></h2>

@@ -194,14 +194,15 @@
       <td align="center" valign="top">
 
          <table width="580" border="0" cellspacing="0" cellpadding="0" class="main">
+            <!--
             <tr>
                <td height="90" valign="bottom" align="center">
                   <p><br />
-                  <!--<img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/header.gif" width="580" height="90" alt="TriCoreTraining.com" />-->
                   <img src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo" />
                   </p>
                </td>
             </tr>
+            -->
             <tr>
                <td align="center">
 

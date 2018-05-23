@@ -13,8 +13,8 @@
          color: #4c4c4c;
          font-family: Arial, 'Helvetica Neue', 'Liberation Sans', FreeSans, sans-serif;
          max-width:550px;
-         margin-left: auto;
-         margin-right: auto;          
+         /*margin-left: auto;
+         margin-right: auto;*/
       }
 
       ol {
@@ -67,6 +67,7 @@
          color: #FFAE00;
          margin: 10px 0 10px 24px;
          padding: 0;
+         font-size: 14px;
       }
 
       td.sidebar ul li a {
@@ -90,16 +91,16 @@
       }
 
       td.mainbar h2 {
-         font-size: 18px;
+         font-size: 16px;
          /*background-color: #FFAE00;*/
          font-weight: bold;
-         color: #ffffff;
+         color: #4c4c4c;
          margin: 0;
          padding: 0;
       }
 
       td.mainbar h2 a {
-         font-size: 18px;
+         font-size: 16px;
          font-weight: bold;
          color: #ffffff;
          text-decoration: none;
@@ -120,7 +121,7 @@
       }
 
       td.mainbar p img {
-         border-bottom: 4px solid #edc913;
+         /*border-bottom: 4px solid #edc913;*/
       }
 
       td.mainbar p img.none {
@@ -135,11 +136,13 @@
          font-weight: normal;
          margin: 10px 0 10px 0;
          padding: 0;
+         font-size: 14px;
          list-style-position: inside;
       }
 
       td.sideheader h3 {
          /** background-color: #FFAE00; */
+         font-size: 14px;
          font-weight: bold;
          color: #ffffff;
          margin: 0;
@@ -151,7 +154,7 @@
       }
 
       td.footer p {
-         font-size: 11px;
+         font-size: 14px;
          font-weight: normal;
          color: #333333;
          margin: 0;
@@ -159,7 +162,7 @@
       }
 
       td.footer p a {
-         font-size: 11px;
+         font-size: 14px;
          font-weight: normal;
          color: #6cb9ce;
       }
@@ -181,12 +184,24 @@
          align-items: flex-start;
          text-align: center;
          cursor: default;
-         color: buttontext;
+         /*color: purple;*/
          padding: 2px 6px 3px;
-         border: 2px outset buttonface;
+         border: 1px outset buttonface;
          box-sizing: border-box;
       }
-      button { display:none; }
+      table.workouts td.trimp, table.workouts td.duration .sum {
+            font-weight: bold;
+      }
+      button .calendar {
+        background-color: #6cb9ce; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+      }
    </style>
 
 </head>
@@ -198,23 +213,9 @@
 
          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="main">
             <tr>
-               <td  valign="bottom" align="left">
-                  
-                  <img width="50%" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo" />
-                  
-               </td>
-            </tr>
-            <tr>
                <td align="left">
 
                   <table width="100%" cellspacing="0" cellpadding="4">
-                     <!--
-                     <tr>
-                        <td height="5"></td>
-                        <td></td>
-                        <td class="date"><p><?php date('YYYY-mm-dd', time()); ?></p></td>
-                     </tr>
-                     -->
                      <tr align="left" rowspan="3" valign="top">
 
                         <td width="100%" valign="top" class="mainbar" align="left">

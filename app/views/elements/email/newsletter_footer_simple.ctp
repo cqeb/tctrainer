@@ -1,16 +1,22 @@
-						   <br />
+						          <br />
 
 							         <p>
-                           	<a href="http://www.facebook.com/pages/TriCoreTraining/150997251602079?v=wall" target="_blank"><img width="50" alt="<?php __('Visit us at Facebook'); ?>" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/icon_facebook.png" / ></a>
+                              <a href="http://www.facebook.com/pages/TriCoreTraining/150997251602079?v=wall" target="_blank">
+                              <?php __('Want to post something on our page on Facebook?'); ?>
+                              </a><br />
 
-                           	<a href="http://www.twitter.com/tricoretraining/" target="_blank"><img width="50" alt="<?php __('Follow us on Twitter'); ?>" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/icon_twitter.png" /></a>
-                           	</p>
+                              <a href="http://www.twitter.com/tricoretraining/" target="_blank">
+                              <?php __('Or follow us on Twitter'); ?>
+                              </a>
+                        </p>
 
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/spacer.gif" width="329" height="12" />
 
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/hr.gif" width="329" height="27" />
 
                            <img alt="" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/spacer.gif" width="329" height="12" />
+
+                           <img width="25%" src="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo" />
 
                         </td>
                      </tr>
@@ -19,7 +25,7 @@
                </td>
             </tr>
             <tr>
-               <td align="center" class="footer">
+               <td align="left" class="footer">
                   <p>
                     <a href="https://tricoretraining.com?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">
                     TriCoreTraining</a><br />
