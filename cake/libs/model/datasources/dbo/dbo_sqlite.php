@@ -412,7 +412,7 @@ class DboSqlite extends DboSource {
  * @param unknown_type $results
  */
 	function resultSet(&$results) {
-		$this->results = $results;
+		$this->results =& $results;
 		$this->map = array();
 		$fieldCount = sqlite_num_fields($results);
 		$index = $j = 0;

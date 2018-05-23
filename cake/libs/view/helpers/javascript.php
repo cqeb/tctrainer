@@ -203,7 +203,7 @@ class JavascriptHelper extends AppHelper {
 		if ($options['inline']) {
 			return sprintf($this->tags['javascriptblock'], $script);
 		} else {
-			$view = ClassRegistry::getObject('view');
+			$view =& ClassRegistry::getObject('view');
 			$view->addScript(sprintf($this->tags['javascriptblock'], $script));
 		}
 	}
@@ -279,7 +279,7 @@ class JavascriptHelper extends AppHelper {
 		if ($inline) {
 			return $out;
 		} else {
-			$view = ClassRegistry::getObject('view');
+			$view =& ClassRegistry::getObject('view');
 			$view->addScript($out);
 		}
 	}
@@ -550,7 +550,7 @@ class JavascriptHelper extends AppHelper {
 		if ($inline) {
 			return $out;
 		} else {
-			$view = ClassRegistry::getObject('view');
+			$view =& ClassRegistry::getObject('view');
 			$view->addScript($out);
 		}
 	}

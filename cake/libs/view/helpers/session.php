@@ -150,7 +150,7 @@ class SessionHelper extends CakeSession {
 				} elseif ($flash['element'] == '' || $flash['element'] == null) {
 					$out = $flash['message'];
 				} else {
-					$view = ClassRegistry::getObject('view');
+					$view =& ClassRegistry::getObject('view');
 					$tmpVars = $flash['params'];
 					$tmpVars['message'] = $flash['message'];
 					$out = $view->element($flash['element'], $tmpVars);

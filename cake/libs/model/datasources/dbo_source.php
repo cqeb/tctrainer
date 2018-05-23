@@ -361,7 +361,7 @@ class DboSource extends DataSource {
 					$cache = true;
 				}
 				$args[1] = array_map(array(&$this, 'value'), $args[1]);
-				return $this->fetchAll(StringHelper::insert($args[0], $args[1]), $cache);
+				return $this->fetchAll(String::insert($args[0], $args[1]), $cache);
 			}
 		}
 	}
@@ -631,7 +631,7 @@ class DboSource extends DataSource {
 		if (PHP_SAPI != 'cli') {
 			App::import('Core', 'View');
 			$controller = null;
-			$View = new View($controller, false);
+			$View =& new View($controller, false);
 			$View->set('logs', array($this->configKeyName => $log));
 			echo $View->element('sql_dump', array('_forced_from_dbo_' => true));
 		} else {
@@ -807,7 +807,7 @@ class DboSource extends DataSource {
 
 		foreach ($_associations as $type) {
 			foreach ($model->{$type} as $assoc => $assocData) {
-				$linkModel = $model->{$assoc};
+				$linkModel =& $model->{$assoc};
 				$external = isset($assocData['external']);
 
 				if ($model->useDbConfig == $linkModel->useDbConfig) {
@@ -832,16 +832,16 @@ class DboSource extends DataSource {
 		if ($model->recursive > -1) {
 			foreach ($_associations as $type) {
 				foreach ($model->{$type} as $assoc => $assocData) {
-					$linkModel = $model->{$assoc};
+					$linkModel =& $model->{$assoc};
 
 					if (empty($linkedModels[$type . '/' . $assoc])) {
 						if ($model->useDbConfig == $linkModel->useDbConfig) {
-							$db = $this;
+							$db =& $this;
 						} else {
-							$db = ConnectionManager::getDataSource($linkModel->useDbConfig);
+							$db =& ConnectionManager::getDataSource($linkModel->useDbConfig);
 						}
 					} elseif ($model->recursive > 1 && ($type == 'belongsTo' || $type == 'hasOne')) {
-						$db = $this;
+						$db =& $this;
 					}
 
 					if (isset($db) && method_exists($db, 'queryAssociation')) {
@@ -947,14 +947,14 @@ class DboSource extends DataSource {
 					if ($recursive > 0) {
 						foreach ($linkModel->__associations as $type1) {
 							foreach ($linkModel->{$type1} as $assoc1 => $assocData1) {
-								$deepModel = $linkModel->{$assoc1};
+								$deepModel =& $linkModel->{$assoc1};
 								$tmpStack = $stack;
 								$tmpStack[] = $assoc1;
 
 								if ($linkModel->useDbConfig === $deepModel->useDbConfig) {
-									$db = $this;
+									$db =& $this;
 								} else {
-									$db = ConnectionManager::getDataSource($deepModel->useDbConfig);
+									$db =& ConnectionManager::getDataSource($deepModel->useDbConfig);
 								}
 								$db->queryAssociation($linkModel, $deepModel, $type1, $assoc1, $assocData1, $queryData, true, $fetch, $recursive - 1, $tmpStack);
 							}
@@ -996,7 +996,7 @@ class DboSource extends DataSource {
 			}
 
 			for ($i = 0; $i < $count; $i++) {
-				$row = $resultSet[$i];
+				$row =& $resultSet[$i];
 
 				if ($type !== 'hasAndBelongsToMany') {
 					$q = $this->insertQueryData($query, $resultSet[$i], $association, $assocData, $model, $linkModel, $stack);
@@ -1016,15 +1016,15 @@ class DboSource extends DataSource {
 					if ($recursive > 0) {
 						foreach ($linkModel->__associations as $type1) {
 							foreach ($linkModel->{$type1} as $assoc1 => $assocData1) {
-								$deepModel = $linkModel->{$assoc1};
+								$deepModel =& $linkModel->{$assoc1};
 
 								if (($type1 === 'belongsTo') || ($deepModel->alias === $model->alias && $type === 'belongsTo') || ($deepModel->alias != $model->alias)) {
 									$tmpStack = $stack;
 									$tmpStack[] = $assoc1;
 									if ($linkModel->useDbConfig == $deepModel->useDbConfig) {
-										$db = $this;
+										$db =& $this;
 									} else {
-										$db = ConnectionManager::getDataSource($deepModel->useDbConfig);
+										$db =& ConnectionManager::getDataSource($deepModel->useDbConfig);
 									}
 									$db->queryAssociation($linkModel, $deepModel, $type1, $assoc1, $assocData1, $queryData, true, $fetch, $recursive - 1, $tmpStack);
 								}
@@ -1968,7 +1968,7 @@ class DboSource extends DataSource {
 		if ($allFields) {
 			$fields = array_keys($model->schema());
 		} elseif (!is_array($fields)) {
-			$fields = StringHelper::tokenize($fields);
+			$fields = String::tokenize($fields);
 		}
 		$fields = array_values(array_filter($fields));
 		$allFields = $allFields || in_array('*', $fields) || in_array($model->alias . '.*', $fields);
@@ -2284,7 +2284,7 @@ class DboSource extends DataSource {
 		}
 
 		if ($bound) {
-			return  StringHelper::insert($key . ' ' . trim($operator), $value);
+			return  String::insert($key . ' ' . trim($operator), $value);
 		}
 
 		if (!preg_match($operatorMatch, trim($operator))) {

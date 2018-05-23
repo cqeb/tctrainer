@@ -748,7 +748,7 @@ class DboMysql extends DboMysqlBase {
 		if (isset($this->results) && is_resource($this->results) && $this->results != $results) {
 			mysql_free_result($this->results);
 		}
-		$this->results = $results;
+		$this->results =& $results;
 		$this->map = array();
 		$numFields = mysql_num_fields($results);
 		$index = 0;

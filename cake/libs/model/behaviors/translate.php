@@ -53,7 +53,7 @@ class TranslateBehavior extends ModelBehavior {
  * @access public
  */
 	function setup(&$model, $config = array()) {
-		$db = ConnectionManager::getDataSource($model->useDbConfig);
+		$db =& ConnectionManager::getDataSource($model->useDbConfig);
 		if (!$db->connected) {
 			trigger_error(
 				sprintf(__('Datasource %s for TranslateBehavior of model %s is not connected', true), $model->useDbConfig, $model->alias),
@@ -94,8 +94,8 @@ class TranslateBehavior extends ModelBehavior {
 		if (empty($locale)) {
 			return $query;
 		}
-		$db = ConnectionManager::getDataSource($model->useDbConfig);
-		$RuntimeModel = $this->translateModel($model);
+		$db =& ConnectionManager::getDataSource($model->useDbConfig);
+		$RuntimeModel =& $this->translateModel($model);
 		if (!empty($RuntimeModel->tablePrefix)) {
 			$tablePrefix = $RuntimeModel->tablePrefix;
 		} else {
@@ -298,7 +298,7 @@ class TranslateBehavior extends ModelBehavior {
 		$tempData = $this->runtime[$model->alias]['beforeSave'];
 		unset($this->runtime[$model->alias]['beforeSave']);
 		$conditions = array('model' => $model->alias, 'foreign_key' => $model->id);
-		$RuntimeModel = $this->translateModel($model);
+		$RuntimeModel =& $this->translateModel($model);
 
 		foreach ($tempData as $field => $value) {
 			unset($conditions['content']);
@@ -335,7 +335,7 @@ class TranslateBehavior extends ModelBehavior {
  * @access public
  */
 	function afterDelete(&$model) {
-		$RuntimeModel = $this->translateModel($model);
+		$RuntimeModel =& $this->translateModel($model);
 		$conditions = array('model' => $model->alias, 'foreign_key' => $model->id);
 		$RuntimeModel->deleteAll($conditions);
 	}
@@ -352,7 +352,7 @@ class TranslateBehavior extends ModelBehavior {
 			if (!class_exists('I18n')) {
 				App::import('Core', 'i18n');
 			}
-			$I18n = I18n::getInstance();
+			$I18n =& I18n::getInstance();
 			$I18n->l10n->get(Configure::read('Config.language'));
 			$model->locale = $I18n->l10n->locale;
 		}
@@ -381,7 +381,7 @@ class TranslateBehavior extends ModelBehavior {
 			if (PHP5) {
 				$this->runtime[$model->alias]['model'] = ClassRegistry::init($className, 'Model');
 			} else {
-				$this->runtime[$model->alias]['model'] = ClassRegistry::init($className, 'Model');
+				$this->runtime[$model->alias]['model'] =& ClassRegistry::init($className, 'Model');
 			}
 		}
 		if (!empty($model->translateTable) && $model->translateTable !== $this->runtime[$model->alias]['model']->useTable) {
@@ -389,7 +389,7 @@ class TranslateBehavior extends ModelBehavior {
 		} elseif (empty($model->translateTable) && empty($model->translateModel)) {
 			$this->runtime[$model->alias]['model']->setSource('i18n');
 		}
-		$model = $this->runtime[$model->alias]['model'];
+		$model =& $this->runtime[$model->alias]['model'];
 		return $model;
 	}
 
@@ -407,7 +407,7 @@ class TranslateBehavior extends ModelBehavior {
 			$fields = array($fields);
 		}
 		$associations = array();
-		$RuntimeModel = $this->translateModel($model);
+		$RuntimeModel =& $this->translateModel($model);
 		$default = array('className' => $RuntimeModel->alias, 'foreignKey' => 'foreign_key');
 
 		foreach ($fields as $key => $value) {
@@ -486,7 +486,7 @@ class TranslateBehavior extends ModelBehavior {
 		if (is_string($fields)) {
 			$fields = array($fields);
 		}
-		$RuntimeModel = $this->translateModel($model);
+		$RuntimeModel =& $this->translateModel($model);
 		$associations = array();
 
 		foreach ($fields as $key => $value) {

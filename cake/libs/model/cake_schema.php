@@ -180,7 +180,7 @@ class CakeSchema extends Object {
 		}
 
 		if (class_exists($class)) {
-			$Schema = new $class($options);
+			$Schema =& new $class($options);
 			return $Schema;
 		}
 		$false = false;
@@ -209,7 +209,7 @@ class CakeSchema extends Object {
 			),
 			$options
 		));
-		$db = ConnectionManager::getDataSource($connection);
+		$db =& ConnectionManager::getDataSource($connection);
 
 		App::import('Model', 'AppModel');
 		if (isset($this->plugin)) {
@@ -249,7 +249,7 @@ class CakeSchema extends Object {
 				if (PHP5) {
 					$Object = ClassRegistry::init(array('class' => $model, 'ds' => $connection));
 				} else {
-					$Object = ClassRegistry::init(array('class' => $model, 'ds' => $connection));
+					$Object =& ClassRegistry::init(array('class' => $model, 'ds' => $connection));
 				}
 
 				if (is_object($Object) && $Object->useTable !== false) {
@@ -384,7 +384,7 @@ class CakeSchema extends Object {
 		}
 		$out .= "}\n";
 
-		$File = new File($path . DS . $file, true);
+		$File =& new File($path . DS . $file, true);
 		$header = '$Id';
 		$content = "<?php \n/* {$name} schema generated on: " . date('Y-m-d H:i:s') . " : ". time() . "*/\n{$out}?>";
 		$content = $File->prepare($content);
@@ -450,7 +450,7 @@ class CakeSchema extends Object {
  */
 	function compare($old, $new = null) {
 		if (empty($new)) {
-			$new = $this;
+			$new =& $this;
 		}
 		if (is_array($new)) {
 			if (isset($new['tables'])) {
@@ -597,7 +597,7 @@ class CakeSchema extends Object {
  * @access public
  */
 	function __columns(&$Obj) {
-		$db = ConnectionManager::getDataSource($Obj->useDbConfig);
+		$db =& ConnectionManager::getDataSource($Obj->useDbConfig);
 		$fields = $Obj->schema(true);
 		$columns = $props = array();
 		foreach ($fields as $name => $value) {

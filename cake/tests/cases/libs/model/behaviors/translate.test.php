@@ -69,26 +69,26 @@ class TranslateBehaviorTest extends CakeTestCase {
  * @return void
  */
 	function testTranslateModel() {
-		$TestModel = new Tag();
+		$TestModel =& new Tag();
 		$TestModel->translateTable = 'another_i18n';
 		$TestModel->Behaviors->attach('Translate', array('title'));
-		$translateModel = $TestModel->Behaviors->Translate->translateModel($TestModel);
+		$translateModel =& $TestModel->Behaviors->Translate->translateModel($TestModel);
 		$this->assertEqual($translateModel->name, 'I18nModel');
 		$this->assertEqual($translateModel->useTable, 'another_i18n');
 
-		$TestModel = new User();
+		$TestModel =& new User();
 		$TestModel->Behaviors->attach('Translate', array('title'));
-		$translateModel = $TestModel->Behaviors->Translate->translateModel($TestModel);
+		$translateModel =& $TestModel->Behaviors->Translate->translateModel($TestModel);
 		$this->assertEqual($translateModel->name, 'I18nModel');
 		$this->assertEqual($translateModel->useTable, 'i18n');
 
-		$TestModel = new TranslatedArticle();
-		$translateModel = $TestModel->Behaviors->Translate->translateModel($TestModel);
+		$TestModel =& new TranslatedArticle();
+		$translateModel =& $TestModel->Behaviors->Translate->translateModel($TestModel);
 		$this->assertEqual($translateModel->name, 'TranslateArticleModel');
 		$this->assertEqual($translateModel->useTable, 'article_i18n');
 
-		$TestModel = new TranslatedItem();
-		$translateModel = $TestModel->Behaviors->Translate->translateModel($TestModel);
+		$TestModel =& new TranslatedItem();
+		$translateModel =& $TestModel->Behaviors->Translate->translateModel($TestModel);
 		$this->assertEqual($translateModel->name, 'TranslateTestModel');
 		$this->assertEqual($translateModel->useTable, 'i18n');
 	}
@@ -102,7 +102,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testLocaleFalsePlain() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = false;
 
 		$result = $TestModel->read(null, 1);
@@ -127,7 +127,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testLocaleFalseAssociations() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = false;
 		$TestModel->unbindTranslation();
 		$translations = array('title' => 'Title', 'content' => 'Content');
@@ -182,7 +182,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testLocaleSingle() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'eng';
 		$result = $TestModel->read(null, 1);
 		$expected = array(
@@ -238,7 +238,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testLocaleSingleWithConditions() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'eng';
 		$result = $TestModel->find('all', array('conditions' => array('slug' => 'first_translated')));
 		$expected = array(
@@ -278,7 +278,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testLocaleSingleAssociations() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'eng';
 		$TestModel->unbindTranslation();
 		$translations = array('title' => 'Title', 'content' => 'Content');
@@ -339,7 +339,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testLocaleMultiple() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = array('deu', 'eng', 'cze');
 		$delete = array(
 			array('locale' => 'deu'),
@@ -349,7 +349,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 			array('foreign_key' => 2, 'field' => 'content', 'locale' => 'eng'),
 			array('foreign_key' => 3, 'field' => 'title')
 		);
-		$I18nModel = ClassRegistry::getObject('TranslateTestModel');
+		$I18nModel =& ClassRegistry::getObject('TranslateTestModel');
 		$I18nModel->deleteAll(array('or' => $delete));
 
 		$result = $TestModel->read(null, 1);
@@ -403,7 +403,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testMissingTranslation() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'rus';
 		$result = $TestModel->read(null, 1);
 		$this->assertFalse($result);
@@ -431,7 +431,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testTranslatedFindList() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'deu';
 		$TestModel->displayField = 'title';
 		$result = $TestModel->find('list', array('recursive' => 1));
@@ -465,7 +465,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testReadSelectedFields() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'eng';
 		$result = $TestModel->find('all', array('fields' => array('slug', 'TranslatedItem.content')));
 		$expected = array(
@@ -480,7 +480,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 
 		$TestModel->locale = array('eng', 'deu', 'cze');
 		$delete = array(array('locale' => 'deu'), array('field' => 'content', 'locale' => 'eng'));
-		$I18nModel = ClassRegistry::getObject('TranslateTestModel');
+		$I18nModel =& ClassRegistry::getObject('TranslateTestModel');
 		$I18nModel->deleteAll(array('or' => $delete));
 
 		$result = $TestModel->find('all', array('fields' => array('title', 'content')));
@@ -501,7 +501,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testSaveCreate() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'spa';
 		$data = array('slug' => 'fourth_translated', 'title' => 'Leyenda #4', 'content' => 'Contenido #4');
 		$TestModel->create($data);
@@ -520,7 +520,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testSaveUpdate() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'spa';
 		$oldData = array('slug' => 'fourth_translated', 'title' => 'Leyenda #4');
 		$TestModel->create($oldData);
@@ -543,7 +543,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testMultipleCreate() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'deu';
 		$data = array(
 			'slug' => 'new_translated',
@@ -582,7 +582,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testMultipleUpdate() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'eng';
 		$TestModel->validate['title'] = 'notEmpty';
 		$data = array('TranslatedItem' => array(
@@ -625,7 +625,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testMixedCreateUpdateWithArrayLocale() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = array('cze', 'deu');
 		$data = array('TranslatedItem' => array(
 			'id' => 1,
@@ -665,7 +665,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testValidation() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->locale = 'eng';
 		$TestModel->validate['title'] = '/Only this title/';
 		$data = array('TranslatedItem' => array(
@@ -697,8 +697,8 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testAttachDetach() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
-		$Behavior = $this->Model->Behaviors->Translate;
+		$TestModel =& new TranslatedItem();
+		$Behavior =& $this->Model->Behaviors->Translate;
 
 		$TestModel->unbindTranslation();
 		$translations = array('title' => 'Title', 'content' => 'Content');
@@ -748,7 +748,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testAnotherTranslateTable() {
 		$this->loadFixtures('Translate', 'TranslatedItem', 'TranslateTable');
 
-		$TestModel = new TranslatedItemWithTable();
+		$TestModel =& new TranslatedItemWithTable();
 		$TestModel->locale = 'eng';
 		$result = $TestModel->read(null, 1);
 		$expected = array(
@@ -772,7 +772,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testTranslateWithAssociations() {
 		$this->loadFixtures('TranslateArticle', 'TranslatedArticle', 'User', 'Comment', 'ArticlesTag', 'Tag');
 
-		$TestModel = new TranslatedArticle();
+		$TestModel =& new TranslatedArticle();
 		$TestModel->locale = 'eng';
 		$recursive = $TestModel->recursive;
 
@@ -865,7 +865,7 @@ class TranslateBehaviorTest extends CakeTestCase {
  */
 	function testTranslateTableWithPrefix() {
 		$this->loadFixtures('TranslateWithPrefix', 'TranslatedItem');
-		$TestModel = new TranslatedItem2;
+		$TestModel =& new TranslatedItem2;
 		$TestModel->locale = 'eng';
 		$result = $TestModel->read(null, 1);
 		$expected = array('TranslatedItem' => array(
@@ -886,7 +886,7 @@ class TranslateBehaviorTest extends CakeTestCase {
 	function testUnbindTranslationInfinteLoop() {
 		$this->loadFixtures('Translate', 'TranslatedItem');
 
-		$TestModel = new TranslatedItem();
+		$TestModel =& new TranslatedItem();
 		$TestModel->Behaviors->detach('Translate');
 		$TestModel->actsAs = array();
 		$TestModel->Behaviors->attach('Translate');

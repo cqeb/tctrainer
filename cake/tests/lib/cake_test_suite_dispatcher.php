@@ -136,7 +136,7 @@ class CakeTestSuiteDispatcher {
  * @return void
  */
 	function _testCaseList() {
-		$Reporter = $this->getReporter();
+		$Reporter =& $this->getReporter();
 		$Reporter->paintDocumentStart();
 		$Reporter->paintTestMenu();
 		$Reporter->testCaseList();
@@ -149,7 +149,7 @@ class CakeTestSuiteDispatcher {
  * @return void
  */
 	function _groupTestList() {
-		$Reporter = $this->getReporter();
+		$Reporter =& $this->getReporter();
 		$Reporter->paintDocumentStart();
 		$Reporter->paintTestMenu();
 		$Reporter->groupTestList();
@@ -185,9 +185,9 @@ class CakeTestSuiteDispatcher {
 			$appClass = $this->params['output'] . 'Reporter';
 			$appFile = APPLIBS . 'test_suite' . DS . 'reporter' . DS . $type . '_reporter.php';
 			if (file_exists($appFile) && include_once $appFile) {
-				$Reporter = new $appClass(null, $this->params);
+				$Reporter =& new $appClass(null, $this->params);
 			} elseif (include_once $coreFile) {
-				$Reporter = new $coreClass(null, $this->params);
+				$Reporter =& new $coreClass(null, $this->params);
 			}
 		}
 		return $Reporter;
@@ -223,7 +223,7 @@ class CakeTestSuiteDispatcher {
  * @return void
  */
 	function _runGroupTest() {
-		$Reporter = CakeTestSuiteDispatcher::getReporter();
+		$Reporter =& CakeTestSuiteDispatcher::getReporter();
 		if ($this->params['codeCoverage']) {
 			CodeCoverageManager::init($this->params['group'], $Reporter);
 		}
@@ -240,7 +240,7 @@ class CakeTestSuiteDispatcher {
  * @return void
  */
 	function _runTestCase() {
-		$Reporter = CakeTestSuiteDispatcher::getReporter();
+		$Reporter =& CakeTestSuiteDispatcher::getReporter();
 		if ($this->params['codeCoverage']) {
 			CodeCoverageManager::init($this->params['case'], $Reporter);
 		}

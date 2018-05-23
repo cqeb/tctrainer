@@ -49,7 +49,7 @@ class InflectorTest extends CakeTestCase {
  * @return void
  */
 	function testInstantiation() {
-		$Inflector = Inflector::getInstance();
+		$Inflector =& Inflector::getInstance();
 		$this->assertEqual(Inflector::getInstance(), $Inflector);
 	}
 

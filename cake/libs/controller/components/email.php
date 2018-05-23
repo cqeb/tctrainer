@@ -279,7 +279,7 @@ class EmailComponent extends Object{
 
 /**
  * Whether to generate a Message-ID header for the
- * email. True to generate a Message-ID, False to let
+ * e-mail. True to generate a Message-ID, False to let
  * it be handled by sendmail (or similar) or a string
  * to completely override the Message-ID.
  *
@@ -330,7 +330,7 @@ class EmailComponent extends Object{
  * @access public
  */
 	function initialize(&$controller, $settings = array()) {
-		$this->Controller = $controller;
+		$this->Controller =& $controller;
 		if (Configure::read('App.encoding') !== null) {
 			$this->charset = Configure::read('App.encoding');
 		}
@@ -590,7 +590,7 @@ class EmailComponent extends Object{
 
 		if ($this->messageId !== false) {
 			if ($this->messageId === true) {
-				$headers['Message-ID'] = '<' . str_replace('-', '', StringHelper::uuid()) . '@' . env('HTTP_HOST') . '>';
+				$headers['Message-ID'] = '<' . str_replace('-', '', String::uuid()) . '@' . env('HTTP_HOST') . '>';
 			} else {
 				$headers['Message-ID'] = $this->messageId;
 			}
@@ -839,7 +839,7 @@ class EmailComponent extends Object{
  * @access protected
  */
 	function _getSocket($config) {
-		$this->__smtpConnection = new CakeSocket($config);
+		$this->__smtpConnection =& new CakeSocket($config);
 	}
 
 /**

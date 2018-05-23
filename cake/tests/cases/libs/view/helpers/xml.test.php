@@ -75,9 +75,9 @@ class XmlHelperTest extends CakeTestCase {
  * @return void
  */
 	function setUp() {
-		$this->Xml = new XmlHelper();
+		$this->Xml =& new XmlHelper();
 		$this->Xml->beforeRender();
-		$manager = XmlManager::getInstance();
+		$manager =& XmlManager::getInstance();
 		$manager->namespaces = array();
 	}
 
@@ -99,7 +99,7 @@ class XmlHelperTest extends CakeTestCase {
  */
 	function testAddNamespace() {
 		$this->Xml->addNs('custom', 'http://example.com/dtd.xml');
-		$manager = XmlManager::getInstance();
+		$manager =& XmlManager::getInstance();
 
 		$expected = array('custom' => 'http://example.com/dtd.xml');
 		$this->assertEqual($manager->namespaces, $expected);
@@ -114,7 +114,7 @@ class XmlHelperTest extends CakeTestCase {
 	function testRemoveNamespace() {
 		$this->Xml->addNs('custom', 'http://example.com/dtd.xml');
 		$this->Xml->addNs('custom2', 'http://example.com/dtd2.xml');
-		$manager = XmlManager::getInstance();
+		$manager =& XmlManager::getInstance();
 
 		$expected = array('custom' => 'http://example.com/dtd.xml', 'custom2' => 'http://example.com/dtd2.xml');
 		$this->assertEqual($manager->namespaces, $expected);

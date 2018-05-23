@@ -71,11 +71,11 @@ class FixtureTaskTest extends CakeTestCase {
  * @access public
  */
 	function startTest() {
-		$this->Dispatcher = new TestFixtureTaskMockShellDispatcher();
-		$this->Task = new MockFixtureTask();
-		$this->Task->Model = new MockFixtureModelTask();
-		$this->Task->Dispatch = $this->Dispatcher;
-		$this->Task->Template = new TemplateTask($this->Task->Dispatch);
+		$this->Dispatcher =& new TestFixtureTaskMockShellDispatcher();
+		$this->Task =& new MockFixtureTask();
+		$this->Task->Model =& new MockFixtureModelTask();
+		$this->Task->Dispatch =& $this->Dispatcher;
+		$this->Task->Template =& new TemplateTask($this->Task->Dispatch);
 		$this->Task->Dispatch->shellPaths = App::path('shells');
 		$this->Task->Template->initialize();
 	}
@@ -99,7 +99,7 @@ class FixtureTaskTest extends CakeTestCase {
  */
 	function testConstruct() {
 		$this->Dispatch->params['working'] = DS . 'my' . DS . 'path';
-		$Task = new FixtureTask($this->Dispatch);
+		$Task =& new FixtureTask($this->Dispatch);
 
 		$expected = DS . 'my' . DS . 'path' . DS . 'tests' . DS . 'fixtures' . DS;
 		$this->assertEqual($Task->path, $expected);

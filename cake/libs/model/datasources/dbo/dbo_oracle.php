@@ -1028,14 +1028,14 @@ class DboOracle extends DboSource {
 
 						foreach ($linkModel->__associations as $type1) {
 							foreach ($linkModel->{$type1} as $assoc1 => $assocData1) {
-								$deepModel = $linkModel->{$assoc1};
+								$deepModel =& $linkModel->{$assoc1};
 								$tmpStack = $stack;
 								$tmpStack[] = $assoc1;
 
 								if ($linkModel->useDbConfig === $deepModel->useDbConfig) {
-									$db = $this;
+									$db =& $this;
 								} else {
-									$db = ConnectionManager::getDataSource($deepModel->useDbConfig);
+									$db =& ConnectionManager::getDataSource($deepModel->useDbConfig);
 								}
 								$db->queryAssociation($linkModel, $deepModel, $type1, $assoc1, $assocData1, $queryData, true, $fetch, $recursive - 1, $tmpStack);
 							}
@@ -1074,7 +1074,7 @@ class DboOracle extends DboSource {
 			}
 
 			for ($i = 0; $i < $count; $i++) {
-				$row = $resultSet[$i];
+				$row =& $resultSet[$i];
 
 				if ($type !== 'hasAndBelongsToMany') {
 					$q = $this->insertQueryData($query, $resultSet[$i], $association, $assocData, $model, $linkModel, $stack);
@@ -1091,14 +1091,14 @@ class DboOracle extends DboSource {
 						foreach ($linkModel->__associations as $type1) {
 							foreach ($linkModel->{$type1} as $assoc1 => $assocData1) {
 
-								$deepModel = $linkModel->{$assoc1};
+								$deepModel =& $linkModel->{$assoc1};
 								if (($type1 === 'belongsTo') || ($deepModel->alias === $model->alias && $type === 'belongsTo') || ($deepModel->alias != $model->alias)) {
 									$tmpStack = $stack;
 									$tmpStack[] = $assoc1;
 									if ($linkModel->useDbConfig == $deepModel->useDbConfig) {
-										$db = $this;
+										$db =& $this;
 									} else {
-										$db = ConnectionManager::getDataSource($deepModel->useDbConfig);
+										$db =& ConnectionManager::getDataSource($deepModel->useDbConfig);
 									}
 									$db->queryAssociation($linkModel, $deepModel, $type1, $assoc1, $assocData1, $queryData, true, $fetch, $recursive - 1, $tmpStack);
 								}

@@ -101,7 +101,7 @@ class Validation extends Object {
 		static $instance = array();
 
 		if (!$instance) {
-			$instance[0] = new Validation();
+			$instance[0] =& new Validation();
 		}
 		return $instance[0];
 	}
@@ -119,7 +119,7 @@ class Validation extends Object {
  * @access public
  */
 	function notEmpty($check) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 
@@ -147,7 +147,7 @@ class Validation extends Object {
  * @access public
  */
 	function alphaNumeric($check) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 
@@ -190,7 +190,7 @@ class Validation extends Object {
  * @access public
  */
 	function blank($check) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 
@@ -217,7 +217,7 @@ class Validation extends Object {
  * @see Validation::_luhn()
  */
 	function cc($check, $type = 'fast', $deep = false, $regex = null) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 		$_this->type = $type;
@@ -338,7 +338,7 @@ class Validation extends Object {
 				}
 				break;
 			default:
-				$_this = Validation::getInstance();
+				$_this =& Validation::getInstance();
 				$_this->errors[] = __('You must define the $operator parameter for Validation::comparison()', true);
 				break;
 		}
@@ -355,7 +355,7 @@ class Validation extends Object {
  * @access public
  */
 	function custom($check, $regex = null) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 		$_this->regex = $regex;
@@ -387,7 +387,7 @@ class Validation extends Object {
  * @access public
  */
 	function date($check, $format = 'ymd', $regex = null) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 		$_this->regex = $regex;
@@ -426,7 +426,7 @@ class Validation extends Object {
  */
 
 	function time($check) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 		$_this->regex = '%^((0?[1-9]|1[012])(:[0-5]\d){0,2} ?([AP]M|[ap]m))$|^([01]\d|2[0-3])(:[0-5]\d){0,2}$%';
@@ -456,7 +456,7 @@ class Validation extends Object {
  * @access public
  */
 	function decimal($check, $places = null, $regex = null) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->regex = $regex;
 		$_this->check = $check;
@@ -481,7 +481,7 @@ class Validation extends Object {
  * @access public
  */
 	function email($check, $deep = false, $regex = null) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__reset();
 		$_this->check = $check;
 		$_this->regex = $regex;
@@ -559,7 +559,7 @@ class Validation extends Object {
  * @access public
  */
 	function ip($check, $type = 'both') {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$success = false;
 		$type = strtolower($type);
 		if ($type === 'ipv4' || $type === 'both') {
@@ -640,7 +640,7 @@ class Validation extends Object {
  * @access public
  */
 	function money($check, $symbolPosition = 'left') {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->check = $check;
 
 		if ($symbolPosition == 'right') {
@@ -709,7 +709,7 @@ class Validation extends Object {
  * @access public
  */
 	function phone($check, $regex = null, $country = 'all') {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->check = $check;
 		$_this->regex = $regex;
 		$_this->country = $country;
@@ -743,7 +743,7 @@ class Validation extends Object {
  * @access public
  */
 	function postal($check, $regex = null, $country = null) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->check = $check;
 		$_this->regex = $regex;
 		$_this->country = $country;
@@ -811,7 +811,7 @@ class Validation extends Object {
  * @access public
  */
 	function ssn($check, $regex = null, $country = null) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->check = $check;
 		$_this->regex = $regex;
 		$_this->country = $country;
@@ -846,7 +846,7 @@ class Validation extends Object {
  * @access public
  */
 	function uuid($check) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->check = $check;
 		$_this->regex = '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i';
 		return $_this->_check();
@@ -871,7 +871,7 @@ class Validation extends Object {
  * @access public
  */
 	function url($check, $strict = false) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		$_this->__populateIp();
 		$_this->check = $check;
 		$validChars = '([' . preg_quote('!"$&\'()*+,-.@_:;=~[]') . '\/0-9a-z\p{L}\p{N}]|(%[0-9a-f]{2}))';
@@ -942,7 +942,7 @@ class Validation extends Object {
  * @access protected
  */
 	function _check() {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		if (preg_match($_this->regex, $_this->check)) {
 			$_this->error[] = false;
 			return true;
@@ -961,7 +961,7 @@ class Validation extends Object {
  * @access protected
  */
 	function _extract($params) {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		extract($params, EXTR_OVERWRITE);
 
 		if (isset($check)) {
@@ -989,7 +989,7 @@ class Validation extends Object {
  * @access protected
  */
 	function _luhn() {
-		$_this = Validation::getInstance();
+		$_this =& Validation::getInstance();
 		if ($_this->deep !== true) {
 			return true;
 		}

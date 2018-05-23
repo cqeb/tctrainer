@@ -392,7 +392,7 @@ class Helper extends Overloadable {
  * @access public
  */
 	function setEntity($entity, $setScope = false) {
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 
 		if ($setScope) {
 			$view->modelScope = false;
@@ -440,7 +440,7 @@ class Helper extends Overloadable {
 		}
 
 		if (ClassRegistry::isKeySet($model)) {
-			$ModelObj = ClassRegistry::getObject($model);
+			$ModelObj =& ClassRegistry::getObject($model);
 			for ($i = 0; $i < $count; $i++) {
 				if (
 					is_a($ModelObj, 'Model') && 
@@ -542,7 +542,7 @@ class Helper extends Overloadable {
  * @access public
  */
 	function model() {
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 		if (!empty($view->association)) {
 			return $view->association;
 		} else {
@@ -557,7 +557,7 @@ class Helper extends Overloadable {
  * @access public
  */
 	function modelID() {
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 		return $view->modelId;
 	}
 
@@ -568,7 +568,7 @@ class Helper extends Overloadable {
  * @access public
  */
 	function field() {
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 		return $view->field;
 	}
 
@@ -582,7 +582,7 @@ class Helper extends Overloadable {
  * @return mixed Null if no errors, string with error otherwhise.
  */
 	function tagIsInvalid($model = null, $field = null, $modelID = null) {
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 		$errors = $this->validationErrors;
 		$entity = $view->entity();
 		if (!empty($entity)) {
@@ -602,7 +602,7 @@ class Helper extends Overloadable {
  * @todo Refactor this method to not have as many input/output options.
  */
 	function domId($options = null, $id = 'id') {
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 
 		if (is_array($options) && array_key_exists($id, $options) && $options[$id] === null) {
 			unset($options[$id]);
@@ -638,7 +638,7 @@ class Helper extends Overloadable {
  * @todo Refactor this method to not have as many input/output options.
  */
 	function _name($options = array(), $field = null, $key = 'name') {
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 		if ($options === null) {
 			$options = array();
 		} elseif (is_string($options)) {
@@ -699,7 +699,7 @@ class Helper extends Overloadable {
 			$this->setEntity($field);
 		}
 
-		$view = ClassRegistry::getObject('view');
+		$view =& ClassRegistry::getObject('view');
 		$result = null;
 
 		$entity = $view->entity();
@@ -712,7 +712,7 @@ class Helper extends Overloadable {
 			$result = $this->data[$habtmKey][$habtmKey];
 		} elseif (empty($result) && isset($this->data[$habtmKey]) && is_array($this->data[$habtmKey])) {
 			if (ClassRegistry::isKeySet($habtmKey)) {
-				$model = ClassRegistry::getObject($habtmKey);
+				$model =& ClassRegistry::getObject($habtmKey);
 				$result = $this->__selectedArray($this->data[$habtmKey], $model->primaryKey);
 			}
 		}

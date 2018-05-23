@@ -131,7 +131,7 @@ class ModelTask extends BakeTask {
 		if (!$table) {
 			$table = Inflector::tableize($className);
 		}
-		$object = new Model(array('name' => $className, 'table' => $table, 'ds' => $this->connection));
+		$object =& new Model(array('name' => $className, 'table' => $table, 'ds' => $this->connection));
 		return $object;
 	}
 
@@ -180,7 +180,7 @@ class ModelTask extends BakeTask {
 		}
 		$currentModelName = $this->getName();
 		$useTable = $this->getTable($currentModelName);
-		$db = ConnectionManager::getDataSource($this->connection);
+		$db =& ConnectionManager::getDataSource($this->connection);
 		$fullTableName = $db->fullTableName($useTable);
 
 		if (in_array($useTable, $this->_tables)) {
@@ -710,7 +710,7 @@ class ModelTask extends BakeTask {
 	function _generatePossibleKeys() {
 		$possible = array();
 		foreach ($this->_tables as $otherTable) {
-			$tempOtherModel = new Model(array('table' => $otherTable, 'ds' => $this->connection));
+			$tempOtherModel = & new Model(array('table' => $otherTable, 'ds' => $this->connection));
 			$modelFieldsTemp = $tempOtherModel->schema(true);
 			foreach ($modelFieldsTemp as $fieldName => $field) {
 				if ($field['type'] == 'integer' || $field['type'] == 'string') {
@@ -805,7 +805,7 @@ class ModelTask extends BakeTask {
 		}
 		App::import('Model', 'ConnectionManager', false);
 
-		$db = ConnectionManager::getDataSource($useDbConfig);
+		$db =& ConnectionManager::getDataSource($useDbConfig);
 		$useTable = Inflector::tableize($modelName);
 		$fullTableName = $db->fullTableName($useTable, false);
 		$tableIsGood = false;
@@ -835,7 +835,7 @@ class ModelTask extends BakeTask {
 		App::import('Model', 'ConnectionManager', false);
 
 		$tables = array();
-		$db = ConnectionManager::getDataSource($useDbConfig);
+		$db =& ConnectionManager::getDataSource($useDbConfig);
 		$db->cacheSources = false;
 		$usePrefix = empty($db->config['prefix']) ? '' : $db->config['prefix'];
 		if ($usePrefix) {

@@ -177,7 +177,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 	function _init() {
 		$this->Controller = new RequestHandlerTestController(array('components' => array('RequestHandler')));
 		$this->Controller->constructClasses();
-		$this->RequestHandler = $this->Controller->RequestHandler;
+		$this->RequestHandler =& $this->Controller->RequestHandler;
 	}
 
 /**
@@ -612,7 +612,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
  * @return void
  */
 	function testClientProperties() {
-		$_SERVER['HTTP_HOST'] = LOCALHOST.':80';
+		$_SERVER['HTTP_HOST'] = 'localhost:80';
 		$this->assertEqual($this->RequestHandler->getReferer(), 'localhost');
 		$_SERVER['HTTP_HOST'] = null;
 		$_SERVER['HTTP_X_FORWARDED_HOST'] = 'cakephp.org';
@@ -704,7 +704,7 @@ class RequestHandlerComponentTest extends CakeTestCase {
 			array('base' => '/officespace', 'here' => '/officespace/accounts/', 'webroot' => '/officespace/')
 		));
 
-		$RequestHandler = new NoStopRequestHandler();
+		$RequestHandler =& new NoStopRequestHandler();
 
 		ob_start();
 		$RequestHandler->beforeRedirect(
@@ -721,8 +721,8 @@ class RequestHandlerComponentTest extends CakeTestCase {
  * @return void
  */
 	function testBeforeRedirectCallingHeader() {
-		$controller = new RequestHandlerMockController();
-		$RequestHandler = new NoStopRequestHandler();
+		$controller =& new RequestHandlerMockController();
+		$RequestHandler =& new NoStopRequestHandler();
 
 		$controller->expectOnce('header', array('HTTP/1.1 403 Forbidden'));
 
