@@ -41,7 +41,7 @@
 
 define('LOCALHOST', 'local.tricoretraining.com');
 define('TESTHOST', 'test.tricoretraining.com');
-
+	
 if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 { 
 	/**
@@ -52,17 +52,35 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 	define('LOG_ERROR', 2);
 	Configure::write('debug', 2);
 	
+	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
+
 	$_SERVER['DOCUMENT_ROOT'] = '/Applications/XAMPP/xamppfiles/htdocs/tricoretraining.com/';
 
+	Configure::write('App.hostUrl', 'http://' . LOCALHOST);
+
 	if ( $_SERVER['HTTP_HOST'] == TESTHOST ) {
+		Configure::write('App.hostUrl', 'http://' . TESTHOST);
 		$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/test.tricoretraining.com/';
 	}
 
-} else 
+} elseif ( $_SERVER['HTTP_HOST'] == 'https://thetriplans.com' ) {
+	define('DEBUG', true );
+	define('LOG_ERROR', 2);	
+	Configure::write('debug', 2);
+
+	Configure::write('App.mailHost', 'business36.web-hosting.com');
+	Configure::write('App.hostUrl', 'https://thetriplans.com');	
+
+	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/thetriplans.com/';
+
+} else
 {
-	define( 'DEBUG', false );
+	define('DEBUG', false );
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
+
+	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
+	Configure::write('App.hostUrl', 'https://tricoretraining.com');	
 
 	$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
 }
@@ -84,6 +102,7 @@ Configure::write('App.encoding', 'UTF-8');
  * And uncomment the App.baseUrl below:
  */
 
+// Upload Directory must be writeable for web-user
 Configure::write('App.uploadDir', $_SERVER['DOCUMENT_ROOT'] . 'trainer/app/webroot/files/');
 // Paypal payment email
 Configure::write('App.paymentemail', 'payment@tricoretraining.com');
@@ -94,40 +113,15 @@ Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 Configure::write('App.mailFrom', 'Klaus-M. from TriCoreTraining <support@tricoretraining.com>');
 Configure::write('App.mailAdmin', 'support@tricoretraining.com');
 Configure::write('App.mailPort', '25');
-/* CHANGE */
-Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
 Configure::write('App.mailUser', '');
 Configure::write('App.mailPassword', '');
 Configure::write('App.mailDelivery', 'mail');
 
-// local configuration
-if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
-{
-    // rename this variable
-    Configure::write('App.serverUrl', '/trainer');
-    // Domain with protocol and NO trailing slash
-    Configure::write('App.hostUrl', 'http://' . LOCALHOST);
-    
-    Configure::write('App.Dirbackslash', false);
+// rename this variable
+Configure::write('App.serverUrl', '/trainer');
+// Domain with protocol and NO trailing slash
 
-} else
-{
-	// server configuration
-	
-	// rename this variable
-	Configure::write('App.serverUrl', '/trainer');
-
-	if ( $_SERVER['HTTP_HOST'] == TESTHOST )
-	{
-		// Domain with protocol and NO trailing slash
-		Configure::write('App.hostUrl', 'http://' . TESTHOST);
-	} else
-	{
-		// Domain with protocol and NO trailing slash
-		Configure::write('App.hostUrl', 'https://tricoretraining.com');		
-	}
-
-}
+Configure::write('App.Dirbackslash', false);
 	
 Configure::write('price_eur', '"4.90","13.90","24.90","39.90"');
 Configure::write('price_eur_month', '"4.90","4.63","4.15","3.26"');
@@ -161,11 +155,12 @@ Configure::write('company_emails', '"@gentics.com","@schremser.com"');
  * Turn off all caching application-wide.
  *
  */
-if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
  	Configure::write('Cache.disable', true);
-else
+} else {
  	Configure::write('Cache.disable', true);
-		
+}
+
 /**
  * Enable cache checking.
  *
@@ -207,7 +202,7 @@ Configure::write('Session.save', 'php');
 /**
  * The name of CakePHP's session cookie.
  */
-Configure::write('Session.cookie', 'CakePHP');
+Configure::write('Session.cookie', 'TCTCookie');
 
 Configure::write('Session.path', '/');
 /**
