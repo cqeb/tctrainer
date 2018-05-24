@@ -85,6 +85,8 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 	$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
 }
 
+define('url', '/trainer');
+
 /**
  * Application wide charset encoding
  */

@@ -32,7 +32,7 @@ Genug Vorteile für Dich? <a href="/trainer/users/register">Melde dich einmal an
 who are working (maybe have a family, so you're limited in time) and want to be perfectly prepared 
 for their competitions or sport goals.
 <br /><br />
-Our motto is “Reach Your Goal With A Plan“.
+Our motto is “Reach Your Goal With a Plan“.
 <br /><br />
 You're right here, if you 
 <br />

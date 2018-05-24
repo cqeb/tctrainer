@@ -1,8 +1,8 @@
 <?php
-$url = '/trainer';
+$url = url;
 ?>
-
-<?php if ( $_SERVER['HTTP_HOST'] != LOCALHOST ) { ?>
+<!-- do not track on localhost and testhost -->
+<?php if ( $_SERVER['HTTP_HOST'] != LOCALHOST && $_SERVER['HTTP_HOST'] != TESTHOST) { ?>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

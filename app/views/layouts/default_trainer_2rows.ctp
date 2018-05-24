@@ -17,7 +17,7 @@ else
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 
-    <?php echo $this->element('metanavigation'); ?>
+    <?php echo $this->element('metatags'); ?>
 	<?php echo $this->element('header'); ?>
 
     <link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/reset.css?v=<?php echo VERSION; ?>" />

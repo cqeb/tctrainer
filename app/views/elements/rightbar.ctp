@@ -3,7 +3,7 @@
 	<div class="panel-body">
 
 <?php if ( isset( $session_userid ) ) { ?>
-<a class="btn btn-primary" href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('Go PREMIUM'); ?></b></a>
+<a class="btn btn-primary btn-warning" href="/trainer/payments/subscribe_triplans"><b>&raquo; <?php __('Go PREMIUM'); ?></b></a>
 <br /><br />
 <?php } ?>
 

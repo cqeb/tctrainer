@@ -49,7 +49,6 @@ class WorkoutRenderer {
 					<td class=\"description " . strtolower($w->getSport()) . "\" colspan=\"4\">
 						<div>
 							" . $w->getDescription() . "
-
 						</div>
 					</td>
 				</tr>";
@@ -67,6 +66,8 @@ class WorkoutRenderer {
 		
 		$html .= "\n</table>";
 
+		/*
+		// this is for single day notifications
 		if ( isset( $notSun ) && $count_workouts == 0 ) {
 				$html = "<table class=\"workouts\">";
 				$html .= "
@@ -75,11 +76,12 @@ class WorkoutRenderer {
 				</tr>";
 				$html .= "</table>";			
 		}
+		*/
 		return $html;
 	}
 
 	/**
-	 * save weekdays in database
+	 * inject weekdays in training plan
 	 * @param 
 	 */
 	public function inject_weekdays($workouts, $athlete, $time, $phase, $genWeek, $exportpure = false) {
@@ -87,6 +89,8 @@ class WorkoutRenderer {
 		$j = 1;
 		$weekdays = array();
 		$weekdays2 = array();
+
+		// TODO save in database
 
 		// get start of training week
 		//$startDayTS = $startdate_ts - ( ( gmdate("w", $startdate_ts) - 1 ) * 86400 );
@@ -166,8 +170,10 @@ class WorkoutRenderer {
 
 		$weekdays2 = $weekdays3;
 
-		if ( $exportpure == true ) return $weekdays2;
-		else return $weekdays;
+		if ( $exportpure == true ) 
+			return $weekdays2;
+		else 
+			return $weekdays;
 
 	}
 
@@ -261,12 +267,12 @@ END:VEVENT
 	public static function renderCheckButton(Workout $w, Athlete $athlete, $duration) {
 		$trainingId = $w->getTrainingId();
 		if ($trainingId) {
-			return '<button title="' . __('See allocated training', true) .
+			return '<button class="trainingplan" title="' . __('See allocated training', true) .
 				'" ' . 
 				'data-trainingid="' . $trainingId . '"' .
 				'>&#10003;</button>';
 		} else {
-			return '<button title="' . __('Record training as done', true) .
+			return '<button class="trainingplan" title="' . __('Record training as done', true) .
 				'" ' . 
 				'data-sportstype="' . $w->getSport() . '" ' .
 				'data-duration="' . $duration . ':00" ' .

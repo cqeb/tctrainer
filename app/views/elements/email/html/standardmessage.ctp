@@ -1,14 +1,8 @@
 
-<?php echo $this->element('email/newsletter_header_simple'); ?>
+<?php echo $this->element('email/newsletter_header'); ?>
 
- <table cellspacing="0" width="100%">
-    <tr>
-       <td>
-          <h2><?php echo $subject; ?></h2>
-       </td>
-    </tr>
- </table>
-
+ <p><b><?php echo $subject; ?></b></p>
+ 
  <p><?php echo $mcontent; ?></p>
                            
-<?php echo $this->element('email/newsletter_footer_simple'); ?>
+<?php echo $this->element('email/newsletter_footer'); ?>

@@ -7,7 +7,7 @@
 
             <br />
             <fieldset>
-            <legend><?php __('I know it is somewhere in my brain :)'); ?></legend>
+            <legend><?php __('No problem, we have you covered. :)'); ?></legend>
 
             <div class="form-group">
 

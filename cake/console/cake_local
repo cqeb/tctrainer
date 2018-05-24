@@ -30,6 +30,7 @@ done
 LIB=$(dirname -- "$LIB")/
 APP=`pwd`
 
-exec php -q ${LIB}cake.php -working "${APP}" "$@"
+exec /Applications/XAMPP/bin/php -q ${LIB}cake_local.php -working "${APP}" "$@"
+# exec php -q ${LIB}cake.php -working "${APP}" "$@"
 
 exit;

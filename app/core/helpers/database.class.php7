@@ -23,19 +23,20 @@ class Database {
 	    $this->password = $password;
 	    $this->database = $database;
 	      	 
-	    $this->conn = mysql_connect(
+	    $this->conn = mysqli_connect(
 	    	$this->host,$this->user,$this->password);
 	    if (!$this->conn) {
 	    	throw new Exception("Error connecting to the database: " . 
-	    		mysql_error() . "; ErrorNo:" . mysql_errno());
+	    		mysqli_connect_error() . "; ErrorNo:" . mysqli_connect_errno());
 	    }
-	    mysql_query("SET NAMES 'utf8'");
-		mysql_query("SET CHARACTER SET 'utf8'");
+	    	//mysql_query("SET NAMES 'utf8'");
+		//mysql_query("SET CHARACTER SET 'utf8'");
+		$this->conn->set_charset('utf8');
 	
 		if ($this->conn) {
-	    	mysql_select_db($this->database);
+	    		mysqli_select_db($this->conn,$this->database);
 		} else {
-	    	echo "unable to connect to db" . mysql_error();
+	    		echo "unable to connect to db" . mysql_error();
 	    }	
     }
 
@@ -43,7 +44,7 @@ class Database {
      * close the mysql link on exit
      */
     public function __destruct() {
-    	@mysql_close($this->conn);
+    	@mysqli_close($this->conn);
     }
 
     /**
@@ -54,29 +55,29 @@ class Database {
      * 	UPDATE/DELETE the number of updated rows
      */
  	public function query($sql) {
-		$res = mysql_query($sql, $this->conn);
+		$res = mysqli_query($sql, $this->conn);
 		if (!$res) {
 			throw new Exception("Error while executing query:\n" .
 				"$sql\n" .	
-				"Error No: " . mysql_errno($this->conn) . "\n" .
-				mysql_error($this->conn));
+				"Error No: " . mysqli_connect_errno($this->conn) . "\n" .
+				mysqli_connect_error($this->conn));
 		}
 		$queryType = $this->determineQueryType($sql);
-        if ($queryType == "SELECT") {
-        	if (mysql_num_rows($res) > 0) {
-    	        $rows = array();
-        	    while ($row = mysql_fetch_assoc($res)) {
-             		$rows[] = $row;
-             	}
-             	return $rows;
-            } else {
-             	return array();
-            }
-      	} else if ($queryType == "INSERT") {
-      		return mysql_insert_id($this->conn);
-      	} else if ($queryType == "UPDATE" || $queryType == "DELETE") {
-      		return mysql_affected_rows($this->conn);
-      	}
+        	if ($queryType == "SELECT") {
+        		if (mysql_num_rows($res) > 0) {
+    	        	$rows = array();
+					while ($row = mysql_fetch_assoc($res)) {
+						$rows[] = $row;
+					}
+             		return $rows;
+				} else {
+					return array();
+				}
+			} else if ($queryType == "INSERT") {
+				return mysqli_insert_id($this->conn);
+			} else if ($queryType == "UPDATE" || $queryType == "DELETE") {
+				return mysqli_affected_rows($this->conn);
+			}
     }
     
     /**

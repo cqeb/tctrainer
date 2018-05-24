@@ -1173,18 +1173,19 @@ class TrainingstatisticsController extends AppController {
 		$this->autoRender = false;
 	}
 
+	/*
+	* DEPRECATED
+	*/
     function garmin_import()
     {                                                       
 		// http://www.ciscomonkey.net/gc-to-dm-export/
 		// http://sergeykrasnov.ru/subsites/dev/garmin-connect-statisics/
 
-		//$this->layout = 'default_trainer_2rows';
 		$this->checkSession();
 
 		$session_userid = $this->Session->read('session_userid');
 
 		// Set your username and password for Garmin Connect here.
-		
 		$username = $this->data['Trainingstatistic']['username'];
 		$password = $this->data['Trainingstatistic']['password'];
 		$limit = $this->data['Trainingstatistic']['amount'];

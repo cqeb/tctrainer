@@ -63,7 +63,7 @@ echo $form->input('lastname',
 
 echo $form->input('gender',
      array(
-     'before' => '<label for="gender">' . __('Gender', true) . '</label>',
+     'before' => '<label style="font-weight:bold;" class="gender" for="gender">' . __('Gender', true) . '</label>',
      'after' => '',
      'between' => '',
      'class' => 'required checkbox',
@@ -141,10 +141,11 @@ echo $form->input('notifications',
 </div>
 
 <div class="form-group">
+<a name="recommendation"></a>
 <?php
 
 echo '<div class="alert alert-info">';
-__('We would be very happy if you write a review (recommendation) about TriCoreTraining.com. Thank you.');
+__('We would be very happy if you write a review (recommendation) about TriCoreTraining. Thank you.');
 echo '</div>';
 echo $form->textarea('myrecommendation',
                   array(

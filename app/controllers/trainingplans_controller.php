@@ -178,7 +178,11 @@ class TrainingplansController extends AppController {
 	function check_trainingplans() {
 
 		// secure access
-		if ( $_SERVER['REMOTE_ADDR'] != '::1' && $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && $_SERVER['REMOTE_ADDR'] != '78.142.159.226' && isset( $_GET['access'] ) && $_GET['access'] != 'mikau2345$' ) 
+		if ( $_SERVER['REMOTE_ADDR'] != '::1' && 
+			$_SERVER['REMOTE_ADDR'] != '127.0.0.1' && 
+			$_SERVER['REMOTE_ADDR'] != '78.142.159.226' && 
+			isset( $_GET['access'] ) && 
+			$_GET['access'] != SECRET_PW ) 
 					die('No access!');
 				
 		$_SESSION = array();
@@ -192,14 +196,13 @@ class TrainingplansController extends AppController {
 		$sql = "SELECT * FROM users ORDER BY id";
 
 		// DEBUG
-		if ( isset( $_GET['debug'] ) ) $sql .= " LIMIT 1";
+		if ( isset( $_GET['debug'] ) ) 
+			$sql .= " LIMIT 1";
 		//print_r($this->User);
 		$users_results = $this->User->query($sql);
 
 		$count_results = count( $users_results );
 
-		//if ( isset( $_GET['end'] ) && $_GET['end'] < $count_results ) $count_results = $_GET['end'];
-			
 		for ( $i = $start; $i < $count_results; $i++ )
 		{
 			$user = $users_results[$i]['users'];

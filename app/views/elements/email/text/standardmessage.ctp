@@ -1,4 +1,4 @@
-<?php __('Hi'); ?> <?php echo $user['firstname']; ?>,
+* <?php echo $subject; ?> *
 
 <?php echo strip_tags( $mcontent ); ?>
                            

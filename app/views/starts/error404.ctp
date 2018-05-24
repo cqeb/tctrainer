@@ -6,7 +6,7 @@
              <?php echo $this->element('js_error'); ?>
 
              <fieldset>
-             <legend><?php __('Gain speed, lose weight'); ?></legend>
+             <legend><?php __('We are SOOOOORRRY.'); ?></legend>
 
              <div class="alert alert-danger">
              <?php __('Mysteries of the universe - where did this page go? Who knows ... '); ?>

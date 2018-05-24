@@ -179,7 +179,6 @@ class ProviderComponent extends Object {
 			default:
 				$phaseName = __('Basic Training', true);
 				break;
-
 		}
 
 		$html .= '<br /><h3 id="phaseinfo">' . $phaseName;

@@ -21,9 +21,9 @@ else
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
-    <?php echo $this->element('metanavigation'); ?>
+    <?php echo $this->element('metatags'); ?>
 
-    <!--link rel="alternate" type="application/rss+xml" title="TriCoreTraining.com RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" /-->
+    <!--link rel="alternate" type="application/rss+xml" title="TriCoreTraining RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" /-->
 
 	<!-- Latest compiled and minified CSS BS 3.0. RC1-->
 	<link href="<?php echo $url; ?>/assets/css/theme.css" rel="stylesheet">
@@ -70,7 +70,7 @@ else
 		  <span class="icon-bar"></span>
 		</button>
 		<a class="navbar-brand navbar-brand-small" href="#">
-		<img width="120" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com Logo"></a>
+		<img width="120" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo"></a>
 	  	</div>
 
 	<!-- Footer -->

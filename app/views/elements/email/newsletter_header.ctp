@@ -91,7 +91,7 @@
       }
 
       td.mainbar h2 {
-         font-size: 16px;
+         font-size: 15px;
          /*background-color: #FFAE00;*/
          font-weight: bold;
          color: #4c4c4c;
@@ -100,7 +100,7 @@
       }
 
       td.mainbar h2 a {
-         font-size: 16px;
+         font-size: 15px;
          font-weight: bold;
          color: #ffffff;
          text-decoration: none;
@@ -140,11 +140,10 @@
          list-style-position: inside;
       }
 
-      td.sideheader h3 {
-         /** background-color: #FFAE00; */
+      td h3 {
          font-size: 14px;
          font-weight: bold;
-         color: #ffffff;
+         color: #4c4c4c;
          margin: 0;
          padding: 0;
       }
@@ -201,6 +200,9 @@
         text-decoration: none;
         display: inline-block;
         font-size: 16px;
+      }
+      .trainingplan {
+        display: none;
       }
    </style>
 

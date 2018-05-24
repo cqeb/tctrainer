@@ -73,7 +73,7 @@ echo $form->input('password',
 
 ?>
   
-    <div class="checkbox">
+    <div class="checkbox remember">
     <?php
     		   echo $form->input('remember_me', array('before' => '', 'after' => '', 'label' => __('Remember me', true), 'type' => 'checkbox'));
     ?>

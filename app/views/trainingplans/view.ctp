@@ -1,8 +1,8 @@
 <img src="<?php echo Configure::read('App.serverUrl'); ?>/img/indicator.gif" id="loader" />
-<button id="toggleDesc" class="small btn" data-toggletext="<?php __('Show Descriptions'); ?>"><?php __('Hide Descriptions'); ?></button>
+<button id="toggleDesc" class="small btn btn-success" data-toggletext="<?php __('Show Descriptions'); ?>"><?php __('Hide Descriptions'); ?></button>
 <div id="plan"></div>
-<button class="btn" id="prev"><?php __('Previous'); ?></button>
-<button class="btn" id="next"><?php __('Next'); ?></button>
+<button class="btn btn-success" id="prev"><?php __('Previous'); ?></button>
+<button class="btn btn-success" id="next"><?php __('Next'); ?></button>
 
 <!--
 <?php

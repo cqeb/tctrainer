@@ -382,8 +382,7 @@ class UsersController extends AppController {
 
 	      		// check submitted email address against database
 				$results = $this->User->findByEmail($this->data['User']['email']);
-	
-				// is password valid?
+
 				if ( $results && ($results['User']['password'] == md5($this->data['User']['password'])) )
 				{
 					// has user activated his profile and do WE not have deactivated user
@@ -474,7 +473,8 @@ class UsersController extends AppController {
 
 		if ( $this->data )
 		{
-	        $this->User->set( $this->data );
+			$this->User->set( $this->data );
+
     	    if ($this->User->saveAll($this->data, array('validate' => 'only'))) {} 
 
 			// deactivate this if you're working offline
@@ -770,65 +770,76 @@ class UsersController extends AppController {
 					$this->data['User']['activated'] = 1;
 			}
 			
-			// print_r($this->data);
-	      	if ( $this->User->save( $this->data, array(
-	           'validate' => true,
-	           'fieldList' => array(
-	               'firstname', 'lastname', 'gender', 'email', 
-	               'password', 
-	               'birthday',
-	               'lactatethreshold', 
-	               'bikelactatethreshold', 
-	               'maximumheartrate',
-	               'typeofsport', 
-				   'tos',
-				   'healthtos',
-				   'mailingtos',
-	               'country',
-	               'passwordcheck', 'emailcheck', 
-	               'paid_from', 'paid_to',
-	               'rookie', 'weeklyhours',
-	               'newsletter', 'coldestmonth', 'dayofheaviesttraining',
-	               'publicprofile','publictrainings',
-	               'maximumheartrate', 'activated',
-	               'unit', 'unitdate', 'yourlanguage', 'inviter' 
-	           ) ) ) )
-	      	{
-				if ( isset( $send_to_userid ) )
-				{
-					$inviter_user = $this->User->findById( $send_to_userid );
-					if ( is_array( $inviter_user ) )
-					{
-						$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed!', true);
-						$template = 'standardmail';
-						$content = __('great', true) . '. ' . $this->data['User']['firstname'] . ' ' . $this->data['User']['lastname'] . ' ' . __('wants to become an athlete too. Maybe you do workouts together?', true);
-						$content .= '<br /><br />' . __('After she/he purchases a PREMIUM membership you will receive a FREE 3 month PREMIUM membership as a "Thank you".', true);
-						
-						$this->_sendMail( $inviter_user, $subject, $template, $content, $this->data['User']['yourlanguage'], '' );
-					}
-				}
+			$sql = "SELECT * FROM users WHERE email = '" . $this->data['User']['email'] . '"';
+			$User_check_before_saving = $this->User->query( $sql );
 
-				// send user with activation link
-				$tid = $this->_sendNewUserMail( $this->User->id );
-		
-				// write imperial / metric to session and date-format
-				$this->Session->write('session_unit', $this->data['User']['unit']);
-				$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-		
-				$statusbox = 'alert-success';
-				$this->Session->write('register_userid', $this->User->id);
-		
-				$this->Session->write('flash',__('Signup finished. 1st step done!',true));
-				$this->redirect(array('action' => 'register_finish'));
-	      } else
-	      {
-				if ( isset( $password_unenc ) ) $this->data['User']['password'] = $password_unenc;
-				//pr($this->User->invalidFields( ));
-	      }
-	
-	      $statusbox = 'alert alert-danger';
-	      $this->Session->write('flash',__('Some errors occured',true));
-	      $this->set('statusbox', $statusbox);
+			if ( is_array( $User_check_before_saving ) && count( $User_check_before_saving ) > 0 )
+			{
+				$statusbox = 'alert alert-danger';
+				$this->Session->write('flash',__('Some errors occured. User might already exist.',true));
+				$this->set('statusbox', $statusbox);
+				
+			} else {
+
+				if ( $this->User->save( $this->data, array(
+				'validate' => true,
+				'fieldList' => array(
+					'firstname', 'lastname', 'gender', 'email', 
+					'password', 
+					'birthday',
+					'lactatethreshold', 
+					'bikelactatethreshold', 
+					'maximumheartrate',
+					'typeofsport', 
+					'tos',
+					'healthtos',
+					'mailingtos',
+					'country',
+					'passwordcheck', 'emailcheck', 
+					'paid_from', 'paid_to',
+					'rookie', 'weeklyhours',
+					'newsletter', 'coldestmonth', 'dayofheaviesttraining',
+					'publicprofile','publictrainings',
+					'maximumheartrate', 'activated',
+					'unit', 'unitdate', 'yourlanguage', 'inviter' 
+				) ) ) )
+				{
+					if ( isset( $send_to_userid ) )
+					{
+						$inviter_user = $this->User->findById( $send_to_userid );
+						if ( is_array( $inviter_user ) )
+						{
+							$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed!', true);
+							$template = 'standardmail';
+							$content = __('great', true) . '. ' . $this->data['User']['firstname'] . ' ' . $this->data['User']['lastname'] . ' ' . __('wants to become an athlete too. Maybe you do workouts together?', true);
+							$content .= '<br /><br />' . __('After she/he purchases a PREMIUM membership you will receive a FREE 3 month PREMIUM membership as a "Thank you".', true);
+							
+							$this->_sendMail( $inviter_user, $subject, $template, $content, $this->data['User']['yourlanguage'], '' );
+						}
+					}
+
+					// send user with activation link
+					$tid = $this->_sendNewUserMail( $this->User->id );
+			
+					// write imperial / metric to session and date-format
+					$this->Session->write('session_unit', $this->data['User']['unit']);
+					$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+			
+					$statusbox = 'alert-success';
+					$this->Session->write('register_userid', $this->User->id);
+			
+					$this->Session->write('flash',__('Signup finished. 1st step done!',true));
+					$this->redirect(array('action' => 'register_finish'));
+				} else
+				{
+						if ( isset( $password_unenc ) ) 
+							$this->data['User']['password'] = $password_unenc;
+				}
+			
+				$statusbox = 'alert alert-danger';
+				$this->Session->write('flash',__('Some errors occured. Please check the form.',true));
+				$this->set('statusbox', $statusbox);
+			}
 	    }
 	
 	    $this->set('sports', $this->Unitcalc->get_sports());
@@ -1036,7 +1047,7 @@ class UsersController extends AppController {
 				$this->User->id = $transactions['activation_userid'];
 				$this->User->savefield('activated', 1, false);
 
-				$this->Session->write('flash',__('You will receive regularly training schedules from TriCoreTraining.com. Start your sports career.',true));
+				$this->Session->write('flash',__('You will receive regularly training schedules from TriCoreTraining. Add races to set your goal.',true));
         
 				if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
 				{
@@ -1206,12 +1217,11 @@ class UsersController extends AppController {
 		        'validate' => true,
         		'fieldList' => array(
 		        'typeofsport', 'rookie', 
-					//'dayofheaviesttraining',
-		        'weeklyhours', 'coldestmonth',
-		        'publicprofile', 'publictrainings', 
+				//'dayofheaviesttraining',
+				'weeklyhours', 
+				// 'coldestmonth', 'publicprofile', 'publictrainings', 
 				'tos', 
-				'healthtos',
-				'mailingtos',
+				//'healthtos','mailingtos',
 		        'lactatethreshold',
 		        'bikelactatethreshold'
 	        	)))) {
@@ -1223,6 +1233,7 @@ class UsersController extends AppController {
 					);
 			} else 
 			{
+				//print_r( $this->data );
 				$this->Session->write('flash',__('Some errors occured.', true));
 				$statusbox = 'alert alert-danger';
 			}
@@ -1700,10 +1711,10 @@ class UsersController extends AppController {
 		{
 			$this->template = 'passwordreset';
 			$this->set('randompassword',$randompassword);
-			$subject = 'TriCoreTraining - ' . __('we reset your password!',true);
+			$subject = __('We reset your password!',true) . ' ⚠️';
 		} else {
 			$this->template = 'passwordforgotten';
-			$subject = 'TriCoreTraining - ' . __('forgot your password?',true);
+			$subject = __('Forgot your password?',true) . ' ⚠️';
 		}
 
 		$User = $this->User->read(null,$id);
@@ -1765,9 +1776,16 @@ class UsersController extends AppController {
 				$_SERVER['REMOTE_ADDR'] != '127.0.0.1' && 
 				$_SERVER['REMOTE_ADDR'] != '78.142.159.226' && 
 				isset( $_GET['access'] ) && 
-				$_GET['access'] != 'mikau2345$' ) 
+				$_GET['access'] != SECRET_PW ) 
 					die('No access!');
 	
+		// TODO Implement daily reminder for training
+	    // Sun = 0
+		
+		$check_on_day = 0;
+		// right now we send the complete plan
+		$sent_complete_trainingplan = true;
+
 		// debug timing check
 		$timer['start'] = time();
 
@@ -1785,16 +1803,14 @@ class UsersController extends AppController {
 			echo "Start on date (now): " . date('Y-m-d H:i:s', time()) . "\n<br />";
 			
 	    $this->layout = 'plain';
-	    
-	    // Sun = 0
-	    $check_on_day = 0;
     
     	// select all users 
-		$sql = "SELECT * FROM users WHERE email != '' ORDER BY id";
+		$sql = "SELECT * FROM users WHERE email != '' ORDER BY id DESC";
 		
 		// localhost only sends 20 emails
-		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
 			$sql .= " LIMIT 20";
+		}
 		$results = $this->User->query($sql);
 
 		$output = '';
@@ -1852,25 +1868,33 @@ class UsersController extends AppController {
             if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 			{
 				$misc['counter'] = $i;
-				//if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug, $misc, 'notSun' );
 
-                if ( ( date('w', time()) == $check_on_day ) ) {
+				if ( $user['email'] != '' ) 
+					$this->_advanced_checks( $user, $check_on_day, $debug, $misc );
+				/*
+				// experimental
+                if ( ( date('w', time()) == $check_on_day ) || $sent_complete_trainingplan == true ) {
                 	if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug, $misc );
                 }
                 else {
                 	if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug, $misc, 'notSun' );
-                }
+				}
+				*/
 
 			} else
 			{
+				if ( $user['email'] != '' ) 
+					$this->_advanced_checks( $user, $check_on_day, $debug );
 				// check whether it's Sunday or user has advanced features activated
-                //if ( ( date('w', time()) == $check_on_day ) || ( $user['advanced_features'] == 1 ) )
-                if ( ( date('w', time()) == $check_on_day ) ) {
+				/*
+				// experimental
+				if ( ( date('w', time()) == $check_on_day ) ) {
                 	if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug );
                 }
                 else {
                 	if ( $user['email'] != '' ) $this->_advanced_checks( $user, $check_on_day, $debug, null, 'notSun' );
-                }
+				}
+				*/
 			}  
 			if ( $debug == true ) echo "<hr>\n";
 		}
@@ -1896,7 +1920,8 @@ class UsersController extends AppController {
 		if ( $debug == true ) 
 				echo "<br>_advanced_checks:<br><br>User (language): ". $u['yourlanguage'] . "<br>";
 
-		Configure::write('Config.language',$u['yourlanguage']);
+		// set app to user's language
+		Configure::write('Config.language', $u['yourlanguage']);
 		  
 		$text_for_mail = $text_for_mail_training = $text_for_mail_premium = '';
 		$content = '';
@@ -1919,7 +1944,7 @@ class UsersController extends AppController {
 		  if ( $wrong_attributes != '' ) 
 		  {
 		        $to_user['email'] = 'support@tricoretraining.com';
-		        $to_user['name'] = 'Admin';
+		        $to_user['name'] = 'Klaus-M. Admin';
 		        
 		        $mailsubject = __('Strange user - please check', true);
 		        $mailtemplate = 'standardmail';
@@ -1965,7 +1990,7 @@ class UsersController extends AppController {
 					$greeting_versions[] = __('you will make it! Go for the next week.', true) . ' ';
 					$greeting_versions[] = __('how do you feel? If things are not going smooth. Relax, start, continue.', true) . ' ';
 					$greeting_versions[] = __('persistence will make your life better too. So, go for the next training week.', true) . ' ';
-					$greeting_versions[] = __('only if you measure, you can achieve your goal. So let\'s do it', true) . ' ';
+					$greeting_versions[] = __('only if you measure, you can achieve your goal. So let\'s do it', true) . '. ';
 
 					$one_version = rand(0, count($greeting_versions)-1);
 					$text_for_mail_training .= $greeting_versions[$one_version];
@@ -2007,7 +2032,7 @@ class UsersController extends AppController {
 							else 
 								$lang = 'en';
 						
-							$text_for_mail_training .= '*** ' . __('Your next race is only a few weeks away.', true) . ' ' . 
+							$text_for_mail_training .= '🏅 ' . __('Your next race is only a few weeks away.', true) . ' ' . 
 								'<a href="' . Configure::read('App.hostUrl') . 
 								'/blog/' . $lang . '/now-its-time-the-race-starts-soon/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . 
 								__('Read this blog post!', true) . '</a><br /><br />'; 
@@ -2021,7 +2046,7 @@ class UsersController extends AppController {
 							else 
 								$lang = 'en';
 						
-							$text_for_mail_training .= '<span style="background-color:lightblue">*** ' . __('Your next race is only a few days away. TriCoreTraining wishes you all the best!', true) . '</span> ' . 
+							$text_for_mail_training .=  '🏅 ' . __('Your next race is only a few days away. TriCoreTraining wishes you all the best!', true) . ' ' . 
 								'<a href="' . Configure::read('App.hostUrl') . 
 								'/blog/' . $lang . '/what-can-go-wrong-before-a-competition/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . 
 								__('Read this!', true) . '</a><br /><br />'; 
@@ -2259,10 +2284,10 @@ class UsersController extends AppController {
 			
 				  // check for recommendations
 				  // TODO (B) not yet implemented
-			      if ( !$u['myrecommendation'] )
+			      if ( !$u['myrecommendation'] && $u['activated'] == '1' && strtotime( $u['paid_to'] ) > time() )
 			      { 
 				          $text_for_mail .= '<li>' . __('If you like TriCoreTraining', true) . ', <a href="' . Configure::read('App.hostUrl') . 
-				          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('please tell it your friends 🧡!', true) . '</a>';
+				          Configure::read('App.serverUrl') . '/users/edit_traininginfo/#recommendation?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('please tell it your friends 🧡!', true) . '</a>';
 				          $text_for_mail .= "</li>\n";
 			      }
 				  
@@ -2276,16 +2301,21 @@ class UsersController extends AppController {
 				  }
 				
 				  // account still not activated between 5 and 25 days - remind user
+				  // if not activated you get no trainingplan
 				  if ( 
 				    ( ( strtotime( $u['created'] ) + (86400*5) ) < time() ) && 
 				    ( ( strtotime( $u['created'] ) + (86400*25) ) > time() ) && 
 				    $u['activated'] != '1' )
 				  {
-				      $text_for_mail .= '<li>' . __('Your account is not activated yet ⚠️ and so you haven\'t unlocked the immense training power. Please use your activation mail to ACTIVATE your account or contact our support. Thanks.', true) . "</li>\n";
-				  }   
+					  $text_for_mail .= '<li>' . 
+						  __('Your account is not activated yet ⚠️ and so you haven\'t unlocked the immense training power.', true) . ' ' . 
+						  __('Please use your activation mail to ACTIVATE your account', true) . ' ' . 
+						  __('or', true) . ' ' . 
+						  '<a href="mailto:support@tricoretraining.com">' . __('contact our support. Thanks.', true) . "</a></li>\n";
+				  } else {
+					$send_trainingplan = true;
+				  }  
 		
-				  $send_trainingplan = true;
-
 				  // premium membership is over, user has level "premiummember"
 				  if ( ( strtotime( $u['paid_to'] ) < time() ) )
 				  {
@@ -2300,12 +2330,12 @@ class UsersController extends AppController {
 				      $text_for_mail_premium =  
 						__('Your PREMIUM membership has expired 😞. If you still want to receive professional, interactive training plans for the value of one coffee ☕ a month again', true) . ', ' .
 						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . __('Subscribe PREMIUM', true) . '</a>' . "\n";
-						'<br /><br />' . "\n\n"; // . __('Gain speed, lose weight');
+						'<br /><br />' . "\n\n"; // . __('Reach Your Goal With a Plan!');
 				  }
 				
-				  // mail-text with 5 subject variations
-				  if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
-				  {
+				// mail-text with 5 subject variations
+				if ( $text_for_mail || $text_for_mail_training || $text_for_mail_premium )
+				{
                        $mailsubjectarr[] = $u['firstname'] . ', ' . __('another training plan arrived! 🏊‍♂️ 🚴‍♂️🏃‍♂️', true);
                        $mailsubjectarr[] = $u['firstname'] . ', ' . __('a great week ended and a new one begins! 🏃‍♂️ ☀️', true);
                        $mailsubjectarr[] = $u['firstname'] . ', ' . __('this week will be awesome! Read your plan. 🚴‍♀️', true);
@@ -2325,11 +2355,15 @@ class UsersController extends AppController {
                             $content = $text_for_mail_training . '<br /><br />' . "\n\n";		
                        }
 
-					   if ( $send_trainingplan === true ) {
+					   if ( $send_trainingplan === true ) 
+					   {
+							// print_r($user);
 							$trainingplan_content = $this->Provider->getPlan(true, $user, $notSun, 1);
+							// echo $trainingplan_content;
+
 							// add training plan in mail for next week (1)
-							$content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b><br />'; 
-							$content .=  '<table width="100%"><tr><td>' . $trainingplan_content . "</td></tr></table><br /><br />";
+							$content .= '<b>' . __('Your training schedule for next week is here!', true) . '</b><br /><br />'; 
+							$content .=  '<table width="80%"><tr><td>' . $trainingplan_content . "</td></tr></table><br /><br />";
 							// link to training schedule of next week
 							/*
 							$content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
@@ -2341,7 +2375,7 @@ class UsersController extends AppController {
 							$content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
 							'/trainingplans/get_events/?o=1&utm_source=tricoretrainingsystem&utm_medium=mailing' . $key_add . '" target="_blank">' .
 							'<button class="calendar" type="button">' . 
-						    __('Import training week to your personal calendar (.ics)!', true) . '</button></a>' . "\n";
+						    __('Import training week into your personal calendar (.ics)!', true) . '</button></a>' . "\n";
 							$content .= "<br /><br />\n\n";	
 					   } elseif ( $text_for_mail_premium )
                        {
@@ -2376,7 +2410,7 @@ class UsersController extends AppController {
                        if ( $u['notifications'] != 1 ) 
                             $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
                     }
-			 } 
+			 } // if notifications clause 
 	}
 
 	function _sendMail($user, $subject, $template, $content = '', $language = '', $to_user = '', $mimetype = 'both' )
@@ -2473,14 +2507,16 @@ class UsersController extends AppController {
 
 	function stop_notification()
 	{
-		//if ( !isset( $_GET['key'] ) ) 
+		$user_key = $this->params['named']['key'];
+		$user_athlete_id = $this->params['named']['athlete_id'];
 
-		$this->layout = "plain";
-		Configure::write('debug', 0);
+		$this->set("title_for_layout", __('Stop notifications',true));
+		//$this->layout = "plain";
+		//$this->layout = 'default_trainer';
+		// Configure::write('debug', 0);
 
-		if ( $_GET['key'] == $this->Transactionhandler->_encrypt_data($_GET['athlete_id'] ) ) {
-    		$this->User->id = $_GET['athlete_id'];
-    
+		if ( $user_key == $this->Transactionhandler->_encrypt_data($user_athlete_id) ) {
+    		$this->User->id = $user_athlete_id;
 			$this->data = $this->User->read();
 
 			$this->set('UserID', $this->User->id);
@@ -2490,12 +2526,18 @@ class UsersController extends AppController {
 			      'validate' => false,
 			      'fieldList' => array( 'notifications') ) );
 
-			$statusbox = __('Notifications stopped.');
-		} else
-			$statusbox = __('Not valid.');
+			print_r($this->data);
 
+			$msg = __('Notifications stopped. We will stop sending you weekly training plans.', true);
+			$statusbox = 'alert alert-success';
+		} else {
+			$msg = __('Not valid.', true);
+			$statusbox = 'alert alert-danger';
+		}
+		$this->Session->write('flash', $msg);
+		
 		$this->set('statusbox', $statusbox);
-
+		$this->redirect('/users/login');
 	}
 
 }

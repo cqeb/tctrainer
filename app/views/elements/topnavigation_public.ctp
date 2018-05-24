@@ -32,12 +32,12 @@ if ( isset( $this->params['action'] ) )
   	</li>
     <!--
   	<li>
-  		<a href="http://www.twitter.com/tricoretraining/" target="_blank"><img width="30" alt="TriCoreTraining.com on Twitter" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_twitter.png" /></a>
+  		<a href="http://www.twitter.com/tricoretraining/" target="_blank"><img width="30" alt="TriCoreTraining on Twitter" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_twitter.png" /></a>
   	</li>
     -->
 <!--
   	<li>
-  		<a href="#" target="_blank"><img alt="TriCoreTraining.com RSS-Feed" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_rss.png" /></a>
+  		<a href="#" target="_blank"><img alt="TriCoreTraining RSS-Feed" src="<?php echo Configure::read('App.serverUrl'); ?>/img/icon_rss.png" /></a>
 	</li>
 -->
 </ul>

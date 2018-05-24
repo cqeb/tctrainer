@@ -22,8 +22,6 @@ class AppController extends Controller {
 	   	function beforeFilter()
         {
             $this->Session->write('language', 'de');
-           // echo "test" . $this->Session->read('language');
-//print_r($this->Session);
 
             // user sets language       
             if ( isset( $this->params['named']['code'] ) ) 
@@ -50,7 +48,6 @@ class AppController extends Controller {
 
             }
             
-            // print_r($this->Session);
             /*
             // if user is from AUT or GER - change language to German
             if ( !isset( $language ) )
@@ -177,7 +174,7 @@ class AppController extends Controller {
                            $this->Cookie->delete('tct_auth');
                            $this->Cookie->delete('tct_auth_blog');
 						   
-                           $this->Session->write('flash',__("Sorry, your session has expired or you're not logged in.", true));
+                           $this->Session->write('flash',__("Sorry, you're not signed in or your session expired.", true));
                            $this->redirect('/users/login');
 		                       exit();
                       } else

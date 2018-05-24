@@ -196,7 +196,7 @@ echo $form->hidden('weeklyhours');
 
 <?php
 
-$help_rookie = ' <a class="help badge" title="' . __("You do regular sports for the first time?", true) . '" href="#">?</a>';
+$help_rookie = ' <a class="help badge" title="' . __("It's the first time you do sports regularly?", true) . '" href="#">?</a>';
 
 echo $form->input('rookie',
                   array(

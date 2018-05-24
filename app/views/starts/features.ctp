@@ -8,14 +8,14 @@ $price_month_array_split = $price_array[$currency]['month'];
 
 ?>
       <div class="panel panel-default" id="forms">
-        <div class="panel-heading"><h1><?php __('Subscribe TriCoreTraining Memberships'); ?></h1></h1></div>
+        <div class="panel-heading"><h1><?php __('Memberships subscriptions'); ?></h1></h1></div>
         
         <div class="panel-body">
 
            <?php echo $this->element('js_error'); ?>
 
            <fieldset>
-           <legend><?php __('Gain speed, lose weight'); ?>!</legend>
+           <legend><?php __('Reach Your Goal With a Plan!'); ?>!</legend>
 
            <?php if ($session->read('flash')) { ?>
            <div class="<?php echo $statusbox; ?>">
@@ -71,7 +71,7 @@ $price_month_array_split = $price_array[$currency]['month'];
     <td><?php __('MONTHLY'); ?></td>
     <td style="">    
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
-    <b>1 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b> 
+    <b>1 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b> 
     <?php __('for ONLY'); ?> <?php echo $price_array_split[0]; echo ' ' . $currency; ?>   
     </a>
     </td>
@@ -81,7 +81,7 @@ $price_month_array_split = $price_array[$currency]['month'];
     <td><?php __('YEARLY'); ?></td>
     <td style="">    
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
-    <b>12 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b> 
+    <b>12 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b> 
     <?php __('for ONLY'); ?> <?php echo $price_array_split[3]; echo ' ' . $currency; ?>  
     </a>
     </td>
@@ -92,7 +92,7 @@ $price_month_array_split = $price_array[$currency]['month'];
 <tr>
     <td colspan="3">
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
-    <b>1 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <b>1 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price_array_split[0]; echo ' ' . $currency; ?>   
     </a>
     </td>
@@ -100,7 +100,7 @@ $price_month_array_split = $price_array[$currency]['month'];
 <tr class="odd">
     <td colspan="3">
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:3">
-    <b>3 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <b>3 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price_array_split[1]; echo ' ' . $currency; ?>  
     </a>
     </td>
@@ -108,7 +108,7 @@ $price_month_array_split = $price_array[$currency]['month'];
 <tr>
     <td colspan="3">
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:6">
-    <b>6 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <b>6 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price_array_split[2]; echo ' ' . $currency; ?>  
     </a>
     </td>
@@ -116,7 +116,7 @@ $price_month_array_split = $price_array[$currency]['month'];
 <tr class="odd">
     <td colspan="3">
     <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
-    <b>12 <?php __('month(s)'); __('TriCoreTraining.com plans'); ?></b><br />
+    <b>12 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b><br />
     <?php __('for ONLY'); ?> <?php echo $price_array_split[3]; echo ' ' . $currency; ?>  
     </a>
     </td>

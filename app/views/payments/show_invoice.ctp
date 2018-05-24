@@ -36,7 +36,7 @@
              <div style="margin: 0px;" class="block" id="tables">
               
              <table summary="<?php __('TriCoreTraining Invoice'); ?>" class="table table-striped table-bordered table-condensed">
-             <caption><?php __('TriCoreTraining Invoice') ?> <?php __('No.'); ?> <?php echo $data['invoice']; ?> (<?php __('Date'); echo ':'; ?> <?php echo $unitcalc->check_date($data['created']); ?>)</caption>
+             <caption><b><?php __('TriCoreTraining Invoice') ?> <?php __('No.'); ?> <?php echo $data['invoice']; ?></b><br/> (<?php __('Date'); echo ':'; ?> <?php echo $unitcalc->check_date($data['created']); ?>)</caption>
              <thead>
              <tr>
                   <th colspan="3" class="table-head"><?php __('TriCoreTraining plan'); ?></th>
@@ -57,16 +57,24 @@
              </tr>
              <tr>
                   <td></td>
-                  <td><?php __('20% VAT are included.'); ?></td>
+                  <td></td>
              </tr>
              </tbody>
+             <tr class="total">
+                  <th><?php __('MWSt'); ?></th>
+                  <td></td>
+                  <th class="currency"><?php echo $data['currency'] . ' ' . round(($data['price']/1.2*0.2),2); ?></th>
+             </tr>             
              <tr class="total">
                   <th><?php __('Total'); ?></th>
                   <td></td>
                   <th class="currency"><?php echo $data['currency'] . ' ' . $data['price']; ?></th>
              </tr>
              </table>
-              
+             <?php __('20% VAT are included.'); ?>
+
+             <br /><br />
+
              <?php echo $html->link(__('Back to the list of your payments',true),array('controller' => 'payments', 'action' => 'show_payments'))?>
              <br /><br />
              </div>

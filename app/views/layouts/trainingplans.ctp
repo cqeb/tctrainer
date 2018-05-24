@@ -17,7 +17,7 @@ else
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
 
-    <?php echo $this->element('metanavigation'); ?>
+    <?php echo $this->element('metatags'); ?>
 	<?php echo $this->element('header'); ?>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/trainingplans.css?v=<?php echo VERSION; ?>" />
@@ -56,7 +56,7 @@ else
 		  <span class="icon-bar"></span>
 		</button>
 		<a class="navbar-brand navbar-brand-small" href="/trainer/">
-		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining.com Logo"></a>
+		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo"></a>
 	  	</div>
 
 		<?php echo $this->element('subnavigation_all'); ?>
@@ -126,7 +126,8 @@ else
 		<div class="panel">
 	        <div class="panel-body">
 
-			<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?> (<?php echo $html->link(__('Next',true),array('controller' => 'trainingplans', 'action' => 'get_events?o=1'))?>)<br /><br />
+			<h3><?php __('Calendar import'); ?></h3>
+			<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?> (<?php echo $html->link(__('Next',true),array('controller' => 'trainingplans', 'action' => 'get_events?o=1'))?>)
 			
 			<!--//
 			<?php //if ( $this->getAthlete()->isValid() == 0 ) { ?>
@@ -136,9 +137,11 @@ else
 			<?php } ?>
 			//-->
 			
+			<h3><?php __('First steps'); ?></h3>
 			<a id="guide" href="#" title=""><?php __('Beginner\'s guide to your training'); ?></a>
 
-			<h3><?php __('Your mesocycle of the next weeks'); ?></h3>
+			<h3><?php __('Your mesocycle of the next weeks'); ?> <a class="help badge" href="/blog/<?php echo $language . '/'; ?>basics-what-to-know-about-endurance-training/">?</a></h3>
+			
 			<?php
 
 			echo $mesocycles;

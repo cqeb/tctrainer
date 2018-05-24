@@ -1,13 +1,7 @@
 
 <?php echo $this->element('email/newsletter_header'); ?>
 
- <table cellspacing="0" cellpadding="4" bgcolor="#FFAE00" width="100%">
-    <tr>
-       <td>
-          <h2><?php __('Hi'); ?> Admin,</h2>
-       </td>
-    </tr>
- </table>
+ <p><?php __('Hi'); ?> Admin,</p>
 
  <p><i><?php __('some notifications arrived.'); ?></i></p>
  <p>

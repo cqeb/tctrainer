@@ -23,7 +23,7 @@ if ( isset( $userinfo ) )
 			__($sport . ' workout', true) . ' ' . __('in',true) . ' ' . $duration . ' ' . 
 			__('hour(s)',true) . ' ' . __('with', true) . ' ' .	'TriCoreTraining' .	
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not sign up?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('You want to achieve your goal and get a plan for it, why not sign up?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 
 		// user recommended our service
@@ -32,7 +32,7 @@ if ( isset( $userinfo ) )
 			$facebox_content = '<br /><h1>' . __('I LIKE TriCoreTraining!', true) . '</h1><p>' . 
 			__("Why don't you become a triathlon athlete too? Why not a marathon runner? TriCoreTraining is your interactive online coach.", true) .
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a training plan, why not sign up?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register\'>&raquo; ' . __('You want to achieve your goal and get a plan for it, why not sign up?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 		}
 		
@@ -76,7 +76,7 @@ else
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 
-	<?php echo $this->element('metanavigation'); ?>
+	<?php echo $this->element('metatags'); ?>
 	<?php echo $this->element('header'); ?>
 
 	<link href="<?php echo $url; ?>/css/styles.css" rel="stylesheet">
@@ -127,7 +127,7 @@ else
          <div class="panel">
 			
 			<div class="panel-heading">
-				<h1><?php __('Reach Your GOAL With A Plan'); ?></h1>
+				<h1><?php __('Reach Your Goal With a Plan!'); ?></h1>
 				<h3><?php __('for Triathlon, Running and Biking'); ?></h3>
 			</div>
 				<div class="panel-body">
@@ -141,7 +141,7 @@ else
 						<div class="carousel-inner">
 
 							<div class="item active">
-							    <img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-1.jpg" alt="<?php __('Gain speed, lose weight!'); ?>">
+							    <img width="125%" class="img-responsive" src="<?php echo $url; ?>/img/start/start-1.jpg" alt="<?php __('Reach Your Goal With a Plan!'); ?>">
 								<div class="carousel-caption">
 									<h3><?php __('Like Having A Coach!'); ?></h3>
 									<p><?php __('Get a <b>professional</b>, <b>online</b> training plan to <br/> <b>improve</b> your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!');?>
@@ -365,7 +365,7 @@ else
 						</div>
 					</div>
 					<ul class="list-group list-group-flush text-center">
-							<li class="list-group-item"><?php __('Workout diary', false); ?></li>
+							<li class="list-group-item"><?php __('Workout log', false); ?></li>
 							<li class="list-group-item"><?php __('Training statistics', false); ?></li>
 							<li class="list-group-item"><?php __('Personal settings', false); ?></li>
 							<li class="list-group-item"><?php __('Track goals', false); ?></li>
@@ -392,7 +392,7 @@ else
 
 					</div>
 						<ul class="list-group list-group-flush text-center">
-							<li class="list-group-item"><?php __('Workout diary', false); ?></li>
+							<li class="list-group-item"><?php __('Workout log', false); ?></li>
 							<li class="list-group-item"><?php __('Training statistics', false); ?></li>
 							<li class="list-group-item"><?php __('Personal settings', false); ?></li>
 							<li class="list-group-item"><?php __('Track goals', false); ?></li>
@@ -418,7 +418,7 @@ else
 						</div>
 					</div>
 						<ul class="list-group list-group-flush text-center">
-							<li class="list-group-item"><?php __('Workout diary', false); ?></li>
+							<li class="list-group-item"><?php __('Workout log', false); ?></li>
 							<li class="list-group-item"><?php __('Training statistics', false); ?></li>
 							<li class="list-group-item"><?php __('Personal settings', false); ?></li>
 							<li class="list-group-item"><?php __('Track goals', false); ?></li>

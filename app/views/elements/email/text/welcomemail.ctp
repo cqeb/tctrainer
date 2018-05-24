@@ -7,8 +7,6 @@
 
 <?php __('Click to activate your account'); ?>
 <?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/activate/transaction_id:<?php echo $transaction_id?>
-                           
-<?php __('Login to your personal training dashboard.'); ?>
 
 <?php echo $this->element('email/newsletter_text_footer'); ?>
 

@@ -34,7 +34,7 @@
                   </li>
                 </ul>
 <!--
-          <form action="/trainer/users/login" id="UserLoginForm" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
+          <form action="/trainer/users/login" id="UserLoginFormTop" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
             <div class="form-group">
               <input name="data[User][email]" type="text" placeholder="Email" class="form-control input-sm form-controll-small">
             </div>
@@ -45,7 +45,7 @@
             <button type="submit" class="btn btn-success btn-small"><?php __('Sign in'); ?></button>
           </form>                
 -->
-<form action="#" id="UserLoginForm" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
+<form action="#" id="UserLoginFormTop" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
   
   <?php __('Change to'); ?>:
   <?php if ( $locale != 'eng' || $locale == '' ) { ?>
@@ -73,7 +73,7 @@
 
                           <li><?php echo $html->link(__('Your Training Plan',true),array('controller' => 'trainingplans', 'action' => 'view'))?></li>
 
-                          <li><?php echo $html->link(__('Training Diary',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'))?></li>
+                          <li><?php echo $html->link(__('Training Log',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'))?></li>
                           <li><?php echo $html->link(__('Your Races',true),array('controller' => 'competitions', 'action' => 'list_competitions'))?></li>
                         
                           <li style="padding-left: 20px;"><b><?php __('Statistics'); ?></b></li>
@@ -98,7 +98,7 @@
                           <li>Demo: <?php echo $html->link(__('Edit images',true).' - Beta',array('controller' => 'users', 'action' => 'edit_images'))?></li>
                           -->
                           <?php } ?>
-                          <li><a target="_blank" href="http://getsatisfaction.com/tricoretraining"><?php __('Feedback'); ?></a></li>        
+                          <li><a target="_blank" href="mailto:support@tricoretraining.com"><?php __('Feedback'); ?></a></li>        
                           
                           <!--
                           <?php if ( isset ( $userobject ) ) { ?>
@@ -151,7 +151,7 @@
                   </li>
                 </ul>
 
-<form action="#" id="UserLoginForm" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
+<form action="#" id="UserLoginFormTop" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
   
   <?php __('Change to'); ?>:
   <?php if ( $locale != 'eng' || $locale == '' ) { ?>
@@ -164,7 +164,7 @@
 
 
   <?php if ( isset ( $userobject ) ) { ?>
-  <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-warning btn-small')); ?>
+  <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-success btn-small')); ?>
   <?php } ?>
   
 </form>

@@ -1,5 +1,5 @@
 <?php
-	  echo $output;
+	echo $output;
 
       $this->js_addon = "";
 ?>
