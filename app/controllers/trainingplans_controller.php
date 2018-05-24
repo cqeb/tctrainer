@@ -178,9 +178,7 @@ class TrainingplansController extends AppController {
 	function check_trainingplans() {
 
 		// secure access
-		if ( $_SERVER['REMOTE_ADDR'] != '::1' && 
-			$_SERVER['REMOTE_ADDR'] != '127.0.0.1' && 
-			$_SERVER['REMOTE_ADDR'] != '78.142.159.226' && 
+		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && 
 			isset( $_GET['access'] ) && 
 			$_GET['access'] != SECRET_PW ) 
 					die('No access!');

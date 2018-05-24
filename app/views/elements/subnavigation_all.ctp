@@ -33,18 +33,8 @@
                         </ul>
                   </li>
                 </ul>
-<!--
-          <form action="/trainer/users/login" id="UserLoginFormTop" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
-            <div class="form-group">
-              <input name="data[User][email]" type="text" placeholder="Email" class="form-control input-sm form-controll-small">
-            </div>
-            <div class="form-group">
-              <input name="data[User][password]" type="password" placeholder="Password" class="form-control input-sm form-controll-small">
-            </div>
-            <input type="hidden" name="data[User][remember_me]" value="0">
-            <button type="submit" class="btn btn-success btn-small"><?php __('Sign in'); ?></button>
-          </form>                
--->
+
+
 <form action="#" id="UserLoginFormTop" method="post" accept-charset="utf-8" class="navbar-form navbar-right navbar-small">
   
   <?php __('Change to'); ?>:
@@ -57,7 +47,7 @@
   <?php } ?>
 
   <?php echo $html->link(__('Sign In',true),array('controller' => 'users', 'action' => 'login'), array('class' => 'btn btn-warning btn-small')); ?>
-<!--  <?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook/', array('class' => 'btn btn-warning btn-small')); ?>-->
+  <?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook/', array('class' => 'btn btn-warning btn-small')); ?>
 
 </form>
 
@@ -98,22 +88,7 @@
                           <li>Demo: <?php echo $html->link(__('Edit images',true).' - Beta',array('controller' => 'users', 'action' => 'edit_images'))?></li>
                           -->
                           <?php } ?>
-                          <li><a target="_blank" href="mailto:support@tricoretraining.com"><?php __('Feedback'); ?></a></li>        
-                          
-                          <!--
-                          <?php if ( isset ( $userobject ) ) { ?>
-                          <li><?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout')); ?></li>
-                          <?php } ?>
-                          <li style="padding-left: 20px;">Change to:<li>
-                          <?php if ( $locale != 'eng' || $locale == '' ) { ?>
-                          <?php echo $html->link('English',array('controller' => 'starts', 'action' => 'index', 'code' => "eng")); ?>
-                          <?php } ?>
-
-                          <?php if ( $locale != 'deu' ) { ?>
-                          <?php echo $html->link('Deutsch',array('controller' => 'starts', 'action' => 'index', 'code' => "deu")); ?>
-                          <?php } ?>
-                          </li>
-                          -->
+                          <li><a target="_blank" href="mailto:support@tricoretraining.com"><?php __('Feedback'); ?></a></li>
 
                         </ul>
                   </li>
@@ -141,7 +116,7 @@
                         </ul>
                   </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php __('Blog'); ?><b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php __('FAQ'); ?> &amp; <?php __('Blog'); ?><b class="caret"></b></a>
                         <ul class="dropdown-menu">
                           <li><a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>"><?php __('Read our Blog'); ?></a></li>
                           <li><a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>category/news/"><?php __('News'); ?></a></li>
@@ -162,62 +137,10 @@
   <?php echo $html->link('Deutsch',array('controller' => 'starts', 'action' => 'index', 'code' => "deu"), array('class' => 'btn btn-success btn-small')); ?>
   <?php } ?>
 
-
   <?php if ( isset ( $userobject ) ) { ?>
   <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout'), array('class' => 'btn btn-success btn-small')); ?>
   <?php } ?>
   
 </form>
-
-<!--
-    <form class="navbar-form navbar-right navbar-small" role="search" method="get" id="searchform" action="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>">
-      <div class="form-group">
-      <input name="s" id="s" type="text" class="form-control form-controll-small" placeholder="<?php __('Search'); ?>">
-      </div>
-      <input id="searchsubmit" value="<?php __('Search'); ?>" type="submit" class="btn btn-primary">
-    </form>
--->
-    
-<!--
-<div>
-<?php if ( !isset( $session_userid ) ) { ?>
-<?php } else { ?>
-
-<?php if ( isset ( $userobject ) ) { echo $userobject['firstname']; } ?> | <?php echo $html->link(__('Sign out',true), array('controller' => 'users', 'action' => 'logout')); ?> | <?php } ?>
-
-<?php if ( $locale != 'eng' || $locale == '' ) { ?>
-<?php echo $html->link('English',array('controller' => 'starts', 'action' => 'index', 'code' => "eng")) . ' | '; ?>
-<?php } ?>
-
-<?php if ( $locale != 'deu' ) { ?>
-<?php echo $html->link('Deutsch',array('controller' => 'starts', 'action' => 'index', 'code' => "deu")) . ' | '; ?>
-<?php } ?>
-</div>
--->
-
-<!--
-<ul>
-<?php if ( !isset($session_userid) ) { ?>
-
-<?php } ?>
-
-<?php if ( $this->name == 'Competitions' ) { ?>
-
-<?php } ?>
-<?php if ( $this->name == 'Trainingplans' ) { ?>
-
-<?php } ?>
-<?php if ( $this->name == 'Trainingstatistics' ) { ?>
-
-<?php } ?>
-<?php if ( $this->name == 'Users' && $session_userid ) { ?>
-        	
-<?php } ?>
-<?php if ( $this->name == 'Payments' ) { ?>
-
-<?php } ?>
-</ul>
-<br />
--->
 
 <?php } ?>

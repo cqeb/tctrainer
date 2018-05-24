@@ -12,7 +12,7 @@
 	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 </style>
 <div id="mc_embed_signup">
-<form action="http://tricoretraining.us3.list-manage1.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=b99533c86e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<form action="https://tricoretraining.us3.list-manage1.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=b99533c86e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 	<h2><?php __('Want to receive Triathlon Training hacks and tricks?'); ?></h2>
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <div class="mc-field-group">
@@ -48,7 +48,7 @@ var head= document.getElementsByTagName('head')[0];
 if (!jqueryLoaded) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = '//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js';
+    script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js';
     head.appendChild(script);
     if (script.readyState && script.onload!==null){
         script.onreadystatechange= function () {
@@ -86,7 +86,7 @@ function mce_preload_check(){
     }
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.src = 'http://downloads.mailchimp.com/js/jquery.form-n-validate.js';
+    script.src = 'https://downloads.mailchimp.com/js/jquery.form-n-validate.js';
     head.appendChild(script);
     try {
         var validatorLoaded=jQuery("#fake-form").validate({});
@@ -101,7 +101,7 @@ function mce_init_form(){
       var options = { errorClass: 'mce_inline_error', errorElement: 'div', onkeyup: function(){}, onfocusout:function(){}, onblur:function(){}  };
       var mce_validator = $("#mc-embedded-subscribe-form").validate(options);
       $("#mc-embedded-subscribe-form").unbind('submit');//remove the validator so we can get into beforeSubmit on the ajaxform, which then calls the validator
-      options = { url: 'http://tricoretraining.us3.list-manage1.com/subscribe/post-json?u=1aae732ff84bdc99903e3ec91&id=b99533c86e&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
+      options = { url: 'https://tricoretraining.us3.list-manage1.com/subscribe/post-json?u=1aae732ff84bdc99903e3ec91&id=b99533c86e&c=?', type: 'GET', dataType: 'json', contentType: "application/json; charset=utf-8",
                     beforeSubmit: function(){
                         $('#mce_tmp_error_msg').remove();
                         $('.datefield','#mc_embed_signup').each(

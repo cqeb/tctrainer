@@ -192,8 +192,8 @@
 		html_append:			'</div>',
 		icon:
 		{
-			image:				"http://www.google.com/mapfiles/marker.png",
-			shadow:				"http://www.google.com/mapfiles/shadow50.png",
+			image:				"https://www.google.com/mapfiles/marker.png",
+			shadow:				"https://www.google.com/mapfiles/shadow50.png",
 			iconsize:			[20, 34],
 			shadowsize:			[37, 34],
 			iconanchor:			[9, 34],

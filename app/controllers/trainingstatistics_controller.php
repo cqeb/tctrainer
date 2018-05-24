@@ -1129,7 +1129,6 @@ class TrainingstatisticsController extends AppController {
     
     function garmin_import_final()
     {                                                       
-		//$this->layout = 'default_trainer_2rows';
 		$this->checkSession();
 
 		$session_userid = $this->Session->read('session_userid');

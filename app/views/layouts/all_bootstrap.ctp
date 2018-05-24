@@ -32,7 +32,7 @@ else
 
 	<link href="<?php echo $url; ?>/assets/css/styles.main.css" rel="stylesheet">
 
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> 
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"> 
 	<!--[if lt IE 7]>
 	<link href="<?php echo $url; ?>/assets/css/font-awesome-ie7.min.css" rel="stylesheet">
 	<![endif]-->
@@ -1971,7 +1971,8 @@ else
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="<?php echo $url; ?>/assets/js/jquery.js" type="text/javascript"></script>
 
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
+<script src="https
+://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.min.js"></script>
 <!-- PAGE CUSTOM SCROLLER -->
 <script type="text/javascript" src="<?php echo $url; ?>/assets/js/jquery.nicescroll.min.js"></script>
 

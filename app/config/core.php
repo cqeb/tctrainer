@@ -79,10 +79,11 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
 
-	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
+	Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.hostUrl', 'https://tricoretraining.com');	
 
-	$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
+	//$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
+	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/tricoretraining.com/';
 }
 
 define('url', '/trainer');

@@ -16,7 +16,7 @@
          <?php } ?>
 
          <div class="alert alert-success">
-         <?php echo __('Your current membership is valid from', true) . ' ' . $paid_from . ' ' . __('to', true) . ' ' . $paid_to; ?>.
+         <?php echo __('Your current membership is valid from', true) . ' ' . $paid_from . ' ' . __('to', true) . ' ' . $paid_to; ?>.<br />
          <?php __("You're a"); echo ' '; if ( $pay_member == 'freemember' ) echo __('FREE member'); else echo __('PREMIUM member'); ?>
          </div>
 

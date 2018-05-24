@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/assets/css/theme.css?v=<?php echo VERSION; ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/css/theme/jquery-ui-1.8.5.custom.css?v=<?php echo VERSION; ?>" />
 
-	<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css?v=<?php echo VERSION; ?>" /> 
+	<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css?v=<?php echo VERSION; ?>" /> 
 	<!--[if lt IE 7]>
 	<link href="<?php echo $url; ?>/assets/css/font-awesome-ie7.min.css?v=<?php echo VERSION; ?>" rel="stylesheet">
 	<![endif]-->
@@ -30,12 +30,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<script type="text/javascript" src="<?php echo $url; ?>/assets/js/jquery-1.9.1.js?v=<?php echo VERSION; ?>"></script>
 
 	<!--script type="text/javascript" src="<?php echo $url; ?>/js/jquery-ui-1.8.5.custom.min.js?v=<?php echo VERSION; ?>"></script-->
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 
 
-	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
-	<!--script type="text/javascript" src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.js?v=<?php echo VERSION; ?>"></script-->
+	<!--script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.js?v=<?php echo VERSION; ?>"></script-->
 	<script type="text/javascript" src="<?php echo $url; ?>/assets/js/bootstrap.min.js?v=<?php echo VERSION; ?>"></script>
 
 	<!-- PAGE CUSTOM SCROLLER -->

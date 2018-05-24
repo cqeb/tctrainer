@@ -75,7 +75,7 @@ class ProviderComponent extends Object {
 		} else {
 			return '<div class="alert alert-danger"><p>' .
 				__("Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions.", true) . 
-				'</p><br /><button onclick="document.location=\'/trainer/payments/subscribe_triplans\'">' .
+				'</p><br /><button class="trainingplan" onclick="document.location=\'/trainer/payments/subscribe_triplans\'">' .
 				__('Become PREMIUM', true) . 
 				'</button></div>' . 
 				"<script type=\"text/javascript\">

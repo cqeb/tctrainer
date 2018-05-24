@@ -191,7 +191,7 @@
         domtest.style['cursor']=p;
         if (domtest.style['cursor']==p) return p;
       }
-      return 'url(http://www.google.com/intl/en_ALL/mapfiles/openhand.cur),n-resize';  // thank you google for custom cursor!
+      return 'url(https://www.google.com/intl/en_ALL/mapfiles/openhand.cur),n-resize';  // thank you google for custom cursor!
     }
     d.cursorgrabvalue = detectCursorGrab();
 

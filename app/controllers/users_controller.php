@@ -90,7 +90,6 @@ class UsersController extends AppController {
 
 	function list_users()
 	{
-  			//$this->layout = 'default_trainer_2rows';
       		$this->checkSession();
             $statusbox = 'alert';
 
@@ -1674,7 +1673,7 @@ class UsersController extends AppController {
 		$this->Email->to = $User['User']['email'];
 		//$this->Email->bcc = array('secret@example.com');
 		$this->Email->subject = __('We\'re so glad you start your training! 🏃‍♀️ 🏃',true);
-		$this->Email->replyTo = Configure::read('App.mailFrom');
+		//$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 
 		$this->Email->template = 'welcomemail'; // note no '.ctp'
@@ -1725,7 +1724,7 @@ class UsersController extends AppController {
 
 		$this->Email->to = $User['User']['email'];
 		$this->Email->subject = $subject;
-		$this->Email->replyTo = Configure::read('App.mailFrom');
+		//$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 
 		//Set view variables as normal
@@ -1772,9 +1771,7 @@ class UsersController extends AppController {
 	function check_notifications()
 	{
 		// secure access
-		if ( $_SERVER['REMOTE_ADDR'] != '::1' && 
-				$_SERVER['REMOTE_ADDR'] != '127.0.0.1' && 
-				$_SERVER['REMOTE_ADDR'] != '78.142.159.226' && 
+		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && 
 				isset( $_GET['access'] ) && 
 				$_GET['access'] != SECRET_PW ) 
 					die('No access!');
@@ -2447,9 +2444,8 @@ class UsersController extends AppController {
 		}
 
 		$this->Email->to = $to_user['email'];
-		//echo "email sent to " . $to_user['email'] . "<br />\n";
-		
-		$this->Email->replyTo = Configure::read('App.mailFrom');
+		//echo "email sent to " . $to_user['email'] . "<br />\n";		
+		//$this->Email->replyTo = Configure::read('App.mailFrom');
 		$this->Email->from = Configure::read('App.mailFrom');
 		$this->Email->subject = $subject;
     	if ( !isset( $template ) ) $template = 'standardmail';
