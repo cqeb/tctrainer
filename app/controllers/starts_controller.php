@@ -113,7 +113,7 @@ class StartsController extends AppController
 			// create title
 			$title = __('I did a', true) . ' ' . $distance . ' ' . $distance_unit . ' ' . 
 				__($sport . ' workout', true) . ' ' . __('in',true) . ' ' . $duration . ' ' . 
-				__('hour(s)',true) . ' ' . __('with', true) . ' ' . 'http://tricoretraining.com';
+				__('hour(s)',true) . ' ' . __('with', true) . ' ' . 'https://tricoretraining.com';
 				 
 			// read userinformation
 			$this->loadModel('User');

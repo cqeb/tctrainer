@@ -14,7 +14,7 @@
                           <li><a href="/trainer/#references"><?php __('References'); ?></a></li>
                           <li><a href="/trainer/#newsletter">&raquo; <?php __('Get Training Hints'); ?></a></li>                          
                           <li><a href="/trainer/#pricing"><?php __('Pricing'); ?></a></li>
-                          <li><a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>tricoretraining-the-interactive-online-training-coach-for-triathlon-running-biking/"><?php __('More about'); ?> TriCoreTraining</a></li>
+                          <li><a href="/blog/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>about/"><?php __('More about'); ?> TriCoreTraining</a></li>
                         </ul>
                   </li>
                    <li class="dropdown">
@@ -88,7 +88,7 @@
                           <li>Demo: <?php echo $html->link(__('Edit images',true).' - Beta',array('controller' => 'users', 'action' => 'edit_images'))?></li>
                           -->
                           <?php } ?>
-                          <li><a target="_blank" href="mailto:support@tricoretraining.com"><?php __('Feedback'); ?></a></li>
+                          <li><a href="mailto:support@tricoretraining.com"><?php __('Feedback'); ?></a></li>
 
                         </ul>
                   </li>

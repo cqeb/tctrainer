@@ -275,25 +275,35 @@ class UsersController extends AppController {
 			{
 				$user = unserialize( base64_decode( $fbuser ) );
 			} else
-			{ 
-				
-				if ( isset( $_GET['code'] ) ) $code = $_GET['code'];
+			{ 	
+				if ( isset( $_GET['code'] ) ) 
+					$code = $_GET['code'];
 	
+				// DEBUG
+				$version = 'v3.0/';
 				if ( empty( $code ) )
 				{
-					$dialog_url = "http://www.facebook.com/dialog/oauth?client_id=" . $app_id . "&scope=email,public_profile&redirect_uri=" . 
+					// TODO friendslist is missing
+					$dialog_url = "https://www.facebook.com/".$version."dialog/oauth?" .
+						"client_id=" . $app_id . 
+						"&scope=email,public_profile" .
+						"&redirect_uri=" . 
 						urlencode($my_url);
 	        			$this->redirect($dialog_url);
 	        			die();
 				} else
 				{
-					$token_url = "https://graph.facebook.com/oauth/access_token?client_id=" .
-	        				$app_id . "&redirect_uri=" . urlencode($my_url) . "&client_secret=" .
-	        				$app_secret . "&code=" . $code;
-		
-					$access_token = @file_get_contents($token_url);
+					$token_url = "https://graph.facebook.com/".$version."oauth/access_token?" .
+						"client_id=" . $app_id . 
+						"&redirect_uri=" . urlencode($my_url) . 
+						"&client_secret=" . $app_secret . 
+						"&code=" . $code;
+					// $access_token = @file_get_contents($token_url);
+					$access_token = file_get_contents($token_url);
 					$atoken = json_decode($access_token);
-					$graph_url = "https://graph.facebook.com/v2.8/me?fields=name,email&access_token=" . $atoken->access_token;
+					$graph_url = "https://graph.facebook.com/".$version."me?" . 
+						"fields=name,email" . 
+						"&access_token=" . $atoken->access_token;
 					$user = @json_decode(file_get_contents($graph_url));
 				}
 			}
@@ -1778,7 +1788,6 @@ class UsersController extends AppController {
 	
 		// TODO Implement daily reminder for training
 	    // Sun = 0
-		
 		$check_on_day = 0;
 		// right now we send the complete plan
 		$sent_complete_trainingplan = true;
@@ -1802,12 +1811,15 @@ class UsersController extends AppController {
 	    $this->layout = 'plain';
     
     	// select all users 
-		$sql = "SELECT * FROM users WHERE email != '' ORDER BY id DESC";
+		$sql = "SELECT * FROM users WHERE email != '' ORDER BY id";
 		
 		// localhost only sends 20 emails
-		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_GET['debug'] == true ) {
 			$sql .= " LIMIT 20";
 		}
+		//// DEMO REMOVE
+		// $sql .= " LIMIT 20";
+			
 		$results = $this->User->query($sql);
 
 		$output = '';
@@ -1831,7 +1843,8 @@ class UsersController extends AppController {
 		$count_results = count( $results );
 
 		// with GET variable you can move endpoint of notifications
-		if ( isset( $_GET['end'] ) && $_GET['end'] < $count_results ) $count_results = $_GET['end'];
+		if ( isset( $_GET['end'] ) && $_GET['end'] < $count_results ) 
+			$count_results = $_GET['end'];
 			
 		// go through all users
 		for ( $i = $start; $i < $count_results; $i++ )
@@ -1861,6 +1874,9 @@ class UsersController extends AppController {
 				$this->blognews = $blognews_en['html'];
 			*/
 
+			// DEMO REMOVE
+			// $user['email'] = 'klaus@schremser.com';
+			
 			// if local testing, then send	
             if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 			{
@@ -1962,6 +1978,7 @@ class UsersController extends AppController {
 		  */
 		  
 		  // if user wants to receive notifications
+		  // wrong way :)
 		  if ( $user['notifications'] != 1 ) 
 		  {   
 		  		// if user is not deactivated and activated its profile
@@ -2421,7 +2438,8 @@ class UsersController extends AppController {
 	  		Configure::write('Config.language',$language);
     	}
 		
-    	if ( isset( $user['User']['firstname'] ) ) $user = $user['User'];
+		if ( isset( $user['User']['firstname'] ) ) 
+			$user = $user['User'];
     
 	    if ( !isset($to_user['email']) ) 
 	    		$to_user['email'] = $user['email'];

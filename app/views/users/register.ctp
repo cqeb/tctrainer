@@ -159,7 +159,7 @@ echo $form->input('password',
 echo $form->input('birthday',
      array(
      'class' => 'required form-control',
-     'style' => 'width:75px',
+     'style' => 'width:85px',
      'minYear' => '1930',
      'maxYear' => date( 'Y', time() )-15,
      'label' => __('Birthday', true),
@@ -213,6 +213,35 @@ echo $form->input('rookie',
                   )
 ));
 
+?>
+</div>
+
+<div class="form-group">
+
+<?php
+/*
+$calc_array[] = '3 + 7 =';
+$calc_array[] = '2 + 8 =';
+$calc_array[] = '5 + 5 =';
+$calc_array[] = '6 + 4 =';
+$calc_one = rand(0,count($calc_array)-1);
+$calc = $calc_array[$calc_one];
+
+echo $form->input('spamprotection',
+                  array(
+                  'before' => __('Help us SPAM protect our platform', true) . $calc,
+                  'after' => $help_rookie,
+                  'between' => '',
+                  'class' => 'required',
+                  'label' => '',
+                  'legend' => false,
+                  'type' => 'checkbox',
+                  'options' => array(
+                            '1' => __('Yes',true),
+                            '0' => __('No',true)
+                  )
+));
+*/
 ?>
 </div>
 
