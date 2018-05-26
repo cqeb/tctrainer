@@ -5,14 +5,16 @@
 					<div class="col-12 col-lg-12 text-center">
 
 <!-- Begin MailChimp Signup Form -->
-<link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css">
+<!--link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css"-->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+
 <style type="text/css">
 	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
 	/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
 	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 </style>
 <div id="mc_embed_signup">
-<form action="https://tricoretraining.us3.list-manage1.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=b99533c86e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<form action="https://tricoretraining.us3.list-manage.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=b99533c86e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 	<h2><?php __('Want to receive Triathlon Training hacks and tricks?'); ?></h2>
 <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
 <div class="mc-field-group">
@@ -36,6 +38,7 @@
 	<div class="clear"><input type="submit" value="<?php __('Subscribe'); ?>" name="subscribe" id="mc-embedded-subscribe" class="btn btn-primary"></div>
 </form>
 </div>
+<?php /*
 <script type="text/javascript">
 var fnames = new Array();var ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';
 try {
@@ -228,6 +231,9 @@ function mce_success_cb(resp){
 
 </script>
 <!--End mc_embed_signup-->
+*/
+?>
+<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 
 					</div>
 				</div>
