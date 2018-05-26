@@ -84,7 +84,7 @@ class StatisticshandlerComponent extends Object {
             for ( $i = 0; $i < count( $trainingdata ); $i++ )
             {
                   $dt = $trainingdata[$i]['trainingstatistics'];
-                  $date_string = split( ' ', $dt['date'] );
+                  $date_string = preg_split( '/ /', $dt['date'] );
 
                   $day = $date_string[0];
 
@@ -113,7 +113,7 @@ class StatisticshandlerComponent extends Object {
             for ( $i = 0; $i < count( $scheduled_trainingdata ); $i++ )
             {
                   $dt = $scheduled_trainingdata[$i]['scheduledtrainings'];
-                  $date_string = split( ' ', $dt['date'] );
+                  $date_string = preg_split( '/ /', $dt['date'] );
                   // week day in trainingplan - always Monday :(
                   $day = $date_string[0];
 
@@ -317,7 +317,7 @@ class StatisticshandlerComponent extends Object {
             
                     if ( $distanceperunit_interim > $max_perunit ) $max_perunit = round( $distanceperunit_interim, 1);
                     // depends on minutes per km / mi
-                    $newdate = split( ' ', $dt['date'] );
+                    $newdate = preg_split( '/ /', $dt['date'] );
                     $newdate2 = $newdate[0];
 
                     // date, distance, duration, avg_pulse

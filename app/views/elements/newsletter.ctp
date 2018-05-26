@@ -16,7 +16,7 @@
 <div id="mc_embed_signup">
 <form action="https://tricoretraining.us3.list-manage.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=b99533c86e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 	<h2><?php __('Want to receive Triathlon Training hacks and tricks?'); ?></h2>
-<div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+<div class="indicates-required"><span class="asterisk">*</span> <?php __('indicates required'); ?></div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL"><?php __('Email'); ?> <span class="asterisk">*</span>
 </label>

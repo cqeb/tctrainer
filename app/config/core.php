@@ -49,8 +49,8 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
 	 */
 	define('DEBUG', true);
-	define('LOG_ERROR', 0);
-	Configure::write('debug', 0);
+	define('LOG_ERROR', 3);
+	Configure::write('debug', 3);
 	
 	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
 

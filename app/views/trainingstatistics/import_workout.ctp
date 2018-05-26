@@ -16,7 +16,7 @@ else
 	 
 ?></legend>
 
-         <?php if ($session->read('flash')) { ?>
+         <?php $statusbox = 'alert'; if ($session->read('flash')) { ?>
          <div class="<?php echo $statusbox; ?>">
          <?php echo $session->read('flash'); $session->delete('flash'); ?>
          </div><br />
@@ -27,18 +27,20 @@ else
 if ( !isset( $newimportfile ) ) 
 {
   
-    __('Upload a CSV-file - you can save an Excel-file in this format.');
+    __('Upload a file with a .csv extension please'); echo ".<br />";
+    __('You can save this format by using your Microsoft Excel application'); echo ".<br />";
+    __('We do not support .xls(x), we only support .csv extentions.');
 
     echo '<br /><br />';
-    
+    echo '<a href="/trainer/example/example_workouts_import.csv" target="_blank">&raquo; ';
+    __('Download example file'); echo ' - CSV'; echo '<br />';
+    echo '</a>';
     echo '<a href="/trainer/example/example_workouts_import.xls" target="_blank">&raquo; ';
-    __('Here you can download an example Excel file for you.');
+    __('Download example file'); echo ' - XLS (Excel)'; echo '<br />';
     echo '</a>';
         
     echo '<br /><br /><br />';
-    
     echo $form->file('import_csv_upload');
-    
     echo "<br /><br />";
     
     echo $form->submit(__('Import workouts',true),array('class' => 'btn btn-primary'));

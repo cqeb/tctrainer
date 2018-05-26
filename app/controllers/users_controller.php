@@ -21,11 +21,11 @@ class UsersController extends AppController {
   
   		// necessary for upload
   		// fill with associated array of name, type, size to the corresponding column name
-  		$this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
+  		// $this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
   
   		// captcha keys
-  		$this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
-  		$this->Recaptcha->privatekey = RECAPTCHA_PRIVATEKEY;
+  		// $this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
+  		// $this->Recaptcha->privatekey = RECAPTCHA_PRIVATEKEY;
   
   		$this->js_addon = '';
 	}

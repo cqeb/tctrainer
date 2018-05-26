@@ -390,8 +390,8 @@ class UnitcalcComponent extends Object {
             // save / show / display
             if ( $mode == 'show' )
             {
-               $date_split_fromtime = split( ' ', $date );
-               $date_split = split( '-', $date_split_fromtime[0] );
+               $date_split_fromtime = preg_split( '/ /', $date );
+               $date_split = preg_split( '/-/', $date_split_fromtime[0] );
 
                switch ( $session_unitdate )
                {
@@ -413,17 +413,17 @@ class UnitcalcComponent extends Object {
                switch ( $session_unitdate )
                {
                       case "ddmmyyyy":
-                      $date_split = split( '\.', $date );
+                      $date_split = preg_split( '/\./', $date );
                       $return = $date_split[2] . '-' . $date_split[1] . '-' . $date_split[0];
                       break;
 
                       case "mmddyyyy":
-                      $date_split = split( '\.', $date );
+                      $date_split = preg_split( '/\./', $date );
                       $return = $date_split[2] . '-' . $date_split[0] . '-' . $date_split[1];
                       break;
 
                       case "yyyymmdd":
-                      $date_split = split( '-', $date );
+                      $date_split = preg_split( '/-/', $date );
                       if ( count( $date_split ) == 3 )
                         {
                                 // in case you get a wrong format
@@ -639,12 +639,12 @@ class UnitcalcComponent extends Object {
 				
 		if ( $currency == 'USD' )
 		{
-			$price_array_split['USD']['total'] = str_replace( '"', '', split(",",$price_usd));
-			$price_array_split['USD']['month'] = str_replace( '"', '', split(",",$price_usd_month));
+			$price_array_split['USD']['total'] = str_replace( '"', '', preg_split("/,/",$price_usd));
+			$price_array_split['USD']['month'] = str_replace( '"', '', preg_split("/,/",$price_usd_month));
 		} else
 		{
-			$price_array_split['EUR']['total'] = str_replace( '"', '', split(",",$price_eur));
-			$price_array_split['EUR']['month'] = str_replace( '"', '', split(",",$price_eur_month));
+			$price_array_split['EUR']['total'] = str_replace( '"', '', preg_split("/,/",$price_eur));
+			$price_array_split['EUR']['month'] = str_replace( '"', '', preg_split("/,/",$price_eur_month));
 		}
 				
 		return $price_array_split;

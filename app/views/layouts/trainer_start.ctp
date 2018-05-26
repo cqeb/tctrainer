@@ -200,7 +200,7 @@ else
 
 		<div class="panel">
 			<div class="col-12 col-lg-12 panel-heading text-center">
-				<h3><?php __('WHAT IS TRICORETRAINING?'); ?></h3>
+				<h3 class="big"><?php __('WHAT IS TRICORETRAINING?'); ?></h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -217,7 +217,7 @@ else
 	<div class="panel text-center">
 		<div class="col-12 col-lg-12 panel-heading text-center">
 <!--		<div class="panel-heading">-->
-			<h3><?php __('FEATURES'); ?></h3>
+			<h3 class="big"><?php __('FEATURES'); ?></h3>
 <!--		</div>-->
 		</div>
 		<div class="panel-body">
@@ -233,7 +233,7 @@ else
 		          <p class="lead"><?php __('Receive individual training plans based on your workouts and upcoming competitions.');?></p>
 		        </div>
 		        <div class="col-md-5">
-		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-plans-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-plans-big.png" data-src="holder.js/500x500/auto" alt="<?php __('Get individual training plans');?>" title="<?php __('Get individual training plans');?>"></a>
+		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-plans-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-plans-small.jpg" data-src="holder.js/500x500/auto" alt="<?php __('Get individual training plans');?>" title="<?php __('Get individual training plans');?>"></a>
 		        </div>
 		      </div>
 
@@ -241,7 +241,7 @@ else
 
 		      <div class="row featurette">
 		        <div class="col-md-5">
-		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-stats-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-stats-big.png" data-src="holder.js/500x500/auto" alt="<?php __('Analyze your workouts');?>" title="<?php __('Analyze your workouts');?>"></a>
+		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-stats-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-stats-small.jpg" data-src="holder.js/500x500/auto" alt="<?php __('Analyze your workouts');?>" title="<?php __('Analyze your workouts');?>"></a>
 		        </div>
 		        <div class="col-md-7">
 		          <h2 class="featurette-heading"><?php __('Analyze your workouts');?><span class="text-muted"></span></h2>
@@ -257,7 +257,7 @@ else
 		          <p class="lead"><?php __('Log your trainings, manage your competitions, and also keep track of your weight.');?></p>
 		        </div>
 		        <div class="col-md-5">
-		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-track-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-track-big.png" data-src="holder.js/500x500/auto" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"></a>
+		          <a target="_blank" href="<?php echo $url; ?>/img/startpage-feature-track-big.png"><img class="featurette-image img-responsive" src="<?php echo $url; ?>/img/startpage-feature-track-small.jpg" data-src="holder.js/500x500/auto" alt="<?php __('Track your trainings');?>" title="<?php __('Track your trainings');?>"></a>
 		        </div>
 		      </div>
 
@@ -274,7 +274,7 @@ else
 <div class="container">
 	<div class="panel">
 		<div class="col-12 col-lg-12 panel-heading text-center">
-			<h3><?php __('WHAT PEOPLE SAY ABOUT'); ?> TRICORETRAINING</h3>
+			<h3 class="big"><?php __('WHAT PEOPLE SAY ABOUT'); ?> TRICORETRAINING</h3>
 		</div>
 	<div class="panel-body">
 		<div class="row">

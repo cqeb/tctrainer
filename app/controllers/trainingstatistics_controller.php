@@ -80,25 +80,35 @@ class TrainingstatisticsController extends AppController {
 						$return = $this->_save_file($csv_file, $userid, "file", "import");
 						//if (!$return['error']) echo $return['destination'];
 				
+						if ( isset($return['error']) && $return['error'] == 'type_not_accepted' )
+						{
+							$statusbox = 'alert alert-danger';
+							$this->Session->write('flash',__('File type not supported. Please upload another file!', true));
+							$this->set('statusbox', $statusbox);
+							$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'import_workout'));
+							die();
+						}
+
 						$app_backslash = Configure::read('App.Dirbackslash');
 
 						$importfile = Configure::read('App.uploadDir') . 'imports/' . $return['filename'];
 					
 						if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 						{
-							if ( isset( $app_backslash ) && $app_backslash == true ) 
-								$importfile = str_replace( '/', '\\', $importfile);
-								//$importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);                  
+							if ( isset( $app_backslash ) && $app_backslash == true ) {
+								//$importfile = str_replace( '/', '\\', $importfile);
+							}
+							//$importfile = str_replace( 'files\\', 'app\\webroot\\files\\', $importfile);                  
 						} else
 						{
-								//$importfile = str_replace( 'files/', 'app/webroot/files/', $importfile);                  
+							//$importfile = str_replace( 'files/', 'app/webroot/files/', $importfile);                  
 						}
 		
 						$importdata = file( $importfile );
 		
 					} else
 					{
-						//pr($this->data['Trainingstatistic']['hiddenimportfile']);
+						// pr($this->data['Trainingstatistic']['hiddenimportfile']);
 						$importdata = unserialize(urldecode($this->data['Trainingstatistic']['hiddenimportfile']));
 					}
 		
@@ -134,7 +144,7 @@ class TrainingstatisticsController extends AppController {
 							if ( !$this->Unitcalc->is_utf8($value) ) 
 								$value = utf8_encode( $value );
 		
-							$idl = split( ";", $value ); // importdatalines
+							$idl = preg_split( "/;|,/", $value ); // importdatalines
 							if ( isset( $idl[0] ) ) $importdate = $importdate_orig = $idl[0];
 							else $importdate = '';
 							
@@ -173,9 +183,12 @@ class TrainingstatisticsController extends AppController {
 							if ( isset( $idl[10] ) ) $importworkoutlink = $idl[10];
 							else $importworkoutlink = '';
 			
+							//echo $importdate . "xx<br>";
 							if ( strtotime( $importdate ) )
 							{ 
+								//echo $importdate . "<br>";
 								$importdate = $this->Unitcalc->check_date( $importdate, 'save' );
+								//echo $importdate . "<br>";
 								if ( !is_numeric( strtotime( $importdate ) ) ) 
 								{
 									$import_error = '<br />' . __('Date', true) . ' ' . __('is not valid!', true);
@@ -212,7 +225,7 @@ class TrainingstatisticsController extends AppController {
 						
 							if ( isset( $importduration ) ) 
 							{
-								$importdurationarray = split( ':', $importduration );
+								$importdurationarray = preg_split( '/:/', $importduration );
 							
 								if ( is_numeric($importdurationarray[0]) && is_numeric($importdurationarray[1]) && is_numeric($importdurationarray[2]) )
 								{
@@ -436,13 +449,13 @@ class TrainingstatisticsController extends AppController {
           $new_name = $addthis . '_' . $userid . '_' . $file['name'];
           $destination .= $new_name;
           $weburl .= $new_name;
-
+		  
           if ( move_uploaded_file( $file['tmp_name'], $destination ) )
           {                                                                                                                                         
             //unlink($file['tmp_name']);
             $return['destination'] = $weburl;
             $return['filename'] = $new_name;
-            $return['error'] = '';
+			$return['error'] = '';
             return $return;
           }
         } else
@@ -515,7 +528,7 @@ class TrainingstatisticsController extends AppController {
 	  				$this->data['Trainingstatistic']['duration'] = $this->data['Trainingstatistic']['duration'] . ':00';
 	  			}
 	
-	  			if ( count( split( ':', $this->data['Trainingstatistic']['duration'] ) ) == 2 )
+	  			if ( count( preg_split( '/:/', $this->data['Trainingstatistic']['duration'] ) ) == 2 )
 	  			$this->data['Trainingstatistic']['duration'] = '00:' . $this->data['Trainingstatistic']['duration'];
 	  			$this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
 	  		}
