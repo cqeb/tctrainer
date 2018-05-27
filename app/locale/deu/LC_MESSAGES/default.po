@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TRICORETRAINING\n"
 "POT-Creation-Date: 2018-05-27 15:35+0200\n"
-"PO-Revision-Date: 2018-05-27 15:36+0200\n"
+"PO-Revision-Date: 2018-05-27 17:54+0200\n"
 "Last-Translator: KMS <klaus@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de_DE\n"
@@ -688,7 +688,7 @@ msgstr "Neues Passwort gespeichert."
 
 #: /controllers/users_controller.php:1704
 msgid "We're so glad you start your training! 🏃‍♀️ 🏃"
-msgstr "Wir sind glücklich, dass du dein Training beginnst! 🏃‍♀️ 🏃"
+msgstr "Es ist fantastisch, dass du dein Training beginnst! 🏃‍♀️ 🏃"
 
 #: /controllers/users_controller.php:1742
 msgid "We reset your password!"

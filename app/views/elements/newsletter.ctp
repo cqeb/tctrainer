@@ -14,7 +14,16 @@
 	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
 </style>
 <div id="mc_embed_signup">
-<form action="https://tricoretraining.us3.list-manage.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=b99533c86e" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+<?php 
+
+if ( $locale == 'de' ) {
+    $mailchimp_list_id = '9e6182eb6e';
+} else {
+    $mailchimp_list_id = 'b99533c86e';
+}
+
+?>
+<form action="https://tricoretraining.us3.list-manage.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=<?php echo $mailchimp_list_id; ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
 	<h2><?php __('Want to receive Triathlon Training hacks and tricks?'); ?></h2>
 <div class="indicates-required"><span class="asterisk">*</span> <?php __('indicates required'); ?></div>
 <div class="mc-field-group">

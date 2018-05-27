@@ -36,44 +36,68 @@ class UsersController extends AppController {
         $this->set('statusbox', 'alert');    
 	}
 
-	function add_subscriber($email = null, $firstname = null, $lastname = null) 
+	function add_subscriber($email = null, $firstname = null, $lastname = null, $gender = null, $language = 'en') 
 	{
-			// http://stackoverflow.com/questions/5025455/some-basic-mailchimp-api-examples-required
-			// https://us3.admin.mailchimp.com/lists/settings/merge-tags?id=299149
+		// https://www.codexworld.com/add-subscriber-to-list-mailchimp-api-php/ v3.0
 
-			$req_path = ( ROOT . DS . APP_DIR . '/controllers/components/mailchimp.php' );
-			require_once $req_path;
-
-			// http://apidocs.mailchimp.com/api/2.0/lists/subscribe.php
-			// https://github.com/drewm/mailchimp-api
-
-			// grab an API Key from http://admin.mailchimp.com/account/api/
-			$MailChimp = new MailChimp(MAILCHIMP_APIKEY);
-
-			// grab your List's Unique Id by going to http://admin.mailchimp.com/lists/
-			// Click the "settings" link for the list - the Unique Id is at the bottom of that page. 
-			$result = $MailChimp->call('lists/subscribe', array(
-				'id'                => 'b99533c86e',
-				'email'             => array( 'email' => $email ),
-				'merge_vars'        => array(
-					/**
-					*'FNAME'             => array( 'email' => $email ),
-					*'LNAME'             => array( 'email' => $email )
-					**/
-					//'MERGE2' => $_POST['name'] // MERGE name from list settings
-					// there MERGE fields must be set if required in list settings
-				),
-				'double_optin'      => false,
-				'update_existing'   => true,
-				'replace_interests' => false
-			));
-
-			if ( $result === false ) {
-				// response wasn't even json
+		if ($gender == 'f') 
+			$gender = 'female';
+		else if ($gender == 'm')
+			$gender = 'male';
+		else
+			$gender = 'other';
+		
+		// MailChimp API credentials
+		$apiKey = MAILCHIMP_APIKEY;
+		if ( $language == 'de' ) {
+			$listID = '9e6182eb6e';
+		} else {
+			$listID = 'b99533c86e';
+		}
+		
+		// MailChimp API URL
+		$memberID = md5(strtolower($email));
+		$dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
+		$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listID . '/members/' . $memberID;
+			
+		// member information
+		$json = json_encode([
+			'email_address' => $email,
+			'status'        => 'subscribed',
+			'merge_fields'  => [
+				'FNAME'     => $fname,
+				'LNAME'     => $lname,
+				'GENDER'    => $gender,
+				'LANGUAGE'  => $language
+			]
+		]);
+			
+		// send a HTTP POST request with curl
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $apiKey);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+		$result = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		curl_close($ch);
+			
+		// store the status message based on response code
+		if ($httpCode == 200) {
+			// success
+		} else {
+			switch ($httpCode) {
+				case 214:
+					// already subscribed
+					break;
+				default:
+					// some error
+					break;
 			}
-			else if ( isset($result->status) && $result->status == 'error' ) {
-				// Error info: $result->status, $result->code, $result->name, $result->error
-			}
+		}
 	}
 
 	function fill_my_database()
@@ -895,7 +919,7 @@ class UsersController extends AppController {
 			$session_register_userid = $this->Session->read('register_userid');
 
 			// add to mailchimp
-			$this->add_subscriber($this->data['User']['email']);
+			$this->add_subscriber($this->data['User']['email'], $this->data['User']['firstname'], $this->data['User']['lastname'], $this->data['User']['gender'], $this->data['User']['yourlanguage']);
 
 			if ( $session_register_userid != $this->User->id )
 			{
