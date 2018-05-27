@@ -87,6 +87,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
         define('LOG_ERROR', 3);
         Configure::write('debug', 3);
 	}
+
 	//$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/tricoretraining.com/';
 }
@@ -131,22 +132,22 @@ Configure::write('App.serverUrl', '/trainer');
 
 Configure::write('App.Dirbackslash', false);
 	
-Configure::write('price_eur', '"4.90","13.90","24.90","39.90"');
-Configure::write('price_eur_month', '"4.90","4.63","4.15","3.26"');
+Configure::write('price_eur', '"5.90","15.90","30.90","59.90"');
+Configure::write('price_eur_month', '"5.90","5.30","5.15","4.99"');
 
-Configure::write('price_usd', '"4.90","13.90","24.90","39.90"');
-Configure::write('price_usd_month', '"4.90","4.63","4.15","3.26"');
+Configure::write('price_usd', '"5.90","15.90","30.90","59.90"');
+Configure::write('price_usd_month', '"5.90","5.30","5.15","4.99"');
 
 Configure::write('tct_price_eur', '"0.10","0.30","0.60","1.20"');
-Configure::write('tct_price_eur_month', '"4.90","4.63","4.15","3.26"');
+Configure::write('tct_price_eur_month', '"0.10","0.10","0.10","0.10"');
 
-Configure::write('company_price_eur', '"3.90","9.90","18.90","34.90"');
-Configure::write('company_price_eur_month', '"3.90","3.30","3.15","2.91"');
+Configure::write('company_price_eur', '"4.13","12.39","24.78","49.56"');
+Configure::write('company_price_eur_month', '"4.13","4.13","4.13","4.13"');
 
-Configure::write('company_price_usd', '"3.90","9.90","18.90","34,90"');
-Configure::write('company_price_usd_month', '"3.90","3.30","3.15","2.91"');
+Configure::write('company_price_usd', '"4.13","12.39","24.78","49.56"');
+Configure::write('company_price_usd_month', '"4.13","4.13","4.13","4.13"');
 
-Configure::write('company_emails', '"@gentics.com","@schremser.com"');
+Configure::write('company_emails', '"@growtf.com","@schremser.com"');
 
 /**
  * Uncomment the define below to use CakePHP admin routes.
