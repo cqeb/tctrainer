@@ -1,5 +1,6 @@
 body {
-	background: #F2F2F2 url('/trainer/img/bg.jpg') repeat-x top center;
+	/*background: #F2F2F2 url('/trainer/img/bg.jpg') repeat-x top center;*/
+	background: #F2F2F2 repeat-x top center;
 }
 
 /* general use border radius class */

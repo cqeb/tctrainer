@@ -1056,7 +1056,7 @@ class UsersController extends AppController {
 				$this->User->id = $transactions['activation_userid'];
 				$this->User->savefield('activated', 1, false);
 
-				$this->Session->write('flash',__('You will receive regularly training schedules from TriCoreTraining. Add races to set your goal.',true));
+				$this->Session->write('flash',__('Add races to set your goal. Your weekly training plan will be generated using these goals.',true));
         
 				if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
 				{

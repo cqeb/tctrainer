@@ -140,7 +140,7 @@ else
 			<h3><?php __('First steps'); ?></h3>
 			<a id="guide" href="#" title=""><?php __('Beginner\'s guide to your training'); ?></a>
 
-			<h3><?php __('Your mesocycle of the next weeks'); ?> <a class="help badge" href="/blog/<?php echo $language . '/'; ?>basics-what-to-know-about-endurance-training/">?</a></h3>
+			<h3><?php __('Your mesocycle of the next weeks'); ?> <a class="help badge" href="/blog/<?php if (isset($language)) echo $language . '/'; ?>basics-what-to-know-about-endurance-training/">?</a></h3>
 			
 			<?php
 
