@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TRICORETRAINING\n"
-"POT-Creation-Date: 2018-05-26 14:48+0200\n"
-"PO-Revision-Date: 2018-05-26 14:48+0200\n"
+"POT-Creation-Date: 2018-05-27 09:37+0200\n"
+"PO-Revision-Date: 2018-05-27 09:39+0200\n"
 "Last-Translator: KMS <klaus@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de_DE\n"
@@ -74,7 +74,7 @@ msgid "Verification by PAYPAL failed"
 msgstr "Verifizierung durch PAYPAL ist fehlgeschlagen"
 
 #: /controllers/payments_controller.php:429;455
-#: /controllers/users_controller.php:821 /views/layouts/trainer_start.ctp:45
+#: /controllers/users_controller.php:821 /views/layouts/trainer_start.ctp:46
 msgid "TriCoreTraining"
 msgstr "TriCoreTraining"
 
@@ -171,25 +171,25 @@ msgstr "Erhalte Interaktive Trainingspläne Für Triathlon, Marathon Und Radrenn
 
 #: /controllers/starts_controller.php:114
 #: /controllers/trainingstatistics_controller.php:1087
-#: /views/layouts/trainer_start.ctp:22
+#: /views/layouts/trainer_start.ctp:23
 msgid "I did a"
 msgstr "Ich machte ein"
 
 #: /controllers/starts_controller.php:115
 #: /controllers/trainingstatistics_controller.php:1088
-#: /views/layouts/trainer_start.ctp:23
+#: /views/layouts/trainer_start.ctp:24
 msgid "in"
 msgstr "in"
 
 #: /controllers/starts_controller.php:116
 #: /controllers/trainingstatistics_controller.php:1089
-#: /views/layouts/trainer_start.ctp:24
+#: /views/layouts/trainer_start.ctp:25
 msgid "hour(s)"
 msgstr "Stunde(n)"
 
 #: /controllers/starts_controller.php:116
 #: /controllers/trainingstatistics_controller.php:1089
-#: /views/layouts/trainer_start.ctp:24
+#: /views/layouts/trainer_start.ctp:25
 msgid "with"
 msgstr "mit"
 
@@ -558,11 +558,11 @@ msgstr "Registrierung - wichtige Aktivierung deines Benutzerkontos"
 
 #: /controllers/users_controller.php:1059
 msgid ""
-"You will receive regularly training schedules from TriCoreTraining. Add races "
-"to set your goal."
+"Add races to set your goal. Your weekly training plan will be generated using "
+"these goals."
 msgstr ""
-"Du wirst regelmässig Trainingspläne von TriCoreTraining.com erhalten. Füge "
-"Rennen hinzu, um Ziele zu setzen."
+"Definiere Rennen, damit du dein Ziel festlegst. Dein wöchentlicher "
+"Trainingsplan wird aus diesen Zielen erstellt."
 
 #: /controllers/users_controller.php:1078
 msgid "Something went wrong - sorry. Maybe you're already activated?"
@@ -2055,7 +2055,7 @@ msgid "Pricing"
 msgstr "Preise"
 
 #: /views/elements/footer.ctp:29
-#: /views/layouts/trainer_start.ctp:149;158;168;179;378;405;431
+#: /views/layouts/trainer_start.ctp:150;159;169;180;379;406;432
 msgid "Get Started"
 msgstr "Loslegen"
 
@@ -2229,7 +2229,7 @@ msgid "Training"
 msgstr "Training"
 
 #: /views/elements/subnavigation_all.ctp:62
-#: /views/layouts/trainer_start.ctp:401;427 /views/layouts/trainingplans.ctp:78
+#: /views/layouts/trainer_start.ctp:402;428 /views/layouts/trainingplans.ctp:78
 msgid "Training Plan"
 msgstr "Trainingplan"
 
@@ -2409,7 +2409,7 @@ msgstr "Alte Periode:"
 #: /views/payments/initiate.ctp:19;23 /views/payments/show_invoice.ctp:55
 #: /views/payments/subscribe_triplans.ctp:19
 #: /views/payments/unsubscribe_triplans.ctp:19
-#: /views/users/register_finish.ctp:30
+#: /views/users/register_finish.ctp:31
 msgid "to"
 msgstr "bis"
 
@@ -2556,8 +2556,13 @@ msgstr ""
 "Deine Testperiode ist GRATIS und endet automatisch, wenn du nicht für eine "
 "Mitgliedschaft unterschreibst."
 
-#: /views/elements/email/html/welcomemail.ctp:11
-#: /views/elements/email/text/welcomemail.ctp:8
+#: /views/elements/email/html/welcomemail.ctp:9
+#: /views/elements/email/text/welcomemail.ctp:7
+msgid "You can test TriCoreTraining for 15 days."
+msgstr "Du kannst TriCoreTraining für 15 Tage ausprobieren."
+
+#: /views/elements/email/html/welcomemail.ctp:12
+#: /views/elements/email/text/welcomemail.ctp:9
 msgid "Click to activate your account"
 msgstr "Klicke hier, um deinen Account zu aktivieren"
 
@@ -2570,25 +2575,25 @@ msgid "Your new password on TriCoreTraining (https://tricoretraining.com) is"
 msgstr ""
 "Dein neues Passwort auf TriCoreTraining (https://tricoretraining.com) ist"
 
-#: /views/layouts/trainer_start.ctp:21
+#: /views/layouts/trainer_start.ctp:22
 msgid "My TriCoreTraining workout!"
 msgstr "Mein TriCoreTraining Workout!"
 
-#: /views/layouts/trainer_start.ctp:25;34;45
+#: /views/layouts/trainer_start.ctp:26;35;46
 msgid "Yours"
 msgstr "Euer"
 
-#: /views/layouts/trainer_start.ctp:26;35
+#: /views/layouts/trainer_start.ctp:27;36
 msgid "You want to achieve your goal and get a plan for it, why not sign up?"
 msgstr ""
 "Du willst dein Ziel erreichen und einen Plan dafür haben, warum nicht gleich "
 "registrieren?"
 
-#: /views/layouts/trainer_start.ctp:32
+#: /views/layouts/trainer_start.ctp:33
 msgid "I LIKE TriCoreTraining!"
 msgstr "Mir gefällt TriCoreTraining!"
 
-#: /views/layouts/trainer_start.ctp:33
+#: /views/layouts/trainer_start.ctp:34
 msgid ""
 "Why don't you become a triathlon athlete too? Why not a marathon runner? "
 "TriCoreTraining is your interactive online coach."
@@ -2596,11 +2601,11 @@ msgstr ""
 "Warum wirst du nicht auch ein Triathlon Athlet? Warum nicht ein "
 "Marathonläufer? TriCoreTraining ist dein interaktiver Online-Coach."
 
-#: /views/layouts/trainer_start.ctp:43
+#: /views/layouts/trainer_start.ctp:44
 msgid "Your company helps you to save 30% of the membership fee!"
 msgstr "Deine Firma hat dir zu 30% günstigeren Mitgliedschaften verholfen!"
 
-#: /views/layouts/trainer_start.ctp:44
+#: /views/layouts/trainer_start.ctp:45
 msgid ""
 "Register initially with your company email, try out TriCoreTraining and then "
 "you will get a discounted PREMIUM membership."
@@ -2608,34 +2613,34 @@ msgstr ""
 "Registriere dich initial mit deiner Firmenemail, probiere TriCoreTraining aus "
 "und dann bekommst du die vergünstigten PREMIUM Mitgliedschaften."
 
-#: /views/layouts/trainer_start.ctp:45
+#: /views/layouts/trainer_start.ctp:46
 msgid "founder of"
 msgstr "Gründer von"
 
-#: /views/layouts/trainer_start.ctp:46
+#: /views/layouts/trainer_start.ctp:47
 msgid ""
 "If you want to improve your athletic skills and get a plan, why not register?"
 msgstr ""
 "Wenn du deine athletischen Eigenschaften verbessern willst und einen "
 "Trainingsplan willst, warum nicht gleich registrieren?"
 
-#: /views/layouts/trainer_start.ctp:105
+#: /views/layouts/trainer_start.ctp:106
 msgid "Toggle navigation"
 msgstr "Öffne Navigation"
 
-#: /views/layouts/trainer_start.ctp:130;144 /views/starts/features.ctp:18
+#: /views/layouts/trainer_start.ctp:131;145 /views/starts/features.ctp:18
 msgid "Reach Your Goal With a Plan!"
 msgstr "Erreiche Dein ZIEL Mit Einem Plan!"
 
-#: /views/layouts/trainer_start.ctp:131
+#: /views/layouts/trainer_start.ctp:132
 msgid "for Triathlon, Running and Biking"
 msgstr "für Triathlon, Laufen und Radfahren"
 
-#: /views/layouts/trainer_start.ctp:146
+#: /views/layouts/trainer_start.ctp:147
 msgid "Like Having A Coach!"
 msgstr "Wie Mit Einem Coach!"
 
-#: /views/layouts/trainer_start.ctp:147
+#: /views/layouts/trainer_start.ctp:148
 msgid ""
 "Get a <b>professional</b>, <b>online</b> training plan to <br/> <b>improve</b> "
 "your <b>running</b>, <b>biking</b> or <b>triathlon skills</b>!"
@@ -2644,47 +2649,47 @@ msgstr ""
 "Trainingspläne, um deine <b>Lauf-</b>, <b>Radfahr-</b> oder <b>Triathlon-"
 "Eigenschaften</b> zu verbessern!"
 
-#: /views/layouts/trainer_start.ctp:149;158;168;179
+#: /views/layouts/trainer_start.ctp:150;159;169;180
 msgid "it´s free!"
 msgstr "gratis!"
 
-#: /views/layouts/trainer_start.ctp:153
+#: /views/layouts/trainer_start.ctp:154
 msgid "Job, Family, No Time?"
 msgstr "Job, Family, keine Zeit?"
 
-#: /views/layouts/trainer_start.ctp:155
+#: /views/layouts/trainer_start.ctp:156
 msgid "Job, Family, No time?"
 msgstr "Job, Family, keine Zeit?"
 
-#: /views/layouts/trainer_start.ctp:156
+#: /views/layouts/trainer_start.ctp:157
 msgid "Be an ambitious athlete despite <b>a full time job and family time</b>."
 msgstr ""
 "Sei ein ambitionierter Athlet trotz <b>Vollzeit-Job und Familienzeit</b>."
 
-#: /views/layouts/trainer_start.ctp:163;165
+#: /views/layouts/trainer_start.ctp:164;166
 msgid "Enjoy your training"
 msgstr "Geniesse dein Training"
 
-#: /views/layouts/trainer_start.ctp:166
+#: /views/layouts/trainer_start.ctp:167
 msgid ""
 "Want to finish a Half Ironman or marathon? <b>Get the most out of training!</b>"
 msgstr ""
 "Willst du einen Halbmarathon oder Marathon machen? <b>Macht das beste aus "
 "deinem Training!</b>"
 
-#: /views/layouts/trainer_start.ctp:203
+#: /views/layouts/trainer_start.ctp:204
 msgid "WHAT IS TRICORETRAINING?"
 msgstr "WAS IST TRICORETRAINING?"
 
-#: /views/layouts/trainer_start.ctp:220
+#: /views/layouts/trainer_start.ctp:221
 msgid "FEATURES"
 msgstr "FUNKTIONEN"
 
-#: /views/layouts/trainer_start.ctp:232;236;236
+#: /views/layouts/trainer_start.ctp:233;237;237
 msgid "Get individual training plans"
 msgstr "Erhalte individuelle Trainingspläne"
 
-#: /views/layouts/trainer_start.ctp:233
+#: /views/layouts/trainer_start.ctp:234
 msgid ""
 "Receive individual training plans based on your workouts and upcoming "
 "competitions."
@@ -2692,11 +2697,11 @@ msgstr ""
 "Erhalte Trainingspläne, die individuell auf dein bisheriges Training und deine "
 "kommenden Wettkämpfe zugeschnitten sind."
 
-#: /views/layouts/trainer_start.ctp:244;244;247
+#: /views/layouts/trainer_start.ctp:245;245;248
 msgid "Analyze your workouts"
 msgstr "Analysiere deine Trainings"
 
-#: /views/layouts/trainer_start.ctp:248
+#: /views/layouts/trainer_start.ctp:249
 msgid ""
 "Use detailed statistics to assess yor fitness and gain even more from your "
 "workouts."
@@ -2704,31 +2709,31 @@ msgstr ""
 "Erfahre durch unsere detaillierten Statistiken mehr über deine "
 "Trainingseinheiten."
 
-#: /views/layouts/trainer_start.ctp:256;260;260
+#: /views/layouts/trainer_start.ctp:257;261;261
 msgid "Track your trainings"
 msgstr "Erfasse deine Trainings"
 
-#: /views/layouts/trainer_start.ctp:257
+#: /views/layouts/trainer_start.ctp:258
 msgid ""
 "Log your trainings, manage your competitions, and also keep track of your "
 "weight."
 msgstr "Verwalte Trainingseinheiten, Wettkampfe und sogar dein Gewicht."
 
-#: /views/layouts/trainer_start.ctp:277
+#: /views/layouts/trainer_start.ctp:278
 msgid "WHAT PEOPLE SAY ABOUT"
 msgstr "WAS SAGEN UNSERE KUNDEN ÜBER"
 
-#: /views/layouts/trainer_start.ctp:284;297;310;323
+#: /views/layouts/trainer_start.ctp:285;298;311;324
 msgid "reference for"
 msgstr "Referenz für"
 
-#: /views/layouts/trainer_start.ctp:288
+#: /views/layouts/trainer_start.ctp:289
 msgid ""
 "TriCoreTraining helped me in my training for my Ironmans and many other races. "
 "Thank you."
 msgstr "TriCoreTraining half mir bei meinem Training für meine Ironman. Danke."
 
-#: /views/layouts/trainer_start.ctp:301
+#: /views/layouts/trainer_start.ctp:302
 msgid ""
 "I lost 8 kilograms while I did my TriCoreTraining training for two Half-"
 "Ironmans a year"
@@ -2736,7 +2741,7 @@ msgstr ""
 "I verlor 8 Kilos während ich meinen TriCoreTraining Plan für zwei Halb-"
 "Ironmans durchgeführt habe"
 
-#: /views/layouts/trainer_start.ctp:314
+#: /views/layouts/trainer_start.ctp:315
 msgid ""
 "I am a rookie at triathlon, but now I go for Ironman Austria with "
 "TriCoreTraining - great!"
@@ -2744,7 +2749,7 @@ msgstr ""
 "Ich bin ein Anfänger im Triathlon, aber jetzt bin ich am Weg zum Ironman "
 "Austria mit TriCoreTraining - großartig!"
 
-#: /views/layouts/trainer_start.ctp:327
+#: /views/layouts/trainer_start.ctp:328
 msgid ""
 "My marathon time is down to 3 hours 27 minutes. Thanks to TriCoreTraining and "
 "its training plans."
@@ -2752,51 +2757,51 @@ msgstr ""
 "Meine Marathonzeit ist runter auf 3 Stunden 27 Minuten. Danke an "
 "TriCoreTraining und seine Trainingpläne."
 
-#: /views/layouts/trainer_start.ctp:345
+#: /views/layouts/trainer_start.ctp:346
 msgid "Choose your plan"
 msgstr "Wähle deinen Plan"
 
-#: /views/layouts/trainer_start.ctp:359
+#: /views/layouts/trainer_start.ctp:360
 msgid "FREE PLAN"
 msgstr "GRATIS PLAN"
 
-#: /views/layouts/trainer_start.ctp:368;395;421
+#: /views/layouts/trainer_start.ctp:369;396;422
 msgid "Workout log"
 msgstr "Trainingslog"
 
-#: /views/layouts/trainer_start.ctp:369;396;422
+#: /views/layouts/trainer_start.ctp:370;397;423
 msgid "Training statistics"
 msgstr "Trainingsstatistiken"
 
-#: /views/layouts/trainer_start.ctp:370;397;423
+#: /views/layouts/trainer_start.ctp:371;398;424
 msgid "Personal settings"
 msgstr "Persönliche Einstellungen"
 
-#: /views/layouts/trainer_start.ctp:371;398;424
+#: /views/layouts/trainer_start.ctp:372;399;425
 msgid "Track goals"
 msgstr "Ziele verfolgen"
 
-#: /views/layouts/trainer_start.ctp:372;399;425
+#: /views/layouts/trainer_start.ctp:373;400;426
 msgid "Mobile + Tablet usage"
 msgstr "Mobile und Tablet Verwendung"
 
-#: /views/layouts/trainer_start.ctp:373;400;426
+#: /views/layouts/trainer_start.ctp:374;401;427
 msgid "Knowledgebase"
 msgstr "Wissensdatenbank"
 
-#: /views/layouts/trainer_start.ctp:374
+#: /views/layouts/trainer_start.ctp:375
 msgid "No Training Plan"
 msgstr "Kein Trainingsplan"
 
-#: /views/layouts/trainer_start.ctp:385
+#: /views/layouts/trainer_start.ctp:386
 msgid "MONTHLY PLAN"
 msgstr "MONATLICHE PLÄNE"
 
-#: /views/layouts/trainer_start.ctp:401;427
+#: /views/layouts/trainer_start.ctp:402;428
 msgid "Interactive"
 msgstr "Interaktive"
 
-#: /views/layouts/trainer_start.ctp:412
+#: /views/layouts/trainer_start.ctp:413
 msgid "YEARLY PLAN"
 msgstr "JÄHRLICHE PLÄNE"
 
@@ -4491,15 +4496,21 @@ msgstr "Aktiviere deinen Zugang!"
 msgid "PLEASE do not forget to activate your account!"
 msgstr "BITTE vergiss nicht deinen Account zu aktivieren!"
 
-#: /views/users/register_finish.ctp:28
+#: /views/users/register_finish.ctp:27
+msgid "If you can't find it, maybe our welcome email landed in your SPAM folder"
+msgstr ""
+"Wenn du es nicht finden kannst, dann ist dein Willkommensmail vielleicht in "
+"deinem SPAM-Ordner gelandet"
+
+#: /views/users/register_finish.ctp:29
 msgid "Thank you and happy training!"
 msgstr "Danke und Happy Training!"
 
-#: /views/users/register_finish.ctp:30
+#: /views/users/register_finish.ctp:31
 msgid "Your FREE membership is valid from"
 msgstr "Deine GRATIS Mitgliedschaft ist gültig von"
 
-#: /views/users/register_finish.ctp:36
+#: /views/users/register_finish.ctp:37
 msgid "Activate"
 msgstr "Aktivieren"
 
@@ -4514,6 +4525,13 @@ msgstr "Betreff"
 #: /views/users/send_message.ctp:53
 msgid "Message"
 msgstr "Nachricht"
+
+#~ msgid ""
+#~ "You will receive regularly training schedules from TriCoreTraining. Add "
+#~ "races to set your goal."
+#~ msgstr ""
+#~ "Du wirst regelmässig Trainingspläne von TriCoreTraining.com erhalten. Füge "
+#~ "Rennen hinzu, um Ziele zu setzen."
 
 #~ msgid "Search"
 #~ msgstr "Suchen"
