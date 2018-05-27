@@ -65,8 +65,8 @@ class UsersController extends AppController {
 			'email_address' => $email,
 			'status'        => 'subscribed',
 			'merge_fields'  => [
-				'FNAME'     => $fname,
-				'LNAME'     => $lname,
+				'FNAME'     => $firstname,
+				'LNAME'     => $lastname,
 				'GENDER'    => $gender,
 				'LANGUAGE'  => $language
 			]
@@ -2050,7 +2050,7 @@ class UsersController extends AppController {
 					$greeting_versions[] = __('only if you measure, you can achieve your goal. So let\'s do it', true) . '. ';
 
 					$one_version = rand(0, count($greeting_versions)-1);
-					$text_for_mail_training .= $greeting_versions[$one_version];
+					$text_for_mail_training .= $greeting_versions[$one_version] . '<br /><br />';
 						
 					// compare 2 timestamps
 					if ( $diff_time > $last_training )

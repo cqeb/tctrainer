@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-05-27 15:35+0200\n"
+"POT-Creation-Date: 2018-05-27 21:47+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -72,7 +72,7 @@ msgid "Verification by PAYPAL failed"
 msgstr ""
 
 #: /controllers/payments_controller.php:429;455
-#: /controllers/users_controller.php:821
+#: /controllers/users_controller.php:845
 #: /views/layouts/trainer_start.ctp:46
 msgid "TriCoreTraining"
 msgstr ""
@@ -94,7 +94,7 @@ msgid "Congratz - your friend subscribed for a PREMIUM membership!"
 msgstr ""
 
 #: /controllers/payments_controller.php:448
-#: /controllers/users_controller.php:823
+#: /controllers/users_controller.php:847
 msgid "great"
 msgstr ""
 
@@ -139,7 +139,7 @@ msgid "You canceled the payment transaction. If this was not intended, please do
 msgstr ""
 
 #: /controllers/payments_controller.php:553
-#: /controllers/users_controller.php:1097
+#: /controllers/users_controller.php:1121
 msgid "contact our support"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgid "ok"
 msgstr ""
 
 #: /controllers/trainingstatistics_controller.php:376
-#: /controllers/users_controller.php:227
+#: /controllers/users_controller.php:251
 msgid "Error"
 msgstr ""
 
@@ -368,7 +368,7 @@ msgid "Training saved."
 msgstr ""
 
 #: /controllers/trainingstatistics_controller.php:596
-#: /controllers/users_controller.php:1430
+#: /controllers/users_controller.php:1454
 msgid "Some errors occured"
 msgstr ""
 
@@ -388,515 +388,515 @@ msgstr ""
 msgid "Garmin workouts imported."
 msgstr ""
 
-#: /controllers/users_controller.php:102;141;194
+#: /controllers/users_controller.php:126;165;218
 msgid "Sorry. Don't fool around with our security."
 msgstr ""
 
-#: /controllers/users_controller.php:170;1170
+#: /controllers/users_controller.php:194;1194
 msgid "User profile saved."
 msgstr ""
 
-#: /controllers/users_controller.php:175;1175;1219;1265;1496;1552;1613
+#: /controllers/users_controller.php:199;1199;1243;1289;1520;1576;1637
 msgid "Some errors occured."
 msgstr ""
 
-#: /controllers/users_controller.php:219
+#: /controllers/users_controller.php:243
 msgid "Message sent to users"
 msgstr ""
 
-#: /controllers/users_controller.php:227
+#: /controllers/users_controller.php:251
 msgid "message not send"
 msgstr ""
 
-#: /controllers/users_controller.php:252
+#: /controllers/users_controller.php:276
 msgid "No users selected."
 msgstr ""
 
-#: /controllers/users_controller.php:348;366
+#: /controllers/users_controller.php:372;390
 msgid "Wait a second please. If you are not redirected, please click here."
 msgstr ""
 
-#: /controllers/users_controller.php:352
+#: /controllers/users_controller.php:376
 msgid "Sorry, your user is not active. Please contact our"
 msgstr ""
 
-#: /controllers/users_controller.php:383
+#: /controllers/users_controller.php:407
 msgid "Login"
 msgstr ""
 
-#: /controllers/users_controller.php:439
+#: /controllers/users_controller.php:463
 msgid "Not activated yet. Please follow the activation link in the welcome mail."
 msgstr ""
 
-#: /controllers/users_controller.php:445
+#: /controllers/users_controller.php:469
 msgid "Wrong or not existing email or password. Please try again."
 msgstr ""
 
-#: /controllers/users_controller.php:455
+#: /controllers/users_controller.php:479
 #: /views/users/login.ctp:14
 msgid "Logout"
 msgstr ""
 
-#: /controllers/users_controller.php:471
+#: /controllers/users_controller.php:495
 msgid "You're logged out. Bye."
 msgstr ""
 
-#: /controllers/users_controller.php:477
+#: /controllers/users_controller.php:501
 #: /views/users/password_forgotten.ctp:2
 #: /views/users/password_reset.ctp:2
 msgid "Password forgotten"
 msgstr ""
 
-#: /controllers/users_controller.php:506
+#: /controllers/users_controller.php:530
 msgid "Email was not found in database!"
 msgstr ""
 
-#: /controllers/users_controller.php:512
+#: /controllers/users_controller.php:536
 msgid "Click link in email to reset password!"
 msgstr ""
 
-#: /controllers/users_controller.php:525
+#: /controllers/users_controller.php:549
 msgid "Password reset"
 msgstr ""
 
-#: /controllers/users_controller.php:559
+#: /controllers/users_controller.php:583
 msgid "We send a new password to your email."
 msgstr ""
 
-#: /controllers/users_controller.php:563
+#: /controllers/users_controller.php:587
 msgid "Something is wrong - sorry."
 msgstr ""
 
-#: /controllers/users_controller.php:563
+#: /controllers/users_controller.php:587
 msgid "Contact our support."
 msgstr ""
 
-#: /controllers/users_controller.php:586
+#: /controllers/users_controller.php:610
 msgid "Signup for your TriCoreTraining training plan"
 msgstr ""
 
-#: /controllers/users_controller.php:607
+#: /controllers/users_controller.php:631
 msgid "We will use your profile from Facebook for your signup form, please add all missing information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your EMAIL to the same as used in your Facebook account."
 msgstr ""
 
-#: /controllers/users_controller.php:788
+#: /controllers/users_controller.php:812
 msgid "Some errors occured. User might already exist."
 msgstr ""
 
-#: /controllers/users_controller.php:821
+#: /controllers/users_controller.php:845
 msgid "your friend subscribed!"
 msgstr ""
 
-#: /controllers/users_controller.php:823
+#: /controllers/users_controller.php:847
 msgid "wants to become an athlete too. Maybe you do workouts together?"
 msgstr ""
 
-#: /controllers/users_controller.php:824
+#: /controllers/users_controller.php:848
 msgid "After she/he purchases a PREMIUM membership you will receive a FREE 3 month PREMIUM membership as a \"Thank you\"."
 msgstr ""
 
-#: /controllers/users_controller.php:854
+#: /controllers/users_controller.php:878
 msgid "Signup finished. 1st step done!"
 msgstr ""
 
-#: /controllers/users_controller.php:863
+#: /controllers/users_controller.php:887
 msgid "Some errors occured. Please check the form."
 msgstr ""
 
-#: /controllers/users_controller.php:867
+#: /controllers/users_controller.php:891
 msgid "Some errors occured. The calculation for spam protection was not correct."
 msgstr ""
 
-#: /controllers/users_controller.php:879
+#: /controllers/users_controller.php:903
 #: /views/users/register_finish.ctp:2
 msgid "Signup finished"
 msgstr ""
 
-#: /controllers/users_controller.php:902
+#: /controllers/users_controller.php:926
 msgid "Sorry. Something is wrong. Don't hack other accounts!"
 msgstr ""
 
-#: /controllers/users_controller.php:1009
+#: /controllers/users_controller.php:1033
 msgid "Sorry, your email is not correct!"
 msgstr ""
 
-#: /controllers/users_controller.php:1026
+#: /controllers/users_controller.php:1050
 msgid "Sorry, your email is already used!"
 msgstr ""
 
-#: /controllers/users_controller.php:1037
+#: /controllers/users_controller.php:1061
 msgid "Email is not used!"
 msgstr ""
 
-#: /controllers/users_controller.php:1044
+#: /controllers/users_controller.php:1068
 msgid "Email changed!"
 msgstr ""
 
-#: /controllers/users_controller.php:1057
+#: /controllers/users_controller.php:1081
 msgid "Signup - Important activation of your account"
 msgstr ""
 
-#: /controllers/users_controller.php:1078
+#: /controllers/users_controller.php:1102
 msgid "Add races to set your goal. Your weekly training plan will be generated using these goals."
 msgstr ""
 
-#: /controllers/users_controller.php:1097
+#: /controllers/users_controller.php:1121
 msgid "Something went wrong - sorry. Maybe you're already activated?"
 msgstr ""
 
-#: /controllers/users_controller.php:1097
+#: /controllers/users_controller.php:1121
 msgid "If not"
 msgstr ""
 
-#: /controllers/users_controller.php:1115
+#: /controllers/users_controller.php:1139
 msgid "Your BMI is"
 msgstr ""
 
-#: /controllers/users_controller.php:1115
+#: /controllers/users_controller.php:1139
 msgid "Your BMI-check says:"
 msgstr ""
 
-#: /controllers/users_controller.php:1120
+#: /controllers/users_controller.php:1144
 msgid "Please check your height and weight again - we got an incorrect BMI result"
 msgstr ""
 
-#: /controllers/users_controller.php:1120
+#: /controllers/users_controller.php:1144
 msgid "thank you"
 msgstr ""
 
-#: /controllers/users_controller.php:1131
+#: /controllers/users_controller.php:1155
 msgid "Change your athlete profile"
 msgstr ""
 
-#: /controllers/users_controller.php:1186
+#: /controllers/users_controller.php:1210
 msgid "Change your address"
 msgstr ""
 
-#: /controllers/users_controller.php:1228
+#: /controllers/users_controller.php:1252
 msgid "Change your training settings"
 msgstr ""
 
-#: /controllers/users_controller.php:1257
+#: /controllers/users_controller.php:1281
 msgid "Training settings saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1275
+#: /controllers/users_controller.php:1299
 msgid "Change your weight goals"
 msgstr ""
 
-#: /controllers/users_controller.php:1321
+#: /controllers/users_controller.php:1345
 msgid "Your target weight date is in the past and must be in the future!"
 msgstr ""
 
-#: /controllers/users_controller.php:1327
+#: /controllers/users_controller.php:1351
 msgid "Our weight goals are targeting weight loss!"
 msgstr ""
 
-#: /controllers/users_controller.php:1346
+#: /controllers/users_controller.php:1370
 msgid "You have to lose"
 msgstr ""
 
-#: /controllers/users_controller.php:1347
+#: /controllers/users_controller.php:1371
 msgid "per month to achieve your goal."
 msgstr ""
 
-#: /controllers/users_controller.php:1352
+#: /controllers/users_controller.php:1376
 msgid "You should lose at maximum "
 msgstr ""
 
-#: /controllers/users_controller.php:1354
+#: /controllers/users_controller.php:1378
 msgid "per month."
 msgstr ""
 
-#: /controllers/users_controller.php:1389
+#: /controllers/users_controller.php:1413
 msgid "Your target weight is not ok. Your goals would bring your BMI to a critical"
 msgstr ""
 
-#: /controllers/users_controller.php:1405
+#: /controllers/users_controller.php:1429
 msgid "Settings are saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1441
+#: /controllers/users_controller.php:1465
 msgid "Change your athlete profile image"
 msgstr ""
 
-#: /controllers/users_controller.php:1492
+#: /controllers/users_controller.php:1516
 msgid "Image(s) saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1514
+#: /controllers/users_controller.php:1538
 msgid "Image deleted."
 msgstr ""
 
-#: /controllers/users_controller.php:1520
+#: /controllers/users_controller.php:1544
 msgid "Change your metric"
 msgstr ""
 
-#: /controllers/users_controller.php:1545
+#: /controllers/users_controller.php:1569
 msgid "Metric information saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1560
+#: /controllers/users_controller.php:1584
 msgid "Change your account password - Security"
 msgstr ""
 
-#: /controllers/users_controller.php:1589
+#: /controllers/users_controller.php:1613
 msgid "No passwords entered or passwords do not match!"
 msgstr ""
 
-#: /controllers/users_controller.php:1601
+#: /controllers/users_controller.php:1625
 msgid "Saved a new password."
 msgstr ""
 
-#: /controllers/users_controller.php:1704
+#: /controllers/users_controller.php:1728
 msgid "We're so glad you start your training! 🏃‍♀️ 🏃"
 msgstr ""
 
-#: /controllers/users_controller.php:1742
+#: /controllers/users_controller.php:1766
 msgid "We reset your password!"
 msgstr ""
 
-#: /controllers/users_controller.php:1745
+#: /controllers/users_controller.php:1769
 msgid "Forgot your password?"
 msgstr ""
 
-#: /controllers/users_controller.php:1981
+#: /controllers/users_controller.php:2005
 msgid "Strange user - please check"
 msgstr ""
 
-#: /controllers/users_controller.php:1983
+#: /controllers/users_controller.php:2007
 msgid "These attributes are not defined in this user profile"
 msgstr ""
 
-#: /controllers/users_controller.php:1991
+#: /controllers/users_controller.php:2015
 msgid "is not correct"
 msgstr ""
 
-#: /controllers/users_controller.php:2022
+#: /controllers/users_controller.php:2046
 msgid "how was your training week? I hope awesome."
 msgstr ""
 
-#: /controllers/users_controller.php:2023
+#: /controllers/users_controller.php:2047
 msgid "you will make it! Go for the next week."
 msgstr ""
 
-#: /controllers/users_controller.php:2024
+#: /controllers/users_controller.php:2048
 msgid "how do you feel? If things are not going smooth. Relax, start, continue."
 msgstr ""
 
-#: /controllers/users_controller.php:2025
+#: /controllers/users_controller.php:2049
 msgid "persistence will make your life better too. So, go for the next training week."
 msgstr ""
 
-#: /controllers/users_controller.php:2026
+#: /controllers/users_controller.php:2050
 msgid "only if you measure, you can achieve your goal. So let's do it"
 msgstr ""
 
-#: /controllers/users_controller.php:2035
+#: /controllers/users_controller.php:2059
 msgid "If you log your workouts, you get better training plans and reach your goal faster."
 msgstr ""
 
-#: /controllers/users_controller.php:2037
+#: /controllers/users_controller.php:2061
 msgid "Go to your"
 msgstr ""
 
-#: /controllers/users_controller.php:2039
+#: /controllers/users_controller.php:2063
 msgid "logbook"
 msgstr ""
 
-#: /controllers/users_controller.php:2040
+#: /controllers/users_controller.php:2064
 msgid "and track your workouts - better now than later ⏱️!"
 msgstr ""
 
-#: /controllers/users_controller.php:2068
+#: /controllers/users_controller.php:2092
 msgid "Your next race is only a few weeks away."
 msgstr ""
 
-#: /controllers/users_controller.php:2071
+#: /controllers/users_controller.php:2095
 msgid "Read this blog post!"
 msgstr ""
 
-#: /controllers/users_controller.php:2082
+#: /controllers/users_controller.php:2106
 msgid "Your next race is only a few days away. TriCoreTraining wishes you all the best!"
 msgstr ""
 
-#: /controllers/users_controller.php:2085
+#: /controllers/users_controller.php:2109
 msgid "Read this!"
 msgstr ""
 
-#: /controllers/users_controller.php:2105
+#: /controllers/users_controller.php:2129
 #: /controllers/components/statisticshandler.php:856
 msgid "Status of your season's training"
 msgstr ""
 
-#: /controllers/users_controller.php:2106;2176
+#: /controllers/users_controller.php:2130;2200
 #: /controllers/components/statisticshandler.php:858;928
 msgid "of"
 msgstr ""
 
-#: /controllers/users_controller.php:2107;2176
+#: /controllers/users_controller.php:2131;2200
 #: /controllers/components/statisticshandler.php:859;928
 #: /views/trainingstatistics/statistics_trimp.ctp:91
 #: /views/trainingstatistics/statistics_trimp_json copy.ctp:34
 msgid "Trimps"
 msgstr ""
 
-#: /controllers/users_controller.php:2174
+#: /controllers/users_controller.php:2198
 #: /controllers/components/statisticshandler.php:926
 msgid "Status of your week's training"
 msgstr ""
 
-#: /controllers/users_controller.php:2200
+#: /controllers/users_controller.php:2224
 msgid "Your firstname is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2200;2207;2214;2221;2228;2235
+#: /controllers/users_controller.php:2224;2231;2238;2245;2252;2259
 msgid "Please add it to your profile."
 msgstr ""
 
-#: /controllers/users_controller.php:2203;2210;2217;2224;2231;2238;2251;2260;2292;2303;2314;2332
+#: /controllers/users_controller.php:2227;2234;2241;2248;2255;2262;2275;2284;2316;2327;2338;2356
 msgid "Change it."
 msgstr ""
 
-#: /controllers/users_controller.php:2207
+#: /controllers/users_controller.php:2231
 msgid "Your lastname is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2214
+#: /controllers/users_controller.php:2238
 msgid "Your address is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2221
+#: /controllers/users_controller.php:2245
 msgid "Your zip is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2228
+#: /controllers/users_controller.php:2252
 msgid "Your city is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2235
+#: /controllers/users_controller.php:2259
 msgid "Your country is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2243
+#: /controllers/users_controller.php:2267
 msgid "Your birthday is missing! This is essentiell for calculations."
 msgstr ""
 
-#: /controllers/users_controller.php:2249
+#: /controllers/users_controller.php:2273
 msgid "Your run lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: /controllers/users_controller.php:2258
+#: /controllers/users_controller.php:2282
 msgid "Your bike lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: /controllers/users_controller.php:2288
+#: /controllers/users_controller.php:2312
 msgid "Your weight loss per month to achieve your goal must be"
 msgstr ""
 
-#: /controllers/users_controller.php:2290
+#: /controllers/users_controller.php:2314
 msgid "that's not healthy ⚖️ - set a new weight goal!"
 msgstr ""
 
-#: /controllers/users_controller.php:2301
+#: /controllers/users_controller.php:2325
 msgid "You have not logged your weekly trainings."
 msgstr ""
 
-#: /controllers/users_controller.php:2312
+#: /controllers/users_controller.php:2336
 msgid "You mentioned that you're a beginner. Since you're with us for more than 9 months, maybe you should update this in your profile!"
 msgstr ""
 
-#: /controllers/users_controller.php:2322
+#: /controllers/users_controller.php:2346
 msgid "If you like TriCoreTraining"
 msgstr ""
 
-#: /controllers/users_controller.php:2323
+#: /controllers/users_controller.php:2347
 msgid "please tell it your friends 🧡!"
 msgstr ""
 
-#: /controllers/users_controller.php:2330
+#: /controllers/users_controller.php:2354
 msgid "You haven't agreed to our terms and conditions or your medical conditions are not good enough for endurance training. 👨🏽‍⚕️ Is that still correct? You won't receive training plans with bad health for your own protection. Sorry!"
 msgstr ""
 
-#: /controllers/users_controller.php:2344
+#: /controllers/users_controller.php:2368
 msgid "Your account is not activated yet ⚠️ and so you haven't unlocked the immense training power."
 msgstr ""
 
-#: /controllers/users_controller.php:2345
+#: /controllers/users_controller.php:2369
 msgid "Please use your activation mail to ACTIVATE your account"
 msgstr ""
 
-#: /controllers/users_controller.php:2346
+#: /controllers/users_controller.php:2370
 #: /views/users/login.ctp:31
 #: /views/users/register.ctp:27
 msgid "or"
 msgstr ""
 
-#: /controllers/users_controller.php:2347
+#: /controllers/users_controller.php:2371
 msgid "contact our support. Thanks."
 msgstr ""
 
-#: /controllers/users_controller.php:2364
+#: /controllers/users_controller.php:2388
 msgid "Your PREMIUM membership has expired 😞. If you still want to receive professional, interactive training plans for the value of one coffee ☕ a month again"
 msgstr ""
 
-#: /controllers/users_controller.php:2365
+#: /controllers/users_controller.php:2389
 msgid "Subscribe PREMIUM"
 msgstr ""
 
-#: /controllers/users_controller.php:2372
+#: /controllers/users_controller.php:2396
 msgid "another training plan arrived! 🏊‍♂️ 🚴‍♂️🏃‍♂️"
 msgstr ""
 
-#: /controllers/users_controller.php:2373
+#: /controllers/users_controller.php:2397
 msgid "a great week ended and a new one begins! 🏃‍♂️ ☀️"
 msgstr ""
 
-#: /controllers/users_controller.php:2374
+#: /controllers/users_controller.php:2398
 msgid "this week will be awesome! Read your plan. 🚴‍♀️"
 msgstr ""
 
-#: /controllers/users_controller.php:2375
+#: /controllers/users_controller.php:2399
 msgid "Reach your goal"
 msgstr ""
 
-#: /controllers/users_controller.php:2375
+#: /controllers/users_controller.php:2399
 msgid "with persistence! 🎯"
 msgstr ""
 
-#: /controllers/users_controller.php:2376
+#: /controllers/users_controller.php:2400
 msgid "we are proud of you! ❤️❤️"
 msgstr ""
 
-#: /controllers/users_controller.php:2398
+#: /controllers/users_controller.php:2422
 msgid "Your training schedule for next week is here!"
 msgstr ""
 
-#: /controllers/users_controller.php:2410
+#: /controllers/users_controller.php:2434
 msgid "Import training week into your personal calendar (.ics)!"
 msgstr ""
 
-#: /controllers/users_controller.php:2428
+#: /controllers/users_controller.php:2452
 msgid "There is something to do:"
 msgstr ""
 
-#: /controllers/users_controller.php:2439
+#: /controllers/users_controller.php:2463
 msgid "Cheers."
 msgstr ""
 
-#: /controllers/users_controller.php:2474
+#: /controllers/users_controller.php:2498
 msgid "athlete"
 msgstr ""
 
-#: /controllers/users_controller.php:2549
+#: /controllers/users_controller.php:2573
 msgid "Stop notifications"
 msgstr ""
 
-#: /controllers/users_controller.php:2567
+#: /controllers/users_controller.php:2591
 msgid "Weekly training plans will not arrive in your mailbox anymore. If you also want to stop receiving newsletters, please click unsubscribe in the next one. If anything is annoying you with TriCoreTraining, just tell us. Thanks."
 msgstr ""
 
-#: /controllers/users_controller.php:2570
+#: /controllers/users_controller.php:2594
 msgid "Not valid."
 msgstr ""
 
@@ -1817,15 +1817,15 @@ msgstr ""
 msgid "TriCoreTraining, triathlon plans, sport plans, training schedules, running, biking, run, bike, swim, ironman, half ironman"
 msgstr ""
 
-#: /views/elements/newsletter.ctp:18
+#: /views/elements/newsletter.ctp:27
 msgid "Want to receive Triathlon Training hacks and tricks?"
 msgstr ""
 
-#: /views/elements/newsletter.ctp:19
+#: /views/elements/newsletter.ctp:28
 msgid "indicates required"
 msgstr ""
 
-#: /views/elements/newsletter.ctp:21
+#: /views/elements/newsletter.ctp:30
 #: /views/users/edit_user.ctp:33
 #: /views/users/edit_userinfo.ctp:90
 #: /views/users/login.ctp:44
@@ -1833,21 +1833,21 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
-#: /views/elements/newsletter.ctp:26
+#: /views/elements/newsletter.ctp:35
 #: /views/users/edit_user.ctp:27
 #: /views/users/edit_userinfo.ctp:35
 #: /views/users/register.ctp:42
 msgid "Firstname"
 msgstr ""
 
-#: /views/elements/newsletter.ctp:30
+#: /views/elements/newsletter.ctp:39
 #: /views/users/edit_user.ctp:30
 #: /views/users/edit_userinfo.ctp:55
 #: /views/users/register.ctp:61
 msgid "Lastname"
 msgstr ""
 
-#: /views/elements/newsletter.ctp:38
+#: /views/elements/newsletter.ctp:47
 #: /views/elements/subnavigation_all.ctp:98
 msgid "Subscribe"
 msgstr ""
