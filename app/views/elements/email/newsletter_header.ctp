@@ -191,6 +191,7 @@
       table.workouts td.trimp, table.workouts td.duration .sum {
             font-weight: bold;
       }
+
       .calendar {
         background-color: #6cb9ce; /* Green */
         border: none;
@@ -203,6 +204,18 @@
       }
       .trainingplan {
         display: none;
+      }
+
+      td.mainbar p a.button {
+          background-color: #6cb9ce; /* Green */
+          color: #FFFFFF;
+          border: none;
+          color: white;
+          padding: 15px 32px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 14px;
       }
    </style>
 

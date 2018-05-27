@@ -23,8 +23,8 @@
                      echo '<div class="alert alert-danger">' . $smtperrors . '</div>';
 ?>
 <img alt="<?php __('Activate your account!'); ?>" src="/trainer/img/alert.png" />
-                   <b><?php __('PLEASE do not forget to activate your account!'); ?><br />
-                   <?php __('If you can\'t find it, maybe our welcome email landed in your SPAM folder'); ?></b> 
+                   <b><?php __('PLEASE do not forget to activate your account!'); ?></b><br /><br />
+                   <i><?php __('If you can\'t find it, maybe our welcome email landed in your SPAM folder'); ?></i> 
                    <br /><br />
                    <?php __('Thank you and happy training!'); ?>
                    <br /><br />

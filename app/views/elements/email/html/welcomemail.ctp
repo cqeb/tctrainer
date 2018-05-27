@@ -8,7 +8,7 @@
  <p><?php __('Your trial period is FREE and ends automatically if you do not subscribe to a membership.'); ?></p>
  <p><?php __('You can test TriCoreTraining for 15 days.'); ?></p>
 
- <p class="more"><a href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/activate/transaction_id:<?php echo $transaction_id?>">
+ <p><a class="button" href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/activate/transaction_id:<?php echo $transaction_id?>">
  <?php __('Click to activate your account'); ?>
 </a></p>
 

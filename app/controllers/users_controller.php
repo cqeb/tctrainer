@@ -779,7 +779,7 @@ class UsersController extends AppController {
 					$this->data['User']['activated'] = 1;
 			}
 			
-			$sql = "SELECT * FROM users WHERE email = '" . $this->data['User']['email'] . '"';
+			$sql = "SELECT * FROM users WHERE email = '" . $this->data['User']['email'] . "'";
 			$User_check_before_saving = $this->User->query( $sql );
 
 			if ( is_array( $User_check_before_saving ) && count( $User_check_before_saving ) > 0 )
@@ -789,65 +789,84 @@ class UsersController extends AppController {
 				$this->set('statusbox', $statusbox);
 				
 			} else {
-
-				if ( $this->User->save( $this->data, array(
-				'validate' => true,
-				'fieldList' => array(
-					'firstname', 'lastname', 'gender', 'email', 
-					'password', 
-					'birthday',
-					'lactatethreshold', 
-					'bikelactatethreshold', 
-					'maximumheartrate',
-					'typeofsport', 
-					'tos',
-					'healthtos',
-					'mailingtos',
-					'country',
-					'passwordcheck', 'emailcheck', 
-					'paid_from', 'paid_to',
-					'rookie', 'weeklyhours',
-					'newsletter', 'coldestmonth', 'dayofheaviesttraining',
-					'publicprofile','publictrainings',
-					'maximumheartrate', 'activated',
-					'unit', 'unitdate', 'yourlanguage', 'inviter' 
-				) ) ) )
-				{
-					if ( isset( $send_to_userid ) )
+				if ( $this->data['User']['spamprotection'] == 10 ) {
+					if ( $this->User->save( $this->data, array(
+					'validate' => true,
+					'fieldList' => array(
+						'firstname', 'lastname', 'gender', 'email', 
+						'password', 
+						'birthday',
+						'lactatethreshold', 
+						'bikelactatethreshold', 
+						'maximumheartrate',
+						'typeofsport', 
+						'tos',
+						'healthtos',
+						'mailingtos',
+						'country',
+						'passwordcheck', 'emailcheck', 
+						'paid_from', 'paid_to',
+						'rookie', 'weeklyhours',
+						'newsletter', 'coldestmonth', 'dayofheaviesttraining',
+						'publicprofile','publictrainings',
+						'maximumheartrate', 'activated',
+						'unit', 'unitdate', 'yourlanguage', 'inviter' 
+					) ) ) )
 					{
-						$inviter_user = $this->User->findById( $send_to_userid );
-						if ( is_array( $inviter_user ) )
+						if ( isset( $send_to_userid ) )
 						{
-							$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed!', true);
-							$template = 'standardmail';
-							$content = __('great', true) . '. ' . $this->data['User']['firstname'] . ' ' . $this->data['User']['lastname'] . ' ' . __('wants to become an athlete too. Maybe you do workouts together?', true);
-							$content .= '<br /><br />' . __('After she/he purchases a PREMIUM membership you will receive a FREE 3 month PREMIUM membership as a "Thank you".', true);
-							
-							$this->_sendMail( $inviter_user, $subject, $template, $content, $this->data['User']['yourlanguage'], '' );
+							$inviter_user = $this->User->findById( $send_to_userid );
+							if ( is_array( $inviter_user ) )
+							{
+								$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed!', true);
+								$template = 'standardmail';
+								$content = __('great', true) . '. ' . $this->data['User']['firstname'] . ' ' . $this->data['User']['lastname'] . ' ' . __('wants to become an athlete too. Maybe you do workouts together?', true);
+								$content .= '<br /><br />' . __('After she/he purchases a PREMIUM membership you will receive a FREE 3 month PREMIUM membership as a "Thank you".', true);
+								
+								$this->_sendMail( $inviter_user, $subject, $template, $content, $this->data['User']['yourlanguage'], '' );
+							}
 						}
-					}
 
-					// send user with activation link
-					$tid = $this->_sendNewUserMail( $this->User->id );
-			
-					// write imperial / metric to session and date-format
-					$this->Session->write('session_unit', $this->data['User']['unit']);
-					$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
-			
-					$statusbox = 'alert-success';
-					$this->Session->write('register_userid', $this->User->id);
-			
-					$this->Session->write('flash',__('Signup finished. 1st step done!',true));
-					$this->redirect(array('action' => 'register_finish'));
-				} else
-				{
-						if ( isset( $password_unenc ) ) 
-							$this->data['User']['password'] = $password_unenc;
+						// send user with activation link
+						$tid = $this->_sendNewUserMail( $this->User->id );
+
+						$subject_admin = 'New signup at TriCoreTraining';
+						$template = 'standardmail';
+						$content = 
+							'First name: ' . $this->data['User']['firstname'] . "<br />\n" .
+							'Last name: ' . $this->data['User']['lastname'] . "<br />\n" .
+							'Email: ' . $this->data['User']['email'] . "<br />\n" .
+							'Gender: ' . $this->data['User']['gender'] . "<br />\n" .
+							'Type of sport: ' . $this->data['User']['typeofsport'] . "<br />\n" .
+							'Rookie: ' . $this->data['User']['rookie'] . "<br />\n";
+						$to_user_admin['email'] = 'support@tricoretraining.com';
+
+						//function _sendMail($user, $subject, $template, $content = '', $language = '', $to_user = '', $mimetype = 'both' )
+						$this->_sendMail(array(), $subject_admin, $template, $content, 'eng', $to_user_admin,'both');
+
+						// write imperial / metric to session and date-format
+						$this->Session->write('session_unit', $this->data['User']['unit']);
+						$this->Session->write('session_unitdate', $this->data['User']['unitdate']);
+				
+						$statusbox = 'alert-success';
+						$this->Session->write('register_userid', $this->User->id);
+				
+						$this->Session->write('flash',__('Signup finished. 1st step done!',true));
+						$this->redirect(array('action' => 'register_finish'));
+					} else
+					{
+							if ( isset( $password_unenc ) ) 
+								$this->data['User']['password'] = $password_unenc;
+					}
+				
+					$statusbox = 'alert alert-danger';
+					$this->Session->write('flash',__('Some errors occured. Please check the form.',true));
+					$this->set('statusbox', $statusbox);
+				} else {
+					$statusbox = 'alert alert-danger';
+					$this->Session->write('flash',__('Some errors occured. The calculation for spam protection was not correct.',true));
+					$this->set('statusbox', $statusbox);	
 				}
-			
-				$statusbox = 'alert alert-danger';
-				$this->Session->write('flash',__('Some errors occured. Please check the form.',true));
-				$this->set('statusbox', $statusbox);
 			}
 	    }
 	
@@ -2386,10 +2405,9 @@ class UsersController extends AppController {
 							$content .= "<br /><br />\n\n";
 							*/
 							$key_add = "&athlete_id=" . $u['id'] . "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
-							$content .= '<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
+							$content .= '<a class="button" href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
 							'/trainingplans/get_events/?o=1&utm_source=tricoretrainingsystem&utm_medium=mailing' . $key_add . '" target="_blank">' .
-							'<button class="calendar" type="button">' . 
-						    __('Import training week into your personal calendar (.ics)!', true) . '</button></a>' . "\n";
+						    __('Import training week into your personal calendar (.ics)!', true) . '</a>' . "\n";
 							$content .= "<br /><br />\n\n";	
 					   } elseif ( $text_for_mail_premium )
                        {
@@ -2473,8 +2491,12 @@ class UsersController extends AppController {
 			$this->set('to_name', $to_user['name']);
 		
 		// put athlete_key encrypted to mail
-		$ath_id_key = $this->Transactionhandler->_encrypt_data($user['id']);
-
+		if (isset( $user['id'] )) 
+			$ath_id_key = $this->Transactionhandler->_encrypt_data($user['id']);
+		else {
+			$user['id'] = 1;
+			$ath_id_key = 1;
+		}
 		$this->set('user', $user);
 	    $this->set('subject', $subject);
 	    $this->set('mcontent', $content);
@@ -2542,7 +2564,7 @@ class UsersController extends AppController {
 
 			print_r($this->data);
 
-			$msg = __('Notifications stopped. We will stop sending you weekly training plans.', true);
+			$msg = __('Weekly training plans will not arrive in your mailbox anymore. If you also want to stop receiving newsletters, please click unsubscribe in the next one. If anything is annoying you with TriCoreTraining, just tell us. Thanks.', true);
 			$statusbox = 'alert alert-success';
 		} else {
 			$msg = __('Not valid.', true);

@@ -219,7 +219,7 @@ echo $form->input('rookie',
 <div class="form-group">
 
 <?php
-/*
+
 $calc_array[] = '3 + 7 =';
 $calc_array[] = '2 + 8 =';
 $calc_array[] = '5 + 5 =';
@@ -229,19 +229,15 @@ $calc = $calc_array[$calc_one];
 
 echo $form->input('spamprotection',
                   array(
-                  'before' => __('Help us SPAM protect our platform', true) . $calc,
-                  'after' => $help_rookie,
-                  'between' => '',
-                  'class' => 'required',
-                  'label' => '',
-                  'legend' => false,
-                  'type' => 'checkbox',
-                  'options' => array(
-                            '1' => __('Yes',true),
-                            '0' => __('No',true)
-                  )
+                  'class' => 'required form-control',
+                  'maxLength' => 10,
+                  'label' => __('Please calculate (SPAM protection)', true) . ' ' . $calc,
+                  'error' => array( 
+                    'notempty' => __('Enter your email', true),
+                    'wrap' => 'div', 
+                    'class' => 'text-danger'          
+                  ),
 ));
-*/
 ?>
 </div>
 
