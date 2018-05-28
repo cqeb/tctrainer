@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: TRICORETRAINING\n"
-"POT-Creation-Date: 2018-05-28 21:43+0200\n"
-"PO-Revision-Date: 2018-05-28 21:44+0200\n"
+"POT-Creation-Date: 2018-05-28 21:55+0200\n"
+"PO-Revision-Date: 2018-05-28 21:55+0200\n"
 "Last-Translator: KMS <klaus@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de_DE\n"
@@ -952,15 +952,15 @@ msgstr "Es gibt etwas zu tun:"
 msgid "Cheers."
 msgstr "Ciao."
 
-#: /controllers/users_controller.php:2521
+#: /controllers/users_controller.php:2522
 msgid "athlete"
 msgstr "Athlet"
 
-#: /controllers/users_controller.php:2596
+#: /controllers/users_controller.php:2600
 msgid "Stop notifications"
 msgstr "Benachrichtigungen beenden"
 
-#: /controllers/users_controller.php:2614
+#: /controllers/users_controller.php:2618
 msgid ""
 "Weekly training plans will not arrive in your mailbox anymore. If you also "
 "want to stop receiving newsletters, please click unsubscribe in the next one. "
@@ -971,7 +971,7 @@ msgstr ""
 "\"Abmelden\" beim nächsten, den du erhältst. Wenn dich irgendwas bei "
 "TriCoreTraining stört, dann sag es uns bitte. Danke."
 
-#: /controllers/users_controller.php:2617
+#: /controllers/users_controller.php:2621
 msgid "Not valid."
 msgstr "Nicht gültig."
 
@@ -2550,10 +2550,9 @@ msgstr "Dein neues Passwort auf TriCoreTraining:"
 msgid "Click here to login"
 msgstr "Klicke hier, um dich einzuloggen"
 
-#: /views/elements/email/html/standardmail.ctp:10
-#: /views/elements/email/text/standardmail.ctp:6
-msgid "Stop sending me notifications!"
-msgstr "Ich will keine Benachrichtungen mehr!"
+#: /views/elements/email/html/standardmail.ctp:12
+msgid "Stop sending me weekly training plans!"
+msgstr "Ich will keine wöchentlichen Trainingspläne erhalten!"
 
 #: /views/elements/email/html/welcomemail.ctp:4
 #: /views/elements/email/text/welcomemail.ctp:2
@@ -2597,6 +2596,10 @@ msgstr "20% MWSt inkludiert!"
 msgid "Your new password on TriCoreTraining (https://tricoretraining.com) is"
 msgstr ""
 "Dein neues Passwort auf TriCoreTraining (https://tricoretraining.com) ist"
+
+#: /views/elements/email/text/standardmail.ctp:6
+msgid "Stop sending me notifications!"
+msgstr "Ich will keine Benachrichtungen mehr!"
 
 #: /views/layouts/trainer_start.ctp:21
 msgid "My TriCoreTraining workout!"

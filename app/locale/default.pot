@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-05-28 21:43+0200\n"
+"POT-Creation-Date: 2018-05-28 21:55+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -881,19 +881,19 @@ msgstr ""
 msgid "Cheers."
 msgstr ""
 
-#: /controllers/users_controller.php:2521
+#: /controllers/users_controller.php:2522
 msgid "athlete"
 msgstr ""
 
-#: /controllers/users_controller.php:2596
+#: /controllers/users_controller.php:2600
 msgid "Stop notifications"
 msgstr ""
 
-#: /controllers/users_controller.php:2614
+#: /controllers/users_controller.php:2618
 msgid "Weekly training plans will not arrive in your mailbox anymore. If you also want to stop receiving newsletters, please click unsubscribe in the next one. If anything is annoying you with TriCoreTraining, just tell us. Thanks."
 msgstr ""
 
-#: /controllers/users_controller.php:2617
+#: /controllers/users_controller.php:2621
 msgid "Not valid."
 msgstr ""
 
@@ -2259,9 +2259,8 @@ msgstr ""
 msgid "Click here to login"
 msgstr ""
 
-#: /views/elements/email/html/standardmail.ctp:10
-#: /views/elements/email/text/standardmail.ctp:6
-msgid "Stop sending me notifications!"
+#: /views/elements/email/html/standardmail.ctp:12
+msgid "Stop sending me weekly training plans!"
 msgstr ""
 
 #: /views/elements/email/html/welcomemail.ctp:4
@@ -2297,6 +2296,10 @@ msgstr ""
 
 #: /views/elements/email/text/passwordreset.ctp:6
 msgid "Your new password on TriCoreTraining (https://tricoretraining.com) is"
+msgstr ""
+
+#: /views/elements/email/text/standardmail.ctp:6
+msgid "Stop sending me notifications!"
 msgstr ""
 
 #: /views/layouts/trainer_start.ctp:21

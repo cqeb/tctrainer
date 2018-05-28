@@ -2484,10 +2484,11 @@ class UsersController extends AppController {
                        }
 
                        $content .= '<br /><p>' . __('Cheers.', true) . ' Klaus-M.</p>';
-
+					   $u['ok_notification_link'] = true;
                        // check again :)
-                       if ( $u['notifications'] != 1 ) 
-                            $this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
+                       if ( $u['notifications'] != 1 ) {
+							$this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
+					   }
                     }
 			 } // if notifications clause 
 	}
@@ -2537,6 +2538,9 @@ class UsersController extends AppController {
 		if ( isset( $to_user['name'] ) ) 
 			$this->set('to_name', $to_user['name']);
 		
+		if ( isset( $user['ok_notification_link'] ) && $user['ok_notification_link']  == true ) {
+			$this->set('show_notification_link', 'ok');
+		}
 		// put athlete_key encrypted to mail
 		if (isset( $user['id'] )) 
 			$ath_id_key = $this->Transactionhandler->_encrypt_data($user['id']);
