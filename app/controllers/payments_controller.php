@@ -178,7 +178,7 @@ class PaymentsController extends AppController {
              $this->set('tid', $tid);
           }
 
-		      $countries = $this->Unitcalc->get_countries();
+		  $countries = $this->Unitcalc->get_countries();
           $this->set('timeinterval', $timeinterval);
           $this->set('paid_from', $this->Unitcalc->check_date($results['User']['paid_from']));
           $this->set('paid_to', $this->Unitcalc->check_date($results['User']['paid_to']));

@@ -434,6 +434,14 @@ else
 			</div> 
 	   </div>
 	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-lg-12 text-center">
+				<p><i>* <?php __('20% VAT included!'); ?></i></p>
+			</div>
+		</div>
+    </div>
+</div>	
 </div>
 </article>
 

@@ -30,9 +30,10 @@ for ( $i = 0; $i < count( $testworkoutsfilter ); $i++ )
 {
     $dt = $testworkoutsfilter[$i]['trainingstatistics'];
     $key = $dt['name'] . '|||' . $dt['distance'];
-    $distance = $unitcalc->check_distance( $dt['distance'] );
+    /*$distance = $unitcalc->check_distance( $dt['distance'] );*/
     $ccount = $testworkoutsfilter[$i][0]['ccount'];
     $searchname[$key] = $dt['sportstype'] . ' - ' . $dt['name'] . ' - ' . $distance['amount'] . ' ' . $length_unit . ' (' . $ccount . ')';
+    $searchname[$key] = $dt['sportstype'] . ' - ' . $dt['name'] . ' (' . $ccount . ')';
 }
 
 if ( count( $testworkoutsfilter ) == 0 ) $searchname['none'] = __('No workouts',true);

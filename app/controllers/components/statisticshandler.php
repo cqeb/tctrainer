@@ -249,9 +249,15 @@ class StatisticshandlerComponent extends Object {
 	function get_formcurve( $Trainingstatistic, $userid, $sportstype, $start, $end )
 	{
             // select all test-workouts grouped by sportstype
+            /*
             $sql = "SELECT name, distance, sportstype, count(*) as ccount FROM trainingstatistics WHERE " .
                  "user_id = $userid AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
                  "GROUP BY name, distance, sportstype HAVING ccount > 1 ORDER BY name, distance";
+            */
+            $sql = "SELECT name, sportstype, count(*) as ccount FROM trainingstatistics WHERE " .
+                 "user_id = $userid AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
+                 "GROUP BY name, sportstype HAVING ccount > 1 ORDER BY name";
+            
             $testworkoutsfilter = $Trainingstatistic->query( $sql );
 			
 			return $testworkoutsfilter;
@@ -274,9 +280,15 @@ class StatisticshandlerComponent extends Object {
 
             // TODO select different avg_pulse_zones
             // select all entries for this special test-workout - filtered by the name and the sportstype
+            /*
             $sql = "SELECT date, distance, duration, avg_pulse FROM trainingstatistics WHERE user_id = $userid " .
                 "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
                     "' AND distance = '" . $searchsplit[1] . "' ORDER BY date";
+            */
+            $sql = "SELECT date, distance, duration, avg_pulse FROM trainingstatistics WHERE user_id = $userid " .
+                "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
+                    "' ORDER BY date";
+            
             $trainings = $Trainingstatistic->query( $sql );
 
             for ( $i = 0; $i < count( $trainings ); $i++ )

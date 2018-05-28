@@ -1103,18 +1103,18 @@ class UsersController extends AppController {
         
 				if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
 				{
-				$this->Session->write('session_useremail', $results['User']['email']);
-				$this->Session->write('session_userid', $results['User']['id']);
-				$this->set('session_userid', $results['User']['id']);
+					$this->Session->write('session_useremail', $results['User']['email']);
+					$this->Session->write('session_userid', $results['User']['id']);
+					$this->set('session_userid', $results['User']['id']);
 
-				// set "last_login" session equal to users last login time
-				$results['User']['last_login'] = date("Y-m-d H:i:s");
-				$this->Session->write('last_login', $results['User']['last_login']);
+					// set "last_login" session equal to users last login time
+					$results['User']['last_login'] = date("Y-m-d H:i:s");
+					$this->Session->write('last_login', $results['User']['last_login']);
 
-				// save last_login date
-				//$this->User->save($results);
-				//$this->Session->write('flash',__('Logged in. Welcome.', true));
-				$this->redirect('/trainingplans/view');
+					// save last_login date
+					//$this->User->save($results);
+					//$this->Session->write('flash',__('Logged in. Welcome.', true));
+					$this->redirect('/trainingplans/view');
 				}
 			} else
 			{
