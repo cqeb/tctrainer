@@ -716,6 +716,11 @@ class UsersController extends AppController {
 			$this->data['User']['publicprofile'] = "0";
 			$this->data['User']['publictrainings'] = "0";
 		  
+			// check spammer
+			// if firstname == lastname, reset lastname
+			if ($this->data['User']['firstname'] == $this->data['User']['lastname']) {
+				$this->data['User']['lastname'] = null;
+			}
 			// check if anybody invited this user
 			if ( isset( $inviter ) || isset( $this->data['User']['inviter'] ) ) 
 			{
@@ -813,7 +818,21 @@ class UsersController extends AppController {
 				$this->set('statusbox', $statusbox);
 				
 			} else {
-				if ( $this->data['User']['spamprotection'] == 10 ) {
+				// calculcate spam protection
+				// we get 2 numbers in hidden field separated with |
+				// separate them, check for INT
+
+				$spamprotection = false;
+				$calc_numbers = preg_split('/\|/', base64_decode($this->data['User']['calc_spam']));
+
+				if (is_numeric($calc_numbers[0]) && is_numeric($calc_numbers[1])) {
+					$calc_sum = $calc_numbers[0] + $calc_numbers[1];
+				
+					if ($calc_sum == $this->data['User']['spamprotection']) {
+						$spamprotection = true;
+					}
+				}
+				if ( $spamprotection == true ) {
 					if ( $this->User->save( $this->data, array(
 					'validate' => true,
 					'fieldList' => array(

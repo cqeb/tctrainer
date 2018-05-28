@@ -10,7 +10,7 @@
 
         <fieldset>
         <legend>
-          <?php __('Receive your first training month for free. Deal?'); ?>
+          <?php __('Receive your trainings plans for 2 weeks for free. Deal?'); ?>
         </legend>
         
 
@@ -220,12 +220,9 @@ echo $form->input('rookie',
 
 <?php
 
-$calc_array[] = '3 + 7 =';
-$calc_array[] = '2 + 8 =';
-$calc_array[] = '5 + 5 =';
-$calc_array[] = '6 + 4 =';
-$calc_one = rand(0,count($calc_array)-1);
-$calc = $calc_array[$calc_one];
+$first_calc = rand(0, 10);
+$second_calc = rand(0, 10);
+$calc = $first_calc . ' + ' . $second_calc;
 
 echo $form->input('spamprotection',
                   array(
@@ -238,6 +235,10 @@ echo $form->input('spamprotection',
                     'class' => 'text-danger'          
                   ),
 ));
+$calc = base64_encode($first_calc.'|'.$second_calc);
+
+echo $form->input( 'calc_spam', array('type' => 'hidden', 'value' => $calc));
+
 ?>
 </div>
 

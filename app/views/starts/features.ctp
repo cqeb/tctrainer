@@ -70,7 +70,7 @@ $price_month_array_split = $price_array[$currency]['month'];
 <tr class="odd">
     <td><?php __('MONTHLY'); ?></td>
     <td style="">    
-    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1">
+    <!--a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:1"-->
     <b>1 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b> 
     <?php __('for ONLY'); ?> <?php echo $price_array_split[0]; echo ' ' . $currency; ?>   
     </a>
@@ -80,7 +80,7 @@ $price_month_array_split = $price_array[$currency]['month'];
 <tr class="odd">
     <td><?php __('YEARLY'); ?></td>
     <td style="">    
-    <!a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12">
+    <!--a rel="facebox[.bolder]" href="<?php echo Configure::read('App.serverUrl'); ?>/payments/initiate/t:12"-->
     <b>12 <?php __('month(s)'); echo 'TriCoreTraining '; __('plans'); ?></b> 
     <?php __('for ONLY'); ?> <?php echo $price_array_split[3]; echo ' ' . $currency; ?>  
     </a>
@@ -125,14 +125,25 @@ $price_month_array_split = $price_array[$currency]['month'];
 </tbody>
 </table>
 
+<a href="/trainer/users/register"><button class="btn btn-primary btn-success" onClick="javascript:top.location.href='/trainer/users/register' value="<?php __('Sign up, it\'s free'); ?>"><?php __('Sign up, it\'s free'); ?></button></a>
+&laquo; &laquo; &laquo; &laquo; -- <?php __('Click here and start shaping your body!'); ?> :)
+<br /><br /><br />
+<div class="alert" style="color:white">
 <?php
 
-__('Signup FREE and get training plans for triathlon, biking and running for 3 months FREE. Then you can upgrade to PREMIUM for a price less than 2 coffees a month!');
+__('Sign up and receive weekly training plans for triathlon, biking and running.');
+echo ' <br /><br />';
+echo '<b>';
+__('Try them for FREE for 15 days.');
+echo '</b>';
+echo ' <br /><br />';
+__('Get your coach in a box by upgrading to a PREMIUM membership for a price less than the price of 2 coffees a month!');
+echo ' <br /><br />';
+__('20% VAT included!');
 
 ?>
+</div>
 <br /><br />
-
-<a href="/trainer/users/register"><button class="btn btn-default" onClick="javascript:top.location.href='/trainer/users/register' value="<?php __('Signup FREE'); ?>"><?php __('Signup FREE'); ?></button></a>
 
                 </fieldset>
 
