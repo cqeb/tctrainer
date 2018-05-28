@@ -460,11 +460,15 @@ class UsersController extends AppController {
 					} else
 					{
 						// login data is wrong, redirect to login page
+						$tid = $this->_sendNewUserMail( $results['User']['id'] );
 						$this->Session->write('flash',__('Not activated yet. Please follow the activation link in the welcome mail.',true));
 						$this->redirect('/users/login');
 					}
 				} else
 				{
+
+					//// ACTIVATION EMAIL
+
 					// login data is wrong, redirect to login page
 					$this->Session->write('flash',__('Wrong or not existing email or password. Please try again.', true));
 	        		// You must not redirect otherwise you won't see errors

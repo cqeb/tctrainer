@@ -1,6 +1,5 @@
 <?php
 
-// NEW VERSION
 // get currencies
 $currency = 'EUR';
 $userobject = null;

@@ -65,9 +65,9 @@ class ProviderComponent extends Object {
 			$this->athlete = new Athlete($this->DB, $user);
 		}
 
-		// cut preview time to a maximum of 3 weeks
-		if (array_key_exists('o', $_GET) && intval($_GET['o']) > 3 && !$this->getAthlete()->isAdvancedFeatures()) {
-			$_GET['o'] == 3;
+		// cut preview time to a maximum of 4 weeks
+		if (isset($_GET['o']) && intval($_GET['o']) > 4 && $this->getAthlete()->isAdvancedFeatures() != 1) {
+			$_GET['o'] = 4;
 		}
 		
 		if ($this->getAthlete()->isValid() == 1) {
@@ -191,7 +191,10 @@ class ProviderComponent extends Object {
 		
 		// also attach time and workout settings
 		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->getAthlete()->getId()); 
-		
+		if ( $_GET['o'] == 4 ) 
+			$html .= '<br /><div class="alert alert-danger">' . __('You can see a maximum of 4 weeks in advance.', true) . ' ' . 
+				'<a href="/trainer/trainingplans/view">' . __('Back to current week', true) . '</div>';
+				
 		// add generate time
 		$benchmarkTime = microtime(true) - $timerStart;
 		//$html .= "\n<!-- generated in {$benchmarkTime}s -->\n";
