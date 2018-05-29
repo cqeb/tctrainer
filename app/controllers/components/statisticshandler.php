@@ -256,11 +256,11 @@ class StatisticshandlerComponent extends Object {
                 "GROUP BY name, distance, sportstype HAVING ccount > 1 ORDER BY name, distance";
         */
         $sql = "SELECT name, sportstype, count(*) as ccount FROM trainingstatistics WHERE " .
-                "user_id = $userid AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
+                "user_id = " . $userid . " AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
                 "GROUP BY name, sportstype HAVING ccount > 1 ORDER BY name";
         
         $testworkoutsfilter = $Trainingstatistic->query( $sql );
-        
+
         return $testworkoutsfilter;
 	}		
 	

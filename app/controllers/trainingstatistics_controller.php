@@ -1258,13 +1258,10 @@ class TrainingstatisticsController extends AppController {
 		{
 			// Pull out just the list of activites
 			$activities = $json->{'results'}->{'activities'};
-			//print_r($activities); die();
 			$activities_view = array();
 
 			$results = $this->Session->read('userobject');
-			//print_r($results); echo "<hr>";
 			// Process each activity.
-
 			// TODO first we have to display the workouts and show checkbox, then import it after user interaction
 			foreach ( $activities as $a ) {
 

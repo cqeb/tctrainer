@@ -8,20 +8,20 @@ $searchfilter = base64_encode( $searchfilter );
         
         <div class="panel-body">
 
-                   <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_formcurve','class' => 'form-horizontal')); ?>
-                   <fieldset>
-                   <legend><?php __('How fast am I?'); ?></legend>
+            <?php echo $form->create('Trainingstatistic', array('action' => 'statistics_formcurve','class' => 'form-horizontal')); ?>
+            <fieldset>
+            <legend><?php __('How fast am I?'); ?></legend>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div>
-                   <br />
-                   <?php } ?>
-                   
-                   <?php __('You want to know whether you became faster? This statistic shows you based on your test-workouts your current speed.'); ?> 
-                   <a target="statistics" href="/blog/<?php if ( $language == 'eng' || $language == '' ) { ?>en<?php } else { ?>de<?php } ?>/how-can-i-test-if-i-became-faster/"><?php __('Explanation on these statistics in our blog?'); ?></a>
-                   <br /><br />
+            <?php if ($session->read('flash')) { ?>
+            <div class="<?php echo $statusbox; ?>">
+            <?php echo $session->read('flash'); $session->delete('flash'); ?>
+            </div>
+            <br />
+            <?php } ?>
+            
+            <?php __('You want to know whether you became faster? This statistic shows you based on your test-workouts your current speed.'); ?> 
+            <a target="statistics" href="/blog/<?php if ( $language == 'eng' || $language == '' ) { ?>en<?php } else { ?>de<?php } ?>/how-can-i-test-if-i-became-faster/"><?php __('Explanation on these statistics in our blog?'); ?></a>
+            <br /><br />
 
 <div class="form-group">
 <?php
@@ -29,11 +29,15 @@ $searchfilter = base64_encode( $searchfilter );
 for ( $i = 0; $i < count( $testworkoutsfilter ); $i++ )
 {
     $dt = $testworkoutsfilter[$i]['trainingstatistics'];
+    // we will not define test workouts with distance
+    /*
     if ( isset( $dt['distance'] ) && isset( $dt['name'] ) ) 
         $key = $dt['name'] . '|||' . $dt['distance'];
+    */
+    $key = $dt['name'];
     /*$distance = $unitcalc->check_distance( $dt['distance'] );*/
     $ccount = $testworkoutsfilter[$i][0]['ccount'];
-    $searchname[$key] = $dt['sportstype'] . ' - ' . $dt['name'] . ' - ' . $distance['amount'] . ' ' . $length_unit . ' (' . $ccount . ')';
+    // $searchname[$key] = $dt['sportstype'] . ' - ' . $dt['name'] . ' - ' . $distance['amount'] . ' ' . $length_unit . ' (' . $ccount . ')';
     $searchname[$key] = $dt['sportstype'] . ' - ' . $dt['name'] . ' (' . $ccount . ')';
 }
 
@@ -201,7 +205,7 @@ google.setOnLoadCallback(get_formcurve);
 
 <div id="chart1"></div>
 
-<!--
+
 <?php if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) { ?>
 <br /><br /><br /><br /><br /><br />
 Debugging: (only localhost)<br />
@@ -209,8 +213,6 @@ Debugging: (only localhost)<br />
 <?php } ?>
 
 <br /><br /><br /><br /><br /><br /><br /><br />
--->
-
 <?php
 
 } else

@@ -159,26 +159,6 @@ Configure::write('company_emails', '"@growtf.com","@schremser.com"');
  * 'superuser' -> superuser_index() and /superuser/controller/index
  */
 //Configure::write('Routing.admin', 'admin');
-/**
- * Enable cache checking.
- *
- * If set to true, for view caching you must still use the controller
- * var $cacheAction inside your controllers to define caching settings.
- * You can either set it controller-wide by setting var $cacheAction = true,
- * or in each action using $this->cacheAction = true.
- *
- */
-//Configure::write('Cache.check', true);
-/**
- * Turn off all caching application-wide.
- *
- */
-if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
- 	Configure::write('Cache.disable', true);
-} else {
- 	Configure::write('Cache.disable', true);
-}
-
 
 /**
  * The preferred session handling method. Valid values:
@@ -314,17 +294,38 @@ Configure::write('Acl.database', 'default');
  * File storage engine.
  *
  */
- /*
+ /**
+ * Enable cache checking.
+ *
+ * If set to true, for view caching you must still use the controller
+ * var $cacheAction inside your controllers to define caching settings.
+ * You can either set it controller-wide by setting var $cacheAction = true,
+ * or in each action using $this->cacheAction = true.
+ *
+ */
+
+Configure::write('Cache.check', true);
+
+/**
+ * Turn off all caching application-wide.
+ *
+ */
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
+	Configure::write('Cache.disable', true);
+} else {
+	Configure::write('Cache.disable', true);
+}
+
  Cache::config('default', array(
  		'engine' => 'File', //[required]
  		'duration'=> 10, //[optional]
  		'probability'=> 100, //[optional]
-  		'path' => '/tmp/cakephp', //[optional] use system tmp directory - remember to use absolute path
+  		'path' => '/Applications/XAMPP/htdocs/tricoretraining.com/tmp', //[optional] use system tmp directory - remember to use absolute path
   		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
   		'lock' => false, //[optional]  use file locking
   		'serialize' => true //[optional]
 ));
-*/
+
  /*
  *
  * APC (http://pecl.php.net/package/APC)
