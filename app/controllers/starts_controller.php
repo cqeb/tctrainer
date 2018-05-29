@@ -26,7 +26,6 @@ class StartsController extends AppController
   		$this->layout = 'trainer_start';
 
       	$this->set("title_for_layout", __('Get Interactive Training Plans For Triathlon, Marathon And Bike Races', true));
-		  // __('the interactive, online training plan service for run, bike and triathlon athletes '
 	
 		/*
 		if ( !$this->Session->read('newest_trainings') )
@@ -39,7 +38,7 @@ class StartsController extends AppController
 		}
 		*/
 		
-/*
+		/*
 		if ( isset( $this->params['named']['code'] ) ) 
 		{
 			$this->code = $this->params['named']['code'];
@@ -52,7 +51,7 @@ class StartsController extends AppController
 			
 		echo 'starts_controller language var ' . $language . "<br>";
 		echo 'starts_controller code params ' . $this->code . "<br>";
-*/
+		*/
 		// why should $language has a value?
 		/*
 		if ( isset( $language ) && $language != '' && ( strlen( $language ) == 2 ) )

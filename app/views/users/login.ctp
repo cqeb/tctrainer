@@ -29,7 +29,9 @@ if ( $session_userid && $session_useremail ) { ?>
 
         <?php if ( !isset( $session_userid ) ) { ?>
         <?php if ($session->read('previous_url')) { 
-          $addon = 'previous_url:' . base64_encode($session->read('previous_url')) . '/'; 
+          //  does not work yet with Facebook
+          //$addon = 'previous_url:' . base64_encode($session->read('previous_url')) . '/'; 
+          $addon = '';
         } else {
           $addon = '';
         } ?>

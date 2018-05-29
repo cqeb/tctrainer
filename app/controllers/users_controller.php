@@ -291,12 +291,15 @@ class UsersController extends AppController {
 				$my_url = 'https://' . TESTHOST . '/facebook/login.php';
 			else {
 				$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
+				/*
+				// does not work yet
 				if ( isset( $this->params['named']['previous_url'] ) ) {
 					$my_url .= 'previous_url:' . $this->params['named']['previous_url'] . '/';
 				}
+				*/
 			}
-
-			if ( isset( $this->params['named']['previous_url'] ) ) {
+			// does not work yet
+			if ( isset( $this->params['named']['previous_url'] ) && 1 == 2 ) {
 				$redirect_url = base64_decode($this->params['named']['previous_url']);
 				$redirect_url = preg_replace('/\/trainer/', '', $redirect_url);
 			} else {
@@ -359,7 +362,7 @@ class UsersController extends AppController {
 						$cookie['firstname'] = $results['User']['firstname'];
 						
 						// COOKIE TIME only 1 day
-						$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 day');
+						$this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
 						$this->Cookie->write('tct_auth', $cookie, false, '+1 day');
 
 						// set "user" session equal to email address
@@ -382,7 +385,7 @@ class UsersController extends AppController {
 						$this->Session->write( 'recommendations', serialize($user_recommendations) );
 						*/
 						
-						echo '<script language="JavaScript">top.location.href="' . $redirect_url . '";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
+						echo '<script language="JavaScript">top.location.href="' . $redirect_url . '";</script><a href="' . $redirect_url . '">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
 						// doesn't work with facebook login - session get's lost
 						//$this->redirect('/trainingplans/view/');
 						$this->Session->write('previous_url', '');
@@ -444,10 +447,10 @@ class UsersController extends AppController {
 						if ( $this->data['User']['remember_me'] )
 						{
 							$this->Cookie->write('tct_auth', $cookie, false, '+30 days');	
-							$this->Cookie->write('tct_auth_blog', $cookie, false, '+30 days');
+							$this->Cookie->write('tct_auth_blog', "true", false, '+30 days');
 						} else
 						{
-							$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 day');
+							$this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
 							$this->Cookie->write('tct_auth', $cookie, false, '+1 day');
 						}
 	
@@ -512,13 +515,24 @@ class UsersController extends AppController {
 		$this->Session->delete('session_useremail');
 		$this->Session->delete('session_userid');
 
-		$this->Cookie->write('tct_auth_blog', $cookie, false, '+0 hour');
-		$this->Cookie->write('tct_auth', $cookie, false, '+0 hour');
+		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
+		$this->Cookie->write('tct_auth', $cookie, false, time() - 3600);
 
 		$this->Cookie->delete('tct_auth');
 		$this->Cookie->delete('tct_auth_blog');
 		$this->Cookie->delete('TCTCookie');
+		$this->Cookie->delete('CakeCookie');
 
+		$cookie_name = 'TCTCookie';
+		unset($_COOKIE[$cookie_name]);
+		// empty value and expiration one hour before
+		$res = setcookie($cookie_name, '', time() - 3600);
+
+		$cookie_name = 'CakeCookie';
+		unset($_COOKIE[$cookie_name]);
+		// empty value and expiration one hour before
+		$res = setcookie($cookie_name, '', time() - 3600);
+		
 		$this->set('session_userid', null);
 		$this->set('session_useremail', null);	
 		$this->set('session_unit', '');

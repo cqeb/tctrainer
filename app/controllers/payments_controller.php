@@ -26,6 +26,7 @@ class PaymentsController extends AppController {
    function subscribe_triplans()
    {
             $this->checkSession();
+            
             $results['User'] = $this->Session->read('userobject');
             $session_userid = $results['User']['id'];
             $currency = $this->Unitcalc->currency_for_country( $results['User']['country'] );

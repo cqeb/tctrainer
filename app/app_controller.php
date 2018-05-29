@@ -214,9 +214,23 @@ class AppController extends Controller {
                                 $this->Session->delete('session_userid');
                              	$this->Cookie->delete('tct_auth');
                                 $this->Cookie->delete('tct_auth_blog');
+
+                                $this->Cookie->delete('TCTCookie');
+                                $this->Cookie->delete('CakeCookie');
+                        
+                                $cookie_name = 'TCTCookie';
+                                unset($_COOKIE[$cookie_name]);
+                                // empty value and expiration one hour before
+                                $res = setcookie($cookie_name, '', time() - 3600);
+                        
+                                $cookie_name = 'CakeCookie';
+                                unset($_COOKIE[$cookie_name]);
+                                // empty value and expiration one hour before
+                                $res = setcookie($cookie_name, '', time() - 3600);
+
                                 $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
                                 $this->redirect('/users/login');
-                                exit();
+                                die();
                         } else
                         {  
                                 $this->Session->write('session_userid', $results['User']['id']);
@@ -224,7 +238,7 @@ class AppController extends Controller {
                                 $this->Session->write('userobject', $results['User']);
                                 $this->Session->write('Config.language', $results['User']['yourlanguage']);
                                 $this->set('userobject', $results['User']);
-                                $this->Cookie->write('tct_auth_blog', "true", $encrypt = false, $expires = null);
+                                $this->Cookie->write('tct_auth_blog', "true", false, null);
                         }
 	               }
                  $this->set('session_userid', $session_userid);
