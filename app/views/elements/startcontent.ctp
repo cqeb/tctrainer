@@ -1,4 +1,4 @@
-<?php if ( $locale == 'deu' ) { ?>
+<?php if ( $language == 'deu' ) { ?>
 
 <!--<h2>Wie es funktioniert?</h2>-->
 
@@ -23,7 +23,7 @@ Du bist richtig bei uns, wenn du
 Genug Vorteile für Dich? <a href="/trainer/users/register">Melde dich einmal an!</a>
 </p>
 
-<?php } else if ( $locale == 'eng' ) { ?>
+<?php } else if ( $language == 'eng' ) { ?>
 
 <!--<h2>How it works?</h2>-->
 

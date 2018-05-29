@@ -18,8 +18,9 @@
                    </div><br />
                    <?php } ?>
 
-                   <?php echo $html->link(__('It\'s time to start your training with a goal.', true), array('controller' => 'users', 'action' => 'login')); ?>
+                   <?php echo $html->link(__('It\'s time to start your training with a goal.', true), array('controller' => 'users', 'action' => 'login'), array('class' => 'btn btn-success')); ?>
                    
+                   <br /><br />
                    </fieldset>
 
         </div>

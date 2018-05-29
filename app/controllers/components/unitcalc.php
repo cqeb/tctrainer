@@ -76,42 +76,43 @@ class UnitcalcComponent extends Object {
    **/
    function check_distance( $amount, $mode = 'show', $ret = 'both', $excel = '' )
    {
-            if ( is_numeric( $amount ) )
-            {
-	              $session_userobject = $this->Session->read('userobject');
-				        $locale = $session_userobject['yourlanguage'];
+        if ( is_numeric( $amount ) )
+        {
+	            $session_userobject = $this->Session->read('userobject');
+				$language = $session_userobject['yourlanguage'];
 				  
-	              if (  $session_userobject['unit'] == 'imperial' )
-	              {
-	                 if ( $mode == 'show' ) 
+                if (  $session_userobject['unit'] == 'imperial' )
+                {
+                    if ( $mode == 'show' ) 
                         $convert = 'km_mi';
-	                 else
-	                      $convert = 'mi_km';
+                    else
+                        $convert = 'mi_km';
 
-	                 $amount_array['amount'] = $this->convert_metric( $amount, $convert, 1 );
-	                 $amount_array['unit'] = 'mi';
-	              } else
-	              {
-	                 if ( $mode == 'show' ) 
+                    $amount_array['amount'] = $this->convert_metric( $amount, $convert, 1 );
+                    $amount_array['unit'] = 'mi';
+
+                } else
+                {
+                    if ( $mode == 'show' ) 
                         $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-	                 else 
+                    else 
                         $amount_array['amount'] = $amount;
 
-	                 $amount_array['unit'] = 'km';
-	              }
-	
-      				  if ( $locale == 'ger' || $excel == 'excel' )
-      				  { 
-      				  		$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
-      				  }
-				  	
-	              if ( $ret == 'single' )
-	                 return $amount_array['amount'];
-	              else
-	                 return $amount_array;
+                    $amount_array['unit'] = 'km';
+                }
 
-            } else
-              	  return false;
+                    if ( $language == 'deu' || $excel == 'excel' )
+                    { 
+                        $amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+                    }
+                
+                if ( $ret == 'single' )
+                    return $amount_array['amount'];
+                else
+                    return $amount_array;
+
+        } else
+                return false;
    }
 
    /**
@@ -122,7 +123,7 @@ class UnitcalcComponent extends Object {
             if ( is_numeric( $amount ) )
             {
               $session_userobject = $this->Session->read('userobject');
-              $locale = $session_userobject['yourlanguage'];
+              $language = $session_userobject['yourlanguage'];
               
               if (  $session_userobject['unit'] == 'imperial' )
               {
@@ -143,8 +144,8 @@ class UnitcalcComponent extends Object {
                   $amount_array['unit'] = 'kg';
               }
 			  
-			        if ( $locale == 'ger' || $excel == 'excel' ) 
-			  		      $amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+			  if ( $language == 'deu' || $excel == 'excel' ) 
+			  	$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
 			
               if ( $ret == 'single' )
                   return $amount_array['amount'];
@@ -161,7 +162,6 @@ class UnitcalcComponent extends Object {
    {
             if ( is_numeric( $amount ) )
             {
-		
               $session_userobject = $this->Session->read('userobject');
 
               if (  $session_userobject['unit'] == 'imperial' )
@@ -169,8 +169,9 @@ class UnitcalcComponent extends Object {
                     if ( $mode == 'show' ) 
                     {
                         $convert = 'cm_ft';
-                    } else
+                    } else {
                         $convert = 'ft_cm';
+                    }   
 
 				    $amount = $this->convert_metric( $amount, $convert );
                     //$amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
@@ -191,8 +192,9 @@ class UnitcalcComponent extends Object {
               else
                  return $amount_array;
 
-            } else
+            } else {
                 return false;
+            }
    }
 
    /**
@@ -200,41 +202,41 @@ class UnitcalcComponent extends Object {
    **/
    function calculate_bmi( $weight, $height, $age )
    {
-            /*
-            BMI (Body mass index) Tabelle
-            Age     underw. normal  overw.  really fat
-            18-24  	<19  	19-24  	24-29  	29-39  	>39
-            25-34 	<20 	20-25 	25-30 	30-40 	>40
-            35-44 	<21 	21-26 	26-31 	31-41 	>41
-            45-54 	<22 	22-27 	27-32 	32-42 	>42
-            55-64 	<23 	23-28 	28-33 	33-43 	>43
-            65+ 	<24 	24-29 	29-34 	34-44 	>44
+        /*
+        BMI (Body mass index) Tabelle
+        Age     underw. normal  overw.  really fat
+        18-24  	<19  	19-24  	24-29  	29-39  	>39
+        25-34 	<20 	20-25 	25-30 	30-40 	>40
+        35-44 	<21 	21-26 	26-31 	31-41 	>41
+        45-54 	<22 	22-27 	27-32 	32-42 	>42
+        55-64 	<23 	23-28 	28-33 	33-43 	>43
+        65+ 	<24 	24-29 	29-34 	34-44 	>44
 
-            BMI = kg / m^2
-            */
+        BMI = kg / m^2
+        */
 
-            $height = $height / 100; // must be in meters
-            $bmi = $weight / ($height * $height);
+        $height = $height / 100; // must be in meters
+        $bmi = $weight / ($height * $height);
 
-            $bmi_current = $bmi;
+        $bmi_current = $bmi;
 
-            // reduce bmi by age interval
-            if ( $age < 25 ) $bmi = $bmi + 0;
-            if ( $age < 35 && $bmi > 24 ) $bmi = $bmi - 1;
-            if ( $age < 45 && $bmi > 34 ) $bmi = $bmi - 2;
-            if ( $age < 55 && $bmi > 44 ) $bmi = $bmi - 3;
-            if ( $age < 65 && $bmi > 54 ) $bmi = $bmi - 4;
-            if ( $age > 64 ) $bmi = $bmi - 5;
+        // reduce bmi by age interval
+        if ( $age < 25 ) $bmi = $bmi + 0;
+        if ( $age < 35 && $bmi > 24 ) $bmi = $bmi - 1;
+        if ( $age < 45 && $bmi > 34 ) $bmi = $bmi - 2;
+        if ( $age < 55 && $bmi > 44 ) $bmi = $bmi - 3;
+        if ( $age < 65 && $bmi > 54 ) $bmi = $bmi - 4;
+        if ( $age > 64 ) $bmi = $bmi - 5;
 
-            if ( $bmi <= 16 ) $bmi_status = __('critical (too low)',true);
-            if ( $bmi >= 16 && $bmi < 20 ) $bmi_status = __('not critical (but too low)',true);
-            if ( $bmi >= 20 && $bmi < 25 ) $bmi_status = __('normal',true);
-            if ( $bmi >= 25 && $bmi < 30 ) $bmi_status = __('not critical (but too high)',true);
-            if ( $bmi >= 30 ) $bmi_status = __('critical (too high)',true);
+        if ( $bmi <= 16 ) $bmi_status = __('critical (too low)',true);
+        if ( $bmi >= 16 && $bmi < 20 ) $bmi_status = __('not critical (but too low)',true);
+        if ( $bmi >= 20 && $bmi < 25 ) $bmi_status = __('normal',true);
+        if ( $bmi >= 25 && $bmi < 30 ) $bmi_status = __('not critical (but too high)',true);
+        if ( $bmi >= 30 ) $bmi_status = __('critical (too high)',true);
 
-            $return['bmi_status'] = $bmi_status;
-            $return['bmi'] = round($bmi_current, 1);
-            return $return;
+        $return['bmi_status'] = $bmi_status;
+        $return['bmi'] = round($bmi_current, 1);
+        return $return;
    }
 
    /**
@@ -242,44 +244,44 @@ class UnitcalcComponent extends Object {
    **/
    function format_number($number, $decimals = 0, $thousand_separator = '&nbsp;', $decimal_point = '.')
    {
-            $tmp1 = round((float) $number, $decimals);
+        $tmp1 = round((float) $number, $decimals);
 
-            while (($tmp2 = preg_replace('/(\d+)(\d\d\d)/', '\1 \2', $tmp1)) != $tmp1)
-                  $tmp1 = $tmp2;
+        while (($tmp2 = preg_replace('/(\d+)(\d\d\d)/', '\1 \2', $tmp1)) != $tmp1)
+                $tmp1 = $tmp2;
 
-            return strtr($tmp1, array(' ' => $thousand_separator, '.' => $decimal_point));
+        return strtr($tmp1, array(' ' => $thousand_separator, '.' => $decimal_point));
    }
    /**
    * is the send amount a correct decimal number?
    **/
    function check_decimal( $amount )
    {
-            $amount = trim($amount);
+        $amount = trim($amount);
 
-            // if decimal numbers on the right side are more than 100 - problemos :)
+        // if decimal numbers on the right side are more than 100 - problemos :)
 
-            //if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,2})?$~", $amount, $parts) )
-            if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,100})?$~", $amount, $parts) )
-            {
-                 if ( !empty($parts['2']) )
-                 {
-                      $pre = preg_replace("~[".$parts['2']."]~", "", $parts['1']);
-                 } else
-                 {
-                      $pre = $parts['1'];
-                 }
-                 if ( !empty($parts['4']) )
-                 {
-                      $post = ".".preg_replace("~[".$parts['4']."]~", "", $parts['3']);
-                 } else
-                 {
-                      $post = false;
-                 }
-                 $format_amount = $pre.$post;
+        //if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,2})?$~", $amount, $parts) )
+        if ( preg_match("~^([0-9]+|(?:(?:[0-9]{1,3}([.,' ]))+[0-9]{3})+)(([.,])[0-9]{1,100})?$~", $amount, $parts) )
+        {
+                if ( !empty($parts['2']) )
+                {
+                    $pre = preg_replace("~[".$parts['2']."]~", "", $parts['1']);
+                } else
+                {
+                    $pre = $parts['1'];
+                }
+                if ( !empty($parts['4']) )
+                {
+                    $post = ".".preg_replace("~[".$parts['4']."]~", "", $parts['3']);
+                } else
+                {
+                    $post = false;
+                }
+                $format_amount = $pre.$post;
 
-                 return $format_amount;
-            }
-            return false;
+                return $format_amount;
+        }
+        return false;
    }
 
    /**
@@ -288,25 +290,25 @@ class UnitcalcComponent extends Object {
    **/
    function time_from_to( $date_from, $date_to )
    {
-            if ( $date_from == "" )
-            {
-                $date_from_ts = time();
-            } else
-            {
-                list($year,$month,$day) = explode("-",$date_from);
-                $date_from_ts = mktime( 0, 0, 0, $month, $day, $year );
-            }
+        if ( $date_from == "" )
+        {
+            $date_from_ts = time();
+        } else
+        {
+            list($year,$month,$day) = explode("-",$date_from);
+            $date_from_ts = mktime( 0, 0, 0, $month, $day, $year );
+        }
 
-            $date_to_string = $date_to['year'] . '-' . $date_to['month'] . '-' . $date_to['day'];
-            list($year,$month,$day) = explode("-", $date_to_string);
-            $date_to_ts = mktime( 0, 0, 0, $month, $day, $year );
+        $date_to_string = $date_to['year'] . '-' . $date_to['month'] . '-' . $date_to['day'];
+        list($year,$month,$day) = explode("-", $date_to_string);
+        $date_to_ts = mktime( 0, 0, 0, $month, $day, $year );
 
-            $diff['days'] = ($date_to_ts - $date_from_ts) / ( 3600 * 24 );
-            // TODO 30 days =/= 1 month
-            // that might not be correct :)
-            $diff['months'] = $diff['days'] / 30;
+        $diff['days'] = ($date_to_ts - $date_from_ts) / ( 3600 * 24 );
+        // TODO 30 days =/= 1 month
+        // that might not be correct :)
+        $diff['months'] = $diff['days'] / 30;
 
-            return $diff;
+        return $diff;
    }
 
    /**
@@ -314,20 +316,21 @@ class UnitcalcComponent extends Object {
    **/
    function time_to_seconds( $time )
    {
-            // HH:MM:SS to seconds
-            $time = trim( $time );
-            $time_array = explode( ":", $time );
-            if ( count( $time_array ) == 3 )
-            {
-               $seconds = $time_array[2];
-               $minutes_in_seconds = $time_array[1] * 60;
-               $hours_in_seconds = $time_array[0] * 3600;
+        // HH:MM:SS to seconds
+        $time = trim( $time );
+        $time_array = explode( ":", $time );
+        if ( count( $time_array ) == 3 )
+        {
+            $seconds = $time_array[2];
+            $minutes_in_seconds = $time_array[1] * 60;
+            $hours_in_seconds = $time_array[0] * 3600;
 
-               $result = $seconds + $minutes_in_seconds + $hours_in_seconds;
-               return $result;
+            $result = $seconds + $minutes_in_seconds + $hours_in_seconds;
+            return $result;
 
-            } else
-               return false;
+        } else {
+            return false;
+        }
    }
 
    /**
@@ -335,15 +338,15 @@ class UnitcalcComponent extends Object {
    **/
    function seconds_to_time( $seconds )
    {
-            $hours = intval( $seconds / 3600 );
-            $rest_hours = $seconds - ( $hours * 3600 );
-            $minutes = intval( $rest_hours / 60 );
-            $rest_minutes = $seconds - ( $hours * 3600 ) - ( $minutes * 60 );
-            $seconds2 = intval( $rest_minutes );
+        $hours = intval( $seconds / 3600 );
+        $rest_hours = $seconds - ( $hours * 3600 );
+        $minutes = intval( $rest_hours / 60 );
+        $rest_minutes = $seconds - ( $hours * 3600 ) - ( $minutes * 60 );
+        $seconds2 = intval( $rest_minutes );
 
-            $result = sprintf("%02d", $hours) . ":" . sprintf("%02d", $minutes) . ":" . sprintf("%02d", $seconds2);
+        $result = sprintf("%02d", $hours) . ":" . sprintf("%02d", $minutes) . ":" . sprintf("%02d", $seconds2);
 
-            return $result;
+        return $result;
    }
 
    /**
@@ -351,17 +354,17 @@ class UnitcalcComponent extends Object {
    **/
    function how_old( $birthday )
    {
-			if ( is_array( $birthday ) ) $birthday = $birthday['year'] . '-' . $birthday['month'] . '-' . $birthday['day'];
-            if ( !isset( $birthday ) ) return 0;
-            //calculate years of age (input string: YYYY-MM-DD)
-            list($year,$month,$day) = explode("-",$birthday);
-            $year_diff  = date("Y") - $year;
-            $month_diff = date("m") - $month;
-            $day_diff   = date("d") - $day;
-            if ($day_diff < 0 || $month_diff < 0)
-               $year_diff--;
+        if ( is_array( $birthday ) ) $birthday = $birthday['year'] . '-' . $birthday['month'] . '-' . $birthday['day'];
+        if ( !isset( $birthday ) ) return 0;
+        //calculate years of age (input string: YYYY-MM-DD)
+        list($year,$month,$day) = explode("-",$birthday);
+        $year_diff  = date("Y") - $year;
+        $month_diff = date("m") - $month;
+        $day_diff   = date("d") - $day;
+        if ($day_diff < 0 || $month_diff < 0)
+            $year_diff--;
 
-            return $year_diff;
+        return $year_diff;
    }
 
    /**
@@ -371,19 +374,18 @@ class UnitcalcComponent extends Object {
    function check_date( $date, $mode = 'show', $session_unitdate_overwrite = '' )
    {
             $session_userobject = $this->Session->read('userobject');
-			
-			      $session_unidate = '';
+			$session_unidate = '';
 
             if ( isset( $session_unitdate_overwrite ) && $session_unitdate_overwrite != '' ) 
-            	   $session_unitdate = $session_unitdate_overwrite;
-				    else
-				         $session_unitdate = $session_userobject['unitdate'];
+            	$session_unitdate = $session_unitdate_overwrite;
+			else
+				$session_unitdate = $session_userobject['unitdate'];
 			
             if ( $session_unitdate == '' ) 
-            	  $session_unitdate = $this->Session->read('session_unitdate');
+            	$session_unitdate = $this->Session->read('session_unitdate');
 				
             if ( $session_unitdate == '' )
-				        $session_unitdate = 'yyyymmdd'; 
+				$session_unitdate = 'yyyymmdd'; 
 			
             $return = "";
 
@@ -412,26 +414,26 @@ class UnitcalcComponent extends Object {
 
                switch ( $session_unitdate )
                {
-                      case "ddmmyyyy":
-                      $date_split = preg_split( '/\./', $date );
-                      $return = $date_split[2] . '-' . $date_split[1] . '-' . $date_split[0];
-                      break;
+                    case "ddmmyyyy":
+                    $date_split = preg_split( '/\./', $date );
+                    $return = $date_split[2] . '-' . $date_split[1] . '-' . $date_split[0];
+                    break;
 
-                      case "mmddyyyy":
-                      $date_split = preg_split( '/\./', $date );
-                      $return = $date_split[2] . '-' . $date_split[0] . '-' . $date_split[1];
-                      break;
+                    case "mmddyyyy":
+                    $date_split = preg_split( '/\./', $date );
+                    $return = $date_split[2] . '-' . $date_split[0] . '-' . $date_split[1];
+                    break;
 
-                      case "yyyymmdd":
-                      $date_split = preg_split( '/-/', $date );
-                      if ( count( $date_split ) == 3 )
-                        {
-                                // in case you get a wrong format
-                                $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
-                        } else
-                        {
-                                $return = 0;
-                        }        
+                    case "yyyymmdd":
+                    $date_split = preg_split( '/-/', $date );
+                    if ( count( $date_split ) == 3 )
+                    {
+                            // in case you get a wrong format
+                            $return = $date_split[0] . '-' . $date_split[1] . '-' . $date_split[2];
+                    } else
+                    {
+                            $return = 0;
+                    }        
                       break;
                }
 
@@ -485,35 +487,35 @@ class UnitcalcComponent extends Object {
    */
    function diff_dates( $date_from, $date_to )
    {
-            //$date_to_string = $date_to['year'] . '-' . $date_to['month'] . '-' . $date_to['day'];
-            list($year_from, $month_from, $day_from) = explode("-", $date_from);
-            $ts_from = mktime( 0, 0, 0, $month_from, $day_from, $year_from );
+        //$date_to_string = $date_to['year'] . '-' . $date_to['month'] . '-' . $date_to['day'];
+        list($year_from, $month_from, $day_from) = explode("-", $date_from);
+        $ts_from = mktime( 0, 0, 0, $month_from, $day_from, $year_from );
 
-            list($year_to, $month_to, $day_to) = explode("-", $date_to);
-            $ts_to = mktime( 0, 0, 0, $month_to, $day_to, $year_to );
+        list($year_to, $month_to, $day_to) = explode("-", $date_to);
+        $ts_to = mktime( 0, 0, 0, $month_to, $day_to, $year_to );
 
-            $diff_in_days = ($ts_to - $ts_from)/(3600*24);
+        $diff_in_days = ($ts_to - $ts_from)/(3600*24);
 
-            return $diff_in_days;
+        return $diff_in_days;
    }
 
 /*
    function date_plus_days( $date, $days, $calctype = 'plus' )
    {
-            list($year, $month, $day) = explode("-", $date);
-            $ts = mktime( 0, 0, 0, $month, $day, $year );
+        list($year, $month, $day) = explode("-", $date);
+        $ts = mktime( 0, 0, 0, $month, $day, $year );
 
-            if ( $calctype == 'plus' )
-            {
-                 $ts_return = $ts + ( $days * 24 * 3600 );
-            } elseif ( $calctype == 'minus' )
-            {
-                 $ts_return = $ts - ( $days * 24 * 3600 );
-            }
+        if ( $calctype == 'plus' )
+        {
+                $ts_return = $ts + ( $days * 24 * 3600 );
+        } elseif ( $calctype == 'minus' )
+        {
+                $ts_return = $ts - ( $days * 24 * 3600 );
+        }
 
-            $date_return = date( "Y-m-d", $ts_return );
+        $date_return = date( "Y-m-d", $ts_return );
 
-            return $date_return;
+        return $date_return;
    }
 */
 
@@ -522,21 +524,21 @@ class UnitcalcComponent extends Object {
    */
    function date_plus_days( $date, $days )
    {
-            // TODO (B) - replace with strtotime
-            if ( strpos( $date, ' ' ) )
-            {
-                 $date_split = explode( ' ', $date );
-                 $date = $date_split[0];
-            }
+        // TODO (B) - replace with strtotime
+        if ( strpos( $date, ' ' ) )
+        {
+                $date_split = explode( ' ', $date );
+                $date = $date_split[0];
+        }
 
-            list($year, $month, $day) = explode( '-', $date );
-            $ts = mktime( 0, 0, 0, $month, $day, $year );
+        list($year, $month, $day) = explode( '-', $date );
+        $ts = mktime( 0, 0, 0, $month, $day, $year );
 
-            $ts_return = $ts + ( $days * 86400 );
+        $ts_return = $ts + ( $days * 86400 );
 
-            $date_return = date( "Y-m-d", $ts_return );
+        $date_return = date( "Y-m-d", $ts_return );
 
-            return $date_return;
+        return $date_return;
    }
 
    /*
@@ -544,21 +546,21 @@ class UnitcalcComponent extends Object {
    */
    function month_in_year( $month, $year )
    {
-            if ( $month > 12 )
-            {
-                 $month -= 12;
-                 $year++;
-            }
+        if ( $month > 12 )
+        {
+                $month -= 12;
+                $year++;
+        }
 
-            if ( $month < 1 )
-            {
-                 $month += 12;
-                 $year--;
-            }
-            $return['month'] = $month;
-            $return['year'] = $year;
+        if ( $month < 1 )
+        {
+                $month += 12;
+                $year--;
+        }
+        $return['month'] = $month;
+        $return['year'] = $year;
 
-            return $return;
+        return $return;
    }
 
    /**
@@ -566,34 +568,35 @@ class UnitcalcComponent extends Object {
    **/
    function get_season( $userdata, $sentdata )
    {
-               // if no event is saved, than use current date
-               if ( !is_array( $sentdata ) )
-               {
-                  $sentdata['Competition']['competitiondate']['month'] = date('m', time());
-                  $sentdata['Competition']['competitiondate']['year'] = date('Y', time());
-               }
+        // if no event is saved, than use current date
+        
+        if ( !is_array( $sentdata ) )
+        {
+            $sentdata['Competition']['competitiondate']['month'] = date('m', time());
+            $sentdata['Competition']['competitiondate']['year'] = date('Y', time());
+        }
 
-			         if ( $userdata['User']['coldestmonth'] < 10 )
-			   		      $userdata['User']['coldestmonth'] = '0' . $userdata['User']['coldestmonth'];
-					
-               $seasonstartmonth = $seasonendmonth = $userdata['User']['coldestmonth'];
-               $compmonth = $sentdata['Competition']['competitiondate']['month'];
-               $compyear = $sentdata['Competition']['competitiondate']['year'];
+        if ( $userdata['User']['coldestmonth'] < 10 )
+            $userdata['User']['coldestmonth'] = '0' . $userdata['User']['coldestmonth'];
+            
+        $seasonstartmonth = $seasonendmonth = $userdata['User']['coldestmonth'];
+        $compmonth = $sentdata['Competition']['competitiondate']['month'];
+        $compyear = $sentdata['Competition']['competitiondate']['year'];
 
-               if ( $seasonstartmonth < $compmonth )
-               {
-                   $seasonstartyear = $compyear;
-                   $seasonendyear = $compyear+1;
-               } else
-               {
-                   $seasonstartyear = $compyear-1;
-                   $seasonendyear = $compyear;
-               }
+        if ( $seasonstartmonth < $compmonth )
+        {
+            $seasonstartyear = $compyear;
+            $seasonendyear = $compyear + 1;
+        } else
+        {
+            $seasonstartyear = $compyear - 1;
+            $seasonendyear = $compyear;
+        }
 
-               $season['start'] = $seasonstartyear . '-' . $seasonstartmonth . '-01';
-               $season['end']   = $seasonendyear . '-' . $seasonendmonth . '-01';
+        $season['start'] = $seasonstartyear . '-' . $seasonstartmonth . '-01';
+        $season['end']   = $seasonendyear . '-' . $seasonendmonth . '-01';
 
-               return $season;
+        return $season;
    }
 
    /**
@@ -602,14 +605,14 @@ class UnitcalcComponent extends Object {
    **/
    function currency_for_country( $country )
    {
-            $eur_countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
+        $eur_countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
 
-            if ( in_array( $country, $eur_countries ) )
-                $currency = 'EUR';
-            else
-                $currency = 'USD';
+        if ( in_array( $country, $eur_countries ) )
+            $currency = 'EUR';
+        else
+            $currency = 'USD';
 
-            return $currency;
+        return $currency;
    }
 
 
@@ -656,15 +659,15 @@ class UnitcalcComponent extends Object {
     */
    function coldestmonth_for_country( $country )
    {
-            /*
-            $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
+        /*
+        $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
 
-            if ( in_array( $country, $eur_countries ) )
-                xx
-            else
-                xx
-            */
-            return '1';
+        if ( in_array( $country, $eur_countries ) )
+            xx
+        else
+            xx
+        */
+        return '1';
    } 
 
    /**
@@ -673,18 +676,18 @@ class UnitcalcComponent extends Object {
     */
    function unit_for_country( $country, $type )
    {
-            /*
-            $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
+        /*
+        $countries = array( 'D', 'AT', 'F', 'GB', 'BE', 'BG', 'HR', 'CZ', 'GR', 'HU', 'LI', 'LU', 'PL', 'PT', 'RO', 'SK', 'SI', 'ES' );
 
-            if ( in_array( $country, $eur_countries ) )
-                xx
-            else
-                xx
-            */
-            if ( $type == 'unitdate' )
-                  return 'yyyymmdd';
-            elseif ( $type == 'unit' )
-                  return 'metric';
+        if ( in_array( $country, $eur_countries ) )
+            xx
+        else
+            xx
+        */
+        if ( $type == 'unitdate' )
+                return 'yyyymmdd';
+        elseif ( $type == 'unit' )
+                return 'metric';
    } 
 
    function get_sports()

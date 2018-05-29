@@ -14,7 +14,7 @@
            <?php } ?>
            
            <?php __('This statistics shows you your weight-history and the way to your weight targets.'); ?>
-           <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
+           <a target="statistics" href="/blog/<?php if ( $language == 'eng' || $language == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
            <br /><br />
 
 <div class="form-group">

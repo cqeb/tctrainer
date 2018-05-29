@@ -13,7 +13,6 @@ class FilldatabaseComponent extends Object
 
   function prefill($model)
   {
-
       $number['users'] = 100;
       $number['competitions'] = 10;
       $number['tracks'] = 500;
@@ -29,13 +28,21 @@ class FilldatabaseComponent extends Object
 
       for ( $i = 0; $i < $number['users']; $i++ )
       {
-            if ( rand(1,2) == 1 ) $gender = 'm';
-            else $gender = 'f';
-            $randHR = rand( 180, 230 );
+            if ( rand(1,2) == 1 ) 
+              $gender = 'm';
+            else 
+              $gender = 'f';
+            
+              $randHR = rand( 180, 230 );
             $weight = rand( 65, 150 );
             $height = rand( 150, 210 );
-            if ( rand(1,2) == 1 ) { $rookie = 1; $traininglevel = 1; $weeklyhours = rand(4,8); } else
-              { $rookie = 0; $traininglevel = 4; $weeklyhours = rand(8,24); }
+
+            if ( rand(1,2) == 1 ) { 
+                $rookie = 1; $traininglevel = 1; $weeklyhours = rand(4,8); 
+            } else 
+            { 
+                $rookie = 0; $traininglevel = 4; $weeklyhours = rand(8,24); 
+            }
             if ( rand(1,2) == 1 ) {
               $unit = 'metric';
               $unitdate = 'ddmmyyyy';
@@ -59,7 +66,7 @@ class FilldatabaseComponent extends Object
               null, 'Klaus-M. " . $i . "', 'Prerovsky $i', '$gender', 'phone', 'address', 'zip', 'city', 'AT', 'tri" . $i . "@schremser.com', '1', 
               '1975-11-26', md5('finger'), 1, $randHR, " . $randHR*0.85 . ", " . $randHR*0.80 . ", 'youknowus', 1, 1, 
               'philo', '', '$sport', 1, $weight, '', 1, '', $height, '1', '$unit', '$unitdate', 0, 0, $rookie, $traininglevel, $weeklyhours, 'FRI', 
-              1, 0, 'ger', 'image', 'bikeimage', 'freemember', '". date('Y-m-d', time()) . "', '" . date('Y-m-d', time()+86400*90) . "', '', 
+              1, 0, 'deu', 'image', 'bikeimage', 'freemember', '". date('Y-m-d', time()) . "', '" . date('Y-m-d', time()+86400*90) . "', '', 
               0, 'cancelreason', 0, 0, '" .  date('Y-m-d', time()) . "', '" .  date('Y-m-d', time()) . "')";
                  
             $model->query( $sql );
@@ -75,14 +82,17 @@ class FilldatabaseComponent extends Object
                $arr_idx = rand(0,3);
                $sport = $sports_arr[$arr_idx];            
                $important = rand(1,3);
-               if ( $important != 1 ) $important = 0;
+
+               if ( $important != 1 ) 
+                  $important = 0;
                // do not change $sport ?!
                $sql = "INSERT INTO competitions VALUES (null, $userid, '" . 
                     date( 'Y-m-d', time()+86400*rand(-365,365)) . "','Competition $k','$sport',
                     null,null,null,null,null,null,null,null,$important, 'Vienna, Austria', 
                     '" . date('Y-m-d', time()) . "', '" . date('Y-m-d', time()) . "' )";
                $model->query( $sql );
-            }                
+            }  
+
             for ( $l = 0; $l < $number['tracks']; $l++ )
             {
                $sportst_arr = array( 'RUN', 'BIKE', 'SWIM', 'RUN' );
@@ -100,6 +110,7 @@ class FilldatabaseComponent extends Object
                '" . date('Y-m-d', time()) . "', '" . date('Y-m-d', time()) . "' )";
                $model->query( $sql );
             }
+            
             for ( $m = 0; $m < $number['plannedtrainings']; $m++ )
             {
                $sportst_arr = array( 'RUN', 'BIKE', 'SWIM', 'RUN' );

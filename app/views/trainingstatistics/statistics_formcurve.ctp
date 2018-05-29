@@ -20,7 +20,7 @@ $searchfilter = base64_encode( $searchfilter );
                    <?php } ?>
                    
                    <?php __('You want to know whether you became faster? This statistic shows you based on your test-workouts your current speed.'); ?> 
-                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/how-can-i-test-if-i-became-faster/"><?php __('Explanation on these statistics in our blog?'); ?></a>
+                   <a target="statistics" href="/blog/<?php if ( $language == 'eng' || $language == '' ) { ?>en<?php } else { ?>de<?php } ?>/how-can-i-test-if-i-became-faster/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
 <div class="form-group">

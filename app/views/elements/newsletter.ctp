@@ -16,7 +16,7 @@
 <div id="mc_embed_signup">
 <?php 
 
-if ( $locale == 'de' ) {
+if ( $language == 'deu' ) {
     $mailchimp_list_id = '9e6182eb6e';
 } else {
     $mailchimp_list_id = 'b99533c86e';

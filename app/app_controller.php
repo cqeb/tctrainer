@@ -21,62 +21,67 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
         {
-            
-            $this->Session->write('language', 'de');
-
-            // user sets language       
+            // user sets language 
+            // code: eng or deu
             if ( isset( $this->params['named']['code'] ) ) 
             {
                 $this->code = $this->params['named']['code'];
-                
-                $this->Session->write('Config.language', $this->code);
-                // you have to set this to change the language of the app
-                Configure::write('Config.language',$this->code);
-                $this->set('locale', $this->code); 
-                $locale = $this->code;
+                $language = $this->code;
     
             } else {
 
-                $language = $this->Session->read('Config.language');
-                // echo "app_controller - session language: " . $language . "<br>";
-                if (!isset($language)) {
-                    $language = 'eng';
+                // user is logged in
+                if ( $this->Session->read('session_userid') ) 
+                {
+                    $this->loadModel('User');
+                    
+                    // $this->checkSession();
+                    $this->User->id = $this->Session->read('session_userid');
+                    $this->UserLanguage = $this->User->read();
+                    
+                    if ( isset($this->UserLanguage['User']['yourlanguage'] ) ) {
+                        $language = $this->UserLanguage['User']['yourlanguage'];
+                    }
+                } else {
+
+                    if ( $this->Session->read('Config.language') ) {
+                        $language = $this->Session->read('Config.language');
+                    } else {
+                        /*
+                        if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
+                            $freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+                        else
+                            $freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
+                    
+                        $yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+            
+                        if ( isset( $yourlocation->country_code ) && ( $yourlocation->country_code == 'DE' || $yourlocation->country_code == 'AT' ) )
+                        {
+                            $language = 'deu';
+                        } else {
+                            $language = 'eng';
+                        }
+                        */
+                        if ( preg_match('/^de/', $_SERVER['HTTP_ACCEPT_LANGUAGE'] ) ) {
+                            $language = 'deu';
+                        } else {
+                            $language = 'eng';
+                        }
+                    }
                 }
-
-                Configure::write('Config.language', $language);
-                $this->set('locale', $language); 
-                $locale = $language;
-
             }
             
-            /*
-            // if user is from AUT or GER - change language to German
-            if ( !isset( $language ) )
-			{
-      				if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
-      					$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
-      				else
-      					$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
-					
-      				$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
-			
-      				if ( isset( $yourlocation->country_code ) && ( $yourlocation->country_code == 'DE' || $yourlocation->country_code == 'AT' ) )
-      				{
-                          Configure::write('Config.language','deu');
-      				} else {
-                          Configure::write('Config.language','eng');
-                    }
-      		} else
-            {                
-                Configure::write('Config.language',$language);
-            }
-            */
-
-            if ($locale && file_exists(VIEWS . $locale . DS . $this->viewPath))
+            // you have to set this to change the language of the app
+            Configure::write('Config.language', $language);
+            // write language into session // this is a MUST to set the language
+            $this->Session->write('Config.language', $language);
+            // deu is for locale folder
+            $this->set('language', $language); 
+            
+            if ($language && file_exists(VIEWS . $language . DS . $this->viewPath))
             {
-                //echo VIEWS . $locale . DS . $this->viewPath;
                 // e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp
-                $this->viewPath = $locale . DS . $this->viewPath;
+                $this->viewPath = $language . DS . $this->viewPath;
             }
 
             if ($this->RequestHandler->isAjax())
@@ -130,7 +135,8 @@ class AppController extends Controller {
 			{
                     $this->loadModel('User');
                             
-                    $sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
+                    $sql = "SELECT myrecommendation, firstname, lastname, email FROM " .
+                        "users WHERE myrecommendation != '' AND yourlanguage = '" . $language . "'";
                     $user_recommendations = $this->User->query( $sql );
                             
                     $this->Session->write( 'recommendations', serialize($user_recommendations) );
@@ -143,106 +149,76 @@ class AppController extends Controller {
             { 
 					$this->set('recommendations', $user_recommendations);
 			}
-
-            $this->set('locale', $locale);
-            $this->Session->write('Config.language', $locale);
+        
+            // set for views
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
      }
 
      function checkSession()
      {
-                // fill $username with session data
-                $session_useremail = $this->Session->read('session_useremail');
-                $session_userid    = $this->Session->read('session_userid');
+            // fill $username with session data
+            $session_useremail = $this->Session->read('session_useremail');
+            $session_userid    = $this->Session->read('session_userid');
 
-                // googlebot must enter our service to index our pages
-                /*
-                if ( strstr( $_SERVER['HTTP_USER_AGENT'], 'Mediapartners' ) )
-                {
-                        $session_useremail = 'googlebot@schremser.com';
-                        $session_userid = 47;
-                }
-                */
-			
-                // if not in session - read cookie
-                $cookie = $this->Cookie->read('tct_auth');
+            // tct_auth_blog
+            $this->Cookie->path = '/';
+            $this->Cookie->domain = '.tricoretraining.com';
+            
+            if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
+            {    
+                $this->Cookie->secure = false; 
+            } else {
+                $this->Cookie->secure = true; 
+            }
 
-                // no information about user in session
-                if ( !$session_useremail || !$session_userid )
+            if ( preg_match( '/@/', $session_useremail ) && is_numeric( $session_userid ) )
+            {
+                // check to make sure it's correct
+                $this->loadModel('User');
+                $results = $this->User->findByEmail( $session_useremail );
+
+                // if not correct, send to login page
+                if ( ( !$results || $results['User']['id'] != $session_userid ) )
                 {
-                      if ( ( !$cookie['email'] || !$cookie['userid'] ) )
-                      {
-                           // to be sure
-                           $this->Cookie->delete('tct_auth');
-                           $this->Cookie->delete('tct_auth_blog');
-                           $this->Session->write('previous_url', $_SERVER['REQUEST_URI']);
-                           
-                           $this->Session->write('flash',__("Sorry, you're not signed in or your session expired.", true));
-                           $this->redirect('/users/login');
-		                   die();
-                      } else
-                      {
-                           $session_useremail = $cookie['email'];
-                           $session_userid    = $cookie['userid'];
-                      }
+                    $this->Session->delete('session_useremail');
+                    $this->Session->delete('session_userid');
+                    $this->set('session_userid', null);
+                    $this->set('session_useremail', null);
+
+                    $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
+                    $this->redirect('/users/login');
+                    die();
                 } else
-                {
-                       // if cookie data are not the same session data, delete cookie
-                       if ( ( isset( $cookie['email'] ) && isset( $cookie['userid'] ) ) )
-                       {
-                          if ( ( $cookie['email'] != $session_useremail ) || ( $cookie['userid']  != $session_userid ) )
-                          {
-                             $this->Cookie->delete('tct_auth');
-                             $this->Cookie->delete('tct_auth_blog');
-                             //$this->Cookie->delete('TCTCookie');
-                          }
-                       }
+                {  
+                    // reset session vars
+                    $this->Session->write('session_userid', $results['User']['id']);
+                    $this->Session->write('session_useremail', $results['User']['email']);
+                    
+                    $this->set('session_userid', $results['User']['id']);
+                    $this->set('session_useremail', $results['User']['email']);
+
+                    $this->Session->write('userobject', $results['User']);
+                    $this->Session->write('Config.language', $results['User']['yourlanguage']);
+                    $this->set('userobject', $results['User']);
+
+                    // this is for Wordpress to have the same auth
+                    $this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
                 }
+            // session data not correct, kick her/him out
+            } else {
+                // to be sure
+                $this->Session->write('previous_url', $_SERVER['REQUEST_URI']);
+                $this->Session->delete('session_useremail');
+                $this->Session->delete('session_userid');
+                $this->set('session_userid', null);
+                $this->set('session_useremail', null);
 
-                if ( $session_useremail && $session_userid )
-                {
-            		    // if $username is not empty,
-            		    // check to make sure it's correct
-            		    $this->loadModel('User');
-            		    $results = $this->User->findByEmail( $session_useremail );
-
-            		    // if not correct, send to login page
-                        if ( ( !$results || $results['User']['id'] != $session_userid ) )
-                        {
-                                $this->Session->delete('session_useremail');
-                                $this->Session->delete('session_userid');
-                             	$this->Cookie->delete('tct_auth');
-                                $this->Cookie->delete('tct_auth_blog');
-
-                                $this->Cookie->delete('TCTCookie');
-                                $this->Cookie->delete('CakeCookie');
-                        
-                                $cookie_name = 'TCTCookie';
-                                unset($_COOKIE[$cookie_name]);
-                                // empty value and expiration one hour before
-                                $res = setcookie($cookie_name, '', time() - 3600);
-                        
-                                $cookie_name = 'CakeCookie';
-                                unset($_COOKIE[$cookie_name]);
-                                // empty value and expiration one hour before
-                                $res = setcookie($cookie_name, '', time() - 3600);
-
-                                $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
-                                $this->redirect('/users/login');
-                                die();
-                        } else
-                        {  
-                                $this->Session->write('session_userid', $results['User']['id']);
-                                $this->Session->write('session_useremail', $results['User']['email']);
-                                $this->Session->write('userobject', $results['User']);
-                                $this->Session->write('Config.language', $results['User']['yourlanguage']);
-                                $this->set('userobject', $results['User']);
-                                $this->Cookie->write('tct_auth_blog', "true", false, null);
-                        }
-	               }
-                 $this->set('session_userid', $session_userid);
-	     }
+                $this->Session->write('flash',__("Sorry, you're not signed in or your session expired.", true));
+                $this->redirect('/users/login');
+                die();
+            }
+        }
 }
 
 ?>

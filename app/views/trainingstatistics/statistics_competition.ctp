@@ -26,7 +26,7 @@
            <?php } ?>
 
            <?php __('This statistic shows you whether you can finish your next competition. The signal light leads you the way.'); ?> 
-           <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/do-i-have-trained-enough-for-my-competition/"><?php __('Explanation on these statistics in our blog?'); ?></a>
+           <a target="statistics" href="/blog/<?php if ( $language == 'eng' || $language == '' ) { ?>en<?php } else { ?>de<?php } ?>/do-i-have-trained-enough-for-my-competition/"><?php __('Explanation on these statistics in our blog?'); ?></a>
            <br /><br />
 
 <div class="form-group">

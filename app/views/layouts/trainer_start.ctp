@@ -59,7 +59,7 @@ if ( isset( $facebox_content ) ) {
 
 ?><!DOCTYPE html>
 <html lang="<?php 
-    if ( $locale == 'deu' ) echo 'de'; 
+    if ( $language == 'deu' ) echo 'de'; 
     else echo 'en'; 
 ?>">
 <head>

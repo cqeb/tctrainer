@@ -195,6 +195,9 @@
 		.form-control, .alert, textarea {
 			width: 40%;
 		}
+		div.alert {
+			width: 90%;
+		}
 		.input-group .form-control {
 			width: 50%;
 		}

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="<?php 
-    if ( $locale == 'deu' ) echo 'de'; 
-    else echo 'en'; 
+	if ( $language == 'deu' ) 
+		echo 'de'; 
+	else 
+		echo 'en'; 
 ?>">
 <head>
     <title><?php

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="<?php 
-    if ( $locale == 'deu' ) echo 'de'; 
+    if ( $language == 'deu' ) echo 'de'; 
     else echo 'en'; 
 ?>">
 
@@ -23,7 +23,7 @@ else
 
     <?php echo $this->element('metatags'); ?>
 
-    <!--link rel="alternate" type="application/rss+xml" title="TriCoreTraining RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $locale == 'eng' || $locale == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" /-->
+    <!--link rel="alternate" type="application/rss+xml" title="TriCoreTraining RSS" href="http://feeds.feedburner.com/tricoretraining/<?php if ( $language == 'eng' || $language == '' ) { ?>EN<?php } else { ?>DE<?php } ?>" /-->
 
 	<!-- Latest compiled and minified CSS BS 3.0. RC1-->
 	<link href="<?php echo $url; ?>/assets/css/theme.css" rel="stylesheet">

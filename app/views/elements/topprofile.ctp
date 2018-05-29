@@ -12,10 +12,10 @@
  | 
 <?php } ?>
 
-<?php if ( $locale != 'eng' || $locale == '' ) { ?>
+<?php if ( $language != 'eng' || $language == '' ) { ?>
 <?php echo $html->link('English',array('controller' => 'starts', 'action' => 'index', 'code' => "eng")) . ' | '; ?>
 <?php } ?>
-<?php if ( $locale != 'deu' ) { ?>
+<?php if ( $language != 'deu' ) { ?>
 <?php echo $html->link('Deutsch',array('controller' => 'starts', 'action' => 'index', 'code' => "deu")) . ' | '; ?>
 <?php } ?>
 </b>

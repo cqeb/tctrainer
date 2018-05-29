@@ -35,7 +35,7 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 <?php if ( isset( $session_userid ) && isset( $userobject['id'] ) ) { ?>
 <br /><br />
 <?php __('Send this link to your friends'); ?>:<br />
-<a href="/trainer/starts/index/<?php if ( $locale == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>ur:<?php echo base64_encode($userobject['id']); ?>/">&raquo; <?php __('Invite your friends'); ?></a>
+<a href="/trainer/starts/index/<?php if ( $language == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>ur:<?php echo base64_encode($userobject['id']); ?>/">&raquo; <?php __('Invite your friends'); ?></a>
 <?php } ?>
 
 	</div>

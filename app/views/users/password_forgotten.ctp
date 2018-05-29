@@ -42,20 +42,6 @@ if ( $status != 'sent' )
 ?>
 </div>
 
-<div class="form-group">
-
-<?php      
-      
-      //create the reCAPTCHA form.
-      //$recaptcha->display_form('echo');
-      
-      //hide an email address
-      //$recaptcha->hide_mail('tri@schremser.com','echo');
-
-?>
-
-</div>
-
                  <?php echo $this->Form->submit(__('Send',true), array('class'=>'btn btn-primary')); ?>
                
 

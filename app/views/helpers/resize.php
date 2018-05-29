@@ -14,7 +14,7 @@ class ResizeHelper extends AppHelper {
   a link back to my site would be nice too.
   */
   
-  function resize($imagePath,$opts=null)
+  function resize($imagePath, $opts=null)
   {
       # start configuration
       

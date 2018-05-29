@@ -4,7 +4,7 @@ class UsersController extends AppController {
 	var $name = 'Users';
 
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc', 'Statistics');
-	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Recaptcha', 'Unitcalc', 'Transactionhandler', 'Provider', 'Xmlhandler', 'Sendmailhandler', 'Statisticshandler', 'Filldatabase');
+	var $components = array('Email', 'Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Transactionhandler', 'Provider', 'Xmlhandler', 'Sendmailhandler', 'Statisticshandler', 'Filldatabase');
 
 	var $paginate = array(
        'User' => array(
@@ -17,15 +17,19 @@ class UsersController extends AppController {
   		parent::beforeFilter();
   		$this->layout = 'default_trainer';
 		
+		// tct_auth_blog
 		$this->Cookie->path = '/';
-  
+		$this->Cookie->domain = '.tricoretraining.com';
+		
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
+		{    
+			$this->Cookie->secure = false; 
+		} else {
+			$this->Cookie->secure = true; 
+		}
   		// necessary for upload
   		// fill with associated array of name, type, size to the corresponding column name
   		// $this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
-  
-  		// captcha keys
-  		// $this->Recaptcha->publickey = "6LcW_goAAAAAAHjN9I5AKsOI0dqsWwwkTifVde97";
-  		// $this->Recaptcha->privatekey = RECAPTCHA_PRIVATEKEY;
   
   		$this->js_addon = '';
 	}
@@ -179,8 +183,10 @@ class UsersController extends AppController {
 				{
 					$user = $this->data['User'];
 					$this->Session->write('session_useremail', $user['email']);
-          			$this->Session->write('session_userid', $user['id']);
-			        $this->redirect('/trainingplans/view');
+					$this->Session->write('session_userid', $user['id']);
+					// redirect to trainingplan  
+					$this->redirect('/trainingplans/view');
+					die();
 				}
 				
 			} else
@@ -192,7 +198,6 @@ class UsersController extends AppController {
 			      {
 			      	   $statusbox = 'alert alert-success';
 			      	   $this->Session->write('flash',__('User profile saved.',true));
-			
 			      } else
 			      {
 			      	   $statusbox = 'alert alert-danger';
@@ -363,7 +368,6 @@ class UsersController extends AppController {
 						
 						// COOKIE TIME only 1 day
 						$this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
-						$this->Cookie->write('tct_auth', $cookie, false, '+1 day');
 
 						// set "user" session equal to email address
 						// user might have a different session from other login
@@ -377,8 +381,6 @@ class UsersController extends AppController {
 						$this->Session->write('last_login', $results['User']['last_login']);
 
 						/*
-						$language = Configure::read('Config.language');
-						
 						$sql = "SELECT myrecommendation FROM users WHERE myrecommendation = '' AND yourlanguage = '" . $language . "'";
 						$user_recommendations = $this->User->query( $sql );
 						
@@ -415,49 +417,60 @@ class UsersController extends AppController {
 	
 	function login()
 	{
+		$previous_url = $this->Session->read('previous_url');
+		if ( $previous_url ) {
+			$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
+		} else {	
+			$redirect_url = '/trainingplans/view';
+		}
+
 	    if ( $this->Session->read('session_userid') ) 
 	    {
 			$this->checkSession();
-			$this->redirect('/trainingplans/view');
+			$this->Session->write('previous_url', '');
+			$this->redirect($redirect_url);
 	    } else
 	    {
 		  	$this->set("title_for_layout", __('Login', true));
 		  	$this->set('error', false);
 
-			if ($this->data)
-			{
-		        $this->User->set( $this->data );
-		
+			if ($this->data) {
+
+				$this->User->set( $this->data );
+				// validate
 		        $this->User->saveAll($this->data, array('validate' => 'only')); 
 
 	      		// check submitted email address against database
 				$results = $this->User->findByEmail($this->data['User']['email']);
-
+				
 				if ( $results && ($results['User']['password'] == md5($this->data['User']['password'])) )
 				{
 					// has user activated his profile and do WE not have deactivated user
 					if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
 					{
+						/*
 						$cookie = array();
 						$cookie['email'] = $results['User']['email'];
 						$cookie['userid'] = $results['User']['id'];
 						$cookie['firstname'] = $results['User']['firstname'];
-						
+						*/
+
 						// if you want to stay logged in, we have to write a cookie
+						// TODO KMS
 						if ( $this->data['User']['remember_me'] )
 						{
-							$this->Cookie->write('tct_auth', $cookie, false, '+30 days');	
 							$this->Cookie->write('tct_auth_blog', "true", false, '+30 days');
+							Configure::write('Session_longterm', 'true');
 						} else
 						{
 							$this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
-							$this->Cookie->write('tct_auth', $cookie, false, '+1 day');
 						}
 	
 						// set "user" session equal to email address
 						// user might have a different session from other login
 						$this->Session->write('session_useremail', $results['User']['email']);
 						$this->Session->write('session_userid', $results['User']['id']);
+
 						$this->set('session_userid', $results['User']['id']);
 	
 						// set "last_login" session equal to users last login time
@@ -465,8 +478,7 @@ class UsersController extends AppController {
 						$this->Session->write('last_login', $results['User']['last_login']);
 	
 						/*
-						$locale = Configure::read('Config.language');
-						$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $locale . "'";
+						$sql = "SELECT myrecommendation, firstname, lastname, email FROM users WHERE myrecommendation != '' AND yourlanguage = '" . $language . "'";
 						$user_recommendations = $this->User->query( $sql );
 									
 						$this->Session->write( 'recommendations', serialize($user_recommendations) );
@@ -475,16 +487,10 @@ class UsersController extends AppController {
 								$this->set('recommendations', $user_recommendations);
 						*/
 
-						if ( isset( $this->data['User']['previous_url'] ) ) {
-							$redirect_url = preg_replace('/\/trainer/', '', $this->data['User']['previous_url']);
-							$this->Session->write('previous_url', '');
-							$this->redirect($redirect_url);	
-							die();
-						} else {
-							$this->Session->write('previous_url', '');
-							$this->redirect('/trainingplans/view');
-							die();
-						}
+
+						$this->Session->write('previous_url', '');
+						$this->redirect($redirect_url);
+						die();
 					} else
 					{
 						// login data is wrong, redirect to login page
@@ -495,9 +501,6 @@ class UsersController extends AppController {
 					}
 				} else
 				{
-
-					//// ACTIVATION EMAIL
-
 					// login data is wrong, redirect to login page
 					$this->Session->write('flash',__('Wrong or not existing email or password. Please try again.', true));
 	        		// You must not redirect otherwise you won't see errors
@@ -516,25 +519,13 @@ class UsersController extends AppController {
 		$this->Session->delete('session_userid');
 
 		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
-		$this->Cookie->write('tct_auth', $cookie, false, time() - 3600);
-
-		$this->Cookie->delete('tct_auth');
 		$this->Cookie->delete('tct_auth_blog');
-		$this->Cookie->delete('TCTCookie');
-		$this->Cookie->delete('CakeCookie');
+		// in case a long termin login cookie is set
 
-		$cookie_name = 'TCTCookie';
-		unset($_COOKIE[$cookie_name]);
-		// empty value and expiration one hour before
-		$res = setcookie($cookie_name, '', time() - 3600);
+		Configure::write('Session_longterm', 'false');
 
-		$cookie_name = 'CakeCookie';
-		unset($_COOKIE[$cookie_name]);
-		// empty value and expiration one hour before
-		$res = setcookie($cookie_name, '', time() - 3600);
-		
-		$this->set('session_userid', null);
-		$this->set('session_useremail', null);	
+		$this->set('session_userid', '');
+		$this->set('session_useremail', '');	
 		$this->set('session_unit', '');
 		$this->set('session_unitdate', '');
 		$this->set('session_firstname', '');
@@ -543,6 +534,7 @@ class UsersController extends AppController {
 		// login data is wrong, redirect to login page
 		$this->Session->write('flash',__("You're logged out. Bye.",true));
 		$this->redirect('/users/login');
+		die();
 	}
 
 	function password_forgotten($id = null)
@@ -558,17 +550,6 @@ class UsersController extends AppController {
 			$this->User->set( $this->data );
 
     	    if ($this->User->saveAll($this->data, array('validate' => 'only'))) {} 
-
-			// deactivate this if you're working offline
-			// captcha checks for your correct entry
-			/*
-			if( !$this->Recaptcha->valid($this->params['form']) )
-			{
-				$statusbox = 'alert alert-error';
-				$this->Session->write('flash',__('Sorry Captcha not correct!',true));
-				//$this->redirect('/users/password_forgotten');
-			}
-			*/
 
 			if ( $statusbox != 'alert alert-error' )
 			{
@@ -587,7 +568,6 @@ class UsersController extends AppController {
 			}
 		}
 
-    	//$this->layout = 'default_trainer';
 		$this->set('statusbox', $statusbox);
 		$this->set('status', $status);
 	}
@@ -754,10 +734,8 @@ class UsersController extends AppController {
 			// set default language
 			$this->data['User']['yourlanguage'] = 'eng';
 			
-			// overwrite language by session parameter
-			$session_language = $this->Session->read('Config.language');
-			if ( isset( $session_language ) ) {
-				$this->data['User']['yourlanguage'] = $session_language;
+			if ( $this->Session->read('Config.language') ) {
+				$this->data['User']['yourlanguage'] = $this->Session->read('Config.language');
 			}
 
 			// TODO (B) add some checks
@@ -1152,6 +1130,7 @@ class UsersController extends AppController {
 		$this->transaction_id = $this->params['named']['transaction_id'];
 		//echo $this->transaction_id;
 		$this->loadModel('Transaction');
+
 		$transactions = $this->Transactionhandler->handle_transaction( $this->Transaction, $this->transaction_id, 'read');
 
 		// transaction exist
@@ -1167,12 +1146,15 @@ class UsersController extends AppController {
 				$this->User->id = $transactions['activation_userid'];
 				$this->User->savefield('activated', 1, false);
 
-				$this->Session->write('flash',__('Add races to set your goal. Your weekly training plan will be generated using these goals.',true));
+				$this->Session->write('flash', __('Add races to set your goal. Your weekly training plan will be generated using these goals.',true));
         
+				/*
+				// auto-login
 				if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
 				{
 					$this->Session->write('session_useremail', $results['User']['email']);
 					$this->Session->write('session_userid', $results['User']['id']);
+
 					$this->set('session_userid', $results['User']['id']);
 
 					// set "last_login" session equal to users last login time
@@ -1184,6 +1166,7 @@ class UsersController extends AppController {
 					//$this->Session->write('flash',__('Logged in. Welcome.', true));
 					$this->redirect('/trainingplans/view');
 				}
+				*/
 			} else
 			{
 				$this->Session->write('flash', __("Something went wrong - sorry. Maybe you're already activated?", true) . ' ' . __('If not', true) . ', <a href="mailto:support@tricoretraining.com">' . __('contact our support', true) . '.</a>');
@@ -1233,7 +1216,6 @@ class UsersController extends AppController {
 		{
 			$this->data = $this->User->read();
 			$this->set('UserID', $this->User->id);
-
 		} else
 		{
 			$this->set('UserID', $this->User->id);
@@ -1249,14 +1231,16 @@ class UsersController extends AppController {
 		                $new_email = $this->data['User']['email'];
 						$this->Session->write( 'session_useremail', $new_email );
 						
-		                if ( $this->Cookie->read('email') )
+						/*
+						if ( $this->Cookie->read('email') )
 		                {
 		                      $cookie = array();
 		                      $cookie['email'] = $new_email;
 		                      $cookie['userid'] = $session_userid;
 		                      
-		                      $this->Cookie->write('tct_auth', $cookie, false, '+1 day');
-		                }
+		                      // $this->Cookie->write('tct_auth', $cookie, false, '+1 day');
+						}
+						*/
 		           }
 		      	   $statusbox = 'alert alert-success';
 		      	   $this->Session->write('flash',__('User profile saved.',true));
@@ -1668,10 +1652,6 @@ class UsersController extends AppController {
 		} else
 		{
 	      $this->User->set($this->data);
-	      /*
-	      if ($this->User->saveAll($this->data, array('validate' => 'only'))) 
-	      { }
-	      */
 	      
 	      $save_pw = $this->data['User']['password'];
 	      
@@ -1698,7 +1678,6 @@ class UsersController extends AppController {
 	             } else
 	             {
 	                $this->data['User']['password'] = $save_pw;
-	    
 	                //pr($this->User->validationErrors);
 	                
 	             	$statusbox = 'alert alert-danger';
@@ -1963,10 +1942,12 @@ class UsersController extends AppController {
 			// user object
 			$user = $results[$i]['users'];
 
-			if ( $debug == true ) 
+			if ( $debug == true ) {
 				echo "<br>\n" . "Language (initial): " . Configure::read('Config.language');
+			}
 
 			// go through all users and configure specific user's language as default
+			// change app language
 			Configure::write('Config.language', $user['yourlanguage']);
 
             if ( $debug == true ) 
@@ -2545,9 +2526,8 @@ class UsersController extends AppController {
 
    	  	if ( isset( $language ) && $language != '' )
 		{
-			if ( $debug == true ) echo "<br>_sendMail<br>User (language): ". $language . "<br>";
-			 
-	  		Configure::write('Config.language',$language);
+			if ( $debug == true ) echo "<br>_sendMail<br>User (language): ". $language . "<br>"; 
+	  		Configure::write('Config.language', $language);
     	}
 		
 		if ( isset( $user['User']['firstname'] ) ) 

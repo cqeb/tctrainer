@@ -133,6 +133,7 @@ class I18n extends Object {
 		}
 		$language = Configure::read('Config.language');
 
+		// TODO KMS
 		if (!empty($_SESSION['Config']['language'])) {
 			$language = $_SESSION['Config']['language'];
 		}
@@ -287,7 +288,6 @@ class I18n extends Object {
 
 				if ($core) {
 					$app = $directory . $lang . DS . $this->category . DS . 'core';
-
 					if (file_exists($fn = "$app.mo")) {
 						$this->__loadMo($fn, $domain);
 						$this->__noLocale = false;

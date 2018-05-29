@@ -9,36 +9,8 @@ class StatisticsHelper extends AppHelper {
 	
 	}
 
-/*
-	function chart_settings( $chart_title, $color, $fill, $showtype = 'mid-slide', $type = 'area', $tip = '<br>#x_label#', $tipreplace = '' )
-	{
-		$chart_tip = $chart_title;
-		$tip = $chart_tip . ' #val# ' . $tip;
-		if ( isset( $tipreplace ) && $tipreplace != '' ) $tip = $tipreplace;
-		 
-		//showtype mid-slide
-		$default_settings = '
-		"type":"' . $type . '",
-		"fill-alpha":0.4,
-		"width":2,
-		"dot-size":4,
-		"halo-size":2,
-		"colour":"' . $color . '",
-		"fill":"' . $fill . '",     
-		"text":"' . $chart_title . '",
-		"on-show": {"type": "' . $showtype . '", "cascade":1, "delay":0.5},
-	    "dot-style":{
-	      	"tip":"' . $tip . '"
-	    },
-	    ';
-		
-		return $default_settings;
-	}
-*/
-
 	function y_axis( $stroke = 1, $max, $min = 0, $steps = 1, $legend )
 	{
-
 		$chart_yaxis = '
 		"y_axis": {
 		    "colour":"#AAAAAA",
@@ -57,7 +29,6 @@ class StatisticsHelper extends AppHelper {
 		';
 		
 		return $chart_yaxis;
-		
 	}
 	
 	function x_axis( $legend, $labels, $stroke = 1, $steps = '', $number_labels = null )

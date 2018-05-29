@@ -74,18 +74,14 @@ class TransactionhandlerComponent extends Object {
    function _decrypt_data( $text ) {
 
             $salt = Configure::read('Security.salt');
-
             $text = md5($text.$salt);
-            
             return $text;
    }
 
    function _encrypt_data( $text ) {
 
             $salt = Configure::read('Security.salt');
-
             $text = md5($text.$salt);
-            
             return $text;
 
    }

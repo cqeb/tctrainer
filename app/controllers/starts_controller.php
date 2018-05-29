@@ -23,76 +23,32 @@ class StartsController extends AppController
 
 	function index( $language = '' )
 	{
+		Configure::write('Config.language', 'deu');
   		$this->layout = 'trainer_start';
 
       	$this->set("title_for_layout", __('Get Interactive Training Plans For Triathlon, Marathon And Bike Races', true));
-	
-		/*
-		if ( !$this->Session->read('newest_trainings') )
-		{
-			$this->loadModel('User');
-			$sql = 'SELECT users.firstname, users.lastname, sportstype, distance FROM trainingstatistics,users WHERE trainingstatistics.user_id = users.id AND date BETWEEN ' . 
-				'\'' . date('Y-m-d', time()-86400*700) . '\' AND \'' . date( 'Y-m-d', time() ) . '\' LIMIT 10';
-			$usertrainings = $this->User->query( $sql );
-			pr($usertrainings);
-		}
-		*/
 		
-		/*
-		if ( isset( $this->params['named']['code'] ) ) 
-		{
-			$this->code = $this->params['named']['code'];
-			
-			$this->Session->write('Config.language', $this->code);
-			// you have to set this to change the language of the app
-			Configure::write('Config.language',$this->code);
-            $this->set('locale', $this->code);    
-		}
-			
-		echo 'starts_controller language var ' . $language . "<br>";
-		echo 'starts_controller code params ' . $this->code . "<br>";
-		*/
-		// why should $language has a value?
-		/*
-		if ( isset( $language ) && $language != '' && ( strlen( $language ) == 2 ) )
-		{
-            // http://www.loc.gov/standards/iso639-2/php/code_list.php
-			
-			if ( $language == 'de' ) 
-				$this->code = 'deu';
-			else 
-				$this->code = 'eng';
-				
-			$this->Session->write('Config.language', $this->code);
-			Configure::write('Config.language', $this->code);
-            $this->set('locale', $this->code);
-		}
-		*/
-        
-        $session_userid = $this->Session->read('session_userid');
-		
-        if ( isset( $session_userid ) ) 
+		// echo "read " . Configure::read('Config.language');
+
+		$session_userid = $this->Session->read('session_userid');
+		// echo "session_userid " . $session_userid . "<br>";
+
+        if ( $session_userid ) 
         {
-            $this->checkSession();
+			// save language in user profile
+			$this->checkSession();
 
             $this->User->id = $session_userid;
 			$this->data = $this->User->read();
 			
 			if ( isset( $this->params['named']['code'] ) ) 
 			{
-				$this->code = $this->params['named']['code'];
-				
-				// $this->Session->write('Config.language', $this->code);
-				// you have to set this to change the language of the app
-				// Configure::write('Config.language',$this->code);
-				// $this->set('locale', $this->code);    
+				// UPDATE yourlanguage field
+				$this->User->savefield('yourlanguage', $this->params['named']['code'], false);
 			}
-
-            // UPDATE yourlanguage field
-			if ( isset($this->code) ) 
-				$this->User->savefield('yourlanguage', $this->code, false);
         }
-        
+		
+		// referral send to page
         if ( isset( $this->params['named']['u'] ) ) 
         {
             $transaction_id = $this->params['named']['u'];
@@ -146,6 +102,7 @@ class StartsController extends AppController
 			$this->set('userinfo', $results['User']);
 			$this->Session->write('recommendation_userid', 'money:' . $results['User']['id']);
 			
+		// corporate discounts
  		} elseif ( isset( $this->params['named']['c'] ) )
  		{
  			$company_email = base64_decode( $this->params['named']['c'] );
@@ -166,6 +123,8 @@ class StartsController extends AppController
 				$this->set( 'companyinfo', $discount );
 			}
 			
+		// if user is logged in, then redirect
+		// TODO
 		} elseif ( $this->Session->read('session_userid') )
         {
             $this->redirect('/trainingplans/view');
@@ -185,6 +144,7 @@ class StartsController extends AppController
 
 	function change_language()
 	{
+		/*
 		if ( isset( $this->params['named']['code'] ) ) 
 			$this->code = $this->params['named']['code'];
 		else
@@ -192,13 +152,14 @@ class StartsController extends AppController
 
 	    if ( $this->Session->read('session_userid') )
 	    {
-				$this->loadModel('User');
+			$this->loadModel('User');
 	
-				$this->User->id = $this->Session->read('session_userid');
-				$this->User->savefield('yourlanguage', $this->code, false);
+			$this->User->id = $this->Session->read('session_userid');
+			$this->User->savefield('yourlanguage', $this->code, false);
 	    }
 
-		Configure::write('Config.language',$this->code);
+		Configure::write('Config.language', $this->code);
+
 		$this->Session->write('Config.language', $this->code);
 		$this->Session->write('flash',__('Language setting changed.',true));
 
@@ -207,12 +168,11 @@ class StartsController extends AppController
 		    $this->redirect($this->referer());
 	    } else
 		{ 
-	        //$this->redirect(array('controller' => 'starts', 'action' => 'index', 'code' => $this->code));
 	        $redirect_url = '/starts/index/code:'.$this->code;
 			$this->redirect($redirect_url);
 			die();
 	    }
-
+		*/
 	}
 	
 	function coupon( $partner = '' )

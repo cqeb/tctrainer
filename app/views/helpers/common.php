@@ -7,6 +7,7 @@ class CommonHelper extends AppHelper {
 
   function beforeRender()
   {
+    
   }
   
   function getRecommendations()

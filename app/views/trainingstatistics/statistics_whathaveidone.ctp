@@ -2,14 +2,13 @@
 
 if ( $export == true )
 {
-
 		$yesno[1] = __('Yes', true);
 		$yesno[0] = __('No', true);
 
 ?>
 
 <!DOCTYPE html>
-<html lang="<?php if ( $locale == 'ger' ) echo 'de'; else echo 'en'; ?>">
+<html lang="<?php if ( $language == 'deu' ) echo 'de'; else echo 'en'; ?>">
 <head>
     <title>TriCoreTraining <?php __('Statistics'); ?></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />        
@@ -30,10 +29,7 @@ if ( $export == true )
 
 </head>
 <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR5VT3V"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
+<?php echo $this->element('tracker'); ?>
 
 <table>
 <tr id="titles">
@@ -110,7 +106,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                    <?php } ?>
 
                    <?php __('These statistics show you what and how much you have achieved in a certain period of time.'); ?> 
-                   <a target="statistics" href="/blog/<?php if ( $locale == 'eng' || $locale == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
+                   <a target="statistics" href="/blog/<?php if ( $language == 'eng' || $language == '' ) { ?>en<?php } else { ?>de<?php } ?>/what-do-i-learn-from-the-statistics/"><?php __('Explanation on these statistics in our blog?'); ?></a>
                    <br /><br />
 
 <div class="form-group">

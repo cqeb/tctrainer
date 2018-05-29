@@ -12,7 +12,6 @@ class PaymenthandlerComponent extends Object {
    function handle_payment( $model, $tid = null, $mode = 'create', $key = '', $val = '' )
    {
             // create // add // read
-
             if ( $mode == 'create' )
             {
               // get last invoice number
@@ -42,8 +41,10 @@ class PaymenthandlerComponent extends Object {
                   $value = $results[$i]['Transaction']['transaction_value'];
                   $result[$keyword] = $value;
                }
-               if ( count( $results ) > 0 ) return $result;
-               else return false;
+               if ( count( $results ) > 0 ) 
+                  return $result;
+               else 
+                  return false;
             }
    }
 

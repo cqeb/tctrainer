@@ -23,7 +23,7 @@
 
              <div class="form-group">
              <b>TriCoreTraining</b><br />
-             acquired by Klaus-M. Schremser GmbH<br />
+             <?php __('Acquired by'); ?> Klaus-M. Schremser GmbH<br />
              Gruene Gasse 35<br />
              A-2351 Wiener Neudorf, <?php __('Austria'); ?><br />
              <br /><br />

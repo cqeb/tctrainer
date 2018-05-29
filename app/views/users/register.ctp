@@ -247,7 +247,7 @@ echo $form->input( 'calc_spam', array('type' => 'hidden', 'value' => $calc));
 <br /><br />
 <div class="form-group">
 <b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree."); ?></b>  
-<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
+<a href="/blog/<?php if ( $language == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 </div>
 
 <?php
@@ -265,7 +265,7 @@ echo $form->input('tos',
 
 <div class="form-group">
 <b><?php __("You also confirm that you have no medical inability to do sports and that we can store personal health data."); ?></b> 
-<a href="/blog/<?php if ( $locale == 'deu' ) echo 'de/'; else echo 'en/'; ?>data-privacy-agreement/" target="_blank"><?php __("See chapter 26 in the data privacy agreement."); ?></a>
+<a href="/blog/<?php if ( $language == 'deu' ) echo 'de/'; else echo 'en/'; ?>data-privacy-agreement/" target="_blank"><?php __("See chapter 26 in the data privacy agreement."); ?></a>
 </div>
 
 <?php

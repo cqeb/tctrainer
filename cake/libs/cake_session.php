@@ -180,7 +180,10 @@ class CakeSession extends Object {
 			ClassRegistry::init($settings);
 		}
 		if ($start === true) {
-			if (!empty($base)) {
+			
+			// hack by KMS for getting session cookie '/'
+			unset($base);
+			if (!empty($base)) {				
 				$this->path = $base;
 				if (strpos($base, 'index.php') !== false) {
 				   $this->path = str_replace('index.php', '', $base);
@@ -190,6 +193,8 @@ class CakeSession extends Object {
 				}
 			}
 			$this->host = env('HTTP_HOST');
+			// KMS hack
+			//$this->host = env('HTTP_BASE');
 
 			if (strpos($this->host, ':') !== false) {
 				$this->host = substr($this->host, 0, strpos($this->host, ':'));
@@ -534,6 +539,8 @@ class CakeSession extends Object {
 						ini_set('session.name', Configure::read('Session.cookie'));
 						ini_set('session.cookie_lifetime', $this->cookieLifeTime);
 						ini_set('session.cookie_path', $this->path);
+						// KMS hack
+						ini_set('session.cookie_domain', env('HTTP_BASE'));
 					}
 				}
 			break;

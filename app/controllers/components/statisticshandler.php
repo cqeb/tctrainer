@@ -21,24 +21,24 @@ class StatisticshandlerComponent extends Object {
 			
             if ( empty( $data['Trainingstatistic']['fromdate'] ) )
             {
-               $return['start'] = $season['start'];
-               //$return['end']   = $season['end'];
-               $return['end'] = date( 'Y-m-d', time() );
+                $return['start'] = $season['start'];
+                //$return['end']   = $season['end'];
+                $return['end'] = date( 'Y-m-d', time() );
 			   
-			         if ( $this->Session->read( $session_value . '_from' ) ) 
-			   		      $return['start'] = $this->Session->read( $session_value . '_from' );
-			         if ( $this->Session->read( $session_value . '_to' ) ) 
-			   		      $return['end'] = $this->Session->read( $session_value . '_to' );
+                if ( $this->Session->read( $session_value . '_from' ) ) 
+                    $return['start'] = $this->Session->read( $session_value . '_from' );
+                if ( $this->Session->read( $session_value . '_to' ) ) 
+                    $return['end'] = $this->Session->read( $session_value . '_to' );
 					
             } else
             {
-               $start_array = $data['Trainingstatistic']['fromdate'];
-               $end_array   = $data['Trainingstatistic']['todate'];
-               $return['start'] = $start_array['year'] . '-' . $start_array['month'] . '-' . $start_array['day'];
-               $return['end'] = $end_array['year'] . '-' . $end_array['month'] . '-' . $end_array['day'];
+                $start_array = $data['Trainingstatistic']['fromdate'];
+                $end_array   = $data['Trainingstatistic']['todate'];
+                $return['start'] = $start_array['year'] . '-' . $start_array['month'] . '-' . $start_array['day'];
+                $return['end'] = $end_array['year'] . '-' . $end_array['month'] . '-' . $end_array['day'];
             }
 
-			     return $return;
+			return $return;
 	}
 
 	function get_trimps( $Trainingstatistic, $userid, $sportstype, $start, $end )
@@ -46,7 +46,7 @@ class StatisticshandlerComponent extends Object {
 		// get all data from this time period for this user
         // where duration > 0 
         $sql = "SELECT duration, trimp, date FROM trainingstatistics WHERE
-               user_id = $userid AND ";
+               user_id = " . $userid . " AND ";
         if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
         $sql .= "( date BETWEEN '" . $start . "' AND '" . $end . "' ) ";
         $sql .= "AND duration > 0 ";
@@ -58,487 +58,491 @@ class StatisticshandlerComponent extends Object {
 
 	function get_trimps_json( $timeperiod, $sportstype, $graphtype, $start, $end, $userid, $Trainingstatistic )
 	{
-            // http://www.flammerouge.je/factsheets/trainstress.htm
-            $start_calc = $this->Unitcalc->date_plus_days( $start, $timeperiod*(-1) );
+        // http://www.flammerouge.je/factsheets/trainstress.htm
+        $start_calc = $this->Unitcalc->date_plus_days( $start, $timeperiod*(-1) );
 
-			      $startday_ts = strtotime( $start_calc );
-			      $endday_ts = strtotime( $end );						
+        $startday_ts = strtotime( $start_calc );
+        $endday_ts = strtotime( $end );						
 
-            if ( $endday_ts > time() ) 
+        if ( $endday_ts > time() ) 
+        {
+            $endday_ts = time(); 
+            $end = date( "Y-m-d", time() ); 
+        }
+        
+        $diff_dates = $this->Unitcalc->diff_dates( $start_calc, $end );
+
+        // real training data (tracked workouts)
+        $sql = "SELECT duration, trimp, date FROM trainingstatistics WHERE
+                user_id = $userid AND ";
+        if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
+        $sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ";
+        $sql .= "ORDER BY date ASC";
+        $trainingdata = $Trainingstatistic->query( $sql );
+
+        // go through all trainings in trainingsstatistics
+        for ( $i = 0; $i < count( $trainingdata ); $i++ )
+        {
+            $dt = $trainingdata[$i]['trainingstatistics'];
+            $date_string = preg_split( '/ /', $dt['date'] );
+
+            $day = $date_string[0];
+
+            // cumulate all trimp per day
+            if ( isset( $trimp_done[$day] ) )
             {
-            	 $endday_ts = time(); 
-            	 $end = date( "Y-m-d", time() ); 
-			      }
-            
-            $diff_dates = $this->Unitcalc->diff_dates( $start_calc, $end );
-
-            // real training data (tracked workouts)
-            $sql = "SELECT duration, trimp, date FROM trainingstatistics WHERE
-                   user_id = $userid AND ";
-            if ( $sportstype ) $sql .= "sportstype = '" . $sportstype . "' AND ";
-            $sql .= "( date BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ";
-            $sql .= "ORDER BY date ASC";
-            $trainingdata = $Trainingstatistic->query( $sql );
-
-            // go through all trainings in trainingsstatistics
-            for ( $i = 0; $i < count( $trainingdata ); $i++ )
+                $trimp_done[$day] += ( $dt['trimp'] );
+            } else
             {
-                  $dt = $trainingdata[$i]['trainingstatistics'];
-                  $date_string = preg_split( '/ /', $dt['date'] );
-
-                  $day = $date_string[0];
-
-                  // cumulate all trimp per day
-                  if ( isset( $trimp_done[$day] ) )
-                  {
-                       $trimp_done[$day] += ( $dt['trimp'] );
-                  } else
-                  {
-                       $trimp_done[$day] = ( $dt['trimp'] );
-                  }
+                $trimp_done[$day] = ( $dt['trimp'] );
             }
+        }
 
-            /*
-			* track scheduled / planned workouts
-		    */
-            $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
-                sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
-                "athlete_id = $userid AND ";
-            if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND ";
-            $sql .= "( week BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
+        /*
+        * track scheduled / planned workouts
+        */
+        $sql = "SELECT duration, week AS date, trimp, athlete_id AS user_id,
+            sport AS sportstype, week AS date FROM scheduledtrainings WHERE " . 
+            "athlete_id = $userid AND ";
+        if ( $sportstype ) $sql .= "sport = '" . $sportstype . "' AND ";
+        $sql .= "( week BETWEEN '" . $start_calc . "' AND '" . $end . "' ) ORDER BY date ASC";
 
-            $scheduled_trainingdata = $Trainingstatistic->query( $sql );
+        $scheduled_trainingdata = $Trainingstatistic->query( $sql );
 
-            // go through all planned trainings
-            for ( $i = 0; $i < count( $scheduled_trainingdata ); $i++ )
+        // go through all planned trainings
+        for ( $i = 0; $i < count( $scheduled_trainingdata ); $i++ )
+        {
+            $dt = $scheduled_trainingdata[$i]['scheduledtrainings'];
+            $date_string = preg_split( '/ /', $dt['date'] );
+            // week day in trainingplan - always Monday :(
+            $day = $date_string[0];
+
+            // cumulate all trimp per day
+            if ( isset( $trimp_planned[$day] ) )
             {
-                  $dt = $scheduled_trainingdata[$i]['scheduledtrainings'];
-                  $date_string = preg_split( '/ /', $dt['date'] );
-                  // week day in trainingplan - always Monday :(
-                  $day = $date_string[0];
-
-                  // cumulate all trimp per day
-                  if ( isset( $trimp_planned[$day] ) )
-                  {
-                       $trimp_planned[$day] += ( $dt['trimp'] );
-                  } else
-                  {
-                       $trimp_planned[$day] = ( $dt['trimp'] );
-                  }
-            }
-
-            foreach ( $trimp_planned as $date => $trimp ) {
-                $startday = strtotime($date);
-                $trimp_per_day = round($trimp / 7);
-                for ( $k = 0; $k < 7; $k++ ) {
-                    $weekday = $startday + (86400 * $k);
-                    $weekday = date( 'Y-m-d', $weekday);
-                    $trimp_planned[$weekday] = $trimp_per_day;
-                }
-            }
-
-            // TODO limit period of difference to x days?
-            //if ( $diff_dates > 60 ) $diff_dates = 60;
-            $max_unit = 0;
-
-            for ( $i = 0; $i < $diff_dates; $i++ )
+                $trimp_planned[$day] += ( $dt['trimp'] );
+            } else
             {
-                // go through all days in this period from now to past
-                // go each day back
-                $rightday_ts = $endday_ts - ( 86400 * $i );
-                $rightday = date( 'Y-m-d', $rightday_ts );
-
-                // if day is not available, set with 0
-                if ( !isset( $trimp_done[$rightday] ) ) $trimp_done[$rightday] = 0;
-                //else $trimp_done[$rightday] = $trimp_done[$rightday];
-
-                if ( !isset( $trimp_planned[$rightday] ) ) $trimp_planned[$rightday] = 0;
-                //else $trimp_planned[$rightday] = $trimp_planned[$rightday];
-
-                // save date for this day where we went back
-                $trimp_dates[$i] = $rightday;
-
-                if ( $graphtype == 'chronic' )
-                {
-                  // CTL
-                  // item in clause is smaller then period (42)
-                  if ( $i <= $timeperiod ) 
-                      $startpoint = 0;
-                  else 
-                      $startpoint = $i - $timeperiod;
-
-                  //echo $i . ' - ' . $startpoint . "<br>";
-                } elseif ( $graphtype == 'acute' )
-                {
-                  // ATL
-                  if ( $i <= $timeperiod ) 
-                      $startpoint = 0;
-                  else 
-                      $startpoint = $i - $timeperiod;
-                }
-
-                // calculate all trimp for CTL or ATL timeperiod back in the past per day
-                for ( $j = $startpoint; $j <= $i; $j++ )
-                {
-                    // here we insert the trained trimps of the logbook
-                    if ( !isset( $trimp_tl_done[$j] ) ) 
-                          $trimp_tl_done[$j] = 0;
-                    
-                    $trimp_tl_done[$j] += $trimp_done[$rightday];
-
-                    if ( $trimp_tl_done[$j] > $max_unit ) 
-                          $max_unit = $trimp_tl_done[$j];
-
-                    // here we insert the planned trimps of the trainingplan
-                    if ( !isset( $trimp_tl_planned[$j] ) ) 
-                          $trimp_tl_planned[$j] = 0;
-
-                    $trimp_tl_planned[$j] += $trimp_planned[$rightday];
-                    
-                    if ( $trimp_tl_planned[$j] > $max_unit ) 
-                          $max_unit = $trimp_tl_planned[$j];
-                }
+                $trimp_planned[$day] = ( $dt['trimp'] );
             }
+        }
 
-            // removed this temporarily
-            /*
-            for ( $e = 0; $e < count( $trimp_tl_done ); $e++ )
+        foreach ( $trimp_planned as $date => $trimp ) {
+            $startday = strtotime($date);
+            $trimp_per_day = round($trimp / 7);
+
+            for ( $k = 0; $k < 7; $k++ ) {
+                $weekday = $startday + (86400 * $k);
+                $weekday = date( 'Y-m-d', $weekday);
+                $trimp_planned[$weekday] = $trimp_per_day;
+            }
+        }
+
+        // TODO limit period of difference to x days?
+        //if ( $diff_dates > 60 ) $diff_dates = 60;
+        $max_unit = 0;
+
+        for ( $i = 0; $i < $diff_dates; $i++ )
+        {
+            // go through all days in this period from now to past
+            // go each day back
+            $rightday_ts = $endday_ts - ( 86400 * $i );
+            $rightday = date( 'Y-m-d', $rightday_ts );
+
+            // if day is not available, set with 0
+            if ( !isset( $trimp_done[$rightday] ) ) $trimp_done[$rightday] = 0;
+            //else $trimp_done[$rightday] = $trimp_done[$rightday];
+
+            if ( !isset( $trimp_planned[$rightday] ) ) $trimp_planned[$rightday] = 0;
+            //else $trimp_planned[$rightday] = $trimp_planned[$rightday];
+
+            // save date for this day where we went back
+            $trimp_dates[$i] = $rightday;
+
+            if ( $graphtype == 'chronic' )
             {
-                $trimp_tl_done[$e] = round($trimp_tl_done[$e] / $timeperiod);
-                $trimp_tl_planned[$e] = round($trimp_tl_planned[$e] / $timeperiod);
+                // CTL
+                // item in clause is smaller then period (42)
+                if ( $i <= $timeperiod ) 
+                    $startpoint = 0;
+                else 
+                    $startpoint = $i - $timeperiod;
+
+                //echo $i . ' - ' . $startpoint . "<br>";
+            } elseif ( $graphtype == 'acute' )
+            {
+                // ATL
+                if ( $i <= $timeperiod ) 
+                    $startpoint = 0;
+                else 
+                    $startpoint = $i - $timeperiod;
             }
 
-            if ( isset( $max_unit ) )
-                $max_unit = round( ( $max_unit * 1.1 ) / $timeperiod );
-            else
-                $max_unit = 50;
-                //if ( isset( $max_unit ) && $max_unit < 1 ) $max_unit = 50;
-            */
+            // calculate all trimp for CTL or ATL timeperiod back in the past per day
+            for ( $j = $startpoint; $j <= $i; $j++ )
+            {
+                // here we insert the trained trimps of the logbook
+                if ( !isset( $trimp_tl_done[$j] ) ) 
+                        $trimp_tl_done[$j] = 0;
+                
+                $trimp_tl_done[$j] += $trimp_done[$rightday];
 
-            $max_unit = round( $max_unit * 1.1 );
-            //echo "max_unit: " . $max_unit . "<br>";
+                if ( $trimp_tl_done[$j] > $max_unit ) 
+                        $max_unit = $trimp_tl_done[$j];
 
-            if ( isset( $_GET['debug'] ) ) {
-              for ( $i = 0; $i < count( $trimp_tl_done ); $i++ )
-              {
-                  echo $trimp_dates[$i] . "<br>";
-                  echo "trimp_tl_done: " . $trimp_tl_done[$i] . "<br>";
-                  echo "trimp_tl_planned: " . $trimp_tl_planned[$i] . "<br>";
+                // here we insert the planned trimps of the trainingplan
+                if ( !isset( $trimp_tl_planned[$j] ) ) 
+                        $trimp_tl_planned[$j] = 0;
 
-              }
+                $trimp_tl_planned[$j] += $trimp_planned[$rightday];
+                
+                if ( $trimp_tl_planned[$j] > $max_unit ) 
+                        $max_unit = $trimp_tl_planned[$j];
             }
+        }
 
-            // for the graph we need the days in reverse order
-            $trimp_tl_done = array_reverse($trimp_tl_done);
-            $trimp_tl_planned = array_reverse($trimp_tl_planned);
-            $trimp_dates = array_reverse($trimp_dates);
+        // removed this temporarily
+        /*
+        for ( $e = 0; $e < count( $trimp_tl_done ); $e++ )
+        {
+            $trimp_tl_done[$e] = round($trimp_tl_done[$e] / $timeperiod);
+            $trimp_tl_planned[$e] = round($trimp_tl_planned[$e] / $timeperiod);
+        }
 
-      		$return['start'] = $start;			
-            $return['end'] = $end;
-      		$return['max_unit'] = $max_unit;
-            $return['trimp_tl_done'] = $trimp_tl_done;
-            $return['trimp_tl_planned'] = $trimp_tl_planned;
-            $return['trimp_dates'] = $trimp_dates;
+        if ( isset( $max_unit ) )
+            $max_unit = round( ( $max_unit * 1.1 ) / $timeperiod );
+        else
+            $max_unit = 50;
+            //if ( isset( $max_unit ) && $max_unit < 1 ) $max_unit = 50;
+        */
 
-      		if ( isset( $_GET['debug'] ) ) 
-                return false;
-            else 
-                return $return;		
+        $max_unit = round( $max_unit * 1.1 );
+        //echo "max_unit: " . $max_unit . "<br>";
+
+        if ( isset( $_GET['debug'] ) ) {
+            for ( $i = 0; $i < count( $trimp_tl_done ); $i++ )
+            {
+                echo $trimp_dates[$i] . "<br>";
+                echo "trimp_tl_done: " . $trimp_tl_done[$i] . "<br>";
+                echo "trimp_tl_planned: " . $trimp_tl_planned[$i] . "<br>";
+
+            }
+        }
+
+        // for the graph we need the days in reverse order
+        $trimp_tl_done = array_reverse($trimp_tl_done);
+        $trimp_tl_planned = array_reverse($trimp_tl_planned);
+        $trimp_dates = array_reverse($trimp_dates);
+
+        $return['start'] = $start;			
+        $return['end'] = $end;
+        $return['max_unit'] = $max_unit;
+        $return['trimp_tl_done'] = $trimp_tl_done;
+        $return['trimp_tl_planned'] = $trimp_tl_planned;
+        $return['trimp_dates'] = $trimp_dates;
+
+        if ( isset( $_GET['debug'] ) ) 
+            return false;
+        else 
+            return $return;		
 	}
 
 	function get_formcurve( $Trainingstatistic, $userid, $sportstype, $start, $end )
 	{
-            // select all test-workouts grouped by sportstype
-            /*
-            $sql = "SELECT name, distance, sportstype, count(*) as ccount FROM trainingstatistics WHERE " .
-                 "user_id = $userid AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
-                 "GROUP BY name, distance, sportstype HAVING ccount > 1 ORDER BY name, distance";
-            */
-            $sql = "SELECT name, sportstype, count(*) as ccount FROM trainingstatistics WHERE " .
-                 "user_id = $userid AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
-                 "GROUP BY name, sportstype HAVING ccount > 1 ORDER BY name";
-            
-            $testworkoutsfilter = $Trainingstatistic->query( $sql );
-			
-			return $testworkoutsfilter;
+        // select all test-workouts grouped by sportstype
+        /*
+        $sql = "SELECT name, distance, sportstype, count(*) as ccount FROM trainingstatistics WHERE " .
+                "user_id = $userid AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
+                "GROUP BY name, distance, sportstype HAVING ccount > 1 ORDER BY name, distance";
+        */
+        $sql = "SELECT name, sportstype, count(*) as ccount FROM trainingstatistics WHERE " .
+                "user_id = $userid AND name != '' AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) " . 
+                "GROUP BY name, sportstype HAVING ccount > 1 ORDER BY name";
+        
+        $testworkoutsfilter = $Trainingstatistic->query( $sql );
+        
+        return $testworkoutsfilter;
 	}		
 	
 	function get_formcurve_json( $searchfilter, $start, $end, $userid, $Trainingstatistic, $unit )
 	{
-			$startday_ts = strtotime( $start );
-			$endday_ts = strtotime( $end );						
-            
-            if ( $endday_ts > time() ) 
-            {
-                $endday_ts = time(); 
-                $end = date( "Y-m-d", time() ); 
-			}
-            
-            // to filter test-workouts I have to create a key to filter
-            $searchsplit = explode( "|||", $searchfilter );
-            $pulse['min'] = $pulse['max'] = 0;
+        $startday_ts = strtotime( $start );
+        $endday_ts = strtotime( $end );						
+        
+        if ( $endday_ts > time() ) 
+        {
+            $endday_ts = time(); 
+            $end = date( "Y-m-d", time() ); 
+        }
+        
+        // to filter test-workouts I have to create a key to filter
+        $searchsplit = explode( "|||", $searchfilter );
+        $pulse['min'] = $pulse['max'] = 0;
 
-            // TODO select different avg_pulse_zones
-            // select all entries for this special test-workout - filtered by the name and the sportstype
-            /*
-            $sql = "SELECT date, distance, duration, avg_pulse FROM trainingstatistics WHERE user_id = $userid " .
-                "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
-                    "' AND distance = '" . $searchsplit[1] . "' ORDER BY date";
-            */
-            $sql = "SELECT date, distance, duration, avg_pulse FROM trainingstatistics WHERE user_id = $userid " .
-                "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
-                    "' ORDER BY date";
-            
-            $trainings = $Trainingstatistic->query( $sql );
+        // TODO select different avg_pulse_zones
+        // select all entries for this special test-workout - filtered by the name and the sportstype
+        /*
+        $sql = "SELECT date, distance, duration, avg_pulse FROM trainingstatistics WHERE user_id = $userid " .
+            "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
+                "' AND distance = '" . $searchsplit[1] . "' ORDER BY date";
+        */
+        $sql = "SELECT date, distance, duration, avg_pulse FROM trainingstatistics WHERE user_id = $userid " .
+            "AND ( date BETWEEN '" . $start . "' AND '" . $end . "' ) AND name = '" . $searchsplit[0] .
+                "' ORDER BY date";
+        
+        $trainings = $Trainingstatistic->query( $sql );
 
-            for ( $i = 0; $i < count( $trainings ); $i++ )
-            {
-                    $dt = $trainings[$i]['trainingstatistics'];
-                    if ( $i == 0 ) { $start = $dt['date']; $startday_ts = strtotime( $dt['date'] ); }
+        for ( $i = 0; $i < count( $trainings ); $i++ )
+        {
+                $dt = $trainings[$i]['trainingstatistics'];
+                if ( $i == 0 ) { $start = $dt['date']; $startday_ts = strtotime( $dt['date'] ); }
 
-                    // find out what the maximum pulse is - for the height of the graph
-                    if ( $dt['avg_pulse'] > $pulse['max'] ) $pulse['max'] = $dt['avg_pulse'];
-                    if ( $dt['avg_pulse'] < $pulse['min'] || $pulse['min'] == 0 ) $pulse['min'] = $dt['avg_pulse'];
-            }
+                // find out what the maximum pulse is - for the height of the graph
+                if ( $dt['avg_pulse'] > $pulse['max'] ) $pulse['max'] = $dt['avg_pulse'];
+                if ( $dt['avg_pulse'] < $pulse['min'] || $pulse['min'] == 0 ) $pulse['min'] = $dt['avg_pulse'];
+        }
 
-            $diff_dates = $this->Unitcalc->diff_dates( $start, $end );
+        $diff_dates = $this->Unitcalc->diff_dates( $start, $end );
 
-            // what is the average pulse
-            $total_avg_pulse = round( ( ( $pulse['max'] + $pulse['min'] ) / 2 ), 0 );
-            $max_perunit = 0;
+        // what is the average pulse
+        $total_avg_pulse = round( ( ( $pulse['max'] + $pulse['min'] ) / 2 ), 0 );
+        $max_perunit = 0;
 
-            for ( $i = 0; $i < count( $trainings ); $i++ )
-            {
-                    // we make all entries of the testworkouts relative to each other 
-                    // and transform them to minutes per miles/km
-                    $dt = $trainings[$i]['trainingstatistics'];
+        for ( $i = 0; $i < count( $trainings ); $i++ )
+        {
+                // we make all entries of the testworkouts relative to each other 
+                // and transform them to minutes per miles/km
+                $dt = $trainings[$i]['trainingstatistics'];
 
-                    // calculate current average pulse minus total average pulse
-                    $diff_pulse = ( $dt['avg_pulse'] - $total_avg_pulse ); // 190 - 160 = 30 / basic value
+                // calculate current average pulse minus total average pulse
+                $diff_pulse = ( $dt['avg_pulse'] - $total_avg_pulse ); // 190 - 160 = 30 / basic value
 
-                    $change_value = ( $diff_pulse / $dt['avg_pulse'] ) + 1;
+                $change_value = ( $diff_pulse / $dt['avg_pulse'] ) + 1;
 
-                    $dt['old_duration'] = $dt['duration'];
-                    $duration_interim = ( $dt['duration'] * $change_value );
-            
-                    $dt['duration'] = $newduration = round( $duration_interim, 0 );
+                $dt['old_duration'] = $dt['duration'];
+                $duration_interim = ( $dt['duration'] * $change_value );
+        
+                $dt['duration'] = $newduration = round( $duration_interim, 0 );
 
-                    $correct_distance = $this->Unitcalc->check_distance( $dt['distance'] );
-                    $distanceperunit_interim =  $newduration / $correct_distance['amount'] / 60;
-                    $dt['distanceperunit'] = round( $distanceperunit_interim, 2);
-            
-                    if ( $distanceperunit_interim > $max_perunit ) $max_perunit = round( $distanceperunit_interim, 1);
-                    // depends on minutes per km / mi
-                    $newdate = preg_split( '/ /', $dt['date'] );
-                    $newdate2 = $newdate[0];
+                $correct_distance = $this->Unitcalc->check_distance( $dt['distance'] );
+                $distanceperunit_interim =  $newduration / $correct_distance['amount'] / 60;
+                $dt['distanceperunit'] = round( $distanceperunit_interim, 2);
+        
+                if ( $distanceperunit_interim > $max_perunit ) $max_perunit = round( $distanceperunit_interim, 1);
+                // depends on minutes per km / mi
+                $newdate = preg_split( '/ /', $dt['date'] );
+                $newdate2 = $newdate[0];
 
-                    // date, distance, duration, avg_pulse
-                    $traindate2[$newdate2] = $dt;
-            }
+                // date, distance, duration, avg_pulse
+                $traindate2[$newdate2] = $dt;
+        }
 
-            $initiator = 0;
+        $initiator = 0;
 
-            for ( $i = 0; $i < $diff_dates; $i++ )
-            {
-                    $rdate = date( 'Y-m-d', ( $startday_ts + $i * 86400 ) );
+        for ( $i = 0; $i < $diff_dates; $i++ )
+        {
+            $rdate = date( 'Y-m-d', ( $startday_ts + $i * 86400 ) );
 
-                    // set last value if no testworkout is in the array for this date					 
-                    if ( !isset( $traindate2[$rdate]['distanceperunit'] ) )
-                    { 
-                        $traindate[$rdate]['distanceperunit'] = $initiator;
-                    } else 
-                        $traindate[$rdate]['distanceperunit'] = $initiator = $traindate2[$rdate]['distanceperunit'];
-                            
-                    $traindate[$rdate]['date'] = $rdate;
-            }
+            // set last value if no testworkout is in the array for this date					 
+            if ( !isset( $traindate2[$rdate]['distanceperunit'] ) )
+            { 
+                $traindate[$rdate]['distanceperunit'] = $initiator;
+            } else 
+                $traindate[$rdate]['distanceperunit'] = $initiator = $traindate2[$rdate]['distanceperunit'];
+                    
+            $traindate[$rdate]['date'] = $rdate;
+        }
 
-            $max_perunit = round( $max_perunit, 0 ) + 1;
+        $max_perunit = round( $max_perunit, 0 ) + 1;
 
-            $return['start'] = $start;
-            $return['end'] = $end;
-            $return['max_perunit'] = $max_perunit;
-			$return['trainings'] = $traindate;
-			$return['unit'] = $unit;
+        $return['start'] = $start;
+        $return['end'] = $end;
+        $return['max_perunit'] = $max_perunit;
+        $return['trainings'] = $traindate;
+        $return['unit'] = $unit;
 
-			return $return;
+        return $return;
 	}
 
 	function get_weight_json( $start, $end, $results, $userid, $Trainingstatistic, $unit )
 	{
-		    $end_orig = $end;
-            $targetweight = $results['User']['targetweight'];
-            $targetweightdate = $results['User']['targetweightdate'];
-            $diff_week = 0;
+        $end_orig = $end;
+        $targetweight = $results['User']['targetweight'];
+        $targetweightdate = $results['User']['targetweightdate'];
+        $diff_week = 0;
+        
+        if ( isset( $targetweightdate ) && isset( $targetweight ) && $end_orig == date('Y-m-d', time()) ) 
+        { 
+            $end = $targetweightdate; 
+        }
+
+        $start_ts = strtotime($start);
+        $end_ts = strtotime($end);
+    
+        $sql = "SELECT round(avg(weight),1) as avgweight, 
+                date_format(min(date), '%Y-%m-%d') as 'weekday',
+                date_format(date, '%Y%u') as 'week' FROM trainingstatistics WHERE 
+                user_id = $userid AND weight != '' AND
+                date BETWEEN '" . $start . "' AND '" . $end . "' GROUP BY week ORDER BY week ASC";
+        $trainings = $Trainingstatistic->query( $sql );
+        
+        $lastentry = count($trainings);
+        
+        if ( $lastentry > 0 )
+        {
+            $firsttraining = $trainings[0][0];
+            $start_ts = strtotime( $firsttraining['weekday'] );
+
+            $weeks_between_dates = round(($end_ts - $start_ts)/(86400*7),0)+1;
+            $week_ts = $start_ts;
+
+            if ( isset( $targetweightdate ) && isset( $targetweight ) ) // && $end_orig == date( 'Y-m-d', time() ) )
+            {
+                $train_array = $trainings[$lastentry-1][0];
+                
+                $diff_time = strtotime( $targetweightdate ) - strtotime( $train_array['weekday'] );
+
+                // weeks between last trainingstatistics entry and target weight date
+                $diff_week = round( $diff_time / ( 86400 * 7 ) );
+                // diff between last weight entry and target weight
+                $diff_weight = $targetweight - $train_array['avgweight'];
+
+                $diff_weight_show = $this->Unitcalc->check_weight( $diff_weight, 'show', 'single' );
             
-            if ( isset( $targetweightdate ) && isset( $targetweight ) && $end_orig == date('Y-m-d', time()) ) 
-            { 
-                $end = $targetweightdate; 
+                // how much do you have to lose to reach your weight goal
+                $diff_per_week = ($diff_weight / $diff_week);
+                    $diff_per_week_show = $this->Unitcalc->check_weight( $diff_per_week, 'show', 'single' );
+            
+                $lastweight = $train_array['avgweight'];
+                    $lastweight_show = $this->Unitcalc->check_weight( $lastweight, 'show', 'single' );
+            
+                $lastweightdate = $train_array['weekday'];
+            }
+                
+            for ( $i = 0; $i < $weeks_between_dates; $i ++)
+            {
+                $nweek[$i] = date('W', $week_ts);
+                $nyear[$i] = date('o', $week_ts);
+                $weeks[$i] = $nyear[$i]. $nweek[$i]; 
+                $weeks_ts[$i] = $week_ts;
+                $week_ts += (86400*7);
             }
 
-            $start_ts = strtotime($start);
-            $end_ts = strtotime($end);
-     
-            $sql = "SELECT round(avg(weight),1) as avgweight, 
-                    date_format(min(date), '%Y-%m-%d') as 'weekday',
-                    date_format(date, '%Y%u') as 'week' FROM trainingstatistics WHERE 
-                    user_id = $userid AND weight != '' AND
-                    date BETWEEN '" . $start . "' AND '" . $end . "' GROUP BY week ORDER BY week ASC";
-            $trainings = $Trainingstatistic->query( $sql );
-            
-            $lastentry = count($trainings);
-            
-            if ( $lastentry > 0 )
+            $maxweight = 0;
+
+            for ( $i = 0; $i < count( $trainings ); $i++ )
             {
-                $firsttraining = $trainings[0][0];
-                $start_ts = strtotime( $firsttraining['weekday'] );
+                $week = $trainings[$i][0]['week'];
+                $train[$week]['avgweight'] = $trainings[$i][0]['avgweight'];
+                if ( $train[$week]['avgweight'] > $maxweight ) 
+                $maxweight = $this->Unitcalc->check_weight( $train[$week]['avgweight'], 'show', 'single' );
+            }
 
-                $weeks_between_dates = round(($end_ts - $start_ts)/(86400*7),0)+1;
-                $week_ts = $start_ts;
+            $targetweight_show = $this->Unitcalc->check_weight( $results['User']['targetweight'], 'show', 'single' );
+            
+            if ( $targetweight_show > $maxweight ) 
+                $maxweight = $targetweight_show;
+        
+            $avg_weight_lastweek = 'null';
+        
+            // go through all weeks - in case you have weeks without trainings you have to set them to 0
+            for( $i = 0; $i < ( $weeks_between_dates ); $i++ )
+            {
+                $yearweek = $nyear[$i] . '' . $nweek[$i];
 
-                if ( isset( $targetweightdate ) && isset( $targetweight ) ) // && $end_orig == date( 'Y-m-d', time() ) )
+                if ( $i > ( $weeks_between_dates - $diff_week ) ) 
                 {
-                        $train_array = $trainings[$lastentry-1][0];
-                        
-                        $diff_time = strtotime( $targetweightdate ) - strtotime( $train_array['weekday'] );
-
-                        // weeks between last trainingstatistics entry and target weight date
-                        $diff_week = round( $diff_time / ( 86400 * 7 ) );
-                        // diff between last weight entry and target weight
-                        $diff_weight = $targetweight - $train_array['avgweight'];
-
-                        $diff_weight_show = $this->Unitcalc->check_weight( $diff_weight, 'show', 'single' );
-                    
-                        // how much do you have to lose to reach your weight goal
-                        $diff_per_week = ($diff_weight / $diff_week);
-                            $diff_per_week_show = $this->Unitcalc->check_weight( $diff_per_week, 'show', 'single' );
-                    
-                        $lastweight = $train_array['avgweight'];
-                            $lastweight_show = $this->Unitcalc->check_weight( $lastweight, 'show', 'single' );
-                    
-                        $lastweightdate = $train_array['weekday'];
-                }
-                    
-                for ( $i = 0; $i < $weeks_between_dates; $i ++)
+                    $train[$yearweek]['avgweight'] = 'null';
+                } else
                 {
-                        $nweek[$i] = date('W', $week_ts);
-                        $nyear[$i] = date('o', $week_ts);
-                        $weeks[$i] = $nyear[$i]. $nweek[$i]; 
-                        $weeks_ts[$i] = $week_ts;
-                        $week_ts += (86400*7);
-                }
-
-			    $maxweight = 0;
-
-                for ( $i = 0; $i < count( $trainings ); $i++ )
-                {
-                    $week = $trainings[$i][0]['week'];
-                    $train[$week]['avgweight'] = $trainings[$i][0]['avgweight'];
-                    if ( $train[$week]['avgweight'] > $maxweight ) 
-                    $maxweight = $this->Unitcalc->check_weight( $train[$week]['avgweight'], 'show', 'single' );
-                }
-
-        	    $targetweight_show = $this->Unitcalc->check_weight( $results['User']['targetweight'], 'show', 'single' );
-                if ( $targetweight_show > $maxweight ) 
-                    $maxweight = $targetweight_show;
-		  
-                $avg_weight_lastweek = 'null';
-		 
-                // go through all weeks - in case you have weeks without trainings you have to set them to 0
-                for( $i = 0; $i < ( $weeks_between_dates ); $i++ )
-                {
-                    $yearweek = $nyear[$i] . '' . $nweek[$i];
-
-                    if ( $i > ( $weeks_between_dates - $diff_week ) ) 
+                    if ( empty($train[$yearweek]['avgweight']) || $train[$yearweek]['avgweight'] == 0 )
                     {
-                        $train[$yearweek]['avgweight'] = 'null';
+                        $train[$yearweek]['avgweight'] = $avg_weight_lastweek;
                     } else
                     {
-                        if ( empty($train[$yearweek]['avgweight']) || $train[$yearweek]['avgweight'] == 0 )
-                        {
-                            $train[$yearweek]['avgweight'] = $avg_weight_lastweek;
-                        } else
-                        {
-                            $avg_weight_lastweek = $this->Unitcalc->check_weight( $train[$yearweek]['avgweight'], 'show', 'single' );
-                                        $train[$yearweek]['avgweight'] = $this->Unitcalc->check_weight( $train[$yearweek]['avgweight'], 'show', 'single' );
-                        }
+                        $avg_weight_lastweek = $this->Unitcalc->check_weight( $train[$yearweek]['avgweight'], 'show', 'single' );
+                        $train[$yearweek]['avgweight'] = $this->Unitcalc->check_weight( $train[$yearweek]['avgweight'], 'show', 'single' );
                     }
                 }
-                ksort($train);
-	          
-                if ( $maxweight == 0 ) 
-                    $maxweight = $this->Unitcalc->check_weight( '150', 'show', 'single' );
-                $maxweight = round( $maxweight ) + 10; 
-                $minweight = round( $this->Unitcalc->check_weight( '40', 'show', 'single' ) );
-			}
+            }
+            ksort($train);
+            
+            if ( $maxweight == 0 ) 
+                $maxweight = $this->Unitcalc->check_weight( '150', 'show', 'single' );
+            $maxweight = round( $maxweight ) + 10; 
+            $minweight = round( $this->Unitcalc->check_weight( '40', 'show', 'single' ) );
+        }
 
-            // merge all values for a return array
-            $return['lastentry'] = $lastentry;
-			$return['start'] = $start;
-			$return['end'] = $end;
-			$return['diff_week'] = $diff_week;
-			if ( isset( $diff_weight_show ) ) $return['diff_weight_show'] = $diff_weight_show;
-			if ( isset( $diff_per_week_show ) ) $return['diff_per_week_show'] = $diff_per_week_show;
-			if ( isset( $lastweight_show ) ) $return['lastweight_show'] = $lastweight_show;
-			$return['targetweight_show'] = $targetweight_show;
-			$return['weeks_between_dates'] = $weeks_between_dates;
-			$return['minweight'] = $minweight;
-			$return['maxweight'] = $maxweight;
-			$return['weeks'] = $weeks;
-            $return['weeks_ts'] = $weeks_ts;
-			$return['train']= $train;
+        // merge all values for a return array
+        $return['lastentry'] = $lastentry;
+        $return['start'] = $start;
+        $return['end'] = $end;
+        $return['diff_week'] = $diff_week;
 
-			return $return;			
+        if ( isset( $diff_weight_show ) ) $return['diff_weight_show'] = $diff_weight_show;
+        if ( isset( $diff_per_week_show ) ) $return['diff_per_week_show'] = $diff_per_week_show;
+        if ( isset( $lastweight_show ) ) $return['lastweight_show'] = $lastweight_show;
+        
+        $return['targetweight_show'] = $targetweight_show;
+        $return['weeks_between_dates'] = $weeks_between_dates;
+        $return['minweight'] = $minweight;
+        $return['maxweight'] = $maxweight;
+        $return['weeks'] = $weeks;
+        $return['weeks_ts'] = $weeks_ts;
+        $return['train']= $train;
+
+        return $return;			
 	}
 
 	function get_statistics( $Trainingstatistic, $userid, $sportstype, $start, $end )
 	{
-            // select trainingsdata
-            $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND date BETWEEN '" .
-                $start . "' AND '" . $end . "' ORDER BY date";
-            $trainings = $Trainingstatistic->query( $sql );
+        // select trainingsdata
+        $sql = "SELECT * FROM trainingstatistics WHERE user_id = $userid AND date BETWEEN '" .
+            $start . "' AND '" . $end . "' ORDER BY date";
+        $trainings = $Trainingstatistic->query( $sql );
 
-            $sumdata['collected_sportstypes'] = array();
-            $sumdata['duration'] = array();
-            $sumdata['distance'] = array();
-            $sumdata['trimp'] = array();
+        $sumdata['collected_sportstypes'] = array();
+        $sumdata['duration'] = array();
+        $sumdata['distance'] = array();
+        $sumdata['trimp'] = array();
 
-			$last_entry = count( $trainings ) - 1;
-			
-			if ( $last_entry > 0 )
-			{
-				$start = $trainings[0]['trainingstatistics']['date'];
-				$end = $trainings[$last_entry]['trainingstatistics']['date'];
-	
-                // collect them, accumulate per sportstype
-                for ( $i = 0; $i < count( $trainings ); $i++ )
+        $last_entry = count( $trainings ) - 1;
+        
+        if ( $last_entry > 0 )
+        {
+            $start = $trainings[0]['trainingstatistics']['date'];
+            $end = $trainings[$last_entry]['trainingstatistics']['date'];
+
+            // collect them, accumulate per sportstype
+            for ( $i = 0; $i < count( $trainings ); $i++ )
+            {
+                $dt = $trainings[$i]['trainingstatistics'];
+                $sportstype = strtoupper($dt['sportstype']);
+
+                if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
                 {
-                    $dt = $trainings[$i]['trainingstatistics'];
-                    $sportstype = strtoupper($dt['sportstype']);
-
-                    if ( !in_array( $sportstype, $sumdata['collected_sportstypes'] ) )
-                    {
-                        $sumdata['collected_sportstypes'][] = strtoupper($sportstype);
-                        $sumdata['duration'][$sportstype] = 0;
-                        $sumdata['distance'][$sportstype] = 0;
-                        $sumdata['trimp'][$sportstype] = 0;
-                    }
-
-                    $sumdata['duration'][$sportstype] += ( $dt['duration'] );
-                    $sumdata['distance'][$sportstype] += $dt['distance'];
-                    $sumdata['trimp'][$sportstype] += $dt['trimp'];
+                    $sumdata['collected_sportstypes'][] = strtoupper($sportstype);
+                    $sumdata['duration'][$sportstype] = 0;
+                    $sumdata['distance'][$sportstype] = 0;
+                    $sumdata['trimp'][$sportstype] = 0;
                 }
-                $return['sumdata'] = $sumdata;
-                $return['trainings'] = $trainings;
-                $return['start'] = $start;
-                $return['end'] = $end;
-			} else
-			{
-				$return['sumdata'] = $sumdata;
-				$return['trainings'] = $trainings;
-				$return['start'] = $start;
-				$return['end'] = $end;
-			}			
-			return $return;
+
+                $sumdata['duration'][$sportstype] += ( $dt['duration'] );
+                $sumdata['distance'][$sportstype] += $dt['distance'];
+                $sumdata['trimp'][$sportstype] += $dt['trimp'];
+            }
+            $return['sumdata'] = $sumdata;
+            $return['trainings'] = $trainings;
+            $return['start'] = $start;
+            $return['end'] = $end;
+        } else
+        {
+            $return['sumdata'] = $sumdata;
+            $return['trainings'] = $trainings;
+            $return['start'] = $start;
+            $return['end'] = $end;
+        }			
+        return $return;
 	}
 
 	function get_statistics_json( $start, $end, $results, $userid, $Trainingstatistic, $unit, $params )

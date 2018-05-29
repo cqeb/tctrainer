@@ -159,17 +159,6 @@ Configure::write('company_emails', '"@growtf.com","@schremser.com"');
  * 'superuser' -> superuser_index() and /superuser/controller/index
  */
 //Configure::write('Routing.admin', 'admin');
-
-/**
- * Turn off all caching application-wide.
- *
- */
-if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
- 	Configure::write('Cache.disable', true);
-} else {
- 	Configure::write('Cache.disable', true);
-}
-
 /**
  * Enable cache checking.
  *
@@ -180,6 +169,17 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
  *
  */
 //Configure::write('Cache.check', true);
+/**
+ * Turn off all caching application-wide.
+ *
+ */
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
+ 	Configure::write('Cache.disable', true);
+} else {
+ 	Configure::write('Cache.disable', true);
+}
+
+
 /**
  * The preferred session handling method. Valid values:
  *
@@ -208,9 +208,12 @@ Configure::write('Session.save', 'php');
  * 'Session.save' must be set to 'database' in order to utilize this constant.
  */
 //Configure::write('Session.database', 'default');
+
+
 /**
  * The name of CakePHP's session cookie.
  */
+
 Configure::write('Session.cookie', 'TCTCookie');
 
 Configure::write('Session.path', '/');
@@ -218,7 +221,10 @@ Configure::write('Session.path', '/');
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
  */
-Configure::write('Session.timeout', '86400');
+if ( Configure::read('Session_longterm') == "true" )
+	Configure::write('Session.timeout', '300');
+else
+	Configure::write('Session.timeout', '10');
 
 /**
  * If set to false, sessions are not automatically started.
@@ -229,6 +235,7 @@ Configure::write('Session.start', true);
  * in the session
  */
 Configure::write('Session.checkAgent', true);
+
 /**
  * The level of CakePHP security. The session timeout time defined
  * in 'Session.timeout' is multiplied according to the settings here.
@@ -236,7 +243,7 @@ Configure::write('Session.checkAgent', true);
  *
  * 'high'	Session timeout in 'Session.timeout' x 10
  * 'medium'	Session timeout in 'Session.timeout' x 100
- * 'low'		Session timeout in 'Session.timeout' x 300
+ * 'low'	Session timeout in 'Session.timeout' x 300
  *
  * CakePHP session IDs are also regenerated between requests if
  * 'Security.level' is set to 'high'.
@@ -246,6 +253,32 @@ Configure::write('Security.level', 'medium');
  * A random string used in security hashing methods.
  */
 Configure::write('Security.salt', 'LKLKJsfasafwerwer972498349724923479234DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+
+
+// app/config/my_session.php
+//
+// Revert value and get rid of the referrer check even when,
+// Security.level is medium
+// ini_restore('session.referer_check');
+
+// ini_set('session.use_trans_sid', 0);
+// ini_set('session.name', Configure::read('Session.cookie'));
+
+// Cookie is now destroyed when browser is closed, doesn't
+// persist for days as it does by default for security
+// low and medium
+// ini_set('session.cookie_lifetime', 0);
+
+// Cookie path is now '/' even if you app is within a sub
+// directory on the domain
+// $this->path = '/';
+// ini_set('session.cookie_path', $this->path);
+
+// Session cookie now persists across all subdomains
+// ini_set('session.cookie_domain', env('HTTP_BASE'));
+
+
+
 /**
  * Compress CSS output by removing comments, whitespace, repeating tags, etc.
  * This requires a/var/cache directory to be writable by the web server for caching.
@@ -280,17 +313,19 @@ Configure::write('Acl.database', 'default');
  *
  * File storage engine.
  *
- *
- * 	 Cache::config('default', array(
- *		'engine' => 'File', //[required]
- *		'duration'=> 3600, //[optional]
- *		'probability'=> 100, //[optional]
- * 		'path' => CACHE, //[optional] use system tmp directory - remember to use absolute path
- * 		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
- * 		'lock' => false, //[optional]  use file locking
- * 		'serialize' => true //[optional]
- *	));
- *
+ */
+ /*
+ Cache::config('default', array(
+ 		'engine' => 'File', //[required]
+ 		'duration'=> 10, //[optional]
+ 		'probability'=> 100, //[optional]
+  		'path' => '/tmp/cakephp', //[optional] use system tmp directory - remember to use absolute path
+  		'prefix' => 'cake_', //[optional]  prefix every cache file with this string
+  		'lock' => false, //[optional]  use file locking
+  		'serialize' => true //[optional]
+));
+*/
+ /*
  *
  * APC (http://pecl.php.net/package/APC)
  *

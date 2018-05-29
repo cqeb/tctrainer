@@ -294,7 +294,6 @@ class ProviderComponent extends Object {
 				*/
 			}
 		//}
-
 		if ( $retValues == true ) return $workouts;
 	}
 
@@ -329,7 +328,8 @@ class ProviderComponent extends Object {
 		$sql = "SELECT week FROM scheduledtrainings WHERE athlete_id = " . $this->athlete->getId() . " AND week > '" . $start . 
 			"' GROUP BY week ORDER by week ASC";
 		*/
-		$sql = "SELECT DISTINCT week FROM scheduledtrainings WHERE athlete_id = " . $this->athlete->getId() . " AND week > '" . $start . 
+		$sql = "SELECT DISTINCT week FROM scheduledtrainings WHERE athlete_id = " . 
+			$this->athlete->getId() . " AND week > '" . $start . 
 			"' ORDER by week ASC";
 		$trainings = $this->DB->query( $sql );
 

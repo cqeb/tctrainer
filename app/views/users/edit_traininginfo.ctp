@@ -76,7 +76,7 @@ echo $form->input('weeklyhours',
 
 <?php
 
-if ( $locale == 'deu' ) $language = 'de';
+if ( $language == 'deu' ) $language = 'de';
 else $language = 'en';
  
 $help_lth = ' <a class="help badge" title="' .
@@ -156,7 +156,8 @@ echo $form->input('rookie',
 ));
 
 $tos_link = '<a href="/blog/';
-if ( $locale == 'deu' ) $tos_link .= 'de/'; else $tos_link .= 'en/';
+if ( $language == 'deu' ) 
+    $tos_link .= 'de/'; else $tos_link .= 'en/';
 $tos_link .= 'terms-of-service-2/" target="_blank">' .
 	__('Read our terms and conditions.',true) . '</a>';
 
