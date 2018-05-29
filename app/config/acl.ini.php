@@ -1,4 +1,3 @@
-;<?php die() ?>
 ; SVN FILE: $Id: acl.ini.php,v 1.1 2010-07-12 19:52:21 klaus Exp $
 ;/**
 ; * Short description for file.

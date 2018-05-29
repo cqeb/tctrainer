@@ -288,10 +288,21 @@ class UsersController extends AppController {
 			$app_secret = FACEBOOK_APPSECRET;
 			
 			if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
-				$my_url = 'http://' . TESTHOST . '/facebook/login.php';
-			else
+				$my_url = 'https://' . TESTHOST . '/facebook/login.php';
+			else {
 				$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
+				if ( isset( $this->params['named']['previous_url'] ) ) {
+					$my_url .= 'previous_url:' . $this->params['named']['previous_url'] . '/';
+				}
+			}
 
+			if ( isset( $this->params['named']['previous_url'] ) ) {
+				$redirect_url = base64_decode($this->params['named']['previous_url']);
+				$redirect_url = preg_replace('/\/trainer/', '', $redirect_url);
+			} else {
+				$redirect_url = '/trainer/trainingplans/view/';
+			}
+			
 			if ( isset( $this->params['named']['fbuser'] ) ) 
 				$fbuser = $this->params['named']['fbuser'];
 
@@ -347,9 +358,10 @@ class UsersController extends AppController {
 						$cookie['userid'] = $results['User']['id'];
 						$cookie['firstname'] = $results['User']['firstname'];
 						
-						// COOKIE TIME
+						// COOKIE TIME only 1 day
 						$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 day');
-	
+						$this->Cookie->write('tct_auth', $cookie, false, '+1 day');
+
 						// set "user" session equal to email address
 						// user might have a different session from other login
 						$this->Session->write('session_useremail', $results['User']['email']);
@@ -370,7 +382,7 @@ class UsersController extends AppController {
 						$this->Session->write( 'recommendations', serialize($user_recommendations) );
 						*/
 						
-						echo '<script language="JavaScript">top.location.href="/trainer/trainingplans/view/";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
+						echo '<script language="JavaScript">top.location.href="' . $redirect_url . '";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
 						// doesn't work with facebook login - session get's lost
 						//$this->redirect('/trainingplans/view/');
 					} else {
@@ -431,9 +443,11 @@ class UsersController extends AppController {
 						if ( $this->data['User']['remember_me'] )
 						{
 							$this->Cookie->write('tct_auth', $cookie, false, '+30 days');	
+							$this->Cookie->write('tct_auth_blog', $cookie, false, '+30 days');
 						} else
 						{
 							$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 day');
+							$this->Cookie->write('tct_auth', $cookie, false, '+1 day');
 						}
 	
 						// set "user" session equal to email address
@@ -456,14 +470,22 @@ class UsersController extends AppController {
 						if ( isset( $user_recommendations ) ) 
 								$this->set('recommendations', $user_recommendations);
 						*/
-												
-						$this->redirect('/trainingplans/view');
+
+						if ( isset( $this->data['User']['previous_url'] ) ) {
+							$redirect_url = preg_replace('/\/trainer/', '', $this->data['User']['previous_url']);
+							$this->redirect($redirect_url);	
+							die();
+						} else {
+							$this->redirect('/trainingplans/view');
+							die();
+						}
 					} else
 					{
 						// login data is wrong, redirect to login page
 						$tid = $this->_sendNewUserMail( $results['User']['id'] );
 						$this->Session->write('flash',__('Not activated yet. Please follow the activation link in the welcome mail.',true));
 						$this->redirect('/users/login');
+						die();
 					}
 				} else
 				{
@@ -473,7 +495,7 @@ class UsersController extends AppController {
 					// login data is wrong, redirect to login page
 					$this->Session->write('flash',__('Wrong or not existing email or password. Please try again.', true));
 	        		// You must not redirect otherwise you won't see errors
-					//$this->redirect('/users/login');
+					$this->redirect('/users/login');
 				}
 			}
 		}

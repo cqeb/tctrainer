@@ -21,6 +21,7 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
         {
+            
             $this->Session->write('language', 'de');
 
             // user sets language       
@@ -175,10 +176,11 @@ class AppController extends Controller {
                            // to be sure
                            $this->Cookie->delete('tct_auth');
                            $this->Cookie->delete('tct_auth_blog');
-						   
+                           $this->Session->write('previous_url', $_SERVER['REQUEST_URI']);
+                           
                            $this->Session->write('flash',__("Sorry, you're not signed in or your session expired.", true));
                            $this->redirect('/users/login');
-		                       exit();
+		                   die();
                       } else
                       {
                            $session_useremail = $cookie['email'];
@@ -186,13 +188,14 @@ class AppController extends Controller {
                       }
                 } else
                 {
-                       // if cookie data are not the as session data, delete cookie
+                       // if cookie data are not the same session data, delete cookie
                        if ( ( isset( $cookie['email'] ) && isset( $cookie['userid'] ) ) )
                        {
                           if ( ( $cookie['email'] != $session_useremail ) || ( $cookie['userid']  != $session_userid ) )
                           {
                              $this->Cookie->delete('tct_auth');
                              $this->Cookie->delete('tct_auth_blog');
+                             //$this->Cookie->delete('TCTCookie');
                           }
                        }
                 }
@@ -210,7 +213,7 @@ class AppController extends Controller {
                                 $this->Session->delete('session_useremail');
                                 $this->Session->delete('session_userid');
                              	$this->Cookie->delete('tct_auth');
-                             	$this->Cookie->delete('tct_auth_blog');
+                                $this->Cookie->delete('tct_auth_blog');
                                 $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
                                 $this->redirect('/users/login');
                                 exit();

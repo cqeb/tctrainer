@@ -28,7 +28,12 @@ if ( $session_userid && $session_useremail ) { ?>
 <div class="form-group">
 
         <?php if ( !isset( $session_userid ) ) { ?>
-        <a href="/trainer/users/login_facebook/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/fb-signin.jpg"></a> &nbsp;&nbsp; <b><?php __('or'); ?></b><br />
+        <?php if ($session->read('previous_url')) { 
+          $addon = 'previous_url:' . base64_encode($session->read('previous_url')) . '/'; 
+        } else {
+          $addon = '';
+        } ?>
+        <a href="/trainer/users/login_facebook/<?php echo $addon; ?>"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/fb-signin.jpg"></a> &nbsp;&nbsp; <b><?php __('or'); ?></b><br />
         <?php } ?>
   
 </div>
@@ -71,6 +76,9 @@ echo $form->input('password',
      ) 
 ));
 
+if ($session->read('previous_url')) {
+  echo $form->hidden('previous_url', array('value' => $session->read('previous_url')));
+}
 ?>
   
     <div class="checkbox remember">
