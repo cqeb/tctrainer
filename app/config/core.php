@@ -304,7 +304,7 @@ Configure::write('Acl.database', 'default');
  *
  */
 
-Configure::write('Cache.check', true);
+//// Configure::write('Cache.check', true);
 
 /**
  * Turn off all caching application-wide.
@@ -316,6 +316,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
 	Configure::write('Cache.disable', true);
 }
 
+ /*
  Cache::config('default', array(
  		'engine' => 'File', //[required]
  		'duration'=> 10, //[optional]
@@ -325,6 +326,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
   		'lock' => false, //[optional]  use file locking
   		'serialize' => true //[optional]
 ));
+*/
 
  /*
  *

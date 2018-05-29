@@ -5,9 +5,9 @@ $url = url;
 <?php if ( $_SERVER['HTTP_HOST'] != LOCALHOST && $_SERVER['HTTP_HOST'] != TESTHOST ) { ?>
 
 <?php 
-// $admin_user = $this->Session->read('userobject');
+$admin_user = $this->Session->read('userobject');
 
-//if ( isset($admin_user['admin']) && $admin_user['admin'] != 1 ) { 
+if ( isset($admin_user['admin']) && $admin_user['admin'] != 1 ) { 
 ?>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -17,7 +17,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-P47J8C3');</script>
 <!-- End Google Tag Manager -->
 
-<?php //} ?>
+<?php } ?>
 
 <?php } ?>
 
