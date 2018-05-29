@@ -8,10 +8,10 @@
       parent::error404($params);
     }
 	
-	function missing_action($params) {
-      $this->controller->redirect(array('controller'=>'starts', 'action'=>'error404'));
-      parent::missing_action($params);
-	}
+    function missing_action($params) {
+        $this->controller->redirect(array('controller'=>'starts', 'action'=>'error404'));
+        parent::missing_action($params);
+    }
 
   }
 

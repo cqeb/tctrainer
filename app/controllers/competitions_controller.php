@@ -232,8 +232,17 @@ class CompetitionsController extends AppController {
 
                $this->data['Competition']['user_id'] = $session_userid;
 
+               $competition_date = $this->data['Competition']['competitiondate'];
+               if (is_array($competition_date)) $competition_date = 
+                $competition_date['year'] . '-' . $competition_date['month'] . '-' . $competition_date['day'];
+
+               /*
                $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND name = '" . $this->data['Competition']['name'] .
                       "' AND competitiondate = '" . $this->data['Competition']['competitiondate'] . "'";
+               */
+               $sql = "SELECT * FROM competitions WHERE user_id = $session_userid AND name = '" . $this->data['Competition']['name'] .
+                      "' AND competitiondate = '" . $competition_date . "'";
+
                $Comps_already = $this->Competition->query( $sql );
                if ( count( $Comps_already ) > 0 ) $error = __('This event already exists!',true);
 

@@ -29,7 +29,8 @@ $searchfilter = base64_encode( $searchfilter );
 for ( $i = 0; $i < count( $testworkoutsfilter ); $i++ )
 {
     $dt = $testworkoutsfilter[$i]['trainingstatistics'];
-    $key = $dt['name'] . '|||' . $dt['distance'];
+    if ( isset( $dt['distance'] ) && isset( $dt['name'] ) ) 
+        $key = $dt['name'] . '|||' . $dt['distance'];
     /*$distance = $unitcalc->check_distance( $dt['distance'] );*/
     $ccount = $testworkoutsfilter[$i][0]['ccount'];
     $searchname[$key] = $dt['sportstype'] . ' - ' . $dt['name'] . ' - ' . $distance['amount'] . ' ' . $length_unit . ' (' . $ccount . ')';

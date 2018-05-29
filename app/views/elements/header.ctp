@@ -4,7 +4,11 @@ $url = url;
 <!-- do not track on localhost and testhost -->
 <?php if ( $_SERVER['HTTP_HOST'] != LOCALHOST && $_SERVER['HTTP_HOST'] != TESTHOST ) { ?>
 
-<?php if ( $userobject['admin'] != 1 ) { ?>
+<?php 
+// $admin_user = $this->Session->read('userobject');
+
+//if ( isset($admin_user['admin']) && $admin_user['admin'] != 1 ) { 
+?>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -13,7 +17,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-P47J8C3');</script>
 <!-- End Google Tag Manager -->
 
-<?php } ?>
+<?php //} ?>
 
 <?php } ?>
 

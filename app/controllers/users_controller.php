@@ -346,8 +346,9 @@ class UsersController extends AppController {
 						$cookie['email'] = $results['User']['email'];
 						$cookie['userid'] = $results['User']['id'];
 						$cookie['firstname'] = $results['User']['firstname'];
-							
-						$this->Cookie->write('tct_auth_blog', $cookie, false, '+30 days');
+						
+						// COOKIE TIME
+						$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 day');
 	
 						// set "user" session equal to email address
 						// user might have a different session from other login
@@ -429,10 +430,10 @@ class UsersController extends AppController {
 						// if you want to stay logged in, we have to write a cookie
 						if ( $this->data['User']['remember_me'] )
 						{
-							$this->Cookie->write('tct_auth', $cookie, false, '+52 weeks');	
+							$this->Cookie->write('tct_auth', $cookie, false, '+30 days');	
 						} else
 						{
-							$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 hour');
+							$this->Cookie->write('tct_auth_blog', $cookie, false, '+1 day');
 						}
 	
 						// set "user" session equal to email address
@@ -485,11 +486,16 @@ class UsersController extends AppController {
 		// kill all session information
 		$this->Session->delete('session_useremail');
 		$this->Session->delete('session_userid');
+
+		$this->Cookie->write('tct_auth_blog', $cookie, false, '+0 hour');
+		$this->Cookie->write('tct_auth', $cookie, false, '+0 hour');
+
 		$this->Cookie->delete('tct_auth');
 		$this->Cookie->delete('tct_auth_blog');
+		$this->Cookie->delete('TCTCookie');
 
-		$this->set('session_userid', '');
-		$this->set('session_useremail', '');
+		$this->set('session_userid', null);
+		$this->set('session_useremail', null);	
 		$this->set('session_unit', '');
 		$this->set('session_unitdate', '');
 		$this->set('session_firstname', '');
@@ -1210,7 +1216,7 @@ class UsersController extends AppController {
 		                      $cookie['email'] = $new_email;
 		                      $cookie['userid'] = $session_userid;
 		                      
-		                      $this->Cookie->write('tct_auth', $cookie, false, '+52 weeks');
+		                      $this->Cookie->write('tct_auth', $cookie, false, '+1 day');
 		                }
 		           }
 		      	   $statusbox = 'alert alert-success';

@@ -48,9 +48,9 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 	 * Defines the default error type when using the log() function. Used for
 	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
 	 */
-	define('DEBUG', false);
-	define('LOG_ERROR', 0);
-	Configure::write('debug', 0);
+	define('DEBUG', true);
+	define('LOG_ERROR', 3);
+	Configure::write('debug', 3);
 	
 	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
 
@@ -81,13 +81,13 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 
 	Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.hostUrl', 'https://tricoretraining.com');	
-	/*
-	if ($_SERVER['REMOTE_ADDR'] == '213.225.32.169') {
-        define('DEBUG', true );
-        define('LOG_ERROR', 3);
-        Configure::write('debug', 3);
+	
+	if ($_SERVER['REMOTE_ADDR'] == '213.225.35.216') {
+        define('DEBUG', false );
+        define('LOG_ERROR', 1);
+        Configure::write('debug', 1);
 	}
-	*/	
+	
 	//$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/tricoretraining.com/';
 }
