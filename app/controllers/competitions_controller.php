@@ -27,11 +27,13 @@ class CompetitionsController extends AppController {
    {
         parent::beforeFilter();
         $this->layout = 'default_trainer';
-        $this->checkSession();
+        //$this->checkSession();
+        
    }
 
    function list_competitions()
    {
+        $this->checkSession();
         $statusbox = 'alert';
         $create_dummy = '';
 
@@ -77,6 +79,8 @@ class CompetitionsController extends AppController {
 
    function edit_competition($id = null) 
    {
+        $this->checkSession();
+       
         $this->set('js_addon','');
         $error = '';
         $statusbox = 'alert';
@@ -158,29 +162,29 @@ class CompetitionsController extends AppController {
                 // check for metric / unit
                 if ( isset( $this->data['Competition']['swim_distance'] ) )
                 {
-                $this->data['Competition']['swim_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['swim_distance'] ), 'save', 'single' );
+                    $this->data['Competition']['swim_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['swim_distance'] ), 'save', 'single' );
                 }
                 if ( isset( $this->data['Competition']['bike_distance'] ) )
                 {
-                $this->data['Competition']['bike_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['bike_distance'] ), 'save', 'single' );
+                    $this->data['Competition']['bike_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['bike_distance'] ), 'save', 'single' );
                 }
                 if ( isset( $this->data['Competition']['duathlon_run_distance'] ) )
                 {
-                $this->data['Competition']['duathlon_run_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['duathlon_run_distance']), 'save', 'single' );
+                    $this->data['Competition']['duathlon_run_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['duathlon_run_distance']), 'save', 'single' );
                 }
                 if ( isset( $this->data['Competition']['run_distance'] ) )
                 {
-                $this->data['Competition']['run_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['run_distance'] ), 'save', 'single' );
+                    $this->data['Competition']['run_distance'] = $this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Competition']['run_distance'] ), 'save', 'single' );
                 }
 
                 if ( isset( $this->data['Competition']['swim_time'] ) )
-                $this->data['Competition']['swim_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['swim_time'] );
+                    $this->data['Competition']['swim_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['swim_time'] );
                 if ( isset( $this->data['Competition']['bike_time'] ) )
-                $this->data['Competition']['bike_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['bike_time'] );
+                    $this->data['Competition']['bike_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['bike_time'] );
                 if ( isset( $this->data['Competition']['duathlon_run_time'] ) )
-                $this->data['Competition']['duathlon_run_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['duathlon_run_time'] );
+                    $this->data['Competition']['duathlon_run_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['duathlon_run_time'] );
                 if ( isset( $this->data['Competition']['run_time'] ) )
-                $this->data['Competition']['run_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['run_time'] );
+                    $this->data['Competition']['run_time'] = $this->Unitcalc->time_to_seconds( $this->data['Competition']['run_time'] );
             }
 
             // create dummy event for user based on his personal profile
@@ -282,6 +286,8 @@ class CompetitionsController extends AppController {
 
    function check_competitions( $competitions, $userdata )
    {
+        $this->checkSession();
+       
         // TODO (B) finish this function
         $userdata = $userdata['User'];
 
@@ -298,6 +304,8 @@ class CompetitionsController extends AppController {
 
    function delete($id) 
    {
+        $this->checkSession();
+       
         $this->Provider->smartPurgeOnDelete($id);
         $this->Competition->delete($id);
         $this->Session->write('flash',__('Race was deleted.', true));

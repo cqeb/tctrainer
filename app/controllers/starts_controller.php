@@ -13,7 +13,8 @@ class StartsController extends AppController
 	function beforeFilter()
 	{
   		parent::beforeFilter();
-  		$this->layout = 'default_trainer';
+		$this->layout = 'default_trainer';
+		
 	}
 
 	function all_bootstrap ()
@@ -125,7 +126,7 @@ class StartsController extends AppController
 			
 		// if user is logged in, then redirect
 		// TODO
-		} elseif ( $this->Session->read('session_userid') )
+		} elseif ( is_numeric($this->Session->read('session_userid') ) )
         {
             $this->redirect('/trainingplans/view');
         }

@@ -487,7 +487,6 @@ class UsersController extends AppController {
 								$this->set('recommendations', $user_recommendations);
 						*/
 
-
 						$this->Session->write('previous_url', '');
 						$this->redirect($redirect_url);
 						die();
@@ -515,8 +514,8 @@ class UsersController extends AppController {
 		$this->set("title_for_layout", __('Logout',true));
 		
 		// kill all session information
-		$this->Session->delete('session_useremail');
-		$this->Session->delete('session_userid');
+		$this->Session->write('session_useremail', '');
+		$this->Session->write('session_userid', '');
 
 		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
 		$this->Cookie->delete('tct_auth_blog');
@@ -625,13 +624,13 @@ class UsersController extends AppController {
 	 */
 	function register() 
 	{	  
-	    if ( $this->Session->read('session_userid') ) 
+	    if ( is_numeric($this->Session->read('session_userid')) ) 
 	    {
 			$this->checkSession();
 			$this->redirect('/trainingplans/view');
 	    }
 
-		if ( $this->Session->read( 'recommendation_userid' ) ) 
+		if ( is_numeric($this->Session->read( 'recommendation_userid' )) ) 
 			$inviter = $this->Session->read('recommendation_userid');
 		else
 			$inviter = '';
@@ -1304,7 +1303,9 @@ class UsersController extends AppController {
 		$this->set("title_for_layout", __('Change your training settings',true));		
 
 		$this->checkSession();
+		
 		$statusbox = 'alert';
+
 		$this->User->id = $session_userid = $this->Session->read('session_userid');
 		$this->set('unitmetric', $this->Unitcalc->get_unit_metric() );
 

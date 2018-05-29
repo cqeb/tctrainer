@@ -17,8 +17,8 @@ class TrainingstatisticsController extends AppController {
 
    function beforeFilter()
    {
-            parent::beforeFilter();
-            $this->layout = 'default_trainer';
+		parent::beforeFilter();
+		$this->layout = 'default_trainer';
    }
 
    // list all trainings

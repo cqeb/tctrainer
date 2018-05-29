@@ -83,9 +83,9 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 	Configure::write('App.hostUrl', 'https://tricoretraining.com');	
 	
 	if ($_SERVER['REMOTE_ADDR'] == '213.225.35.216') {
-        define('DEBUG', false );
-        define('LOG_ERROR', 1);
-        Configure::write('debug', 1);
+        define('DEBUG', true );
+        define('LOG_ERROR', 3);
+        Configure::write('debug', 3);
 	}
 	
 	//$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
