@@ -2082,7 +2082,7 @@ class UsersController extends AppController {
 							__('If you log your workouts, you get better training plans and reach your goal faster.', true) . 
 							'<br /><br />' .  
 							__('Go to your', true) . ' <a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') .				
-							'/trainingstatistics/list_trainings/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' .
+							'/trainingstatistics/list_trainings/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=go_to_logbook" target="_blank">' .
 							'TriCoreTraining ' . __('logbook', true) . '</a> ' . 
 							__('and track your workouts - better now than later ⏱️!', true) . "<br /><br />"; 
 		 
@@ -2114,7 +2114,7 @@ class UsersController extends AppController {
 						
 							$text_for_mail_training .= '🏅 ' . __('Your next race is only a few weeks away.', true) . ' ' . 
 								'<a href="' . Configure::read('App.hostUrl') . 
-								'/blog/' . $lang . '/now-its-time-the-race-starts-soon/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . 
+								'/blog/' . $lang . '/now-its-time-the-race-starts-soon/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=faq_weekly_plan_race" target="_blank">' . 
 								__('Read this blog post!', true) . '</a><br /><br />'; 
 		 				}
 
@@ -2128,7 +2128,7 @@ class UsersController extends AppController {
 						
 							$text_for_mail_training .=  '🏅 ' . __('Your next race is only a few days away. TriCoreTraining wishes you all the best!', true) . ' ' . 
 								'<a href="' . Configure::read('App.hostUrl') . 
-								'/blog/' . $lang . '/what-can-go-wrong-before-a-competition/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . 
+								'/blog/' . $lang . '/what-can-go-wrong-before-a-competition/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=faq_weekly_plan_race" target="_blank">' . 
 								__('Read this!', true) . '</a><br /><br />'; 
 		 				}
 		 			}
@@ -2246,42 +2246,42 @@ class UsersController extends AppController {
 			      if ( !$u['firstname'] ) 
 			        $text_for_mail .= '<li>' . __('Your firstname is missing!',true) . ' ' . __('Please add it to your profile.', true) .
 			         " " . '<a href="' . Configure::read('App.hostUrl') . 
-			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">&raquo; ' . 
 			         __('Change it.', true) . '</a>' . 
 			        "</li>\n";
 			
 			      if ( !$u['lastname'] ) 
 			        $text_for_mail .= '<li>' . __('Your lastname is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
 			         " " . '<a href="' . Configure::read('App.hostUrl') . 
-			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">&raquo; ' . 
 			         __('Change it.', true) . '</a>' . 
 			         "</li>\n";
 			      
 			      if ( $u['level'] == 'paymember' && !$u['address'] ) 
 			        $text_for_mail .= '<li>' . __('Your address is missing!',true) . ' ' . __('Please add it to your profile.', true) .
 			         " " . '<a href="' . Configure::read('App.hostUrl') . 
-			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">&raquo; ' . 
 			         __('Change it.', true) . '</a>' . 
 			         "</li>\n";
 			
 			      if ( $u['level'] == 'paymember' && !$u['zip'] ) 
 			        $text_for_mail .= '<li>' . __('Your zip is missing!',true) . ' ' . __('Please add it to your profile.', true) . 
 			         " " . '<a href="' . Configure::read('App.hostUrl') . 
-			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">&raquo; ' . 
 			         __('Change it.', true) . '</a>' . 
 			         "</li>\n";
 			
 			      if ( $u['level'] == 'paymember' && !$u['city'] ) 
 			        $text_for_mail .= '<li>' . __('Your city is missing!',true) . ' ' . __('Please add it to your profile.', true) .
 			         " " . '<a href="' . Configure::read('App.hostUrl') . 
-			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">&raquo; ' . 
 			         __('Change it.', true) . '</a>' . 
 			         "</li>\n";
 			
 			      if ( $u['level'] == 'paymember' && !$u['country'] ) 
 			        $text_for_mail .= '<li>' . __('Your country is missing!',true) . ' ' . __('Please add it to your profile.', true) .
 			         " " . '<a href="' . Configure::read('App.hostUrl') . 
-			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . 
+			         Configure::read('App.serverUrl') . '/users/edit_userinfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">&raquo; ' . 
 			         __('Change it.', true) . '</a>' . 
 			         "</li>\n";
 			
@@ -2295,7 +2295,7 @@ class UsersController extends AppController {
 			      } else {
 			        $text_for_mail .= '<li>' . __('Your run lactate threshold must be between 100 and 210.', true) . 
 			          " " . '<a href="' . Configure::read('App.hostUrl') . 
-			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
 			      }
 			
 			      // check bike lactatethreshold
@@ -2304,7 +2304,7 @@ class UsersController extends AppController {
 			      } else {
 			        $text_for_mail .= '<li>' . __('Your bike lactate threshold must be between 100 and 210.', true) . 
 			          " " . '<a href="' . Configure::read('App.hostUrl') . 
-			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=missing_data" target="_blank">' . __('Change it.', true) . '</a>' . "</li>\n";
 			      }
 
 			      // check for target weight
@@ -2336,7 +2336,7 @@ class UsersController extends AppController {
 			                  round( $this->Unitcalc->check_weight($weight_per_month_check, 'show', 'single'), 1 ) .
 			                  ' ' . $weight_unit . ' - ' . __("that's not healthy ⚖️ - set a new weight goal!", true) . ' ' . 
 			                  " " . '<a href="' . Configure::read('App.hostUrl') . 
-			                  Configure::read('App.serverUrl') . '/users/edit_weight/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('Change it.', true) . '</a>' .
+			                  Configure::read('App.serverUrl') . '/users/edit_weight/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=weight_loss" target="_blank">' . __('Change it.', true) . '</a>' .
 			                  "</li>\n";
 			          } 
 			      }
@@ -2347,7 +2347,7 @@ class UsersController extends AppController {
 			          // check per sport how many hours an user should train
 			          $text_for_mail .= '<li>' . __('You have not logged your weekly trainings.', true) . 
 			          " " . '<a href="' . Configure::read('App.hostUrl') . 
-			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('Change it.', true) . '</a>' .
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=no_logged_trainings" target="_blank">' . __('Change it.', true) . '</a>' .
 			          "</li>\n";
 			      }
 			
@@ -2358,7 +2358,7 @@ class UsersController extends AppController {
 			      {
 			          $text_for_mail .= '<li>' . __("You mentioned that you're a beginner. Since you're with us for more than 9 months, maybe you should update this in your profile!", true) .
 			          " " . '<a href="' . Configure::read('App.hostUrl') . 
-			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('Change it.', true) . '</a>' .
+			          Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=beginner_reminder" target="_blank">' . __('Change it.', true) . '</a>' .
 			          "</li>\n";
 			      }   
 			
@@ -2367,7 +2367,7 @@ class UsersController extends AppController {
 			      if ( !$u['myrecommendation'] && $u['activated'] == '1' && strtotime( $u['paid_to'] ) > time() )
 			      { 
 				          $text_for_mail .= '<li>' . __('If you like TriCoreTraining', true) . ', <a href="' . Configure::read('App.hostUrl') . 
-				          Configure::read('App.serverUrl') . '/users/edit_traininginfo/#recommendation?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('please tell it your friends 🧡!', true) . '</a>';
+				          Configure::read('App.serverUrl') . '/users/edit_traininginfo/#recommendation?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=recommend_service" target="_blank">' . __('please tell it your friends 🧡!', true) . '</a>';
 				          $text_for_mail .= "</li>\n";
 			      }
 				  
@@ -2376,7 +2376,7 @@ class UsersController extends AppController {
 				  { 
 				      $text_for_mail .= '<li>' . __("You haven't agreed to our terms and conditions or your medical conditions are not good enough for endurance training. 👨🏽‍⚕️ Is that still correct? You won't receive training plans with bad health for your own protection. Sorry!", true) . 
 				      " " . '<a href="' . Configure::read('App.hostUrl') . 
-				      Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">' . __('Change it.', true) . '</a>' .
+				      Configure::read('App.serverUrl') . '/users/edit_traininginfo/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=have_not_agree" target="_blank">' . __('Change it.', true) . '</a>' .
 				      "</li>\n";
 				  }
 				
@@ -2409,7 +2409,7 @@ class UsersController extends AppController {
 
 				      $text_for_mail_premium =  
 						__('Your PREMIUM membership has expired 😞. If you still want to receive professional, interactive training plans for the value of one coffee ☕ a month again', true) . ', ' .
-						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretrainingsystem&utm_medium=mailing" target="_blank">&raquo; ' . __('Subscribe PREMIUM', true) . '</a>' . "\n";
+						'<a href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/payments/subscribe_triplans/?utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=expired_premium" target="_blank">&raquo; ' . __('Subscribe PREMIUM', true) . '</a>' . "\n";
 						'<br /><br />' . "\n\n"; // . __('Reach Your Goal With a Plan!');
 				  }
 				
@@ -2453,7 +2453,7 @@ class UsersController extends AppController {
 							*/
 							$key_add = "&athlete_id=" . $u['id'] . "&key=" . $this->Transactionhandler->_encrypt_data( $u['id'] );
 							$content .= '<a class="button" href="' . Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . 
-							'/trainingplans/get_events/?o=1&utm_source=tricoretrainingsystem&utm_medium=mailing' . $key_add . '" target="_blank">' .
+							'/trainingplans/get_events/?o=1&utm_source=tricoretrainingsystem&utm_medium=mailing&utm_campaign=import_calendar' . $key_add . '" target="_blank">' .
 						    __('Import training week into your personal calendar (.ics)!', true) . '</a>' . "\n";
 							$content .= "<br /><br />\n\n";	
 					   } elseif ( $text_for_mail_premium )
@@ -2485,6 +2485,7 @@ class UsersController extends AppController {
 
                        $content .= '<br /><p>' . __('Cheers.', true) . ' Klaus-M.</p>';
 					   $u['ok_notification_link'] = true;
+					
                        // check again :)
                        if ( $u['notifications'] != 1 ) {
 							$this->_sendMail($u, $mailsubject, $template, $content, $u['yourlanguage']);
