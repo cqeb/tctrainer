@@ -9,6 +9,9 @@
 <?php __('Click to activate your account'); ?>
 <?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/activate/transaction_id:<?php echo $transaction_id?>
 
+
+<?php __('With your subscription you agree that we are allowed to send you newsletters and mailings on a regular base. Thanks a lot!'); ?>
+
 <?php echo $this->element('email/newsletter_text_footer'); ?>
 
 

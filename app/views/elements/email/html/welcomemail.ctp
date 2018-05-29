@@ -10,6 +10,10 @@
 
  <p><a class="button" href="<?php echo Configure::read('App.hostUrl'); echo Configure::read('App.serverUrl'); ?>/users/activate/transaction_id:<?php echo $transaction_id?>">
  <?php __('Click to activate your account'); ?>
-</a></p>
+ </a></p>
 
+ <p>
+ <?php __('With your subscription you agree that we are allowed to send you newsletters and mailings on a regular base. Thanks a lot!'); ?>
+ </p>
+ 
 <?php echo $this->element('email/newsletter_footer'); ?>
