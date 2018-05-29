@@ -385,6 +385,7 @@ class UsersController extends AppController {
 						echo '<script language="JavaScript">top.location.href="' . $redirect_url . '";</script><a href="/trainer/trainingplans/view/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
 						// doesn't work with facebook login - session get's lost
 						//$this->redirect('/trainingplans/view/');
+						$this->Session->write('previous_url', '');
 					} else {
 						echo __('Sorry, your user is not active. Please contact our', true) . ' <a href="mailto:support@tricoretraining.com">Support</a>. <a href="/trainer/">&raquo; Home</a>';
 					}
@@ -473,9 +474,11 @@ class UsersController extends AppController {
 
 						if ( isset( $this->data['User']['previous_url'] ) ) {
 							$redirect_url = preg_replace('/\/trainer/', '', $this->data['User']['previous_url']);
+							$this->Session->write('previous_url', '');
 							$this->redirect($redirect_url);	
 							die();
 						} else {
+							$this->Session->write('previous_url', '');
 							$this->redirect('/trainingplans/view');
 							die();
 						}
