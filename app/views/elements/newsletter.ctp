@@ -4,6 +4,15 @@
 				<div class="row">
 					<div class="col-12 col-lg-12 text-center">
 
+						<h2><?php __('Get Triathlon training hints?'); ?></h2>
+						<h3><?php __('You\'ll receive regular tips and hints on a perfect training plan.'); ?></h3>
+<br />
+<?php if ( !isset($this->params['named']['newsletter'] ) ) { ?>
+
+<a class="btn btn-success" href="/trainer/starts/index/code:<?php echo $language; ?>/newsletter:true/#newsletter"><?php __('Receive our Newsletter'); ?><br /><em><?php __('it´s free!'); ?></em></a>
+
+<?php } else { ?>
+
 <!-- Begin MailChimp Signup Form -->
 <!--link href="//cdn-images.mailchimp.com/embedcode/classic-081711.css" rel="stylesheet" type="text/css"-->
 <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
@@ -24,7 +33,7 @@ if ( $language == 'deu' ) {
 
 ?>
 <form action="https://tricoretraining.us3.list-manage.com/subscribe/post?u=1aae732ff84bdc99903e3ec91&amp;id=<?php echo $mailchimp_list_id; ?>" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
-	<h2><?php __('Want to receive Triathlon Training hacks and tricks?'); ?></h2>
+
 <div class="indicates-required"><span class="asterisk">*</span> <?php __('indicates required'); ?></div>
 <div class="mc-field-group">
 	<label for="mce-EMAIL"><?php __('Email'); ?> <span class="asterisk">*</span>
@@ -53,6 +62,7 @@ if ( $language == 'deu' ) {
 
 <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
 
+<?php } ?>
 					</div>
 				</div>
 			</div>

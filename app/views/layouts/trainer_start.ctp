@@ -65,9 +65,9 @@ if ( isset( $facebox_content ) ) {
 <head>
 	<title><?php
 if ( isset( $title ) ) 
-	echo 'TriCoreTraining - ' . ' ' . $title;
+	echo 'TriCoreTraining - ' . $title;
 else	
-	echo 'TriCoreTraining - ' . ' ' . $title_for_layout;
+	echo 'TriCoreTraining - ' . $title_for_layout;
 	?></title>
 
 	<?php $url = Configure::read('App.serverUrl'); //echo $html->charset(); ?>
@@ -331,19 +331,18 @@ else
 				</div>	
 			</div>
 		</div>
-	</div><a name="newsletter"></a>
+	</div>
 	</div>
 </div>
-
-<?php echo $this->element('newsletter'); ?>
 
 <div class="container">
 	<div class="jumbotron">
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-lg-12 text-center">
-						<a name="pricing"></a><h2><?php __('Choose your plan'); ?></h2>
-						<p></p>
+						<a name="pricing"></a>
+						<h2><?php __('Choose your plan'); ?></h2>
+						<!--<p></p>-->
 					</div>
 				</div>
 			</div>
@@ -439,7 +438,12 @@ else
 				<p><i>* <?php __('20% VAT included!'); ?></i></p>
 			</div>
 		</div>
-    </div>
+	</div>
+	
+	<a name="newsletter"></a>
+
+	<?php echo $this->element('newsletter'); ?>
+
 </div>	
 </div>
 </article>
