@@ -287,10 +287,6 @@ abstract class WorkoutProvider {
 	 * stores generated workouts back to the database
 	 */
 	public function save() {
-
-		//print_r($this->workouts);
-		//print_r($this->historic);
-
 		if (count($this->workouts) == 0 || $this->historic) {
 			return false;
 		}

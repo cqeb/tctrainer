@@ -196,7 +196,6 @@ class TrainingplansController extends AppController {
 		// DEBUG
 		if ( isset( $_GET['debug'] ) ) 
 			$sql .= " LIMIT 1";
-		//print_r($this->User);
 		$users_results = $this->User->query($sql);
 
 		$count_results = count( $users_results );

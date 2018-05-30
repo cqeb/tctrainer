@@ -3,8 +3,6 @@
 $intervaldays = 14;
 $startday_ts = strtotime( $start );
 
-//print_r($trainings);
-
 $output = '{ "results": [ '; $j = 0;
 
 for ( $i = 0; $i < count($trainings); $i++ ) 

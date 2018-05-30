@@ -293,11 +293,6 @@ class CompetitionsController extends AppController {
 
         for ( $i = 0; $i < count( $competitions ); $i++ )
         {
-                /*
-                print_r( $competitions[$i]["competitions"] );
-                echo "<br /><br />";
-                print_r($userdata);
-                */
                 // right now we do nothing here
         }
    }

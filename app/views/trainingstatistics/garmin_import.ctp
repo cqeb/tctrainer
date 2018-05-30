@@ -46,7 +46,7 @@ foreach ( $activities_view as $key => $workout )
         'hiddenField' => 'N',
     ));
     //echo "<input style='margin-left: 0px' type='checkbox' name='workout2import' value='" .  . "' />";"
-    echo "</td>";
+    echo "  </td>";
     echo "  <td>" . $this->Unitcalc->check_date($workout['date'],'show','') . "</td>";
     //echo "  <td>" . $workout['name'] . "</td>";
     echo "  <td>" . $workout['sport'] . "</td>";
@@ -65,12 +65,8 @@ foreach ( $activities_view as $key => $workout )
     //echo "  <td>" . $workout['workoutlink'] . "</td>";
     //echo "  <td>" . $workout['importeddate'] . "</td>";
     echo "</tr>";
-    //print_r($workout);
-    
-    echo "</tr>";
     $i++;
 }
-//print_r($activities_view); 
 
 ?>
         </table>

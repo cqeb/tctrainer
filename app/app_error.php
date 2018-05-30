@@ -4,8 +4,6 @@
   {
 
     function error404($params) {
-      print_r($params);
-      die();
       $this->controller->redirect(array('controller'=>'starts', 'action'=>'error404'));
       parent::error404($params);
     }

@@ -1345,7 +1345,6 @@ class UsersController extends AppController {
 					);
 			} else 
 			{
-				//print_r( $this->data );
 				$this->Session->write('flash',__('Some errors occured.', true));
 				$statusbox = 'alert alert-danger';
 			}
@@ -2471,7 +2470,6 @@ class UsersController extends AppController {
 
 					   if ( $send_trainingplan === true ) 
 					   {
-							// print_r($user);
 							$trainingplan_content = $this->Provider->getPlan(true, $user, $notSun, 1);
 							// echo $trainingplan_content;
 
@@ -2614,8 +2612,6 @@ class UsersController extends AppController {
 	    /* Do not pass any args to send() */
 	    $this->Email->send();
 
-		//print_r($this->Email->htmlMessage);
-
 	    /* Check for SMTP errors. */
 	    $this->set('smtperrors', $this->Email->smtpError);
 	    if ( $debug == true ) echo "<br>" . $this->Email->smtpError . "<br>";
@@ -2646,8 +2642,6 @@ class UsersController extends AppController {
 			$test = $this->User->save( $this->data, array(
 			      'validate' => false,
 			      'fieldList' => array( 'notifications') ) );
-
-			print_r($this->data);
 
 			$msg = __('Weekly training plans will not arrive in your mailbox anymore. If you also want to stop receiving newsletters, please click unsubscribe in the next one. If anything is annoying you with TriCoreTraining, just tell us. Thanks.', true);
 			$statusbox = 'alert alert-success';
