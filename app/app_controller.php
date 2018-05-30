@@ -21,15 +21,24 @@ class AppController extends Controller {
 
 	   	function beforeFilter()
         {
+            // tct_auth_blog
+            $this->Cookie->path = '/';
+            $this->Cookie->domain = '.tricoretraining.com';
+            
+            if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
+            {    
+                $this->Cookie->secure = false; 
+            } else {
+                $this->Cookie->secure = true; 
+            }
+
             // user sets language 
             // code: eng or deu
             if ( isset( $this->params['named']['code'] ) ) 
             {
                 $this->code = $this->params['named']['code'];
                 $language = $this->code;
-    
             } else {
-
                 // user is logged in
                 if ( $this->Session->read('session_userid') ) 
                 {
@@ -43,7 +52,6 @@ class AppController extends Controller {
                         $language = $this->UserLanguage['User']['yourlanguage'];
                     }
                 } else {
-
                     if ( $this->Session->read('Config.language') ) {
                         $language = $this->Session->read('Config.language');
                     } else {
@@ -78,6 +86,8 @@ class AppController extends Controller {
             // deu is for locale folder
             $this->set('language', $language); 
             
+            $this->Cookie->write('tct_language', "$language", false, '+1 day');
+
             if ($language && file_exists(VIEWS . $language . DS . $this->viewPath))
             {
                 // e.g. use /app/views/fre/pages/tos.ctp instead of /app/views/pages/tos.ctp
@@ -161,6 +171,7 @@ class AppController extends Controller {
             $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');
 
+/*
             // tct_auth_blog
             $this->Cookie->path = '/';
             $this->Cookie->domain = '.tricoretraining.com';
@@ -171,6 +182,7 @@ class AppController extends Controller {
             } else {
                 $this->Cookie->secure = true; 
             }
+*/
 
             if ( preg_match( '/@/', $session_useremail ) && is_numeric( $session_userid ) )
             {
