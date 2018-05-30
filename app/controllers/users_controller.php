@@ -417,6 +417,10 @@ class UsersController extends AppController {
 	
 	function login()
 	{
+		// reset cookie for blog
+		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
+		$this->Cookie->delete('tct_auth_blog');
+
 		$previous_url = $this->Session->read('previous_url');
 		if ( $previous_url ) {
 			$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
@@ -519,8 +523,8 @@ class UsersController extends AppController {
 
 		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
 		$this->Cookie->delete('tct_auth_blog');
-		// in case a long termin login cookie is set
 
+		// in case a long termin login cookie is set
 		Configure::write('Session_longterm', 'false');
 
 		$this->set('session_userid', '');
@@ -963,9 +967,12 @@ class UsersController extends AppController {
 
 			$session_register_userid = $this->Session->read('register_userid');
 
-			// add to mailchimp
-			$this->add_subscriber($this->data['User']['email'], $this->data['User']['firstname'], $this->data['User']['lastname'], $this->data['User']['gender'], $this->data['User']['yourlanguage']);
-
+			// add to mailchimp but not on localhost
+			if ( $_SERVER['HTTP_HOST'] != LOCALHOST )
+			{
+				$this->add_subscriber($this->data['User']['email'], $this->data['User']['firstname'], $this->data['User']['lastname'], $this->data['User']['gender'], $this->data['User']['yourlanguage']);
+			}
+			
 			if ( $session_register_userid != $this->User->id )
 			{
 				$this->Session->write('flash',__("Sorry. Something is wrong. Don't hack other accounts!",true));

@@ -122,15 +122,17 @@ class StartsController extends AppController
 				$this->Session->write('recommendation_userid', $discount);
 				
 				$this->set( 'companyinfo', $discount );
-			}
-			
+			}	
 		// if user is logged in, then redirect
 		// TODO
 		} elseif ( is_numeric($this->Session->read('session_userid') ) )
         {
             $this->redirect('/trainingplans/view');
-        }
-
+		}
+		
+		// in case your not logged in, remove blog cookie
+		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
+		$this->Cookie->delete('tct_auth_blog');
 	}
   
 	function error404()
