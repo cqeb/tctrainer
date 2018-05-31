@@ -8,7 +8,7 @@
              <?php echo $form->create('User', array('action' => 'password_forgotten', 'class' => 'form-horizontal'));?>
 
              <fieldset>
-             <legend><?php __('Enter your email to reset your password.'); ?></legend>
+                  <legend><?php __('Enter your email to reset your password.'); ?></legend>
 
              <?php if ($session->read('flash')) { ?>
              <div class="<?php echo $statusbox; ?>">
@@ -31,7 +31,7 @@ if ( $status != 'sent' )
            'between' => '',
            'maxLength' => 255,          
            'class' => 'required form-control',
-           'label' => array( 'class' => 'control-label', __('Your email', true) ),
+           'label' => array( 'class' => 'control-label', 'text' => __('Your email', true) ),
            'error' => array( 
               'notempty' => __('You have to enter an email', true),
               'wrap' => 'span', 

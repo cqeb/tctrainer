@@ -9,11 +9,11 @@
           <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">TriCoreTraining? <!--<?php __('Training Plans'); ?>--><b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="/trainer/#howitworks"><?php __('What is'); ?> TriCoreTraining?</a></li>
-                  <li><a href="/trainer/#features"><?php __('Features'); ?></a></li>
-                  <li><a href="/trainer/#references"><?php __('References'); ?></a></li>
-                  <li><a href="/trainer/#newsletter">&raquo; <?php __('Get Training Hints'); ?></a></li>                          
-                  <li><a href="/trainer/#pricing"><?php __('Pricing'); ?></a></li>
+                  <li><a href="/trainer/starts/index#howitworks"><?php __('What is'); ?> TriCoreTraining?</a></li>
+                  <li><a href="/trainer/starts/index#features"><?php __('Features'); ?></a></li>
+                  <li><a href="/trainer/starts/index#references"><?php __('References'); ?></a></li>
+                  <li><a href="/trainer/starts/index#newsletter">&raquo; <?php __('Get Training Hints'); ?></a></li>                          
+                  <li><a href="/trainer/starts/index#pricing"><?php __('Pricing'); ?></a></li>
                   <li><a href="/blog/<?php if ( $language == 'deu' ) { ?>de/<?php } else { ?>en/<?php } ?>about/"><?php __('More about'); ?> TriCoreTraining</a></li>
                 </ul>
           </li>
@@ -62,7 +62,6 @@
                     <li style="padding-left: 20px;"><b><?php __('Training Plan'); ?></b></li>
 
                     <li><?php echo $html->link(__('Your Training Plan',true),array('controller' => 'trainingplans', 'action' => 'view'))?></li>
-
                     <li><?php echo $html->link(__('Training Log',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'))?></li>
                     <li><?php echo $html->link(__('Your Races',true),array('controller' => 'competitions', 'action' => 'list_competitions'))?></li>
                   

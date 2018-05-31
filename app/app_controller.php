@@ -17,10 +17,16 @@
   */
 class AppController extends Controller {
 
-	   	var $components = array('Session', 'RequestHandler');
-
+	   	// var $components = array('Session', 'RequestHandler');
+        public $components = array('Session', 'RequestHandler');
+        
 	   	function beforeFilter()
         {
+            // print_r($this->Session);
+            // print_r($this->Cookie);
+
+            $this->Session->read('Config.language');
+            // echo "test " . $this->Session->read('session_userid');
             // tct_auth_blog
             $this->Cookie->path = '/';
             $this->Cookie->domain = '.tricoretraining.com';
@@ -38,6 +44,7 @@ class AppController extends Controller {
             {
                 $this->code = $this->params['named']['code'];
                 $language = $this->code;
+                //echo "DEBUG code language " . $language . "<br />";
             } else {
                 // user is logged in
                 if ( $this->Session->read('session_userid') ) 
@@ -47,6 +54,7 @@ class AppController extends Controller {
                     // $this->checkSession();
                     $this->User->id = $this->Session->read('session_userid');
                     $this->UserLanguage = $this->User->read();
+                    //echo "DEBUG user language " . $this->UserLanguage . "<br />";
                     
                     if ( isset($this->UserLanguage['User']['yourlanguage'] ) ) {
                         $language = $this->UserLanguage['User']['yourlanguage'];
@@ -54,6 +62,8 @@ class AppController extends Controller {
                 } else {
                     if ( $this->Session->read('Config.language') ) {
                         $language = $this->Session->read('Config.language');
+
+                        //echo "DEBUG session language " . $language . "<br />";
                     } else {
                         /*
                         if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
@@ -75,6 +85,7 @@ class AppController extends Controller {
                         } else {
                             $language = 'eng';
                         }
+                        //echo "DEBUG browser language " . $language . "<br />";
                     }
                 }
             }

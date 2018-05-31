@@ -8,13 +8,12 @@ class StartsController extends AppController
 	var $useTable = false;
 
 	var $helpers = array('Html', 'Form', 'Javascript', 'Time', 'Session', 'Unitcalc'); // 'TabDisplay',
-	var $components = array('Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Filldatabase', 'Transactionhandler' );
+	var $components = array('Cookie', 'RequestHandler', 'Session', 'Unitcalc', 'Filldatabase', 'Transactionhandler', 'Mailchimp' );
 
 	function beforeFilter()
 	{
   		parent::beforeFilter();
-		$this->layout = 'default_trainer';
-		
+		$this->layout = 'default_trainer';		
 	}
 
 	function all_bootstrap ()
@@ -24,20 +23,22 @@ class StartsController extends AppController
 
 	function index( $language = '' )
 	{
-		Configure::write('Config.language', 'deu');
   		$this->layout = 'trainer_start';
 
       	$this->set("title_for_layout", __('Get Interactive Training Plans For Triathlon, Marathon And Bike Races', true));
 		
-		// echo "read " . Configure::read('Config.language');
-
 		$session_userid = $this->Session->read('session_userid');
-		// echo "session_userid " . $session_userid . "<br>";
+	
+		if ( $language == '' ) {   
+			$language = Configure::read('Config.language');
+			// echo "DEBUG in index config language " . $language;
+		}
 
-        if ( $session_userid ) 
+        if ( is_numeric($session_userid) ) 
         {
 			// save language in user profile
-			$this->checkSession();
+			$this->loadModel('User');
+			//$this->checkSession();
 
             $this->User->id = $session_userid;
 			$this->data = $this->User->read();
@@ -49,8 +50,35 @@ class StartsController extends AppController
 			}
         }
 		
+		if ( isset( $this->params['named']['newsletter'] ) ) {
+
+			$statusbox = '';
+			$status = '';
+		
+			if ( $this->data )
+			{
+				if (filter_var($this->data['Starts']['email'], FILTER_VALIDATE_EMAIL)) {
+					$email = $this->data['Starts']['email'];
+					if ( isset( $this->data['Starts']['firstname'] ) ) $firstname = $this->data['Starts']['firstname']; else $firstname = '';
+					if ( isset( $this->data['Starts']['lastname'] ) ) $lastname = $this->data['Starts']['lastname']; else $lastname = '';
+					$gender = '';
+					$status = 'pending';
+
+					if ( $_SERVER['HTTP_HOST'] != LOCALHOST ) {
+						$this->Mailchimp->add_subscriber($email, $firstname, $lastname, $gender, $language, $status);
+					}
+					$this->Session->write('flash', __('Almost finished! You are receiving an activation email in your mailbox. Please click the link. Check your SPAM folder, in case you can not find it.', true));
+					$statusbox = 'alert alert-success';
+				} else {
+					$this->Session->write('flash', __('Sorry, your email is not valid. Please correct it.', true));
+					$statusbox = 'alert alert-danger';
+				}
+			}
+			$this->set('statusbox', $statusbox);
+			$this->set('status', $status);
+
 		// referral send to page
-        if ( isset( $this->params['named']['u'] ) ) 
+		} elseif ( isset( $this->params['named']['u'] ) ) 
         {
             $transaction_id = $this->params['named']['u'];
 			
@@ -133,6 +161,7 @@ class StartsController extends AppController
 		// in case your not logged in, remove blog cookie
 		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
 		$this->Cookie->delete('tct_auth_blog');
+
 	}
   
 	function error404()
@@ -198,8 +227,9 @@ class StartsController extends AppController
 				$this->Session->write('flash',__('Coupon code saved.', true) . 
 					' <a href="/trainer/users/register/">' . __('Please signup right now!', true) . '</a>');				
 
-				if ( $_SERVER['HTTP_HOST'] != LOCALHOST ) 
+				if ( $_SERVER['HTTP_HOST'] != LOCALHOST ) {
 					mail('klaus@tricoretraining', 'Coupon registered: ' . $this->data['Start']['coupon'], '...', 'From:support@tricoretraining.com');
+				}
 			} else
 			{
 				$statusbox = 'alert alert-danger';
