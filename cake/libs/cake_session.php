@@ -479,6 +479,7 @@ class CakeSession extends Object {
 		if ($iniSet && env('HTTPS')) {
 			ini_set('session.cookie_secure', 1);
 		}
+		ini_set('session.cookie_secure', 1);
 		if ($iniSet && ($this->security === 'high' || $this->security === 'medium')) {
 			ini_set('session.referer_check', $this->host);
 		}
@@ -540,7 +541,15 @@ class CakeSession extends Object {
 						ini_set('session.cookie_lifetime', $this->cookieLifeTime);
 						ini_set('session.cookie_path', $this->path);
 						// KMS hack
-						ini_set('session.cookie_domain', env('HTTP_BASE'));
+						if ( isset( $_SERVER['HTTP_BASE'] ) ) {
+							ini_set('session.cookie_domain', env('HTTP_BASE'));
+						} else {
+							$session_domain = Configure::read('Session.domain');
+							ini_set('session.cookie_domain', $session_domain);
+						}
+						if (env('HTTPS')) {
+							ini_set('session.cookie_secure', 1);
+						}
 					}
 				}
 			break;
@@ -570,7 +579,7 @@ class CakeSession extends Object {
 			break;
 			default:
 				$config = CONFIGS . Configure::read('Session.save') . '.php';
-
+				
 				if (is_file($config)) {
 					require($config);
 				}
@@ -644,6 +653,7 @@ class CakeSession extends Object {
  */
 	function __regenerateId() {
 		$oldSessionId = session_id();
+
 		if ($oldSessionId) {
 			if (session_id() != ''|| isset($_COOKIE[session_name()])) {
 				setcookie(Configure::read('Session.cookie'), '', time() - 42000, $this->path);
@@ -659,6 +669,7 @@ class CakeSession extends Object {
 				if (function_exists('session_write_close')) {
 					session_write_close();
 				}
+
 				$this->__initSession();
 				session_id($oldSessionId);
 				session_start();

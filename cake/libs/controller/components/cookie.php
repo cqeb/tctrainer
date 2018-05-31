@@ -374,6 +374,9 @@ class CookieComponent extends Object {
  */
 	function __write($name, $value) {
 		setcookie($this->name . $name, $this->__encrypt($value), $this->__expires, $this->path, $this->domain, $this->secure);
+		if ($_SERVER['REMOTE_ADDR'] == '213.225.35.216') {
+			//echo $this->name . $name . "<br>" . $this->path . "<br>" . $this->domain . "<br>" . $this->secure . "<br>";
+		}
 
 		if (!is_null($this->__reset)) {
 			$this->__expires = $this->__reset;

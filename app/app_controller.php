@@ -18,19 +18,21 @@
 class AppController extends Controller {
 
 	   	// var $components = array('Session', 'RequestHandler');
-        public $components = array('Session', 'RequestHandler');
+        var $components = array('Session', 'RequestHandler');
         
 	   	function beforeFilter()
         {
-            // print_r($this->Session);
-            // print_r($this->Cookie);
-
-            $this->Session->read('Config.language');
-            // echo "test " . $this->Session->read('session_userid');
+            if (env('HTTPS')) {
+                Configure::write('Session.save', Configure::read('Session.save') . '_https');
+            }
             // tct_auth_blog
             $this->Cookie->path = '/';
-            $this->Cookie->domain = '.tricoretraining.com';
-            
+
+            if ( isset( $_SERVER['HTTP_BASE'] ) ) {
+                $this->Cookie->domain = $_SERVER['HTTP_BASE'];
+            } else {
+                $this->Cookie->domain = Configure::read('Session.domain');
+            }
             if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
             {    
                 $this->Cookie->secure = false; 
@@ -47,7 +49,7 @@ class AppController extends Controller {
                 //echo "DEBUG code language " . $language . "<br />";
             } else {
                 // user is logged in
-                if ( $this->Session->read('session_userid') ) 
+                if ( is_numeric( $this->Session->read('session_userid') ) )
                 {
                     $this->loadModel('User');
                     
@@ -59,7 +61,9 @@ class AppController extends Controller {
                     if ( isset($this->UserLanguage['User']['yourlanguage'] ) ) {
                         $language = $this->UserLanguage['User']['yourlanguage'];
                     }
+
                 } else {
+
                     if ( $this->Session->read('Config.language') ) {
                         $language = $this->Session->read('Config.language');
 
@@ -182,19 +186,6 @@ class AppController extends Controller {
             $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');
 
-/*
-            // tct_auth_blog
-            $this->Cookie->path = '/';
-            $this->Cookie->domain = '.tricoretraining.com';
-            
-            if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
-            {    
-                $this->Cookie->secure = false; 
-            } else {
-                $this->Cookie->secure = true; 
-            }
-*/
-
             if ( preg_match( '/@/', $session_useremail ) && is_numeric( $session_userid ) )
             {
                 // check to make sure it's correct
@@ -212,6 +203,7 @@ class AppController extends Controller {
                     $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
                     $this->redirect('/users/login');
                     die();
+
                 } else
                 {  
                     // reset session vars
@@ -230,6 +222,7 @@ class AppController extends Controller {
                 }
             // session data not correct, kick her/him out
             } else {
+                
                 // to be sure
                 $this->Session->write('previous_url', $_SERVER['REQUEST_URI']);
                 $this->Session->delete('session_useremail');

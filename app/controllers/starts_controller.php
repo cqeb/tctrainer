@@ -28,11 +28,6 @@ class StartsController extends AppController
       	$this->set("title_for_layout", __('Get Interactive Training Plans For Triathlon, Marathon And Bike Races', true));
 		
 		$session_userid = $this->Session->read('session_userid');
-	
-		if ( $language == '' ) {   
-			$language = Configure::read('Config.language');
-			// echo "DEBUG in index config language " . $language;
-		}
 
         if ( is_numeric($session_userid) ) 
         {
@@ -55,6 +50,11 @@ class StartsController extends AppController
 			$statusbox = '';
 			$status = '';
 		
+			if ( $language == '' ) {   
+				$language = Configure::read('Config.language');
+				// echo "DEBUG in index config language " . $language;
+			}
+
 			if ( $this->data )
 			{
 				if (filter_var($this->data['Starts']['email'], FILTER_VALIDATE_EMAIL)) {

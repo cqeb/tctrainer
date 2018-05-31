@@ -39,8 +39,8 @@
  * In development mode, you need to click the flash message to continue.
  */
 
-define('LOCALHOST', 'local.tricoretraining.com');
-define('TESTHOST', 'test.tricoretraining.com');
+define('LOCALHOST', 'local2.tricoretraining.com');
+define('TESTHOST', 'thetriplans.com');
 	
 if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
 { 
@@ -197,11 +197,20 @@ Configure::write('Session.save', 'php');
 Configure::write('Session.cookie', 'TCTCookie');
 
 Configure::write('Session.path', '/');
+
+if ($_SERVER['HTTP_HOST'] == TESTHOST) {
+	Configure::write('Session.domain', 'thetriplans.com');
+} else {
+	Configure::write('Session.domain', 'tricoretraining.com');
+}
+
+
 /**
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
  */
-if ( Configure::read('Session_longterm') == "true" )
+$session_timeout = Configure::read('Session_longterm');
+if (  $session_timeout == "true" )
 	Configure::write('Session.timeout', '300');
 else
 	Configure::write('Session.timeout', '10');

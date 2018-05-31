@@ -18,8 +18,13 @@ class UsersController extends AppController {
   		$this->layout = 'default_trainer';
 		
 		// tct_auth_blog
+		// might be duplicated to app_controller - language setting
 		$this->Cookie->path = '/';
-		$this->Cookie->domain = '.tricoretraining.com';
+		if ( isset( $_SERVER['HTTP_BASE'] ) ) {
+			$this->Cookie->domain = $_SERVER['HTTP_BASE'];
+		} else {
+			$this->Cookie->domain = Configure::read('Session.domain');
+		}
 		
 		if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 		{    
@@ -369,7 +374,7 @@ class UsersController extends AppController {
 			$redirect_url = '/trainingplans/view';
 		}
 
-	    if ( $this->Session->read('session_userid') ) 
+	    if ( is_numeric($this->Session->read('session_userid') ) )
 	    {
 			$this->checkSession();
 			$this->Session->write('previous_url', '');
@@ -458,6 +463,8 @@ class UsersController extends AppController {
 	{
 		$this->set("title_for_layout", __('Logout',true));
 		
+		$this->checkSession();
+
 		// kill all session information
 		$this->Session->write('session_useremail', '');
 		$this->Session->write('session_userid', '');
