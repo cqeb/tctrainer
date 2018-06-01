@@ -41,55 +41,56 @@
 
 define('LOCALHOST', 'local2.tricoretraining.com');
 define('TESTHOST', 'thetriplans.com');
-	
-if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_SERVER['HTTP_HOST'] == TESTHOST )
+
+define('LANGCOOKIE', 'tct_language2');
+define('BLOGCOOKIE', 'tct_auth_blog2');
+
+$DEBUGLOG = '';
+
+if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 { 
 	/**
 	 * Defines the default error type when using the log() function. Used for
 	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
 	 */
 	define('DEBUG', false);
-	define('LOG_ERROR', 0);
-	Configure::write('debug', 0);
-	
+	define('LOG_ERROR', 3);
+	Configure::write('debug', 3);
+	define('MYIP', '127.0.0.1');
+
 	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
+	Configure::write('App.hostUrl', 'http://' . LOCALHOST);
 
 	$_SERVER['DOCUMENT_ROOT'] = '/Applications/XAMPP/xamppfiles/htdocs/tricoretraining.com/';
 
-	Configure::write('App.hostUrl', 'http://' . LOCALHOST);
-
-	if ( $_SERVER['HTTP_HOST'] == TESTHOST ) {
-		Configure::write('App.hostUrl', 'http://' . TESTHOST);
-		$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/test.tricoretraining.com/';
-	}
-
 } elseif ( $_SERVER['HTTP_HOST'] == 'https://thetriplans.com' ) {
-	define('DEBUG', true );
-	define('LOG_ERROR', 2);	
+	define('DEBUG', false);
+	define('LOG_ERROR', 0);	
 	Configure::write('debug', 2);
+	define('MYIP', '213.225.35.216');
 
 	Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.hostUrl', 'https://thetriplans.com');	
 
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/thetriplans.com/';
 
-} else
-{
-	define('DEBUG', false );
+} else {
+	define('DEBUG', false);
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
 
+	define('MYIP', '213.225.35.216');
 	Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.hostUrl', 'https://tricoretraining.com');	
 	
-	if ($_SERVER['REMOTE_ADDR'] == '213.225.35.216') {
-        define('DEBUG', true );
-        define('LOG_ERROR', 3);
-        Configure::write('debug', 3);
+	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/tricoretraining.com/';
+
+	if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+        define('DEBUG', false );
+        define('LOG_ERROR', 0);
+        Configure::write('debug', 0);
 	}
 	
-	//$_SERVER['DOCUMENT_ROOT'] = '/home/content/92/10829392/html/tricoretraining.com/';
-	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/tricoretraining.com/';
 }
 
 define('url', '/trainer');
@@ -193,23 +194,33 @@ Configure::write('Session.save', 'php');
 /**
  * The name of CakePHP's session cookie.
  */
+// cookie topic with domain.com, .domain.com 
+// https://stackoverflow.com/questions/18492576/share-cookie-between-subdomain-and-domain
 
-Configure::write('Session.cookie', 'TCTCookie');
+Configure::write('Session.cookie', 'TCTCookie2');
 
 Configure::write('Session.path', '/');
 
-if ($_SERVER['HTTP_HOST'] == TESTHOST) {
-	Configure::write('Session.domain', 'thetriplans.com');
-} else {
-	Configure::write('Session.domain', 'tricoretraining.com');
-}
+if ($_SERVER['HTTP_HOST'] == LOCALHOST) {
+	
+	Configure::write('Session.domain', LOCALHOST);
 
+} elseif ($_SERVER['HTTP_HOST'] == TESTHOST) {
+
+	Configure::write('Session.domain', 'thetriplans.com');
+
+} else {
+
+	Configure::write('Session.domain', 'tricoretraining.com');
+
+}
 
 /**
  * Session time out time (in seconds).
  * Actual value depends on 'Security.level' setting.
  */
 $session_timeout = Configure::read('Session_longterm');
+
 if (  $session_timeout == "true" )
 	Configure::write('Session.timeout', '300');
 else
@@ -242,7 +253,6 @@ Configure::write('Security.level', 'medium');
  * A random string used in security hashing methods.
  */
 Configure::write('Security.salt', 'LKLKJsfasafwerwer972498349724923479234DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
-
 
 // app/config/my_session.php
 //

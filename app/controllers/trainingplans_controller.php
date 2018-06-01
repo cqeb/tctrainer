@@ -11,15 +11,26 @@ class TrainingplansController extends AppController {
 	var $components = array('Email', 'Cookie', 'RequestHandler', 'Provider', 'Session','Transactionhandler');
 
 	function beforeFilter() {
+
 		parent::beforeFilter();
 		$this->layout = 'trainingplans';
+		if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+			// die('before filter training plan controller');
+		}
 	}
 
 	// view your training plan
 	function view() {
 
+		if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+			// die('trainingplan view - before checkSession');
+		}
         $this->checkSession();
 
+		if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+			// die('trainingplan view - after checkSession');
+		}
+		
 		$week = new DateInterval("P7D");
 		$timezone = new DateTimeZone('UTC');
 
@@ -147,7 +158,6 @@ class TrainingplansController extends AppController {
 	 * get workouts as events for your calendar
 	 */ 
 	function get_events() {
-
 		// do not check
         //$this->checkSession();		
 

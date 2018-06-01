@@ -17,17 +17,13 @@ class UsersController extends AppController {
   		parent::beforeFilter();
   		$this->layout = 'default_trainer';
 		
-		// tct_auth_blog
+		// TCT authentifiation BLOG
 		// might be duplicated to app_controller - language setting
 		$this->Cookie->path = '/';
-		if ( isset( $_SERVER['HTTP_BASE'] ) ) {
-			$this->Cookie->domain = $_SERVER['HTTP_BASE'];
-		} else {
-			$this->Cookie->domain = Configure::read('Session.domain');
-		}
+
+		$this->Cookie->domain = Configure::read('Session.domain');
 		
-		if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
-		{    
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {  
 			$this->Cookie->secure = false; 
 		} else {
 			$this->Cookie->secure = true; 
@@ -52,107 +48,107 @@ class UsersController extends AppController {
 
 	function fill_my_database()
 	{
-			$this->checkSession();
-			$userobject = $this->Session->read('userobject');
-			
-			if ( isset( $userobject['admin'] ) )
-			{
-					$this->autoRender = false;            
-					$this->Filldatabase->prefill($this->User);
-			}      
+		$this->checkSession();
+		$userobject = $this->Session->read('userobject');
+		
+		if ( isset( $userobject['admin'] ) )
+		{
+				$this->autoRender = false;            
+				$this->Filldatabase->prefill($this->User);
+		}      
 	}
 
 	function list_users()
 	{
-      		$this->checkSession();
-            $statusbox = 'alert';
+		$this->checkSession();
+		$statusbox = 'alert';
 
-            $session_userid = $this->Session->read('session_userid');
-            $userobject = $this->Session->read('userobject');
-            
-			if ( $userobject['admin'] != "1" )
-			{
-					// login data is wrong, redirect to login page
-					$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
-					$this->redirect('/users/login');
-			}
-			
-            $this->paginate = array(
-                  'limit' => 300,
-                  'order' => array('User.id' => 'desc')
-            );
+		$session_userid = $this->Session->read('session_userid');
+		$userobject = $this->Session->read('userobject');
+		
+		if ( $userobject['admin'] != "1" )
+		{
+				// login data is wrong, redirect to login page
+				$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
+				$this->redirect('/users/login');
+		}
+		
+		$this->paginate = array(
+				'limit' => 300,
+				'order' => array('User.id' => 'desc')
+		);
 
-            $users = $this->paginate('User');
-			$sql = 'SELECT user_id, max(date) AS lasttraining, count(*) AS sumtrainings FROM trainingstatistics group by user_id';
-			$usertrainings = $this->User->query( $sql );
+		$users = $this->paginate('User');
+		$sql = 'SELECT user_id, max(date) AS lasttraining, count(*) AS sumtrainings FROM trainingstatistics group by user_id';
+		$usertrainings = $this->User->query( $sql );
 
-			for ( $i = 0; $i < count($usertrainings); $i++ )
-			{
-				$dt = $usertrainings[$i]['trainingstatistics'];
-				$dt2 = $usertrainings[$i][0];
-				$user_id = $dt['user_id'];
-				$usertrainingdata[$user_id]['lasttraining'] = $dt2['lasttraining'];
-				$usertrainingdata[$user_id]['sumtrainings'] = $dt2['sumtrainings']; 
-			}			
-            $this->set('users', $users);
-			$this->set('usertrainings', $usertrainingdata);
-            $this->set('statusbox', $statusbox);
+		for ( $i = 0; $i < count($usertrainings); $i++ )
+		{
+			$dt = $usertrainings[$i]['trainingstatistics'];
+			$dt2 = $usertrainings[$i][0];
+			$user_id = $dt['user_id'];
+			$usertrainingdata[$user_id]['lasttraining'] = $dt2['lasttraining'];
+			$usertrainingdata[$user_id]['sumtrainings'] = $dt2['sumtrainings']; 
+		}			
+		$this->set('users', $users);
+		$this->set('usertrainings', $usertrainingdata);
+		$this->set('statusbox', $statusbox);
 	}
 
 	function edit_user($id = null, $setuser = null)
 	{
-      		$this->checkSession();
+		$this->checkSession();
 
-			if ( isset( $this->params['named']['setuser'] ) ) $setuser = $this->params['named']['setuser'];
-            $statusbox = 'alert';
+		if ( isset( $this->params['named']['setuser'] ) ) $setuser = $this->params['named']['setuser'];
+		$statusbox = 'alert';
 
-            $session_userid = $this->Session->read('session_userid');
-            $userobject = $this->Session->read('userobject');
-            
-			if ( $userobject['admin'] != "1" )
+		$session_userid = $this->Session->read('session_userid');
+		$userobject = $this->Session->read('userobject');
+		
+		if ( $userobject['admin'] != "1" )
+		{
+				// login data is wrong, redirect to login page
+				$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
+				$this->redirect('/users/login');
+		}
+
+		if ( isset( $id ) )
+			$this->User->id = $id;
+		elseif ( $this->data['User']['id'] )
+			$this->User->id = $this->data['User']['id'];
+
+		if (empty($this->data))
+		{
+			$this->data = $this->User->read();
+			
+			if ( isset( $setuser )  ) 
 			{
-					// login data is wrong, redirect to login page
-					$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
-					$this->redirect('/users/login');
+				$user = $this->data['User'];
+				$this->Session->write('session_useremail', $user['email']);
+				$this->Session->write('session_userid', $user['id']);
+				// redirect to trainingplan  
+				$this->redirect('/trainingplans/view');
+				die();
 			}
-
-			if ( isset( $id ) )
-				$this->User->id = $id;
-			elseif ( $this->data['User']['id'] )
-				$this->User->id = $this->data['User']['id'];
-
-			if (empty($this->data))
-			{
-				$this->data = $this->User->read();
-				
-				if ( isset( $setuser )  ) 
+			
+		} else
+		{
+			if ($this->User->save( $this->data, array(
+				'validate' => true,
+				'fieldList' => array( 'paid_from', 'paid_to', 'activated', 'deactivated', 
+				'advanced_features', 'notifications', 'canceled' ) ) ) )
 				{
-					$user = $this->data['User'];
-					$this->Session->write('session_useremail', $user['email']);
-					$this->Session->write('session_userid', $user['id']);
-					// redirect to trainingplan  
-					$this->redirect('/trainingplans/view');
-					die();
+					$statusbox = 'alert alert-success';
+					$this->Session->write('flash',__('User profile saved.',true));
+				} else
+				{
+					$statusbox = 'alert alert-danger';
+					$this->Session->write('flash',__('Some errors occured.',true));
 				}
-				
-			} else
-			{
-				if ($this->User->save( $this->data, array(
-			      'validate' => true,
-			      'fieldList' => array( 'paid_from', 'paid_to', 'activated', 'deactivated', 
-			      'advanced_features', 'notifications', 'canceled' ) ) ) )
-			      {
-			      	   $statusbox = 'alert alert-success';
-			      	   $this->Session->write('flash',__('User profile saved.',true));
-			      } else
-			      {
-			      	   $statusbox = 'alert alert-danger';
-			      	   $this->Session->write('flash',__('Some errors occured.',true));
-			      }
-				  $this->data = $this->User->read();
-			}
-			$this->set('user', $this->data['User']);
-			$this->set('statusbox', $statusbox);
+				$this->data = $this->User->read();
+		}
+		$this->set('user', $this->data['User']);
+		$this->set('statusbox', $statusbox);
 	}
 
 	function send_message()
@@ -234,140 +230,170 @@ class UsersController extends AppController {
 
 	function login_facebook()
 	{
-			// Facebook auth 
-            $app_id = 132439964636;
-			$app_secret = FACEBOOK_APPSECRET;
-			
-			if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
-				$my_url = 'https://' . TESTHOST . '/facebook/login.php';
-			else {
-				$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
-				/*
-				// does not work yet
-				if ( isset( $this->params['named']['previous_url'] ) ) {
-					$my_url .= 'previous_url:' . $this->params['named']['previous_url'] . '/';
-				}
-				*/
-			}
+
+		$this->Cookie->write(BLOGCOOKIE, "true", false, time() - 3600);
+		$this->Cookie->delete(BLOGCOOKIE);
+		/*
+		$previous_url = $this->Session->read('previous_url');
+		
+		if ( $previous_url ) {
+			$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
+		} else {	
+			$redirect_url = '/trainingplans/view';
+		}
+		*/
+
+		// Facebook auth 
+		$app_id = 132439964636;
+		$app_secret = FACEBOOK_APPSECRET;
+		
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
+			$my_url = 'https://' . TESTHOST . '/facebook/login.php';
+		else {
+			$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
+			/*
 			// does not work yet
-			if ( isset( $this->params['named']['previous_url'] ) && 1 == 2 ) {
-				$redirect_url = base64_decode($this->params['named']['previous_url']);
-				$redirect_url = preg_replace('/\/trainer/', '', $redirect_url);
-			} else {
-				$redirect_url = '/trainer/trainingplans/view/';
+			if ( isset( $this->params['named']['previous_url'] ) ) {
+				$my_url .= 'previous_url:' . $this->params['named']['previous_url'] . '/';
 			}
-			
-			if ( isset( $this->params['named']['fbuser'] ) ) 
-				$fbuser = $this->params['named']['fbuser'];
+			*/
+		}
+		// does not work yet
+		if ( isset( $this->params['named']['previous_url'] ) && 1 == 2 ) {
+			$redirect_url = base64_decode($this->params['named']['previous_url']);
+			$redirect_url = preg_replace('/\/trainer/', '', $redirect_url);
+		} else {
+			$redirect_url = '/trainer/trainingplans/view/';
+		}
+		
+		if ( isset( $this->params['named']['fbuser'] ) ) 
+			$fbuser = $this->params['named']['fbuser'];
 
-			if ( $_SERVER['HTTP_HOST'] == LOCALHOST && isset( $fbuser ) )
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST && isset( $fbuser ) )
+		{
+			$user = unserialize( base64_decode( $fbuser ) );
+
+		} else
+		{ 	
+			if ( isset( $_GET['code'] ) ) 
+				$code = $_GET['code'];
+
+			// DEBUG
+			$version = 'v3.0/';
+			if ( empty( $code ) )
 			{
-				$user = unserialize( base64_decode( $fbuser ) );
+				// TODO friendslist is missing
+				$dialog_url = "https://www.facebook.com/".$version."dialog/oauth?" .
+					"client_id=" . $app_id . 
+					"&scope=email,public_profile" .
+					"&redirect_uri=" . 
+					urlencode($my_url);
+					$this->redirect($dialog_url);
+					die();
 			} else
-			{ 	
-				if ( isset( $_GET['code'] ) ) 
-					$code = $_GET['code'];
-	
-				// DEBUG
-				$version = 'v3.0/';
-				if ( empty( $code ) )
-				{
-					// TODO friendslist is missing
-					$dialog_url = "https://www.facebook.com/".$version."dialog/oauth?" .
-						"client_id=" . $app_id . 
-						"&scope=email,public_profile" .
-						"&redirect_uri=" . 
-						urlencode($my_url);
-	        			$this->redirect($dialog_url);
-	        			die();
-				} else
-				{
-					$token_url = "https://graph.facebook.com/".$version."oauth/access_token?" .
-						"client_id=" . $app_id . 
-						"&redirect_uri=" . urlencode($my_url) . 
-						"&client_secret=" . $app_secret . 
-						"&code=" . $code;
-					// $access_token = @file_get_contents($token_url);
-					$access_token = file_get_contents($token_url);
-					$atoken = json_decode($access_token);
-					$graph_url = "https://graph.facebook.com/".$version."me?" . 
-						"fields=name,email" . 
-						"&access_token=" . $atoken->access_token;
-					$user = @json_decode(file_get_contents($graph_url));
-				}
-			}
-			
-			// make login things		
-			if ( $user->email )
 			{
-				$results = $this->User->findByEmail($user->email);
-			
-				if ( is_array( $results ) ) 
-				{
-					// has user activated his profile and do WE not have deactivated user
-					if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
-					{
-						$cookie = array();
-						$cookie['email'] = $results['User']['email'];
-						$cookie['userid'] = $results['User']['id'];
-						$cookie['firstname'] = $results['User']['firstname'];
-						
-						// COOKIE TIME only 1 day
-						$this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
-
-						// set "user" session equal to email address
-						// user might have a different session from other login
-						$this->Session->write('session_useremail', $results['User']['email']);
-						$this->Session->write('session_userid', $results['User']['id']);
-
-						$this->set('session_userid', $results['User']['id']);
-	
-						// set "last_login" session equal to users last login time
-						$results['User']['last_login'] = date("Y-m-d H:i:s");
-						$this->Session->write('last_login', $results['User']['last_login']);
-
-						/*
-						$sql = "SELECT myrecommendation FROM users WHERE myrecommendation = '' AND yourlanguage = '" . $language . "'";
-						$user_recommendations = $this->User->query( $sql );
-						
-						$this->Session->write( 'recommendations', serialize($user_recommendations) );
-						*/
-						
-						echo '<script language="JavaScript">top.location.href="' . $redirect_url . '";</script><a href="' . $redirect_url . '">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
-						// doesn't work with facebook login - session get's lost
-						//$this->redirect('/trainingplans/view/');
-						$this->Session->write('previous_url', '');
-					} else {
-						echo __('Sorry, your user is not active. Please contact our', true) . ' <a href="mailto:support@tricoretraining.com">Support</a>. <a href="/trainer/">&raquo; Home</a>';
-					}
-				} else
-				{
-					$fbuserarray['firstname'] = $user->first_name;
-					$fbuserarray['lastname'] = $user->last_name;
-					$fbuserarray['birthday'] = date( 'Y-m-d', strtotime($user->birthday));
-					$fbuserarray['gender'] = $user->gender;
-					$fbuserarray['locale'] = $user->locale;
-					$fbuserarray['email'] = $user->email;
-					
-					$this->Session->write('fbemail', $user->email);
-					$this->Session->write('facebook_user', serialize($fbuserarray));
-
-					echo '<script language="JavaScript">top.location.href="/trainer/users/register/";</script><a href="/trainer/users/register/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
-					// doesn't work with facebook login - session get's lost
-					//$this->redirect('/users/register/');
-				}
+				$token_url = "https://graph.facebook.com/".$version."oauth/access_token?" .
+					"client_id=" . $app_id . 
+					"&redirect_uri=" . urlencode($my_url) . 
+					"&client_secret=" . $app_secret . 
+					"&code=" . $code;
+				// $access_token = @file_get_contents($token_url);
+				$access_token = file_get_contents($token_url);
+				$atoken = json_decode($access_token);
+				$graph_url = "https://graph.facebook.com/".$version."me?" . 
+					"fields=name,email" . 
+					"&access_token=" . $atoken->access_token;
+				$user = @json_decode(file_get_contents($graph_url));
 			}
+		}
+		
+		// make login things		
+		if ( $user->email )
+		{
+			$results = $this->User->findByEmail($user->email);
+		
+			if ( is_array( $results ) ) 
+			{
+				// has user activated his profile and do WE not have deactivated user
+				if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
+				{
+					/*
+					$cookie = array();
+					$cookie['email'] = $results['User']['email'];
+					$cookie['userid'] = $results['User']['id'];
+					$cookie['firstname'] = $results['User']['firstname'];
+					*/
+					
+					// COOKIE TIME only 1 day
+					$this->Cookie->write(BLOGCOOKIE, "true", false, '+1 day');
 
-		    $this->autoRender = false;	
+					// set "user" session equal to email address
+					// user might have a different session from other login
+					$this->Session->write('session_useremail', $results['User']['email']);
+					$this->Session->write('session_userid', $results['User']['id']);
+
+					$this->set('session_userid', $results['User']['id']);
+
+					// set "last_login" session equal to users last login time
+					$results['User']['last_login'] = date("Y-m-d H:i:s");
+					$this->Session->write('last_login', $results['User']['last_login']);
+
+					/*
+					$sql = "SELECT myrecommendation FROM users WHERE myrecommendation = '' AND yourlanguage = '" . $language . "'";
+					$user_recommendations = $this->User->query( $sql );
+					
+					$this->Session->write( 'recommendations', serialize($user_recommendations) );
+					*/
+					
+					$this->Session->write('previous_url', '');
+					$this->autoRender = false;
+
+					echo '<script language="JavaScript">
+						top.location.href="' . $redirect_url . '";</script>';
+					echo '<a href="' . $redirect_url . '">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
+					//echo '<a href="' . $redirect_url . '">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
+
+					// doesn't work with facebook login - session get's lost
+					// $this->redirect('/trainingplans/view/');
+					die();
+					
+				} else {
+					echo __('Sorry, your user is not active. Please contact our', true) . ' <a href="mailto:support@tricoretraining.com">Support</a>. <a href="/trainer/">&raquo; Home</a>';
+				}
+			} else
+			{
+				$fbuserarray['firstname'] = $user->first_name;
+				$fbuserarray['lastname'] = $user->last_name;
+				$fbuserarray['birthday'] = date( 'Y-m-d', strtotime($user->birthday));
+				$fbuserarray['gender'] = $user->gender;
+				$fbuserarray['locale'] = $user->locale;
+				$fbuserarray['email'] = $user->email;
+				
+				$this->Session->write('fbemail', $user->email);
+				$this->Session->write('facebook_user', serialize($fbuserarray));
+
+				$this->autoRender = false;
+
+				echo '<script language="JavaScript">top.location.href="/trainer/users/register/";</script><a href="/trainer/users/register/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
+				
+				// doesn't work with facebook login - session get's lost
+				//$this->redirect('/users/register/');
+				die();
+				
+			}
+		}
+
+		$this->autoRender = false;	
 	}
 	
 	function login()
 	{
 		// reset cookie for blog
-		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
-		$this->Cookie->delete('tct_auth_blog');
+		$this->Cookie->write(BLOGCOOKIE, "true", false, time() - 3600);
+		$this->Cookie->delete(BLOGCOOKIE);
 
 		$previous_url = $this->Session->read('previous_url');
+
 		if ( $previous_url ) {
 			$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
 		} else {	
@@ -409,11 +435,11 @@ class UsersController extends AppController {
 						// TODO KMS
 						if ( $this->data['User']['remember_me'] )
 						{
-							$this->Cookie->write('tct_auth_blog', "true", false, '+30 days');
+							$this->Cookie->write(BLOGCOOKIE, "true", false, '+30 days');
 							Configure::write('Session_longterm', 'true');
 						} else
 						{
-							$this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
+							$this->Cookie->write(BLOGCOOKIE, "true", false, '+1 day');
 						}
 	
 						// set "user" session equal to email address
@@ -469,8 +495,11 @@ class UsersController extends AppController {
 		$this->Session->write('session_useremail', '');
 		$this->Session->write('session_userid', '');
 
-		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
-		$this->Cookie->delete('tct_auth_blog');
+		$this->Cookie->write(BLOGCOOKIE, "true", false, time() - 3600);
+		$this->Cookie->delete(BLOGCOOKIE);
+
+		$tctcookie = Configure::read('Session.cookie');
+		setcookie($tctcookie, '', time() - 3600);
 
 		// in case a long termin login cookie is set
 		Configure::write('Session_longterm', 'false');

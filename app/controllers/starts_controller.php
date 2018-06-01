@@ -13,7 +13,7 @@ class StartsController extends AppController
 	function beforeFilter()
 	{
   		parent::beforeFilter();
-		$this->layout = 'default_trainer';		
+		$this->layout = 'default_trainer';	
 	}
 
 	function all_bootstrap ()
@@ -36,7 +36,7 @@ class StartsController extends AppController
 			//$this->checkSession();
 
             $this->User->id = $session_userid;
-			$this->data = $this->User->read();
+			// $this->UserTemp = $this->User->read();
 			
 			if ( isset( $this->params['named']['code'] ) ) 
 			{
@@ -46,7 +46,6 @@ class StartsController extends AppController
         }
 		
 		if ( isset( $this->params['named']['newsletter'] ) ) {
-
 			$statusbox = '';
 			$status = '';
 		
@@ -55,6 +54,7 @@ class StartsController extends AppController
 				// echo "DEBUG in index config language " . $language;
 			}
 
+			// newsletter subscriber post
 			if ( $this->data )
 			{
 				if (filter_var($this->data['Starts']['email'], FILTER_VALIDATE_EMAIL)) {
@@ -155,13 +155,13 @@ class StartsController extends AppController
 		// TODO
 		} elseif ( is_numeric($this->Session->read('session_userid') ) )
         {
+
             $this->redirect('/trainingplans/view');
 		}
-		
-		// in case your not logged in, remove blog cookie
-		$this->Cookie->write('tct_auth_blog', "true", false, time() - 3600);
-		$this->Cookie->delete('tct_auth_blog');
 
+		// in case your not logged in, remove blog cookie
+		$this->Cookie->write(BLOGCOOKIE, "true", false, time() - 3600);
+		$this->Cookie->delete(BLOGCOOKIE);
 	}
   
 	function error404()

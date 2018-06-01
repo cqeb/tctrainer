@@ -22,19 +22,12 @@ class AppController extends Controller {
         
 	   	function beforeFilter()
         {
-            if (env('HTTPS')) {
-                Configure::write('Session.save', Configure::read('Session.save') . '_https');
-            }
-            // tct_auth_blog
+            // TCT authentification for Wordpress blog
             $this->Cookie->path = '/';
 
-            if ( isset( $_SERVER['HTTP_BASE'] ) ) {
-                $this->Cookie->domain = $_SERVER['HTTP_BASE'];
-            } else {
-                $this->Cookie->domain = Configure::read('Session.domain');
-            }
-            if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
-            {    
+            $this->Cookie->domain = Configure::read('Session.domain');
+
+            if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {    
                 $this->Cookie->secure = false; 
             } else {
                 $this->Cookie->secure = true; 
@@ -101,7 +94,9 @@ class AppController extends Controller {
             // deu is for locale folder
             $this->set('language', $language); 
             
-            $this->Cookie->write('tct_language', "$language", false, '+1 day');
+            // $this->Cookie->write('kms33', "true", false, '+1 hour');
+
+            $this->Cookie->write(LANGCOOKIE, "$language", false, '+1 day');
 
             if ($language && file_exists(VIEWS . $language . DS . $this->viewPath))
             {
@@ -178,6 +173,9 @@ class AppController extends Controller {
             // set for views
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
+            if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+                // die('we are in beforefilter of appcontroller - session');
+            }
      }
 
      function checkSession()
@@ -185,7 +183,11 @@ class AppController extends Controller {
             // fill $username with session data
             $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');
-
+            if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+                // echo "userid " . $this->Session->read('session_userid');
+                // echo "useremail " . $this->Session->read('session_useremail');
+                // die('we are in checkSession (beginning) of appcontroller - session');
+            }
             if ( preg_match( '/@/', $session_useremail ) && is_numeric( $session_userid ) )
             {
                 // check to make sure it's correct
@@ -201,7 +203,12 @@ class AppController extends Controller {
                     $this->set('session_useremail', null);
 
                     $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
-                    $this->redirect('/users/login');
+                    if ($_SERVER['REMOTE_ADDR'] == MYIP) {         
+                        // echo 'we are in checkSession - first half - session';
+                    }
+                    //if ($_SERVER['REMOTE_ADDR'] != MYIP) {
+                        $this->redirect('/users/login');
+                    //}
                     die();
 
                 } else
@@ -217,8 +224,12 @@ class AppController extends Controller {
                     $this->Session->write('Config.language', $results['User']['yourlanguage']);
                     $this->set('userobject', $results['User']);
 
+                    $DEBUGLOG = $this->Session->read('DEBUGLOG');
+                    $DEBUGLOG .= "appcontroller verified session_userid/email and wrote userobject\n";
+                    $this->Session->write('DEBUGLOG', $DEBUGLOG);
+
                     // this is for Wordpress to have the same auth
-                    $this->Cookie->write('tct_auth_blog', "true", false, '+1 day');
+                    $this->Cookie->write(BLOGCOOKIE, "true", false, '+1 day');
                 }
             // session data not correct, kick her/him out
             } else {
@@ -231,7 +242,12 @@ class AppController extends Controller {
                 $this->set('session_useremail', null);
 
                 $this->Session->write('flash',__("Sorry, you're not signed in or your session expired.", true));
-                $this->redirect('/users/login');
+                if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+                    // echo 'checkSession - session data are not correct.';
+                }
+                //if ($_SERVER['REMOTE_ADDR'] != MYIP) {                
+                    $this->redirect('/users/login');
+                //}
                 die();
             }
         }

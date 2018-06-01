@@ -183,6 +183,7 @@ class CakeSession extends Object {
 			
 			// hack by KMS for getting session cookie '/'
 			unset($base);
+			$base = '/';
 			if (!empty($base)) {				
 				$this->path = $base;
 				if (strpos($base, 'index.php') !== false) {
@@ -192,9 +193,8 @@ class CakeSession extends Object {
 				   $this->path = str_replace('?', '', $base);
 				}
 			}
-			$this->host = env('HTTP_HOST');
 			// KMS hack
-			//$this->host = env('HTTP_BASE');
+			$this->host = Configure::read('Session.domain');
 
 			if (strpos($this->host, ':') !== false) {
 				$this->host = substr($this->host, 0, strpos($this->host, ':'));
@@ -222,6 +222,7 @@ class CakeSession extends Object {
 		}
 		$this->__initSession();
 		$this->__startSession();
+		
 		return $this->started();
 	}
 
@@ -233,6 +234,7 @@ class CakeSession extends Object {
  */
 	function started() {
 		if (isset($_SESSION) && session_id()) {
+			//print_r(session_id());
 			return true;
 		}
 		return false;
@@ -476,10 +478,14 @@ class CakeSession extends Object {
  */
 	function __initSession() {
 		$iniSet = function_exists('ini_set');
+		/*
 		if ($iniSet && env('HTTPS')) {
 			ini_set('session.cookie_secure', 1);
 		}
-		ini_set('session.cookie_secure', 1);
+		if ($_SERVER['HTTP_HOST'] != LOCALHOST) {
+			ini_set('session.cookie_secure', 1);
+		}
+		*/
 		if ($iniSet && ($this->security === 'high' || $this->security === 'medium')) {
 			ini_set('session.referer_check', $this->host);
 		}
@@ -540,14 +546,15 @@ class CakeSession extends Object {
 						ini_set('session.name', Configure::read('Session.cookie'));
 						ini_set('session.cookie_lifetime', $this->cookieLifeTime);
 						ini_set('session.cookie_path', $this->path);
+
 						// KMS hack
-						if ( isset( $_SERVER['HTTP_BASE'] ) ) {
-							ini_set('session.cookie_domain', env('HTTP_BASE'));
-						} else {
-							$session_domain = Configure::read('Session.domain');
-							ini_set('session.cookie_domain', $session_domain);
-						}
+						$session_domain = Configure::read('Session.domain');
+						ini_set('session.cookie_domain', $session_domain);
+
 						if (env('HTTPS')) {
+							ini_set('session.cookie_secure', 1);
+						}
+						if ($_SERVER['HTTP_HOST'] != LOCALHOST) {
 							ini_set('session.cookie_secure', 1);
 						}
 					}
