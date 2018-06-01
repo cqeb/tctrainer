@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: TRICORETRAINING\n"
 "POT-Creation-Date: 2018-06-01 08:29+0200\n"
-"PO-Revision-Date: 2018-06-01 08:31+0200\n"
+"PO-Revision-Date: 2018-06-01 11:52+0200\n"
 "Last-Translator: KMS <klaus@tricoretraining.com>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: de_DE\n"
@@ -2125,7 +2125,7 @@ msgstr ""
 
 #: /views/elements/newsletter.bak.ctp:7 /views/elements/newsletter.ctp:6
 msgid "Get Triathlon training hints?"
-msgstr "Erhalte Triathlon Trainingshinweise?"
+msgstr "Erhalte Tipps für dein Triathlontraining?"
 
 #: /views/elements/newsletter.bak.ctp:8 /views/elements/newsletter.ctp:12
 msgid "You'll receive regular tips and hints on a perfect training plan."
