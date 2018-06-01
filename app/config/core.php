@@ -224,7 +224,7 @@ $session_timeout = Configure::read('Session_longterm');
 if (  $session_timeout == "true" )
 	Configure::write('Session.timeout', '300');
 else
-	Configure::write('Session.timeout', '10');
+	Configure::write('Session.timeout', '20');
 
 /**
  * If set to false, sessions are not automatically started.
