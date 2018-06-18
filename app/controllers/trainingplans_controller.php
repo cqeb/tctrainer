@@ -14,7 +14,7 @@ class TrainingplansController extends AppController {
 
 		parent::beforeFilter();
 		$this->layout = 'trainingplans';
-		if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+		if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
 			// die('before filter training plan controller');
 		}
 	}
@@ -22,12 +22,15 @@ class TrainingplansController extends AppController {
 	// view your training plan
 	function view() {
 
-		if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+		$this->Session->delete('facebook_user');
+
+		if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
 			// die('trainingplan view - before checkSession');
 		}
+		
         $this->checkSession();
 
-		if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+		if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
 			// die('trainingplan view - after checkSession');
 		}
 		

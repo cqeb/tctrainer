@@ -3,6 +3,8 @@
 class User extends AppModel {
 	var $name = 'User';
 
+        //var $belongsTo = array ('User');
+        
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 	/*
 	 var $belongsTo = array(

@@ -528,7 +528,9 @@ class PaymentsController extends AppController {
 
    function show_payments()
    {
-        // don't check session because paypal is not logged in
+        $this->checkSession();
+
+        /*
         if ( isset( $this->params['named']['lang'] ) ) {
             $this->code = $this->params['named']['lang']; 				
         } else
@@ -536,9 +538,9 @@ class PaymentsController extends AppController {
             $this->code = 'eng';
         }	 
         $this->Session->write('Config.language', $this->code);
+        */
 
-        $this->checkSession();
-        $this->set('js_addon','');
+        // $this->set('js_addon','');
         $error = '';
         $action = '';
 
@@ -571,7 +573,8 @@ class PaymentsController extends AppController {
    function show_invoice($id = null)
    {
         $this->checkSession();
-        $this->set('js_addon','');
+
+        // $this->set('js_addon','');
 
         $results['User'] = $this->Session->read('userobject');
         $session_userid = $results['User']['id'];

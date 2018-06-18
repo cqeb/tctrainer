@@ -32,7 +32,13 @@ class UsersController extends AppController {
   		// fill with associated array of name, type, size to the corresponding column name
   		// $this->FileUpload->fields = array('name'=> 'file_name', 'type' => 'file_type', 'size' => 'file_size');
   
-  		$this->js_addon = '';
+		$this->js_addon = '';
+		  
+		if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
+			//echo $this->Session->read('session_userid') . ' beforeFilter Users';
+			//die();
+
+		}		  
 	}
 
 	function index()
@@ -71,6 +77,7 @@ class UsersController extends AppController {
 				// login data is wrong, redirect to login page
 				$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
 				$this->redirect('/users/login');
+				$this->set('redirect', 'login');
 		}
 		
 		$this->paginate = array(
@@ -110,12 +117,14 @@ class UsersController extends AppController {
 				// login data is wrong, redirect to login page
 				$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
 				$this->redirect('/users/login');
+				$this->set('redirect', 'login');
 		}
 
-		if ( isset( $id ) )
+		if ( isset( $id ) ) {
 			$this->User->id = $id;
-		elseif ( $this->data['User']['id'] )
+		} elseif ( $this->data['User']['id'] ) {
 			$this->User->id = $this->data['User']['id'];
+		}
 
 		if (empty($this->data))
 		{
@@ -127,6 +136,7 @@ class UsersController extends AppController {
 				$this->Session->write('session_useremail', $user['email']);
 				$this->Session->write('session_userid', $user['id']);
 				// redirect to trainingplan  
+				$this->Session->write('flash',__('You\'re redirected from the edit profile-page because we reloaded your account info.',true));
 				$this->redirect('/trainingplans/view');
 				die();
 			}
@@ -164,6 +174,7 @@ class UsersController extends AppController {
 					// login data is wrong, redirect to login page
 					$this->Session->write('flash',__("Sorry. Don't fool around with our security.",true));
 					$this->redirect('/users/login');
+					$this->set('redirect', 'login');
 			}
 
 			if ( isset( $this->data ) && isset( $this->data['User']['subject'] ) )
@@ -230,81 +241,49 @@ class UsersController extends AppController {
 
 	function login_facebook()
 	{
-
 		$this->Cookie->write(BLOGCOOKIE, "true", false, time() - 3600);
 		$this->Cookie->delete(BLOGCOOKIE);
-		/*
-		$previous_url = $this->Session->read('previous_url');
-		
-		if ( $previous_url ) {
-			$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
-		} else {	
-			$redirect_url = '/trainingplans/view';
-		}
-		*/
 
 		// Facebook auth 
-		$app_id = 132439964636;
+		$app_id = FACEBOOK_APPID;
 		$app_secret = FACEBOOK_APPSECRET;
 		
-		if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) 
-			$my_url = 'https://' . TESTHOST . '/facebook/login.php';
-		else {
-			$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
-			/*
-			// does not work yet
-			if ( isset( $this->params['named']['previous_url'] ) ) {
-				$my_url .= 'previous_url:' . $this->params['named']['previous_url'] . '/';
-			}
-			*/
-		}
-		// does not work yet
-		if ( isset( $this->params['named']['previous_url'] ) && 1 == 2 ) {
-			$redirect_url = base64_decode($this->params['named']['previous_url']);
-			$redirect_url = preg_replace('/\/trainer/', '', $redirect_url);
-		} else {
-			$redirect_url = '/trainer/trainingplans/view/';
-		}
+		$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
+
+		$this->Session->write('flash',__('You\'re redirected to the page you tried to access before.',true));
 		
 		if ( isset( $this->params['named']['fbuser'] ) ) 
 			$fbuser = $this->params['named']['fbuser'];
+		
+		if ( isset( $_GET['code'] ) ) {
+			$code = $_GET['code'];
+		}
 
-		if ( $_SERVER['HTTP_HOST'] == LOCALHOST && isset( $fbuser ) )
-		{
-			$user = unserialize( base64_decode( $fbuser ) );
+		// DEBUG
+		$version = 'v3.0/';
 
-		} else
-		{ 	
-			if ( isset( $_GET['code'] ) ) 
-				$code = $_GET['code'];
-
-			// DEBUG
-			$version = 'v3.0/';
-			if ( empty( $code ) )
-			{
-				// TODO friendslist is missing
-				$dialog_url = "https://www.facebook.com/".$version."dialog/oauth?" .
-					"client_id=" . $app_id . 
-					"&scope=email,public_profile" .
-					"&redirect_uri=" . 
-					urlencode($my_url);
-					$this->redirect($dialog_url);
-					die();
-			} else
-			{
-				$token_url = "https://graph.facebook.com/".$version."oauth/access_token?" .
-					"client_id=" . $app_id . 
-					"&redirect_uri=" . urlencode($my_url) . 
-					"&client_secret=" . $app_secret . 
-					"&code=" . $code;
-				// $access_token = @file_get_contents($token_url);
-				$access_token = file_get_contents($token_url);
-				$atoken = json_decode($access_token);
-				$graph_url = "https://graph.facebook.com/".$version."me?" . 
-					"fields=name,email" . 
-					"&access_token=" . $atoken->access_token;
-				$user = @json_decode(file_get_contents($graph_url));
-			}
+		if ( empty( $code ) ) {
+			// TODO LATER friendslist is missing
+			// $my_url is used
+			$dialog_url = "https://www.facebook.com/".$version."dialog/oauth?" .
+				"client_id=" . $app_id . 
+				"&scope=email,public_profile" .
+				"&redirect_uri=" . 
+				urlencode($my_url);
+				$this->redirect($dialog_url);
+				die();
+		} else {
+			$token_url = "https://graph.facebook.com/".$version."oauth/access_token?" .
+				"client_id=" . $app_id . 
+				"&redirect_uri=" . urlencode($my_url) . 
+				"&client_secret=" . $app_secret . 
+				"&code=" . $code;
+			$access_token = file_get_contents($token_url);
+			$atoken = json_decode($access_token);
+			$graph_url = "https://graph.facebook.com/".$version."me?" . 
+				"fields=name,email" . 
+				"&access_token=" . $atoken->access_token;
+			$user = @json_decode(file_get_contents($graph_url));
 		}
 		
 		// make login things		
@@ -316,14 +295,7 @@ class UsersController extends AppController {
 			{
 				// has user activated his profile and do WE not have deactivated user
 				if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
-				{
-					/*
-					$cookie = array();
-					$cookie['email'] = $results['User']['email'];
-					$cookie['userid'] = $results['User']['id'];
-					$cookie['firstname'] = $results['User']['firstname'];
-					*/
-					
+				{					
 					// COOKIE TIME only 1 day
 					$this->Cookie->write(BLOGCOOKIE, "true", false, '+1 day');
 
@@ -345,16 +317,22 @@ class UsersController extends AppController {
 					$this->Session->write( 'recommendations', serialize($user_recommendations) );
 					*/
 					
+					$previous_url = $this->Session->read('previous_url');
+			
+					if ( $previous_url ) {
+						//$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
+						$redirect_url = $previous_url;
+					} else {	
+						$redirect_url = '/trainingplans/view';
+					}
+					
 					$this->Session->write('previous_url', '');
 					$this->autoRender = false;
 
-					echo '<script language="JavaScript">
-						top.location.href="' . $redirect_url . '";</script>';
+					$this->Session->write('flash',__('You\'re redirected to the page because you logged in with facebook login.',true));
+		
+					echo '<script language="JavaScript">top.location.href="' . $redirect_url . '";</script>';
 					echo '<a href="' . $redirect_url . '">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
-					//echo '<a href="' . $redirect_url . '">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
-
-					// doesn't work with facebook login - session get's lost
-					// $this->redirect('/trainingplans/view/');
 					die();
 					
 				} else {
@@ -375,9 +353,6 @@ class UsersController extends AppController {
 				$this->autoRender = false;
 
 				echo '<script language="JavaScript">top.location.href="/trainer/users/register/";</script><a href="/trainer/users/register/">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
-				
-				// doesn't work with facebook login - session get's lost
-				//$this->redirect('/users/register/');
 				die();
 				
 			}
@@ -392,8 +367,11 @@ class UsersController extends AppController {
 		$this->Cookie->write(BLOGCOOKIE, "true", false, time() - 3600);
 		$this->Cookie->delete(BLOGCOOKIE);
 
+		// redirect to url which the user tried to access before (s)he was redirected to the login
 		$previous_url = $this->Session->read('previous_url');
 
+		// $this->Session->write('flash',__('You\'re redirected to the page you tried to access before. (login)',true));
+		
 		if ( $previous_url ) {
 			$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
 		} else {	
@@ -472,6 +450,7 @@ class UsersController extends AppController {
 						$tid = $this->_sendNewUserMail( $results['User']['id'] );
 						$this->Session->write('flash',__('Not activated yet. Please follow the activation link in the welcome mail.',true));
 						$this->redirect('/users/login');
+						$this->set('redirect', 'login');
 						die();
 					}
 				} else
@@ -480,6 +459,7 @@ class UsersController extends AppController {
 					$this->Session->write('flash',__('Wrong or not existing email or password. Please try again.', true));
 	        		// You must not redirect otherwise you won't see errors
 					$this->redirect('/users/login');
+					$this->set('redirect', 'login');
 				}
 			}
 		}
@@ -489,17 +469,20 @@ class UsersController extends AppController {
 	{
 		$this->set("title_for_layout", __('Logout',true));
 		
-		$this->checkSession();
+		// $this->checkSession();
+
+		// get language for logout url
+		$language = $this->Session->read('Config.language');
+		$previous_url = $this->Session->read('previous_url');
 
 		// kill all session information
-		$this->Session->write('session_useremail', '');
-		$this->Session->write('session_userid', '');
+		$this->Session->destroy();
 
-		$this->Cookie->write(BLOGCOOKIE, "true", false, time() - 3600);
+		$this->Session->write('Config.language', $language);
+		$this->Session->write('previous_url', $previous_url);
+
+		$this->Cookie->write(BLOGCOOKIE, "true", "", 1);
 		$this->Cookie->delete(BLOGCOOKIE);
-
-		$tctcookie = Configure::read('Session.cookie');
-		setcookie($tctcookie, '', time() - 3600);
 
 		// in case a long termin login cookie is set
 		Configure::write('Session_longterm', 'false');
@@ -511,9 +494,19 @@ class UsersController extends AppController {
 		$this->set('session_firstname', '');
 		$this->set('session_lastname', '');
 
+
 		// login data is wrong, redirect to login page
 		$this->Session->write('flash',__("You're logged out. Bye.",true));
-		$this->redirect('/users/login');
+
+		if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
+			//echo "session userid" . $this->Session->read('session_userid');
+			//echo '<br>';
+			//echo Configure::read('Session.cookie');
+
+			//die();
+		}
+		$this->redirect('/users/login/code:'.$language);
+		$this->set('redirect', 'login');
 		die();
 	}
 
@@ -607,19 +600,33 @@ class UsersController extends AppController {
 	 */
 	function register() 
 	{	  
-	    if ( is_numeric($this->Session->read('session_userid')) ) 
+		// if user is logged in, then redirect to protected area
+		if ( is_numeric($this->Session->read('session_userid')) ) 
 	    {
 			$this->checkSession();
-			$this->redirect('/trainingplans/view');
+
+			// redirect to url which the user tried to access before (s)he was redirected to the login
+			$previous_url = $this->Session->read('previous_url');
+
+			$this->Session->write('flash',__('You\'re redirected to the page because you\'re already logged in (register).',true));
+		
+			if ( $previous_url ) {
+				$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
+			} else {	
+				$redirect_url = '/trainingplans/view';
+			}
+
+			$this->Session->write('previous_url', '');
+			$this->redirect($redirect_url);
 	    }
 
-		if ( is_numeric($this->Session->read( 'recommendation_userid' )) ) 
+		if ( is_numeric($this->Session->read( 'recommendation_userid' )) ) {
 			$inviter = $this->Session->read('recommendation_userid');
-		else
+		} else {
 			$inviter = '';
+		}
 
 		$this->set("title_for_layout", __('Signup for your TriCoreTraining training plan', true));		
-		
 		
 	    $success = false;
 	    $statusbox = 'alert';
@@ -828,10 +835,36 @@ class UsersController extends AppController {
 				
 			} else {
 				// calculcate spam protection
-				// we get 2 numbers in hidden field separated with |
-				// separate them, check for INT
 
-				$spamprotection = false;
+				
+				$spamprotection = true;
+
+				if ( isset( $_POST['g-recaptcha-response' ] ) ) {
+					/*
+					secret (required)	RECAPTCHA
+					response (required)	The value of 'g-recaptcha-response'.
+					*/
+					$data = array('response' => $_POST['g-recaptcha-response'], 'secret' => RECAPTCHA);
+					# Create a connection
+					$url = 'https://www.google.com/recaptcha/api/siteverify';
+					$ch = curl_init($url);
+					# Form data string
+					$postString = http_build_query($data, '', '&');
+					# Setting our options
+					curl_setopt($ch, CURLOPT_POST, 1);
+					curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
+					curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+					# Get the response
+					$response = curl_exec($ch);
+					curl_close($ch);
+					// echo $_POST['g-recaptcha-response'] . "<br><br>";
+					// echo RECAPTCHA . "<br><br>";
+					// print_r($response);
+					$response = json_decode($response);
+					if ($response->success == true) { $spamprotection = true; }
+					else $spamprotection = false;
+				}
+				/*
 				$calc_numbers = preg_split('/\|/', base64_decode($this->data['User']['calc_spam']));
 
 				if (is_numeric($calc_numbers[0]) && is_numeric($calc_numbers[1])) {
@@ -841,6 +874,8 @@ class UsersController extends AppController {
 						$spamprotection = true;
 					}
 				}
+				*/
+
 				if ( $spamprotection == true ) {
 					if ( $this->User->save( $this->data, array(
 					'validate' => true,
@@ -1134,7 +1169,7 @@ class UsersController extends AppController {
 				$this->Session->write('flash', __('Add races to set your goal. Your weekly training plan will be generated using these goals.',true));
         
 				/*
-				// auto-login
+				// TODO auto-login
 				if ($results['User']['activated'] == 0 && $results['User']['deactivated'] != 1)
 				{
 					$this->Session->write('session_useremail', $results['User']['email']);
@@ -1856,6 +1891,8 @@ class UsersController extends AppController {
 
 	function check_notifications()
 	{
+		echo $_SERVER['REMOTE_ADDR'] . "\n<br>";
+
 		// secure access
 		if ( $_SERVER['REMOTE_ADDR'] != '127.0.0.1' && 
 				isset( $_GET['access'] ) && 
@@ -1885,19 +1922,24 @@ class UsersController extends AppController {
 			echo "Start on date (now): " . date('Y-m-d H:i:s', time()) . "\n<br />";
 			
 	    $this->layout = 'plain';
-    
+	
+		$this->loadModel('User');
+
     	// select all users 
 		$sql = "SELECT * FROM users WHERE email != '' ORDER BY id";
 		
 		// localhost only sends 20 emails
-		if ( $_SERVER['HTTP_HOST'] == LOCALHOST || $_GET['debug'] == true ) {
+		if ( $_SERVER['HTTP_HOST'] == LOCALHOST || (isset($_GET['debug']) && $_GET['debug'] == true )) {
 			$sql .= " LIMIT 20";
 		}
 		//// DEMO REMOVE
 		// $sql .= " LIMIT 20";
 			
-		$results = $this->User->query($sql);
+		if ( $debug == true ) 
+			echo $sql . "<br>";
 
+		$results = $this->User->query($sql);
+		
 		$output = '';
 
 		/*
@@ -1922,6 +1964,9 @@ class UsersController extends AppController {
 		if ( isset( $_GET['end'] ) && $_GET['end'] < $count_results ) 
 			$count_results = $_GET['end'];
 			
+		if ( $debug == true )
+			echo $count_results . "<br>";
+
 		// go through all users
 		for ( $i = $start; $i < $count_results; $i++ )
 		{
@@ -2632,6 +2677,7 @@ class UsersController extends AppController {
 		
 		$this->set('statusbox', $statusbox);
 		$this->redirect('/users/login');
+		$this->set('redirect', 'login');
 	}
 
 }

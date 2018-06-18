@@ -30,7 +30,9 @@ else
 		$(document).scrollTop( $(".content").offset().top );  
 	};
 	</script>
-
+<?php if ( $this->params['action'] == 'register' ) { ?>
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<?php } ?>
 </head>
 
 <body <?php if ( isset( $this->onLoad ) ) { echo 'onLoad="'. $this->onLoad . '"'; } ?>>
@@ -137,6 +139,13 @@ jQuery(document).ready(
 </script>
 
 <?php echo $this->element('footerend'); ?>
+<?php if (isset($redirect) && $redirect == 'login') { ?>
+<script language="JavaScript">
+<!--
+top.location.href = '/trainer/users/logout';
+-->
+</script>
+<?php } ?>
 
 </body>
 </html>

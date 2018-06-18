@@ -47,7 +47,7 @@
   <?php } ?>
 
   <?php echo $html->link(__('Sign In',true),array('controller' => 'users', 'action' => 'login'), array('class' => 'btn btn-warning btn-small')); ?>
-  <?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook/', array('class' => 'btn btn-warning btn-small')); ?>
+  <?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook', array('class' => 'btn btn-warning btn-small')); ?>
 
 </form>
 
@@ -61,9 +61,9 @@
                   <ul class="dropdown-menu">
                     <li style="padding-left: 20px;"><b><?php __('Training Plan'); ?></b></li>
 
-                    <li><?php echo $html->link(__('Your Training Plan',true),array('controller' => 'trainingplans', 'action' => 'view'))?></li>
-                    <li><?php echo $html->link(__('Training Log',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings'))?></li>
-                    <li><?php echo $html->link(__('Your Races',true),array('controller' => 'competitions', 'action' => 'list_competitions'))?></li>
+                    <li><?php echo $html->link(__('Your Training Plan',true),array('controller' => 'trainingplans', 'action' => 'view/'))?></li>
+                    <li><?php echo $html->link(__('Training Log',true),array('controller' => 'trainingstatistics', 'action' => 'list_trainings/'))?></li>
+                    <li><?php echo $html->link(__('Your Races',true),array('controller' => 'competitions', 'action' => 'list_competitions/'))?></li>
                   
                     <li style="padding-left: 20px;"><b><?php __('Statistics'); ?></b></li>
                     <li><?php echo $html->link(__('How fit am I?',true),array('controller' => 'trainingstatistics', 'action' => 'statistics_trimp'))?></li>

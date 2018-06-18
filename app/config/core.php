@@ -40,10 +40,11 @@
  */
 
 define('LOCALHOST', 'local2.tricoretraining.com');
-define('TESTHOST', 'thetriplans.com');
+define('TESTHOST', 'test.tricoretraining.com');
+define('TESTHOST2', 'thetriplans.com');
 
-define('LANGCOOKIE', 'tct_language2');
-define('BLOGCOOKIE', 'tct_auth_blog2');
+define('LANGCOOKIE', 'tct_language');
+define('BLOGCOOKIE', 'tct_auth_blog');
 
 $DEBUGLOG = '';
 
@@ -53,7 +54,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	 * Defines the default error type when using the log() function. Used for
 	 * differentiating error logging and debugging. Currently PHP supports LOG_DEBUG.
 	 */
-	define('DEBUG', false);
+	define('DEBUG', true);
 	define('LOG_ERROR', 3);
 	Configure::write('debug', 3);
 	define('MYIP', '127.0.0.1');
@@ -63,34 +64,47 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 
 	$_SERVER['DOCUMENT_ROOT'] = '/Applications/XAMPP/xamppfiles/htdocs/tricoretraining.com/';
 
-} elseif ( $_SERVER['HTTP_HOST'] == 'https://thetriplans.com' ) {
+} elseif ( $_SERVER['HTTP_HOST'] == TESTHOST ) {
 	define('DEBUG', false);
 	define('LOG_ERROR', 0);	
-	Configure::write('debug', 2);
-	define('MYIP', '213.225.35.216');
+	Configure::write('debug', 0);
+	define('MYIP', '89.144.214.43');
 
 	Configure::write('App.mailHost', 'business36.web-hosting.com');
-	Configure::write('App.hostUrl', 'https://thetriplans.com');	
+	Configure::write('App.hostUrl', 'https://' . TESTHOST);	
 
-	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/thetriplans.com/';
+	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/' . TESTHOST . '/';
+
+} elseif ( $_SERVER['HTTP_HOST'] == TESTHOST2 ) {
+	define('DEBUG', false);
+	define('LOG_ERROR', 0);	
+	Configure::write('debug', 0);
+	define('MYIP', '89.144.214.220');
+
+	Configure::write('App.mailHost', 'business36.web-hosting.com');
+	Configure::write('App.hostUrl', 'https://' . TESTHOST);	
+
+	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/' . TESTHOST . '/';
 
 } else {
 	define('DEBUG', false);
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
 
-	define('MYIP', '213.225.35.216');
+	define('MYIP', '89.144.214.220');
+
 	Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.hostUrl', 'https://tricoretraining.com');	
 	
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/tricoretraining.com/';
-
-	if ($_SERVER['REMOTE_ADDR'] == MYIP) {
-        define('DEBUG', false );
-        define('LOG_ERROR', 0);
-        Configure::write('debug', 0);
-	}
 	
+}
+
+if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+	define('DEBUG', true);
+	define('LOG_ERROR', 3);
+	Configure::write('debug', 3);
+	echo "debug";
 }
 
 define('url', '/trainer');
@@ -197,7 +211,7 @@ Configure::write('Session.save', 'php');
 // cookie topic with domain.com, .domain.com 
 // https://stackoverflow.com/questions/18492576/share-cookie-between-subdomain-and-domain
 
-Configure::write('Session.cookie', 'TCTCookie2');
+Configure::write('Session.cookie', 'TCTCookie');
 
 Configure::write('Session.path', '/');
 
@@ -207,7 +221,11 @@ if ($_SERVER['HTTP_HOST'] == LOCALHOST) {
 
 } elseif ($_SERVER['HTTP_HOST'] == TESTHOST) {
 
-	Configure::write('Session.domain', 'thetriplans.com');
+	Configure::write('Session.domain', TESTHOST);
+
+} elseif ($_SERVER['HTTP_HOST'] == TESTHOST2) {
+
+	Configure::write('Session.domain', TESTHOST2);
 
 } else {
 
@@ -323,7 +341,7 @@ Configure::write('Acl.database', 'default');
  *
  */
 
-//// Configure::write('Cache.check', true);
+Configure::write('Cache.check', true);
 
 /**
  * Turn off all caching application-wide.
@@ -387,6 +405,6 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {
  *
  */
 
-Cache::config('default', array('engine' => 'File'));
+//// Cache::config('default', array('engine' => 'File'));
 
 ?>

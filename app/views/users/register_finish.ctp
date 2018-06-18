@@ -52,11 +52,6 @@
       $this->js_addon = <<<EOE
 <script type="text/javascript">
 
-        // facebox box
-        //$('a[rel*=facebox]').facebox();
-
-});
-
 </script>
 
 EOE;

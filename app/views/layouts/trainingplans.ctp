@@ -49,20 +49,20 @@ else
 	<div class="container">
 	  	<!-- Brand and toggle get grouped for better mobile display -->
 	  	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-		  <span class="sr-only">Toggle navigation</span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		  <span class="icon-bar"></span>
-		</button>
-		<a class="navbar-brand navbar-brand-small" href="/trainer/">
-		<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo"></a>
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand navbar-brand-small" href="/trainer/">
+			<img width="120px" src="<?php echo $url; ?>/img/logo_tricoretraining_233.png" alt="TriCoreTraining Logo"></a>
 	  	</div>
 
 		<?php echo $this->element('subnavigation_all'); ?>
 
-		</div><!-- /.navbar-collapse --> 
-	</div>	
+	</div><!-- /.navbar-collapse --> 
+	<!--</div>	KMS-->
 	</nav>
 
 </header>
@@ -74,94 +74,95 @@ else
 	<div class="row">
 
 		<div class="col-xs-12 col-sm-6 col-md-7 col-lg-7">
-	    <div class="panel">
-			<div class="panel-heading"><h1><?php __('Training Plan'); ?></h1></div>
-	        <div class="panel-body">
+			<div class="panel">
+				<div class="panel-heading"><h1><?php __('Training Plan'); ?></h1></div>
+					<div class="panel-body">
 
-			<?php echo $content_for_layout; ?>
+					<?php echo $content_for_layout; ?>
 
+					</div>
+				</div>
+			</div>
+		
+			<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
+				<div class="panel">
+					<div class="panel-body">
+
+						<div class="info">
+							<?php echo $info; ?>
+						</div>
+
+						<div class="distribution">
+							<div class="box">
+								<label><?php __('Workout Balance'); ?> <a href="javascript:TrainingPlanner.resetWorkoutBalance();" class="reset"><?php __('reset'); ?></a></label>
+								<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>">
+									</div>
+							</div>
+							<br /><br /><br /><br />
+						</div> 		
+     				</div>
+
+     			</div>
+				<div class="panel">
+					<div class="panel-body">
+
+						<!-- Training hour distribution -->
+						<div class="avgweekly">
+							<div class="box">
+								<label for="avg"><?php __('Training Hours'); ?></label>
+								<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#avg').focus()" title="<?php __('Edit');?>">
+								<input type="text" name="avg" id="avg" title="<?php __('These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected.'); ?>"/>
+								<label for="week"><?php __('This Week'); ?></label>
+								<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#week').focus()" title="<?php __('Edit');?>">
+								<input type="text" name="week" id="week" title="<?php __('This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week.'); ?>"/>
+								<a href="javascript:TrainingPlanner.resetWeeklyHours();" class="reset"><?php __('reset'); ?></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel">
+					<div class="panel-body">
+
+						<h3><?php __('Calendar import'); ?></h3>
+						<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?> (<?php echo $html->link(__('Next',true),array('controller' => 'trainingplans', 'action' => 'get_events?o=1'))?>)
+						
+						<!--//
+						<?php //if ( $this->getAthlete()->isValid() == 0 ) { ?>
+						<?php if ( 1 == 1 ) { ?>
+						<a class="btn btn-primary" href="/trainer/payments/subscribe_triplans"><b><?php __('Upgrade to PREMIUM'); ?></b></a>
+							<br /><br />
+						<?php } ?>
+						//-->
+						
+						<h3><?php __('First steps'); ?></h3>
+						<a id="guide" href="#" title=""><?php __('Beginner\'s guide to your training'); ?></a>
+
+						<h3><?php __('Your mesocycle of the next weeks'); ?> <a class="help badge" href="/blog/<?php if (isset($language)) echo $language . '/'; ?>basics-what-to-know-about-endurance-training/">?</a></h3>
+						
+						<?php
+
+						echo $mesocycles;
+
+						?>
+						<div class="spacerr"></div>
+					</div>
+				</div>
 			</div>
 		</div>
-		</div>
-		
-		<div class="col-xs-12 col-sm-6 col-md-5 col-lg-5">
-		<div class="panel">
-	        <div class="panel-body">
-
-			<div class="info">
-				<?php echo $info; ?>
-	      	</div>
-
-	      	<div class="distribution">
-	      		<div class="box">
-		      		<label><?php __('Workout Balance'); ?> <a href="javascript:TrainingPlanner.resetWorkoutBalance();" class="reset"><?php __('reset'); ?></a></label>
-	      			<div id="slider" title="<?php __('Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks.'); ?>">
-	      				</div>
-	      		</div>
-	      		<br /><br /><br /><br />
-	      	</div>
-     		
-     		</div>
-
-     	</div>
-		<div class="panel">
-	        <div class="panel-body">
-
-	      	<!-- Training hour distribution -->
-			<div class="avgweekly">
-	      		<div class="box">
-	      			<label for="avg"><?php __('Training Hours'); ?></label>
-	      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#avg').focus()" title="<?php __('Edit');?>">
-	      			<input type="text" name="avg" id="avg" title="<?php __('These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected.'); ?>"/>
-	      			<label for="week"><?php __('This Week'); ?></label>
-	      			<img class="edit" src="/trainer/img/pencil.gif" onClick="jQuery('#week').focus()" title="<?php __('Edit');?>">
-	      			<input type="text" name="week" id="week" title="<?php __('This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week.'); ?>"/>
-	      			<a href="javascript:TrainingPlanner.resetWeeklyHours();" class="reset"><?php __('reset'); ?></a>
-	      		</div>
-	      	</div>
-
-	      	</div>
-	    </div>
-
-		<div class="panel">
-	        <div class="panel-body">
-
-			<h3><?php __('Calendar import'); ?></h3>
-			<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?> (<?php echo $html->link(__('Next',true),array('controller' => 'trainingplans', 'action' => 'get_events?o=1'))?>)
-			
-			<!--//
-			<?php //if ( $this->getAthlete()->isValid() == 0 ) { ?>
-			<?php if ( 1 == 1 ) { ?>
-			<a class="btn btn-primary" href="/trainer/payments/subscribe_triplans"><b><?php __('Upgrade to PREMIUM'); ?></b></a>
-				<br /><br />
-			<?php } ?>
-			//-->
-			
-			<h3><?php __('First steps'); ?></h3>
-			<a id="guide" href="#" title=""><?php __('Beginner\'s guide to your training'); ?></a>
-
-			<h3><?php __('Your mesocycle of the next weeks'); ?> <a class="help badge" href="/blog/<?php if (isset($language)) echo $language . '/'; ?>basics-what-to-know-about-endurance-training/">?</a></h3>
-			
-			<?php
-
-			echo $mesocycles;
-
-			?>
-			<div class="spacerr"></div>
-			</div>
-	        </div>
-		</div>
-		
-		</div>
-	
+		<?php if ($session->read('flash')) { ?>
+			<div class="alert alert-danger">
+			<?php echo $session->read('flash'); $session->delete('flash'); ?>
+			</div><br />
+		<?php } ?>
 	</div>
-
 </div>
 </article>
 
-	<!-- Footer -->
-	<?php echo $this->element('footer'); ?>
-	<!-- /Footer -->
+<!-- Footer -->
+<?php echo $this->element('footer'); ?>
+<!-- /Footer -->
 
 </div>
 

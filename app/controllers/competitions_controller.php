@@ -27,13 +27,13 @@ class CompetitionsController extends AppController {
    {
         parent::beforeFilter();
         $this->layout = 'default_trainer';
-        //$this->checkSession();
-        
+        //$this->checkSession();  
    }
 
    function list_competitions()
    {
         $this->checkSession();
+        
         $statusbox = 'alert';
         $create_dummy = '';
 

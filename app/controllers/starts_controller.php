@@ -29,6 +29,7 @@ class StartsController extends AppController
 		
 		$session_userid = $this->Session->read('session_userid');
 
+		// if user is logged in, we can save the current language settings
         if ( is_numeric($session_userid) ) 
         {
 			// save language in user profile
@@ -152,10 +153,10 @@ class StartsController extends AppController
 				$this->set( 'companyinfo', $discount );
 			}	
 		// if user is logged in, then redirect
-		// TODO
 		} elseif ( is_numeric($this->Session->read('session_userid') ) )
         {
-
+			// TODO check whether this could be a problem
+			$this->Session->write('flash',__('You\'re redirected from our start page because you\'re already logged in.',true));
             $this->redirect('/trainingplans/view');
 		}
 

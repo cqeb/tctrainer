@@ -22,9 +22,18 @@ class AppController extends Controller {
         
 	   	function beforeFilter()
         {
+            $this->loadModel('User');
+        
+            if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
+                // die('we are in beforefilter of appcontroller - session');
+                //if ( $this->Session->read('DEBUGLOG') ) echo $this->Session->read('DEBUGLOG');
+                //die('appcontroller: beforeFilter begin');
+            }
+
+            /////$this->Session->write('DEBUGLOG', '');
+
             // TCT authentification for Wordpress blog
             $this->Cookie->path = '/';
-
             $this->Cookie->domain = Configure::read('Session.domain');
 
             if ( $_SERVER['HTTP_HOST'] == LOCALHOST ) {    
@@ -43,14 +52,13 @@ class AppController extends Controller {
             } else {
                 // user is logged in
                 if ( is_numeric( $this->Session->read('session_userid') ) )
-                {
-                    $this->loadModel('User');
-                    
+                {   
                     // $this->checkSession();
                     $this->User->id = $this->Session->read('session_userid');
+                    
                     $this->UserLanguage = $this->User->read();
                     //echo "DEBUG user language " . $this->UserLanguage . "<br />";
-                    
+                    unset($this->User);
                     if ( isset($this->UserLanguage['User']['yourlanguage'] ) ) {
                         $language = $this->UserLanguage['User']['yourlanguage'];
                     }
@@ -153,12 +161,11 @@ class AppController extends Controller {
 
             if ( !$this->Session->read('recommendations') )
 			{
-                    $this->loadModel('User');
-                            
+                    $this->loadModel('User');         
                     $sql = "SELECT myrecommendation, firstname, lastname, email FROM " .
                         "users WHERE myrecommendation != '' AND yourlanguage = '" . $language . "'";
                     $user_recommendations = $this->User->query( $sql );
-                            
+                   
                     $this->Session->write( 'recommendations', serialize($user_recommendations) );
             } else
             {
@@ -173,21 +180,29 @@ class AppController extends Controller {
             // set for views
             $this->set('session_userid', $this->Session->read('session_userid'));
             $this->set('session_useremail', $this->Session->read('session_useremail'));
-            if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+
+            if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
                 // die('we are in beforefilter of appcontroller - session');
+                //$DEBUGLOG = $this->Session->read( 'DEBUGLOG' );
+                //$this->Session->write( 'DEBUGLOG', $DEBUGLOG . '<br />viewPath: ' . $this->viewPath);
+                //if ( $this->Session->read('DEBUGLOG') ) echo $this->Session->read('DEBUGLOG');
+                //die('appcontroller: before');
             }
      }
 
      function checkSession()
      {
+            $this->loadModel('User');
             // fill $username with session data
             $session_useremail = $this->Session->read('session_useremail');
             $session_userid    = $this->Session->read('session_userid');
-            if ($_SERVER['REMOTE_ADDR'] == MYIP) {
-                // echo "userid " . $this->Session->read('session_userid');
+
+            if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
+                // echo "checkSession userid " . $this->Session->read('session_userid');
                 // echo "useremail " . $this->Session->read('session_useremail');
                 // die('we are in checkSession (beginning) of appcontroller - session');
             }
+
             if ( preg_match( '/@/', $session_useremail ) && is_numeric( $session_userid ) )
             {
                 // check to make sure it's correct
@@ -203,12 +218,11 @@ class AppController extends Controller {
                     $this->set('session_useremail', null);
 
                     $this->Session->write('flash',__('Incorrect session data. Sorry.',true));
-                    if ($_SERVER['REMOTE_ADDR'] == MYIP) {         
+                    if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {         
                         // echo 'we are in checkSession - first half - session';
                     }
-                    //if ($_SERVER['REMOTE_ADDR'] != MYIP) {
-                        $this->redirect('/users/login');
-                    //}
+                    $this->redirect('/users/login');
+                    $this->set('redirect', 'login');
                     die();
 
                 } else
@@ -225,29 +239,36 @@ class AppController extends Controller {
                     $this->set('userobject', $results['User']);
 
                     $DEBUGLOG = $this->Session->read('DEBUGLOG');
-                    $DEBUGLOG .= "appcontroller verified session_userid/email and wrote userobject\n";
+                    $DEBUGLOG .= date("Y-m-d H:i:s", time()) . " " . $_SERVER['REQUEST_URI'] . " <br>appcontroller: verified session_userid/email and wrote userobject<br>\n";
                     $this->Session->write('DEBUGLOG', $DEBUGLOG);
 
                     // this is for Wordpress to have the same auth
                     $this->Cookie->write(BLOGCOOKIE, "true", false, '+1 day');
+                    if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
+                        //echo 'checkSession - session data are not correct.';
+                        //if ( $this->Session->read('DEBUGLOG') ) echo $this->Session->read('DEBUGLOG');
+                        //die('checkSession');
+                    }                    
+                    
                 }
+
             // session data not correct, kick her/him out
             } else {
                 
                 // to be sure
                 $this->Session->write('previous_url', $_SERVER['REQUEST_URI']);
+
                 $this->Session->delete('session_useremail');
                 $this->Session->delete('session_userid');
                 $this->set('session_userid', null);
                 $this->set('session_useremail', null);
 
                 $this->Session->write('flash',__("Sorry, you're not signed in or your session expired.", true));
-                if ($_SERVER['REMOTE_ADDR'] == MYIP) {
-                    // echo 'checkSession - session data are not correct.';
+                if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
+                    //echo 'checkSession - session data are not correct.';
                 }
-                //if ($_SERVER['REMOTE_ADDR'] != MYIP) {                
-                    $this->redirect('/users/login');
-                //}
+                $this->redirect('/users/login');
+                $this->set('redirect', 'login');
                 die();
             }
         }

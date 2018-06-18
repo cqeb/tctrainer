@@ -1,4 +1,5 @@
 
+
     <div class="panel panel-default" id="forms">
         <div class="panel-heading"><h1><?php __("Sign up for a plan"); ?></h1></div>
         
@@ -216,38 +217,14 @@ echo $form->input('rookie',
 ?>
 </div>
 
-<div class="form-group">
 
-<?php
-
-$first_calc = rand(0, 10);
-$second_calc = rand(0, 10);
-$calc = $first_calc . ' + ' . $second_calc;
-
-echo $form->input('spamprotection',
-                  array(
-                  'class' => 'required form-control',
-                  'maxLength' => 10,
-                  'label' => __('Please calculate (SPAM protection)', true) . ' ' . $calc,
-                  'error' => array( 
-                    'notempty' => __('Enter your email', true),
-                    'wrap' => 'div', 
-                    'class' => 'text-danger'          
-                  ),
-));
-$calc = base64_encode($first_calc.'|'.$second_calc);
-
-echo $form->input( 'calc_spam', array('type' => 'hidden', 'value' => $calc));
-
-?>
-</div>
 
 <h3><?php __('Security of your personal data'); ?></h3>
 <?php __('The security of your personal data especially your health data are important to us. So we have to ask you to read these terms and agree to them. Thank you.'); ?> 
 <br /><br />
 <div class="form-group">
-<b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree."); ?></b>  
-<a href="/blog/<?php if ( $language == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
+  <b><?php __("You hereby confirm that you've read the TriCoreTraining terms of service and agree."); ?></b>  
+  <a href="/blog/<?php if ( $language == 'deu' ) echo 'de/'; else echo 'en/'; ?>terms-of-service-2/" target="_blank"><?php __('Read our terms and conditions.'); ?></a>
 </div>
 
 <?php
@@ -298,7 +275,33 @@ echo $form->input('mailingtos',
 ));
 ?>
 <br />
+<div class="form-group">
 
+<div class="g-recaptcha" data-sitekey="6Lcmc18UAAAAACZeFHDAKQHUD_B9l-ONUYcjUc5R"></div>
+
+<?php
+/*
+$first_calc = rand(0, 10);
+$second_calc = rand(0, 10);
+$calc = $first_calc . ' + ' . $second_calc;
+
+echo $form->input('spamprotection',
+                  array(
+                  'class' => 'required form-control',
+                  'maxLength' => 10,
+                  'label' => __('Please calculate (SPAM protection)', true) . ' ' . $calc,
+                  'error' => array( 
+                    'notempty' => __('Enter your email', true),
+                    'wrap' => 'div', 
+                    'class' => 'text-danger'          
+                  ),
+));
+$calc = base64_encode($first_calc.'|'.$second_calc);
+
+echo $form->input( 'calc_spam', array('type' => 'hidden', 'value' => $calc));
+*/
+?>
+</div>
 <?php
 
 // calculate FREE training period
