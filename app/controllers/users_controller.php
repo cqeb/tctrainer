@@ -319,11 +319,12 @@ class UsersController extends AppController {
 					
 					$previous_url = $this->Session->read('previous_url');
 			
+					// as this is a javascript redirect, we should add /trainer/
 					if ( $previous_url ) {
 						//$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
 						$redirect_url = $previous_url;
 					} else {	
-						$redirect_url = '/trainingplans/view';
+						$redirect_url = '/trainer/trainingplans/view';
 					}
 					
 					$this->Session->write('previous_url', '');

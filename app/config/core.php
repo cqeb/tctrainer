@@ -104,7 +104,7 @@ if ($_SERVER['REMOTE_ADDR'] == MYIP) {
 	define('DEBUG', true);
 	define('LOG_ERROR', 3);
 	Configure::write('debug', 3);
-	echo "debug";
+	//echo "debug";
 }
 
 define('url', '/trainer');
