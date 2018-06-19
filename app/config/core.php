@@ -59,7 +59,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	Configure::write('debug', 3);
 	define('MYIP', '127.0.0.1');
 
-	Configure::write('App.mailHost', 'relay-hosting.secureserver.net');
+	Configure::write('App.mailHost', MYIP);
 	Configure::write('App.hostUrl', 'http://' . LOCALHOST);
 
 	$_SERVER['DOCUMENT_ROOT'] = '/Applications/XAMPP/xamppfiles/htdocs/tricoretraining.com/';
@@ -70,7 +70,8 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	Configure::write('debug', 0);
 	define('MYIP', '89.144.214.43');
 
-	Configure::write('App.mailHost', 'business36.web-hosting.com');
+	Configure::write('App.mailHost', 'mx.tricoretraining.com');
+	//Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.hostUrl', 'https://' . TESTHOST);	
 
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/' . TESTHOST . '/';
@@ -81,7 +82,8 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	Configure::write('debug', 0);
 	define('MYIP', '89.144.214.220');
 
-	Configure::write('App.mailHost', 'business36.web-hosting.com');
+	//Configure::write('App.mailHost', 'business36.web-hosting.com');
+	Configure::write('App.mailHost', 'mx.tricoretraining.com');
 	Configure::write('App.hostUrl', 'https://' . TESTHOST);	
 
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/' . TESTHOST . '/';
@@ -92,8 +94,10 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	Configure::write('debug', 0);
 
 	define('MYIP', '89.144.214.220');
+	//define('MYIP', '10.133.4.57');
 
-	Configure::write('App.mailHost', 'business36.web-hosting.com');
+	//Configure::write('App.mailHost', 'business36.web-hosting.com');
+	Configure::write('App.mailHost', 'mx.tricoretraining.com');
 	Configure::write('App.hostUrl', 'https://tricoretraining.com');	
 	
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/tricoretraining.com/';
@@ -134,10 +138,17 @@ Configure::write('App.paymentemail', 'payment@tricoretraining.com');
 /**
  * mail sending options
  */
-Configure::write('App.mailFrom', 'Klaus-M. from TriCoreTraining <support@tricoretraining.com>');
+
+// this one is only the definition of admin for receiving specific emails
 Configure::write('App.mailAdmin', 'support@tricoretraining.com');
+
+//Configure::write('App.mailHost', 'smtp.gmail.com');
+
+Configure::write('App.mailFrom', 'Klaus-M. from TriCoreTraining <support@mx.tricoretraining.com>');
+
+Configure::write('App.mailReply', 'support@tricoretraining.com');
 Configure::write('App.mailPort', '25');
-Configure::write('App.mailUser', '');
+Configure::write('App.mailUser', 'support@mx.tricoretraining.com');
 Configure::write('App.mailPassword', '');
 Configure::write('App.mailDelivery', 'mail');
 

@@ -615,18 +615,20 @@ class PaymentsController extends AppController {
 
         $this->Email->to = $User['User']['email'];
 
-        if ( $mailtype == 'invoice' )
+        if ( $mailtype == 'invoice' ) {
             $this->Email->subject = __('TriCoreTraining Invoice',true);
-        else
+        } else {
             $this->Email->subject = __('TriCoreTraining Subscription Info',true);
+        }
 
-        $this->Email->replyTo = Configure::read('App.mailFrom');
+        $this->Email->replyTo = Configure::read('App.mailReply');
         $this->Email->from = Configure::read('App.mailFrom');
 
-        if ( $mailtype == 'invoice' )
+        if ( $mailtype == 'invoice' ) {
             $this->Email->template = 'invoicemail'; // note no '.ctp'
-        else
+        } else {
             $this->Email->template = 'invoiceinfomail'; // note no '.ctp'
+        }
 
         //Send as 'html', 'text' or 'both' (default is 'text')
         $this->Email->sendAs = 'both'; // because we like to send pretty mail
@@ -667,7 +669,7 @@ class PaymentsController extends AppController {
 
         $this->Email->to = Configure::read('App.mailAdmin');
         $this->Email->subject = $subject;
-        $this->Email->replyTo = Configure::read('App.mailFrom');
+        $this->Email->replyTo = Configure::read('App.mailReply');
         $this->Email->from = Configure::read('App.mailFrom');
         $this->Email->template = 'notification'; // note no '.ctp'
         //Send as 'html', 'text' or 'both' (default is 'text')
@@ -718,7 +720,7 @@ class PaymentsController extends AppController {
                 $to_user['name'] = $user['User']['firstname'];
 
           $this->Email->to = $to_user['email'];
-          $this->Email->replyTo = Configure::read('App.mailFrom');
+          $this->Email->replyTo = Configure::read('App.mailReply');
           $this->Email->from = Configure::read('App.mailFrom');
           $this->Email->subject = $subject;
 

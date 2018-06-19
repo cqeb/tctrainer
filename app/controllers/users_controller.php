@@ -704,11 +704,11 @@ class UsersController extends AppController {
 			*/
 			
 			if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
-				$freegeoipurl = 'http://freegeoip.net/json/81.217.23.232';
+				$freeipurl = 'http://api.ipstack.com/89.144.214.220?access_key=f30ae0b7caef2ced5c7456ebce9fcd44';
 			else
-				$freegeoipurl = 'http://freegeoip.net/json/' . $_SERVER['REMOTE_ADDR'];
+				$freeipurl = 'http://api.ipstack.com/' . $_SERVER['REMOTE_ADDR'] . '?access_key=f30ae0b7caef2ced5c7456ebce9fcd44';
 				
-			$yourlocation = @json_decode( implode( '', file( $freegeoipurl ) ) );
+			$yourlocation = @json_decode( implode( '', file( $freeipurl ) ) );
 		
 			if ( isset( $yourlocation->country_code ) && isset( $countries[$yourlocation->country_code]) && strlen( $yourlocation->country_code ) > 0 )
 			{
@@ -835,11 +835,10 @@ class UsersController extends AppController {
 				$this->set('statusbox', $statusbox);
 				
 			} else {
-				// calculcate spam protection
-
-				
+				// calculcate spam protection				
 				$spamprotection = true;
 
+				// Recaptcha new v2
 				if ( isset( $_POST['g-recaptcha-response' ] ) ) {
 					/*
 					secret (required)	RECAPTCHA
@@ -866,6 +865,7 @@ class UsersController extends AppController {
 					else $spamprotection = false;
 				}
 				/*
+				// old spam protection
 				$calc_numbers = preg_split('/\|/', base64_decode($this->data['User']['calc_spam']));
 
 				if (is_numeric($calc_numbers[0]) && is_numeric($calc_numbers[1])) {
@@ -904,6 +904,7 @@ class UsersController extends AppController {
 						if ( isset( $send_to_userid ) )
 						{
 							$inviter_user = $this->User->findById( $send_to_userid );
+
 							if ( is_array( $inviter_user ) )
 							{
 								$subject = __('TriCoreTraining', true) . ' - ' . __('your friend subscribed!', true);
@@ -943,8 +944,9 @@ class UsersController extends AppController {
 						$this->redirect(array('action' => 'register_finish'));
 					} else
 					{
-							if ( isset( $password_unenc ) ) 
-								$this->data['User']['password'] = $password_unenc;
+						if ( isset( $password_unenc ) ) {
+							$this->data['User']['password'] = $password_unenc;
+						}
 					}
 				
 					$statusbox = 'alert alert-danger';
@@ -1795,7 +1797,7 @@ class UsersController extends AppController {
 		$this->Email->to = $User['User']['email'];
 		//$this->Email->bcc = array('secret@example.com');
 		$this->Email->subject = __('We\'re so glad you start your training! 🏃‍♀️ 🏃',true);
-		//$this->Email->replyTo = Configure::read('App.mailFrom');
+		$this->Email->replyTo = Configure::read('App.mailReply');
 		$this->Email->from = Configure::read('App.mailFrom');
 
 		$this->Email->template = 'welcomemail'; // note no '.ctp'
@@ -1810,16 +1812,21 @@ class UsersController extends AppController {
         $mailDelivery = Configure::read('App.mailDelivery');
 
 		$this->Email->smtpOptions = array(
-        'port'=>$mailPort,
-        'timeout'=>'30',
-        'host'=>$mailHost,
-        'username'=>$mailUser,
-        'password'=>$mailPassword,
-        'client'=>'smtp_helo_hostname'
+			'port'=>$mailPort,
+			'timeout'=>'30',
+			'host'=>$mailHost,
+			'username'=>$mailUser,
+			'password'=>$mailPassword,
+			'client'=>'smtp_helo_hostname'
         );
         /* Set delivery method */
-        $this->Email->delivery = $mailDelivery;
-        /* Do not pass any args to send() */
+		$this->Email->delivery = $mailDelivery;
+
+		if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+			// print_r($this->Email);
+		}
+
+		/* Do not pass any args to send() */
         $this->Email->send();
 
         $this->Session->write('activation_transaction_id', $tid);
@@ -1846,7 +1853,7 @@ class UsersController extends AppController {
 
 		$this->Email->to = $User['User']['email'];
 		$this->Email->subject = $subject;
-		//$this->Email->replyTo = Configure::read('App.mailFrom');
+		$this->Email->replyTo = Configure::read('App.mailReply');
 		$this->Email->from = Configure::read('App.mailFrom');
 
 		//Set view variables as normal
@@ -2585,13 +2592,12 @@ class UsersController extends AppController {
 		}
 
 		$this->Email->to = $to_user['email'];
-		//echo "email sent to " . $to_user['email'] . "<br />\n";		
-		//$this->Email->replyTo = Configure::read('App.mailFrom');
+		$this->Email->replyTo = Configure::read('App.mailReply');
 		$this->Email->from = Configure::read('App.mailFrom');
 		$this->Email->subject = $subject;
     	if ( !isset( $template ) ) $template = 'standardmail';
 		
-		//Set view variables as normal
+		// set view variables as normal
 		if ( isset( $to_user['name'] ) ) 
 			$this->set('to_name', $to_user['name']);
 		

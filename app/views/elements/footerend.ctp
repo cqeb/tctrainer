@@ -1,8 +1,8 @@
 
 <?php 
-echo "<pre style=\"border: 1px solid #000; height: 9em; overflow: auto; margin: 0.5em;\">";
 
-if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') == 1) {
+if ($_SERVER['REMOTE_ADDR'] == MYIP) {
+    echo "<pre style=\"border: 1px solid #000; height: 9em; overflow: auto; margin: 0.5em;\">";
 
     echo 'DEBUG KMS<br />';
 
@@ -19,7 +19,7 @@ if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') ==
     if ( isset($this->Cookie) ) print_r($this->Cookie);
     
     print_r($_COOKIE);
-    
+    echo "</pre>\n";  
 }
 ?>
 
@@ -27,6 +27,5 @@ if ($_SERVER['REMOTE_ADDR'] == MYIP || $this->Session->read('session_userid') ==
 if ( isset( $cakeDebug ) && DEBUG ) { 
     print_r( $cakeDebug ); 
 } 
-echo "</pre>\n";
 
 ?>

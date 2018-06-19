@@ -104,7 +104,7 @@ class AppController extends Controller {
             
             // $this->Cookie->write('kms33', "true", false, '+1 hour');
 
-            $this->Cookie->write(LANGCOOKIE, "$language", false, '+1 day');
+            $this->Cookie->write(LANGCOOKIE, "$language", false, '+365 days');
 
             if ($language && file_exists(VIEWS . $language . DS . $this->viewPath))
             {
