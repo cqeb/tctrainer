@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2018-06-01 08:29+0200\n"
+"POT-Creation-Date: 2018-06-20 09:25+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -14,16 +14,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: /app_controller.php:205
+#: /app_controller.php:220
 msgid "Incorrect session data. Sorry."
 msgstr ""
 
-#: /app_controller.php:244
+#: /app_controller.php:266
 msgid "Sorry, you're not signed in or your session expired."
 msgstr ""
 
 #: /controllers/competitions_controller.php:116
-#: /controllers/trainingstatistics_controller.php:493
+#: /controllers/trainingstatistics_controller.php:495
 msgid "Sorry. This is not your entry!"
 msgstr ""
 
@@ -72,7 +72,7 @@ msgid "Verification by PAYPAL failed"
 msgstr ""
 
 #: /controllers/payments_controller.php:432;458
-#: /controllers/users_controller.php:873
+#: /controllers/users_controller.php:914
 #: /views/layouts/trainer_start.ctp:45
 msgid "TriCoreTraining"
 msgstr ""
@@ -94,7 +94,7 @@ msgid "Congratz - your friend subscribed for a PREMIUM membership!"
 msgstr ""
 
 #: /controllers/payments_controller.php:451
-#: /controllers/users_controller.php:875
+#: /controllers/users_controller.php:916
 msgid "great"
 msgstr ""
 
@@ -130,25 +130,25 @@ msgstr ""
 msgid "No invoice"
 msgstr ""
 
-#: /controllers/payments_controller.php:549
+#: /controllers/payments_controller.php:551
 msgid "Thank you for subscribing for a membership. You receive your invoice as soon as your subscription period starts. "
 msgstr ""
 
-#: /controllers/payments_controller.php:552
+#: /controllers/payments_controller.php:554
 msgid "You canceled the payment transaction. If this was not intended, please do the payment process again. If something else\n            is not going ok for you"
 msgstr ""
 
-#: /controllers/payments_controller.php:553
-#: /controllers/users_controller.php:1157
+#: /controllers/payments_controller.php:555
+#: /controllers/users_controller.php:1199
 msgid "contact our support"
 msgstr ""
 
-#: /controllers/payments_controller.php:616
+#: /controllers/payments_controller.php:619
 #: /views/payments/show_invoice.ctp:38;39
 msgid "TriCoreTraining Invoice"
 msgstr ""
 
-#: /controllers/payments_controller.php:618
+#: /controllers/payments_controller.php:621
 msgid "TriCoreTraining Subscription Info"
 msgstr ""
 
@@ -156,55 +156,59 @@ msgstr ""
 msgid "Get Interactive Training Plans For Triathlon, Marathon And Bike Races"
 msgstr ""
 
-#: /controllers/starts_controller.php:70
+#: /controllers/starts_controller.php:71
 msgid "Almost finished! You are receiving an activation email in your mailbox. Please click the link. Check your SPAM folder, in case you can not find it."
 msgstr ""
 
-#: /controllers/starts_controller.php:73
+#: /controllers/starts_controller.php:74
 msgid "Sorry, your email is not valid. Please correct it."
-msgstr ""
-
-#: /controllers/starts_controller.php:98
-#: /controllers/trainingstatistics_controller.php:1087
-#: /views/layouts/trainer_start.ctp:22
-msgid "I did a"
 msgstr ""
 
 #: /controllers/starts_controller.php:99
 #: /controllers/trainingstatistics_controller.php:1088
+#: /views/layouts/trainer_start.ctp:22
+msgid "I did a"
+msgstr ""
+
+#: /controllers/starts_controller.php:100
+#: /controllers/trainingstatistics_controller.php:1089
 #: /views/layouts/trainer_start.ctp:23
 msgid "in"
 msgstr ""
 
-#: /controllers/starts_controller.php:100
-#: /controllers/trainingstatistics_controller.php:1089
+#: /controllers/starts_controller.php:101
+#: /controllers/trainingstatistics_controller.php:1090
 #: /views/layouts/trainer_start.ctp:24
 msgid "hour(s)"
 msgstr ""
 
-#: /controllers/starts_controller.php:100
-#: /controllers/trainingstatistics_controller.php:1089
+#: /controllers/starts_controller.php:101
+#: /controllers/trainingstatistics_controller.php:1090
 #: /views/layouts/trainer_start.ctp:24
 msgid "with"
 msgstr ""
 
-#: /controllers/starts_controller.php:224
+#: /controllers/starts_controller.php:159
+msgid "You're redirected from our start page because you're already logged in."
+msgstr ""
+
+#: /controllers/starts_controller.php:225
 msgid "coupon"
 msgstr ""
 
-#: /controllers/starts_controller.php:227
+#: /controllers/starts_controller.php:228
 msgid "Coupon code saved."
 msgstr ""
 
-#: /controllers/starts_controller.php:228
+#: /controllers/starts_controller.php:229
 msgid "Please signup right now!"
 msgstr ""
 
-#: /controllers/starts_controller.php:236
+#: /controllers/starts_controller.php:237
 msgid "Please add a valid coupon code!"
 msgstr ""
 
-#: /controllers/trainingplans_controller.php:57
+#: /controllers/trainingplans_controller.php:60
 #: /controllers/components/unitcalc.php:707;711;715;719
 #: /views/trainingstatistics/edit_training.ctp:51;63
 #: /views/trainingstatistics/statistics_competition.ctp:48
@@ -213,9 +217,9 @@ msgstr ""
 msgid "Swim"
 msgstr ""
 
-#: /controllers/trainingplans_controller.php:57;60;66
+#: /controllers/trainingplans_controller.php:60;63;69
 #: /controllers/components/unitcalc.php:708;712;716;720;731;735
-#: /views/layouts/trainingplans.ctp:222
+#: /views/layouts/trainingplans.ctp:223
 #: /views/trainingstatistics/edit_training.ctp:50;62
 #: /views/trainingstatistics/statistics_competition.ctp:46
 #: /views/trainingstatistics/statistics_trimp.ctp:34
@@ -224,9 +228,9 @@ msgstr ""
 msgid "Bike"
 msgstr ""
 
-#: /controllers/trainingplans_controller.php:57;60;63
+#: /controllers/trainingplans_controller.php:60;63;66
 #: /controllers/components/unitcalc.php:709;713;717;721;723;724;725;726;727;730;732;734;736
-#: /views/layouts/trainingplans.ctp:221
+#: /views/layouts/trainingplans.ctp:222
 #: /views/trainingstatistics/edit_training.ctp:49;61
 #: /views/trainingstatistics/statistics_competition.ctp:45
 #: /views/trainingstatistics/statistics_trimp.ctp:33
@@ -235,11 +239,11 @@ msgstr ""
 msgid "Run"
 msgstr ""
 
-#: /controllers/trainingplans_controller.php:81
+#: /controllers/trainingplans_controller.php:84
 msgid "You might want to add some competitions to refine your training plan."
 msgstr ""
 
-#: /controllers/trainingplans_controller.php:83
+#: /controllers/trainingplans_controller.php:86
 #: /views/competitions/list_competitions.ctp:16;16
 msgid "Add competition"
 msgstr ""
@@ -280,7 +284,7 @@ msgstr ""
 #: /controllers/trainingstatistics_controller.php:211
 #: /views/competitions/edit_competition.ctp:58
 #: /views/competitions/list_competitions.ctp:23
-#: /views/layouts/trainingplans.ctp:219
+#: /views/layouts/trainingplans.ctp:220
 #: /views/trainingstatistics/garmin_import.ctp:21
 #: /views/trainingstatistics/import_workout.ctp:72
 #: /views/trainingstatistics/list_trainings.ctp:36
@@ -332,7 +336,7 @@ msgstr ""
 #: /views/users/edit_user.ctp:78;98;117;136;156
 #: /views/users/edit_userinfo.ctp:136
 #: /views/users/list_users.ctp:4;67
-#: /views/users/register.ctp:212
+#: /views/users/register.ctp:213
 msgid "No"
 msgstr ""
 
@@ -343,7 +347,7 @@ msgstr ""
 #: /views/users/edit_user.ctp:77;97;116;135;155
 #: /views/users/edit_userinfo.ctp:135
 #: /views/users/list_users.ctp:3;66
-#: /views/users/register.ctp:211
+#: /views/users/register.ctp:212
 msgid "Yes"
 msgstr ""
 
@@ -352,7 +356,7 @@ msgid "ok"
 msgstr ""
 
 #: /controllers/trainingstatistics_controller.php:376
-#: /controllers/users_controller.php:198
+#: /controllers/users_controller.php:209
 msgid "Error"
 msgstr ""
 
@@ -364,540 +368,556 @@ msgstr ""
 msgid "Import of workouts finished!"
 msgstr ""
 
-#: /controllers/trainingstatistics_controller.php:591
+#: /controllers/trainingstatistics_controller.php:593
 msgid "Training saved."
 msgstr ""
 
-#: /controllers/trainingstatistics_controller.php:596
-#: /controllers/users_controller.php:1492
+#: /controllers/trainingstatistics_controller.php:598
+#: /controllers/users_controller.php:1534
 msgid "Some errors occured"
 msgstr ""
 
-#: /controllers/trainingstatistics_controller.php:642
+#: /controllers/trainingstatistics_controller.php:644
 msgid "Pick workout type"
 msgstr ""
 
-#: /controllers/trainingstatistics_controller.php:1121
+#: /controllers/trainingstatistics_controller.php:1122
 msgid "Sorry. This is not your data set!"
 msgstr ""
 
-#: /controllers/trainingstatistics_controller.php:1130
+#: /controllers/trainingstatistics_controller.php:1131
 msgid "Workout was removed."
 msgstr ""
 
-#: /controllers/trainingstatistics_controller.php:1181
+#: /controllers/trainingstatistics_controller.php:1182
 msgid "Garmin workouts imported."
 msgstr ""
 
-#: /controllers/users_controller.php:72;111;165
+#: /controllers/users_controller.php:78;118;175
 msgid "Sorry. Don't fool around with our security."
 msgstr ""
 
-#: /controllers/users_controller.php:142;1231
+#: /controllers/users_controller.php:139
+msgid "You're redirected from the edit profile-page because we reloaded your account info."
+msgstr ""
+
+#: /controllers/users_controller.php:152;1273
 msgid "User profile saved."
 msgstr ""
 
-#: /controllers/users_controller.php:146;1236;1280;1327;1558;1614;1670
+#: /controllers/users_controller.php:156;1278;1322;1369;1600;1656;1712
 msgid "Some errors occured."
 msgstr ""
 
-#: /controllers/users_controller.php:190
+#: /controllers/users_controller.php:201
 msgid "Message sent to users"
 msgstr ""
 
-#: /controllers/users_controller.php:198
+#: /controllers/users_controller.php:209
 msgid "message not send"
 msgstr ""
 
-#: /controllers/users_controller.php:223
+#: /controllers/users_controller.php:234
 msgid "No users selected."
 msgstr ""
 
-#: /controllers/users_controller.php:353;377
+#: /controllers/users_controller.php:253
+msgid "You're redirected to the page you tried to access before."
+msgstr ""
+
+#: /controllers/users_controller.php:337
+msgid "You're redirected to the page because you logged in with facebook login."
+msgstr ""
+
+#: /controllers/users_controller.php:340;360
 msgid "Wait a second please. If you are not redirected, please click here."
 msgstr ""
 
-#: /controllers/users_controller.php:361
+#: /controllers/users_controller.php:344
 msgid "Sorry, your user is not active. Please contact our"
 msgstr ""
 
-#: /controllers/users_controller.php:410
+#: /controllers/users_controller.php:393
 msgid "Login"
 msgstr ""
 
-#: /controllers/users_controller.php:473
+#: /controllers/users_controller.php:456
 msgid "Not activated yet. Please follow the activation link in the welcome mail."
 msgstr ""
 
-#: /controllers/users_controller.php:480
+#: /controllers/users_controller.php:464
 msgid "Wrong or not existing email or password. Please try again."
 msgstr ""
 
-#: /controllers/users_controller.php:490
+#: /controllers/users_controller.php:475
 #: /views/users/login.ctp:14
 msgid "Logout"
 msgstr ""
 
-#: /controllers/users_controller.php:515
+#: /controllers/users_controller.php:504
 msgid "You're logged out. Bye."
 msgstr ""
 
-#: /controllers/users_controller.php:522
+#: /controllers/users_controller.php:520
 #: /views/users/password_forgotten.ctp:2
 #: /views/users/password_reset.ctp:2
 msgid "Password forgotten"
 msgstr ""
 
-#: /controllers/users_controller.php:542
+#: /controllers/users_controller.php:540
 msgid "Email was not found in database!"
 msgstr ""
 
-#: /controllers/users_controller.php:548
+#: /controllers/users_controller.php:546
 msgid "Click link in email to reset password!"
 msgstr ""
 
-#: /controllers/users_controller.php:560
+#: /controllers/users_controller.php:558
 msgid "Password reset"
 msgstr ""
 
-#: /controllers/users_controller.php:594
+#: /controllers/users_controller.php:592
 msgid "We send a new password to your email."
 msgstr ""
 
-#: /controllers/users_controller.php:598
+#: /controllers/users_controller.php:596
 msgid "Something is wrong - sorry."
 msgstr ""
 
-#: /controllers/users_controller.php:598
+#: /controllers/users_controller.php:596
 msgid "Contact our support."
 msgstr ""
 
-#: /controllers/users_controller.php:621
+#: /controllers/users_controller.php:616
+msgid "You're redirected to the page because you're already logged in (register)."
+msgstr ""
+
+#: /controllers/users_controller.php:634
 msgid "Signup for your TriCoreTraining training plan"
 msgstr ""
 
-#: /controllers/users_controller.php:642
+#: /controllers/users_controller.php:654
 msgid "We will use your profile from Facebook for your signup form, please add all missing information. In the future you can login with your Facebook Login. If you already have a TriCoreTraining account, change your EMAIL to the same as used in your Facebook account."
 msgstr ""
 
-#: /controllers/users_controller.php:826
+#: /controllers/users_controller.php:838
 msgid "Some errors occured. User might already exist."
 msgstr ""
 
-#: /controllers/users_controller.php:873
+#: /controllers/users_controller.php:914
 msgid "your friend subscribed!"
 msgstr ""
 
-#: /controllers/users_controller.php:875
+#: /controllers/users_controller.php:916
 msgid "wants to become an athlete too. Maybe you do workouts together?"
 msgstr ""
 
-#: /controllers/users_controller.php:876
+#: /controllers/users_controller.php:917
 msgid "After she/he purchases a PREMIUM membership you will receive a FREE 3 month PREMIUM membership as a \"Thank you\"."
 msgstr ""
 
-#: /controllers/users_controller.php:906
+#: /controllers/users_controller.php:947
 msgid "Signup finished. 1st step done!"
 msgstr ""
 
-#: /controllers/users_controller.php:915
+#: /controllers/users_controller.php:957
 msgid "Some errors occured. Please check the form."
 msgstr ""
 
-#: /controllers/users_controller.php:919
+#: /controllers/users_controller.php:961
 msgid "Some errors occured. The calculation for spam protection was not correct."
 msgstr ""
 
-#: /controllers/users_controller.php:931
+#: /controllers/users_controller.php:973
 #: /views/users/register_finish.ctp:2
 msgid "Signup finished"
 msgstr ""
 
-#: /controllers/users_controller.php:957
+#: /controllers/users_controller.php:999
 msgid "Sorry. Something is wrong. Don't hack other accounts!"
 msgstr ""
 
-#: /controllers/users_controller.php:1064
+#: /controllers/users_controller.php:1106
 msgid "Sorry, your email is not correct!"
 msgstr ""
 
-#: /controllers/users_controller.php:1081
+#: /controllers/users_controller.php:1123
 msgid "Sorry, your email is already used!"
 msgstr ""
 
-#: /controllers/users_controller.php:1092
+#: /controllers/users_controller.php:1134
 msgid "Email is not used!"
 msgstr ""
 
-#: /controllers/users_controller.php:1099
+#: /controllers/users_controller.php:1141
 msgid "Email changed!"
 msgstr ""
 
-#: /controllers/users_controller.php:1112
+#: /controllers/users_controller.php:1154
 msgid "Signup - Important activation of your account"
 msgstr ""
 
-#: /controllers/users_controller.php:1134
+#: /controllers/users_controller.php:1176
 msgid "Add races to set your goal. Your weekly training plan will be generated using these goals."
 msgstr ""
 
-#: /controllers/users_controller.php:1157
+#: /controllers/users_controller.php:1199
 msgid "Something went wrong - sorry. Maybe you're already activated?"
 msgstr ""
 
-#: /controllers/users_controller.php:1157
+#: /controllers/users_controller.php:1199
 msgid "If not"
 msgstr ""
 
-#: /controllers/users_controller.php:1175
+#: /controllers/users_controller.php:1217
 msgid "Your BMI is"
 msgstr ""
 
-#: /controllers/users_controller.php:1175
+#: /controllers/users_controller.php:1217
 msgid "Your BMI-check says:"
 msgstr ""
 
-#: /controllers/users_controller.php:1180
+#: /controllers/users_controller.php:1222
 msgid "Please check your height and weight again - we got an incorrect BMI result"
 msgstr ""
 
-#: /controllers/users_controller.php:1180
+#: /controllers/users_controller.php:1222
 msgid "thank you"
 msgstr ""
 
-#: /controllers/users_controller.php:1191
+#: /controllers/users_controller.php:1233
 msgid "Change your athlete profile"
 msgstr ""
 
-#: /controllers/users_controller.php:1247
+#: /controllers/users_controller.php:1289
 msgid "Change your address"
 msgstr ""
 
-#: /controllers/users_controller.php:1289
+#: /controllers/users_controller.php:1331
 msgid "Change your training settings"
 msgstr ""
 
-#: /controllers/users_controller.php:1320
+#: /controllers/users_controller.php:1362
 msgid "Training settings saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1337
+#: /controllers/users_controller.php:1379
 msgid "Change your weight goals"
 msgstr ""
 
-#: /controllers/users_controller.php:1383
+#: /controllers/users_controller.php:1425
 msgid "Your target weight date is in the past and must be in the future!"
 msgstr ""
 
-#: /controllers/users_controller.php:1389
+#: /controllers/users_controller.php:1431
 msgid "Our weight goals are targeting weight loss!"
 msgstr ""
 
-#: /controllers/users_controller.php:1408
+#: /controllers/users_controller.php:1450
 msgid "You have to lose"
 msgstr ""
 
-#: /controllers/users_controller.php:1409
+#: /controllers/users_controller.php:1451
 msgid "per month to achieve your goal."
 msgstr ""
 
-#: /controllers/users_controller.php:1414
+#: /controllers/users_controller.php:1456
 msgid "You should lose at maximum "
 msgstr ""
 
-#: /controllers/users_controller.php:1416
+#: /controllers/users_controller.php:1458
 msgid "per month."
 msgstr ""
 
-#: /controllers/users_controller.php:1451
+#: /controllers/users_controller.php:1493
 msgid "Your target weight is not ok. Your goals would bring your BMI to a critical"
 msgstr ""
 
-#: /controllers/users_controller.php:1467
+#: /controllers/users_controller.php:1509
 msgid "Settings are saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1503
+#: /controllers/users_controller.php:1545
 msgid "Change your athlete profile image"
 msgstr ""
 
-#: /controllers/users_controller.php:1554
+#: /controllers/users_controller.php:1596
 msgid "Image(s) saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1576
+#: /controllers/users_controller.php:1618
 msgid "Image deleted."
 msgstr ""
 
-#: /controllers/users_controller.php:1582
+#: /controllers/users_controller.php:1624
 msgid "Change your metric"
 msgstr ""
 
-#: /controllers/users_controller.php:1607
+#: /controllers/users_controller.php:1649
 msgid "Metric information saved."
 msgstr ""
 
-#: /controllers/users_controller.php:1622
+#: /controllers/users_controller.php:1664
 msgid "Change your account password - Security"
 msgstr ""
 
-#: /controllers/users_controller.php:1647
+#: /controllers/users_controller.php:1689
 msgid "No passwords entered or passwords do not match!"
 msgstr ""
 
-#: /controllers/users_controller.php:1659
+#: /controllers/users_controller.php:1701
 msgid "Saved a new password."
 msgstr ""
 
-#: /controllers/users_controller.php:1761
+#: /controllers/users_controller.php:1803
 msgid "We're so glad you start your training! 🏃‍♀️ 🏃"
 msgstr ""
 
-#: /controllers/users_controller.php:1799
+#: /controllers/users_controller.php:1846
 msgid "We reset your password!"
 msgstr ""
 
-#: /controllers/users_controller.php:1802
+#: /controllers/users_controller.php:1849
 msgid "Forgot your password?"
 msgstr ""
 
-#: /controllers/users_controller.php:2040
+#: /controllers/users_controller.php:2097
 msgid "Strange user - please check"
 msgstr ""
 
-#: /controllers/users_controller.php:2042
+#: /controllers/users_controller.php:2099
 msgid "These attributes are not defined in this user profile"
 msgstr ""
 
-#: /controllers/users_controller.php:2050
+#: /controllers/users_controller.php:2107
 msgid "is not correct"
 msgstr ""
 
-#: /controllers/users_controller.php:2081
+#: /controllers/users_controller.php:2138
 msgid "how was your training week? I hope awesome."
 msgstr ""
 
-#: /controllers/users_controller.php:2082
+#: /controllers/users_controller.php:2139
 msgid "you will make it! Go for the next week."
 msgstr ""
 
-#: /controllers/users_controller.php:2083
+#: /controllers/users_controller.php:2140
 msgid "how do you feel? If things are not going smooth. Relax, start, continue."
 msgstr ""
 
-#: /controllers/users_controller.php:2084
+#: /controllers/users_controller.php:2141
 msgid "persistence will make your life better too. So, go for the next training week."
 msgstr ""
 
-#: /controllers/users_controller.php:2085
+#: /controllers/users_controller.php:2142
 msgid "only if you measure, you can achieve your goal. So let's do it"
 msgstr ""
 
-#: /controllers/users_controller.php:2094
+#: /controllers/users_controller.php:2151
 msgid "If you log your workouts, you get better training plans and reach your goal faster."
 msgstr ""
 
-#: /controllers/users_controller.php:2096
+#: /controllers/users_controller.php:2153
 msgid "Go to your"
 msgstr ""
 
-#: /controllers/users_controller.php:2098
+#: /controllers/users_controller.php:2155
 msgid "logbook"
 msgstr ""
 
-#: /controllers/users_controller.php:2099
+#: /controllers/users_controller.php:2156
 msgid "and track your workouts - better now than later ⏱️!"
 msgstr ""
 
-#: /controllers/users_controller.php:2127
+#: /controllers/users_controller.php:2184
 msgid "Your next race is only a few weeks away."
 msgstr ""
 
-#: /controllers/users_controller.php:2130
+#: /controllers/users_controller.php:2187
 msgid "Read this blog post!"
 msgstr ""
 
-#: /controllers/users_controller.php:2141
+#: /controllers/users_controller.php:2198
 msgid "Your next race is only a few days away. TriCoreTraining wishes you all the best!"
 msgstr ""
 
-#: /controllers/users_controller.php:2144
+#: /controllers/users_controller.php:2201
 msgid "Read this!"
 msgstr ""
 
-#: /controllers/users_controller.php:2164
+#: /controllers/users_controller.php:2221
 #: /controllers/components/statisticshandler.php:872
 msgid "Status of your season's training"
 msgstr ""
 
-#: /controllers/users_controller.php:2165;2235
+#: /controllers/users_controller.php:2222;2292
 #: /controllers/components/statisticshandler.php:874;944
 msgid "of"
 msgstr ""
 
-#: /controllers/users_controller.php:2166;2235
+#: /controllers/users_controller.php:2223;2292
 #: /controllers/components/statisticshandler.php:875;944
 #: /views/trainingstatistics/statistics_trimp.ctp:91
 #: /views/trainingstatistics/statistics_trimp_json copy.ctp:34
 msgid "Trimps"
 msgstr ""
 
-#: /controllers/users_controller.php:2233
+#: /controllers/users_controller.php:2290
 #: /controllers/components/statisticshandler.php:942
 msgid "Status of your week's training"
 msgstr ""
 
-#: /controllers/users_controller.php:2259
+#: /controllers/users_controller.php:2316
 msgid "Your firstname is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2259;2266;2273;2280;2287;2294
+#: /controllers/users_controller.php:2316;2323;2330;2337;2344;2351
 msgid "Please add it to your profile."
 msgstr ""
 
-#: /controllers/users_controller.php:2262;2269;2276;2283;2290;2297;2310;2319;2351;2362;2373;2391
+#: /controllers/users_controller.php:2319;2326;2333;2340;2347;2354;2367;2376;2408;2419;2430;2448
 msgid "Change it."
 msgstr ""
 
-#: /controllers/users_controller.php:2266
+#: /controllers/users_controller.php:2323
 msgid "Your lastname is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2273
+#: /controllers/users_controller.php:2330
 msgid "Your address is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2280
+#: /controllers/users_controller.php:2337
 msgid "Your zip is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2287
+#: /controllers/users_controller.php:2344
 msgid "Your city is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2294
+#: /controllers/users_controller.php:2351
 msgid "Your country is missing!"
 msgstr ""
 
-#: /controllers/users_controller.php:2302
+#: /controllers/users_controller.php:2359
 msgid "Your birthday is missing! This is essentiell for calculations."
 msgstr ""
 
-#: /controllers/users_controller.php:2308
+#: /controllers/users_controller.php:2365
 msgid "Your run lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: /controllers/users_controller.php:2317
+#: /controllers/users_controller.php:2374
 msgid "Your bike lactate threshold must be between 100 and 210."
 msgstr ""
 
-#: /controllers/users_controller.php:2347
+#: /controllers/users_controller.php:2404
 msgid "Your weight loss per month to achieve your goal must be"
 msgstr ""
 
-#: /controllers/users_controller.php:2349
+#: /controllers/users_controller.php:2406
 msgid "that's not healthy ⚖️ - set a new weight goal!"
 msgstr ""
 
-#: /controllers/users_controller.php:2360
+#: /controllers/users_controller.php:2417
 msgid "You have not logged your weekly trainings."
 msgstr ""
 
-#: /controllers/users_controller.php:2371
+#: /controllers/users_controller.php:2428
 msgid "You mentioned that you're a beginner. Since you're with us for more than 9 months, maybe you should update this in your profile!"
 msgstr ""
 
-#: /controllers/users_controller.php:2381
+#: /controllers/users_controller.php:2438
 msgid "If you like TriCoreTraining"
 msgstr ""
 
-#: /controllers/users_controller.php:2382
+#: /controllers/users_controller.php:2439
 msgid "please tell it your friends 🧡!"
 msgstr ""
 
-#: /controllers/users_controller.php:2389
+#: /controllers/users_controller.php:2446
 msgid "You haven't agreed to our terms and conditions or your medical conditions are not good enough for endurance training. 👨🏽‍⚕️ Is that still correct? You won't receive training plans with bad health for your own protection. Sorry!"
 msgstr ""
 
-#: /controllers/users_controller.php:2403
+#: /controllers/users_controller.php:2460
 msgid "Your account is not activated yet ⚠️ and so you haven't unlocked the immense training power."
 msgstr ""
 
-#: /controllers/users_controller.php:2404
+#: /controllers/users_controller.php:2461
 msgid "Please use your activation mail to ACTIVATE your account"
 msgstr ""
 
-#: /controllers/users_controller.php:2405
+#: /controllers/users_controller.php:2462
 #: /views/users/login.ctp:38
-#: /views/users/register.ctp:27
+#: /views/users/register.ctp:28
 msgid "or"
 msgstr ""
 
-#: /controllers/users_controller.php:2406
+#: /controllers/users_controller.php:2463
 msgid "contact our support. Thanks."
 msgstr ""
 
-#: /controllers/users_controller.php:2423
+#: /controllers/users_controller.php:2480
 msgid "Your PREMIUM membership has expired 😞. If you still want to receive professional, interactive training plans for the value of one coffee ☕ a month again"
 msgstr ""
 
-#: /controllers/users_controller.php:2424
+#: /controllers/users_controller.php:2481
 msgid "Subscribe PREMIUM"
 msgstr ""
 
-#: /controllers/users_controller.php:2431
+#: /controllers/users_controller.php:2488
 msgid "another training plan arrived! 🏊‍♂️ 🚴‍♂️🏃‍♂️"
 msgstr ""
 
-#: /controllers/users_controller.php:2432
+#: /controllers/users_controller.php:2489
 msgid "a great week ended and a new one begins! 🏃‍♂️ ☀️"
 msgstr ""
 
-#: /controllers/users_controller.php:2433
+#: /controllers/users_controller.php:2490
 msgid "this week will be awesome! Read your plan. 🚴‍♀️"
 msgstr ""
 
-#: /controllers/users_controller.php:2434
+#: /controllers/users_controller.php:2491
 msgid "Reach your goal"
 msgstr ""
 
-#: /controllers/users_controller.php:2434
+#: /controllers/users_controller.php:2491
 msgid "with persistence! 🎯"
 msgstr ""
 
-#: /controllers/users_controller.php:2435
+#: /controllers/users_controller.php:2492
 msgid "we are proud of you! ❤️❤️"
 msgstr ""
 
-#: /controllers/users_controller.php:2456
+#: /controllers/users_controller.php:2513
 msgid "Your training schedule for next week is here!"
 msgstr ""
 
-#: /controllers/users_controller.php:2468
+#: /controllers/users_controller.php:2525
 msgid "Import training week into your personal calendar (.ics)!"
 msgstr ""
 
-#: /controllers/users_controller.php:2486
+#: /controllers/users_controller.php:2543
 msgid "There is something to do:"
 msgstr ""
 
-#: /controllers/users_controller.php:2497
+#: /controllers/users_controller.php:2554
 msgid "Cheers."
 msgstr ""
 
-#: /controllers/users_controller.php:2533
+#: /controllers/users_controller.php:2590
 msgid "athlete"
 msgstr ""
 
-#: /controllers/users_controller.php:2609
+#: /controllers/users_controller.php:2665
 msgid "Stop notifications"
 msgstr ""
 
-#: /controllers/users_controller.php:2625
+#: /controllers/users_controller.php:2681
 msgid "Weekly training plans will not arrive in your mailbox anymore. If you also want to stop receiving newsletters, please click unsubscribe in the next one. If anything is annoying you with TriCoreTraining, just tell us. Thanks."
 msgstr ""
 
-#: /controllers/users_controller.php:2628
+#: /controllers/users_controller.php:2684
 msgid "Not valid."
 msgstr ""
 
@@ -1398,61 +1418,77 @@ msgstr ""
 msgid "An intensive, aerobic workout. Ride a course with small hills, which take you into Zone 3 frequently."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:115
+#: /core/workouts/bikeworkout.class.php:113
+msgid "An intensive, aerobic workout. Ride a course with small hills, which takes you into Zone 3 frequently."
+msgstr ""
+
+#: /core/workouts/bikeworkout.class.php:116
 msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:118
+#: /core/workouts/bikeworkout.class.php:117
+msgid "Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times (min. 10)."
+msgstr ""
+
+#: /core/workouts/bikeworkout.class.php:120
 msgid "Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times."
 msgstr ""
 
 #: /core/workouts/bikeworkout.class.php:121
-msgid "Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort."
+msgid "Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times (min. 10)."
 msgstr ""
 
 #: /core/workouts/bikeworkout.class.php:124
+msgid "Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort."
+msgstr ""
+
+#: /core/workouts/bikeworkout.class.php:125
+msgid "Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort (min. 8)."
+msgstr ""
+
+#: /core/workouts/bikeworkout.class.php:128
 msgid "Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about 5 minutes to ascend. Do not stand up while climbing."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:127
+#: /core/workouts/bikeworkout.class.php:131
 msgid "Pick a hilly course with several ascents that take more than 5 minutes to climb. Stay seated, and do not max out your pulse while climbing."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:130
+#: /core/workouts/bikeworkout.class.php:134
 msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Climb fast, and ride down very easy while spinning lightly. Do not stand up while climbing. Repeat to a maximum of 8 times."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:133
+#: /core/workouts/bikeworkout.class.php:137
 msgid "Pick a flat course, and ride in Zone 3 with low cadence after warming up."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:136
+#: /core/workouts/bikeworkout.class.php:140
 msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:139
+#: /core/workouts/bikeworkout.class.php:143
 msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your speed for a maximum of 10 minutes (you may want to start with 5), while pedaling with low cadence. Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:142
+#: /core/workouts/bikeworkout.class.php:146
 msgid "Accelerate slowly after warming up. When Zone 4 is reached, take 2 minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 40 minutes. Cool down afterwards in Zone 2, and ride with a low cadence during the intervals."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:145
+#: /core/workouts/bikeworkout.class.php:149
 msgid "Pick a flat course. After warming up establish Zone 5, and stay there while maintaining low cadence. STOP immediately if you feel nauseous."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:148
+#: /core/workouts/bikeworkout.class.php:152
 msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your bike lactate threshold in your training info settings."
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:149;153
-#: /core/workouts/runworkout.class.php:138;142
+#: /core/workouts/bikeworkout.class.php:153;157
+#: /core/workouts/runworkout.class.php:139;143
 #: /views/elements/subnavigation_all.ctp:80
 msgid "Edit training info"
 msgstr ""
 
-#: /core/workouts/bikeworkout.class.php:152
+#: /core/workouts/bikeworkout.class.php:156
 msgid "Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your bike lactate threshold in your training info settings."
 msgstr ""
 
@@ -1484,51 +1520,55 @@ msgstr ""
 msgid "An intensive, aerobic workout. Run a course with small hills, which take you into Zone 3 frequently."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:107
+#: /core/workouts/runworkout.class.php:105
+msgid "An intensive, aerobic workout. Run a course with small hills, which takes you into Zone 3 frequently."
+msgstr ""
+
+#: /core/workouts/runworkout.class.php:108
 msgid "Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat 4-8 times during the run."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:110
+#: /core/workouts/runworkout.class.php:111
 msgid "Do an endurance run in Zone 2. After warming up accelerate smoothly until you reach a pace you could sustain for 5 kilometers. Keep your pace for 2 minutes, then slow down to Zone 2. Repeat up to 6 times."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:113
+#: /core/workouts/runworkout.class.php:114
 msgid "Pick a hilly course, and run in Zone 1 to Zone 5. Do not ascend longer than 5 minutes."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:116
+#: /core/workouts/runworkout.class.php:117
 msgid "Pick a hilly course with several ascents that take more than 5 minutes to climb. Your pulse may climb to Zone 5, but refrain from maxing out."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:119
+#: /core/workouts/runworkout.class.php:120
 msgid "Warm up thoroughly. Pick a steep hill, which takes about 1 minute to ascend. Run fast uphills, and jog down very easy (take up to 4mins to recover). Repeat to a maximum of 8 times."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:122
+#: /core/workouts/runworkout.class.php:123
 msgid "Pick a flat course, and run in Zone 3 after warming up."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:125
+#: /core/workouts/runworkout.class.php:126
 msgid "Pick a flat course, and warm up. Accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:128
+#: /core/workouts/runworkout.class.php:129
 msgid "Warm up thoroughly. On a hilly track with small climbs accelerate to the top of Zone 4, and keep your pace for a maximum of 10 minutes (you may want to start with 5). Recover for 2 minutes after each interval, and repeat 3-5 times. You can also pick a track with strong headwinds."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:131
+#: /core/workouts/runworkout.class.php:132
 msgid "Accelerate slowly after warming up. When Zone 4 is reached, take two minutes to accelerate into the lower third of Zone 5. Then gradually slow down for another 2 minutes to reach the bottom of Zone 4. Repeat this pattern to a maximum of 30 minutes. Cool down afterwards in Zone 2."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:134
+#: /core/workouts/runworkout.class.php:135
 msgid "Pick a flat course. After warming up establish Zone 5, and keep running without recovery. STOP immediately if you feel nauseous."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:137
+#: /core/workouts/runworkout.class.php:138
 msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your run lactate threshold in your training info settings."
 msgstr ""
 
-#: /core/workouts/runworkout.class.php:141
+#: /core/workouts/runworkout.class.php:142
 msgid "Pick a flat course, and run like as if you would be racing. Go hard from the beginning, and use the \"Lap\"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your run lactate threshold in your training info settings."
 msgstr ""
 
@@ -1844,7 +1884,7 @@ msgstr ""
 #: /views/users/edit_user.ctp:33
 #: /views/users/edit_userinfo.ctp:90
 #: /views/users/login.ctp:51
-#: /views/users/register.ctp:106
+#: /views/users/register.ctp:107
 msgid "Email"
 msgstr ""
 
@@ -1852,7 +1892,7 @@ msgstr ""
 #: /views/elements/newsletter.ctp:54
 #: /views/users/edit_user.ctp:27
 #: /views/users/edit_userinfo.ctp:35
-#: /views/users/register.ctp:42
+#: /views/users/register.ctp:43
 msgid "Firstname"
 msgstr ""
 
@@ -1860,7 +1900,7 @@ msgstr ""
 #: /views/elements/newsletter.ctp:69
 #: /views/users/edit_user.ctp:30
 #: /views/users/edit_userinfo.ctp:55
-#: /views/users/register.ctp:61
+#: /views/users/register.ctp:62
 msgid "Lastname"
 msgstr ""
 
@@ -2520,7 +2560,7 @@ msgstr ""
 msgid "Workout Balance"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:97;119
+#: /views/layouts/trainingplans.ctp:97;118
 msgid "reset"
 msgstr ""
 
@@ -2528,90 +2568,90 @@ msgstr ""
 msgid "Here you can adjust the balance between your workout types. Drag the sliders to determine how much time is spent on training for each kind of sport. Changing these settings will also affect all future training weeks."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:113
+#: /views/layouts/trainingplans.ctp:112
 msgid "Training Hours"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:114;117
+#: /views/layouts/trainingplans.ctp:113;116
 #: /views/users/list_users.ctp:86
 msgid "Edit"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:115
+#: /views/layouts/trainingplans.ctp:114
 msgid "These are your <b>average</b> training hours - the average amount of training you will complete throughout your training year. If you update this setting, your whole future training plan will be affected."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:116
+#: /views/layouts/trainingplans.ctp:115
 msgid "This Week"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:118
+#: /views/layouts/trainingplans.ctp:117
 msgid "This is the amount of training hours for the current training week, derived from your average training hours right above. Adapt this value to receive more or fewer training volume for this week."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:129
+#: /views/layouts/trainingplans.ctp:128
 msgid "Calendar import"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:130
+#: /views/layouts/trainingplans.ctp:129
 msgid "Add current training week to your calendar"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:130
+#: /views/layouts/trainingplans.ctp:129
 #: /views/trainingplans/view.ctp:5
 msgid "Next"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:135
+#: /views/layouts/trainingplans.ctp:134
 msgid "Upgrade to PREMIUM"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:140
+#: /views/layouts/trainingplans.ctp:139
 msgid "First steps"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:141
+#: /views/layouts/trainingplans.ctp:140
 msgid "Beginner's guide to your training"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:143
+#: /views/layouts/trainingplans.ctp:142
 msgid "Your mesocycle of the next weeks"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:220
+#: /views/layouts/trainingplans.ctp:221
 #: /views/users/edit_traininginfo.ctp:216
 msgid "Zone"
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:229
+#: /views/layouts/trainingplans.ctp:230
 msgid "1. Your workouts are sorted by relevancy. If you receive a lot of workouts, combine them, but have one day for rest at minimum."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:229
+#: /views/layouts/trainingplans.ctp:230
 msgid "2. Change your available time, if necessary."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:229
+#: /views/layouts/trainingplans.ctp:230
 msgid "3. Change your sports balance, if necessary."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:229
+#: /views/layouts/trainingplans.ctp:230
 msgid "Click on the right side of the image to go to the next step."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:232
+#: /views/layouts/trainingplans.ctp:233
 msgid "Add your important competitions to get an improved training plan based on your sport goals."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:235
+#: /views/layouts/trainingplans.ctp:236
 msgid "If you have more specific training data, modify your settings. Change your lactate threshold or check your heart rate zones."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:238
+#: /views/layouts/trainingplans.ctp:239
 msgid "Logg your workouts to have a history of your training and receive more specific training workouts. Post your achievements to Twitter or Facebook."
 msgstr ""
 
-#: /views/layouts/trainingplans.ctp:241
+#: /views/layouts/trainingplans.ctp:242
 msgid "Analyse the results of your training with the most important graphs and statistics."
 msgstr ""
 
@@ -2648,7 +2688,7 @@ msgstr ""
 
 #: /views/payments/initiate.ctp:34
 #: /views/users/edit_traininginfo.ctp:162
-#: /views/users/register.ctp:250
+#: /views/users/register.ctp:227
 msgid "Read our terms and conditions."
 msgstr ""
 
@@ -3452,7 +3492,7 @@ msgstr ""
 
 #: /views/trainingstatistics/statistics_whathaveidone.ctp:348
 #: /views/users/edit_traininginfo.ctp:272
-#: /views/users/register.ctp:344
+#: /views/users/register.ctp:347
 msgid "hours"
 msgstr ""
 
@@ -3547,12 +3587,12 @@ msgstr ""
 
 #: /views/users/edit_password.ctp:31
 #: /views/users/login.ctp:73
-#: /views/users/register.ctp:149
+#: /views/users/register.ctp:150
 msgid "Password"
 msgstr ""
 
 #: /views/users/edit_password.ctp:33
-#: /views/users/register.ctp:145
+#: /views/users/register.ctp:146
 msgid "Enter a password"
 msgstr ""
 
@@ -3637,7 +3677,7 @@ msgid "You're doing training for competitions and doing regular sports for the f
 msgstr ""
 
 #: /views/users/edit_traininginfo.ctp:144
-#: /views/users/register.ctp:203
+#: /views/users/register.ctp:204
 msgid "Beginner in structured training?"
 msgstr ""
 
@@ -3658,12 +3698,12 @@ msgid "Your bike lactate threshold is not valid! Should be between 220 and 120."
 msgstr ""
 
 #: /views/users/edit_traininginfo.ctp:271
-#: /views/users/register.ctp:343
+#: /views/users/register.ctp:346
 msgid "Weekly training load varies between"
 msgstr ""
 
 #: /views/users/edit_traininginfo.ctp:272
-#: /views/users/register.ctp:344
+#: /views/users/register.ctp:347
 msgid "and"
 msgstr ""
 
@@ -3700,37 +3740,37 @@ msgid "Minimum of two characters"
 msgstr ""
 
 #: /views/users/edit_userinfo.ctp:33
-#: /views/users/register.ctp:38
+#: /views/users/register.ctp:39
 msgid "Enter your firstname"
 msgstr ""
 
 #: /views/users/edit_userinfo.ctp:53
-#: /views/users/register.ctp:57
+#: /views/users/register.ctp:58
 msgid "Enter your lastname"
 msgstr ""
 
 #: /views/users/edit_userinfo.ctp:66
-#: /views/users/register.ctp:73
+#: /views/users/register.ctp:74
 msgid "Gender"
 msgstr ""
 
 #: /views/users/edit_userinfo.ctp:74
-#: /views/users/register.ctp:78
+#: /views/users/register.ctp:79
 msgid "male"
 msgstr ""
 
 #: /views/users/edit_userinfo.ctp:74
-#: /views/users/register.ctp:78
+#: /views/users/register.ctp:79
 msgid "female"
 msgstr ""
 
 #: /views/users/edit_userinfo.ctp:92
-#: /views/users/register.ctp:108;233
+#: /views/users/register.ctp:109
 msgid "Enter your email"
 msgstr ""
 
 #: /views/users/edit_userinfo.ctp:114
-#: /views/users/register.ctp:165
+#: /views/users/register.ctp:166
 msgid "Birthday"
 msgstr ""
 
@@ -3897,7 +3937,7 @@ msgid "Log in and start shaping your body"
 msgstr ""
 
 #: /views/users/login.ctp:38
-#: /views/users/register.ctp:24
+#: /views/users/register.ctp:25
 msgid "Login with your Facebook account!"
 msgstr ""
 
@@ -3934,95 +3974,91 @@ msgstr ""
 msgid "You received an email with your new password."
 msgstr ""
 
-#: /views/users/register.ctp:3
+#: /views/users/register.ctp:4
 msgid "Sign up for a plan"
 msgstr ""
 
-#: /views/users/register.ctp:13
+#: /views/users/register.ctp:14
 msgid "Receive your trainings plans for 2 weeks for free. Deal?"
 msgstr ""
 
-#: /views/users/register.ctp:37;56
+#: /views/users/register.ctp:38;57
 msgid "Minimum 2 characters long"
 msgstr ""
 
-#: /views/users/register.ctp:89
+#: /views/users/register.ctp:90
 msgid "Please use your company email for signup to receive your company discount!"
 msgstr ""
 
-#: /views/users/register.ctp:91
+#: /views/users/register.ctp:92
 msgid "Your email must end with"
 msgstr ""
 
-#: /views/users/register.ctp:126
+#: /views/users/register.ctp:127
 msgid "Your email is already in use!"
 msgstr ""
 
-#: /views/users/register.ctp:144
+#: /views/users/register.ctp:145
 msgid "Minimum 4 characters long"
 msgstr ""
 
-#: /views/users/register.ctp:177
+#: /views/users/register.ctp:178
 msgid "Plans for which type of sport?"
 msgstr ""
 
-#: /views/users/register.ctp:179
+#: /views/users/register.ctp:180
 msgid "Choose your type of sport"
 msgstr ""
 
-#: /views/users/register.ctp:183
+#: /views/users/register.ctp:184
 msgid "pick yours"
 msgstr ""
 
-#: /views/users/register.ctp:199
+#: /views/users/register.ctp:200
 msgid "It's the first time you do sports regularly?"
 msgstr ""
 
-#: /views/users/register.ctp:231
-msgid "Please calculate (SPAM protection)"
-msgstr ""
-
-#: /views/users/register.ctp:245
+#: /views/users/register.ctp:222
 msgid "Security of your personal data"
 msgstr ""
 
-#: /views/users/register.ctp:246
+#: /views/users/register.ctp:223
 msgid "The security of your personal data especially your health data are important to us. So we have to ask you to read these terms and agree to them. Thank you."
 msgstr ""
 
-#: /views/users/register.ctp:249
+#: /views/users/register.ctp:226
 msgid "You hereby confirm that you've read the TriCoreTraining terms of service and agree."
 msgstr ""
 
-#: /views/users/register.ctp:257;275;292
+#: /views/users/register.ctp:234;252;269
 msgid "I agree"
 msgstr ""
 
-#: /views/users/register.ctp:259
+#: /views/users/register.ctp:236
 msgid "You HAVE TO agree to our terms and conditions! That's the way you protect our rights :)."
 msgstr ""
 
-#: /views/users/register.ctp:267
+#: /views/users/register.ctp:244
 msgid "You also confirm that you have no medical inability to do sports and that we can store personal health data."
 msgstr ""
 
-#: /views/users/register.ctp:268
+#: /views/users/register.ctp:245
 msgid "See chapter 26 in the data privacy agreement."
 msgstr ""
 
-#: /views/users/register.ctp:277
+#: /views/users/register.ctp:254
 msgid "You HAVE TO agree to our health agreement!"
 msgstr ""
 
-#: /views/users/register.ctp:285
+#: /views/users/register.ctp:262
 msgid "You confirm that we are allowed to send you direct mails including newsletters on a regular base."
 msgstr ""
 
-#: /views/users/register.ctp:294
+#: /views/users/register.ctp:271
 msgid "You HAVE TO agree to our mailing agreement!"
 msgstr ""
 
-#: /views/users/register.ctp:318
+#: /views/users/register.ctp:321
 msgid "Sign up"
 msgstr ""
 

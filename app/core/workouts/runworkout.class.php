@@ -101,7 +101,7 @@ class RunWorkout extends Workout {
 				return __('Do an endurance run in Zone 2.', true);
 				break;
 			case Workout::E3:
-				return __('An intensive, aerobic workout. Run a course with small hills, which take you into Zone 3 frequently.', true);
+				return __('An intensive, aerobic workout. Run a course with small hills, which takes you into Zone 3 frequently.', true);
 				break;
 			case Workout::S1:
 				return __('Do an endurance run in Zone 2. Sprint for 20 seconds after warming up. Repeat 4-8 times during the run.', true);

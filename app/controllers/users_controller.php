@@ -253,16 +253,20 @@ class UsersController extends AppController {
 		$this->Session->write('flash',__('You\'re redirected to the page you tried to access before.',true));
 		
 		if ( isset( $this->params['named']['fbuser'] ) ) 
+		{
 			$fbuser = $this->params['named']['fbuser'];
+		}
 		
-		if ( isset( $_GET['code'] ) ) {
+		if ( isset( $_GET['code'] ) ) 
+		{
 			$code = $_GET['code'];
 		}
 
 		// DEBUG
 		$version = 'v3.0/';
 
-		if ( empty( $code ) ) {
+		if ( empty( $code ) ) 
+		{
 			// TODO LATER friendslist is missing
 			// $my_url is used
 			$dialog_url = "https://www.facebook.com/".$version."dialog/oauth?" .
@@ -272,7 +276,8 @@ class UsersController extends AppController {
 				urlencode($my_url);
 				$this->redirect($dialog_url);
 				die();
-		} else {
+		} else 
+		{
 			$token_url = "https://graph.facebook.com/".$version."oauth/access_token?" .
 				"client_id=" . $app_id . 
 				"&redirect_uri=" . urlencode($my_url) . 
@@ -286,16 +291,15 @@ class UsersController extends AppController {
 			$user = @json_decode(file_get_contents($graph_url));
 		}
 		
-		// make login things		
-		if ( $user->email )
+		// get email from facebook user profile		
+		if ( $user->email ) 
 		{
 			$results = $this->User->findByEmail($user->email);
 		
 			if ( is_array( $results ) ) 
 			{
 				// has user activated his profile and do WE not have deactivated user
-				if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1)
-				{					
+				if ($results['User']['activated'] == 1 && $results['User']['deactivated'] != 1) {					
 					// COOKIE TIME only 1 day
 					$this->Cookie->write(BLOGCOOKIE, "true", false, '+1 day');
 

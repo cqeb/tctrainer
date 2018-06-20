@@ -109,16 +109,16 @@ class BikeWorkout extends Workout {
 				return __('Do an endurance ride in Zone 2.', true);
 				break;
 			case Workout::E3:
-				return __('An intensive, aerobic workout. Ride a course with small hills, which take you into Zone 3 frequently.', true);
+				return __('An intensive, aerobic workout. Ride a course with small hills, which takes you into Zone 3 frequently.', true);
 				break;
 			case Workout::S1:
-				return __('Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times.', true);
+				return __('Ride in Zone 2. Shift to a very light gear and increase your cadence to maximum (before you start bouncing) over 1 minute, and hold as long as possible. Recover for 1 minute, and repeat several times (min. 10).', true);
 				break;
 			case Workout::S2:
-				return __('Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times.', true);
+				return __('Ride in Zone 2. Shift to a light gear, and start exercising with just one of your legs. The other foot remains on the pedal, but does not support. Change legs when fatigue settles in and repeat several times (min. 10).', true);
 				break;
 			case Workout::S3:
-				return __('Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort.', true);
+				return __('Do an endurance ride in Zone 2, but insert several 10-second sprints with maximum effort (min. 8).', true);
 				break;
 			case Workout::F1:
 				return __('Pick a hilly course, and ride in Zone 1 to Zone 5. The hills should take about 5 minutes to ascend. Do not stand up while climbing.', true);
