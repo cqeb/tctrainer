@@ -189,7 +189,7 @@ echo '<br />';
 	<span class="input-group-addon"><span id="kcal" class="badge"><?php if ($data && array_key_exists('kcal', $data)) { echo $data['kcal']; } ?></span></span>
 	<span class="input-group-addon"><?php echo $unit['length']; ?>/h</span>
 	<span class="input-group-addon"><span id="avgspeed" class="badge"><?php if ($data && array_key_exists('avg_speed', $data)) { echo $data['avg_speed']; } ?></span></span>
-	<span class="input-group-addon">TRIMPs</span>
+	<span class="input-group-addon"><a href="/blog/de/for-heavens-sake-what-is-trimp-trainingimpulse/">TRIMPs</a></span>
 	<span class="input-group-addon"><span id="trimp" class="badge"><?php if ($data && array_key_exists('trimp', $data)) { echo $data['trimp']; } ?></span></span>
 </div><br />
 

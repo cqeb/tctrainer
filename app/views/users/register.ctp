@@ -169,7 +169,7 @@ echo $form->input('birthday',
 
 ?>
 </div>
-
+<a name="help_rookie"></a>
 <div class="form-group">
 <?php 
 echo $form->input('typeofsport',
@@ -195,9 +195,10 @@ echo $form->hidden('weeklyhours');
 
 <div class="form-group">
 
+
 <?php
 
-$help_rookie = ' <a class="help badge" title="' . __("It's the first time you do sports regularly?", true) . '" href="#">?</a>';
+$help_rookie = ' <a class="help badge" title="' . __("It's the first time you do sports regularly?", true) . '" href="#help_rookie">?</a>';
 
 echo $form->input('rookie',
                   array(

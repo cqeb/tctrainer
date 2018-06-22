@@ -272,7 +272,7 @@ class UsersController extends AppController {
 			// $my_url is used
 			$dialog_url = "https://www.facebook.com/".$version."dialog/oauth?" .
 				"client_id=" . $app_id . 
-				"&scope=email,public_profile" .
+				"&scope=email,public_profile" . // must be reviewed by FB ,user_gender,user_birthday" .
 				"&redirect_uri=" . 
 				urlencode($my_url);
 				$this->redirect($dialog_url);
@@ -346,13 +346,19 @@ class UsersController extends AppController {
 				}
 			} else
 			{
+				/*
 				$fbuserarray['firstname'] = $user->first_name;
 				$fbuserarray['lastname'] = $user->last_name;
 				$fbuserarray['birthday'] = date( 'Y-m-d', strtotime($user->birthday));
 				$fbuserarray['gender'] = $user->gender;
 				$fbuserarray['locale'] = $user->locale;
+				*/
+				$fbname = preg_split('/ /', $user->name);
+
+				$fbuserarray['firstname'] = $fbname[0];
+				$fbuserarray['lastname'] = $fbname[1];
 				$fbuserarray['email'] = $user->email;
-				
+
 				$this->Session->write('fbemail', $user->email);
 				$this->Session->write('facebook_user', serialize($fbuserarray));
 
@@ -626,9 +632,11 @@ class UsersController extends AppController {
 			$this->redirect($redirect_url);
 	    }
 
-		if ( is_numeric($this->Session->read( 'recommendation_userid' )) ) {
+		if ( is_numeric($this->Session->read( 'recommendation_userid' )) ) 
+		{
 			$inviter = $this->Session->read('recommendation_userid');
-		} else {
+		} else 
+		{
 			$inviter = '';
 		}
 

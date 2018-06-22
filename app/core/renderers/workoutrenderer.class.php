@@ -43,7 +43,7 @@ class WorkoutRenderer {
 							"\">" . __($w->getCategory(), true) . "</span>
 							" . self::renderCheckButton($w, $athlete, $durationHr) . "
 					<td class=\"duration\">" . $durationHr . "<small>h</small></td>
-					<td class=\"trimp\">" . $w->getTRIMP() . "<small>TRIMPs</small></td>
+					<td class=\"trimp\">" . $w->getTRIMP() . " <small><a href='/blog/de/for-heavens-sake-what-is-trimp-trainingimpulse/'>TRIMPs</a></small></td>
 				</tr>
 				<tr>
 					<td class=\"description " . strtolower($w->getSport()) . "\" colspan=\"4\">
@@ -61,7 +61,7 @@ class WorkoutRenderer {
 		$html .= "
 		<tr><td class=\"nobg\"></td><td class=\"nobg\"></td>
 			<td class=\"duration sum\">" . self::formatTime($length) . "<small>h</small></td>
-			<td class=\"trimp sum\">" . $trimps . "<small>TRIMPs</small></td>
+			<td class=\"trimp sum\">" . $trimps . " <small><a href='/blog/de/for-heavens-sake-what-is-trimp-trainingimpulse/'>TRIMPs</a></small></td>
 		</tr>";
 		
 		$html .= "\n</table>";

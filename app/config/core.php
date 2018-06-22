@@ -93,8 +93,8 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
 
-	//define('MYIP', '89.144.214.220');
-	define('MYIP', '212.186.133.37');
+	define('MYIP', '89.144.214.220');
+	//define('MYIP', '212.186.133.37');
 
 	//Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.mailHost', 'mx.tricoretraining.com');
@@ -251,10 +251,12 @@ if ($_SERVER['HTTP_HOST'] == LOCALHOST) {
  */
 $session_timeout = Configure::read('Session_longterm');
 
-if (  $session_timeout == "true" )
-	Configure::write('Session.timeout', 30*84600/3600);
-else
-	Configure::write('Session.timeout', 86400/3600);
+if (  $session_timeout == "true" ) {
+	Configure::write('Session.timeout', 5*30);
+} else {
+	// 24 hours (+6 hours US time) = 30 hours
+	Configure::write('Session.timeout', 5.5);
+}
 
 /**
  * If set to false, sessions are not automatically started.

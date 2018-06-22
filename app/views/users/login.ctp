@@ -82,13 +82,13 @@ if ($session->read('previous_url')) {
   echo $form->hidden('previous_url', array('value' => $session->read('previous_url')));
 }
 ?>
-  
+<!--//
     <div class="checkbox remember">
     <?php
     		   echo $form->input('remember_me', array('before' => '', 'after' => '', 'label' => __('Remember me', true), 'type' => 'checkbox'));
     ?>
     </div>
-
+//-->
 </div>
                   <?php echo $this->Form->submit(__('Sign In', true), array('class'=>'btn btn-primary')); ?>
 
