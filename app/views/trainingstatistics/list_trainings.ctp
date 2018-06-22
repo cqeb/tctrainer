@@ -20,12 +20,12 @@ __('swim workout', true);
                    </div><br />
                    <?php } ?>
 
-                   <a href="/trainer/trainingstatistics/edit_training"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/edit_training/"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training/'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
                    
-                   <a href="/trainer/trainingstatistics/import_workout"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+                   <a href="/trainer/trainingstatistics/import_workout/"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout/'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
 <!--
 
-                   <a href="/trainer/trainingstatistics/garmin_read"><button class="btn btn-primary"  onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
+                   <a href="/trainer/trainingstatistics/garmin_read/"><button class="btn btn-primary"  onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
 -->
 
                    <br /><br />
@@ -53,7 +53,7 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
 <?php $training = $trainingstatistic['Trainingstatistic']; ?>
 
 <tr>
-    <td><a <?php if ( isset( $training['name'] ) && $training['name'] != '' ) echo 'class="help2" title="' . $training['name'] . '"'; ?>" href="/trainer/trainingstatistics/edit_training/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><?php echo $unitcalc->check_date($training['date']); ?></a><?php echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
+    <td><a <?php if ( isset( $training['name'] ) && $training['name'] != '' ) echo 'class="help2" title="' . $training['name'] . '"'; ?>" href="/trainer/trainingstatistics/edit_training/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>/"><?php echo $unitcalc->check_date($training['date']); ?></a><?php echo ', '; $tday = date('D', strtotime($training['date']));  __($tday); ?></td>
     <td><?php $stype = $training['sportstype']; __($stype); ?></td>
     <td align="right"><?php $distance = $unitcalc->check_distance($training['distance'], 'show'); echo $distance['amount'] . ' ' . $distance['unit']; ?></td>
     <td><?php $duration = $unitcalc->seconds_to_time($training['duration']); echo $duration; ?></td>
@@ -62,16 +62,16 @@ if ( !isset( $trainingstatistics ) || count( $trainingstatistics ) < 1 )
 
 $facebookurl = '/trainer/trainingstatistics/url_redirect/type:facebook/distance:'.
 	$distance['amount'] . '/distance_unit:' . $distance['unit'] .
-	'/duration:' . $duration . '/sport:' . $stype;
+	'/duration:' . $duration . '/sport:' . $stype . '/';
 
 $twitterurl = '/trainer/trainingstatistics/url_redirect/type:twitter/distance:'.
 	$distance['amount'] . '/distance_unit:' . $distance['unit'] .
-	'/duration:' . $duration . '/sport:' . $stype;
+	'/duration:' . $duration . '/sport:' . $stype . '/';
  
 ?>
     
 <nowrap>
-<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
+<a onClick="return confirm('<?php __('Are you sure?'); ?>');" href="/trainer/trainingstatistics/delete/<?php echo $trainingstatistic['Trainingstatistic']['id']; ?>/"><img alt="<?php __('Delete workout'); ?>" width="18" src="/trainer/img/icon_delete.png" /></a>
 <a class="help2" title="<?php __('Tell your friends on Facebook about your great workout!'); ?>" target="_blank" href="<?php echo $facebookurl; ?>"><img alt="<?php __('Post to Facebook'); ?>" width="18" src="/trainer/img/icon_facebook.png" /></a>
 <a class="help2" title="<?php __('Tell your Twitter follower about your great workout!'); ?>" target="_blank" href="<?php echo $twitterurl; ?>"><img alt="<?php __('Post to Twitter'); ?>" width="18" src="/trainer/img/icon_twitter.png" /></a>
 

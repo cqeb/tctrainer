@@ -75,7 +75,7 @@
 
              <br /><br />
 
-             <?php echo $html->link(__('Back to the list of your payments',true),array('controller' => 'payments', 'action' => 'show_payments'))?>
+             <?php echo $html->link(__('Back to the list of your payments',true), '/payments/show_payments/')?>
              <br /><br />
              </div>
 

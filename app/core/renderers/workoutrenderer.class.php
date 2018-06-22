@@ -225,7 +225,7 @@ END:VCALENDAR";
 			$workout_summary = __($w->getSport(), true) . " " . $durationHr . "h - " . __($w->getTypeLabel(), true);
 			$workout_description = "TRIMPs: " . $w->getTRIMP() . " (" . __($w->getCategory(), true) . ") " . 
 				$w->getShortCategory() . " - " . $w->getCategoryDescription() . " " . 
-				$w->getDescription() . " " . __('Track workouts',true) . " https://tricoretraining.com/trainer/trainingstatistics/edit_training";
+				$w->getDescription() . " " . __('Track workouts',true) . " https://tricoretraining.com/trainer/trainingstatistics/edit_training/";
 			if ($w->isLsd()) {
 				$workout_description .= "" . __('This is a special workout for an upcoming long-distance event. These trainings are most important - you should not skip them.', true); 
 			}

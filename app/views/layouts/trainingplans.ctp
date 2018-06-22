@@ -126,12 +126,12 @@ else
 					<div class="panel-body">
 
 						<h3><?php __('Calendar import'); ?></h3>
-						<?php echo $html->link(__('Add current training week to your calendar',true),array('controller' => 'trainingplans', 'action' => 'get_events'))?> (<?php echo $html->link(__('Next',true),array('controller' => 'trainingplans', 'action' => 'get_events?o=1'))?>)
+						<?php echo $html->link(__('Add current training week to your calendar',true), '/trainingplans/get_events/')?> (<?php echo $html->link(__('Next', true), '/trainingplans/get_events/?o=1')?>)
 						
 						<!--//
 						<?php //if ( $this->getAthlete()->isValid() == 0 ) { ?>
 						<?php if ( 1 == 1 ) { ?>
-						<a class="btn btn-primary" href="/trainer/payments/subscribe_triplans"><b><?php __('Upgrade to PREMIUM'); ?></b></a>
+						<a class="btn btn-primary" href="/trainer/payments/subscribe_triplans/"><b><?php __('Upgrade to PREMIUM'); ?></b></a>
 							<br /><br />
 						<?php } ?>
 						//-->

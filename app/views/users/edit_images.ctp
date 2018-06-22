@@ -33,7 +33,7 @@ if ( $myimage_show && $myimage_show != 'image' )
                   <img alt="<?php __('My profile image', true); ?>" width="200" src="<?php echo $myimage_show; ?>" />
                   </div>
                   <?php 
-                  echo $html->link(__('Delete profile image?',true),array('action' => 'delete_image', 'field' => 'myimage'), null, __('Are you sure?',true) );
+                  echo $html->link(__('Delete profile image?',true), array('action' => 'delete_image', 'field' => 'myimage'), null, __('Are you sure?',true) );
                   ?>
 <?php
 }

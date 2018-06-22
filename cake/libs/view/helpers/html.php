@@ -279,6 +279,7 @@ class HtmlHelper extends AppHelper {
  * @link http://book.cakephp.org/view/1442/link
  */
 	function link($title, $url = null, $options = array(), $confirmMessage = false) {
+		
 		$escapeTitle = true;
 		if ($url !== null) {
 			$url = $this->url($url);
@@ -314,6 +315,7 @@ class HtmlHelper extends AppHelper {
 			}
 			unset($options['default']);
 		}
+
 		return sprintf($this->tags['link'], $url, $this->_parseAttributes($options), $title);
 	}
 

@@ -201,7 +201,7 @@ class StartsController extends AppController
 		    $this->redirect($this->referer());
 	    } else
 		{ 
-	        $redirect_url = '/starts/index/code:'.$this->code;
+	        $redirect_url = '/starts/index/code:'.$this->code . '/';
 			$this->redirect($redirect_url);
 			die();
 	    }

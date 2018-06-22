@@ -11,7 +11,7 @@ if ( $session_userid && $session_useremail ) { ?>
                    <fieldset>
                    <legend><?php __('You are logged in and want to leave?'); ?></legend>
 
-                   <?php echo $html->link(__('Logout', true), array('controller' => 'users', 'action' => 'logout')); ?>
+                   <?php echo $html->link(__('Logout', true), '/users/logout/'); ?>
 
                    </fieldset>
 <?php } else { ?>
@@ -35,7 +35,7 @@ if ( $session_userid && $session_useremail ) { ?>
         } else {
           $addon = '';
         } ?>
-        <a href="/trainer/users/login_facebook/<?php echo $addon; ?>"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/fb-signin.jpg"></a> &nbsp;&nbsp; <b><?php __('or'); ?></b><br />
+        <a href="/trainer/users/login_facebook/<?php echo $addon; ?>/"><img alt="<?php __('Login with your Facebook account!'); ?>" src="/trainer/img/fb-signin.jpg"></a> &nbsp;&nbsp; <b><?php __('or'); ?></b><br />
         <?php } ?>
   
 </div>
@@ -96,7 +96,7 @@ if ($session->read('previous_url')) {
                   <?php echo $form->end();?>
 
     <br />
-    <?php echo $html->link(__("Can't remember my password?", true),array('controller' => 'users', 'action' => 'password_forgotten'))?>
+    <?php echo $html->link(__("Can't remember my password?", true), '/users/password_forgotten/')?>
     <br /><br />
 
 <?php } ?>

@@ -52,7 +52,7 @@ if ( !isset( $users ) || count( $users ) < 1 )
 
 <tr>
     <td>
-<span><?php echo $html->link($user['id'], array('action' => 'edit_user', 'id' => $user['id']), null); ?></span>
+<span><?php echo $html->link($user['id'], '/users/edit_user/id:' . $user['id'] . '/', null); ?></span>
 <br />
 <?php 
 echo $form->input('user_' . $user['id'],
@@ -83,7 +83,7 @@ echo $form->input('user_' . $user['id'],
     <td><?php echo 'Activ. <b>' . $yesno[$user['activated']] . '</b><br />' . 'Deact. <b>' . $yesno[$user['deactivated']]; ?></b></td>
     <td><?php echo 'Beta <b>' . $yesno[$user['advanced_features']] . '</b><br />' . 'Admin <b>' . $yesno[$user['admin']]; ?></b></td>
     <td style="text-align:right;">
-    <?php echo $html->link(__('Edit', true), array('action' => 'edit_user', $user['id']), null); ?>
+    <?php echo $html->link(__('Edit', true), '/users/edit_user/' . $user['id'] . '/', null); ?>
     <br />
     <?php echo $html->link(__('Become user', true), array('action' => 'edit_user', $user['id'], 'setuser' => 'true'), null); ?>
     </td>

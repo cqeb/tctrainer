@@ -38,7 +38,8 @@ class UsersController extends AppController {
 			//echo $this->Session->read('session_userid') . ' beforeFilter Users';
 			//die();
 
-		}		  
+		}	
+		$this->loadModel('User');	  
 	}
 
 	function index()
@@ -328,7 +329,7 @@ class UsersController extends AppController {
 						//$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
 						$redirect_url = $previous_url;
 					} else {	
-						$redirect_url = '/trainer/trainingplans/view';
+						$redirect_url = '/trainer/trainingplans/view/';
 					}
 					
 					$this->Session->write('previous_url', '');
@@ -510,7 +511,7 @@ class UsersController extends AppController {
 
 			//die();
 		}
-		$this->redirect('/users/login/code:'.$language);
+		$this->redirect('/users/login/code:'.$language.'/');
 		$this->set('redirect', 'login');
 		die();
 	}
@@ -618,7 +619,7 @@ class UsersController extends AppController {
 			if ( $previous_url ) {
 				$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
 			} else {	
-				$redirect_url = '/trainingplans/view';
+				$redirect_url = '/trainingplans/view/';
 			}
 
 			$this->Session->write('previous_url', '');
@@ -935,6 +936,7 @@ class UsersController extends AppController {
 						$to_user_admin['email'] = 'support@tricoretraining.com';
 
 						//function _sendMail($user, $subject, $template, $content = '', $language = '', $to_user = '', $mimetype = 'both' )
+						// send admin info about new user
 						$this->_sendMail(array(), $subject_admin, $template, $content, 'eng', $to_user_admin,'both');
 
 						// write imperial / metric to session and date-format

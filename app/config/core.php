@@ -70,8 +70,8 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	Configure::write('debug', 0);
 	define('MYIP', '89.144.214.43');
 
-	Configure::write('App.mailHost', 'mx.tricoretraining.com');
-	//Configure::write('App.mailHost', 'business36.web-hosting.com');
+	//Configure::write('App.mailHost', 'mx.tricoretraining.com');
+	Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.hostUrl', 'https://' . TESTHOST);	
 
 	$_SERVER['DOCUMENT_ROOT'] = '/home/schrlnek/' . TESTHOST . '/';
@@ -93,8 +93,8 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
 
-	define('MYIP', '89.144.214.220');
-	//define('MYIP', '10.133.4.57');
+	//define('MYIP', '89.144.214.220');
+	define('MYIP', '212.186.133.37');
 
 	//Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.mailHost', 'mx.tricoretraining.com');
@@ -148,7 +148,8 @@ Configure::write('App.mailFrom', 'Klaus-M. from TriCoreTraining <support@mx.tric
 
 Configure::write('App.mailReply', 'support@tricoretraining.com');
 Configure::write('App.mailPort', '25');
-Configure::write('App.mailUser', 'support@mx.tricoretraining.com');
+//Configure::write('App.mailUser', 'support@mx.tricoretraining.com');
+Configure::write('App.mailUser', '');
 Configure::write('App.mailPassword', '');
 Configure::write('App.mailDelivery', 'mail');
 
@@ -199,7 +200,7 @@ Configure::write('company_emails', '"@growtf.com","@schremser.com"');
  * To use database sessions, execute the SQL file found at /app/config/sql/sessions.sql.
  *
  */
-Configure::write('Session.save', 'php');
+Configure::write('Session.save', 'cake');
 /**
  * The name of the table used to store CakePHP database sessions.
  *
@@ -251,9 +252,9 @@ if ($_SERVER['HTTP_HOST'] == LOCALHOST) {
 $session_timeout = Configure::read('Session_longterm');
 
 if (  $session_timeout == "true" )
-	Configure::write('Session.timeout', '300');
+	Configure::write('Session.timeout', 30*84600/3600);
 else
-	Configure::write('Session.timeout', '20');
+	Configure::write('Session.timeout', 86400/3600);
 
 /**
  * If set to false, sessions are not automatically started.
@@ -263,7 +264,34 @@ Configure::write('Session.start', true);
  * When set to false, HTTP_USER_AGENT will not be checked
  * in the session
  */
-Configure::write('Session.checkAgent', true);
+Configure::write('Session.checkAgent', false);
+
+
+// https://book.cakephp.org/1.3/en/The-Manual/Core-Components/Sessions.html
+
+/*
+// app/config/my_session.php
+//
+// Revert value and get rid of the referrer check even when,
+// Security.level is medium
+ini_restore('session.referer_check');
+
+ini_set('session.use_trans_sid', 0);
+ini_set('session.name', Configure::read('Session.cookie'));
+
+// Cookie is now destroyed when browser is closed, doesn't
+// persist for days as it does by default for security
+// low and medium
+ini_set('session.cookie_lifetime', 0);
+
+// Cookie path is now '/' even if you app is within a sub
+// directory on the domain
+$this->path = '/';
+ini_set('session.cookie_path', $this->path);
+
+// Session cookie now persists across all subdomains
+ini_set('session.cookie_domain', env('HTTP_BASE'));
+*/
 
 /**
  * The level of CakePHP security. The session timeout time defined
@@ -277,35 +305,12 @@ Configure::write('Session.checkAgent', true);
  * CakePHP session IDs are also regenerated between requests if
  * 'Security.level' is set to 'high'.
  */
-Configure::write('Security.level', 'medium');
+//Configure::write('Security.level', 'medium');
+Configure::write('Security.level', 'low');
 /**
  * A random string used in security hashing methods.
  */
 Configure::write('Security.salt', 'LKLKJsfasafwerwer972498349724923479234DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
-
-// app/config/my_session.php
-//
-// Revert value and get rid of the referrer check even when,
-// Security.level is medium
-// ini_restore('session.referer_check');
-
-// ini_set('session.use_trans_sid', 0);
-// ini_set('session.name', Configure::read('Session.cookie'));
-
-// Cookie is now destroyed when browser is closed, doesn't
-// persist for days as it does by default for security
-// low and medium
-// ini_set('session.cookie_lifetime', 0);
-
-// Cookie path is now '/' even if you app is within a sub
-// directory on the domain
-// $this->path = '/';
-// ini_set('session.cookie_path', $this->path);
-
-// Session cookie now persists across all subdomains
-// ini_set('session.cookie_domain', env('HTTP_BASE'));
-
-
 
 /**
  * Compress CSS output by removing comments, whitespace, repeating tags, etc.

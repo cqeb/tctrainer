@@ -16,7 +16,7 @@
                    </div><br />
                    <?php } ?>
 
-<a href="/trainer/users/list_users">&raquo; <?php __('List users'); ?></a><br /><br />
+<a href="/trainer/users/list_users/">&raquo; <?php __('List users'); ?></a><br /><br />
 
 <div class="form-group">
 <?php

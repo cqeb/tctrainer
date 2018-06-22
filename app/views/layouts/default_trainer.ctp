@@ -139,10 +139,11 @@ jQuery(document).ready(
 </script>
 
 <?php echo $this->element('footerend'); ?>
+
 <?php if (isset($redirect) && $redirect == 'login') { ?>
 <script language="JavaScript">
 <!--
-top.location.href = '/trainer/users/logout';
+top.location.href = '/trainer/users/logout/';
 -->
 </script>
 <?php } ?>

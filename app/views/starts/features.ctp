@@ -125,7 +125,7 @@ $price_month_array_split = $price_array[$currency]['month'];
 </tbody>
 </table>
 
-<a href="/trainer/users/register"><button class="btn btn-primary btn-success" onClick="javascript:top.location.href='/trainer/users/register' value="<?php __('Sign up, it\'s free'); ?>"><?php __('Sign up, it\'s free'); ?></button></a>
+<a href="/trainer/users/register/"><button class="btn btn-primary btn-success" onClick="javascript:top.location.href='/trainer/users/register/' value="<?php __('Sign up, it\'s free'); ?>"><?php __('Sign up, it\'s free'); ?></button></a>
 &laquo; &laquo; &laquo; &laquo; -- <?php __('Click here and start shaping your body!'); ?> :)
 <br /><br /><br />
 <div class="alert" style="color:white">

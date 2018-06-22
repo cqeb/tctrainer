@@ -34,7 +34,7 @@
                    <br /><br />
                    For DEBUGGING (only localhost):
                    <br />
-                   <?php echo $html->link(__('Activate', true), array('controller' => 'users', 'action' => 'activate', 'transaction_id' => $transaction_id)); ?>
+                   <?php echo $html->link(__('Activate', true), '/users/activate/transaction_id:' . $transaction_id . '/'); ?>
                   <br />
                   <?php } ?>
 </div>

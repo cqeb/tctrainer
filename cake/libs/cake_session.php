@@ -624,9 +624,12 @@ class CakeSession extends Object {
  */
 	function _checkValid() {
 		if ($this->read('Config')) {
-			if ((Configure::read('Session.checkAgent') === false || $this->_userAgent == $this->read('Config.userAgent')) && $this->time <= $this->read('Config.time')) {
+			// changed by kms
+			//if ((Configure::read('Session.checkAgent') === false || $this->_userAgent == $this->read('Config.userAgent')) && $this->time <= $this->read('Config.time')) {
+			if ((Configure::read('Session.checkAgent') === false || $this->_userAgent == $this->read('Config.userAgent'))) {
 				$time = $this->read('Config.time');
 				$this->write('Config.time', $this->sessionTime);
+
 				if (Configure::read('Security.level') === 'high') {
 					$check = $this->read('Config.timeout');
 					$check -= 1;
@@ -637,6 +640,7 @@ class CakeSession extends Object {
 						$this->write('Config.timeout', 10);
 					}
 				}
+
 				$this->valid = true;
 			} else {
 				$this->destroy();
@@ -646,7 +650,8 @@ class CakeSession extends Object {
 		} else {
 			$this->write('Config.userAgent', $this->_userAgent);
 			$this->write('Config.time', $this->sessionTime);
-			$this->write('Config.timeout', 10);
+			// changed by KMS
+			$this->write('Config.timeout', 86400);
 			$this->valid = true;
 			$this->__setError(1, 'Session is valid');
 		}

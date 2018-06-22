@@ -15,7 +15,7 @@
                    </div><br />
                    <?php } ?>
 
-                   <?php echo $html->link(__('Back to list of users',true), array('controller' => 'users', 'action' => 'list_users'), null) ?>
+                   <?php echo $html->link(__('Back to list of users',true), '/users/list_users/', null) ?>
 					         <br /><br />
 
 <div class="form-group">

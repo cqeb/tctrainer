@@ -50,7 +50,7 @@ if ( !isset( $newimportfile ) )
     echo '<div class="alert">'; 
     echo $form->submit(__('Confirm import', true), array('div' => false,'class' => 'btn btn-primary') );
 	  echo '&nbsp;&nbsp;'; 
-    echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
+    echo $html->link(__('Cancel',true), '/trainingstatistics/list_trainings/', null);
     echo '</div>';
     echo $form->hidden('hiddenimportfile');
 
@@ -81,7 +81,7 @@ if ( isset( $outputfile ) ) {
     echo $form->submit(__('Confirm import', true),array('class' => 'btn btn-primary'));
 	/*
 	echo '&nbsp;&nbsp;'; 
-    echo $html->link(__('Cancel',true), array('controller' => 'trainingstatistics', 'action' => 'list_trainings'),null);
+    echo $html->link(__('Cancel',true), '/trainingstatistics/list_trainings/', null);
     */
     echo '</div>'; 
 

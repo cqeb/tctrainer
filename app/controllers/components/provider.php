@@ -75,7 +75,7 @@ class ProviderComponent extends Object {
 		} else {
 			return '<div class="alert alert-danger"><p>' .
 				__("Sorry, you are not eligible to receive training plans as your PREMIUM membership has expired or you resigned our terms and conditions.", true) . 
-				'</p><br /><button class="trainingplan" onclick="document.location=\'/trainer/payments/subscribe_triplans\'">' .
+				'</p><br /><button class="trainingplan" onclick="document.location=\'/trainer/payments/subscribe_triplans/\'">' .
 				__('Become PREMIUM', true) . 
 				'</button></div>' . 
 				"<script type=\"text/javascript\">
@@ -193,7 +193,7 @@ class ProviderComponent extends Object {
 		$html .= $this->getJSWorkoutSettings($genWeek->format("Y-m-d"), $this->getAthlete()->getId()); 
 		if ( $_GET['o'] == 4 ) 
 			$html .= '<br /><div class="alert alert-danger">' . __('You can see a maximum of 4 weeks in advance.', true) . ' ' . 
-				'<a href="/trainer/trainingplans/view">' . __('Back to current week', true) . '</div>';
+				'<a href="/trainer/trainingplans/view/">' . __('Back to current week', true) . '</div>';
 				
 		// add generate time
 		$benchmarkTime = microtime(true) - $timerStart;

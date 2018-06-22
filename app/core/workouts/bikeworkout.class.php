@@ -146,11 +146,11 @@ class BikeWorkout extends Workout {
 				break;
 			case Workout::TEST_SHORT:
 				return __('Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 20 minutes. Use this value to update your bike lactate threshold in your training info settings.', true) .
-					' <button class="trainingplan" onclick="document.location.href=\'/trainer/users/edit_traininginfo\'">' . __('Edit training info', true) . '</button>';
+					' <button class="trainingplan" onclick="document.location.href=\'/trainer/users/edit_traininginfo/\'">' . __('Edit training info', true) . '</button>';
 				break;
 			case Workout::TEST_LONG:
 				return __('Pick a flat course, and ride like as if you would be racing. Go hard from the beginning, and press the "Lap"-Button on your sports watch to determine your average heart rate for the last 50 minutes. Use this value to update your bike lactate threshold in your training info settings.', true) .
-					' <button class="trainingplan" onclick="document.location.href=\'/trainer/users/edit_traininginfo\'">' . __('Edit training info', true) . '</button>';
+					' <button class="trainingplan" onclick="document.location.href=\'/trainer/users/edit_traininginfo/\'">' . __('Edit training info', true) . '</button>';
 				break;
 			default:
 				return 'UNKNOWN';

@@ -1081,7 +1081,7 @@ class TrainingstatisticsController extends AppController {
 		if ( $p['smtype'] == 'facebook' )
 		{
 			$socialmedia_url = 'http://www.facebook.com/sharer.php?u=https://tricoretraining.com' .  
-				'/trainer/starts/index/u:' . $transaction_id;
+				'/trainer/starts/index/u:' . $transaction_id . '/';
 		} elseif ( $p['smtype'] == 'twitter' )
 		{
 			$twittertext =

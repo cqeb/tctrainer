@@ -23,7 +23,7 @@ if ( isset( $userinfo ) )
 			__($sport . ' workout', true) . ' ' . __('in',true) . ' ' . $duration . ' ' . 
 			__('hour(s)',true) . ' ' . __('with', true) . ' ' .	'TriCoreTraining' .	
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('You want to achieve your goal and get a plan for it, why not sign up?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register/\'>&raquo; ' . __('You want to achieve your goal and get a plan for it, why not sign up?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 
 		// user recommended our service
@@ -32,7 +32,7 @@ if ( isset( $userinfo ) )
 			$facebox_content = '<br /><h1>' . __('I LIKE TriCoreTraining!', true) . '</h1><p>' . 
 			__("Why don't you become a triathlon athlete too? Why not a marathon runner? TriCoreTraining is your interactive online coach.", true) .
 			'<br /><br />' . __('Yours', true) . ', ' . $userinfo['firstname'] . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('You want to achieve your goal and get a plan for it, why not sign up?', true) . '</a></p>' . 
+			'<a href=\'/trainer/users/register/\'>&raquo; ' . __('You want to achieve your goal and get a plan for it, why not sign up?', true) . '</a></p>' . 
 			'<img alt=\'' . $userinfo['firstname'] . '\' src=\'http://0.gravatar.com/avatar/' . md5( $userinfo['email'] ) . '?s=69&d=identicon\' />';
 		}
 		
@@ -43,7 +43,7 @@ if ( isset( $companyinfo ) )
 			$facebox_content = '<br /><h1>' . __('Your company helps you to save 30% of the membership fee!', true) . '</h1><p>' . 
 			__("Register initially with your company email, try out TriCoreTraining and then you will get a discounted PREMIUM membership.", true) . 
 			'<br /><br />' . __('Yours', true) . ', Klaus-M. (' . __('founder of', true) . ') ' . __('TriCoreTraining', true) . '<br /><br />' . 
-			'<a href=\'/trainer/users/register\'>&raquo; ' . __('If you want to improve your athletic skills and get a plan, why not register?', true) . '</a></p>';
+			'<a href=\'/trainer/users/register/\'>&raquo; ' . __('If you want to improve your athletic skills and get a plan, why not register?', true) . '</a></p>';
 }
 
 if ( isset( $facebox_content ) ) {
@@ -374,7 +374,7 @@ else
 						</ul>
 				</div>
 			<div class="panel-footer">
-					<a class="btn btn-success btn-block" href="/trainer/users/register"><?php __('Get Started', false); ?></a>
+					<a class="btn btn-success btn-block" href="/trainer/users/register/"><?php __('Get Started', false); ?></a>
 			</div>
 		  </div>
         </div>
@@ -401,7 +401,7 @@ else
 						</ul>
 				</div>
 				<div class="panel-footer">
-					<a class="btn btn-info btn-block" href="/trainer/users/register"><?php __('Get Started', false); ?></a>
+					<a class="btn btn-info btn-block" href="/trainer/users/register/"><?php __('Get Started', false); ?></a>
 				</div>
 			</div> 
 	   </div>
@@ -427,7 +427,7 @@ else
 						</ul>
 				</div>
 				<div class="panel-footer">
-					<a class="btn btn-danger btn-block" href="/trainer/users/register"><?php __('Get Started', false); ?></a>
+					<a class="btn btn-danger btn-block" href="/trainer/users/register/"><?php __('Get Started', false); ?></a>
 				</div>
 			</div> 
 	   </div>

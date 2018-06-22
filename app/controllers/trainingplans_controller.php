@@ -82,7 +82,7 @@ class TrainingplansController extends AppController {
 		if ($schedule && count($schedule->getRaces()) == 0) {
 			$this->set('info', '<div class="alert"><p>' . 
 			__("You might want to add some competitions to refine your training plan.", true) . 
-			'</p><button onclick="javascript:document.location=\'/trainer/competitions/list_competitions\'">' .
+			'</p><button onclick="javascript:document.location=\'/trainer/competitions/list_competitions/\'">' .
 			__("Add competition", true) . 
 			"</button>
 			</div>");
