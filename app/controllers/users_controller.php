@@ -137,7 +137,7 @@ class UsersController extends AppController {
 				$this->Session->write('session_useremail', $user['email']);
 				$this->Session->write('session_userid', $user['id']);
 				// redirect to trainingplan  
-				$this->Session->write('flash',__('You\'re redirected from the edit profile-page because we reloaded your account info.',true));
+				$this->Session->write('flash',__("You're redirected from the edit profile-page because we reloaded your account info.", true));
 				$this->redirect('/trainingplans/view');
 				die();
 			}
@@ -251,7 +251,7 @@ class UsersController extends AppController {
 		
 		$my_url = Configure::read('App.hostUrl') . Configure::read('App.serverUrl') . '/users/login_facebook/';
 
-		$this->Session->write('flash',__('You\'re redirected to the page you tried to access before.',true));
+		$this->Session->write('flash',__("You're redirected to the page you tried to access before.", true));
 		
 		if ( isset( $this->params['named']['fbuser'] ) ) 
 		{
@@ -335,7 +335,7 @@ class UsersController extends AppController {
 					$this->Session->write('previous_url', '');
 					$this->autoRender = false;
 
-					$this->Session->write('flash',__('You\'re redirected to the page because you logged in with facebook login.',true));
+					$this->Session->write('flash',__("You're redirected to the page because you logged in with facebook login.", true));
 		
 					echo '<script language="JavaScript">top.location.href="' . $redirect_url . '";</script>';
 					echo '<a href="' . $redirect_url . '">' . __('Wait a second please. If you are not redirected, please click here.', true) . '</a>';
@@ -376,7 +376,7 @@ class UsersController extends AppController {
 		// redirect to url which the user tried to access before (s)he was redirected to the login
 		$previous_url = $this->Session->read('previous_url');
 
-		// $this->Session->write('flash',__('You\'re redirected to the page you tried to access before. (login)',true));
+		// $this->Session->write('flash',__("You're redirected to the page you tried to access before. (login)", true));
 		
 		if ( $previous_url ) {
 			$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
@@ -614,7 +614,7 @@ class UsersController extends AppController {
 			// redirect to url which the user tried to access before (s)he was redirected to the login
 			$previous_url = $this->Session->read('previous_url');
 
-			$this->Session->write('flash',__('You\'re redirected to the page because you\'re already logged in (register).',true));
+			$this->Session->write('flash',__("You're redirected to the page because you're already logged in (register).", true));
 		
 			if ( $previous_url ) {
 				$redirect_url = preg_replace('/\/trainer/', '', $previous_url);
