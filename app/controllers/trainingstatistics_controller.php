@@ -130,7 +130,7 @@ class TrainingstatisticsController extends AppController {
 				{
 					$this->Session->write('flash',__('No import data found!', true));
 					$this->set('statusbox', $statusbox);
-					$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
+					$this->redirect('/trainer/trainingstatistics/list_trainings/');
 					die();
 				}
 	
@@ -472,57 +472,77 @@ class TrainingstatisticsController extends AppController {
   function edit_training($id = null) {
 
 		$this->checkSession();
-	  	//$this->layout = 'default_trainer';
-	  	$this->set('js_addon','');
-	  	$unit = $this->Unitcalc->get_unit_metric();
+		//$this->layout = 'default_trainer';
+		$this->set('js_addon','');
+
+		$unit = $this->Unitcalc->get_unit_metric();
 	  	$statusbox = '';
 	
 	  	$session_userid = $this->Session->read('session_userid');
 	  	$results['User'] = $this->Session->read('userobject');
 
-	  	if ( empty($this->data) ) {
-	  		$statusbox = 'alert';
+		// this part is executed if no data is send (first load of workout)
+		if ( empty($this->data) ) 
+		{
+			  $statusbox = 'alert';
+			  
 	  		// security check - don't view workouts of other users
-	  		if ( $id ) {
+			if ( $id ) 
+			{
 	  			$result = $this->Trainingstatistic->find ('all',
-	  			array('conditions' =>
-	  			array( 'and' =>
-	  			array( 'id' => $id, 'user_id' => $session_userid )
-	  			)));
-	  			if ( isset( $result[0] ) ) {
+					array('conditions' =>
+					array( 'and' =>
+					array( 'id' => $id, 'user_id' => $session_userid )
+					)));
+				if ( isset( $result[0] ) )
+				{
 	  				$this->data = $result[0];
-	  			} else {
+				} else 
+				{
 	  				$this->Session->write('flash',__('Sorry. This is not your entry!', true));
 	  				$this->set('statusbox', $statusbox);
 	  				$this->redirect(array('controller' => 'trainingstatistics', 'action' => 'list_trainings'));
 	  			}
 	  		}
 	
-	  		if ( isset( $this->data['Trainingstatistic']['duration'] ) )
-	  		$this->data['Trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['Trainingstatistic']['duration'] );
+	  		if ( isset( $this->data['Trainingstatistic']['duration'] ) ) {
+				  $this->data['Trainingstatistic']['duration'] = $this->Unitcalc->seconds_to_time( $this->data['Trainingstatistic']['duration'] );
+			}
 	
 	  		if ( isset( $this->data['Trainingstatistic']['distance'] ) )
 	  		{
 	  			$distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
-	  			$this->data['Trainingstatistic']['distance'] = $distance['amount'];
+				$this->data['Trainingstatistic']['distance'] = $distance['amount'];
 	  		}
 	
-	  		if ( isset( $this->data['Trainingstatistic']['weight'] ) )
-	  		$this->data['Trainingstatistic']['weight'] = round( $this->Unitcalc->check_weight( $results['User']['weight'], 'show', 'single' ), 1);
+	  		if ( isset( $this->data['Trainingstatistic']['weight'] ) ) {
+				  $this->data['Trainingstatistic']['weight'] = $this->Unitcalc->check_weight( round( $results['User']['weight'], 1), 'show', 'single' );
+
+			}
 	
 	  	} else {
+
 	  		$statusbox = 'alert';
 	
 	  		// check for metric / unit
-	  		if ( isset( $this->data['Trainingstatistic']['distance'] ) ) {
-	  			$remove_array = array( ' ', 'km', 'mi' );
+			if ( isset( $this->data['Trainingstatistic']['distance'] ) ) 
+			{
+				$remove_array = array( ' ', 'km', 'mi' );
+				// remove spaces, km or mi extensions
+				$this->data['Trainingstatistic']['distance'] = 
+					str_replace( $remove_array, '', $this->data['Trainingstatistic']['distance'] );
+				
+				// modify to comma with dot
 	  			$this->data['Trainingstatistic']['distance'] = 
-	  				str_replace( $remove_array, '', $this->data['Trainingstatistic']['distance'] );
-	  			$this->data['Trainingstatistic']['distance'] = 
-	  				$this->Unitcalc->check_distance( $this->Unitcalc->check_decimal( $this->data['Trainingstatistic']['distance'] ), 'save', 'single' );
+					  $this->Unitcalc->check_distance( 
+						  $this->Unitcalc->check_decimal( 
+							  $this->data['Trainingstatistic']['distance'] 
+							), 'save', 'single' 
+						);
 	  		}
 
-	  		if ( isset( $this->data['Trainingstatistic']['duration'] ) ) {  			$remove_array = array( ' ' );
+	  		if ( isset( $this->data['Trainingstatistic']['duration'] ) ) {  			
+				$remove_array = array( ' ' );
 	  			$this->data['Trainingstatistic']['duration'] = str_replace( $remove_array, '', $this->data['Trainingstatistic']['duration'] );
 	  			if ( preg_match( "/,/", $this->data['Trainingstatistic']['duration'] ) || preg_match( "/\./", $this->data['Trainingstatistic']['duration'] ) ) {
 	  				$replace_array = array( ',', '.' );
@@ -530,8 +550,10 @@ class TrainingstatisticsController extends AppController {
 	  				$this->data['Trainingstatistic']['duration'] = $this->data['Trainingstatistic']['duration'] . ':00';
 	  			}
 	
-	  			if ( count( preg_split( '/:/', $this->data['Trainingstatistic']['duration'] ) ) == 2 )
-	  			$this->data['Trainingstatistic']['duration'] = '00:' . $this->data['Trainingstatistic']['duration'];
+	  			if ( count( preg_split( '/:/', $this->data['Trainingstatistic']['duration'] ) ) == 2 ) {
+				  $this->data['Trainingstatistic']['duration'] = '00:' . $this->data['Trainingstatistic']['duration'];
+				}
+
 	  			$this->data['Trainingstatistic']['duration'] = $this->Unitcalc->time_to_seconds( $this->data['Trainingstatistic']['duration'] );
 	  		}
 	
@@ -575,19 +597,30 @@ class TrainingstatisticsController extends AppController {
 	  		$tdate = $this->data['Trainingstatistic']['date'];
 	  		$tdate = $tdate['year'] . '-' . $tdate['month'] . '-' . $tdate['day'];
 	
-	  		if ( isset( $this->data['Trainingstatistic']['weight'] ) && $this->data['Trainingstatistic']['weight'] > 0 && ( strtotime( $tdate ) > ( time() - ( 86400 * 7 ) ) ) ) {
-	  			$this->data['Trainingstatistic']['weight'] = str_replace( ',', '.', $this->data['Trainingstatistic']['weight'] );
+			/*
+			if ( isset( $this->data['Trainingstatistic']['weight'] ) && 
+				  $this->data['Trainingstatistic']['weight'] > 0 && 
+				  ( strtotime( $tdate ) > ( time() - ( 86400 * 7 ) ) ) ) 
+			{
+			*/
+			if ( isset( $this->data['Trainingstatistic']['weight'] ) && 
+				  $this->data['Trainingstatistic']['weight'] > 0 ) 
+			{
+				$this->data['Trainingstatistic']['weight'] = str_replace( ',', '.', $this->data['Trainingstatistic']['weight'] );
 	  			$saveweight = $this->Unitcalc->check_weight( $this->data['Trainingstatistic']['weight'], 'save', 'single' );
 	  		} else {
 	  			$saveweight = $results['User']['weight'];
-	  		}
-	
+			}
 	  		$this->data['Trainingstatistic']['weight'] = $saveweight;
-	
-	  		// save workout for user
-	  		if ($this->Trainingstatistic->save( $this->data, array('validate' => true))) {
+
+			// save workout for user
+	  		if (
+				  $this->Trainingstatistic->save( $this->data, array('validate' => true))
+				) 
+			{
 	  			$this->User->id = $session_userid;
-	  			if ( isset( $saveweight ) && $saveweight > 0 ) {
+				if ( isset( $saveweight ) && $saveweight > 0 ) 
+				{
 	  				$this->User->savefield('weight', $saveweight, false);
 	  			}
 	  			$this->Session->write('flash',__('Training saved.',true));
@@ -603,10 +636,10 @@ class TrainingstatisticsController extends AppController {
 	  		}
 	
 	  		if ( isset( $this->data['Trainingstatistic']['distance'] ) ) {
-	  			$distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
-	  			$this->data['Trainingstatistic']['distance'] = $distance['amount'];
+				$distance = $this->Unitcalc->check_distance( $this->data['Trainingstatistic']['distance'], 'show' );
+				  $this->data['Trainingstatistic']['distance'] = $distance['amount'];
 	  		}
-	
+
 	  		if ( isset( $this->data['Trainingstatistic']['weight'] ) ) {
 	  			$this->data['Trainingstatistic']['weight'] = round( $this->Unitcalc->check_weight($this->data['Trainingstatistic']['weight'], 'show', 'single' ), 1);
 	  		}
@@ -1189,6 +1222,7 @@ class TrainingstatisticsController extends AppController {
 	/*
 	* DEPRECATED
 	*/
+	/*
     function garmin_import()
     {                                                       
 		// http://www.ciscomonkey.net/gc-to-dm-export/
@@ -1347,53 +1381,58 @@ class TrainingstatisticsController extends AppController {
 			$this->set('activities_view', $activities_view);
 		}
   }
+*/
 
-function curl( $url, $post = array(), $head = array(), $opts = array() )
-{
-	$session_userid = $this->Session->read('session_userid');
+	function curl( $url, $post = array(), $head = array(), $opts = array() )
+	{
+		$session_userid = $this->Session->read('session_userid');
 
-	$cookie_file = Configure::read('App.uploadDir') . '/cookies_' . $session_userid . '.txt';
-	$ch = curl_init();
+		$cookie_file = Configure::read('App.uploadDir') . '/cookies_' . $session_userid . '.txt';
+		$ch = curl_init();
 
-	//curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
-	curl_setopt( $ch, CURLOPT_URL, $url );
-	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );	
-	curl_setopt( $ch, CURLOPT_ENCODING, "gzip" );
-	curl_setopt( $ch, CURLOPT_COOKIEFILE, $cookie_file );
-	curl_setopt( $ch, CURLOPT_COOKIEJAR, $cookie_file );
-	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
+		//curl_setopt( $ch, CURLOPT_VERBOSE, 1 );
+		curl_setopt( $ch, CURLOPT_URL, $url );
+		curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );	
+		curl_setopt( $ch, CURLOPT_ENCODING, "gzip" );
+		curl_setopt( $ch, CURLOPT_COOKIEFILE, $cookie_file );
+		curl_setopt( $ch, CURLOPT_COOKIEJAR, $cookie_file );
+		curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
 
-	foreach ( $opts as $k => $v ) {
-		curl_setopt( $ch, $k, $v );
-	}
+		foreach ( $opts as $k => $v ) {
+			curl_setopt( $ch, $k, $v );
+		}
 
-	if ( count( $post ) > 0 ) {
-		// POST mode
-		curl_setopt( $ch, CURLOPT_POST, 1 );
-		curl_setopt( $ch, CURLOPT_POSTFIELDS, $post );
-	}
-	else {
-		curl_setopt( $ch, CURLOPT_HTTPHEADER, $head );
-		curl_setopt( $ch, CURLOPT_CRLF, 1 );
-	}
+		if ( count( $post ) > 0 ) 
+		{
+			// POST mode
+			curl_setopt( $ch, CURLOPT_POST, 1 );
+			curl_setopt( $ch, CURLOPT_POSTFIELDS, $post );
+		} else 
+		{
+			curl_setopt( $ch, CURLOPT_HTTPHEADER, $head );
+			curl_setopt( $ch, CURLOPT_CRLF, 1 );
+		}
 
-	$success = curl_exec( $ch );
+		$success = curl_exec( $ch );
 
-	if ( curl_errno( $ch ) !== 0 ) {
-		//throw new Exception( sprintf( '%s: CURL Error %d: %s', __CLASS__, curl_errno( $ch ), curl_error( $ch ) ) );
-		return "Error";
-	}
-
-	if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 200 ) {
-		if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 201 ) {
-			//throw new Exception( sprintf( 'Bad return code(%1$d) for: %2$s', curl_getinfo( $ch, CURLINFO_HTTP_CODE ), $url ) );
+		if ( curl_errno( $ch ) !== 0 ) 
+		{
+			//throw new Exception( sprintf( '%s: CURL Error %d: %s', __CLASS__, curl_errno( $ch ), curl_error( $ch ) ) );
 			return "Error";
 		}
-	}
 
-	curl_close( $ch );
-	return $success;
-}
+		if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 200 ) 
+		{
+			if ( curl_getinfo( $ch, CURLINFO_HTTP_CODE ) !== 201 ) 
+			{
+				//throw new Exception( sprintf( 'Bad return code(%1$d) for: %2$s', curl_getinfo( $ch, CURLINFO_HTTP_CODE ), $url ) );
+				return "Error";
+			}
+		}
+
+		curl_close( $ch );
+		return $success;
+	}
 
 }
 

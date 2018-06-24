@@ -1,8 +1,8 @@
 
     body {
-        padding-top: 70px;
-        padding-bottom: 0px;
-        background-color: rgba(0,0,0, 0.1);
+        padding-top:70px;
+        padding-bottom:0px;
+        background-color:rgba(0,0,0, 0.1);
     }
 
 	.wrapper {
@@ -17,17 +17,15 @@
 	}
 	
 	h1 {
-		font-size: 32.5px;
-		/* font-size: 44px; */
+		font-size:32.5px;
 	}
 
 	h3 {
-		font-size: 20px;
-		/* font-size: 44px; */
+		font-size:20px;
 	}
 
 	.big {
-		font-size: 35px;
+		font-size:35px;
 	}
 
 	.thumbnail {
@@ -53,26 +51,26 @@
 	}
 
 	.responsiveimage {
-		max-width: 600px;
+		max-width:600px;
 	}
 
 	.navbar-small {
-		font-size: 13px;
-		padding: 0px 0px;
+		font-size:13px;
+		padding:0px 0px;
 	} 
 
 	.form-controll-small {
-		font-size: 13px;
-		height: 100%;
+		font-size:13px;
+		height:100%;
 	}
 
 	.btn-small {
-		font-size: 13px;
+		font-size:13px;
 	}
 
 	.navbar-brand-small {	
-		padding-top: 0px;
-		padding-bottom: 0px;
+		padding-top:0px;
+		padding-bottom:0px;
 	}
 
 	.item {
@@ -82,7 +80,7 @@
 	}
 
 	.date {
-		width:50%;
+		width: 100%;
 	}
 
 	.date .form-control {
@@ -153,7 +151,7 @@
 			width: 20%;
 		}
 		.form-control, .alert, textarea {
-			width: 50%;
+			width: 70%;
 		}
 		.input-group .form-control {
 			width: 70%;
@@ -167,12 +165,6 @@
 	}
 	
 	@media (max-width: 767px) {
-		.container {
-			/**
-			padding-right:20px;
-			padding-left:20px;
-			**/
-		}
 		body {
 			padding-top:0px;
 		}
@@ -183,31 +175,47 @@
 			width: 90%;
 		}	
 		.spacerr {
-			height:200px;
+			height: 200px;
 		}
-		.panel-heading { margin-top: 100px; }		
+		.panel-heading { 
+			margin-top: 100px; 
+		}	
+		.table {
+			font-size: 12px;
+		}			
 	}	
 
 	@media (max-width: 530px) {
+		body {
+			padding-top:0px;
+		}		
 		.responsiveimage {
 			max-width: 300px;
 		}
 		.form-control, .alert, textarea {
-			width: 40%;
+			width: 90%;
 		}
 		div.alert {
 			width: 90%;
 		}
 		.input-group .form-control {
-			width: 50%;
+			width: 90%;
 		}
 		.button-right {
-			float:right;
+			float: right;
 		}
 		.spacerr {
-			height:400px;
+			height: 400px;
 		}
-		.panel-heading { margin-top: 100px; }
+		.panel-heading { 
+			margin-top: 100px; 
+		}
+		.table {
+			font-size: 12px;
+		}
+		#importbutton {
+			display: none;
+		}
 	}
 
 /* added by kms */

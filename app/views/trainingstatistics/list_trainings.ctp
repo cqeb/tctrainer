@@ -9,35 +9,35 @@ __('swim workout', true);
         
         <div class="panel-body">
 
-                   <?php echo $this->element('js_error'); ?>
+            <?php echo $this->element('js_error'); ?>
 
-                   <fieldset> 
-                   <legend><?php __('What you have already trained!'); ?></legend>
+            <fieldset> 
+            <legend><?php __('What you have already trained!'); ?></legend>
 
-                   <?php if ($session->read('flash')) { ?>
-                   <div class="<?php echo $statusbox; ?>">
-                   <?php echo $session->read('flash'); $session->delete('flash'); ?>
-                   </div><br />
-                   <?php } ?>
+            <?php if ($session->read('flash')) { ?>
+            <div class="<?php echo $statusbox; ?>">
+            <?php echo $session->read('flash'); $session->delete('flash'); ?>
+            </div><br />
+            <?php } ?>
 
-                   <a href="/trainer/trainingstatistics/edit_training/"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training/'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
-                   
-                   <a href="/trainer/trainingstatistics/import_workout/"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout/'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
+            <a href="/trainer/trainingstatistics/edit_training/"><button class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/edit_training/'" value="<?php __('Add workout'); ?>"><?php __('Add workout'); ?></button></a>
+            
+            <a href="/trainer/trainingstatistics/import_workout/"><button id="importbutton" class="btn btn-primary" onClick="javascript:top.location.href='/trainer/trainingstatistics/import_workout/'" value="<?php __('Import workouts'); ?>"><?php __('Import workouts'); ?></button></a>
 <!--
 
-                   <a href="/trainer/trainingstatistics/garmin_read/"><button class="btn btn-primary"  onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
+            <a href="/trainer/trainingstatistics/garmin_read/"><button class="btn btn-primary"  onClick="javascript:_new.location.href=''" value="<?php __('Import workouts'); ?> (Garmin)"><?php __('Import workouts'); ?> (Garmin)</button></a>
 -->
 
-                   <br /><br />
+            <br /><br />
 
-<table class="table table-striped table-bordered table-condensed">
-<tr>
-    <th><?php echo $paginator->sort(__('Date',true), 'date'); ?></th>
-    <th><?php echo $paginator->sort(__('Sport',true), 'sportstype'); ?></th>
-    <th><?php echo $paginator->sort(__('Distance',true), 'distance'); ?></th>
-    <th><?php echo $paginator->sort(__('Duration',true), 'duration'); ?></th>
-    <th class="listaction"><?php __('Action'); ?></th>
-</tr>
+            <table class="table table-striped table-bordered table-condensed">
+            <tr>
+                <th><?php echo $paginator->sort(__('Date',true), 'date'); ?></th>
+                <th><?php echo $paginator->sort(__('Sport',true), 'sportstype'); ?></th>
+                <th><?php echo $paginator->sort(__('Distance',true), 'distance'); ?></th>
+                <th><?php echo $paginator->sort(__('Duration',true), 'duration'); ?></th>
+                <th class="listaction"><?php __('Action'); ?></th>
+            </tr>
 
 <?php 
 

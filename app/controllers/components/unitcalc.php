@@ -78,39 +78,45 @@ class UnitcalcComponent extends Object {
    {
         if ( is_numeric( $amount ) )
         {
-	            $session_userobject = $this->Session->read('userobject');
-				$language = $session_userobject['yourlanguage'];
-				  
-                if (  $session_userobject['unit'] == 'imperial' )
-                {
-                    if ( $mode == 'show' ) 
-                        $convert = 'km_mi';
-                    else
-                        $convert = 'mi_km';
-
-                    $amount_array['amount'] = $this->convert_metric( $amount, $convert, 1 );
-                    $amount_array['unit'] = 'mi';
-
-                } else
-                {
-                    if ( $mode == 'show' ) 
-                        $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                    else 
-                        $amount_array['amount'] = $amount;
-
-                    $amount_array['unit'] = 'km';
+            $session_userobject = $this->Session->read('userobject');
+            $language = $session_userobject['yourlanguage'];
+                
+            if (  $session_userobject['unit'] == 'imperial' )
+            {
+                if ( $mode == 'show' ) {
+                    $convert = 'km_mi';
+                } else {
+                    $convert = 'mi_km';
                 }
 
-                    if ( $language == 'deu' || $excel == 'excel' )
+                $amount_array['amount'] = $this->convert_metric( $amount, $convert, 1 );
+                $amount_array['unit'] = 'mi';
+            // metric
+            } else
+            {
+                if ( $mode == 'show' ) {
+                    $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
+                    if ( $language == 'deu' )
                     { 
                         $amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
-                    }
-                
-                if ( $ret == 'single' )
-                    return $amount_array['amount'];
-                else
-                    return $amount_array;
+                    }                    
+                } else {
+                    $amount_array['amount'] = $amount;
+                }
 
+                $amount_array['unit'] = 'km';
+            }
+
+            if ( $excel == 'excel' )
+            { 
+                $amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+            }
+            
+            if ( $ret == 'single' ) {
+                return $amount_array['amount'];
+            } else {
+                return $amount_array;
+            }
         } else
                 return false;
    }
@@ -127,26 +133,31 @@ class UnitcalcComponent extends Object {
               
               if (  $session_userobject['unit'] == 'imperial' )
               {
-                 if ( $mode == 'show' ) 
+                 if ( $mode == 'show' ) {
                     $convert = 'kg_lbs';
-                 else
+                 } else {
                     $convert = 'lbs_kg';
+                 }
 
                  $amount_array['amount'] = $this->convert_metric( $amount, $convert );
                  $amount_array['unit'] = 'lbs';
               } else
               {
-                  if ( $mode == 'show' ) 
+                  if ( $mode == 'show' ) {
                       $amount_array['amount'] = $this->format_number( $amount, 3, '', '.' );
-                  else 
+                      if ( $language == 'deu' ) {
+                        $amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
+                      }
+                  } else {
                       $amount_array['amount'] = $amount;
-                  
+                  }
                   $amount_array['unit'] = 'kg';
               }
 			  
-			  if ( $language == 'deu' || $excel == 'excel' ) 
+			  if ( $excel == 'excel' ) {
 			  	$amount_array['amount'] = str_replace( '.', ',', $amount_array['amount'] );
-			
+              }
+
               if ( $ret == 'single' )
                   return $amount_array['amount'];
               else

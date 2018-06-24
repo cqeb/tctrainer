@@ -36,22 +36,12 @@ class Trainingstatistic extends AppModel {
                             'rule' => array('comparison', '>', 0)
                             ),
           ),
-          /*
           'weight' => array(
                   'numeric' => array(
                             'rule' => 'numeric'
                             //'message' => 'Please supply your current weight.'
                             ),
-                  'greater' => array(
-                            'rule' => array('comparison', '>=', 40)
-                            //'message' => 'Must be at least 40 kilograms.'
-                            ),
-                  'lower' => array(
-                            'rule' => array('comparison', '<=', 150)
-                            //'message' => 'Must be lower than 150 kilograms.'
-                            ),
           ),
-          */
           'avg_pulse' => array( // should be avgHR
                   'numeric' => array(
                             'rule' => 'numeric'

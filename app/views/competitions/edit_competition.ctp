@@ -1,8 +1,10 @@
 <?php
 
+            /*
             $GMAPS_API = GMAPS_APIKEY;
             $this->addScript('gmaps_google', $javascript->link('https://maps.google.com/maps?file=api&amp;v=2&amp;key='.$GMAPS_API));
             $this->addScript('gmaps_jquery', $javascript->link('jquery.gmap-1.1.0'));
+            */
 
 ?>
       <div class="panel panel-default" id="forms">
@@ -120,7 +122,7 @@ echo $form->input('location',
 
 ?>
 
-              <div id="gmap"></div>
+<!--<div id="gmap"></div>-->
 
 </div>
 
@@ -153,6 +155,7 @@ echo $form->submit(__('Save',true), array('class'=>'btn btn-primary'));
         /** 
          * thanks to http://gmap.nurtext.de/examples.html
         */
+        /*
         if ( \$("#CompetitionLocation").val() ) 
         {
             \$("#gmap").css("height","250px");
@@ -164,6 +167,7 @@ echo $form->submit(__('Save',true), array('class'=>'btn btn-primary'));
                   address: \$("#CompetitionLocation").val(),
                   zoom: 10 });
         }
+        */
 });
 
 /**
