@@ -2,12 +2,14 @@
 $url = url;
 ?>
 <!-- do not track on localhost and testhost -->
-<?php if ( $_SERVER['HTTP_HOST'] != LOCALHOST && $_SERVER['HTTP_HOST'] != TESTHOST && $_SERVER['HTTP_HOST'] != TESTHOST2 ) { ?>
+<?php if ( $_SERVER['HTTP_HOST'] != LOCALHOST && 
+	$_SERVER['HTTP_HOST'] != TESTHOST && 
+	$_SERVER['HTTP_HOST'] != TESTHOST2 ) { 
+		
+		if ( isset( $userobject['admin'] ) && $userobject['admin'] == '1' ) {
+			// no tracking
+		} else {
 
-<?php 
-$admin_user = $this->Session->read('userobject');
-
-//if ( isset($admin_user['admin']) && $admin_user['admin'] != 1 ) { 
 ?>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -18,10 +20,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
 
 <?php 
-//} 
+	} 
+} 
 ?>
-
-<?php } ?>
 
 	<!-- Latest compiled and minified CSS BS 3.0. RC1-->
 	<link rel="stylesheet" type="text/css" href="<?php echo $url; ?>/assets/css/theme.css?v=<?php echo VERSION; ?>" />

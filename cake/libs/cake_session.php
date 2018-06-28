@@ -509,6 +509,16 @@ class CakeSession extends Object {
 						ini_set('session.cookie_path', $this->path);
 						ini_set('session.auto_start', 0);
 						ini_set('session.save_path', TMP . 'sessions');
+						
+						// KMS hack
+						$session_domain = Configure::read('Session.domain');
+						ini_set('session.cookie_domain', $session_domain);
+
+						if (env('HTTPS')) {
+							ini_set('session.cookie_secure', 1);
+						} elseif ($_SERVER['HTTP_HOST'] != LOCALHOST) {
+							ini_set('session.cookie_secure', 1);
+						}						
 					}
 				}
 			break;

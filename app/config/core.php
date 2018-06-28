@@ -68,7 +68,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	define('DEBUG', false);
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
-	define('MYIP', '89.144.214.43');
+	define('MYIP', '89.144.205.60');
 
 	//Configure::write('App.mailHost', 'mx.tricoretraining.com');
 	Configure::write('App.mailHost', 'business36.web-hosting.com');
@@ -80,7 +80,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	define('DEBUG', false);
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
-	define('MYIP', '89.144.214.220');
+	define('MYIP', '89.144.205.60');
 
 	//Configure::write('App.mailHost', 'business36.web-hosting.com');
 	Configure::write('App.mailHost', 'mx.tricoretraining.com');
@@ -93,7 +93,7 @@ if ( $_SERVER['HTTP_HOST'] == LOCALHOST )
 	define('LOG_ERROR', 0);	
 	Configure::write('debug', 0);
 
-	define('MYIP', '89.144.214.220');
+	define('MYIP', '89.144.205.60');
 	//define('MYIP', '212.186.133.37');
 
 	//Configure::write('App.mailHost', 'business36.web-hosting.com');

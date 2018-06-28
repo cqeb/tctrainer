@@ -423,7 +423,7 @@ class UsersController extends AppController {
 
 						// if you want to stay logged in, we have to write a cookie
 						// TODO KMS
-						if ( $this->data['User']['remember_me'] )
+						if ( isset( $this->data['User']['remember_me'] ) && $this->data['User']['remember_me'] == 1 )
 						{
 							$this->Cookie->write(BLOGCOOKIE, "true", false, '+30 days');
 							Configure::write('Session_longterm', 'true');

@@ -113,11 +113,14 @@
 
 	}
 	
-	@media(min-width: 768px) and (max-width: 992px) {
+	@media(min-width: 767px) and (max-width: 992px) {
 		.navbar, .wrapper {
 			max-width: 760px;
 			margin-right:auto;
 			margin-left:auto;
+		}
+		button.trainingplan {
+			display:none;
 		}
 		.responsiveimage {
 			max-width: 450px;
@@ -127,7 +130,16 @@
 		}
 		.spacerr {
 			height:400px;
-		}		
+		}
+		table.workouts td {
+			font-size: 8px;
+		}	
+		#toggleDesc {
+			display:none;
+		}
+		.table {
+			font-size: 12px;
+		}
 	}
 	
 	@media (max-width: 992px) {
@@ -151,10 +163,10 @@
 			width: 20%;
 		}
 		.form-control, .alert, textarea {
-			width: 70%;
+			width: 90%;
 		}
 		.input-group .form-control {
-			width: 70%;
+			width: 90%;
 		}
 		.button-right {
 			float:right;

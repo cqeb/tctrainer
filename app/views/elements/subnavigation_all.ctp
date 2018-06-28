@@ -20,7 +20,7 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php __('How to start'); ?><b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><?php echo $html->link(__('Get started',true), '/users/register/'); ?></li>
+                  <li><?php echo $html->link(__('Sign up',true), '/users/register/'); ?></li>
                   <li><?php echo $html->link(__('Sign in',true), '/users/login/'); ?></li>
                 </ul>
           </li>
@@ -39,15 +39,16 @@
   
   <?php __('Change to'); ?>:
   <?php if ( $language != 'eng' || $language == '' ) { ?>
-  <?php echo $html->link('English', '/starts/index/code:eng/', array('class' => 'btn btn-success btn-small')); ?>
+  <?php echo $html->link('English', '/starts/index/code:eng/', array('style' => 'color:white;text-decoration:underline')); ?>
   <?php } ?>
 
   <?php if ( $language != 'deu' ) { ?>
-  <?php echo $html->link('Deutsch','/starts/index/code:deu/', array('class' => 'btn btn-success btn-small')); ?>
+  <?php echo $html->link('Deutsch','/starts/index/code:deu/', array('style' => 'color:white;text-decoration:underline')); ?>
   <?php } ?>
 
-  <?php echo $html->link(__('Sign In',true),'/users/login/', array('class' => 'btn btn-warning btn-small')); ?>
-  <?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook/', array('class' => 'btn btn-warning btn-small')); ?>
+  <?php echo $html->link(__('Sign up', true),'/users/register/', array('class' => 'btn btn-success btn-small')); ?>
+  <?php echo $html->link(__('Sign In', true),'/users/login/', array('class' => 'btn btn-warning btn-small')); ?>
+  <!--<?php echo $html->link(__('Facebook Sign In',true),'/users/login_facebook/', array('class' => 'btn btn-warning btn-small')); ?>-->
 
 </form>
 
@@ -128,11 +129,11 @@
   
   <?php __('Change to'); ?>:
   <?php if ( $language != 'eng' || $language == '' ) { ?>
-  <?php echo $html->link('English', '/starts/index/code:eng/', array('class' => 'btn btn-success btn-small')); ?>
+  <?php echo $html->link('English', '/starts/index/code:eng/', array('style' => 'color:white;text-decoration:underline')); ?>
   <?php } ?>
 
   <?php if ( $language != 'deu' ) { ?>
-  <?php echo $html->link('Deutsch','/starts/index/code:deu/', array('class' => 'btn btn-success btn-small')); ?>
+  <?php echo $html->link('Deutsch','/starts/index/code:deu/', array('style' => 'color:white;text-decoration:underline')); ?>
   <?php } ?>
 
   <?php if ( isset ( $userobject ) ) { ?>
