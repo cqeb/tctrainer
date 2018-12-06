@@ -281,7 +281,7 @@ Configure::write('Security.level', 'medium');
 /**
  * A random string used in security hashing methods.
  */
-Configure::write('Security.salt', 'LKLKJsfasafwerwer972498349724923479234DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi');
+Configure::write('Security.salt', 'x');
 
 // app/config/my_session.php
 //
